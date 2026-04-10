@@ -3,7 +3,7 @@
   "content": "Top 5 users by storage usage:",
   "content_en_sha1_hash": "8934cd3fcb13cb31a45f771b3cbaf5c669d8b86a",
   "created_at": "2025-05-19T21:30:52.966Z",
-  "updated_at": "2026-04-09T00:22:51.248Z",
+  "updated_at": "2026-04-10T15:22:27.334Z",
   "comment": {
     "text": "\"This translation key refers to the text 'Top 5 users by storage usage', used as a label in a UI component displaying statistics about top-performing users. It appears on a button that displays a list of top users.\"",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation uses 'nejčastějších' (most frequent), which refers to frequency of use, whereas the English text refers to 'Top 5' in the context of volume/amount (storage usage).",
-          "suggestion": "5 největších uživatelů podle využití úložiště:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -81,13 +75,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The specific number '5' from the English source is missing in the French translation, which instead uses the word 'Cinq' (Five). While semantically similar, in a UI context where the number might be dynamic or specific to a 'Top 5' metric, the literal digit is preferred.",
-          "suggestion": "Top 5 utilisateurs par utilisation de stockage :"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -159,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'săli' (rooms/halls) instead of 'utilizatori' (users), which completely changes the meaning of the text.",
-          "suggestion": "Top 5 utilizatori după utilizarea spațiului de stocare:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'පරිශ්‍රීලකයින්' (parishrilakayin) is a misspelling/incorrect word for 'users' (පරිශීලකයින් - parishilakayin).",
-          "suggestion": "ආචයන භාවිතය වැඩිම පරිශීලකයින් 5:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

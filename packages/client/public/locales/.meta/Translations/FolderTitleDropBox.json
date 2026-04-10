@@ -3,7 +3,7 @@
   "content": "Dropbox directory",
   "content_en_sha1_hash": "1a991dfb32e8cd8808fd95385917355bc689cb86",
   "created_at": "2025-05-19T21:30:49.974Z",
-  "updated_at": "2026-04-08T21:17:13.190Z",
+  "updated_at": "2026-04-10T15:22:27.312Z",
   "comment": {
     "text": "This translation key is used to display the title of a Dropbox directory. It appears as part of file names or folder labels in the application, and its value will be translated by users based on their language settings.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'գրացուցակ' means 'list' or 'directory' in the sense of a contact list or a catalog, whereas in a file system context, 'directory' should be translated as 'տնօրենություն' (folder/directory).",
-          "suggestion": "Dropbox տնօրենություն"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -183,13 +177,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'direktorijum' is in the accusative/instrumental case, whereas the English title requires the nominative case 'direktorijum' (or more commonly 'direktorij'). In Serbian, a title/label should be in the nominative case.",
-          "suggestion": "Dropbox direktorijum"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

@@ -3,7 +3,7 @@
   "content": "The URL used for the single sign-on on the Identity provider side",
   "content_en_sha1_hash": "52920fb734942b1004a873fb087529c481adc18b",
   "created_at": "2025-05-19T21:30:50.147Z",
-  "updated_at": "2026-04-08T22:55:40.205Z",
+  "updated_at": "2026-04-10T15:22:27.321Z",
   "comment": {
     "text": "The translation key \"SignOnEndpointUrlTooltip\" is used to display the tooltip text explaining the URL used for single sign-on on the Identity provider side. It appears in a tooltip associated with a button that configures this setting.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation uses 'මෙම ඒ.ස.නි. භාවිතා කරයි' (uses this URL), which changes the sentence from a noun phrase describing a URL into an active sentence stating that something 'uses this URL'. This changes the meaning from a definition to an action.",
-          "suggestion": "අනන්‍යතා සපයන්නාගේ (Identity provider) පාර්ශවයෙන් තනි පිවිසුම (single sign-on) සඳහා භාවිතා කරන URL එක"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

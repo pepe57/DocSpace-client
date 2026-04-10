@@ -3,7 +3,7 @@
   "content": "Every day of the week",
   "content_en_sha1_hash": "baad1d5872ad00d1bfedbdaac73374c84f5a7571",
   "created_at": "2025-05-19T21:30:45.148Z",
-  "updated_at": "2026-04-08T10:08:13.266Z",
+  "updated_at": "2026-04-10T15:22:27.193Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Every day of the week\" when a specific condition is met in a weekly selection component. It appears as the default option in a dropdown select element, likely on a calendar or scheduling interface.",
     "is_auto": true,
@@ -63,13 +63,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Spanish translation says 'Every day of the month' (mes) instead of 'Every day of the week' (semana).",
-          "suggestion": "Cada día de la semana"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {

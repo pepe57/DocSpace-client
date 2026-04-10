@@ -3,7 +3,7 @@
   "content": "<1>{{tag}}</1> tag removed.",
   "content_en_sha1_hash": "85ffc4c66876474cb6183593a2d31ad65530a440",
   "created_at": "2026-02-19T13:36:19.064Z",
-  "updated_at": "2026-04-08T21:25:56.183Z",
+  "updated_at": "2026-04-10T15:22:27.312Z",
   "comment": {
     "text": "This translation key displays a confirmation message when a tag is successfully removed. It appears as part of a confirmation message, likely in a dialog or notification, indicating that the specified tag has been deleted. Translators should ensure the wording accurately reflects the action of removing a tag.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation means 'updated' (թարմացվեց) instead of 'removed' (հեռացվեց).",
-          "suggestion": "<1>{{tag}}</1> թեգը հեռացվեց։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

@@ -3,7 +3,7 @@
   "content": "Enable",
   "content_en_sha1_hash": "20063ad9053289cecaa20ae630ed2dd758282a07",
   "created_at": "2025-05-19T21:30:44.923Z",
-  "updated_at": "2026-04-10T08:21:04.303Z",
+  "updated_at": "2026-04-10T15:22:27.198Z",
   "comment": {
     "text": "This translation key is used to display the label \"Enable\" on a button in a modal dialog, typically found in settings or configuration sections of an application. It appears as the primary action button in a footer section and is used for enabling a feature or functionality.",
     "is_auto": true,
@@ -165,25 +165,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '有効' (Yūkou) means 'Effective' or 'Valid'. For a button label performing an action to 'Enable' a feature, the imperative verb form '有効にする' is required.",
-          "suggestion": "有効にする"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '허용' means 'Allow' or 'Permit', which is different from 'Enable' (to turn on/activate). In the context of a button to enable a feature or setting, '활성화' is the correct technical term.",
-          "suggestion": "활성화"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -195,13 +183,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Iespējot' is a gerund (meaning 'by enabling' or 'enabling'), whereas the English 'Enable' is an imperative verb used for a button label. For a button action, the infinitive or imperative form is required.",
-          "suggestion": "Iespeldēt"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

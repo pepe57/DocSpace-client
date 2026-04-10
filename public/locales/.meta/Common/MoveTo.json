@@ -3,7 +3,7 @@
   "content": "Move to",
   "content_en_sha1_hash": "349f807a5e5497d0e5f0e5eb83dd8a59d2dd2c7d",
   "created_at": "2025-05-19T21:30:46.631Z",
-  "updated_at": "2026-04-10T08:21:04.290Z",
+  "updated_at": "2026-04-10T15:22:27.150Z",
   "comment": {
     "text": "The translation key \"MoveTo\" is used to display the label for a button that allows users to move files or items to a new location. It appears in various UI elements, such as file management dialogs and context menus, providing an intuitive way for users to select a destination. This text should be translated to provide a clear and consistent experience across different languages.",
     "is_auto": true,
@@ -63,13 +63,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Yerini dəyiş' means 'Change position' or 'Move (yourself/something) to a different spot', which is an imperative command. In a UI context for moving files to a destination, 'Hərəkət etdir' or 'Köçür' is more appropriate for the action 'Move to'. However, specifically for 'Move to [Destination]', 'Köçür' or 'Yerini dəyişdir' is better, but 'Yerini dəyiş' sounds like a command to a person to move their seat.",
-          "suggestion": "Köçür"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -135,13 +129,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation '이동 위치' means 'Move location' (a noun phrase), whereas the English 'Move to' is a verb phrase/action command used for a button or menu item. In a UI context for a button, it should be an imperative command.",
-          "suggestion": "~로 이동"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -213,13 +201,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Помери у' is grammatically incorrect for a UI button label. In Serbian, 'Move to' (as a command/action) should be 'Пребаци у' or 'Премести у'. 'Помери' is more commonly used for physical movement (like moving a chair) rather than digital file management.",
-          "suggestion": "Премести у"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

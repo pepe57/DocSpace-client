@@ -3,7 +3,7 @@
   "content": "Folder deleted",
   "content_en_sha1_hash": "80fa7315b0ebe24ae6902123622edb0e1f4c01f3",
   "created_at": "2025-05-19T21:30:49.752Z",
-  "updated_at": "2026-04-08T20:00:35.490Z",
+  "updated_at": "2026-04-10T15:22:27.296Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -164,13 +164,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Фасцикла' is not a standard Serbian word for 'Folder'. The correct term is 'Овртик' or 'Фолдер'.",
-          "suggestion": "Фолдер је обрисан"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

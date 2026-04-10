@@ -3,7 +3,7 @@
   "content": "Customized",
   "content_en_sha1_hash": "78cdab3abf9dc85d580caef459aa5a8b05f47f62",
   "created_at": "2026-02-18T14:55:47.489Z",
-  "updated_at": "2026-04-08T12:38:58.922Z",
+  "updated_at": "2026-04-10T15:22:27.217Z",
   "comment": {
     "text": "This key displays a badge label indicating whether a template is modified or the default version. It appears on a TemplatesRow component within the Portal Settings, specifically on a badge element to differentiate between customized and default templates. Translators should ensure the translation accurately reflects the meaning of \"modified\" versus \"original.\"",
     "is_auto": true,
@@ -147,13 +147,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Пользовательский' means 'User-defined' or 'Personal', whereas the context requires 'Modified' (to differentiate from a default template).",
-          "suggestion": "Измененный"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -177,13 +171,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Icustomizuar' is a misspelling/incorrect formation. In Albanian, the prefix 'i-' should be separated or correctly attached to the adjective, but 'Icustomizuar' is not a standard word. The correct term for 'Customized' is 'I personalizuar' or 'I modifikuar'.",
-          "suggestion": "I personalizuar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

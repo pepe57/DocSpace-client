@@ -3,7 +3,7 @@
   "content": "The maximum length of a user name or another local part is 64 characters.",
   "content_en_sha1_hash": "ba7b9b65a0fda5b91b2999cd6da74cf668a5cc1d",
   "created_at": "2025-05-19T21:30:46.386Z",
-  "updated_at": "2026-04-10T08:21:04.300Z",
+  "updated_at": "2026-04-10T15:22:27.154Z",
   "comment": {
     "text": "\"This translation key is used to display an error message when a user name exceeds the maximum allowed length of 64 characters. It appears in dialogs where users are prompted to update their email address or local part.\"",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation changes the subject from 'user name or another local part' to 'email address' (Elektron poçtun), which is a different technical entity.",
-          "suggestion": "İstifadəçi adının və ya digər lokal hissənin maksimum uzunluğu 64 simvoldur."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -135,13 +129,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the mention of 'another local part', which is important context for email address validation errors.",
-          "suggestion": "Maksymalna długość nazwy użytkownika lub innego elementu lokalnego wynosi 64 znaki."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -165,25 +153,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English text specifies that the limit applies to 'a user name or another local part', whereas the Russian translation only mentions 'mailbox name' (имени почтового ящика), omitting the 'local part' nuance.",
-          "suggestion": "Максимальная длина имени пользователя или другой локальной части составляет 64 символа."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'පරිශ්‍රීලක' (parishrīlaka) is a misspelling/incorrect term for 'user'. The correct term for 'user' in Sinhala is 'පරිශීලක' (parishīlaka).",
-          "suggestion": "පරිශීලක නාමයක හෝ වෙනත් ස්ථානීය කොටසක උපරිම දිග අකුරු 64 කි."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

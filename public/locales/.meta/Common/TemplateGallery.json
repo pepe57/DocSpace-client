@@ -3,7 +3,7 @@
   "content": "Template gallery",
   "content_en_sha1_hash": "6dfaa7588cf9181537129654e857881bc2647de2",
   "created_at": "2025-12-22T09:40:11.793Z",
-  "updated_at": "2026-04-10T08:21:04.284Z",
+  "updated_at": "2026-04-10T15:22:27.092Z",
   "comment": {
     "text": "This text appears as the label for a button or menu item that opens a gallery of templates. It’s used to indicate the availability of pre-built templates, likely for forms or documents. Translators should ensure the description accurately reflects the function of opening this template gallery.",
     "is_auto": true,
@@ -171,13 +171,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'නිර්මාණ ගැලරිය' means 'Creation Gallery' or 'Design Gallery'. While related, it fails to specifically translate 'Template' (සැකිලි), which is the core functional term in the context of pre-built document structures.",
-          "suggestion": "සැකිලි ගැලරිය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -3,7 +3,7 @@
   "content": "Copy message",
   "content_en_sha1_hash": "26902efda37d4a30d3f6fd110ba9cc653bae0c8b",
   "created_at": "2025-10-27T16:14:24.116Z",
-  "updated_at": "2026-04-08T14:10:41.437Z",
+  "updated_at": "2026-04-10T15:22:27.226Z",
   "comment": {
     "text": "This text appears as the tooltip on a button that copies a message. It informs the user that clicking the button will initiate a copy action for the message content. This helps users quickly duplicate and share messages.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Mesajı surət əldə et' is a literal, word-for-word translation of 'Get a copy of the message' which sounds unnatural and grammatically awkward for a UI tooltip. In Azerbaijani UI, 'Copy' as a command is typically translated as 'Kopyala'.",
-          "suggestion": "Mesajı kopyala"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -111,13 +105,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '복사 메시지' literally means 'Copy message' as a noun phrase (like a title), whereas the context requires a verb phrase/command 'Copy the message'. In Korean UI, '메시지 복사' is the standard way to express the action of copying a message.",
-          "suggestion": "메시지 복사"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {

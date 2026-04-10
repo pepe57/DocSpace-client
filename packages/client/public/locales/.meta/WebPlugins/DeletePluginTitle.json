@@ -3,7 +3,7 @@
   "content": "Delete plugin?",
   "content_en_sha1_hash": "a78a1d27084eed85ce0fe4dd762e6fc445100979",
   "created_at": "2025-05-19T21:30:49.906Z",
-  "updated_at": "2026-04-08T18:46:43.932Z",
+  "updated_at": "2026-04-10T15:22:27.306Z",
   "comment": {
     "text": "This translation key is used for the \"Delete plugin?\" message displayed as the header of a confirmation modal dialog in an application. It prompts the user to confirm deleting a plugin.",
     "is_auto": true,
@@ -111,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'spraudnis' in Latvian refers to a physical electrical plug or a connector. In the context of software, 'plugin' should be translated as 'pielikne'.",
-          "suggestion": "Vai izdzēst pielikni?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -159,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පේනුව මකන්නද?' means 'Should I erase the pen?' or 'Erase the pen?', which is contextually incorrect for deleting a software plugin.",
-          "suggestion": "ප්ලගිනය මකාදමන්නද?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +165,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Izbrišem vtičnik?' uses the first-person singular ('Shall I delete...') instead of the impersonal/infinitive form typically used for confirmation dialog headers ('Delete plugin?').",
-          "suggestion": "Izbrišati vtičnik?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

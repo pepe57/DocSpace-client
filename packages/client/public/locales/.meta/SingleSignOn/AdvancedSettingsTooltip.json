@@ -3,7 +3,7 @@
   "content": "Hide default authentication page and automatically redirect to SSO service.",
   "content_en_sha1_hash": "c798644a2826666749452b9712f3f550f8cfe279",
   "created_at": "2025-05-19T21:30:50.061Z",
-  "updated_at": "2026-04-08T23:40:06.582Z",
+  "updated_at": "2026-04-10T15:22:27.327Z",
   "comment": {
     "text": "This translation key is used to describe a tooltip that explains the meaning of hiding the default authentication page and automatically redirecting to an SSO service. The tooltip appears when a checkbox related to Single Sign-On (SSO) integration is enabled or disabled in the Portal Settings category.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text uses the singular 'page', but the Czech translation uses the plural 'stránky' (pages).",
-          "suggestion": "Skrýt výchozí ověřovací stránku a automaticky přesměrovat na službu SSO."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -159,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation incorrectly translates 'default authentication page' as 'පෙරනිමි ද්වි සාධක පිටුව' (default two-factor page), which changes the meaning from general authentication to two-factor authentication.",
-          "suggestion": "පෙරනිමි සහතික කිරීමේ පිටුව සඟවා ස්වයංක්‍රීයව තනි-පිවිසුම් (SSO) සේවාව වෙත හරවා යවන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

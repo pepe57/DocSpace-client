@@ -3,7 +3,7 @@
   "content": "Number of attempts",
   "content_en_sha1_hash": "1fdff331916efb2b880604cb7c80296a41565cd7",
   "created_at": "2025-05-19T21:30:52.094Z",
-  "updated_at": "2026-04-09T02:17:40.379Z",
+  "updated_at": "2026-04-10T15:22:27.354Z",
   "comment": {
     "text": "The \"NumberOfAttempts\" translation key is used to display the label for a field that shows the number of attempts allowed or made by a user. It appears in an input container on a security settings page and should be translated as the text \"Number of attempts\".",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Təşəbbüslərin' means 'initiatives'. In the context of security settings and brute force protection, 'attempts' should be translated as 'cəhd' (attempt).",
-          "suggestion": "Cəhd sayı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

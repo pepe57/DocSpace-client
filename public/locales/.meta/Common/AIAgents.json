@@ -3,7 +3,7 @@
   "content": "AI agents",
   "content_en_sha1_hash": "2b51b10f658502a5ad4e50a7005f9bddf67f44c0",
   "created_at": "2025-09-26T15:20:53.940Z",
-  "updated_at": "2026-04-10T08:21:04.286Z",
+  "updated_at": "2026-04-10T15:22:27.278Z",
   "comment": {
     "text": "This translation key represents the label for a folder displaying AI agents within the user interface. It's used as the \"title\" of a tree folder, likely within a navigation or organization panel, and indicates a collection of AI agent resources. Translators should ensure the translation accurately reflects the concept of AI agents.",
     "is_auto": true,
@@ -243,13 +243,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Εργαλεία Τεχνητής Νοημοσύνης' means 'Artificial Intelligence Tools', which is a different concept than 'AI agents'.",
-          "suggestion": "Πράκτορες Τεχνητής Νοημοσύνης"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -273,13 +267,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'ԱԲ' (AB), which is a phonetic transliteration of the letters 'A' and 'B', instead of the standard Armenian abbreviation for Artificial Intelligence 'ԱԻ' (AI) or the full term 'արհեստական բանականություն'. In Armenian, 'ԱԲ' does not represent 'AI'.",
-          "suggestion": "ԱԻ գործակալներ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -393,13 +381,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Штучні інтелекти' means 'Artificial Intelligences' (the concept/technology), whereas the English 'AI agents' refers to specific entities or software programs (agents) powered by AI. The translation misses the 'agents' component.",
-          "suggestion": "AI-агенти"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

@@ -3,7 +3,7 @@
   "content": "No models found",
   "content_en_sha1_hash": "3d02178b7a78aaa935e174c3b52e143f4d548b07",
   "created_at": "2026-02-18T14:56:04.517Z",
-  "updated_at": "2026-04-08T04:04:07.778Z",
+  "updated_at": "2026-04-10T15:22:27.145Z",
   "comment": {
     "text": "This key displays a message when no models are available to be selected. It appears as a label in a dropdown/selection component, likely within a dialog or settings panel, to inform the user that no models are present. Translators should ensure the message clearly conveys the absence of models.",
     "is_auto": true,
@@ -117,13 +117,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Modeles atrastas' means 'Models found', which is the exact opposite of the English 'No models found'.",
-          "suggestion": "Modeļu nav atrasts"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -177,13 +171,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation uses an incorrect word order and a grammatically incorrect form of the participle. 'Pronajeno' is a neuter singular form, whereas 'modeljev' is genitive plural. The correct way to express 'found' in this context is 'najdenih'.",
-          "suggestion": "Ni najdenih modelov"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

@@ -3,7 +3,7 @@
   "content": "An error has been encountered. Please contact your administrator.",
   "content_en_sha1_hash": "e2b260a35f7f80d6f2d9a7c35cf36bc67d70ff17",
   "created_at": "2025-05-19T21:30:50.653Z",
-  "updated_at": "2026-04-09T04:07:33.530Z",
+  "updated_at": "2026-04-10T15:22:27.384Z",
   "comment": {
     "text": "This translation key \"BackupCreatedError\" is used to display an error message when a backup file upload fails. The message appears in a toast notification when uploading a local file and the upload process has not completed successfully.",
     "is_auto": true,
@@ -75,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation includes unprofessional and irrelevant content ('Tosi outo' - 'Very strange') that is not present in the source text and changes the tone of the error message.",
-          "suggestion": "Virhe on tapahtunut. Ota yhteyttä järjestelmänvalvojaan."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -105,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase '管理者を連絡ください' is grammatically incorrect and unnatural in Japanese. It should be '管理者に連絡してください' or '管理者に連絡してください'. The particle 'を' is used incorrectly with the verb '連絡する' in this context.",
-          "suggestion": "エラーが発生しました。管理者に連絡してください。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

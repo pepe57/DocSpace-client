@@ -3,7 +3,7 @@
   "content": "You",
   "content_en_sha1_hash": "905cb326c779f0123e079bf8ccb223176a3cf32d",
   "created_at": "2025-05-19T21:30:49.648Z",
-  "updated_at": "2026-04-07T19:54:57.501Z",
+  "updated_at": "2026-04-10T15:22:27.076Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that data is being reassigned or interrupted, typically in a dialog or button context. It appears in UI elements such as Data Reassignment Dialog and Delete Profile Ever Dialog, and is intended to notify users that an action is in progress related to their own data.",
     "is_auto": true,
@@ -105,13 +105,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'You' refers to the user (second person), but the Korean translation '나' means 'I' (first person).",
-          "suggestion": "사용자"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {

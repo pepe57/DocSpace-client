@@ -3,7 +3,7 @@
   "content": "Manage connection",
   "content_en_sha1_hash": "3ca4794faf5c82e76336e37b70c07375fb9ed946",
   "created_at": "2025-10-27T16:14:24.262Z",
-  "updated_at": "2026-04-08T05:05:19.137Z",
+  "updated_at": "2026-04-10T15:22:27.156Z",
   "comment": {
     "text": "This text likely refers to a button or link that allows users to manage their connection settings or connected accounts within the chat interface. Translators should ensure the translated text accurately conveys the ability to adjust or oversee connection-related configurations.",
     "is_auto": true,
@@ -75,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Hallitse yhteys' uses the singular form 'yhteys' (connection), whereas the English 'Manage connection' in this context (referring to settings/accounts) or the code variable 'ManageConnections' implies a plural or general concept. More importantly, in Finnish, 'Hallitse yhteys' sounds like a command to 'Manage the connection' (singular specific), whereas 'Hallitse yhteyksiä' (Manage connections) or 'Yhteyksien hallinta' (Connection management) is the standard UI pattern for managing settings.",
-          "suggestion": "Hallitse yhteyksiä"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {

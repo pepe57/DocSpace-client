@@ -3,7 +3,7 @@
   "content": "Enter webhook name",
   "content_en_sha1_hash": "2d45fcab14d478d796e9f518fc43d163b4156840",
   "created_at": "2025-05-19T21:30:49.707Z",
-  "updated_at": "2026-04-08T20:21:16.678Z",
+  "updated_at": "2026-04-10T15:22:27.299Z",
   "comment": {
     "text": "The translation key \"EnterWebhookName\" is used to display a placeholder text in a web form, which is part of a modal dialog. This text prompts users to enter a webhook name when submitting the form. It appears as a label for an input field.",
     "is_auto": true,
@@ -141,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Introducere nume webhook' uses a noun phrase ('Introduction of webhook name') instead of an imperative verb phrase ('Enter webhook name'). In the context of a placeholder, it sounds like a title rather than an instruction to the user.",
-          "suggestion": "Introdu numele webhook-ului"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

@@ -3,7 +3,7 @@
   "content": "Restore to",
   "content_en_sha1_hash": "55a3efe467e20e4698ed5e79684c4b701ff485cb",
   "created_at": "2025-05-19T21:30:47.920Z",
-  "updated_at": "2026-04-08T01:07:41.066Z",
+  "updated_at": "2026-04-10T15:22:27.119Z",
   "comment": {
     "text": "This translation key is used to display a button or dialog title indicating that files can be restored from a previous state. It appears in UI components related to file management and selection, such as the FilesSelector component.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English text 'Restore to' implies a destination or a specific state (preposition 'to'), whereas the Azerbaijani translation 'Bərpa edin' only means 'Restore'. This loses the directional context required for a 'Restore to' action.",
-          "suggestion": "Bərpa et"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English text 'Restore to' implies a destination or a target state (indicated by the preposition 'to'), whereas the Finnish translation 'Palauta' only means 'Restore'. This makes it a command rather than a label for a target location/state.",
-          "suggestion": "Palauta kohteeseen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -93,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Armenian translation 'Վերականգնել' means 'Restore', missing the prepositional sense of 'to' (indicating a destination or target state) present in the English 'Restore to'.",
-          "suggestion": "Վերականգնել մինչև"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -171,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'මෙයට ප්‍රත්‍යර්පණය' translates more like 'Restoration to this' or 'Restoration to this [object]', which sounds unnatural and grammatically incomplete for a UI button/label. In a UI context for 'Restore to', it should imply 'Restore to [location/state]'.",
-          "suggestion": "මෙයට නැවත ලබාගන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

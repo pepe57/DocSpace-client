@@ -3,7 +3,7 @@
   "content": "Administrator Message Settings",
   "content_en_sha1_hash": "accdf6092b6a057074bd1eada900a50effd27962",
   "created_at": "2025-05-19T21:30:50.388Z",
-  "updated_at": "2026-04-09T04:26:13.016Z",
+  "updated_at": "2026-04-10T15:22:27.388Z",
   "comment": {
     "text": "The translation key \"AdminsMessage\" is used to display a title for settings related to administrator messages, including descriptions and links within the Portal Settings UI. This key appears in various places, such as headings and category titles, providing context to administrators about message settings and their corresponding actions.",
     "is_auto": true,
@@ -63,13 +63,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Einstellungen von Nachrichten für Administrator' means 'Settings of messages for administrator', which implies settings for messages sent TO an administrator. The English 'Administrator Message Settings' refers to the settings OF the messages that the administrator manages/configures.",
-          "suggestion": "Administrator-Nachrichteneinstellungen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -135,13 +129,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Beheerder Bericht Instellingen' is a literal word-for-word concatenation that is grammatically incorrect in Dutch. In Dutch, compound nouns must be joined or used with proper prepositional structure. As written, it reads like three separate words rather than a single concept.",
-          "suggestion": "Instellingen voor beheerberichten"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -171,13 +159,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Administrator Message Settings' refers to settings for messages sent BY the administrator (or regarding the administrator). The Russian translation 'Настройки сообщений администратору' means 'Settings for messages TO the administrator', which reverses the direction of the communication/ownership.",
-          "suggestion": "Настройки сообщений администратора"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -219,13 +201,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Administrator Message Settings' refers to settings for messages sent BY the administrator (or messages related to the administrator). The Ukrainian translation 'Параметри повідомлень адміністратору' means 'Settings for messages TO the administrator', which reverses the direction of the relationship.",
-          "suggestion": "Налаштування повідомлень адміністратора"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

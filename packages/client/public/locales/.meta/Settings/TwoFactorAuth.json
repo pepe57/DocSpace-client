@@ -3,7 +3,7 @@
   "content": "Two-factor authentication",
   "content_en_sha1_hash": "edfd617aa53e034bf19dce690f417b00bc824fa9",
   "created_at": "2025-05-19T21:30:53.005Z",
-  "updated_at": "2026-04-09T00:17:17.547Z",
+  "updated_at": "2026-04-10T15:22:27.333Z",
   "comment": {
     "text": "Two-factor authentication is a security feature used to add an extra layer of protection when accessing the portal. This translation key is used as the label for a settings category and button in the portal's security settings, informing users about this security measure.",
     "is_auto": true,
@@ -177,13 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ද්වි සාධක තහවුරුව' translates to 'Two-factor confirmation' rather than 'Two-factor authentication'. In a security context, 'authentication' should be translated as 'සත්‍යාපනය' (Sathyapanaya) to be technically accurate.",
-          "suggestion": "ද්වි-සාධක සත්‍යාපනය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

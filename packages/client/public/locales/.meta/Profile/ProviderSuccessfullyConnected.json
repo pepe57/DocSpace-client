@@ -3,7 +3,7 @@
   "content": "Provider successfully connected",
   "content_en_sha1_hash": "31af35b9112072c6a9acdc45f45020050020561e",
   "created_at": "2025-05-19T21:30:53.373Z",
-  "updated_at": "2026-04-09T07:03:37.909Z",
+  "updated_at": "2026-04-10T15:22:27.399Z",
   "comment": {
     "text": "This translation key displays a success message when a user successfully connects with an OAuth provider. It is typically displayed after a successful login or authorization process in the social network section of a profile page.",
     "is_auto": true,
@@ -129,13 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Operadora' refers to a telecommunications carrier or service provider (like a mobile network), whereas 'Provider' in the context of OAuth refers to an identity/authentication provider. 'Ligada' is also too literal/informal for a successful connection process.",
-          "suggestion": "Provedor conectado com êxito"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {

@@ -3,7 +3,7 @@
   "content": "Services",
   "content_en_sha1_hash": "5cbd584046863bc7b753e57e8681a98a87f36f0f",
   "created_at": "2025-06-03T20:59:25.520Z",
-  "updated_at": "2026-04-10T13:53:52.463Z",
+  "updated_at": "2026-04-10T15:22:27.340Z",
   "comment": {
     "text": "The translation key \"Services\" is used to display the label for a section or category related to services in a UI setting. It appears as part of a settings tree structure and is likely used on a page that allows users to manage or configure their services. The exact location may vary, but it is commonly found on pages related to portal settings or configurations.",
     "is_auto": true,
@@ -117,13 +117,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation contains a character error. The word 'ບໍໍລິການ' uses an incorrect combination of characters (possibly a typo or encoding issue with the vowel/tone mark), making it look unnatural or incorrect. The correct spelling for 'Services' is 'ບໍລິການ'.",
-          "suggestion": "ບໍລິການ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -171,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'සේවාලාංකෘති' (sevalankruthi) is a technical/neologism term that doesn't accurately represent 'Services' in a standard UI context. It translates more towards 'service-modifications' or 'service-transformations'. The standard, correct term for 'Services' in Sinhala is 'සේවා'.",
-          "suggestion": "සේවා"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

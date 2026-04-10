@@ -3,7 +3,7 @@
   "content": "Developer",
   "content_en_sha1_hash": "7e08ebec5e6f80a136fa4076e041dd0c811a5e70",
   "created_at": "2025-05-19T21:30:44.508Z",
-  "updated_at": "2026-04-08T12:07:56.709Z",
+  "updated_at": "2026-04-10T15:22:27.213Z",
   "comment": {
     "text": "This translation key is used to display the label \"Developer\" in various contexts within the application, typically appearing as a header or title. It appears on standalone components related to benefits and enterprise settings, where it's used to differentiate between developer and enterprise licenses.",
     "is_auto": true,
@@ -63,13 +63,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is identical to the English source, meaning the Azerbaijani translation is missing. 'Developer' in Azerbaijani is 'Tərtibatçı'.",
-          "suggestion": "Tərtibatçı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -99,13 +93,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation is identical to the English text, which is not a German word. The correct term for 'Developer' in this context is 'Entwickler'.",
-          "suggestion": "Entwickler"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -129,25 +117,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation is identical to the English text, meaning it was not translated.",
-          "suggestion": "Kehittäjä"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation is identical to the English text, which is not a French translation.",
-          "suggestion": "Développeur"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -225,25 +201,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is in English instead of Portuguese.",
-          "suggestion": "Desenvolvedor"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is in English instead of Portuguese (Brazil).",
-          "suggestion": "Desenvolvedor"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -309,13 +273,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is identical to the English source, meaning the Turkish translation is missing. 'Developer' should be translated to Turkish.",
-          "suggestion": "Geliştirici"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

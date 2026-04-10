@@ -3,7 +3,7 @@
   "content": "IdP Entity Id",
   "content_en_sha1_hash": "ec80bd1846e6613c32d80934518fd3cfe3e05f8e",
   "created_at": "2025-05-19T21:30:50.123Z",
-  "updated_at": "2026-04-08T23:08:50.640Z",
+  "updated_at": "2026-04-10T15:22:27.324Z",
   "comment": {
     "text": "The translation key \"ProviderURL\" is used to translate the label for a field that displays the IDP entity URL in an identity provider settings page. It appears as part of a form field and requires a translated value for display purposes.",
     "is_auto": true,
@@ -27,37 +27,19 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation 'معرف مزود الهوية' means 'Identity Provider ID', omitting the 'Entity' part of 'IdP Entity Id'.",
-          "suggestion": "معرف كيان مزود الهوية"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Entity' in the context of SAML/IdP refers to a technical 'Entity' (an actor or system), not a 'Müəssisə' (a business/company/enterprise). In technical SSO settings, 'Entity ID' is a specific identifier.",
-          "suggestion": "IdP Entiti ID"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Идентификация на обекта на доставчика на самоличност' means 'Identification of the identity provider object', which is a description of a process or a concept, rather than the specific technical identifier 'Entity Id'. In SAML/SSO contexts, 'Entity ID' is a specific technical term that should be translated as 'Идентификатор на субекта' or 'Entity ID'.",
-          "suggestion": "Идентификатор на субекта на IdP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -99,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'թողարկողի' means 'issuer' or 'publisher', which is not the correct technical term for 'Entity'. In the context of SAML/IdP, 'Entity Id' refers to the unique identifier of the entity, not its status as an issuer.",
-          "suggestion": "IdP Entity Id"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -153,13 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Idp ID da Entidade' is redundant and grammatically awkward. In technical contexts, 'Entity Id' refers to a specific identifier (Entity ID). The current translation translates 'Id' twice (once as 'Idp' and once as 'ID'), which is confusing.",
-          "suggestion": "ID da Entidade IdP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -183,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation is incomplete and cut off ('IdP හැඳු.'), failing to convey the full meaning of 'Entity Id'.",
-          "suggestion": "IdP Entity Id"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -201,13 +165,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'IdP ID entitete' is grammatically incorrect and nonsensical in Slovenian. 'Entitete' is not a valid word; the correct term for 'Entity' in this technical context is 'entitet'. Additionally, 'IdP ID entitete' translates roughly to 'IdP ID of entity', which is redundant and awkward.",
-          "suggestion": "IdP identifikator entitete"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -249,13 +207,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Albanian is incorrect, making it sound like 'IdP Entity the ID' instead of 'IdP Entity ID'. In Albanian, the noun being described should typically come before the modifier, or the possessive structure should be adjusted.",
-          "suggestion": "ID-ja e entitetit IdP"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

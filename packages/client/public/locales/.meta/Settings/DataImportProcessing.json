@@ -3,7 +3,7 @@
   "content": "Processing of data import",
   "content_en_sha1_hash": "999734d7ec521c34831b73d0c1147ed4ca82180a",
   "created_at": "2025-05-19T21:30:51.073Z",
-  "updated_at": "2026-04-09T03:39:24.009Z",
+  "updated_at": "2026-04-10T15:22:27.377Z",
   "comment": {
     "text": "This translation key is used for the title of a data import processing step in a migration form. It appears as part of a settings or configuration section and provides a descriptive label for the user to understand the current stage of the import process.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation is grammatically incorrect and lacks a preposition, making it sound like a word salad ('Processing the importing of data' without proper connection). It lacks the necessary preposition 'на' or a correct verbal noun structure.",
-          "suggestion": "Обработване на вноса на данни"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {

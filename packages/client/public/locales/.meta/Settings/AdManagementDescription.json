@@ -3,7 +3,7 @@
   "content": "Choose whether promotional banners are shown in your {{productName}}.",
   "content_en_sha1_hash": "2a6b030bb7ef724467eef21491f93e99dd805096",
   "created_at": "2025-07-02T07:49:04.418Z",
-  "updated_at": "2026-04-09T04:27:25.035Z",
+  "updated_at": "2026-04-10T15:22:27.390Z",
   "comment": {
     "text": "This translation key is used for a descriptive text that explains the choice to display promotional banners in the product name. It appears in the UI as part of a Portal Settings category and is displayed next to an \"Ad Management\" option on a customization page.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'bannelerinin' is a misspelling of 'bannerlərinin'.",
-          "suggestion": "{{productName}} məhsulunuzda reklam bannerlərinin göstərilməsi seçimini edin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,13 +69,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'lija' is a typo or incorrect word (meaning 'sandpaper' or 'sand' as a verb) instead of 'Elija' (Choose).",
-          "suggestion": "Elija si se muestran banners promocionales en su {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -129,13 +117,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical number mismatch: 'banneri' is singular (or a specific plural form that doesn't match the context), whereas the English 'banners' is plural. In Latvian, 'banneri' can be singular nominative, but the verb 'tiek rādīti' is plural. To correctly translate 'promotional banners are shown', it should be 'reklāmas baneri tiek rādīti'.",
-          "suggestion": "Izvēlieties, vai reklāmas baneri tiek rādīti jūsu {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

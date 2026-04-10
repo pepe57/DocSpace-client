@@ -12,7 +12,7 @@
   "ErrorAccountAlreadyUse": "Propojený účet již používaný jiným uživatelem",
   "LogoutActiveConnection": "Odhlášení z aktivního připojení",
   "LogoutAllActiveSessionsDescription": "Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
-  "LogoutBtn": "Odhlášení",
+  "LogoutBtn": "Odhlásit se",
   "LogoutDescription": "Poznámka. Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
   "LogoutFrom": "Odhlášení z {{platform}} {{browser}}?",
   "MyProfile": "Můj profil",

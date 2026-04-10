@@ -3,7 +3,7 @@
   "content": "the form",
   "content_en_sha1_hash": "f056270439da7c25a68f10abf9daafa6ac36ecc5",
   "created_at": "2025-08-26T11:15:00.725Z",
-  "updated_at": "2026-04-07T23:12:46.881Z",
+  "updated_at": "2026-04-10T15:22:27.104Z",
   "comment": {
     "text": "This key displays the label for a form-filling access right. It appears as part of the share options, likely in a list or dialog, indicating that users can fill out a form. Translators should consider phrasing that clearly conveys the ability to complete a form.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'formanı' is in the accusative case (direct object), which makes it grammatically incorrect as a standalone label for an access right. It should be in the nominative case to function as a noun label.",
-          "suggestion": "forma"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

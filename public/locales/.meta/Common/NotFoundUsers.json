@@ -3,7 +3,7 @@
   "content": "No users found",
   "content_en_sha1_hash": "612eb3c64c413c645d13566a1cfa74199923df23",
   "created_at": "2025-05-19T21:30:46.927Z",
-  "updated_at": "2026-04-08T03:54:48.399Z",
+  "updated_at": "2026-04-10T15:22:27.142Z",
   "comment": {
     "text": "This translation key is used to display a message when users are not found or not imported. It appears in an empty screen component and serves as the header text of an empty table view, indicating that there are no users to select or import.",
     "is_auto": true,
@@ -225,13 +225,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'පරිශ්‍රීලකයින්' (parishrilakayin) is a misspelling/incorrect term for 'users'. The correct term for users in this context is 'පරිශීලකයින්' (parishilakayin).",
-          "suggestion": "පරිශීලකයින් හමු නොවුණි"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

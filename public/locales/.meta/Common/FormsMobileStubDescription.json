@@ -3,7 +3,7 @@
   "content": "For the full experience, please use a device with a wider screen.",
   "content_en_sha1_hash": "4f145fc9ad4f7294cf16332a586dfd1a9b1ad562",
   "created_at": "2026-03-26T08:26:35.520Z",
-  "updated_at": "2026-04-08T08:41:55.102Z",
+  "updated_at": "2026-04-10T15:22:27.179Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -176,13 +176,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a slash with two options ('upotrebu/iskustvo'), which is a placeholder/drafting error rather than a finished UI string. It should choose one term to maintain a professional UI.",
-          "suggestion": "Za puno iskustvo, molimo vas da koristite uređaj sa širim ekranom."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

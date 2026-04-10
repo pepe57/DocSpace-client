@@ -3,7 +3,7 @@
   "content": "Create and manage all API keys for your {{organizationName}} {{productName}}.",
   "content_en_sha1_hash": "9382389dde3009cae36131b69c5c0694038fffce",
   "created_at": "2026-04-03T21:51:36.613Z",
-  "updated_at": "2026-04-09T04:13:31.088Z",
+  "updated_at": "2026-04-10T15:22:27.386Z",
   "comment": {
     "text": "This text serves as a description for the API Keys card within the developer tools settings. It informs users that they can create and manage API keys associated with their specific organization and product.",
     "is_auto": true,
@@ -111,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'aprakstītiem' (described) was added at the end, which changes the meaning to 'all API keys described for your...', making the sentence nonsensical in this context.",
-          "suggestion": "Izveidojiet un pārvaldojiet visus API atslavas jūsu {{organizationName}} {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

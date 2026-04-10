@@ -3,7 +3,7 @@
   "content": "Copying",
   "content_en_sha1_hash": "43b7de9894fd26b8d14ca6988e963239baff6ad4",
   "created_at": "2025-05-19T21:30:43.791Z",
-  "updated_at": "2026-04-08T14:09:10.862Z",
+  "updated_at": "2026-04-10T15:22:27.226Z",
   "comment": {
     "text": "This translation key \"CopyOperation\" is used to display a message that indicates an operation where content will be duplicated or mimicked. It is displayed as a label on a button in UI elements, typically allowing users to initiate a copy action, such as copying files or data.",
     "is_auto": true,
@@ -93,13 +93,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation 'Sta copiando' uses the present continuous form (He/She/It is copying), which implies an active subject performing the action. In a UI context for a button or status label, 'Copying' should be a gerund or a noun indicating the process itself.",
-          "suggestion": "Copia"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -123,13 +117,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian word 'Kopē' is grammatically incorrect and does not convey the meaning of the ongoing process 'Copying'. 'Kopē' is not a standard Latvian word for this context; the correct participle for the action of copying is 'Kopēšana'.",
-          "suggestion": "Kopēšana"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -147,13 +135,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'A copiar' implies a continuous action (present continuous) or a state, whereas in the context of a UI button label/status for an operation, 'Copiando' is the standard and correct term for 'Copying'.",
-          "suggestion": "Copiando"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -165,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Copiază' is an imperative verb (command) meaning 'Copy!', whereas the English 'Copying' is a present participle indicating a continuous process or state. In the context of a button label showing progress (e.g., 'Copying...'), the correct Romanian form should be the gerund/continuous form.",
-          "suggestion": "Copiere"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -237,13 +213,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation 'Duke u kopjuar' is grammatically incorrect and uses a passive/reflexive form that doesn't make sense in this context. It translates more like 'Being copied' (as in the object being acted upon) rather than the action of 'Copying'.",
-          "suggestion": "Duke kopjuar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

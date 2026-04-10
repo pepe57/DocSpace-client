@@ -3,7 +3,7 @@
   "content": "AI Room",
   "content_en_sha1_hash": "15189d5504dae70713278091f6294af7e43dcc58",
   "created_at": "2025-10-27T16:14:10.316Z",
-  "updated_at": "2026-04-08T17:21:23.013Z",
+  "updated_at": "2026-04-10T15:22:27.276Z",
   "comment": {
     "text": "This key displays the title for the \"AI Room\" type of room. It appears as a label in UI elements like room filters and selection lists, indicating a room powered by AI functionality. Translators should ensure the term \"AI\" is appropriate for the target locale.",
     "is_auto": true,
@@ -93,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'ԱԲ' (AB), which is a phonetic transliteration of the letters 'A' and 'B', instead of the standard abbreviation for Artificial Intelligence (Արհեստական բանականություն) or the widely accepted 'AI' in Armenian technical contexts. In Armenian, 'ԱԲ' does not mean 'AI'.",
-          "suggestion": "AI Սենյակ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -195,13 +189,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'ВИ соба' is nonsensical. 'ВИ' is not the standard abbreviation for AI (Veštačka inteligencija) in Serbian, and 'соба' means 'dog' in several Slavic languages, which is completely unrelated to 'Room'.",
-          "suggestion": "AI соба"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -219,13 +207,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Штучний інтелект: кімната' (Artificial Intelligence: room) changes the noun phrase 'AI Room' into a descriptive label with a colon, which is unnatural for a UI title/label and changes the semantic structure from a specific room type to a category description.",
-          "suggestion": "AI-кімната"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

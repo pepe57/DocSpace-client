@@ -3,7 +3,7 @@
   "content": "Previous",
   "content_en_sha1_hash": "50f94286ba30706a19070d3ec0a0c8d34d6cf6eb",
   "created_at": "2025-05-19T21:30:47.476Z",
-  "updated_at": "2026-04-08T02:16:41.171Z",
+  "updated_at": "2026-04-10T15:22:27.130Z",
   "comment": {
     "text": "This translation key is used to display the label \"Previous\" in a pagination component, typically found on a page of accounts or data, where it serves as a navigation button to proceed to a previous set of results. It is usually displayed as a clickable element.",
     "is_auto": true,
@@ -93,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '前' (mae) is too vague and typically means 'before' or 'front'. In the context of UI pagination, '前へ' or '戻る' is the standard for a 'Previous' button.",
-          "suggestion": "前へ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

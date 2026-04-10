@@ -3,7 +3,7 @@
   "content": "These {{itemCount}} items will be moved to Trash.",
   "content_en_sha1_hash": "376801e3e09ca786042c3c56c04667dc6dacc5ae",
   "created_at": "2026-04-03T21:51:30.652Z",
-  "updated_at": "2026-04-08T04:27:08.431Z",
+  "updated_at": "2026-04-10T15:22:27.149Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -50,13 +50,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Κάμινα Απορριμμάτων' is a literal, nonsensical translation of 'Trash'. In software UI, 'Trash' (the bin/folder) is translated as 'Κάδος Απορριμμάτων' or simply 'Απορρίμματα'. 'Κάμινα' refers to a furnace/kiln.",
-          "suggestion": "Αυτά τα {{itemCount}} στοιχεία θα μετακινηθούν στον Κάδο Απορριμμάτων."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -146,13 +140,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in noun declension: 'элемента' (singular genitive) is used instead of 'элементов' (plural genitive) which is required for the number {{itemCount}}.",
-          "suggestion": "Эти {{itemCount}} элементов будут перемещены в Корзину."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

@@ -3,7 +3,7 @@
   "content": "View and manage all files and folders",
   "content_en_sha1_hash": "07c9e42a035928c689645c2bb99f9e8490d45a8b",
   "created_at": "2025-05-19T21:30:47.010Z",
-  "updated_at": "2026-04-08T03:47:09.572Z",
+  "updated_at": "2026-04-10T15:22:27.140Z",
   "comment": {
     "text": "This translation key is used to display a description for managing files and folders. It appears on a settings page or similar UI element within an OAuth application, allowing users to view and manage all files and folders associated with their accounts.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Sinhala translation uses 'ලේඛන' (documents) instead of 'ගොනු' (files), which changes the technical scope of the permission from 'files and folders' to 'documents and folders'.",
-          "suggestion": "ගොනු හා ෆෝල්ඩර් සියල්ලම බලන්න සහ පාලනය කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -3,7 +3,7 @@
   "content": "Sign in with Google",
   "content_en_sha1_hash": "4a0b7281397ff6a6cf1e5d19aad8dd3b71043677",
   "created_at": "2025-05-19T21:30:48.762Z",
-  "updated_at": "2026-04-10T08:21:04.401Z",
+  "updated_at": "2026-04-10T15:22:27.102Z",
   "comment": {
     "text": "The \"Sign in with Google\" translation key is used to display a button label or title that allows users to sign in to the application using their Google account credentials. This text typically appears on a login form, such as a button or dialog prompt, and is intended for display in multiple languages.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'تسجيل الدخول Google' is grammatically incomplete and reads like 'Login Google' instead of 'Sign in with Google'. It lacks the preposition 'with' or 'using', making it sound unnatural in Arabic.",
-          "suggestion": "تسجيل الدخول باستخدام Google"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -207,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '解绑Google登录' means 'Unbind Google login', which is the opposite of the intended action 'Sign in with Google'.",
-          "suggestion": "使用 Google 登录"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

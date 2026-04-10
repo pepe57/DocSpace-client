@@ -3,7 +3,7 @@
   "content": "Room storage limit exceeded (<1>{{usedSpace}}/{{quotaLimit}}</1>)",
   "content_en_sha1_hash": "0e4c70c79564adb5b684df48117446f520ca8def",
   "created_at": "2026-03-20T09:07:35.655Z",
-  "updated_at": "2026-04-08T00:08:07.282Z",
+  "updated_at": "2026-04-10T15:22:27.112Z",
   "comment": {
     "text": "This translation key displays a warning message indicating that the storage limit for a room has been exceeded. It shows the currently used storage space and the total quota limit, likely appearing as an alert within the Home section of the UI. Translators should ensure the displayed values are formatted correctly according to local conventions.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation uses 'Преминат лимитът' (The limit is passed), which is grammatically incorrect in this context. It should be 'Преминат е лимитът' (The limit has been exceeded) or 'Лимитът за съхранение в стаята е превишен'.",
-          "suggestion": "Превишен е лимитът за съхранение в стаята (<1>{{usedSpace}}/{{quotaLimit}}</1>)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -183,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Премање границе' means 'Reduction of the limit' or 'Decreasing the limit', which is the opposite of the English meaning 'Limit exceeded'.",
-          "suggestion": "Прекорачен лимит складишта простора (<1>{{usedSpace}}/{{quotaLimit}}</1>)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

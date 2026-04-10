@@ -3,7 +3,7 @@
   "content": "Sort by",
   "content_en_sha1_hash": "a2a5bdeca9391be1e0cdff1c19895bae7fadc2c2",
   "created_at": "2025-05-19T21:30:48.943Z",
-  "updated_at": "2026-04-07T22:41:50.455Z",
+  "updated_at": "2026-04-10T15:22:27.098Z",
   "comment": {
     "text": "The translation key \"SortBy\" is used to display the text \"Sort by\", which serves as a button title in a combobox or dropdown menu, allowing users to sort gallery items or filtered results. This text appears on buttons and labels within various UI components, including filters and sorting options. Its primary purpose is to provide clear instructions for user interaction.",
     "is_auto": true,
@@ -111,13 +111,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English text 'Sort by' implies a prepositional relationship or a label for a selection, whereas the Korean '정렬' (Sort) is a noun/verb meaning just 'Sorting'. While often used, it misses the 'by' nuance which in UI context often precedes the criteria. However, more critically, in many UI patterns, 'Sort by' is translated as '정렬 기준' (Sort criteria) to be grammatically complete for a label.",
-          "suggestion": "정렬 기준"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -141,13 +135,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English text 'Sort by' implies a prepositional relationship (sorting by a specific criterion), whereas the Polish 'Sortuj' is a simple imperative verb meaning 'Sort'. This loses the 'by' component which is standard for UI labels like 'Sort by [Name/Date]'.",
-          "suggestion": "Sortuj według"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {

@@ -3,7 +3,7 @@
   "content": "Reset application",
   "content_en_sha1_hash": "93e3b88bc025a8b58df20fb4ea9f533c792cfd53",
   "created_at": "2025-05-19T21:30:47.892Z",
-  "updated_at": "2026-04-08T01:25:54.259Z",
+  "updated_at": "2026-04-10T15:22:27.120Z",
   "comment": {
     "text": "This translation key is used to display a reset application button label in various parts of the user interface, including a modal dialog and a login settings section. It prompts users to \"Reset Application\" and is typically displayed as a prominent action button or link.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'إعادة تشغيل التطبيق' means 'Restart application' instead of 'Reset application'. 'Reset' in a technical context (clearing settings/data) should be 'إعادة ضبط'.",
-          "suggestion": "إعادة ضبط التطبيق"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -141,13 +135,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'Repor' means 'to replenish' or 'to replace' (like restocking supplies). In a software context for 'Reset application', the correct term is 'Redefinir' or 'Restaurar'.",
-          "suggestion": "Redefinir aplicação"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -225,13 +213,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation 'Rivendos aplikacionin' means 'Reclaim the application' or 'Claim the application' instead of 'Reset the application' (restoring to default settings).",
-          "suggestion": "Rifilloni aplikacionin"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

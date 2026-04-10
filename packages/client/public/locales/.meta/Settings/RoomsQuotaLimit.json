@@ -3,7 +3,7 @@
   "content": "{{roomsQuotaLimit}} for rooms",
   "content_en_sha1_hash": "ee9270f5c126fdf6af89661d474505448542d564",
   "created_at": "2025-05-19T21:30:52.473Z",
-  "updated_at": "2026-04-09T01:40:04.272Z",
+  "updated_at": "2026-04-10T15:22:27.344Z",
   "comment": {
     "text": "This translation key is used to display a quota limit value for rooms. It appears in a warning quota dialog and will be translated as a string of numbers followed by \" for rooms\".",
     "is_auto": true,
@@ -93,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation 'ルームごとに{{roomsQuotaLimit}}' means '{{roomsQuotaLimit}} per room', which changes the meaning from the English '{{roomsQuotaLimit}} for rooms' (a total quota for all rooms).",
-          "suggestion": "ルームの制限: {{roomsQuotaLimit}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

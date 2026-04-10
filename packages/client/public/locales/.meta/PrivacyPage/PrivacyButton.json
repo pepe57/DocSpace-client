@@ -3,7 +3,7 @@
   "content": "Open {{organizationName}} Desktop Editors",
   "content_en_sha1_hash": "dda3d5876529ea8bd3db3b35f56dd4b353fd26b2",
   "created_at": "2025-05-19T21:30:53.411Z",
-  "updated_at": "2026-04-09T07:18:04.884Z",
+  "updated_at": "2026-04-10T15:22:27.403Z",
   "comment": {
     "text": "This translation key contains a button label that opens desktop editors for an organization. The text includes a placeholder {{organizationName}} to be replaced with the actual organization name.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order in Arabic is incorrect. Placing the placeholder {{organizationName}} before the noun 'محرري' (editors) makes the sentence grammatically awkward and suggests the organization name is an adjective or part of a broken phrase. In Arabic, the verb should typically be followed by the object or the noun phrase should be structured as 'Open the desktop editors of {{organizationName}}'.",
-          "suggestion": "افتح محرري سطح المكتب لـ {{organizationName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -63,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation uses 'Άνοιγμα' (Opening/The act of opening), which is a noun. For a button label, the imperative verb 'Άνοιξε' (Open) or the infinitive-style 'Άνοιγμα' is often used, but in the context of a command/action button, 'Άνοιγμα' sounds like a title rather than an action. However, more critically, 'Desktop Editors' is left untranslated, which may be intended, but 'Άνοιγμα' is a noun form.",
-          "suggestion": "Άνοιξε τα {{organizationName}} Desktop Editors"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {

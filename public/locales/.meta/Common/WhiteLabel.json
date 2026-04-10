@@ -3,7 +3,7 @@
   "content": "Logo settings",
   "content_en_sha1_hash": "cde0dbbc94f797482701f082adcc8ce183018e62",
   "created_at": "2025-05-26T07:15:49.607Z",
-  "updated_at": "2026-04-07T19:59:31.693Z",
+  "updated_at": "2026-04-10T15:22:27.077Z",
   "comment": {
     "text": "The \"Logo settings\" translation key is used to display a description for a logo-related setting in the portal settings. It appears in the branding section of the portal and might be seen in a header or on a button related to logo customization. Translators should provide a clear and concise text that explains the purpose of logo settings.",
     "is_auto": true,
@@ -147,13 +147,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Definições de login' means 'Login settings', which is completely different from the English 'Logo settings'.",
-          "suggestion": "Definições de logótipo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -195,25 +189,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is incorrect, making it sound like 'Logo settings' (noun phrase) is 'Logo is settings' or 'Logo configuration' in a broken way. In Serbian, the noun being modified should come first, or a preposition should be used.",
-          "suggestion": "Подешавања логотипа"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is unnatural in Serbian. 'Logotip podešavanja' sounds like 'Logo settings' in a literal, broken way. In Serbian, the noun being modified should come first, or a preposition should be used.",
-          "suggestion": "Podešavanja logotipa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

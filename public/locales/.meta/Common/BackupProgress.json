@@ -3,7 +3,7 @@
   "content": "Backup: {{progress}}%",
   "content_en_sha1_hash": "67556deadd1d0bbd475e81e5accc92229e607451",
   "created_at": "2025-05-26T07:15:40.772Z",
-  "updated_at": "2026-04-08T16:24:12.328Z",
+  "updated_at": "2026-04-10T15:22:27.255Z",
   "comment": {
     "text": "This translation key displays the progress percentage and corresponding label (\"Backup\", \"Preparing Backup\" or a dynamic progress value) during an automated backup process. It appears in various UI elements, such as buttons and dialogues, to inform users about the status of the backup operation.",
     "is_auto": true,
@@ -135,13 +135,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Faça cópias de segurança' is an imperative command ('Make backups'), whereas the English 'Backup' in this context is a noun/label describing the current process status.",
-          "suggestion": "Backup: {{progress}}%"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {

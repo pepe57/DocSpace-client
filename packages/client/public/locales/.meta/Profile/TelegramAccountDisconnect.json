@@ -3,7 +3,7 @@
   "content": "Disconnect Telegram",
   "content_en_sha1_hash": "67950bc2ada8b4276e4189d5534e4bbc62e01802",
   "created_at": "2025-09-10T09:59:16.170Z",
-  "updated_at": "2026-04-09T06:58:05.897Z",
+  "updated_at": "2026-04-10T15:22:27.398Z",
   "comment": {
     "text": "This key is used for the title of a dialog box that allows a user to disconnect their Telegram account. It appears in the header of the disconnect account dialog, guiding the user on the action they are about to take. Translators should ensure the translation accurately conveys the action of disconnecting.",
     "is_auto": true,
@@ -117,13 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Verbind Telegram verbreken' is grammatically incorrect and awkward; it literally translates to 'Connect Telegram break', which is a nonsensical combination of two opposing verbs.",
-          "suggestion": "Telegram verbreken"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -195,13 +189,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation contains a grammatical error ('Telegram'ı bağlantısını kes') that makes the sentence nonsensical. It incorrectly uses a possessive suffix on 'Telegram' followed by a noun phrase, rather than a direct object construction.",
-          "suggestion": "Telegram bağlantısını kes"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

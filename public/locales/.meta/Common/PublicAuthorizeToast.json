@@ -3,7 +3,7 @@
   "content": "This room is opened in the <1>{{roomMode}}</1> mode. If you have an account in this {{productName}}, please authorize.",
   "content_en_sha1_hash": "966e9f6f87aa9004801797a1570d6371db7bf248",
   "created_at": "2025-06-24T16:31:00.928Z",
-  "updated_at": "2026-04-10T08:58:38.051Z",
+  "updated_at": "2026-04-10T15:22:27.129Z",
   "comment": {
     "text": "This translation key is used to display a toast message prompting users to authorize access to their account when they enter a public room in the application. The message includes placeholders for room mode and product name, which will be replaced by actual values during translation. It appears as a modal or dialog prompt.",
     "is_auto": true,
@@ -98,13 +98,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'authorize' (հաստատել) is translated as 'confirm' or 'verify' in Armenian, which is not the correct technical term for logging in or granting access to an account. The correct term should be 'մուտք գործել' (log in) or 'ավտորիզացնել' (authorize).",
-          "suggestion": "Այս սենյակը բացված է <1>{{roomMode}}</1> ռեժիմով։ Եթե դուք ունեք հաշիվ այս {{productName}}-ում, խնդրում ենք մուտք գործել։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

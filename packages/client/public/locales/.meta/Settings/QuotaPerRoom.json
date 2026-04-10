@@ -3,7 +3,7 @@
   "content": "Quota per room",
   "content_en_sha1_hash": "c6d44419e178bb95bb2e8d662bb28b6b56efd1ec",
   "created_at": "2025-05-19T21:30:52.338Z",
-  "updated_at": "2026-04-09T01:53:40.511Z",
+  "updated_at": "2026-04-10T15:22:27.348Z",
   "comment": {
     "text": "The translation key \"QuotaPerRoom\" represents the label for a quota setting related to room capacity in a storage management system. It is used as a title on a category page where users can set and manage quotas per room, typically in a portal settings interface.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'الحصة' (Al-hissa) in Arabic typically refers to a 'portion', 'share', or 'ration' (like food or a portion of a cake). In the context of disk space and storage management, 'Quota' should be translated as 'الحصة التخزينية' or more commonly 'الكوتا' or 'الحد المسموح به'. Using 'الحصة' alone is ambiguous and can be misinterpreted in a technical storage context.",
-          "suggestion": "الحد المسموح به لكل غرفة"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -69,25 +63,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German word 'Quote' means 'quotation' (as in a price quote or a literary quote). The correct term for a resource allocation or limit is 'Kontingent' or 'Quota'.",
-          "suggestion": "Quota pro Zimmer"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek word 'Ποσόστωση' (quota/proportion/ratio) is used in a way that sounds like a mathematical ratio or a process of proportioning, whereas in the context of disk space management, 'Quota' refers to a fixed limit or allocation. 'Όριο' (limit) or 'Ποσό' (amount) is more appropriate, but specifically 'Quota' in IT is often translated as 'Ποσόστωση' only in very specific contexts; here it implies a limit per room.",
-          "suggestion": "Όριο ανά δωμάτιο"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -183,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'සලාකය' (salāka) is incorrect in this context. It does not mean 'quota' in terms of storage or allocation; it is a non-standard or incorrect term for this technical context. The correct term for 'quota' (allocation/limit) in Sinhala is 'කොටස' or 'සීමාව'.",
-          "suggestion": "කාමරයකට වෙන්කිරීම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

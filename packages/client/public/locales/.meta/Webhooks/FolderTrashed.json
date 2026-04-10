@@ -3,7 +3,7 @@
   "content": "Folder trashed",
   "content_en_sha1_hash": "8f9289c570fcc54441a426d4c6463fd539e340a6",
   "created_at": "2025-05-19T21:30:49.759Z",
-  "updated_at": "2026-04-08T19:58:23.248Z",
+  "updated_at": "2026-04-10T15:22:27.295Z",
   "comment": {
     "text": "The translation key \"FolderTrashed\" is used to display a message indicating that a folder has been trashed or deleted in the portal settings UI.",
     "is_auto": true,
@@ -135,13 +135,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Pasta lixeira' means 'Folder trash bin' (noun phrase), whereas the English 'Folder trashed' is a status message indicating an action has been completed (verb/past participle).",
-          "suggestion": "Pasta movida para a lixeira"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -177,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Фасцикла' is a non-standard, incorrect term for 'Folder' in Serbian. The correct term is 'Овртиљак' or 'Фолдер'. Additionally, 'избачена у корпус' is a literal and unnatural translation for 'trashed' in a software context.",
-          "suggestion": "Фолдер је премештен у корпу"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

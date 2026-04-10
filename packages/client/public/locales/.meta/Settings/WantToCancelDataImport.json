@@ -3,7 +3,7 @@
   "content": "Do you want to cancel data import?",
   "content_en_sha1_hash": "458fd3fd1c22f280058351a762696526ba146d2b",
   "created_at": "2025-05-19T21:30:53.192Z",
-  "updated_at": "2026-04-08T23:54:27.909Z",
+  "updated_at": "2026-04-10T15:22:27.328Z",
   "comment": {
     "text": "\"This translation key is used to display a confirmation message when cancelling data import. It appears as part of a modal dialog in the application and is used to confirm the user's intention to cancel the data import process.\"",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'ආයාතය' (āyātaya) is a noun meaning 'import/entry' but is used incorrectly here as a verb or a direct object. In this context, 'import' should be 'ආනයනය' (āyanaya) or 'ඇතුළත් කිරීම' (ætuḷat kirīma) to sound natural and correct in a technical UI context.",
-          "suggestion": "ඔබට දත්ත ආනයනය අවලංගු කිරීමට අවශ්‍යද?"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

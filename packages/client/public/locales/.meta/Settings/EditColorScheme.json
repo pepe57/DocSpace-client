@@ -3,7 +3,7 @@
   "content": "Edit color scheme",
   "content_en_sha1_hash": "e4b8ec853d190dec813a72518343f018e0a210e4",
   "created_at": "2025-05-19T21:30:51.466Z",
-  "updated_at": "2026-04-09T03:05:33.449Z",
+  "updated_at": "2026-04-10T15:22:27.367Z",
   "comment": {
     "text": "EditColorScheme is used in settings pages to display a button that allows users to edit their color scheme. It appears as \"Edit Color Scheme\" and is likely part of a UI element such as a dialog or settings panel, allowing users to modify their appearance preferences.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation means 'Edit current theme' instead of 'Edit color scheme'. While 'theme' and 'color scheme' are related, 'color scheme' specifically refers to colors, whereas 'theme' is a broader UI concept.",
-          "suggestion": "වර්ණ රටාව සංස්කරණය කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

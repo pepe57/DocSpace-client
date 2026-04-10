@@ -3,7 +3,7 @@
   "content": "Chat successfully deleted",
   "content_en_sha1_hash": "20a3ccaa93eb756843a2b5e2576d39b01c45d620",
   "created_at": "2025-11-17T13:24:47.224Z",
-  "updated_at": "2026-04-08T15:37:48.608Z",
+  "updated_at": "2026-04-10T15:22:27.236Z",
   "comment": {
     "text": "This key displays a success message in a toast notification after a chat is successfully deleted. It appears after the `updateUrlChatId` function is executed and the chat selection modal is closed. Translators should ensure the message clearly conveys the action's completion.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation means 'Investigation successfully deleted' instead of 'Chat successfully deleted'. 'Հետաքննություն' (Hetaknnutyun) refers to an investigation or inquiry, whereas 'Chat' should be 'Չաթ' or 'Զրույց'.",
-          "suggestion": "Չաթը հաջողությամբ ջնջվեց:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -177,13 +171,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation means 'Chat has been displayed successfully', which is the opposite of the intended 'Chat successfully deleted'.",
-          "suggestion": "Biseda u fshirë me sukses"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

@@ -3,7 +3,7 @@
   "content": "No templates available in this library.",
   "content_en_sha1_hash": "c21124d568307c62d087c6283dfc4de27e000b8f",
   "created_at": "2026-03-26T08:26:33.939Z",
-  "updated_at": "2026-04-08T10:51:01.663Z",
+  "updated_at": "2026-04-10T15:22:27.200Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -152,13 +152,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation uses the plural 'bibliotékách' (in these libraries) instead of the singular 'bibliotéke' (in this library), which changes the meaning.",
-          "suggestion": "Žiadne šablóny nie sú v tejto knižnici."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -170,25 +164,13 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation uses 'skedarë të modelit' (model files) instead of 'template' (model/shabllon). In a software context, 'templates' should be translated as 'shabllonë'.",
-          "suggestion": "Nuk ka shabllonë të disponueshëm në këtë bibliotekë."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'библиотекарству' (library-ship/librarianship) is used instead of 'библиотеци' (library). 'Библиотекарство' refers to the profession or the field of library science, not a collection of files/templates.",
-          "suggestion": "Нема доступних шаблона у овој библиотеци."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

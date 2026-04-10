@@ -3,7 +3,7 @@
   "content": "Change",
   "content_en_sha1_hash": "64fbd995d3b6b156ee26ae3c03e6516434c34c12",
   "created_at": "2025-05-19T21:30:43.398Z",
-  "updated_at": "2026-04-08T15:44:38.456Z",
+  "updated_at": "2026-04-10T15:22:27.237Z",
   "comment": {
     "text": "This translation key is used for the text \"Change\" which appears as a label on a button in various UI components, such as change owner or user type dialogs and room settings. It prompts the user to make a change action.",
     "is_auto": true,
@@ -135,13 +135,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation 'ການປ່ຽນແປງ' means 'a change' or 'the act of changing' (noun). For a UI button label representing an action (verb), it should be 'ປ່ຽນ' (Change).",
-          "suggestion": "ປ່ຽນ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -243,13 +237,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ndyshoni' means 'to differ' or 'to be different' (descriptive), whereas the English 'Change' in this UI context is an imperative verb meaning 'to modify' or 'to switch' (action).",
-          "suggestion": "Ndrysho"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

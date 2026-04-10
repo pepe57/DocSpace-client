@@ -3,7 +3,7 @@
   "content": "Add to room",
   "content_en_sha1_hash": "117c397ee312dc4ff50d231fd15f77b9c6fcaf72",
   "created_at": "2025-05-19T21:30:42.934Z",
-  "updated_at": "2026-04-08T17:48:11.836Z",
+  "updated_at": "2026-04-10T15:22:27.269Z",
   "comment": {
     "text": "This translation key is used for the label on a submit button in an invite users panel. The button prompts the user to add themselves to a room. It appears as \"AddToRoom\" and can be found in a dialog that allows users to select access rights.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ավելացնել սենյակում։' means 'Add in the room' (locative case), whereas the English 'Add to room' implies an action of adding someone into the room (directional/motion). The correct prepositional usage in Armenian for this context should be 'սենյակ' (accusative/dative sense) rather than 'սենյակում' (in the room).",
-          "suggestion": "Ավելացնել սենյակ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

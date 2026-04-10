@@ -3,7 +3,7 @@
   "content": "Generate",
   "content_en_sha1_hash": "fc45f9b7a9a6e8b48f0e28821ec1981804dd1eb6",
   "created_at": "2025-05-19T21:30:49.766Z",
-  "updated_at": "2026-04-08T19:54:20.790Z",
+  "updated_at": "2026-04-10T15:22:27.292Z",
   "comment": {
     "text": "The translation key \"Generate\" is used to display a button label that enables users to create a new API key or generate a developer token. It appears in various UI components, such as buttons and dialogues, where it prompts users to perform these actions. The exact context can vary between \"EditButton\" (a standard edit action) and \"Generate\" (a specific button for creating an API key).",
     "is_auto": true,
@@ -159,13 +159,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Generate' is an imperative verb used for a button action, whereas the Russian 'Генерация' is a noun (Generation). For a UI button, the imperative verb 'Сгенерировать' is required to match the functional intent.",
-          "suggestion": "Сгенерировать"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

@@ -3,7 +3,7 @@
   "content": "Once the restoring process is over, you'll be automatically redirected to your {{productName}}.",
   "content_en_sha1_hash": "60714cd70ca7d13efc48745ab7823e95ca812d51",
   "created_at": "2025-05-19T21:30:53.442Z",
-  "updated_at": "2026-04-08T02:24:50.908Z",
+  "updated_at": "2026-04-10T15:22:27.132Z",
   "comment": {
     "text": "The PreparationPortalDescription translation key is used to display a message that will be shown after the restoring process is complete, informing users that they will be automatically redirected to their product name. This text appears in the UI on a screen where a progress indicator and percentage are displayed, likely on a preparation portal page.",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Finnish translation is missing the preposition 'to' (tai 'kohti') before the variable, making the sentence grammatically incomplete in Finnish ('...siirretään automaattisesti {{productName}}' instead of '...siirretään automaattisesti {{productName}}-palveluun/sivulle').",
-          "suggestion": "Kun palautusprosessi on päättynyt, sinut ohjataan automaattisesti {{productName}}-palveluun."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -105,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation contains a redundant and nonsensical phrase '포털로 자동으로 {{productName}}로'. It translates to 'automatically to the portal to {{productName}}', which is grammatically broken and adds an extra destination ('portal') not present in the source.",
-          "suggestion": "복원 과정이 끝나면 {{productName}}로 자동으로 리디렉션됩니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -123,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation is grammatically incorrect in a way that changes the subject of the sentence. 'jūs automātiski pārsūtīs' implies 'you will redirect [someone else]', whereas the English 'you'll be automatically redirected' is passive. It should be 'jūs tiksiet automātiski pārsūtīts'.",
-          "suggestion": "Kad atjaunošanas process būs pabeigts, jūs tiksiet automātiski pārsūtīts uz savu {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -141,13 +123,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Polish translation is missing the subject 'you' (zostaniesz), making the sentence grammatically incomplete or implying a passive voice that lacks the intended recipient in a way that feels unnatural in this context, though the primary issue is the missing reflexive/personal aspect of 'you will be redirected'.",
-          "suggestion": "Po zakończeniu procesu przywracania zostaniesz automatycznie przekierowany do {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {

@@ -3,7 +3,7 @@
   "content": "GB",
   "content_en_sha1_hash": "505a44facaa3e758845f6e101f4e21f9d99acf63",
   "created_at": "2025-05-19T21:30:45.623Z",
-  "updated_at": "2026-04-10T08:21:04.350Z",
+  "updated_at": "2026-04-10T15:22:27.177Z",
   "comment": {
     "text": "This translation key is used to display the unit \"Gigabyte\" (GB) in a file quota form. It appears on a dropdown menu where users can select their preferred size unit for displaying and managing files. Translators should note that this term will be used as an option within a larger list of units, including Bytes, Kilobytes, Megabytes, Terabytes, Petabytes, Exabytes, and others.",
     "is_auto": true,
@@ -147,25 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'GO' is incorrect. In the context of data storage units (Gigabyte), the standard abbreviation is 'GB'. 'GO' is not a recognized unit for Gigabytes in Romanian.",
-          "suggestion": "GB"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation 'Гб' uses a lowercase 'б', which is technically incorrect for the abbreviation of 'Гигабайт' (Gigabyte) in Russian. The standard abbreviation is 'ГБ' (both uppercase).",
-          "suggestion": "ГБ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

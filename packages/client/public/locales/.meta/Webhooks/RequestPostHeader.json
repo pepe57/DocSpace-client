@@ -3,7 +3,7 @@
   "content": "POST request header",
   "content_en_sha1_hash": "dd2a90902b9d8063cee3aafe29d727b91766a655",
   "created_at": "2025-05-19T21:30:49.798Z",
-  "updated_at": "2026-04-08T19:33:23.915Z",
+  "updated_at": "2026-04-10T15:22:27.289Z",
   "comment": {
     "text": "\"This translation key is used for the label of a form field displaying request post headers, appearing on a UI component for detailing webhook event settings.\"",
     "is_auto": true,
@@ -207,13 +207,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Kreu' in Albanian means 'Head' (as in a leader or top part), whereas in a technical context for HTTP, 'header' should be translated as 'kryetari' or 'kokëza' (though 'header' is often kept or translated as 'kryetari i kërkesës'). More importantly, 'Kreu i kërkesës POST' translates to 'The head of the POST request', which is semantically incorrect for an HTTP header field.",
-          "suggestion": "Header i kërkesës POST"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

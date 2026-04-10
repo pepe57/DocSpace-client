@@ -3,7 +3,7 @@
   "content": "Don't ask file name again on creation",
   "content_en_sha1_hash": "8e94add6c6b263663fe317dddfd29004f6cc223b",
   "created_at": "2025-05-19T21:30:44.617Z",
-  "updated_at": "2026-04-08T11:46:51.162Z",
+  "updated_at": "2026-04-10T15:22:27.209Z",
   "comment": {
     "text": "This translation key is used to display a message reminding users not to ask for file name changes on creation. It appears in two UI elements: a checkbox in a dialog and a toggle button in a file management section. Translators should provide a message that conveys this reminder in an friendly and non-intrusive tone.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'yaradan zaman' (while creating) implies the user is the one creating the file, whereas the English 'on creation' refers to the system process/event. More importantly, 'soruşmayın' is a formal/plural imperative ('do not ask'), which sounds like a command to the user rather than a setting description. In UI contexts for checkboxes, the translation should describe the action/state (e.g., 'Don't ask again') rather than commanding the user.",
-          "suggestion": "Fayl yaradılarkən adını yenidən soruşma"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -123,13 +117,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation uses the word 'nejautāt' (to not believe/trust) instead of 'nejautāt' (to not ask). In this context, 'nejautāt' means 'to not ask', but the current Latvian phrasing 'veidojot vairs nejautāt' is grammatically incorrect and semantically confusing, implying 'while creating, no longer believe the file name'.",
-          "suggestion": "Veidojot, vairs nejautāt par faila nosaukumu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

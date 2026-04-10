@@ -3,7 +3,7 @@
   "content": "AI tools and integrations",
   "content_en_sha1_hash": "647cfdd2c06961f3756768e640186ab58be2c1f2",
   "created_at": "2025-11-17T07:51:05.550Z",
-  "updated_at": "2026-04-08T17:18:42.503Z",
+  "updated_at": "2026-04-10T15:22:27.275Z",
   "comment": {
     "text": "This text appears as a tooltip on a button or setting related to AI tools and integrations within the chat interface. It explains the functionality of the tools being offered and provides a brief label for those features. Translators should ensure the meaning accurately reflects AI tool integrations.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'İSİ nəticələri' means 'ISI results', which is a complete mistranslation of 'AI tools'. 'AI' (Artificial Intelligence) should be translated as 'Süni İntellekt' and 'tools' as 'alətləri'.",
-          "suggestion": "Süni İntellekt alətləri və inteqrasiyalar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

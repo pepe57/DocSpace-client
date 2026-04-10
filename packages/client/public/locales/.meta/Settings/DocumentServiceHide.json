@@ -3,7 +3,7 @@
   "content": "Hide",
   "content_en_sha1_hash": "34d8b60fe25332f7b98585e82e753eaf502c3e50",
   "created_at": "2025-05-19T21:30:51.369Z",
-  "updated_at": "2026-04-09T03:10:55.508Z",
+  "updated_at": "2026-04-10T15:22:27.370Z",
   "comment": {
     "text": "This translation key is used to display a label indicating whether document service settings are being shown or hidden. It appears in an integrated settings UI element and changes its content based on the state of the setting.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පහ කිරීමට' means 'to lower' or 'to reduce' (as in volume or height), which is incorrect for a UI toggle meaning 'to hide' (conceal).",
-          "suggestion": "සඟවන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -3,7 +3,7 @@
   "content": "No tags",
   "content_en_sha1_hash": "ea3d32deac740b8c0ec2a88044355a1ef5eaba37",
   "created_at": "2025-11-03T12:10:21.069Z",
-  "updated_at": "2026-04-08T04:03:01.349Z",
+  "updated_at": "2026-04-10T15:22:27.144Z",
   "comment": {
     "text": "This text is used as a label to indicate that a room has no tags assigned. It appears as a default tag on room tiles when no other tags are present. Translators should ensure the translation accurately conveys the absence of tags.",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Ei tunneta' means 'Not known' or 'Not recognized', which is semantically incorrect for the context of 'No tags' (absence of labels).",
-          "suggestion": "Ei tageja"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {

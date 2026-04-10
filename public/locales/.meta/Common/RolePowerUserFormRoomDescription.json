@@ -3,7 +3,7 @@
   "content": "Users can upload forms to the room and have full access to the Complete and In Process folders.",
   "content_en_sha1_hash": "9849e1297fdc864b5fce1c89ec6168c9f10bf41d",
   "created_at": "2025-05-19T21:30:48.077Z",
-  "updated_at": "2026-04-08T00:43:38.746Z",
+  "updated_at": "2026-04-10T15:22:27.115Z",
   "comment": {
     "text": "This translation key is used to describe a user's role and access permissions in the room. It appears on options screens or in UI elements that display role descriptions. Translators should focus on conveying the idea of full access to specific folders, as stated in the English content.",
     "is_auto": true,
@@ -51,13 +51,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'In Process' as 'Im Nicht ausgefüllt' (In Not filled out) is logically incorrect and conveys the opposite meaning of the English source.",
-          "suggestion": "User können Formulare in den Raum hochladen und haben vollen Zugriff auf die Ordner \"Ausgefüllt\" und \"In Bearbeitung\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -69,37 +63,19 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Users' was translated as 'Los avanzados' (The advanced ones/users), which changes the meaning from a general subject (Users) to a specific group (Advanced users).",
-          "suggestion": "Los usuarios pueden cargar formularios en la sala y tienen acceso completo a las carpetas Completado y En curso."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in the subject-verb agreement: 'Käyttäjä' (singular) does not match 'voivat' (plural). It should be 'Käyttäjät voivat'.",
-          "suggestion": "Käyttäjät voivat ladata huoneeseen lomakkeita ja saada täydet oikeudet Valmiit- ja Keskeneräiset-kansioihin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Users' was translated as 'Les avancés' (The advanced ones), which is a mistranslation of the subject. It should be 'Les utilisateurs'.",
-          "suggestion": "Les utilisateurs peuvent télécharger des formulaires dans la salle et ont un accès complet aux dossiers Complet et En cours."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -111,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text refers to 'Users', but the Italian translation uses 'Gli esperti' (Experts), which changes the subject of the permission description.",
-          "suggestion": "Gli utenti possono caricare i moduli nella stanza e avere accesso completo alle cartelle Completato e In corso."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -159,37 +129,19 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses 'Avançados' (Advanced) instead of 'Usuários' (Users), which changes the subject of the sentence and the role being described.",
-          "suggestion": "Usuários podem carregar formulários na sala e ter acesso total às pastas Concluído e Em processamento."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation replaces 'Users' with 'Avançados' (Advanced), which changes the subject of the sentence from a general group to a specific role/level not present in the source text.",
-          "suggestion": "Usuários podem fazer upload de formulários para a sala e ter acesso total às pastas Concluídas e Em Processamento."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Avansați' is used instead of 'Utilizatorii'. 'Avansați' means 'Advanced' (as an adjective) or is a misspelling of 'Avansați' (imperative), whereas the English text refers to 'Users' (the subject).",
-          "suggestion": "Utilizatorii pot încărca formulare în sală și au acces complet la folderele Completate și În curs de completare."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -243,13 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation of 'Complete' as 'Đang hoàn thành' is incorrect. 'Đang hoàn thành' means 'In progress' or 'Being completed', which conflicts with the next folder 'In Process' (Đang xử lý). In a folder structure context, 'Complete' should be 'Đã hoàn thành' to indicate finished items.",
-          "suggestion": "Người dùng có thể tải biểu mẫu lên phòng và có quyền truy cập đầy đủ vào các thư mục Đã hoàn thành và Đang xử lý."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

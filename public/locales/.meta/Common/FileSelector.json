@@ -3,7 +3,7 @@
   "content": "File selector",
   "content_en_sha1_hash": "d86ad107658234e861093d3a97e9558fcb7339b0",
   "created_at": "2025-05-19T21:30:45.306Z",
-  "updated_at": "2026-04-10T08:21:04.347Z",
+  "updated_at": "2026-04-10T15:22:27.189Z",
   "comment": {
     "text": "The \"FileSelector\" translation key is used to display a label for a file selection component in the UI. It appears as a button or dialog title and is used to provide users with an option to select files. Translators should focus on conveying a sense of choosing files in this context.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'තෝරනය' (thoranaya) is a noun meaning 'selection' or 'choice', but it is used incorrectly here as a verb form or a broken noun. In the context of a UI component (File Selector), it should be 'ගොනු තේරීම' (File Selection) or 'ගොනු තෝරන්න' (Select Files). 'තෝරනය' is grammatically incorrect in this context.",
-          "suggestion": "ගොනු තේරීම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

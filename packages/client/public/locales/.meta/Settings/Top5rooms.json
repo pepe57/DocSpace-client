@@ -3,7 +3,7 @@
   "content": "Top 5 rooms by storage usage:",
   "content_en_sha1_hash": "800ff672a507fc931c2e9ea57c1cf8454972e65d",
   "created_at": "2025-05-19T21:30:52.959Z",
-  "updated_at": "2026-04-09T00:23:56.483Z",
+  "updated_at": "2026-04-10T15:22:27.334Z",
   "comment": {
     "text": "This translation key is used to display a label for a list of rooms sorted by storage usage. It appears in the \"Rooms List\" component and is shown when the user selects more than 5 rooms to view.",
     "is_auto": true,
@@ -117,13 +117,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'labākās' means 'best', whereas the English 'Top 5' in this context refers to a ranking based on a metric (highest usage). In Latvian, 'labākās' implies quality, while '5 lielākās' or '5 vislielākāk izmantotās' would correctly imply quantity/usage.",
-          "suggestion": "5 lielākās telpas pēc krātuves izmantojuma:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -183,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'соба' (soba) in Serbian means 'rooms' in the sense of 'bedrooms' or 'living spaces', but in the context of cloud storage/DocSpace, 'rooms' refers to virtual spaces or containers. More importantly, 'соба' is the plural of 'soba' (room), but the phrasing 'Топ 5 соба' is grammatically awkward/incorrect for this context; 'собака' means dog, and 'соба' is not the standard plural for 'soba' (which is 'sobe'). Additionally, 'употреби складишта' is a literal translation of 'storage usage' that sounds unnatural in Serbian.",
-          "suggestion": "Топ 5 простора према употреби простора:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

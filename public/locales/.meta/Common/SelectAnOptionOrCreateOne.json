@@ -3,7 +3,7 @@
   "content": "Select an option or create one",
   "content_en_sha1_hash": "2571b4424ae499623b7168722a07d2d539dd56dc",
   "created_at": "2026-02-19T13:36:18.706Z",
-  "updated_at": "2026-04-07T23:52:59.803Z",
+  "updated_at": "2026-04-10T15:22:27.110Z",
   "comment": {
     "text": "This text appears within a UI element, likely a button or label, offering the user two choices: select an existing option or create a new one. It's used to guide the user when they need to choose or add a tag. Translators should ensure the phrasing accurately conveys this dual action.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Bir seçim seçin' is a tautology (pleonasm) in Azerbaijani, meaning 'Select a selection'. It is redundant and sounds unnatural.",
-          "suggestion": "Seçim edin və ya yenisini yaradın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -213,13 +207,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Chinese translation '创建一个' (create one) is grammatically incomplete in Chinese; it lacks a noun/object to complete the thought, making it sound like 'create a' instead of 'create one'.",
-          "suggestion": "选择一个选项或创建一个新选项"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

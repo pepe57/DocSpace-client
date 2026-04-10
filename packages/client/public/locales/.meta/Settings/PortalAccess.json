@@ -3,7 +3,7 @@
   "content": "{{productName}} access",
   "content_en_sha1_hash": "47d03f020b562535e6eb17ded31112639c75a4e8",
   "created_at": "2025-05-19T21:30:52.162Z",
-  "updated_at": "2026-04-10T08:58:38.061Z",
+  "updated_at": "2026-04-10T15:22:27.353Z",
   "comment": {
     "text": "The \"PortalAccess\" translation key displays a label indicating access to a portal, typically found on a page or button related to security settings in a software application. The label includes the product name, making it context-specific and user-friendly for end-users. It appears on various pages within the Portal Settings section.",
     "is_auto": true,
@@ -63,13 +63,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation uses an incorrect word order. In Bulgarian, '{{productName}} достъп' sounds like 'Product access' in a broken way; for a label or title, 'Достъп до {{productName}}' (Access to {{productName}}) is the grammatically correct way to convey the meaning of '{{productName}} access'.",
-          "suggestion": "Достъп до {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -99,13 +93,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'Pääsy {{productName}}:n' uses a genitive case suffix (':n') which makes the sentence grammatically incomplete or implies 'Access of {{productName}}' rather than '{{productName}} access'. In Finnish UI context, the product name should act as a modifier or the phrase should be structured as '{{productName}}-pääsy'.",
-          "suggestion": "{{productName}}-pääsy"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {

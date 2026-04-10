@@ -3,7 +3,7 @@
   "content": "If you have {{organizationName}} Desktop Editors installed but can't open it from this page, your browser might be blocking it.",
   "content_en_sha1_hash": "d9258c1a3c6e75e660f390ca72096a82073c7955",
   "created_at": "2025-05-19T21:30:53.427Z",
-  "updated_at": "2026-04-09T07:15:02.352Z",
+  "updated_at": "2026-04-10T15:22:27.403Z",
   "comment": {
     "text": "This translation key is used to display a warning message to users who cannot open the Desktop Editors of an organization due to browser blocking. The text appears in a privacy room page and informs users to check their browser settings.",
     "is_auto": true,
@@ -27,25 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses the plural 'محرري' (Editors) which results in a grammatical mismatch with the singular pronoun 'فتحه' (open it) and 'يحظره' (blocking it). In Arabic, if the subject is plural, the pronouns must also be plural.",
-          "suggestion": "إذا قمت بتثبيت {{organizationName}} Desktop Editors ولكن لا يمكنك فتحها من هذه الصفحة، فقد يكون متصفحك يحظرها."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the condition 'but can't open it from this page', which is a key part of the instruction/context.",
-          "suggestion": "Əgər sizdə {{organizationName}} Desktop Editors quraşdırılıbsa, lakin onu bu səhifədən aça bilmirsinizsə, brauzeriniz onu bloklaya bilər."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -201,25 +189,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Ukrainian translation is missing the object of the verb 'відкрити' (to open). It says 'can't open from this page' instead of 'can't open it [the editors] from this page'.",
-          "suggestion": "Якщо у вас інстальовані настільні редактори {{organizationName}}, але ви не можете відкрити їх з цієї сторінки, можливо, ваш браузер їх блокує."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'cho Máy tính tính' contains a repetitive typo ('tính tính'), which makes the sentence grammatically incorrect and awkward in Vietnamese.",
-          "suggestion": "Nếu bạn đã cài đặt Trình chỉnh sửa {{organizationName}} cho Máy tính nhưng không thể mở nó từ trang này thì có thể trình duyệt của bạn đang chặn nó."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

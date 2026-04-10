@@ -3,7 +3,7 @@
   "content": "Included in Business plan",
   "content_en_sha1_hash": "f0ee5ea479390ebc0f4a6bb7724c68cd6e5c93e9",
   "created_at": "2025-05-19T21:30:51.695Z",
-  "updated_at": "2026-04-09T02:50:11.803Z",
+  "updated_at": "2026-04-10T15:22:27.361Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Included in Business plan\" in a portal settings category. It appears as a label within a business plan section on a webpage, likely used to indicate whether a third-party service is included in a business plan.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation uses a feminine plural verb/pronoun 'تم إضافتها' (They were added), which implies multiple items were added. The English source 'Included in Business plan' is a passive state/label. In a UI context for a single feature or category, it should be more direct.",
-          "suggestion": "مشمول في خطة الأعمال"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -63,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'επιχειρηματικό σχέδιο' translates to 'business plan' in the sense of a strategic document or a project proposal. In the context of software pricing/subscription tiers, 'Business plan' should be translated as 'επιχειρηματικό πακέτο' or 'Business plan' (as a proper noun/tier name) to indicate a subscription level.",
-          "suggestion": "Περιλαμβάνεται στο Business plan"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -135,13 +123,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'planu Biznes' is grammatically incorrect; 'Biznes' is the nominative form, but it should be in the genitive case ('Biznesowego') to function as an adjective or part of a proper noun phrase in this context.",
-          "suggestion": "Zawarte w planie Biznes"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -153,13 +135,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'plano de negócios' refers to a 'business plan' in the sense of a strategic document/model. In the context of software pricing/subscriptions, 'Business plan' refers to a specific subscription tier, which should be translated as 'plano Business' or 'plano Empresarial'.",
-          "suggestion": "Incluído no plano Business"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {

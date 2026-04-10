@@ -3,7 +3,7 @@
   "content": "To share your form and assign roles to the room participants for filling it out, please create a Virtual Data Room.",
   "content_en_sha1_hash": "7bfa16e48ac3fd715755d7c60f25d71d0451a9d6",
   "created_at": "2025-05-19T21:30:48.496Z",
-  "updated_at": "2026-04-07T23:38:01.956Z",
+  "updated_at": "2026-04-10T15:22:27.107Z",
   "comment": {
     "text": "\"To provide guidance on creating a Virtual Data Room for sharing forms and assigning roles to room participants.\" \n\n(This translation key is used in a button label or dialog related to form creation or assignment of roles.)",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Virtual Data Room' is translated literally as 'virtuaalisen tiedon huone', which is incorrect in a professional/technical context. The standard term for 'Virtual Data Room' in Finnish is 'virtuaalinen tietohuone'.",
-          "suggestion": "Jakaaksesi lomakkeen ja määrätäksesi rooleja huoneen osallistujille lomakkeen täyttöä varten, luo virtuaalinen tietohuone."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -99,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits the specific purpose of assigning roles: 'for filling it out' (フォームへの入力のために).",
-          "suggestion": "フォームを共有し、フォームへの入力のために参加者に役割を割り当てるには、バーチャルデータルームを作成してください。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

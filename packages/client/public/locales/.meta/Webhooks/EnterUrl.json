@@ -3,7 +3,7 @@
   "content": "Enter URL",
   "content_en_sha1_hash": "ae5afe234b1427d8cf89877643fbda2757a1d47d",
   "created_at": "2025-05-19T21:30:49.704Z",
-  "updated_at": "2026-04-08T20:22:27.015Z",
+  "updated_at": "2026-04-10T15:22:27.299Z",
   "comment": {
     "text": "EnterUrl is used as a placeholder text in a labeled input field to guide users when entering a URL. It appears on the \"PayloadUrl\" label in a dialog box and will be translated accordingly.",
     "is_auto": true,
@@ -111,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'vietrādi' is a misspelling or incorrect form of 'vietne' (website). 'Vietrādi' is not a standard Latvian word in this context; it seems to be a confused attempt at 'vietne' or 'vietnē'.",
-          "suggestion": "Ievadiet URL"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -159,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ඒ.ස.නි. යොදන්න' uses an abbreviation 'ඒ.ස.නි.' which is not a standard or recognizable abbreviation for 'URL' in Sinhala. It appears to be a literal transliteration of initials that does not convey the meaning of a web address/URL.",
-          "suggestion": "URL එක ඇතුළත් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

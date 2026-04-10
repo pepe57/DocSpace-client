@@ -3,7 +3,7 @@
   "content": "Disconnect",
   "content_en_sha1_hash": "ed28e0686e1251ba046f582a3e9ec02470a5e78d",
   "created_at": "2025-05-19T21:30:44.562Z",
-  "updated_at": "2026-04-10T08:21:04.313Z",
+  "updated_at": "2026-04-10T15:22:27.211Z",
   "comment": {
     "text": "This translation key is used to display the label \"Disconnect\" or variations of it, such as \"Sign Up With Apple\", in various UI elements like buttons and icons. It appears on a settings page and is related to data management, file backup, or deletion options. Translators should use this key for localized versions of these labels.",
     "is_auto": true,
@@ -147,13 +147,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Desligar' typically refers to turning off a device (like a light or a computer). In the context of account management and data management (disconnecting an account or a service), 'Desconectar' is the correct term.",
-          "suggestion": "Desconectar"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -189,13 +183,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Prekinitev' is a noun meaning 'Disconnection' or 'Interruption'. In the context of UI buttons (e.g., 'onClickDisconnect'), the translation should be a verb (imperative) to match the English action 'Disconnect'.",
-          "suggestion": "Prekliči"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

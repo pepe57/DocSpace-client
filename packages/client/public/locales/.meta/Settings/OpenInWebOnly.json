@@ -3,7 +3,7 @@
   "content": "Open in web only",
   "content_en_sha1_hash": "caf9fca0de7a5b1f6294fbe7075e3be24b469aa3",
   "created_at": "2025-05-19T21:30:52.127Z",
-  "updated_at": "2026-04-09T02:16:34.532Z",
+  "updated_at": "2026-04-10T15:22:27.353Z",
   "comment": {
     "text": "This translation key is used to display a label on a settings page that determines whether an app link opens in the web browser or within the app. It appears as a radio button option in the Portal Settings configuration dialog.",
     "is_auto": true,
@@ -159,13 +159,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a trailing digit '6' which is not present in the source text and likely a typo.",
-          "suggestion": "Otvárať len vo webovom prehliadači"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -183,13 +177,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Otvori samo u pregledaču' means 'Open only in browser', which is a different nuance than 'Open in web only'. While similar, 'web' in this technical context refers to the web version/platform, and the current translation shifts the focus to the tool (browser) rather than the environment (web).",
-          "suggestion": "Otvori samo putem veba"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

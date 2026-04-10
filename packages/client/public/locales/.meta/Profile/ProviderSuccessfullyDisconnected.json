@@ -3,7 +3,7 @@
   "content": "Provider successfully disconnected",
   "content_en_sha1_hash": "7e19e2606519e4f26445f6a151a930a854841fd1",
   "created_at": "2025-05-19T21:30:53.375Z",
-  "updated_at": "2026-04-09T07:02:34.366Z",
+  "updated_at": "2026-04-10T15:22:27.399Z",
   "comment": {
     "text": "The \"ProviderSuccessfullyDisconnected\" translation key is used to display a success message when a user disconnects from an OAuth provider. This message is shown as a toast notification in the UI, confirming that the disconnection was successful and providing feedback to the user.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "In the context of OAuth and account linking, 'Provider' refers to the service/platform (e.g., Google, GitHub), not a person or a supplier. 'Il fornitore' translates to 'The supplier/vendor', which is semantically incorrect for a technical disconnection of an account service. A more accurate term is 'Il provider'.",
-          "suggestion": "Il provider è stato scollegato con successo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -135,13 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Operadora' refers to a telecommunications carrier or service provider (like a mobile network), whereas in the context of OAuth, 'Provider' refers to an Identity Provider (e.g., Google, GitHub). 'Desligada' implies a physical device or a phone call being hung up, rather than an account being unlinked or a connection being severed.",
-          "suggestion": "Provedor desconectado com êxito"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -189,13 +177,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Provajder uspešno prekinut' implies that the provider itself was disconnected/interrupted (as if the provider service stopped working), rather than the user's connection to the provider being severed.",
-          "suggestion": "Povezivanje sa provajderom je uspešno prekinuto"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

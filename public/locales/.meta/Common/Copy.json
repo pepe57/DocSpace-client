@@ -3,7 +3,7 @@
   "content": "Copy",
   "content_en_sha1_hash": "af74f7c5362aaee985bf8cda3dd75fc80751ce51",
   "created_at": "2025-05-19T21:30:43.729Z",
-  "updated_at": "2026-04-10T08:21:04.290Z",
+  "updated_at": "2026-04-10T15:22:27.227Z",
   "comment": {
     "text": "This translation key is used to display the text \"Copy\" in various UI elements, such as buttons and labels, to provide a clear indication of the action being performed, typically copying files or data. It appears in buttons within the FilesSelector component, EmbeddingPanel, and GetCodeDialog modal dialog, helping users understand the purpose of each button's functionality.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Köçür' means 'Move' or 'Migrate' in Azerbaijani. For the action of duplicating data/files (Copy), the correct term is 'Kopyala'.",
-          "suggestion": "Kopyala"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -129,13 +123,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish word 'Kopio' is a noun meaning 'a copy' (the result). For a UI button/action, the verb 'Kopioi' (Copy) should be used to indicate the action.",
-          "suggestion": "Kopioi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -219,13 +207,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'පිටපතක්' means 'a copy' (noun), whereas the English context 'Copy' refers to the action/verb (to copy). In a UI button context, the verb form is required.",
-          "suggestion": "පිටපත් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

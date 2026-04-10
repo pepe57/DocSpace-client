@@ -3,7 +3,7 @@
   "content": "Identity Provider Entity Id (Issuer URL)",
   "content_en_sha1_hash": "76ee57556703e4be7173bf6ab9458305b3c58297",
   "created_at": "2025-05-19T21:30:50.125Z",
-  "updated_at": "2026-04-08T23:07:22.632Z",
+  "updated_at": "2026-04-10T15:22:27.323Z",
   "comment": {
     "text": "The translation key \"ProviderURLTooltip\" is used to display a tooltip for the \"Issuer URL\" label in the Single Sign On settings page, helping users understand the purpose of entering an entity ID. This tooltip appears next to a field where users can enter a provider's URL.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Issuer URL' is translated as 'URL verən', which literally means 'URL giver' or 'URL provider' in a verb-based sense, rather than the technical term for the entity that issues the identity (Issuer). In technical SSO contexts, 'Issuer' refers to the entity issuing the token/assertion.",
-          "suggestion": "İdentifikasiya Provayderi Müəssisə ID-si (Emit edən URL)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -87,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Entity Id' is translated as 'միավորների Id' (units' Id), which is incorrect in the context of SAML/SSO. In technical identity management, 'Entity ID' refers to a unique identifier for an entity, not a collection of units.",
-          "suggestion": "Ինքնության տրամադրողի Entity Id (Թողարկողի URL)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -129,13 +117,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'vietrādis' is an incorrect translation for 'URL'. In Latvian, 'vietrādis' means 'local' or 'indigenous', whereas 'URL' is a technical term that should remain 'URL' or be referred to as 'adrese'.",
-          "suggestion": "Identitātes nodrošinātāja entītijas ID (izdevēja URL)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -153,13 +135,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Entity Id' was translated as 'Identificação' (Identification), which loses the specific technical meaning of 'Entity ID' used in SAML/SSO protocols. In a technical context, 'ID da Entidade' is the standard term.",
-          "suggestion": "ID da Entidade do Provedor de Identidade (URL do Emitente)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -183,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Sinhala translation uses an abbreviation 'හැඳු.' which is incomplete and likely intended to be 'හැඳුනුම්පත' (Identity/ID), making the term 'Identity Provider Entity Id' unclear or truncated.",
-          "suggestion": "අනන්‍යතා සපයන්නාගේ එන්ටිටි හැඳුනුම්පත (නිකුත්කරුගේ URL එක)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -231,13 +201,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Id nhà cung cấp thực thể (IdP)' incorrectly interprets 'Identity Provider Entity Id' as 'Provider Entity ID'. In SAML/SSO contexts, 'Identity Provider' is a single term (IdP). The current translation suggests the 'Entity ID' belongs to a 'Provider Entity', which is technically inaccurate.",
-          "suggestion": "ID thực thể của nhà cung cấp danh tính (URL nhà phát hành)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

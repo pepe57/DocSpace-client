@@ -3,7 +3,7 @@
   "content": "Sharing, editing, reviewing, commenting and renaming.",
   "content_en_sha1_hash": "38e4053ab906f6b6c53d689acf8bc104efcafcd7",
   "created_at": "2025-09-29T18:22:04.714Z",
-  "updated_at": "2026-04-08T08:25:29.306Z",
+  "updated_at": "2026-04-10T15:22:27.178Z",
   "comment": {
     "text": "This key provides a description of full access permissions, encompassing actions like sharing, editing, reviewing, commenting, and renaming. It's used to explain the extent of access granted to a document, likely in a sharing or permissions dialog. Translators should ensure the description accurately conveys the scope of \"full access\" in the application.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation lacks grammatical parallelism. The first word 'Կիսվել' (To share) is a verb, while the subsequent words 'խմբագրում' (editing), 'վերանայում' (reviewing), 'մեկնաբանություն' (commenting), and 'վերանվանում' (renaming) are nouns or gerunds. This creates a broken sentence structure in Armenian.",
-          "suggestion": "Կիսում, խմբագրում, վերանայում, մեկնաբանություն և վերանվանում։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

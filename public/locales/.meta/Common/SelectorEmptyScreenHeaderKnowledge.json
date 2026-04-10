@@ -3,7 +3,7 @@
   "content": "No files here yet",
   "content_en_sha1_hash": "d2b916fc9d3a81b2b8b8ca1e921dd7499f6424e9",
   "created_at": "2025-11-13T14:52:59.082Z",
-  "updated_at": "2026-04-07T23:44:24.083Z",
+  "updated_at": "2026-04-10T15:22:27.108Z",
   "comment": {
     "text": "This text is displayed as a header on an empty screen when a knowledge folder is selected and contains no files. It informs the user that there are currently no files present in the selected knowledge folder. Translators should maintain a friendly and informative tone.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation uses the word 'Մայլեր' (Mayer/Mailers), which is a transliteration of 'Mails' or 'Emails', instead of 'Files' (ֆայլեր). This changes the meaning from 'No files here yet' to 'No emails here yet'.",
-          "suggestion": "Այստեղ դեռ ֆայլեր չկան։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

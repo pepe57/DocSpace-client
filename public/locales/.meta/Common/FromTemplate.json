@@ -3,7 +3,7 @@
   "content": "From template",
   "content_en_sha1_hash": "00c3e6cfbaa52740f50102742f3efa926a33d341",
   "created_at": "2025-05-19T21:30:45.596Z",
-  "updated_at": "2026-04-08T08:34:10.495Z",
+  "updated_at": "2026-04-10T15:22:27.179Z",
   "comment": {
     "text": "This translation key is used to display \"From template\" in a room creation dialogue. It appears as a header label and is related to templates for creating new rooms.",
     "is_auto": true,
@@ -75,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish word 'Mallista' is a verb meaning 'to mold' or 'to shape'. The English 'From template' is a prepositional phrase indicating the source of creation. The correct translation should use a noun phrase.",
-          "suggestion": "Mallipohjasta"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -153,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Șablon de formular' means 'Form template', which adds the word 'formular' (form) that is not present in the English source 'From template'. In the context of creating a room, 'From template' refers to the source/method of creation, not a specific type of template.",
-          "suggestion": "Din șablon"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -183,13 +171,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Predloga obrazca' means 'Template of a form' or 'Form template', which changes the meaning from 'From template' (indicating the source/method of creation).",
-          "suggestion": "Iz predloge"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -213,13 +195,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian translation 'Шаблон форми' means 'Form template', whereas the English source 'From template' indicates the source/method of creation (prepositional phrase).",
-          "suggestion": "З шаблону"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

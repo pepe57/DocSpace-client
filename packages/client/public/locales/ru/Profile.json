@@ -1,5 +1,5 @@
 {
-  "ActiveSessions": "Активная сессия",
+  "ActiveSessions": "Активные сессии",
   "AutoDeleteTitle": "Все сеансы дольше 60 дней будут автоматически удалены.",
   "ChangePasswordAfterLoggingOut": "Изменить пароль после выхода",
   "ConnectSocialNetworks": "Подключите свои социальные сети",
@@ -27,5 +27,5 @@
   "TelegramAccountDisconnectDescription": "Ваша учетная запись @{{username}} подключена для уведомлений Telegram. Вы можете отключить ее. В этом случае вы не будете получать уведомления.",
   "TerminateAllSessions": "Завершить все сеансы, кроме текущего",
   "TwoFactorDescription": "Двухфакторная аутентификация с помощью приложения для генерации кодов включена администратором для всех пользователей.",
-  "TelegramAccountDescription": "Чтобы подключить TelegramBot к вашемукаунту, перейдите по секретной ссылке и нажмите кнопку «Connect Telegram»."
+  "TelegramAccountDescription": "Чтобы подключить TelegramBot к вашему аккаунту, перейдите по секретной ссылке и нажмите кнопку «Connect Telegram»."
 }

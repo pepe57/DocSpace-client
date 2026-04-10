@@ -3,7 +3,7 @@
   "content": "Select users with e-mail",
   "content_en_sha1_hash": "b44aac6c5a9314d6635f445965d4923714037e14",
   "created_at": "2025-05-19T21:30:52.583Z",
-  "updated_at": "2026-04-09T01:18:01.920Z",
+  "updated_at": "2026-04-10T15:22:27.341Z",
   "comment": {
     "text": "\"Select users who have an email address to import into Nextcloud.\"",
     "is_auto": true,
@@ -141,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Secectați' is a typo; the correct spelling is 'Selectați'.",
-          "suggestion": "Selectați utilizatorii cu adresa de e-mail."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -159,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'පරිශ්‍රීලකයින්' (parishrilakayin) is a misspelling/incorrect form of 'පරිශීලකයින්' (parishilakayin - users). Additionally, 'වි-තැපෑලක්' is an awkward/incorrect way to translate 'e-mail' in this context.",
-          "suggestion": "ඊමේල් ලිපිනයක් සහිත පරිශීලකයින් තෝරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

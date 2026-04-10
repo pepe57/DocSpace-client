@@ -3,7 +3,7 @@
   "content": "Create key",
   "content_en_sha1_hash": "e028cb09f2a481aec3b30e1b7d57d0e8976efb23",
   "created_at": "2026-04-03T21:51:36.617Z",
-  "updated_at": "2026-04-09T03:52:19.502Z",
+  "updated_at": "2026-04-10T15:22:27.380Z",
   "comment": {
     "text": "Used as a link title or button label within the Developer Tools section of the Portal Settings. It represents the action of generating a new API key.",
     "is_auto": true,
@@ -207,13 +207,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '创建键' (Create key/button) is too literal and sounds unnatural in a software context. In Chinese UI, 'Key' in the context of API/Security is typically translated as '密钥' (Secret Key/API Key). '键' usually refers to a physical keyboard key.",
-          "suggestion": "创建密钥"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

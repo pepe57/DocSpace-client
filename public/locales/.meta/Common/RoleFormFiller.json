@@ -3,7 +3,7 @@
   "content": "Form filler",
   "content_en_sha1_hash": "36309bd9112093f7939d015f5678b7699adce63e",
   "created_at": "2025-05-19T21:30:48.030Z",
-  "updated_at": "2026-04-08T00:49:20.664Z",
+  "updated_at": "2026-04-10T15:22:27.116Z",
   "comment": {
     "text": "This translation key is used to display the role \"Form filler\" and its corresponding description in various parts of the UI, likely on access control settings or room information pages. It provides a clear label for users and reviewers in different contexts.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Form filler' refers to a person/role (a user who fills out forms), whereas the Czech translation 'Výplň formuláře' means 'Filling out a form' (the action/process).",
-          "suggestion": "Plnidatel formulářů"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -75,13 +69,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Form filler' refers to a person/role (a noun), whereas the Greek translation 'Συμπλήρωση φόρμας' refers to the action of filling out a form (a gerund/process).",
-          "suggestion": "Συμπληρωτής φόρμας"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -117,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation 'フォーム記入用' means 'For form filling' (adjectival/purpose), whereas the English 'Form filler' refers to a person/role. In the context of access control and user roles, it should be a noun representing the person.",
-          "suggestion": "フォーム入力者"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -159,13 +141,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Form filler' refers to a person/role (the actor), whereas the Portuguese translation 'Preenchimento de formulário' refers to the action (the process of filling out a form).",
-          "suggestion": "Preenchedor de formulário"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -189,37 +165,19 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ආකෘතිපත්‍ර පිරවුම' means 'Form filling' (the action/process) rather than 'Form filler' (the person/role). In the context of access control and user roles, it must refer to the person performing the action.",
-          "suggestion": "ආකෘතිපත්‍ර පිරවන්නා"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Form filler' refers to a person/role (a user who fills out forms), whereas the Slovak translation 'Vyplnenie formulára' means 'Filling out a form' (the action/process).",
-          "suggestion": "Plnený formulára"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Form filler' refers to a person/role (a user who fills out forms), whereas the Slovenian translation 'Polnjenje obrazca' means 'Filling out a form' (the action/process).",
-          "suggestion": "Polnilec obrazca"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -249,25 +207,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Vietnamese translation 'Bộ lọc biểu mẫu' means 'Form filter', whereas the English text 'Form filler' refers to a person/role who fills out forms.",
-          "suggestion": "Người điền biểu mẫu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '可填写表单' means 'Can fill out forms' (a capability/action), whereas the English 'Form filler' refers to a specific User Role. In the context of access control and roles, it should be a noun phrase.",
-          "suggestion": "表单填写者"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

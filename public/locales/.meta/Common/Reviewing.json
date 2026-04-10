@@ -3,7 +3,7 @@
   "content": "reviewing",
   "content_en_sha1_hash": "7cd4341e2d7a4899e6abe3e3fb0ef1034064bdc6",
   "created_at": "2025-05-19T21:30:47.947Z",
-  "updated_at": "2026-04-08T01:00:33.641Z",
+  "updated_at": "2026-04-10T15:22:27.118Z",
   "comment": {
     "text": "This translation key is used to display a label for the \"Reviewing\" state when sharing access rights in the Public Room page. It appears as a tooltip or label next to a button, indicating that the user has review permission. The translator should provide a phrase that conveys the idea of reviewing a file or document.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation 'Přezkoumání stránek' means 'Review of pages', which is too specific and incorrect for a general 'Reviewing' state. It adds the word 'pages' (stránek) which is not in the source and changes the grammatical form from a state/action to a noun phrase.",
-          "suggestion": "Prověřování"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -99,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation 'レビューの追加' means 'Add a review', whereas the English 'reviewing' refers to the permission state/action of reviewing. In the context of access rights (Review vs Commenting vs Editing), it should describe the role or the state of having review permissions.",
-          "suggestion": "レビュー"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -189,13 +177,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'reviewing' is a present participle (gerund) indicating an ongoing action or a specific state/permission level. The Serbian translation 'pregled' is a noun meaning 'review' or 'overview', which does not match the grammatical state/action implied by the context of access rights.",
-          "suggestion": "pregledanje"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

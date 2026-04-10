@@ -3,7 +3,7 @@
   "content": "Your logo",
   "content_en_sha1_hash": "bcf2253991976c9d41f18ecca9f3eed026899b53",
   "created_at": "2025-05-26T07:15:49.731Z",
-  "updated_at": "2026-04-07T19:51:15.703Z",
+  "updated_at": "2026-04-10T15:22:27.075Z",
   "comment": {
     "text": "This translation key is used to display a placeholder text for a logo input field. It appears as the initial value of the \"YourLogo\" text when the component is loaded or disabled.",
     "is_auto": true,
@@ -99,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'Your' is missing from the translation. The English text specifies ownership ('Your logo'), whereas the Korean translation only says 'Logo'.",
-          "suggestion": "사용자 로고"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {
@@ -165,13 +159,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'лого' (logo) is a neuter noun in Serbian, but 'Ваш' is the masculine form of the possessive pronoun. It should be 'Ваш логотип' or 'Ваше лого'.",
-          "suggestion": "Ваше лого"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

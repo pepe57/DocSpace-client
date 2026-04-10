@@ -3,7 +3,7 @@
   "content": "Sign in with Zoom",
   "content_en_sha1_hash": "4bf90e936ec81803bddf7c8046ea7c8f393f6d8b",
   "created_at": "2025-05-19T21:30:48.808Z",
-  "updated_at": "2026-04-10T08:21:04.402Z",
+  "updated_at": "2026-04-10T15:22:27.101Z",
   "comment": {
     "text": "This translation key is used for the \"Sign in with Zoom\" button on a login form. It prompts users to sign in with their Zoom account when using two-factor authentication.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The preposition 'with' is missing in the Arabic translation, making the phrase 'Sign Zoom' instead of 'Sign in with Zoom'.",
-          "suggestion": "تسجيل الدخول باستخدام Zoom"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -207,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Chinese translation '解绑Zoom登录' means 'Unbind Zoom login', which is the opposite of the intended action 'Sign in with Zoom'.",
-          "suggestion": "使用 Zoom 登录"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

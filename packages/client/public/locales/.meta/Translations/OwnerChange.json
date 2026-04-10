@@ -3,7 +3,7 @@
   "content": "Change owner",
   "content_en_sha1_hash": "d3ce16a8468e0f2ba0a9f24ec0a093b0af39492e",
   "created_at": "2025-05-19T21:30:49.999Z",
-  "updated_at": "2026-04-10T08:21:04.302Z",
+  "updated_at": "2026-04-10T15:22:27.309Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Change owner\" in various places throughout the application, including a dialog header and a button. Its purpose is to inform users that they can change the ownership of something. It appears on a \"Delete Owner Profile Dialog\" and a \"Change Portal Owner Dialog\".",
     "is_auto": true,
@@ -177,13 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'හිමිකරු සංශෝධනය' means 'Owner modification' or 'Edit owner', which implies changing the details of the owner rather than changing the person who holds the ownership. In the context of a 'Change Portal Owner' dialog, the verb should imply replacing/changing the owner.",
-          "suggestion": "හිමිකරු වෙනස් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

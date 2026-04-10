@@ -3,7 +3,7 @@
   "content": "Select the Google Workspace backup files to start the data import. Multiple files can be selected. Once the data upload and analysis are complete, the next step will be initiated automatically.",
   "content_en_sha1_hash": "f25f818a58e3d7ec05c1f90165f66a8facd46ed1",
   "created_at": "2025-05-19T21:30:52.519Z",
-  "updated_at": "2026-04-09T01:34:45.452Z",
+  "updated_at": "2026-04-10T15:22:27.343Z",
   "comment": {
     "text": "\"This translation key is used to describe the option to select Google Workspace backup files during data import. It appears in a step of a data import process and provides context for users. The purpose is to inform users about the expected behavior.\"",
     "is_auto": true,
@@ -75,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a contradictory sentence: 'Vain yksi tiedosto voidaan valita' (Only one file can be selected), which directly contradicts the English source 'Multiple files can be selected' and the previous Finnish sentence.",
-          "suggestion": "Valitse Google Workspace -varmuuskopiotiedostot aloittaaksesi tietojen tuonnin. Useita tiedostoja voidaan valita. Kun tietojen lataus ja analysointi on valmis, seuraava vaihe aloitetaan automaattisesti."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -183,25 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses the singular 'датотеку' (file) in the first sentence, whereas the English source uses the plural 'files'. This contradicts the subsequent sentence which explicitly mentions multiple files can be selected.",
-          "suggestion": "Изаберите Google Workspace датотеке за резервну копију да бисте започели увоз података. Можете изабрати више датотека. Након што се заврше отпремање и анализа података, следећи корак ће се аутоматски покренути."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English text uses the plural 'backup files', but the Serbian translation uses the singular 'datoteku za rezervnu kopiju' in the first sentence, which contradicts the subsequent sentence stating multiple files can be selected.",
-          "suggestion": "Izaberite Google Workspace datoteke za rezervnu kopiju da biste započeli uvoz podataka. Možete izabrati više datoteka. Nakon što se završe otpremanje i analiza podataka, sledeći korak će se automatski pokrenuti."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

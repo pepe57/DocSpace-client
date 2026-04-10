@@ -3,7 +3,7 @@
   "content": "Enter time",
   "content_en_sha1_hash": "1e957f72bff227aeb488649dc0014df9ee9b2f44",
   "created_at": "2025-05-19T21:30:51.524Z",
-  "updated_at": "2026-04-09T03:03:05.629Z",
+  "updated_at": "2026-04-10T15:22:27.366Z",
   "comment": {
     "text": "\"Enter time\" is used as a placeholder text for an input field to prompt users to enter a specific duration in a security setting, typically on a brute force protection page. It appears as a label within a form element and helps users understand what value is expected from them.",
     "is_auto": true,
@@ -147,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Introducere timp' is a noun phrase meaning 'Time entry' or 'Introduction of time'. For a placeholder/command in an input field, it should be an imperative verb phrase.",
-          "suggestion": "Introduceți timpul"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -177,13 +171,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Vnesi uro' means 'Enter the hour' (referring to a specific point in time on a clock), whereas the context specifies a 'duration' (a length of time).",
-          "suggestion": "Vnesite čas"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

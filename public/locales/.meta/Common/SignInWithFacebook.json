@@ -3,7 +3,7 @@
   "content": "Sign in with Facebook",
   "content_en_sha1_hash": "fbd1e9ae71740f8ee4b988eca5c601f8a0636814",
   "created_at": "2025-05-19T21:30:48.753Z",
-  "updated_at": "2026-04-10T08:21:04.401Z",
+  "updated_at": "2026-04-10T15:22:27.102Z",
   "comment": {
     "text": "Signs in a social media authentication process, typically appearing on buttons or dialogs to confirm selection of Facebook as an account provider.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The preposition 'with' is missing in the Arabic translation, making the phrase 'Sign in Facebook' instead of 'Sign in with Facebook'.",
-          "suggestion": "تسجيل الدخول باستخدام Facebook"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -207,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Chinese translation means 'Unbind Facebook login' (解绑), which is the opposite of 'Sign in' (登录).",
-          "suggestion": "使用 Facebook 登录"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

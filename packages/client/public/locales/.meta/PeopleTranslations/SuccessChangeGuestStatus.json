@@ -3,7 +3,7 @@
   "content": "The guest status was successfully changed",
   "content_en_sha1_hash": "40916ce817239977dd00d9f59371f44af34698d8",
   "created_at": "2025-05-19T21:30:53.519Z",
-  "updated_at": "2026-04-09T07:23:47.465Z",
+  "updated_at": "2026-04-10T15:22:27.404Z",
   "comment": {
     "text": "This translation key is used to display a success message when a guest's status is successfully changed. It will be shown in a toast notification when the user confirms the change in a dialog box.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text refers to 'The guest status' (singular), but the Italian translation uses 'Lo stato degli ospiti' (plural: 'The status of the guests').",
-          "suggestion": "Lo stato dell'ospite è stato modificato con successo"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {

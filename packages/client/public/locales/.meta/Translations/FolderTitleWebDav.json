@@ -3,7 +3,7 @@
   "content": "WebDAV Directory",
   "content_en_sha1_hash": "5f28e3af75cb8e8a3f669af321d961250561489f",
   "created_at": "2025-05-19T21:30:49.983Z",
-  "updated_at": "2026-04-08T21:10:44.338Z",
+  "updated_at": "2026-04-10T15:22:27.310Z",
   "comment": {
     "text": "This translation key is used to display the title of a directory in various file management contexts. It is likely used in buttons or dialogs that allow users to select a directory from a list, such as a folder selection dialog or a context menu. The value will be displayed next to the folder title, allowing users to easily identify the selected directory.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian word 'գրացուցակ' means 'list' or 'directory' in the sense of a catalog/index, whereas in a file management context (WebDAV), 'Directory' refers to a 'folder'. Using 'գրացուցակ' implies a list of items rather than a file system directory.",
-          "suggestion": "WebDAV թղթապանակ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

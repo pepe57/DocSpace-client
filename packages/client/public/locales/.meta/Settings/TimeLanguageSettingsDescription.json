@@ -3,7 +3,7 @@
   "content": "Change Language and Time Zone Settings to adjust common {{productName}} language and time.",
   "content_en_sha1_hash": "9e6265da9246b0ab4fe70895c70f763d8cd5d9e2",
   "created_at": "2025-05-19T21:30:52.935Z",
-  "updated_at": "2026-04-09T00:30:06.411Z",
+  "updated_at": "2026-04-10T15:22:27.335Z",
   "comment": {
     "text": "This translation key is used for a descriptive text that explains the purpose of adjusting language and time zone settings in the application. It is displayed as part of a UI element to inform users about the impact on common product language and time, typically found in a Portal Settings category or customization options.",
     "is_auto": true,
@@ -27,18 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'الشائع' (common) is placed at the end of the sentence in a way that makes it grammatically incorrect and changes the meaning to 'common {{productName}}' rather than 'common language and time'.",
-          "suggestion": "قم بتغيير إعدادات اللغة والمنطقة الزمنية لتعديل لغة وتوقيت {{productName}} الشائع"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "Spelling error in 'إعدادت' (should be 'إعدادات').",
-          "suggestion": "قم بتغيير إعدادات اللغة والمنطقة الزمنية لتعديل لغة وتوقيت {{productName}} الشائع"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -182,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'jезика' is written in a mix of Cyrillic and Latin characters (the 'e' is Latin), and the word 'uobičajen' (common) is translated as 'уобичајен', which in this context sounds unnatural/incorrect in Serbian; it should imply 'default' or 'general' settings.",
-          "suggestion": "Промените подешавања језика и временске зоне да бисте прилагодили опште {{productName}} језик и време."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

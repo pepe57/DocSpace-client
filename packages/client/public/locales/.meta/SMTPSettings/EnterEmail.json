@@ -3,7 +3,7 @@
   "content": "Enter email",
   "content_en_sha1_hash": "2561af4e3ae4688b16392bbda30fa27b36cf9e1a",
   "created_at": "2025-05-19T21:30:53.296Z",
-  "updated_at": "2026-04-10T08:21:04.314Z",
+  "updated_at": "2026-04-10T15:22:27.395Z",
   "comment": {
     "text": "\"Used as a placeholder and label for an email input field in various UI components, such as dialogs and tables, to prompt users to enter their email address.\"",
     "is_auto": true,
@@ -93,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Armenian translation is truncated. 'էլ' is an abbreviation or prefix, but the full word for 'email' (էլեկտրոնային հասցե) is missing, making the instruction incomplete.",
-          "suggestion": "Մուտքագրեք էլեկտրոնային հասցեն"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -171,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'වි-තැපෑල' (vi-thapæla) is an unnatural and incorrect way to translate 'email' in a UI context. It appears to be a literal or broken attempt at a compound word. The standard term for email in Sinhala is 'ඊමේල්' or 'විද්‍යුත් තැපෑල'.",
-          "suggestion": "ඊමේල් ඇතුළත් කරන්න"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

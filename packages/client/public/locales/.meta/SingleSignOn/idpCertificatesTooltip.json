@@ -3,7 +3,7 @@
   "content": "The Identity provider public certificates used for either verification or decryption (or both) of the requests and responses from the IdP.",
   "content_en_sha1_hash": "7846c6461388c273f52adc2c6ee4a3e2120da395",
   "created_at": "2025-05-19T21:30:50.096Z",
-  "updated_at": "2026-04-08T23:22:52.903Z",
+  "updated_at": "2026-04-10T15:22:27.318Z",
   "comment": {
     "text": "This translation key is used to display a tooltip describing identity provider public certificates in the portal settings page. It provides context on the certificates' purpose and usage in single sign-on processes.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation changes the sentence structure from a noun phrase (a definition) to a complete sentence with a subject/verb mismatch. The English text is a definition of 'The Identity provider public certificates', whereas the Sinhala text reads as 'IdP uses the identity provider's public certificates...', which changes the grammatical intent of a tooltip description.",
-          "suggestion": "IdP වෙතින් එවන ඉල්ලීම් සහ ප්‍රතිචාර සත්‍යාපනය කිරීම හෝ විසංකේතනය කිරීම (හෝ දෙකම) සඳහා භාවිතා කරන අනන්‍යතා සපයන්නාගේ (Identity provider) ප්‍රසිද්ධ සහතික."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -219,13 +213,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation incorrectly translates 'The Identity provider public certificates' as 'Identiteti i ofruesit të certifikatave publike', which means 'The identity of the provider of public certificates'. This changes the subject from the certificates themselves to the identity of the provider.",
-          "suggestion": "Certifikatat publike të ofruesit të identitetit përdoren për verifikimin ose deshifrimin (ose të dyja) e kërkesave dhe përgjigjeve nga IdP."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

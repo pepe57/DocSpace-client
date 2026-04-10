@@ -3,7 +3,7 @@
   "content": "Room selector",
   "content_en_sha1_hash": "19415158fe52171efbd6c6c03e13605aae21b7db",
   "created_at": "2025-05-19T21:30:48.245Z",
-  "updated_at": "2026-04-10T08:21:04.347Z",
+  "updated_at": "2026-04-10T15:22:27.113Z",
   "comment": {
     "text": "The \"RoomSelector\" translation key is used to describe a room selection component in the Portal Settings, likely appearing on buttons or labels within the UI. This description will help users understand the purpose of selecting a room in this context.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'තෝරනය' (thoranaya) is a noun meaning 'selection' or 'choice', but in this context, 'Room selector' refers to a component or a tool that performs the action of selecting. The current translation sounds like 'Room selection' rather than 'Room selector'.",
-          "suggestion": "කාමර තේරීම් මෙවලම"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -177,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'собе' is an incorrect declension/form of 'soba' (room). In Serbian, 'Селектор собе' means 'Selector of the room' (singular, genitive), whereas 'Room selector' in a UI context usually refers to the component itself. More importantly, 'собе' is grammatically awkward here; 'Селектор просторија' or 'Селектор соби' would be more standard, but 'собе' specifically sounds like a typo or a broken grammatical case for a general component label.",
-          "suggestion": "Селектор соби"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

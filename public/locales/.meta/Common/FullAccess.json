@@ -3,7 +3,7 @@
   "content": "Full access",
   "content_en_sha1_hash": "5e4017a2a48e628c8f3391f53547d028c3c5fa2c",
   "created_at": "2025-09-23T07:24:16.817Z",
-  "updated_at": "2026-04-08T08:29:50.780Z",
+  "updated_at": "2026-04-10T15:22:27.178Z",
   "comment": {
     "text": "This key represents the highest level of access granted to a shared folder or file. It's used to display the access level in the UI, specifically within access level cells and share settings, indicating the user has full read and write permissions. Translators should ensure the translation accurately conveys the scope of this access level.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Tam giriş' means 'Full entry' or 'Full login', which refers to the act of entering a system. In the context of file permissions (read/write/delete), 'Full access' should be translated as 'Tam giriş imkanı' or more accurately 'Tam giriş hüququ' or 'Tam giriş icazəsi'. However, in software UI for permissions, 'Tam giriş' is often used for 'Full access', but 'Tam giriş' specifically sounds like 'Full login'. A more accurate term for permission levels is 'Tam giriş icazəsi' or 'Tam giriş hüququ'.",
-          "suggestion": "Tam giriş icazəsi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -117,13 +111,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term '전면 액세스' is a literal translation of 'Full access' that sounds unnatural in a software UI context. In Korean IT terminology, 'Full access' (meaning complete permissions) is typically translated as '모든 권한' or '전체 액세스'. '전면' usually implies 'frontal' or 'all-out' (e.g., a frontal attack), which is incorrect for permission levels.",
-          "suggestion": "모든 권한"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {

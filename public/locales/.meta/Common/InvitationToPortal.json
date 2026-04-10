@@ -3,7 +3,7 @@
   "content": "<1>{{displayName}}</1> invites you to join the {{productName}} <1>{{spaceAddress}}</1> for secure document collaboration.",
   "content_en_sha1_hash": "516f637e20928aaf05537ea5e25558d4c52dc3d1",
   "created_at": "2025-05-19T21:30:45.945Z",
-  "updated_at": "2026-04-10T08:58:38.054Z",
+  "updated_at": "2026-04-10T15:22:27.171Z",
   "comment": {
     "text": "This translation key is used to display a welcome message when an invitation is sent to join a secure document collaboration space. It includes placeholders for the user's name and the product name, making it adaptable to different users and products. The text appears in a greeting component after a successful file upload or invitation creation.",
     "is_auto": true,
@@ -147,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'asociați' (to associate/link) is used incorrectly in this context. In Romanian, when inviting someone to join a space or platform, 'să vă alăturați' (to join) is the correct semantic equivalent for 'to join'.",
-          "suggestion": "<1>{{displayName}}</1> vă invită să vă alăturați {{productName}} <1>{{spaceAddress}}</1> pentru colaborarea securizată asupra documentelor."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

@@ -3,7 +3,7 @@
   "content": "Add users or groups",
   "content_en_sha1_hash": "343fc186f903e7448069e75bcbbdc0f190703881",
   "created_at": "2025-09-23T07:24:16.805Z",
-  "updated_at": "2026-04-08T17:46:01.568Z",
+  "updated_at": "2026-04-10T15:22:27.268Z",
   "comment": {
     "text": "This text appears on a button that allows users to add users or groups. It's used to initiate the process of adding new members to a shared resource. Translators should ensure the wording accurately reflects the action of adding users or groups.",
     "is_auto": true,
@@ -141,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'grupuri' contains a typo ('grrupuri').",
-          "suggestion": "Adăugare utilizatori sau grupuri"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -201,13 +195,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The noun 'груп' is in the genitive case, which makes the sentence grammatically incorrect in this context. It should be in the accusative case ('групи') to match 'користувачів'.",
-          "suggestion": "Додати користувачів або групи"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

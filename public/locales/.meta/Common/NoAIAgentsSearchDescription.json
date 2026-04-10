@@ -3,7 +3,7 @@
   "content": "No agents match your current filter. Adjust the filter or clear it to see all available agents.",
   "content_en_sha1_hash": "a0298f81f2be19a8d46c5773b9258c95a657680f",
   "created_at": "2025-10-27T16:14:24.576Z",
-  "updated_at": "2026-04-08T04:07:11.388Z",
+  "updated_at": "2026-04-10T15:22:27.145Z",
   "comment": {
     "text": "This text appears as a description on a screen when no agents are found matching the user's current filter. It instructs the user to adjust or clear their filter to view all available agents. This message is used to guide users when their agent search yields no results.",
     "is_auto": true,
@@ -141,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'peantru' is a typo for 'pentru'.",
-          "suggestion": "Filtru dvs de agenți nu a produs rezultate. Configurați sau goliți filtrul pentru a afișa toți agenții disponibili."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -171,13 +165,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The first sentence contains a grammatical error in Slovenian ('Žadnih agentov ne ustreza') that makes the sentence nonsensical. It should use the correct case/verb agreement for 'No agents match'.",
-          "suggestion": "Nobeni agent ne ustreza vašemu trenutnemu filtru. Prilagodite filter ali ga počistite, da si ogledate vse razpoložljive agente."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -188,11 +176,6 @@
           "type": "extra_variable",
           "description": "Extra variable(s) not in English: {{productName}}",
           "suggestion": ""
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation describes a completely different action (connecting MCP servers in settings) instead of addressing the empty search results/filter issue described in the English text.",
-          "suggestion": "Asnjë agjent nuk përputhet me filtrin tuaj aktual. Ndryshoni filtrin ose fshijeni atë për të parë të gjithë agjentët e disponueshëm."
         }
       ],
       "approved_at": null

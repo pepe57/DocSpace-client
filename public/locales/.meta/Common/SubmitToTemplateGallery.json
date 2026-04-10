@@ -3,7 +3,7 @@
   "content": "Submit to Template Gallery",
   "content_en_sha1_hash": "fe9fb56e0050b72b9bd60d116d510df268c747b9",
   "created_at": "2025-12-22T09:40:11.547Z",
-  "updated_at": "2026-04-07T22:16:08.285Z",
+  "updated_at": "2026-04-10T15:22:27.095Z",
   "comment": {
     "text": "This text appears on a button and in a dialog, likely related to submitting a form or template. It represents the action of offering a form for inclusion in a template gallery, allowing others to use it. Translators should ensure the wording conveys the meaning of sharing or contributing a form.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Հանձնել' (Handznel) means 'to hand over', 'to submit a document/assignment', or 'to surrender'. In the context of a Template Gallery, it sounds like submitting a task or a physical object. A more appropriate term for contributing/sharing a template to a collection is 'Ավելացնել' (Add) or 'Հրապարակել' (Publish).",
-          "suggestion": "Ավելացնել Ձևանմուշների գալերեայում"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

@@ -3,7 +3,7 @@
   "content": "AI features are currently disabled",
   "content_en_sha1_hash": "6adeffc685fa3ba4cb9a4a3d009c17fcc6414f1f",
   "created_at": "2025-11-03T12:10:13.543Z",
-  "updated_at": "2026-04-08T17:25:28.870Z",
+  "updated_at": "2026-04-10T15:22:27.277Z",
   "comment": {
     "text": "This text is a message displayed in the UI to inform users that AI features are temporarily unavailable. It appears within a chat information block and on a \"no access\" screen, likely indicating a technical limitation or planned downtime for AI functionality. Translators should ensure the meaning of \"disabled\" or \"unavailable\" is accurately conveyed in the target language.",
     "is_auto": true,
@@ -147,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation uses 'dezactivate' (singular), but the subject 'Funcții' (features) is plural. It should be 'dezactivate'. Additionally, 'actualmente' is a false friend in this context; in Romanian, 'actualmente' often means 'currently/at the moment' but can sound like 'actually' or be used awkwardly. A more natural way to say 'are currently disabled' is 'sunt momentan dezactivate'.",
-          "suggestion": "Funcțiile de IA sunt momentan dezactivate"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

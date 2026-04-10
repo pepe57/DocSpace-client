@@ -3,7 +3,7 @@
   "content": "Deactivate or delete space.",
   "content_en_sha1_hash": "b70998fc4817a45d4d7119737e6a46662004d7ed",
   "created_at": "2025-05-19T21:30:51.081Z",
-  "updated_at": "2026-04-09T03:38:59.267Z",
+  "updated_at": "2026-04-10T15:22:27.376Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -20,13 +20,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'الفضاء' (Al-Fada') refers to outer space/cosmos. In the context of software/DocSpace, 'space' should be translated as 'مساحة' (Misaha).",
-          "suggestion": "إلغاء تنشيط المساحة أو حذفها."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -44,13 +38,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation uses 'портал' (portal) instead of 'пространство' (space), which changes the technical meaning of the term in the context of DocSpace.",
-          "suggestion": "Деактивирай или изтрий пространството."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -92,13 +80,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian word 'կայքէջը' means 'the website', whereas the English text refers to 'space' (in the context of DocSpace).",
-          "suggestion": "Ապագործունացնել կամ ջնջել տարածքը"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -128,13 +110,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'portālu' (portal) is used instead of 'telpu' (space). In the context of DocSpace, 'space' refers to a workspace/space, not a portal.",
-          "suggestion": "Deaktivizēt vai dzēst telpu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -146,13 +122,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'space' (in the context of DocSpace) is translated as 'portal', which changes the technical meaning of the object being acted upon.",
-          "suggestion": "Dezaktywuj lub usuń przestrzeń."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -176,13 +146,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'space' (context: ONLYOFFICE DocSpace) is translated as 'портал' (portal), which is a different technical entity.",
-          "suggestion": "Деактивировать или удалить пространство."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -224,13 +188,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'space' (in the context of DocSpace) is translated as 'портал' (portal), which changes the technical term used in the product.",
-          "suggestion": "Деактивувати або видалити простір."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

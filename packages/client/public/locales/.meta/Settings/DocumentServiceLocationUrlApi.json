@@ -3,7 +3,7 @@
   "content": "Document Editing Service Address",
   "content_en_sha1_hash": "2037511e6913a8851e1e8816a96493aa5d74fd87",
   "created_at": "2025-05-19T21:30:51.384Z",
-  "updated_at": "2026-04-09T03:10:01.894Z",
+  "updated_at": "2026-04-10T15:22:27.369Z",
   "comment": {
     "text": "This translation key is used for the label on a form input field that allows users to enter the address of a document editing service. It appears in a location form within the PortalSettings page and is intended to provide clear context for users when they are entering this specific information.",
     "is_auto": true,
@@ -117,13 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Documentbewerking Serviceadres' is grammatically incorrect and creates a compound word error. It translates to 'Document Editing Service Address' but lacks the necessary preposition or correct compounding, making it read like 'Document Editing Service-address' in a way that is unnatural. More importantly, 'Documentbewerking' is a noun meaning 'Document Editing', but in this context, it should describe the service. A more accurate translation for a label is 'Serviceadres voor documentbewerking'.",
-          "suggestion": "Serviceadres voor documentbewerking"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {

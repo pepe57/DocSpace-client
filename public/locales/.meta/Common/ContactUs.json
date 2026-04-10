@@ -3,7 +3,7 @@
   "content": "For sales questions, contact us at",
   "content_en_sha1_hash": "8d58e04a3b0884f01458cb78b69edc18104e2ca8",
   "created_at": "2025-05-26T07:15:41.542Z",
-  "updated_at": "2026-04-10T08:21:04.395Z",
+  "updated_at": "2026-04-10T15:22:27.228Z",
   "comment": {
     "text": "The translation key \"ContactUs\" is used to display a contact link in a portal settings page, guiding users to submit sales-related questions. This text appears on a button or similar element, prompting users to reach out for assistance. Translators should adapt this phrase to provide accurate and helpful contact information for the target audience.",
     "is_auto": true,
@@ -51,13 +51,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in German: 'Beim Fragen' is incorrect. It should be 'Bei Fragen' (dative plural) or 'Bei Fragen zum Verkauf'.",
-          "suggestion": "Bei Fragen zum Verkauf kontaktieren Sie uns unter"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -75,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a tautology/redundancy: 'Myyntiin liittyviin kysymyksiin liittyen' translates to 'Regarding questions regarding sales', which is grammatically poor and repetitive in Finnish.",
-          "suggestion": "Myyntiin liittyvissä kysymyksissä, ota meihin yhteyttä osoitteessa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {

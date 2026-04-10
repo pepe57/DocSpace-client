@@ -3,7 +3,7 @@
   "content": "Data import",
   "content_en_sha1_hash": "783af5b205a3e0c3c3b5feadf95d2a786442a1fe",
   "created_at": "2025-05-19T21:30:51.050Z",
-  "updated_at": "2026-04-10T08:21:04.335Z",
+  "updated_at": "2026-04-10T15:22:27.378Z",
   "comment": {
     "text": "This translation key is used to display the label \"Data Import\" on a UI component. It is part of a data import process in a portal settings page, and its purpose is to provide a clear indication of what action is being performed or which option has been selected.",
     "is_auto": true,
@@ -195,25 +195,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation 'Перенос данных' means 'Data migration' or 'Data transfer', which implies moving data from one place to another. The English 'Data import' specifically refers to the process of bringing data into the system. In a UI context, 'Импорт данных' is the accurate term.",
-          "suggestion": "Импорт данных"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'ආයාතය' (āyātaya) is a noun meaning 'the act of entering' or 'entry', but in a UI context for 'Data Import', the correct term should be 'ආනයනය' (ānyanaya) or 'ආයාත කිරීම' (āyāta kirīma) to denote the process of importing data.",
-          "suggestion": "දත්ත ආනයනය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

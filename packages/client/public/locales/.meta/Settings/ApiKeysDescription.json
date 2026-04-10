@@ -3,7 +3,7 @@
   "content": "As an owner/admin you can view and manage all API keys in this {{productName}}.",
   "content_en_sha1_hash": "5593ee7bc8d8372051b5728cbe1f5f45794ca38f",
   "created_at": "2025-05-19T21:30:50.545Z",
-  "updated_at": "2026-04-10T08:58:38.063Z",
+  "updated_at": "2026-04-10T15:22:27.386Z",
   "comment": {
     "text": "This translation key is used for describing API keys management features within a portal settings page. It will be displayed to owners/admins as a tooltip or description in the UI. The context suggests it appears on a page related to developer tools and settings.",
     "is_auto": true,
@@ -99,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation changes the subject from 'As an owner/admin' (the user's role) to 'API key owner/admin' (a specific role for the keys), which alters the intended meaning of the permission description.",
-          "suggestion": "소유자/관리자로서 이 {{productName}}의 모든 API 키를 확인 및 관리할 수 있습니다."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -147,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'all' (toate) is missing from the Romanian translation, which changes the scope of the permission described.",
-          "suggestion": "În calitate de proprietar/administrator puteți vedea și gestiona toate cheile API în {{productName}}."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

@@ -3,7 +3,7 @@
   "content": "No guests match your search. Please adjust your search parameters or clear the search field to view the full list of guests.",
   "content_en_sha1_hash": "1297a129afd4993c61bd2730abb16504a0df9cfe",
   "created_at": "2025-05-19T21:30:46.855Z",
-  "updated_at": "2026-04-08T04:01:51.363Z",
+  "updated_at": "2026-04-10T15:22:27.143Z",
   "comment": {
     "text": "This translation key is used for a message that appears when no guests match the search criteria, prompting the user to adjust their search parameters or clear the search field. It is typically displayed on an empty screen in the Contacts section of a page.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'بوجد' is a spelling error; the correct word for 'there is/are' is 'يوجد'.",
-          "suggestion": "لا يوجد ضيوف يطابقون بحثك. يرجى تعديل معايير البحث أو مسح حقل البحث لعرض قائمة الضيوف الكاملة."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -117,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'viesis' is in the singular form, but the English text 'No guests' and the context 'full list of guests' require the plural form 'viesi'.",
-          "suggestion": "Neviens no viesu neatbilst jūsu meklēšanas kritērijiem. Pielāgojiet meklēšanas parametrus vai notīriet meklēšanas lauku, lai skatītu pilnu viesu sarakstu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

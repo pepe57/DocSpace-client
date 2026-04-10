@@ -3,7 +3,7 @@
   "content": "Please create the first room in {{sectionName}}.",
   "content_en_sha1_hash": "52d0bc357573a2bc6f7486caa5c8d2793a7f50c7",
   "created_at": "2025-10-27T16:14:14.285Z",
-  "updated_at": "2026-04-08T10:47:32.973Z",
+  "updated_at": "2026-04-10T15:22:27.199Z",
   "comment": {
     "text": "This text is a prompt displayed when a user navigates to a section with no existing rooms. It instructs the user to create the first room within that section (e.g., \"Please create the first room in My Files.\"). The `sectionName` variable is dynamically populated with the name of the section.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Xüsusilə' means 'Especially' or 'Particularly', which changes the meaning of the sentence from a simple instruction to an emphasized one that doesn't fit the context.",
-          "suggestion": "{{sectionName}} bölməsində ilk otağı yaradın."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {

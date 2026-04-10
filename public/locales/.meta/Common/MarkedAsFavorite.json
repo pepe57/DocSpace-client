@@ -3,7 +3,7 @@
   "content": "Added to favorites",
   "content_en_sha1_hash": "2f1e3bed43fab05cf7aa088a31554bc16e6d5e5c",
   "created_at": "2026-04-03T21:51:34.722Z",
-  "updated_at": "2026-04-08T04:59:15.118Z",
+  "updated_at": "2026-04-10T15:22:27.155Z",
   "comment": {
     "text": "A success message displayed in a toast notification to confirm that an item has been successfully added to the user's favorites.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Çox istifadə olunan siyahısına əlavə olundu' means 'Added to frequently used list', which is a different concept from 'favorites' (sevimlilər).",
-          "suggestion": "Sevimlilərə əlavə edildi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -105,13 +99,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text is a past participle/status message ('Added to favorites'), whereas the Italian translation is an imperative command ('Add to favorites').",
-          "suggestion": "Aggiunto ai preferiti"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -153,13 +141,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation uses the infinitive verb 'Adicionar' (To add), which implies an action/command, whereas the English text 'Added to favorites' is a past participle indicating a completed state/success message.",
-          "suggestion": "Adicionado aos favoritos"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -183,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ප්‍රියතමයන්ට දමන්න' is an imperative command meaning 'Add to favorites' (an action/button label), whereas the English text 'Added to favorites' is a past participle/status message indicating a completed action.",
-          "suggestion": "ප්‍රියතමයන්ට එක් කරන ලදී"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

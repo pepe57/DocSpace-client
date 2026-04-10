@@ -3,7 +3,7 @@
   "content": "Invalid link",
   "content_en_sha1_hash": "3aaeaeb6ec3f8154506ce18b333531c275dcb035",
   "created_at": "2025-05-19T21:30:45.936Z",
-  "updated_at": "2026-04-08T06:37:49.768Z",
+  "updated_at": "2026-04-10T15:22:27.172Z",
   "comment": {
     "text": "This translation key is used to display an error message when a link provided is invalid. It appears as a message shown by the docEditor component, typically in response to user interactions such as clicking on a button or attempting to load content.",
     "is_auto": true,
@@ -141,13 +141,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation 'Nederīga saite' is actually Lithuanian, not Latvian. The correct Latvian translation for 'Invalid link' is 'Nederīga saite' (Wait, actually 'Nederīga saite' is Lithuanian. In Latvian, it should be 'Noraidīta saite' or 'Nepareiza saite'). Correction: 'Nederīga' is Lithuanian. Latvian is 'Noraidīta' or 'Nepareiza'.",
-          "suggestion": "Nepareiza saite"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -201,13 +195,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Neveljavna' means 'unreliable' or 'erratic' (referring to behavior/character), whereas 'Invalid' in the context of a link means 'not valid' or 'incorrect'.",
-          "suggestion": "Napotna povezava"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

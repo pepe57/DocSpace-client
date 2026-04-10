@@ -3,7 +3,7 @@
   "content": "AI would like to use this tool",
   "content_en_sha1_hash": "f77101356e17e7d9ee481ef4ca7e9e8030683af8",
   "created_at": "2025-10-27T16:14:24.307Z",
-  "updated_at": "2026-04-08T17:17:06.862Z",
+  "updated_at": "2026-04-10T15:22:27.275Z",
   "comment": {
     "text": "This text appears in a confirmation dialog, informing the user that the AI intends to utilize a specific tool. It's a brief explanation of the action being requested before the user confirms or declines the tool usage. Translators should maintain the straightforward, explanatory tone.",
     "is_auto": true,
@@ -159,13 +159,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation contains a grammatical error in verb conjugation ('by sa rada použi' is incorrect; it should be 'by chcela použiť' or 'by sa chcela použiť'). The current form 'použi' is an imperative or incorrect conjugation that breaks the meaning of 'would like to use'.",
-          "suggestion": "AI by chcela použiť tento nástroj"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

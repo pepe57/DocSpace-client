@@ -3,7 +3,7 @@
   "content": "When uploading a large amount of data, the context may be partially truncated, which can reduce the accuracy of responses. It’s recommended to limit the number of files and their total size.",
   "content_en_sha1_hash": "dce1181ee7a007698739a58027258d8d7383988c",
   "created_at": "2025-11-13T07:57:55.565Z",
-  "updated_at": "2026-04-07T23:42:01.918Z",
+  "updated_at": "2026-04-10T15:22:27.108Z",
   "comment": {
     "text": "This text explains a limit on the number of files that can be selected for upload. It appears in the file selection interface to inform users that uploading too many files might reduce the quality of responses. Translators should focus on conveying the impact of file limits on response accuracy.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'բեռնվածելու' is a typo/non-existent word. It should be 'բեռնելիս' or 'բեռնելու'.",
-          "suggestion": "Մեծ քանակությամբ տվյալներ բեռնելիս, համատեքստը կարող է մասամբ կտրվել, ինչը կարող է նվազեցնել արձագանքների ճշտությունը։ Խորհուրդ է տրվում սահմանափակել ֆայլերի քանակը և նրանց ընդհանուր չափը։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

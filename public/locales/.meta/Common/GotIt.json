@@ -3,7 +3,7 @@
   "content": "Got it",
   "content_en_sha1_hash": "5b8027fa0e819719a62305a6b15f3f1c10769f7f",
   "created_at": "2025-05-19T21:30:45.641Z",
-  "updated_at": "2026-04-08T08:16:07.212Z",
+  "updated_at": "2026-04-10T15:22:27.177Z",
   "comment": {
     "text": "The \"GotIt\" translation key is used to display a confirmation button that indicates agreement or acceptance of information in UI elements such as buttons and dialogs. It is typically used in scenarios where the user needs to acknowledge understanding or accept terms, allowing them to proceed with the desired action. This text appears on primary buttons in dialog components and guidance sections.",
     "is_auto": true,
@@ -129,13 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Apanhei' means 'I caught' or 'I picked up' (physically), which is an incorrect way to express 'I understand' or 'Understood' in a UI button context in Portuguese.",
-          "suggestion": "Entendi"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -165,13 +159,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Mám to' is a literal translation of 'I have it' or 'I got it' (as in 'I understand/possess it'), which sounds unnatural for a UI confirmation button in Slovak. In a UI context for acknowledging information, 'Rozumiem' or 'OK' is the standard.",
-          "suggestion": "Rozumiem"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

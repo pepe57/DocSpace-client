@@ -23,7 +23,7 @@
   "FileDeleted": "Súbor odstránený",
   "FileMoved": "Súbor presunutý",
   "FileRestored": "Súbor obnovený",
-  "FileTrashed": "Súbor zničený",
+  "FileTrashed": "Súbor presunutý do koša",
   "FileUpdated": "Súbor aktualizovaný",
   "FileUploaded": "Súbor nahraný",
   "FolderCopied": "Priečinok skopírovaný",
@@ -71,7 +71,7 @@
   "SSLVerification": "Overenie SSL",
   "State": "Stav",
   "TargetId": "ID cieľa",
-  "UnselectAll": "Zrušiť výber všetko",
+  "UnselectAll": "Zrušiť výber všetkých",
   "URL": "URL",
   "UserCreated": "Používateľ vytvorený",
   "UserDeleted": "Používateľ odstránený",
@@ -95,5 +95,5 @@
   "AgentUpdated": "Aktualizovaný AI Agent",
   "FormFilledOut": "Vyplnený formulár",
   "FormStopped": "Formulár zastavený",
-  "FormSubmit": "Odoslanie formulára"
+  "FormSubmit": "Formulár bol odoslaný"
 }

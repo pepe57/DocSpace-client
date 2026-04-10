@@ -3,7 +3,7 @@
   "content": "Copied to clipboard",
   "content_en_sha1_hash": "0e7383487387213f8f33b310d457c956a84efa2d",
   "created_at": "2025-11-25T11:52:41.121Z",
-  "updated_at": "2026-04-08T14:21:04.010Z",
+  "updated_at": "2026-04-10T15:22:27.227Z",
   "comment": {
     "text": "This key displays a success message to the user confirming that code has been copied to the clipboard. It appears as a toast notification after the copy action is performed within a code block in the chat interface. Translators should ensure the wording accurately conveys a successful copy operation.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation means 'Copied to the table of contents' instead of 'Copied to the clipboard'. 'Πίνακας περιεχομένων' refers to a Table of Contents, whereas 'Πίνακας αφής' or 'Πρόχειρο' (or simply using the term for clipboard) is required for a clipboard action.",
-          "suggestion": "Αντιγράφηκε στο πρόχειρο"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -117,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Iespējams, tas ir nokopēts starpliktē' means 'Possibly, it has been copied to the clipboard', which introduces uncertainty. The English text is a definitive success message.",
-          "suggestion": "Nokopēts starpliktē"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -177,13 +165,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian word 'Izvlečeno' means 'Extracted' or 'Pulled out', which is the opposite of 'Copied'. The correct term for copying to a clipboard is 'Kopirano'.",
-          "suggestion": "Kopirano v odložišče"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -207,13 +189,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Kliperne' is a misspelling of 'Panoya' or 'Klipboard' (which is not used in Turkish). 'Kliperne' is not a valid Turkish word for clipboard.",
-          "suggestion": "Panoya kopyalandı"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

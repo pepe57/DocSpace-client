@@ -3,7 +3,7 @@
   "content": "Folder updated",
   "content_en_sha1_hash": "35d20622dba94a642c7f8160c54fa9fa47f19ac1",
   "created_at": "2025-05-19T21:30:49.761Z",
-  "updated_at": "2026-04-08T19:57:52.752Z",
+  "updated_at": "2026-04-10T15:22:27.294Z",
   "comment": {
     "text": "The translation key \"FolderUpdated\" is used to display the phrase \"Folder updated\" when a folder's contents have changed. This message appears in UI elements related to file management and webhooks, likely in buttons or dialog windows that notify users of updates.",
     "is_auto": true,
@@ -171,13 +171,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Фасцикла' is an incorrect/non-standard term for 'Folder' in Serbian. The standard term is 'Овртиљак' or 'Фолдер'.",
-          "suggestion": "Фолдер је ажуриран"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

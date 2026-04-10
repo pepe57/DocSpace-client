@@ -3,7 +3,7 @@
   "content": "Box",
   "content_en_sha1_hash": "239ca5767afac9641593464ce02bc454d6ac07a9",
   "created_at": "2025-05-26T07:15:48.949Z",
-  "updated_at": "2026-04-07T21:00:55.759Z",
+  "updated_at": "2026-04-10T15:22:27.086Z",
   "comment": {
     "text": "This translation key \"TypeTitleBoxNet\" represents the English content \"Box\", used to display a connected cloud service type in the UI, particularly in file and dialog boxes.",
     "is_auto": true,
@@ -87,13 +87,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Box' refers to the specific cloud storage service provider (Box.com), whereas the Finnish translation 'Laatikko' means a physical container/box. This is a proper noun in this context.",
-          "suggestion": "Box"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -105,13 +99,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Տուփ' means a physical container/box. In this context, 'Box' refers to the cloud storage service 'Box.com'. Translating it as a common noun is a semantic error for a brand name.",
-          "suggestion": "Box"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -249,13 +237,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is just the English word 'Box' instead of the Chinese equivalent. In this context, 'Box' refers to the cloud storage service 'Box.com', which should be left as 'Box' or translated appropriately, but providing the English word as the translation is a failure to translate.",
-          "suggestion": "Box"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

@@ -3,7 +3,7 @@
   "content": "You have unsaved changes",
   "content_en_sha1_hash": "5ea3902f149163da1cf57472568ec3a89d52e790",
   "created_at": "2025-05-19T21:30:53.245Z",
-  "updated_at": "2026-04-10T08:21:04.339Z",
+  "updated_at": "2026-04-10T15:22:27.075Z",
   "comment": {
     "text": "This translation key is used to display a reminder message when unsaved changes are made to a form or settings, prompting the user to save their work before leaving the page. It appears in various UI elements such as save buttons and dialogs, alerting users of potential data loss. The translation should convey a clear warning without being too intrusive.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation literally means 'You have not saved the changes' (as an action you performed), whereas the English means 'There are changes that have not been saved' (a state of the data). The current translation sounds like the user intentionally chose not to save, rather than alerting them to unsaved work.",
-          "suggestion": "لديك تغييرات غير محفوظة"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -207,13 +201,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation contains a grammatical error that changes the meaning: 'avec' (with) is used instead of 'avez' (have). This makes the sentence 'You with unsaved changes' instead of 'You have unsaved changes'.",
-          "suggestion": "Vous avez des modifications non sauvegardées"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -231,13 +219,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation '未保存変更はあります。' is grammatically unnatural and sounds like 'There are unsaved changes exist.' It lacks the necessary particle to connect the noun and verb correctly, making it sound robotic or broken.",
-          "suggestion": "未保存の変更があります。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

@@ -3,7 +3,7 @@
   "content": "Web search",
   "content_en_sha1_hash": "381ceddd75a893f19764c7e4cf9cd12c0f6e88c3",
   "created_at": "2025-10-27T16:14:24.651Z",
-  "updated_at": "2026-04-07T20:06:42.600Z",
+  "updated_at": "2026-04-10T15:22:27.079Z",
   "comment": {
     "text": "This key translates the label \"Web search\" displayed next to a search tool icon in a chat message. It appears as part of a header indicating a web search was performed, along with details about the tool used. Translators should ensure the phrasing accurately describes a web search action.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation 'Ιστότυπος αναζήτηση' is grammatically incorrect and uses an awkward term. 'Ιστότυπος' means 'template' or 'layout', whereas 'Web' in the context of the internet should be 'Web' (loanword) or 'Διαδίκτυο'. Additionally, the noun-adjective agreement is incorrect.",
-          "suggestion": "Αναζήτηση στο Web"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -171,13 +165,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Spletna iskalna' is grammatically incomplete and functions as an adjective phrase (meaning 'Web searching...') rather than a noun phrase ('Web search'). It lacks the noun to complete the meaning.",
-          "suggestion": "Iskanje po spletu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

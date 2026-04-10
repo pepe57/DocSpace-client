@@ -3,7 +3,7 @@
   "content": "Enterprise",
   "content_en_sha1_hash": "b4afff317fb189b9020c5c4b47338ed3d2b0662a",
   "created_at": "2025-05-19T21:30:45.018Z",
-  "updated_at": "2026-04-08T10:22:26.973Z",
+  "updated_at": "2026-04-10T15:22:27.196Z",
   "comment": {
     "text": "The \"EnterpriseLicense\" translation key is used to display the text \"Enterprise License\" in a UI component, likely as part of a licensing or upgrade process. It appears on-screen when users need to enter their Enterprise license information, and its purpose is to clearly identify the type of license being used for activation or upgrading.",
     "is_auto": true,
@@ -123,25 +123,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'Enterprise' (referring to a business/corporate tier) is not translated into Finnish. Using the English word in a Finnish UI is considered an incorrect translation in this context.",
-          "suggestion": "Yritys"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation 'Enterprise' is an English word. In French, the term for a business/corporate tier is 'Entreprise'.",
-          "suggestion": "Entreprise"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -171,13 +159,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation uses the English word 'Enterprise' instead of the Korean equivalent. In a localized UI, technical terms like 'Enterprise' should be translated to the target language (e.g., '엔터프라이즈') unless specifically intended to remain in English.",
-          "suggestion": "엔터프라이즈"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -285,13 +267,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English term 'Enterprise' (referring to a business/corporate tier) is not translated into Turkish. Using the English word in a Turkish UI is considered an incorrect translation for a localized product.",
-          "suggestion": "Kurumsal"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -309,13 +285,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation is identical to the English source, failing to translate the term into Vietnamese. In a software context, 'Enterprise' should be translated to convey the business/corporate tier.",
-          "suggestion": "Doanh nghiệp"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
@@ -327,13 +297,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Ndërmarrja' means 'The Enterprise' (noun/entity), whereas in the context of 'Enterprise License', 'Enterprise' acts as an adjective describing the type of license. In Albanian UI, 'Enterprise' as a tier/category is better translated as 'Enterprise' (loanword) or 'Korporatë'. 'Ndërmarrja' sounds like a specific company name rather than a license tier.",
-          "suggestion": "Enterprise"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

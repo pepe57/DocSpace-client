@@ -3,7 +3,7 @@
   "content": "Load metadata from XML to fill the required fields automatically.",
   "content_en_sha1_hash": "5dc7828aee10be08ff27972ea80701e595ddd1d2",
   "created_at": "2025-05-19T21:30:50.195Z",
-  "updated_at": "2026-04-08T22:09:25.047Z",
+  "updated_at": "2026-04-10T15:22:27.319Z",
   "comment": {
     "text": "\"Load metadata from XML to fill required fields automatically\" is used as a tooltip or description for an icon button that enables Single Sign On. This translation key appears in the PortalSettings page and helps users understand its purpose.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation omits the word 'metadata' (البيانات الوصفية), translating it simply as 'data' (البيانات), which changes the technical meaning.",
-          "suggestion": "تحميل البيانات الوصفية من ملف XML لملء الحقول المطلوبة تلقائيًا."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {

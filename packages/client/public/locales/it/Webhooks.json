@@ -77,7 +77,7 @@
   "UserDeleted": "Utente eliminato",
   "UserInvited": "Utente invitato",
   "UserUpdated": "Utente aggiornato",
-  "ViewRawPayload": "Visualizza il carico utile iniziale",
+  "ViewRawPayload": "Visualizza payload grezzo",
   "WebhookCreated": "Webhook creato",
   "WebhookDetails": "Dettagli del webhook",
   "WebhookDisabled": " Webhook disabilitato",

@@ -3,7 +3,7 @@
   "content": "After users accept the invitation, their status will be changed to 'Active'.",
   "content_en_sha1_hash": "ca00a33b999745953583a0dd0b93a69885f3ca4b",
   "created_at": "2025-05-19T21:30:53.274Z",
-  "updated_at": "2026-04-09T06:42:12.626Z",
+  "updated_at": "2026-04-10T15:22:27.393Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that after accepting an invitation, users will be marked as 'Active'. It appears in a modal dialog component.",
     "is_auto": true,
@@ -141,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'va schimba' (will change [something]) is used instead of the passive form 'va fi schimbat' (will be changed). In the current version, it implies the status itself is performing an action rather than being acted upon.",
-          "suggestion": "Odată ce utilizatorii acceptă invitația, statutul lor va fi schimbat în 'Activ'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -159,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'පරිශ්‍රීලකයින්' (parishrilakayin) is a misspelling/incorrect word for 'users'. The correct term should be 'පරිශීලකයින්' (parishilakayin).",
-          "suggestion": "පරිශීලකයින් ආරාධනය පිළිගත් පසු, ඔවුන්ගේ තත්ත්වය 'සක්‍රියයි' ලෙස වෙනස් වනු ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

@@ -3,7 +3,7 @@
   "content": "File unlocked",
   "content_en_sha1_hash": "c60e9fe76b848fe79d0d3970f5c0c61d094278c2",
   "created_at": "2025-05-19T21:30:49.968Z",
-  "updated_at": "2026-04-08T21:22:11.271Z",
+  "updated_at": "2026-04-10T15:22:27.312Z",
   "comment": {
     "text": "The \"FileUnlocked\" translation key is used to display a success message when a file is unlocked. It appears in various UI elements, including buttons and tooltips, such as on a button that unlocks a file or in an info panel displaying file history. The text should indicate that the file has been successfully unlocked, providing feedback to users about the outcome of the action.",
     "is_auto": true,
@@ -51,13 +51,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation 'ملف مفتوح' means 'File is open', which is not the same as 'File unlocked'. In the context of file security/locking, 'unlocked' refers to removing a restriction, whereas 'open' refers to the file being currently in use or accessed.",
-          "suggestion": "تم إلغاء قفل الملف"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -81,13 +75,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation 'Datei nicht gesperrt' means 'File not locked', which describes a state rather than the successful completion of an action. The English 'File unlocked' implies the action of unlocking has been performed (past participle), which is critical for a success toast message.",
-          "suggestion": "Datei entsperrt"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -105,13 +93,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation includes an extra word 'Asiakirjat' (Documents) which is not present in the English source, changing the meaning from a specific file status to a category header.",
-          "suggestion": "Lukitus poistettu"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -135,13 +117,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation 'ロック削除されたファイル' means 'File whose lock was deleted' (a noun phrase describing a state), whereas the English 'File unlocked' is a status message/notification indicating the action was successful. In a UI success toast or info panel, a verb-based or status-based expression is required.",
-          "suggestion": "ファイルのロックを解除しました"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -165,13 +141,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation 'Bestand Van Slot Af' is grammatically incorrect and sounds like a literal, broken word-for-word translation. It translates roughly to 'File From Lock Off', which is not natural Dutch for 'File unlocked'.",
-          "suggestion": "Bestand ontgrendeld"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -207,13 +177,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ගොනුව අගුළු හැරිණි' means 'The file turned/rotated a lock' or 'The file became a lock', which is grammatically incorrect and does not convey the action of unlocking. It uses a reflexive/intransitive verb form that doesn't make sense in this context.",
-          "suggestion": "ගොනුව අගුළු හැරිය"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -267,13 +231,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation 'Skedari u hap' means 'The file was opened', which is a different action than 'unlocked'.",
-          "suggestion": "Skedari u zhbllokua"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

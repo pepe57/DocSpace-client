@@ -3,7 +3,7 @@
   "content": "<1>{{displayName}}</1> wants to share with you the contact of the guest.",
   "content_en_sha1_hash": "22e94db1f497e5a36b2d093d14a19ffc364fc51a",
   "created_at": "2025-05-19T21:30:45.696Z",
-  "updated_at": "2026-04-10T08:58:38.055Z",
+  "updated_at": "2026-04-10T15:22:27.176Z",
   "comment": {
     "text": "This translation key is used to display a personalized message when a user receives an invitation from a guest. It will show the name of the guest who shared the contact information. This appears in a greeting component on the login page.",
     "is_auto": true,
@@ -147,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation uses 'datele de contat' which is a literal/incorrect translation of 'contact'. In Romanian, 'contact' is used as a noun for contact information, whereas 'contat' is not a standard word in this context (it's a misspelling of 'contact').",
-          "suggestion": "<1>{{displayName}}</1> dorește să împărtășească cu tine contactul invitatului."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -219,13 +213,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Albanian translation uses 'dëshironi' (you want/plural you want) instead of 'dëshiron' (he/she wants). This changes the subject from the person named in the variable to the user receiving the message.",
-          "suggestion": "<1>{{displayName}}</1> dëshiron të ndajë me ju kontaktin e mysafirit."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

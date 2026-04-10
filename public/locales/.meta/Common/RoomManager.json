@@ -3,7 +3,7 @@
   "content": "Room manager",
   "content_en_sha1_hash": "609082b01c00bb9850dc11687f7204de4f4b10da",
   "created_at": "2025-05-19T21:30:48.209Z",
-  "updated_at": "2026-04-08T00:24:36.010Z",
+  "updated_at": "2026-04-10T15:22:27.113Z",
   "comment": {
     "text": "This translation key is used to display the label \"Room Manager\" for room management permissions. It appears in a dropdown or select field within a UI component related to sharing access rights, likely on a settings page or permission dialog.",
     "is_auto": true,
@@ -75,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Huoneen johtaja' translates to 'Head of the room' or 'Room Director' (a person's job title), whereas in the context of software permissions, 'Room manager' refers to the role of managing a room. In Finnish UI, 'hallinnointi' or 'ylläpitäjä' is more appropriate for a permission/role label.",
-          "suggestion": "Huoneen hallinnoija"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -129,13 +123,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Kamer Beheerder' is a literal translation of 'Room Manager' that is grammatically incorrect in Dutch. In Dutch, compound nouns are written as one word ('Kamerbeheerder') or with a hyphen, and 'Kamer Beheerder' sounds like two separate entities rather than a single role/title.",
-          "suggestion": "Kamerbeheerder"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -189,25 +177,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Соба није доступна' means 'Room is not available', which is completely different from the English 'Room manager' (a role/permission).",
-          "suggestion": "Менаџер простоје"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Soba nije dostupna' means 'Room is not available', which is completely different from the English 'Room manager' (a role/permission label).",
-          "suggestion": "Upravnik sobe"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

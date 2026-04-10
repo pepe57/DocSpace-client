@@ -3,7 +3,7 @@
   "content": "AI services",
   "content_en_sha1_hash": "7452369e2f15817a4414cc5653aa2101c5c608f4",
   "created_at": "2026-03-26T08:26:29.053Z",
-  "updated_at": "2026-04-10T08:21:04.313Z",
+  "updated_at": "2026-04-10T15:22:27.275Z",
   "comment": {
     "text": "This key translates the text \"AI services,\" which refers to the artificial intelligence features available within the application. It's used within the Disable AI Services dialog to label a specific AI-related setting. Translators should consider the general meaning of AI-powered functionalities.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Xüsusi xidmətlər' means 'Special services' or 'Private services', which completely misses the 'AI' (Artificial Intelligence) component of the source text.",
-          "suggestion": "Süni intellekt xidmətləri"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -159,13 +153,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word order is incorrect. In Lao, the noun 'services' should come before the modifier 'AI' to be grammatically correct and natural. 'AI ບໍລິການ' reads like 'AI Services' in a literal word-for-word swap that results in 'AI Service' (where AI is the subject), whereas 'ບໍລິການ AI' is the correct way to express 'AI-powered services'.",
-          "suggestion": "ບໍລິການ AI"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

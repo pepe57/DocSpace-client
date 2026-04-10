@@ -3,7 +3,7 @@
   "content": "No access to view, edit, or manage files or folders.",
   "content_en_sha1_hash": "ee305f19919eb7024191f766db1eea827b2d84da",
   "created_at": "2025-09-23T07:24:08.399Z",
-  "updated_at": "2026-04-08T12:12:09.745Z",
+  "updated_at": "2026-04-10T15:22:27.213Z",
   "comment": {
     "text": "This text explains that the user has no permissions to view, edit, or manage files or folders. It's used to describe a \"Deny Access\" permission setting, likely appearing in a sharing or access control interface. Translators should ensure the description accurately conveys the restriction of access.",
     "is_auto": true,
@@ -171,13 +171,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The verb 'redaktuar' (past participle/perfect) is used instead of the infinitive 'redaktuar' (to edit) to match the parallel structure of 'të parë' and 'menaxhuar'. In Albanian, after 'për të', all verbs in a list should be in the infinitive form to maintain grammatical consistency and correct meaning.",
-          "suggestion": "Nuk ka akses për të parë, redaktuar ose menaxhuar skedarët apo dosjet."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

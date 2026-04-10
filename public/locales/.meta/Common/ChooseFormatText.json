@@ -3,7 +3,7 @@
   "content": "Choose the format for each file to be downloaded",
   "content_en_sha1_hash": "2fb71e2e0362cf2ae30e23c9be7d0d121a6aaa14",
   "created_at": "2025-05-19T21:30:43.447Z",
-  "updated_at": "2026-04-08T15:29:59.944Z",
+  "updated_at": "2026-04-10T15:22:27.235Z",
   "comment": {
     "text": "The translation key \"ChooseFormatText\" is used to display a message prompting users to select the format for files to be downloaded in a download dialog. This text appears as a label within a file selection interface, guiding users through the conversion process.",
     "is_auto": true,
@@ -141,13 +141,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation uses 'încărcat' (to upload) instead of 'descărcat' (to download), which is the opposite of the intended action.",
-          "suggestion": "Selectați formatul pentru fiecare fișier de descărcat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

@@ -3,7 +3,7 @@
   "content": "Deactivate",
   "content_en_sha1_hash": "d65ded94286c61f4f34527624be77ef1afce3b5a",
   "created_at": "2025-05-19T21:30:44.433Z",
-  "updated_at": "2026-04-08T12:26:14.416Z",
+  "updated_at": "2026-04-10T15:22:27.215Z",
   "comment": {
     "text": "The translation key \"Deactivate\" is used to display the text \"Deactivate\" on buttons and labels in UI elements that allow users to deactivate or disable certain features, typically related to account management or data removal. This text appears in button components, such as confirm deletion or suspension buttons, in portal settings pages and login interfaces.",
     "is_auto": true,
@@ -51,13 +51,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'Deactivate' is a verb (imperative/action), whereas the Czech translation 'Deaktivace' is a noun (the process of deactivation). For a button label, the verb form 'Deaktivovat' should be used.",
-          "suggestion": "Deaktivovat"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {

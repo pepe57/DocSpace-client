@@ -3,7 +3,7 @@
   "content": "Content creators can use the chat and work with files in Result storage.\nThey can upload files to the knowledge base but can’t manage users or access agent settings.",
   "content_en_sha1_hash": "e27411f3623a5d8953b04314ff55c986854b2ed2",
   "created_at": "2025-11-19T19:14:48.494Z",
-  "updated_at": "2026-04-08T00:56:29.040Z",
+  "updated_at": "2026-04-10T15:22:27.117Z",
   "comment": {
     "text": "This key provides a description of the role \"Content Creator\" in an AI Room. It explains their ability to chat, work with files, upload to the knowledge base, but not manage users or agent settings. Translators should ensure this accurately reflects the content creator's permissions.",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Result storage' is translated as 'tulostallennustila', which in Finnish context usually refers to 'print storage' or 'output storage'. In the context of ONLYOFFICE/AI, 'Result storage' is a specific technical component/location name and should likely be treated as a proper noun or translated more accurately to reflect 'storage of results'.",
-          "suggestion": "Sisällöntuottajat voivat käyttää chattia ja työskennellä Result-tallennustilassa olevien tiedostojen kanssa. He voivat ladata tiedostoja tietopankkiin, mutta he eivät voi hallita käyttäjiä tai käyttää agentin asetuksia."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -87,13 +81,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'չեն կարողանում օգտվողներով կառավարել' is grammatically incorrect and semantically broken in Armenian. It translates roughly to 'cannot manage with users' instead of 'cannot manage users'. Additionally, 'մանգաղ' is a typo/nonsense word in this context; it seems to be a failed attempt to translate 'manage' or 'access', but it does not exist in Armenian. The translation of 'access agent settings' is also garbled.",
-          "suggestion": "Բովանդակության ստեղծողները կարող են օգտագործել չաթը և աշխատել Result պահեստում գտնվող ֆայլերի հետ։ Նրանք կարող են ֆայլեր բեռնել գիտելիքների բազա, բայց չեն կարող կառավարել օգտվողներին կամ մուտք գործել գործակալի կարգավորումներ։"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -189,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'chat' is incorrectly translated as 'ћет' (cet), which is a fragment/typo and does not mean 'chat' in Serbian. It should be 'чат'.",
-          "suggestion": "Креатори садржаја могу користити чат и радити са датотекама у складишту резултата.\nМогу да учитавају фајлове у базу знања, али не могу да управљају корисницима или приступе подешавањима агента."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,7 +3,7 @@
   "content": "{{tenantQuotaLimit}} for {{productName}}",
   "content_en_sha1_hash": "09355ae23ccbff3fb98fc3c1e3efa0079105eed8",
   "created_at": "2025-05-19T21:30:52.865Z",
-  "updated_at": "2026-04-09T00:42:10.946Z",
+  "updated_at": "2026-04-10T15:22:27.336Z",
   "comment": {
     "text": "This translation key displays a warning message indicating the quota limit for a specific product. It is used in a dialog that informs users about approaching or exceeded usage limits. The quota limit value is displayed as \"{tenantQuotaLimit} for {productName}\".",
     "is_auto": true,
@@ -111,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'priekš šī' (for this) is grammatically awkward and changes the meaning from 'for [productName]' to 'for this: [productName]', which is unnatural in this context.",
-          "suggestion": "{{tenantQuotaLimit}} {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

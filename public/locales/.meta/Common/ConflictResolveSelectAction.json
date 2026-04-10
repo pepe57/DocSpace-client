@@ -3,7 +3,7 @@
   "content": "Please select the action:",
   "content_en_sha1_hash": "690f45f13bb9e035ca831a55006b8db7f845025e",
   "created_at": "2025-05-19T21:30:43.643Z",
-  "updated_at": "2026-04-08T14:49:47.572Z",
+  "updated_at": "2026-04-10T15:22:27.230Z",
   "comment": {
     "text": "This translation key is used to display a message prompting the user to select an action when resolving conflicts in a file. It appears in buttons and dialogs related to conflict resolution, guiding users through the process of choosing an appropriate course of action.",
     "is_auto": true,
@@ -159,13 +159,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Romanian translation is missing the indefinite article 'o', making the sentence grammatically incomplete and unnatural in this context.",
-          "suggestion": "Selectați o acțiune:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -189,13 +183,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'akcijo' in Slovenian refers to a marketing promotion, a stock/share, or a physical movement. In the context of software conflict resolution, 'action' should be translated as 'dejanje'.",
-          "suggestion": "Prosim, izberite dejanje:"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

@@ -3,7 +3,7 @@
   "content": "Set to default",
   "content_en_sha1_hash": "e0512dbd102921703bbdd2a1da2632a0ca371f46",
   "created_at": "2025-05-19T21:30:48.606Z",
-  "updated_at": "2026-04-07T23:24:29.601Z",
+  "updated_at": "2026-04-10T15:22:27.106Z",
   "comment": {
     "text": "This translation key \"SetToDefault\" is used to display a label that indicates setting the quota to its default value. It is typically displayed in UI elements such as menus or buttons, prompting users to reset their quota to the default configuration. The exact wording and appearance may vary depending on the context in which it appears, but its purpose remains consistent.",
     "is_auto": true,
@@ -141,13 +141,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation 'Ustawiono wartość domyślną' is in the past tense ('Default value has been set'), whereas the English 'Set to default' is an imperative command/action for a button or menu item. This changes the meaning from an action to a status report.",
-          "suggestion": "Ustaw wartość domyślną"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {

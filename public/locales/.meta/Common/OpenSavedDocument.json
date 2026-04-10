@@ -3,7 +3,7 @@
   "content": "Open saved document in new tab",
   "content_en_sha1_hash": "7394664878c77b8982f77653fdf6ac8d29843f01",
   "created_at": "2025-05-19T21:30:57.133Z",
-  "updated_at": "2026-04-08T03:32:32.836Z",
+  "updated_at": "2026-04-10T15:22:27.138Z",
   "comment": {
     "text": "\"Opens a saved document in a new tab.\"",
     "is_auto": true,
@@ -135,13 +135,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation changes 'new tab' (nova aba/guia) to 'new folder' (pasta nova), which completely alters the functional meaning of the action.",
-          "suggestion": "Abrir documento salvo em uma nova aba"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -165,13 +159,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation is in Czech, not Slovak.",
-          "suggestion": "Otvoriť uložený dokument v novej karte"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

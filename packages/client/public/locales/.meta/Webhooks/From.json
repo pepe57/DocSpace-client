@@ -3,7 +3,7 @@
   "content": "From",
   "content_en_sha1_hash": "3f66052a107eaf9bae7cad0f61fb462f47ec2c47",
   "created_at": "2025-05-19T21:30:49.764Z",
-  "updated_at": "2026-04-08T19:54:57.518Z",
+  "updated_at": "2026-04-10T15:22:27.293Z",
   "comment": {
     "text": "This translation key is used for displaying a time range on the \"Delivery Date\" filter component. It displays the departure and arrival times of a delivery in 12-hour format.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Etibarən' means 'On behalf of' or 'By', which is used for signatures. In the context of a time range (From - To), the correct preposition for 'From' is 'Dən' or 'Başlanğıc'.",
-          "suggestion": "Dən"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English word 'From' in the context of a time range (departure time) means 'Od'. The Czech translation 'Odesilatel' means 'Sender', which refers to a person or entity, not a time point.",
-          "suggestion": "Od"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -111,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '시작' means 'Start' or 'Beginning', which is used for actions or events. In the context of a time range (From - To), the correct prepositional meaning for 'From' is '부터'.",
-          "suggestion": "부터"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {

@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.029Z",
-  "updated_at": "2026-04-08T06:21:17.406Z",
+  "updated_at": "2026-04-10T15:22:27.169Z",
   "comment": {
     "text": "The \"Label\" translation key is used to display a descriptive title for input fields, such as group names or room tags. It appears in a dialog box, specifically within the CreateEditGroupDialog and CreateEditRoomDialog components, where it provides context for users to enter a name. Translators should replace the English content with a translated version of \"Name\" while maintaining this descriptive purpose.",
     "is_auto": true,
@@ -255,13 +255,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English source is 'Name', but the Romanian translation 'Etichetă' means 'Label'. While the metadata mentions the key is 'Label', the task is to verify the translation of the provided English text 'Name'.",
-          "suggestion": "Nume"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -291,25 +285,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian word 'Ознака' means 'Mark', 'Label', or 'Sign', whereas the English source 'Name' refers to the identity of the object (e.g., Group Name). In the context of input fields for names, 'Име' is the correct translation.",
-          "suggestion": "Име"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Oznaka' means 'Label', 'Mark', or 'Tag', whereas the English source 'Name' refers to the identity of the object (Group or Room). In the context of a 'Name' input field, 'Ime' or 'Naziv' is the correct translation.",
-          "suggestion": "Naziv"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

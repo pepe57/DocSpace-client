@@ -3,7 +3,7 @@
   "content": "This model uses advanced reasoning, which may increase costs",
   "content_en_sha1_hash": "501d146f9c9f86da83fc294b01d1fa3cb6048e7b",
   "created_at": "2026-03-26T08:26:34.738Z",
-  "updated_at": "2026-04-08T09:56:52.425Z",
+  "updated_at": "2026-04-10T15:22:27.192Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -170,13 +170,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'закључцивање' is a literal, non-standard translation of 'reasoning'. In a technical context, 'расуђивање' or 'логичко закључивање' is more appropriate.",
-          "suggestion": "Овај модел користи напредно расуђивање, што може повећати трошкове"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -194,13 +188,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'advanced reasoning' is translated as 'просунуте обґрунтування', which in a technical/AI context means 'advanced justification'. The correct term for AI reasoning is 'логічне мислення' or 'розсудливість'.",
-          "suggestion": "Ця модель використовує розширене логічне мислення, що може збільшити витрати"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

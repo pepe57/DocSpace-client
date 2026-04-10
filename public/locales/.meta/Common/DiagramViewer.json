@@ -3,7 +3,7 @@
   "content": "Diagram Viewer",
   "content_en_sha1_hash": "efc325eb22799039f69cef2d57bc575842e16a98",
   "created_at": "2025-08-07T11:18:30.575Z",
-  "updated_at": "2026-04-08T12:02:30.338Z",
+  "updated_at": "2026-04-10T15:22:27.213Z",
   "comment": {
     "text": "This key displays the text \"Diagram Viewer\" within a settings section, likely related to logo configuration. It's used to indicate the viewer used for displaying diagrams, alongside logo dimensions. Translators should ensure the term accurately reflects the diagram viewing functionality.",
     "is_auto": true,
@@ -171,13 +171,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Redaktori i Visio-s' means 'Visio Editor', which is a specific third-party software and a different functionality (editing vs viewing) than the English 'Diagram Viewer'.",
-          "suggestion": "Shfaqësi i Diagramit"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

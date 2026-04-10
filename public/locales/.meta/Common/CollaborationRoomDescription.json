@@ -3,7 +3,7 @@
   "content": "Collaborate on one or multiple documents with your team",
   "content_en_sha1_hash": "4f8794388fd638525016491260b66a81894a2574",
   "created_at": "2025-05-19T21:30:43.494Z",
-  "updated_at": "2026-04-08T15:21:00.233Z",
+  "updated_at": "2026-04-10T15:22:27.234Z",
   "comment": {
     "text": "This translation key is used to display a description for collaboration rooms in a shared component, typically appearing on a button or dialog related to team document collaboration. It guides users on how to collaborate on one or multiple documents with their team.",
     "is_auto": true,
@@ -69,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation changes the meaning from 'collaborating ON documents' to 'collaborating IN THE CREATION of documents'. The English text implies working together on existing or shared documents, whereas the Finnish version implies the act of creating them.",
-          "suggestion": "Tee yhteistyötä tiimisi kanssa yhden tai useamman dokumentin parissa"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {

@@ -3,7 +3,7 @@
   "content": "Click the button for the detailed instructions on how to create your own plugins.",
   "content_en_sha1_hash": "a1cac081a5c41e00e53cb58353aba707600844f1",
   "created_at": "2025-05-19T21:30:49.923Z",
-  "updated_at": "2026-04-08T18:30:45.150Z",
+  "updated_at": "2026-04-10T15:22:27.303Z",
   "comment": {
     "text": "This translation key is used for a button label that directs users to detailed instructions on creating their own plugins. It appears as a \"Read Instructions\" button in a UI element, prompting users to access further guidance on plugin development.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'plugins' was translated as 'පේනු' (pens), which is a literal translation for writing instruments, instead of the technical term for software plugins.",
-          "suggestion": "ඔබගේම ප්ලගින් (plugins) සාදා ගන්නේ කෙසේදැයි පිළිබඳ සවිස්තරාත්මක උපදෙස් සඳහා බොත්තම ඔබන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

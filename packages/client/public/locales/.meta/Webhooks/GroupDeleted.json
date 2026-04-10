@@ -3,7 +3,7 @@
   "content": "Group deleted",
   "content_en_sha1_hash": "0420357dbb1540365a7676ba86d9e6fbf8e461a2",
   "created_at": "2025-05-19T21:30:49.770Z",
-  "updated_at": "2026-04-08T19:53:07.325Z",
+  "updated_at": "2026-04-10T15:22:27.292Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a group has been deleted. It appears on a web interface in a developer tool or category settings page, likely on a button or dialog element triggering a group deletion action.",
     "is_auto": true,
@@ -153,13 +153,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'පක්ෂය' (Pakshaya) means 'party' or 'faction' (often used in political contexts), whereas 'Group' in a software/technical context should be translated as 'සමූහය' (Samuhaya).",
-          "suggestion": "සමූහය මකා දමා ඇත"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

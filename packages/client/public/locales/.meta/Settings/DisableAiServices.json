@@ -3,7 +3,7 @@
   "content": "Disable {{aiServices}}",
   "content_en_sha1_hash": "ff9221e8d16c8a8a5865acce6a73670a6019e447",
   "created_at": "2026-03-26T08:26:46.833Z",
-  "updated_at": "2026-04-09T03:24:02.529Z",
+  "updated_at": "2026-04-10T15:22:27.373Z",
   "comment": {
     "text": "This key is used for a dialog component that allows users to disable AI services. The text, \"Disable {{aiServices}}\", appears within a button or other element in the dialog, likely prompting the user to disable specified AI services. Translators should ensure the text accurately conveys the action of disabling AI features.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech word 'Zrušit' means 'Cancel' or 'Abort', whereas the English 'Disable' in the context of services means 'Deactivate' or 'Turn off'.",
-          "suggestion": "Zakázat {{aiServices}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -117,13 +111,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian word 'Izdrošināt' means 'to dare' or 'to venture', which is the opposite of the intended meaning 'to disable'.",
-          "suggestion": "Atslēgt {{aiServices}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -189,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian word 'Издржити' means 'to endure' or 'to withstand', which is the opposite of the intended meaning 'to disable'.",
-          "suggestion": "Искључи {{aiServices}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

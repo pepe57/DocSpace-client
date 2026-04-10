@@ -3,7 +3,7 @@
   "content": "Date",
   "content_en_sha1_hash": "eb9a4bc1c0c153e4e4b042a79113b815b7e3021d",
   "created_at": "2025-05-19T21:30:44.395Z",
-  "updated_at": "2026-04-10T08:21:04.366Z",
+  "updated_at": "2026-04-10T15:22:27.216Z",
   "comment": {
     "text": "This translation key is used for displaying the label \"Date\" in various table headers across different UI components. It is typically rendered as a column title and may be editable or resizable based on its configuration settings.",
     "is_auto": true,
@@ -93,13 +93,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation 'Ամիս-ամսաթիվ' means 'Month-date', which is more specific and different from the general English term 'Date'.",
-          "suggestion": "Ամսաթիվ"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

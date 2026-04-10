@@ -3,7 +3,7 @@
   "content": "Paid",
   "content_en_sha1_hash": "dc9d4584a55464cd571719ee0066acb16d411f86",
   "created_at": "2025-05-19T21:30:47.223Z",
-  "updated_at": "2026-04-08T03:17:58.230Z",
+  "updated_at": "2026-04-10T15:22:27.137Z",
   "comment": {
     "text": "This translation key is used to display a paid status label. It appears on a badge component in the contacts list, indicating that an account has made payments and should be considered paid. The text changes depending on whether a user is paying or not, using the \"Paid\" label for paid accounts.",
     "is_auto": true,
@@ -351,13 +351,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ගෙවන' means 'paying' (an ongoing action/verb), whereas the English 'Paid' is a status (adjective/past participle) indicating the payment has been completed. For a status badge, 'ගෙවා ඇත' or 'ගෙවා අවසන්' is more accurate.",
-          "suggestion": "ගෙවා ඇත"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

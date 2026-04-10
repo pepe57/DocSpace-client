@@ -3,7 +3,7 @@
   "content": "Name",
   "content_en_sha1_hash": "709a23220f2c3d64d1e1d6d18c4d5280f8d82fca",
   "created_at": "2025-05-19T21:30:46.705Z",
-  "updated_at": "2026-04-08T04:20:53.838Z",
+  "updated_at": "2026-04-10T15:22:27.148Z",
   "comment": {
     "text": "This translation key displays the user's full name, typically their first and last names. It is used in a social authentication welcome dialog to provide user information. Translators should note that the name may be truncated or displayed as an alias if not available.",
     "is_auto": true,
@@ -117,13 +117,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Název' means 'Title' or 'Name of an object/document'. In the context of a user's full name (first and last name), the correct term is 'Jméno'.",
-          "suggestion": "Jméno"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -171,13 +165,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The English text 'Name' refers to a person's name (first and last name) according to the context, but the Japanese translation 'ルーム名' means 'Room Name'.",
-          "suggestion": "名前"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -195,13 +183,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian word 'Nosaukums' typically refers to a 'title', 'name of an object/entity', or 'designation'. In the context of a person's full name (first and last name), the correct term is 'Vārds' or 'Uzvārds', or more commonly in UI for a person's full name, 'Vārds un uzvārds' or simply 'Vārds'. 'Nosaukums' is semantically incorrect for a human user's name.",
-          "suggestion": "Vārds"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -225,13 +207,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Imagem' means 'Image', which is completely different from the English 'Name'.",
-          "suggestion": "Nome"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -255,13 +231,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Názov' means 'Title' or 'Name of an object/entity'. In the context of a person's full name (first and last name), the correct term is 'Meno'.",
-          "suggestion": "Meno"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

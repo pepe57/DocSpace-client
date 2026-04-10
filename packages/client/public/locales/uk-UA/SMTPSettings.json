@@ -9,7 +9,7 @@
   "HostLogin": "Логін хосту",
   "HostPassword": "Пароль хосту",
   "Port": "Порт",
-  "SenderDisplayName": "Коротке ім'я відправника",
+  "SenderDisplayName": "Ім'я відправника, яке відображається",
   "SenderEmailAddress": "Адреса електронної пошти відправника",
   "SendTestMail": "Надіслати тестове поштове повідомлення"
 }

@@ -3,7 +3,7 @@
   "content": "Third-party services",
   "content_en_sha1_hash": "871d2b6d2f4209a2045939948478b5ad9e16f6a2",
   "created_at": "2025-05-19T21:30:50.013Z",
-  "updated_at": "2026-04-08T20:54:07.536Z",
+  "updated_at": "2026-04-10T15:22:27.308Z",
   "comment": {
     "text": "This translation key is used to display \"Third-party services\" as a title in various UI components, such as a link and a category name, often found in settings or configuration pages. It appears on a page that lists integration options for third-party services.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation is grammatically incorrect and uses an awkward phrasing ('الخدمات الجهة الخارجية') that does not correctly convey 'Third-party services'. It lacks the proper possessive/adjectival structure.",
-          "suggestion": "خدمات الطرف الثالث"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -201,13 +195,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'служби' (services/agencies/departments) in Ukrainian often refers to government agencies or emergency services. In the context of software integrations and IT, 'сервіси' is the standard and accurate term for 'services'.",
-          "suggestion": "Сторонні сервіси"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

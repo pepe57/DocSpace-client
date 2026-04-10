@@ -3,7 +3,7 @@
   "content": "<1>Already editing:</1> {{editingCount}}",
   "content_en_sha1_hash": "5d6d62d1f126698d0a3ed8b4add5a87a18e1df35",
   "created_at": "2025-09-19T15:39:07.627Z",
-  "updated_at": "2026-04-08T11:14:25.641Z",
+  "updated_at": "2026-04-10T15:22:27.205Z",
   "comment": {
     "text": "This translation key displays a message indicating how many users are currently being edited. It appears within a User Statistics Dialog, specifically informing the user about the number of users in the editing process. Translators should ensure the wording accurately conveys the ongoing editing status.",
     "is_auto": true,
@@ -165,13 +165,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Že urejanje' is grammatically incorrect and conveys a broken meaning. In Slovenian, 'Že' means 'already' (as in 'already happened'), but the phrase 'Že urejanje' translates literally to 'Already editing' in a way that sounds like a fragment or a mistake. To indicate 'Currently being edited' or 'Already in editing process', a more accurate construction is needed.",
-          "suggestion": "<1>Trenutno urejajo:</1> {{editingCount}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -183,13 +177,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Тренутно уређују' (They are currently editing) implies that the users mentioned in the count are the ones performing the action, whereas the English 'Already editing' in this context (User Statistics) refers to the status of the users being edited/modified.",
-          "suggestion": "<1>Већ се уређује:</1> {{editingCount}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

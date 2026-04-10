@@ -3,7 +3,7 @@
   "content": "File downloading in progress",
   "content_en_sha1_hash": "4d14449f50296d839bd7726f4cae8cbeda71c928",
   "created_at": "2025-05-19T21:30:44.681Z",
-  "updated_at": "2026-04-08T11:38:06.021Z",
+  "updated_at": "2026-04-10T15:22:27.208Z",
   "comment": {
     "text": "This translation key is used for the title of a download operation indicator. It appears on-screen when downloading files, providing users with feedback about the progress.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Bulgarian translation 'Файлът се изтегля' means 'The file is downloading', which misses the nuance of 'in progress' (the ongoing state/process).",
-          "suggestion": "Изтегляне на файла в ход"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {

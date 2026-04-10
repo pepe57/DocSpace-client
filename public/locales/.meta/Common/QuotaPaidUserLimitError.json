@@ -3,7 +3,7 @@
   "content": "The paid user limit has been reached.",
   "content_en_sha1_hash": "e1d3147e981910f2b0f7ffe1cc79d9fbc9a364c2",
   "created_at": "2025-05-19T21:30:47.705Z",
-  "updated_at": "2026-04-08T01:54:12.305Z",
+  "updated_at": "2026-04-10T15:22:27.127Z",
   "comment": {
     "text": "This translation key is used to display an error message when a user's paid quota has been reached. It appears in various UI components, such as error messages and payment-related interfaces, indicating that the user has exceeded their paid limit. The text translates to \"The paid user limit has been reached.\"",
     "is_auto": true,
@@ -63,13 +63,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'paid' (bezahlt) is missing from the translation, which changes the specific meaning of the error from a 'paid user limit' to a general 'user limit'.",
-          "suggestion": "Das Limit für bezahlte Benutzer wurde erreicht."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -171,13 +165,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala word 'පරිශ්‍රීලකයින්ගේ' (parishrilakayinge) is a misspelling/incorrect derivation of 'පරිශීලකයින්ගේ' (parishilakayinge - users). More importantly, the sentence structure is awkward and uses a non-standard term for 'paid' in this context.",
-          "suggestion": "ගෙවන ලද පරිශීලක සීමාවට ළඟා වී ඇත."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
