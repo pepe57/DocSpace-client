@@ -175,17 +175,43 @@
   var cspErrorText = "The current domain is not set in the Content Security Policy (CSP) settings.";
   var connectErrorText = "Message bus is not connected with frame";
 
+  // src/errors/index.ts
+  var SDKError = class extends Error {
+    /**
+     * @param code - The error category. Use a {@link SDKErrorCode} value.
+     * @param message - Human-readable description of what went wrong.
+     * @param recoverable - Whether the operation may be retried. Default: `false`.
+     */
+    constructor(code, message, recoverable = false) {
+      super(message);
+      /**
+       * The error category. One of the {@link SDKErrorCode} string values.
+       * Use this for programmatic branching rather than parsing `message`.
+       */
+      __publicField(this, "code");
+      /**
+       * Whether the caller can retry the failed operation without reinitializing the frame.
+       * Default: `false`.
+       */
+      __publicField(this, "recoverable");
+      Object.setPrototypeOf(this, new.target.prototype);
+      this.name = "SDKError";
+      this.code = code;
+      this.recoverable = recoverable;
+    }
+  };
+
   // src/utils/index.ts
   var customUrlSearchParams = (data) => {
     if (!data) return "";
-    Object.keys(data).forEach(
-      (key) => (data[key] === void 0 || data[key] === null) && delete data[key]
+    const cleaned = Object.fromEntries(
+      Object.entries(data).filter(([, v]) => v !== void 0 && v !== null)
     );
-    return new URLSearchParams(data).toString();
+    return new URLSearchParams(cleaned).toString();
   };
   var validateCSP = async (targetSrc) => {
     const { origin, host } = window.location;
-    if (origin.includes(targetSrc)) return;
+    if (origin === new URL(targetSrc).origin) return;
     const response = await fetch(`${targetSrc}${CSPApiUrl}`);
     let json;
     try {
@@ -256,8 +282,9 @@
     };
     switch (config2.mode) {
       case "manager" /* Manager */: {
-        if (config2.id) config2.filter.folder = config2.id;
-        const params = config2.requestToken ? { key: config2.requestToken, ...config2.filter } : config2.filter;
+        const filter = { ...config2.filter };
+        if (config2.id) filter.folder = config2.id;
+        const params = config2.requestToken ? { key: config2.requestToken, ...filter } : filter;
         if (!(params == null ? void 0 : params.withSubfolders)) {
           params == null ? true : delete params.withSubfolders;
         }
@@ -370,19 +397,20 @@
   };
 
   // src/instance/index.ts
-  var _isConnected, _callbacks, _tasks, _classNames, _expectedOrigin, _iframe, _uploadIdCounter, _pendingUploads, _createLoader, _createIframe, _SDKInstance_instances, setupCSPValidation_fn, _sendMessage, _onMessage, parseMessageData_fn, handleMethodResponse_fn, drainNextTask_fn, createMethodTimer_fn, rejectAllPending_fn, processEvent_fn, _allowedCommands, executeCommand_fn, handleError_fn, executeMethod_fn, prepareFrameConfig_fn, createContainer_fn, setupContainer_fn, setupIframe_fn, setupFrameEventHandlers_fn, assembleFrame_fn, registerFrame_fn, _getMethodPromise;
+  var _isConnected, _callIdCounter, _callbacks, _tasks, _classNames, _expectedOrigin, _iframe, _uploadIdCounter, _pendingUploads, _createLoader, _createIframe, _SDKInstance_instances, setupCSPValidation_fn, _sendMessage, _onMessage, parseMessageData_fn, handleMethodResponse_fn, drainNextTask_fn, createMethodTimer_fn, rejectAllPending_fn, processEvent_fn, _allowedCommands, executeCommand_fn, handleError_fn, executeMethod_fn, prepareFrameConfig_fn, createContainer_fn, setupContainer_fn, setupIframe_fn, setupFrameEventHandlers_fn, assembleFrame_fn, registerFrame_fn, _getMethodPromise;
   var _SDKInstance = class _SDKInstance {
     constructor(config2) {
       __privateAdd(this, _SDKInstance_instances);
       __privateAdd(this, _isConnected, false);
-      __privateAdd(this, _callbacks, []);
+      __privateAdd(this, _callIdCounter, 0);
+      __privateAdd(this, _callbacks, /* @__PURE__ */ new Map());
       __privateAdd(this, _tasks, []);
       __privateAdd(this, _classNames, "");
       __privateAdd(this, _expectedOrigin, "");
       __privateAdd(this, _iframe, null);
       __privateAdd(this, _uploadIdCounter, 0);
       __privateAdd(this, _pendingUploads, /* @__PURE__ */ new Map());
-      /** The iframe configuration options. */
+      /** The iframe configuration options. See {@link TFrameConfig}. */
       __publicField(this, "config");
       /**
        * Creates a loading indicator for the DocSpace frame.
@@ -409,7 +437,8 @@
           container = templateCache.get(templateKey).cloneNode(true);
           container.id = `${frameId}-loader`;
         } else {
-          container = _SDKInstance._loaderCache.container.cloneNode();
+          const baseContainer = _SDKInstance._loaderCache.container ?? (_SDKInstance._loaderCache.container = document.createElement("div"));
+          container = baseContainer.cloneNode();
           Object.assign(container.style, {
             width,
             height,
@@ -446,7 +475,7 @@
             styleCache: /* @__PURE__ */ new Map()
           };
         }
-        const { mode, id, frameId, type, width, height, src, events, checkCSP } = config2;
+        const { mode, id, frameId, type, width, height, src, checkCSP } = config2;
         const isMobile = type === "mobile";
         const iframe = _SDKInstance._iframeCache.template.cloneNode();
         const cacheKey = `${mode}_${id || ""}_${frameId}`;
@@ -484,7 +513,7 @@
           }
         }
         if (checkCSP) {
-          __privateMethod(this, _SDKInstance_instances, setupCSPValidation_fn).call(this, iframe, src, events);
+          __privateMethod(this, _SDKInstance_instances, setupCSPValidation_fn).call(this, iframe, src);
         }
         return iframe;
       });
@@ -501,6 +530,7 @@
           const messageEnvelope = {
             frameId,
             type: "",
+            callId: message.callId,
             data: message
           };
           const isEditorExec = message.methodName === "executeInEditor" /* ExecuteInEditor */;
@@ -556,7 +586,7 @@
               console.warn("Unrecognized message type:", data.type);
           }
         } catch (error) {
-          __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, error);
+          __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, error, "PARSE_ERROR" /* ParseError */);
         }
       });
       /**
@@ -585,6 +615,7 @@
      * Called by the DocSpace iframe (via `onCallCommand`) when the app has finished loading.
      * Fades out the loader spinner, fades in the iframe, and fires {@link TFrameEvents.onContentReady}.
      *
+     * @internal
      * @see {@link TFrameEvents.onContentReady}
      */
     setIsLoaded() {
@@ -676,15 +707,16 @@
         __privateSet(this, _expectedOrigin, "");
       }
       __privateSet(this, _isConnected, false);
-      for (const entry of __privateGet(this, _callbacks)) {
+      const reloadError = new SDKError("DISCONNECTED" /* Disconnected */, "Frame reloaded");
+      for (const entry of __privateGet(this, _callbacks).values()) {
         if (entry.timer) clearTimeout(entry.timer);
-        entry.reject(new Error("Frame reloaded"));
+        entry.reject(reloadError);
       }
-      __privateSet(this, _callbacks, []);
+      __privateGet(this, _callbacks).clear();
       __privateSet(this, _tasks, []);
       for (const [, pending] of __privateGet(this, _pendingUploads)) {
         clearTimeout(pending.timer);
-        pending.reject(new Error("Frame reloaded"));
+        pending.reject(reloadError);
       }
       __privateGet(this, _pendingUploads).clear();
       const setupResult = __privateMethod(this, _SDKInstance_instances, createContainer_fn).call(this, this.config.frameId);
@@ -723,7 +755,7 @@
       const replacementDiv = document.createElement("div");
       replacementDiv.id = frameId;
       replacementDiv.className = __privateGet(this, _classNames);
-      replacementDiv.innerHTML = this.config.destroyText || "";
+      replacementDiv.textContent = this.config.destroyText || "";
       if (containerElement) {
         if (containerElement.parentNode) {
           containerElement.parentNode.replaceChild(
@@ -747,15 +779,16 @@
       }
       _SDKInstance._loaderCache.style.delete(loaderClassName);
       __privateSet(this, _isConnected, false);
-      for (const entry of __privateGet(this, _callbacks)) {
+      const destroyError = new SDKError("DISCONNECTED" /* Disconnected */, "Frame destroyed");
+      for (const entry of __privateGet(this, _callbacks).values()) {
         if (entry.timer) clearTimeout(entry.timer);
-        entry.reject(new Error("Frame destroyed"));
+        entry.reject(destroyError);
       }
-      __privateSet(this, _callbacks, []);
+      __privateGet(this, _callbacks).clear();
       __privateSet(this, _tasks, []);
       for (const [, pending] of __privateGet(this, _pendingUploads)) {
         clearTimeout(pending.timer);
-        pending.reject(new Error("Frame destroyed"));
+        pending.reject(destroyError);
       }
       __privateGet(this, _pendingUploads).clear();
       const sdkFrames = (_b = (_a = window.DocSpace) == null ? void 0 : _a.SDK) == null ? void 0 : _b.frames;
@@ -821,7 +854,7 @@
     /**
      * Returns metadata about the folder currently open in the frame.
      *
-     * @returns A promise that resolves with folder metadata.
+     * @returns A promise that resolves with {@link TFolderInfo}.
      *
      * @example
      * ```typescript
@@ -844,7 +877,7 @@
     /**
      * Returns the items currently selected in the frame.
      *
-     * @returns A promise that resolves with the selection data.
+     * @returns A promise that resolves with an array of {@link TFileInfo}.
      *
      * @example
      * ```typescript
@@ -867,7 +900,7 @@
     /**
      * Returns the files in the folder currently open in the frame.
      *
-     * @returns A promise that resolves with file list data.
+     * @returns A promise that resolves with {@link TFilesResponse}.
      *
      * @example
      * ```typescript
@@ -879,8 +912,8 @@
      * Open the first file in viewer mode via {@link SDKInstance.setConfig}.
      * ```typescript
      * const files = await instance.getFiles();
-     * if (files[0]) {
-     *   await instance.setConfig({ id: files[0].id, mode: SDKMode.Viewer }, true);
+     * if (files.files[0]) {
+     *   await instance.setConfig({ id: files.files[0].id, mode: SDKMode.Viewer }, true);
      * }
      * ```
      */
@@ -890,7 +923,7 @@
     /**
      * Returns the subfolders of the folder currently open in the frame.
      *
-     * @returns A promise that resolves with folder list data.
+     * @returns A promise that resolves with {@link TFilesResponse}.
      *
      * @example
      * ```typescript
@@ -902,8 +935,8 @@
      * Navigate into the first subfolder via {@link SDKInstance.setConfig}.
      * ```typescript
      * const folders = await instance.getFolders();
-     * if (folders[0]) {
-     *   await instance.setConfig({ id: folders[0].id }, true);
+     * if (folders.folders[0]) {
+     *   await instance.setConfig({ id: folders.folders[0].id }, true);
      * }
      * ```
      */
@@ -916,7 +949,7 @@
      * Use {@link SDKInstance.getFiles} or {@link SDKInstance.getFolders}
      * when you need only one content type.
      *
-     * @returns A promise that resolves with combined file and folder list data.
+     * @returns A promise that resolves with {@link TFilesResponse}.
      *
      * @example
      * ```typescript
@@ -926,11 +959,8 @@
      *
      * @example
      * ```typescript
-     * // Separate files from folders by type
      * const list = await instance.getList();
-     * const files = list.filter((item) => item.type === 'file');
-     * const folders = list.filter((item) => item.type === 'folder');
-     * console.log(`${files.length} files, ${folders.length} folders`);
+     * console.log('Files:', list.files.length, 'Folders:', list.folders.length);
      * ```
      */
     getList() {
@@ -940,7 +970,7 @@
      * Returns a list of rooms, filtered by `filter`.
      *
      * @param filter - Filter and sort criteria. See {@link TFrameFilter}.
-     * @returns A promise that resolves with room list data.
+     * @returns A promise that resolves with {@link TRoomsResponse}.
      *
      * @example
      * ```typescript
@@ -956,7 +986,7 @@
      * Find rooms and remove an outdated tag from each using {@link SDKInstance.removeTagsFromRoom}.
      * ```typescript
      * const rooms = await instance.getRooms({ search: 'sprint-22' });
-     * for (const room of rooms) {
+     * for (const room of rooms.folders) {
      *   await instance.removeTagsFromRoom(room.id, ['in-progress']);
      * }
      * ```
@@ -967,7 +997,7 @@
     /**
      * Returns information about the currently authenticated user.
      *
-     * @returns A promise that resolves with user profile data.
+     * @returns A promise that resolves with {@link TUserInfo}.
      *
      * @example
      * ```typescript
@@ -990,7 +1020,7 @@
     /**
      * Returns the server's password hash settings needed by {@link SDKInstance.createHash}.
      *
-     * @returns A promise that resolves with hash algorithm settings.
+     * @returns A promise that resolves with {@link THashSettings}.
      *
      * @example
      * ```typescript
@@ -1041,7 +1071,7 @@
      * @param title - The file title (without extension).
      * @param templateId - The ID of the template to use for the new file.
      * @param formId - The ID of the associated form, or an empty string if none.
-     * @returns A promise that resolves with the created file data.
+     * @returns A promise that resolves with {@link TFileInfo}.
      *
      * @example
      * ```typescript
@@ -1069,7 +1099,7 @@
      *
      * @param parentFolderId - The ID of the parent folder.
      * @param title - The folder title.
-     * @returns A promise that resolves with the created folder data.
+     * @returns A promise that resolves with {@link TFolderInfo}.
      *
      * @example
      * ```typescript
@@ -1094,18 +1124,13 @@
      * Creates a new room with the given type and optional settings.
      *
      * @param title - The room display name.
-     * @param roomType - The room type (e.g. `'collaboration'`, `'public'`).
-     * @param quota - Optional storage quota in bytes.
-     * @param tags - Optional tag names to assign.
-     * @param color - Optional accent color (hex).
-     * @param cover - Optional cover image URL.
-     * @param indexing - Optional VDR indexing flag.
-     * @param denyDownload - Optional VDR download restriction flag.
-     * @returns A promise that resolves with the created room data.
+     * @param roomType - The room type (e.g. `1` for custom, `2` for filling forms).
+     * @param options - Optional room settings. See {@link TCreateRoomOptions}.
+     * @returns A promise that resolves with {@link TRoomInfo}.
      *
      * @example
      * ```typescript
-     * const room = await instance.createRoom('Design Team', 'collaboration', undefined, ['design']);
+     * const room = await instance.createRoom('Design Team', 1, { tags: ['design'] });
      * console.log(room);
      * ```
      *
@@ -1113,21 +1138,16 @@
      * Create a room, then create a new tag and apply it using {@link SDKInstance.createTag}
      * and {@link SDKInstance.addTagsToRoom}.
      * ```typescript
-     * const room = await instance.createRoom('Marketing', 'collaboration');
+     * const room = await instance.createRoom('Marketing', 1);
      * await instance.createTag('campaigns');
      * await instance.addTagsToRoom(room.id, ['campaigns']);
      * ```
      */
-    createRoom(title, roomType, quota, tags, color, cover, indexing, denyDownload) {
+    createRoom(title, roomType, options) {
       return __privateGet(this, _getMethodPromise).call(this, "createRoom" /* CreateRoom */, {
         title,
         roomType,
-        ...quota !== void 0 && { quota },
-        ...denyDownload !== void 0 && { denyDownload },
-        ...tags !== void 0 && { tags },
-        ...color !== void 0 && { color },
-        ...cover !== void 0 && { cover },
-        ...indexing !== void 0 && { indexing }
+        ...options
       });
     }
     /**
@@ -1306,7 +1326,7 @@
      * Find rooms by name and clean up a tag from each using {@link SDKInstance.getRooms}.
      * ```typescript
      * const rooms = await instance.getRooms({ search: 'sprint-22' });
-     * for (const room of rooms) {
+     * for (const room of rooms.folders) {
      *   await instance.removeTagsFromRoom(room.id, ['in-progress']);
      * }
      * ```
@@ -1380,7 +1400,7 @@
      */
     navigateSection(section) {
       if (this.config.mode !== "forms" /* Forms */) {
-        throw new Error("navigateSection is only available in Forms mode");
+        throw new SDKError("MODE_MISMATCH" /* ModeMismatch */, "navigateSection is only available in Forms mode");
       }
       return __privateGet(this, _getMethodPromise).call(this, "navigateSection" /* NavigateSection */, { section });
     }
@@ -1422,7 +1442,7 @@
      */
     setCustomActions(config2) {
       if (this.config.mode !== "forms" /* Forms */) {
-        throw new Error("setCustomActions is only available in Forms mode");
+        throw new SDKError("MODE_MISMATCH" /* ModeMismatch */, "setCustomActions is only available in Forms mode");
       }
       return __privateGet(this, _getMethodPromise).call(this, "setCustomActions" /* SetCustomActions */, config2);
     }
@@ -1466,22 +1486,23 @@
     async upload(file) {
       var _a;
       if (this.config.mode !== "forms" /* Forms */) {
-        throw new Error("upload is only available in Forms mode");
+        throw new SDKError("MODE_MISMATCH" /* ModeMismatch */, "upload is only available in Forms mode");
       }
       if (!__privateGet(this, _isConnected)) {
-        __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, { message: connectErrorText });
-        throw new Error(connectErrorText);
+        const err = new SDKError("DISCONNECTED" /* Disconnected */, connectErrorText);
+        __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, err);
+        throw err;
       }
       const { frameId, src } = this.config;
       if (!((_a = __privateGet(this, _iframe)) == null ? void 0 : _a.contentWindow)) {
-        throw new Error("Frame not connected");
+        throw new SDKError("DISCONNECTED" /* Disconnected */, "Frame not connected");
       }
       const buffer = await file.arrayBuffer();
       const uploadId = ++__privateWrapper(this, _uploadIdCounter)._;
       const uploadPromise = new Promise((resolve, reject) => {
         const timer = setTimeout(() => {
           __privateGet(this, _pendingUploads).delete(uploadId);
-          reject(new Error(`Upload timed out: ${file.name}`));
+          reject(new SDKError("UPLOAD_FAILED" /* UploadFailed */, `Upload timed out: ${file.name}`));
         }, 12e4);
         __privateGet(this, _pendingUploads).set(uploadId, { fileName: file.name, resolve, reject, timer });
       });
@@ -1501,6 +1522,7 @@
     }
   };
   _isConnected = new WeakMap();
+  _callIdCounter = new WeakMap();
   _callbacks = new WeakMap();
   _tasks = new WeakMap();
   _classNames = new WeakMap();
@@ -1516,13 +1538,11 @@
    *
    * @param iframe - The iframe element to validate.
    * @param src - The source URL to validate.
-   * @param events - Optional event handlers triggered on validation errors.
    */
-  setupCSPValidation_fn = function(iframe, src, events) {
+  setupCSPValidation_fn = function(iframe, src) {
     requestAnimationFrame(() => {
       validateCSP(src).catch((e) => {
-        var _a;
-        (_a = events == null ? void 0 : events.onAppError) == null ? void 0 : _a.call(events, e.message);
+        __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, e, "CSP_VIOLATION" /* CSPViolation */);
         iframe.srcdoc = getCSPErrorBody(src);
         this.setIsLoaded();
       });
@@ -1565,8 +1585,18 @@
    * @param data - The message data containing the method response.
    */
   handleMethodResponse_fn = function(data) {
-    const entry = __privateGet(this, _callbacks).shift();
-    if (entry) {
+    let matchedId;
+    if (data.callId !== void 0 && __privateGet(this, _callbacks).has(data.callId)) {
+      matchedId = data.callId;
+    } else {
+      const first = __privateGet(this, _callbacks).keys().next();
+      if (!first.done) {
+        matchedId = first.value;
+      }
+    }
+    if (matchedId !== void 0) {
+      const entry = __privateGet(this, _callbacks).get(matchedId);
+      __privateGet(this, _callbacks).delete(matchedId);
       if (entry.timer) clearTimeout(entry.timer);
       try {
         entry.resolve(data.methodReturnData || {});
@@ -1581,11 +1611,11 @@
    * @internal
    */
   drainNextTask_fn = function() {
-    if (__privateGet(this, _tasks).length === 0 || __privateGet(this, _callbacks).length === 0) return;
+    if (__privateGet(this, _tasks).length === 0 || __privateGet(this, _callbacks).size === 0) return;
     const nextTask = __privateGet(this, _tasks).shift();
-    const nextEntry = __privateGet(this, _callbacks)[0];
-    if (nextEntry) {
-      nextEntry.timer = __privateMethod(this, _SDKInstance_instances, createMethodTimer_fn).call(this, nextEntry);
+    const nextEntry = nextTask.callId !== void 0 ? __privateGet(this, _callbacks).get(nextTask.callId) : void 0;
+    if (nextEntry && nextTask.callId !== void 0) {
+      nextEntry.timer = __privateMethod(this, _SDKInstance_instances, createMethodTimer_fn).call(this, nextTask.callId, nextEntry);
     }
     if (!__privateGet(this, _sendMessage).call(this, nextTask)) {
       __privateMethod(this, _SDKInstance_instances, rejectAllPending_fn).call(this, "Frame disconnected");
@@ -1595,12 +1625,12 @@
    * Creates a timeout timer for an in-flight method call.
    * @internal
    */
-  createMethodTimer_fn = function(entry) {
+  createMethodTimer_fn = function(callId, entry) {
     return setTimeout(() => {
-      const idx = __privateGet(this, _callbacks).indexOf(entry);
-      if (idx !== -1) __privateGet(this, _callbacks).splice(idx, 1);
-      entry.reject(new Error("Method call timed out"));
-      __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, { message: "Method call timed out" });
+      __privateGet(this, _callbacks).delete(callId);
+      const err = new SDKError("TIMEOUT" /* Timeout */, "Method call timed out");
+      entry.reject(err);
+      __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, err);
       __privateMethod(this, _SDKInstance_instances, drainNextTask_fn).call(this);
     }, this.config.methodTimeout || 3e4);
   };
@@ -1609,15 +1639,16 @@
    * @internal
    */
   rejectAllPending_fn = function(reason) {
-    const entries = [...__privateGet(this, _callbacks)];
-    __privateSet(this, _callbacks, []);
+    const entries = [...__privateGet(this, _callbacks).values()];
+    __privateGet(this, _callbacks).clear();
     __privateSet(this, _tasks, []);
+    const err = new SDKError("DISCONNECTED" /* Disconnected */, reason);
     for (const entry of entries) {
       if (entry.timer) clearTimeout(entry.timer);
-      entry.reject(new Error(reason));
+      entry.reject(err);
     }
     __privateSet(this, _isConnected, false);
-    __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, { message: reason });
+    __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, err);
   };
   /**
    * Processes event data received from the DocSpace iframe and dispatches it to the registered event handlers.
@@ -1649,7 +1680,7 @@
         if (eventName === "onUploadSuccess") {
           pending.resolve(eventData.data || {});
         } else {
-          pending.reject(new Error((payload == null ? void 0 : payload.message) || "Upload failed"));
+          pending.reject(new SDKError("UPLOAD_FAILED" /* UploadFailed */, (payload == null ? void 0 : payload.message) || "Upload failed"));
         }
       }
     }
@@ -1685,13 +1716,11 @@
    *
    * @param error - The error object containing error information.
    */
-  handleError_fn = function(error) {
+  handleError_fn = function(error, code) {
     var _a, _b;
-    console.error("SDK Error:", error);
-    (_b = (_a = this.config.events) == null ? void 0 : _a.onAppError) == null ? void 0 : _b.call(
-      _a,
-      error.message || "Unknown error occurred"
-    );
+    const sdkError = error instanceof SDKError ? error : new SDKError(code || "DISCONNECTED" /* Disconnected */, error.message || "Unknown error occurred");
+    console.error("SDK Error:", sdkError);
+    (_b = (_a = this.config.events) == null ? void 0 : _a.onAppError) == null ? void 0 : _b.call(_a, sdkError.message || "Unknown error occurred");
   };
   /**
    * Executes methods on the DocSpace iframe using message-based communication.
@@ -1702,22 +1731,25 @@
    */
   executeMethod_fn = function(methodName, params, resolve, reject) {
     if (!__privateGet(this, _isConnected) && methodName !== "setConfig" /* SetConfig */) {
-      __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, { message: connectErrorText });
-      reject(new Error(connectErrorText));
+      const err = new SDKError("DISCONNECTED" /* Disconnected */, connectErrorText);
+      __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, err);
+      reject(err);
       return;
     }
+    const callId = ++__privateWrapper(this, _callIdCounter)._;
     const entry = { resolve, reject, timer: null };
-    __privateGet(this, _callbacks).push(entry);
-    const message = { type: "method", methodName, data: params };
-    if (__privateGet(this, _callbacks).length > 1) {
+    __privateGet(this, _callbacks).set(callId, entry);
+    const message = { type: "method", methodName, data: params, callId };
+    if (__privateGet(this, _callbacks).size > 1) {
       __privateGet(this, _tasks).push(message);
     } else {
-      entry.timer = __privateMethod(this, _SDKInstance_instances, createMethodTimer_fn).call(this, entry);
+      entry.timer = __privateMethod(this, _SDKInstance_instances, createMethodTimer_fn).call(this, callId, entry);
       if (!__privateGet(this, _sendMessage).call(this, message)) {
-        __privateGet(this, _callbacks).pop();
+        __privateGet(this, _callbacks).delete(callId);
         if (entry.timer) clearTimeout(entry.timer);
-        __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, { message: connectErrorText });
-        reject(new Error(connectErrorText));
+        const err = new SDKError("DISCONNECTED" /* Disconnected */, connectErrorText);
+        __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, err);
+        reject(err);
       }
     }
   };
@@ -1729,7 +1761,7 @@
    */
   prepareFrameConfig_fn = function(config2) {
     const mergedConfig = { ...defaultConfig, ...this.config, ...config2 };
-    if (mergedConfig.mode === "manager" || mergedConfig.mode === "system") {
+    if (mergedConfig.mode === "manager" /* Manager */ || mergedConfig.mode === "system" /* System */) {
       mergedConfig.noLoader = false;
     }
     if (mergedConfig.mode === "forms" /* Forms */) {
@@ -1827,7 +1859,7 @@
    */
   assembleFrame_fn = function(container, target, iframe) {
     const fragment = document.createDocumentFragment();
-    if (!this.config.waiting || this.config.mode === "system") {
+    if (!this.config.waiting || this.config.mode === "system" /* System */) {
       fragment.appendChild(iframe);
     }
     if (!this.config.noLoader) {
@@ -1856,7 +1888,7 @@
   _getMethodPromise = new WeakMap();
   __publicField(_SDKInstance, "_loaderCache", {
     style: /* @__PURE__ */ new Map(),
-    container: document.createElement("div"),
+    container: null,
     templates: /* @__PURE__ */ new Map()
   });
   __publicField(_SDKInstance, "_iframeCache");
