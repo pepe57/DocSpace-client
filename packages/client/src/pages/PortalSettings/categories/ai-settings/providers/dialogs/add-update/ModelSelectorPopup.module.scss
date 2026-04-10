@@ -27,6 +27,7 @@
  */
 
 @use "@docspace/ui-kit/styles/variables/colors";
+@use "@docspace/ui-kit/styles/mixins";
 
 .popup {
   position: fixed;
@@ -131,7 +132,25 @@
     visibility: visible;
   }
 
+  @media (hover: none) {
+    visibility: visible;
+  }
+
   --icon-button-hover-color: var(--icon-button-color);
+}
+
+.mobileView {
+  @include mixins.mobile {
+    position: fixed;
+    top: auto;
+    inset-inline-start: 0;
+    bottom: 0;
+    width: 100vw;
+    max-width: 100vw;
+    max-height: calc(100vh - 64px);
+    border-radius: 6px 6px 0 0;
+    z-index: 450;
+  }
 }
 
 .scrollWrapper {

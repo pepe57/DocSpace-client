@@ -208,6 +208,19 @@ const AddUpdateDialogComponent = ({
   const isCustomProvider =
     (selectedOption.key as ProviderType) === ProviderType.OpenAiCompatible;
 
+  const canTogglePopup = useRef(false);
+
+  useEffect(() => {
+    if (showModelsBlock) {
+      canTogglePopup.current = false;
+      const timer = setTimeout(() => {
+        canTogglePopup.current = true;
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+    canTogglePopup.current = false;
+  }, [showModelsBlock]);
+
   const requiredFieldsFilled =
     providerTitle.trim().length > 0 && providerUrl.trim().length > 0;
   const modelsValid = showModelsBlock
@@ -477,7 +490,9 @@ const AddUpdateDialogComponent = ({
               <div ref={addButtonRef} style={{ position: "relative" }}>
                 <SelectedModelsList
                   selectedModels={selectedModels}
-                  onAddClick={modelSelection.togglePopup}
+                  onAddClick={() => {
+                    if (canTogglePopup.current) modelSelection.togglePopup();
+                  }}
                   hasError={modelSelection.hasError}
                 />
                 {modelSelection.isPopupOpen ? (

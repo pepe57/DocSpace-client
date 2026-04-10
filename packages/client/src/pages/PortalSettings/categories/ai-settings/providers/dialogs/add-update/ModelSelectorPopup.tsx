@@ -36,6 +36,8 @@ import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { isMobile } from "@docspace/shared/utils";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 
 import type { TProviderModelInfo } from "@docspace/shared/api/ai/types";
@@ -139,8 +141,10 @@ export const ModelSelectorPopup = ({
 }: ModelSelectorPopupProps) => {
   const { t } = useTranslation(["AISettings", "Common"]);
   const ref = useRef<HTMLDivElement>(null);
+  const isMobileView = isMobile();
 
   useLayoutEffect(() => {
+    if (isMobileView) return;
     if (!anchor.current || !ref.current) return;
 
     // Anchor to the + button row, not the whole container
@@ -163,9 +167,11 @@ export const ModelSelectorPopup = ({
     popupEl.style.top = `${top}px`;
     popupEl.style.left = `${left}px`;
     popupEl.style.maxHeight = `${Math.max(maxHeight, 100)}px`;
-  }, [anchor, recommended.length, other.length]);
+  }, [anchor, recommended.length, other.length, isMobileView]);
 
   useEffect(() => {
+    if (isMobileView) return;
+
     const handleClickOutside = (e: MouseEvent) => {
       if (
         ref.current &&
@@ -179,7 +185,7 @@ export const ModelSelectorPopup = ({
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [onClose, anchor]);
+  }, [onClose, anchor, isMobileView]);
 
   const allModels = isCustomProvider ? [...recommended, ...other] : null;
 
@@ -188,101 +194,119 @@ export const ModelSelectorPopup = ({
     [recommended, other, isCustomProvider],
   );
 
-  return createPortal(
+  const modelList = isCustomProvider ? (
+    <>
+      <div className={styles.sectionHeader}>
+        <Text className={styles.sectionTitle}>
+          {t("AISettings:SelectModels")}
+        </Text>
+      </div>
+      <div
+        className={styles.scrollWrapper}
+        style={{ height: scrollHeight }}
+      >
+        <Scrollbar className={styles.scrollbar}>
+          {allModels?.map((model) => (
+            <ModelRow
+              key={model.modelId}
+              model={model}
+              isSelected={selectedModelIds.has(model.modelId)}
+              showPencil
+              onToggle={onToggle}
+              onEdit={onEditModel}
+            />
+          ))}
+        </Scrollbar>
+      </div>
+    </>
+  ) : (
     <div
-      ref={ref}
-      className={styles.popup}
-      onClick={(e) => e.stopPropagation()}
-      onMouseDown={(e) => e.stopPropagation()}
-      data-testid="model-selector-popup"
+      className={styles.scrollWrapper}
+      style={{ height: scrollHeight }}
     >
-      {isCustomProvider ? (
-        <>
-          <div className={styles.sectionHeader}>
-            <Text className={styles.sectionTitle}>
-              {t("AISettings:SelectModels")}
-            </Text>
-          </div>
-          <div
-            className={styles.scrollWrapper}
-            style={{ height: scrollHeight }}
-          >
-            <Scrollbar className={styles.scrollbar}>
-              {allModels?.map((model) => (
-                <ModelRow
-                  key={model.modelId}
-                  model={model}
-                  isSelected={selectedModelIds.has(model.modelId)}
-                  showPencil
-                  onToggle={onToggle}
-                  onEdit={onEditModel}
-                />
-              ))}
-            </Scrollbar>
-          </div>
-        </>
-      ) : (
-        <div className={styles.scrollWrapper} style={{ height: scrollHeight }}>
-          <Scrollbar fixedSize className={styles.scrollbar}>
-            {recommended.length > 0 ? (
-              <>
-                <div className={styles.sectionHeader}>
-                  <Text className={styles.sectionTitle}>
-                    {t("AISettings:RecommendedModels")}
-                  </Text>
-                  <HelpButton
-                    tooltipContent={t("AISettings:RecommendedModelsTooltip", {
-                      productName: t("Common:ProductName"),
-                    })}
-                    place="bottom"
-                    size={12}
-                  />
-                </div>
-                {recommended.map((model) => (
-                  <ModelRow
-                    key={model.modelId}
-                    model={model}
-                    isSelected={selectedModelIds.has(model.modelId)}
-                    showPencil={false}
-                    onToggle={onToggle}
-                    onEdit={onEditModel}
-                  />
-                ))}
-              </>
-            ) : null}
-            {other.length > 0 ? (
-              <>
-                <div
-                  className={classNames(
-                    styles.sectionHeader,
-                    styles.sectionHeaderOther,
-                  )}
-                >
-                  <Text className={styles.sectionTitle}>
-                    {t("AISettings:OtherModels")}
-                  </Text>
-                  <HelpButton
-                    tooltipContent={t("AISettings:OtherModelsTooltip")}
-                    place="bottom"
-                    size={12}
-                  />
-                </div>
-                {other.map((model) => (
-                  <ModelRow
-                    key={model.modelId}
-                    model={model}
-                    isSelected={selectedModelIds.has(model.modelId)}
-                    showPencil
-                    onToggle={onToggle}
-                    onEdit={onEditModel}
-                  />
-                ))}
-              </>
-            ) : null}
-          </Scrollbar>
-        </div>
-      )}
-    </div>,
+      <Scrollbar fixedSize className={styles.scrollbar}>
+        {recommended.length > 0 ? (
+          <>
+            <div className={styles.sectionHeader}>
+              <Text className={styles.sectionTitle}>
+                {t("AISettings:RecommendedModels")}
+              </Text>
+              <HelpButton
+                tooltipContent={t("AISettings:RecommendedModelsTooltip", {
+                  productName: t("Common:ProductName"),
+                })}
+                place="bottom"
+                size={12}
+              />
+            </div>
+            {recommended.map((model) => (
+              <ModelRow
+                key={model.modelId}
+                model={model}
+                isSelected={selectedModelIds.has(model.modelId)}
+                showPencil={false}
+                onToggle={onToggle}
+                onEdit={onEditModel}
+              />
+            ))}
+          </>
+        ) : null}
+        {other.length > 0 ? (
+          <>
+            <div
+              className={classNames(
+                styles.sectionHeader,
+                styles.sectionHeaderOther,
+              )}
+            >
+              <Text className={styles.sectionTitle}>
+                {t("AISettings:OtherModels")}
+              </Text>
+              <HelpButton
+                tooltipContent={t("AISettings:OtherModelsTooltip")}
+                place="bottom"
+                size={12}
+              />
+            </div>
+            {other.map((model) => (
+              <ModelRow
+                key={model.modelId}
+                model={model}
+                isSelected={selectedModelIds.has(model.modelId)}
+                showPencil
+                onToggle={onToggle}
+                onEdit={onEditModel}
+              />
+            ))}
+          </>
+        ) : null}
+      </Scrollbar>
+    </div>
+  );
+
+  return createPortal(
+    <>
+      {isMobileView ? (
+        <Backdrop
+          visible
+          withBackground
+          shouldShowBackdrop
+          onClick={onClose}
+          zIndex={449}
+        />
+      ) : null}
+      <div
+        ref={ref}
+        className={classNames(styles.popup, {
+          [styles.mobileView]: isMobileView,
+        })}
+        onClick={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
+        data-testid="model-selector-popup"
+      >
+        {modelList}
+      </div>
+    </>,
     document.body,
   );
 };
