@@ -1557,7 +1557,6 @@
   "Usage": "Употреба",
   "WalletBalance": "Равношештаљ у портфељу",
   "WalletTopUpRequired": "Неопходно допунивање: {{currency}}",
-  "AndMoreCount": "Додајте више",
   "ThirdPartyResourceDescription2": "Повежи и сачувај бекапе на цлоуд налоге као што су Дропбок, Бок, ОнеДриве или Гоогле Дриве.",
   "ThirdPartyStorageDescription2": "Користи сервисе трећих страна за складиштење својих бекaпа. Идеално за повезивање екстерних cloud платформи.",
   "DownloadReportBtnText": "Преузми извештај",

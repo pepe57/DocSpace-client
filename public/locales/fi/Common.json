@@ -1557,7 +1557,6 @@
   "Usage": "Käyttö",
   "WalletBalance": "Lompakon saldo",
   "WalletTopUpRequired": "Täydennys vaaditaan: {{currency}}",
-  "AndMoreCount": "Ja lisää!",
   "ThirdPartyResourceDescription2": "Yhdistä ja tallenna varmuuskopiot pilvitileihin, kuten Dropbox, Box, OneDrive tai Google Drive.",
   "ThirdPartyStorageDescription2": "Käytä kolmannen osapuolen palveluita varmuuskopioiden tallentamiseen. Erinomainen vaihtoehto ulkoisten pilvitallennuspalveluiden yhdistämiseen.",
   "DownloadReportBtnText": "Lataa raportti",

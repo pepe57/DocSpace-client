@@ -335,7 +335,7 @@ const ManualBackup = ({
     setErrorMessage("");
     setBackupProgressError("");
     setBackupProgressWarning("");
-    
+
     const storageParams = getStorageParams(
       isCheckedThirdPartyStorage,
       selectedFolder,
@@ -592,7 +592,7 @@ const ManualBackup = ({
         <Text
           className={classNames(styles.backupDescription, "backup-description")}
         >
-          {t("Common:ThirdPartyResourceDescription")}
+          {t("Common:ThirdPartyResourceDescription2")}
         </Text>
         {isCheckedThirdParty ? (
           <ThirdPartyModule
@@ -701,3 +701,4 @@ const ManualBackup = ({
 };
 
 export default ManualBackup;
+

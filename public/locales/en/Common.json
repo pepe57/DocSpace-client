@@ -1557,7 +1557,6 @@
   "Usage": "Usage",
   "WalletBalance": "Wallet balance",
   "WalletTopUpRequired": "Top up required: {{currency}}",
-  "AndMoreCount": "And more!",
   "ThirdPartyResourceDescription2": "Connect and save backups to cloud accounts like Dropbox, Box, OneDrive, or Google Drive.",
   "ThirdPartyStorageDescription2": "Use third-party services to store your backups. Ideal for connecting external cloud storage platforms.",
   "DownloadReportBtnText": "Download report",
