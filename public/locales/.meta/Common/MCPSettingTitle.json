@@ -3,7 +3,7 @@
   "content": "MCP servers",
   "content_en_sha1_hash": "8d9a304fd985232ade488e1913e41a3d9a502b09",
   "created_at": "2025-11-21T08:21:51.274Z",
-  "updated_at": "2026-04-10T15:22:27.156Z",
+  "updated_at": "2026-04-10T15:56:17.588Z",
   "comment": {
     "text": "This key displays the name \"MCP servers\" in the UI, often used to refer to the connection to Microsoft Content Platform servers. It appears in dialogs like the CreateEditAgentDialog and on settings pages, likely to provide context or labels related to MCP server configurations. Translators should ensure the translation accurately reflects this connection to MCP servers.",
     "is_auto": true,
@@ -183,13 +183,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "extra_variable",
-          "description": "Extra variable(s) not in English: {{variable}}",
-          "suggestion": ""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

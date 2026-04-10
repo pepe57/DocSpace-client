@@ -1017,7 +1017,7 @@
   "ShareTheRoom": "a sala",
   "ShareToFillOut": "Compartilhe para preencher",
   "ShareWithPortalUsers": "Compartilhando com usuários do {{productName}}",
-  "ShareWithPortalUsersDescription": "Selecione usuários específicos de {{ productName }} e convide-os a preencher o formulário original.",
+  "ShareWithPortalUsersDescription": "Selecione usuários específicos de {{productName}} e convide-os a preencher o formulário original.",
   "SharingSettings": "Configurações de compartilhamento",
   "ShowAboutWindow": "Mostrar a janela Sobre",
   "ShowArticleMenu": "Mostrar menu",

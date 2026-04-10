@@ -659,7 +659,7 @@
   "MaximumNumberOfExternalLinksCreated": "Numri maksimal i lidhjeve të jashtme të krijuara",
   "MaxLengthExceeded": "Gjatësia maksimale e një emri përdoruesi ose një pjese tjetër lokale është 64 karaktere.",
   "MCPServer": "MCP server",
-  "MCPSettingTitle": "{{variable}} MCP servers",
+  "MCPSettingTitle": "MCP servers",
   "Media": "Mjetet",
   "MediaError": "URL-ja e medias nuk mund të ngarkohej",
   "Megabyte": "MB",
