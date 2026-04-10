@@ -67,10 +67,6 @@
 
 .selectedModelsLabel {
   margin-bottom: 4px;
-
-  &.selectedModelsLabelError {
-    color: var(--input-error-color);
-  }
 }
 
 .requiredMark {
@@ -82,6 +78,30 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 4px;
+
+  :global(.add-model-tag) {
+    cursor: pointer;
+
+    &:hover {
+      background: var(--tag-background) !important;
+      border: var(--tag-border) !important;
+    }
+  }
+
+  :global(.model-tag) {
+    cursor: pointer;
+
+    &:hover {
+      background: var(--tag-background) !important;
+      border: var(--tag-border) !important;
+    }
+  }
+
+  &.selectedModelsError {
+    :global(.add-model-tag) {
+      border-color: var(--input-error-color) !important;
+    }
+  }
 }
 
 .selectedModelsErrorText {

@@ -212,6 +212,17 @@ const MODELS_BY_PROVIDER: Partial<
   [ProviderType.Google]: GOOGLE_MODELS,
 };
 
+const OPENAI_COMPATIBLE_MODELS: TProviderModelInfo[] = [
+  model(
+    "custom-model-1",
+    "Custom Model 1",
+    true,
+    { vision: true, toolCalling: true, extendedThinking: false },
+  ),
+  model("custom-model-2", "Custom Model 2", true, DEFAULT_CAPABILITIES),
+  model("custom-model-3", "custom-model-3", false),
+];
+
 /**
  * Returns mock model list for a given provider type.
  * TODO: Replace with real API call (getModels) when backend is ready.
@@ -219,8 +230,23 @@ const MODELS_BY_PROVIDER: Partial<
 export const getModelsForProvider = (
   type: ProviderType,
 ): TProviderModelInfo[] => {
-  if (type === ProviderType.OpenAiCompatible) return [];
+  if (type === ProviderType.OpenAiCompatible) return OPENAI_COMPATIBLE_MODELS;
   return MODELS_BY_PROVIDER[type] ?? [];
+};
+
+/**
+ * Mock API method that simulates fetching models from the backend after key validation.
+ * TODO: Replace with real API call when backend endpoint is available.
+ */
+export const fetchModelsForProviderByKey = (
+  type: ProviderType,
+  _key: string,
+): Promise<TProviderModelInfo[]> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(getModelsForProvider(type));
+    }, 500);
+  });
 };
 
 /**

@@ -26,8 +26,9 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import equal from "fast-deep-equal/react";
 
 import {
   ModalDialog,
@@ -72,6 +73,11 @@ export const ModelSettingsPanel = ({
     ...model.capabilities,
   });
 
+  const hasChanges = useMemo(() => {
+    if (displayName !== model.displayName) return true;
+    return !equal(capabilities, model.capabilities);
+  }, [displayName, capabilities, model.displayName, model.capabilities]);
+
   const handleCapabilityChange = (key: keyof TModelCapabilities) => {
     setCapabilities((prev) => ({ ...prev, [key]: !prev[key] }));
   };
@@ -87,7 +93,9 @@ export const ModelSettingsPanel = ({
       displayType={ModalDialogType.aside}
       onClose={onClose}
       withBodyScroll
-      zIndex={500}
+      backdropVisible={false}
+      isBackButton
+      onBackClick={onClose}
     >
       <ModalDialog.Header>
         {t("AISettings:ModelSettings")}
@@ -109,9 +117,7 @@ export const ModelSettingsPanel = ({
               scale
               testId="model-name-input"
             />
-            <Text className={styles.hint}>
-              {t("AISettings:ModelNameHint")}
-            </Text>
+            <Text className={styles.hint}>{t("AISettings:ModelNameHint")}</Text>
           </FieldContainer>
 
           <FieldContainer
@@ -137,9 +143,7 @@ export const ModelSettingsPanel = ({
               <Checkbox
                 label={t("AISettings:CapabilityExtendedThinking")}
                 isChecked={capabilities.extendedThinking}
-                onChange={() =>
-                  handleCapabilityChange("extendedThinking")
-                }
+                onChange={() => handleCapabilityChange("extendedThinking")}
               />
             </div>
           </FieldContainer>
@@ -153,6 +157,7 @@ export const ModelSettingsPanel = ({
           label={t("Common:SaveButton")}
           scale
           onClick={handleSave}
+          isDisabled={!hasChanges}
           testId="model-settings-save-button"
         />
         <Button
@@ -166,3 +171,4 @@ export const ModelSettingsPanel = ({
     </ModalDialog>
   );
 };
+

@@ -203,8 +203,7 @@ const AddUpdateDialogComponent = ({
   });
 
   const isKeyVisible = !isKeyInputHidden || providerKey.length > 0;
-  const showModelsBlock =
-    isKeyVisible && (providerKey.length > 0 || variant === "update");
+  const showModelsBlock = modelSelection.modelsLoaded;
   const isCustomProvider =
     (selectedOption.key as ProviderType) === ProviderType.OpenAiCompatible;
 
@@ -331,17 +330,12 @@ const AddUpdateDialogComponent = ({
   }, [providerData]);
 
   useEffect(() => {
-    const type = selectedOption.key as ProviderType;
-    modelSelection.loadModelsForProvider(type);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (providerKey.length === 0) return;
 
-  const handleRemoveModel = useCallback(
-    (modelId: string) => {
-      modelSelection.toggleModel(modelId);
-    },
-    [modelSelection],
-  );
+    const type = selectedOption.key as ProviderType;
+    modelSelection.fetchModels(type, providerKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [providerKey]);
 
   const handleModelSettingsSave = useCallback(
     (
@@ -491,8 +485,8 @@ const AddUpdateDialogComponent = ({
               <div ref={addButtonRef} style={{ position: "relative" }}>
                 <SelectedModelsList
                   selectedModels={selectedModels}
-                  onRemoveModel={handleRemoveModel}
-                  onAddClick={modelSelection.openPopup}
+                  onAddClick={modelSelection.togglePopup}
+                  onTagClick={modelSelection.togglePopup}
                   hasError={modelSelection.hasError}
                 />
                 {modelSelection.isPopupOpen ? (

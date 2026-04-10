@@ -35,7 +35,7 @@ import type {
 } from "@docspace/shared/api/ai/types";
 
 import {
-  getModelsForProvider,
+  fetchModelsForProviderByKey,
   getRecommendedModelIds,
 } from "./mockModelData";
 
@@ -61,35 +61,59 @@ const sortSelectedFirst = (
 };
 
 export const useModelSelection = () => {
-  const [availableModels, setAvailableModels] = useState<
-    TProviderModelInfo[]
-  >([]);
+  const [availableModels, setAvailableModels] = useState<TProviderModelInfo[]>(
+    [],
+  );
   const [selectedModelIds, setSelectedModelIds] = useState<Set<string>>(
     new Set(),
   );
   const [hasError, setHasError] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [settingsModelId, setSettingsModelId] = useState<string | null>(
-    null,
-  );
+  const [settingsModelId, setSettingsModelId] = useState<string | null>(null);
+  const [isLoadingModels, setIsLoadingModels] = useState(false);
+  const [modelsLoaded, setModelsLoaded] = useState(false);
+  const [popupOpenedSelectedIds, setPopupOpenedSelectedIds] = useState<
+    Set<string>
+  >(new Set());
 
   const modelOverrides = useRef<Record<string, TModelOverride>>({});
 
   const loadModelsForProvider = useCallback(
     (type: ProviderType, savedState?: TModelSelectionState) => {
-      const models = getModelsForProvider(type);
-      setAvailableModels(models);
-
       if (savedState) {
         setSelectedModelIds(new Set(savedState.selectedIds));
         modelOverrides.current = { ...savedState.overrides };
+        if (savedState.selectedIds.length > 0) {
+          setModelsLoaded(true);
+        }
       } else {
-        const recommendedIds = getRecommendedModelIds(type);
-        setSelectedModelIds(new Set(recommendedIds));
+        setSelectedModelIds(new Set());
         modelOverrides.current = {};
       }
 
+      setAvailableModels([]);
+      setModelsLoaded(false);
       setHasError(false);
+    },
+    [],
+  );
+
+  const fetchModels = useCallback(
+    async (type: ProviderType, key: string) => {
+      setIsLoadingModels(true);
+      try {
+        const models = await fetchModelsForProviderByKey(type, key);
+        setAvailableModels(models);
+
+        const recommendedIds = getRecommendedModelIds(type);
+        setSelectedModelIds((prev) =>
+          prev.size > 0 ? prev : new Set(recommendedIds),
+        );
+
+        setModelsLoaded(true);
+      } finally {
+        setIsLoadingModels(false);
+      }
     },
     [],
   );
@@ -117,9 +141,7 @@ export const useModelSelection = () => {
 
       setAvailableModels((prev) =>
         prev.map((m) =>
-          m.modelId === modelId
-            ? { ...m, displayName, capabilities }
-            : m,
+          m.modelId === modelId ? { ...m, displayName, capabilities } : m,
         ),
       );
     },
@@ -130,11 +152,15 @@ export const useModelSelection = () => {
     const recommended = availableModels.filter((m) => m.isRecommended);
     const other = availableModels.filter((m) => !m.isRecommended);
 
+    const idsToUseForSorting = isPopupOpen
+      ? popupOpenedSelectedIds
+      : selectedModelIds;
+
     return {
-      recommended: sortSelectedFirst(recommended, selectedModelIds),
-      other: sortSelectedFirst(other, selectedModelIds),
+      recommended: sortSelectedFirst(recommended, idsToUseForSorting),
+      other: sortSelectedFirst(other, idsToUseForSorting),
     };
-  }, [availableModels, selectedModelIds]);
+  }, [availableModels, selectedModelIds, isPopupOpen, popupOpenedSelectedIds]);
 
   const getSelectedModels = useCallback(() => {
     return availableModels.filter((m) => selectedModelIds.has(m.modelId));
@@ -159,12 +185,23 @@ export const useModelSelection = () => {
     };
   }, [selectedModelIds]);
 
-  const openPopup = useCallback(() => {
-    setIsPopupOpen(true);
-  }, []);
+  const togglePopup = useCallback(() => {
+    setIsPopupOpen((prev) => {
+      if (prev) {
+        setPopupOpenedSelectedIds(new Set());
+        if (selectedModelIds.size === 0) {
+          setHasError(true);
+        }
+        return false;
+      }
+      setPopupOpenedSelectedIds(new Set(selectedModelIds));
+      return true;
+    });
+  }, [selectedModelIds]);
 
   const closePopup = useCallback(() => {
     setIsPopupOpen(false);
+    setPopupOpenedSelectedIds(new Set());
     if (selectedModelIds.size === 0) {
       setHasError(true);
     }
@@ -172,6 +209,7 @@ export const useModelSelection = () => {
 
   const openSettings = useCallback((modelId: string) => {
     setSettingsModelId(modelId);
+    setIsPopupOpen(false);
   }, []);
 
   const closeSettings = useCallback(() => {
@@ -180,9 +218,7 @@ export const useModelSelection = () => {
 
   const getModelForSettings = useCallback(() => {
     if (!settingsModelId) return null;
-    return (
-      availableModels.find((m) => m.modelId === settingsModelId) ?? null
-    );
+    return availableModels.find((m) => m.modelId === settingsModelId) ?? null;
   }, [settingsModelId, availableModels]);
 
   return {
@@ -191,8 +227,11 @@ export const useModelSelection = () => {
     hasError,
     isPopupOpen,
     settingsModelId,
+    isLoadingModels,
+    modelsLoaded,
 
     loadModelsForProvider,
+    fetchModels,
     toggleModel,
     updateModelSettings,
     getOrderedModels,
@@ -201,10 +240,11 @@ export const useModelSelection = () => {
     clearError,
     getState,
 
-    openPopup,
+    togglePopup,
     closePopup,
     openSettings,
     closeSettings,
     getModelForSettings,
   };
 };
+

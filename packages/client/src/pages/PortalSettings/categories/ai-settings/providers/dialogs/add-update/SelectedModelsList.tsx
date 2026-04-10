@@ -39,15 +39,15 @@ import styles from "./AddUpdateDialog.module.scss";
 
 type SelectedModelsListProps = {
   selectedModels: TProviderModelInfo[];
-  onRemoveModel: (modelId: string) => void;
   onAddClick: () => void;
+  onTagClick: () => void;
   hasError: boolean;
 };
 
 export const SelectedModelsList = ({
   selectedModels,
-  onRemoveModel,
   onAddClick,
+  onTagClick,
   hasError,
 }: SelectedModelsListProps) => {
   const { t } = useTranslation(["AISettings"]);
@@ -55,9 +55,7 @@ export const SelectedModelsList = ({
   return (
     <div className={styles.selectedModelsField}>
       <Text
-        className={classNames(styles.selectedModelsLabel, {
-          [styles.selectedModelsLabelError]: hasError,
-        })}
+        className={styles.selectedModelsLabel}
         fontWeight={600}
         fontSize="13px"
       >
@@ -76,6 +74,7 @@ export const SelectedModelsList = ({
           withLabel={false}
           onClick={() => onAddClick()}
           style={{ maxWidth: "32px" }}
+          className="add-model-tag"
           dataTestId="add-model-button"
         />
         {selectedModels.map((model) => (
@@ -83,8 +82,8 @@ export const SelectedModelsList = ({
             key={model.modelId}
             tag={model.modelId}
             label={model.displayName}
-            isNewTag
-            onDelete={() => onRemoveModel(model.modelId)}
+            onClick={onTagClick}
+            className="model-tag"
             dataTestId={`model-tag-${model.modelId}`}
           />
         ))}
@@ -97,3 +96,4 @@ export const SelectedModelsList = ({
     </div>
   );
 };
+

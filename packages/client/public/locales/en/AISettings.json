@@ -65,6 +65,7 @@
   "SearchDescription": "Connect a {{webSearch}} engine to enhance {{aiChats}} with real-time information from the internet. Once configured, it will be available to all users in {{productName}}.",
   "SearchEngine": "{{webSearch}} Engine",
   "SelectAtLeastOneModel": "Select at least one model",
+  "SelectModels": "Select models",
   "ServerAddedSuccess": "Server added successfully",
   "ServerDisabledSuccess": "Server disabled successfully",
   "ServerEnabledSuccess": "Server enabled successfully",
