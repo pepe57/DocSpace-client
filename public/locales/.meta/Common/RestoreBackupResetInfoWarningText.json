@@ -3,7 +3,7 @@
   "content": "All current passwords will be reset. {{productName}} users will get an email with the access restoration link.",
   "content_en_sha1_hash": "3531a741576e6d7f3c7d70f497013990e0744339",
   "created_at": "2025-05-26T07:15:46.918Z",
-  "updated_at": "2026-04-08T01:11:23.563Z",
+  "updated_at": "2026-04-10T08:58:38.050Z",
   "comment": {
     "text": "This translation key is used to display a warning message when users need to reset their passwords after restoring backup data. The message informs them that all current passwords will be reset and provides an access restoration link via email for {{productName}} users. It appears in UI components related to data recovery, such as restore backup pages.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "There is a missing space between the variable {{productName}} and the following word 'بريد', which can cause rendering issues in some UI layouts, though the variable itself is present.",
-          "suggestion": "سيتم إعادة تعيين جميع كلمات السر الحالية. سوف يتلقى مستخدمو {{productName}} بريدًا يحتوي على رابط لاستعادة الوصول."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {

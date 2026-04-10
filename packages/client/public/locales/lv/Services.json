@@ -88,7 +88,7 @@
   "InputCurrency": "{{currency}}/1M",
   "InsufficientPermissionsMessage": "Jums nav pietiekami atļauju. Lūdzu, sazinācieties ar maksātāju (<1>{{payerContact}}</1>) lai piekļūtu un konfigurētu pakalpojumu.",
   "LastTopUp": "<1>Pēdējā papildinājums</1>: <2>{{currency}}</2> datumu {{date}}.",
-  "LessThanOneDay": "<1>dienu</1>",
+  "LessThanOneDay": "<1 dienu",
   "LowBalance": "Zemā kredītu saldo. Pievienojiet kredītus, lai nodrošinātu nepārtrauktu pakalpojumu.",
   "ModelSettings": "Modelu iestatījumi",
   "NeedTopUpWallet": "Jūsu maketu fondi ir nepietiski. Lūdzu, papildiet savu maketu.",

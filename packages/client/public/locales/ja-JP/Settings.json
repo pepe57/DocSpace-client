@@ -1,5 +1,5 @@
 {
-  "AboutDataImport": "データのインポートにはいくつかのステップがあります：データのアップロード、解析、インポート設定、インポート。バックアップファイルは{{organizationName}}{{productName}}サーバーに24時間保存され、その後自動的に削除されます。",
+  "AboutDataImport": "データのインポートにはいくつかのステップがあります：データのアップロード、解析、インポート設定、インポート。バックアップファイルは{{organizationName}} {{productName}}サーバーに24時間保存され、その後自動的に削除されます。",
   "AccentColor": "アクセント",
   "AccessRightsChangeOwnerConfirmText": "変更内容は、メールでの確認後に適用されます。",
   "AccountAlreadyExists": "アカウントが既に存在しています",

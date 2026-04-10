@@ -3,7 +3,7 @@
   "content": "Before you delete the space, please make sure that automatic billing is turned off. You may check the status of automatic billing in <1>your Stripe customer portal</1>.",
   "content_en_sha1_hash": "dc639bafcacea9cc342c82a0e94c2353a9bf2d96",
   "created_at": "2025-05-19T21:30:51.120Z",
-  "updated_at": "2026-04-09T03:30:45.035Z",
+  "updated_at": "2026-04-10T08:58:38.063Z",
   "comment": {
     "text": "This translation key is used to display a message reminding users to turn off automatic billing before deleting their portal. The message appears in a dialog box when the user attempts to delete their space.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> contains an extra space before the closing bracket (</ 1>), which breaks the markup structure.",
-          "suggestion": "قبل حذف المساحة ، يرجى التأكد من إيقاف تشغيل الفوترة التلقائية. يمكنك التحقق من حالة الفوترة التلقائية في <1>بوابة عملاء Stripe الخاصة بك</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -51,13 +45,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> is placed after the period, but the period is inside the tag in the Bulgarian translation, whereas in the English source, the period is outside the tag. More importantly, the tag structure in Bulgarian includes the period inside the link, which might affect the clickable area/styling compared to the source.",
-          "suggestion": "Моля, уверете се, че автоматичното таксуване е изключено преди да изтриете пространството. Можете да проверите статуса на автоматичното таксуване в <1>Stripe портала за клиенти</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -75,13 +63,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> is placed after the period, but the period is inside the tag in the Greek translation, whereas in the English source, the period is outside the tag. More importantly, the tag structure in the Greek version includes the period inside the tag, which might affect the link styling/behavior if the period shouldn't be part of the clickable area.",
-          "suggestion": "Πριν διαγράψετε τον χώρο, βεβαιωθείτε ότι η αυτόματη χρέωση είναι απενεργοποιημένη. Μπορείτε να ελέγξετε την κατάσταση της αυτόματης χρέωσης στην <1>Πύλη πελατών Stripe</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -236,13 +218,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> is placed after the period, which includes the period inside the link. In the English source, the period is outside the tag. This can affect the clickable area of the link.",
-          "suggestion": "Перш ніж видалити простір, переконайтеся, що вимкнено автоматичне виставлення рахунків. Перевірити статус автоматичного виставлення рахунків можна на <1>клієнтському порталі Stripe</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

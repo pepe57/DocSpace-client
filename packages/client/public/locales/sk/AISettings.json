@@ -51,7 +51,7 @@
   "MCPServerIntegrationURLHint": "Zadajte adresu {{mcpServer}}, ktorú poskytuje váš servis",
   "MCPSettingsDescription": "Tento sekcia vám umožňuje spravovať {{mcpServers}} pre {{aiChats}} v miestnostiach. Môžete zapnúť systémové {{mcpServers}} alebo pridať vlastné, aby zodpovedali potrebám vašej spoločnosti. Po zapnutí budú tieto servery dostupné pre ostatných používateľov na ich úlohy.",
   "PortalAiDisabledTooltip": "Aby ste použili poskytovateľa AI {{productName}}, uistite sa, že najprv pripojíte AI službu.",
-  "ProviderAddedSuccess": "<0>{{aiProvider}}</0> sa úspešne pridal",
+  "ProviderAddedSuccess": "{{aiProvider}} sa úspešne pridal",
   "ProviderKeyInputHint": "Zadajte API kľúč vygenerovaný z vášho dashboardu {{aiProvider}}",
   "ProviderRemovedSuccess": "{{aiProvider}} bola úspešne odstránená",
   "ProviderUnavailableError": "{{aiProvider}} nie je k dispozícii",

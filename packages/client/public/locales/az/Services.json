@@ -78,7 +78,7 @@
   "InputCurrency": "Giriş ({{currency}}/1M)",
   "InsufficientPermissionsMessage": "Yeterli icazəniz yoxdur. Xidmətlərə daxil olmaq və konfiqurasiya etmək üçün ödəyici ilə (<1>{{payerContact}}</1>) əlaqə saxlayın.",
   "LastTopUp": "<1>Son yükləmə</1>: <2>{{currency}}</2> {{date}} tarixində.",
-  "LessThanOneDay": "<1 gün</N>",
+  "LessThanOneDay": "<1 gün",
   "LowBalance": "Düşük kredit balans. Xidmətin fasiləsiz davam etməsini təmin etmək üçün kredit əlavə edin.",
   "ModelSettings": "Model ayarları",
   "NeedTopUpWallet": "Cüzdanınızda çatışmaz vəsait var. Zəhmət olmasa cüzdanınızı yükləyin.",

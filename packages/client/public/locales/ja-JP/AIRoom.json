@@ -16,7 +16,7 @@
   "UploadFilesDevice": "個人用デバイスからファイルをアップロードする",
   "UploadFilesPortal": "{{sectionNameFirst}}または{{sectionNameSecond}}からファイルをアップロードする",
   "AgentInViewModeWarning": "この{{aiAgent}}は<strong>閲覧専用</strong>モードです。他のユーザーの{{aiChat}}のアクティビティの結果を閲覧できます。",
-  "CreateChatDescription": "<0>{{aiChat}}</0> タブに移動して開始してください。",
+  "CreateChatDescription": "{{aiChat}} タブに移動して開始してください。",
   "EmptyKnowledgeDescription": "ここにアップロードされたファイルはインデックス化され、{{aiChat}} タブのコンテキストとして使用されます。AIに質問したり、コンテンツを生成したり、情報について共同作業したりするために、ファイルを追加してください（各ファイル最大 10 MB）。",
   "EmptyResultsDescription": "{{aiChat}}で生成されたファイルはここに自動的に表示されます。コンテンツを生成したり、チャットを開始したり、出力を伴うメッセージを送信したりするたびに、結果がこのセクションに保存されます。",
   "EmptyResultsViewerDescription": "他のユーザーの{{aiChat}}アクティビティの結果は、利用可能になり次第、ここに表示されます。",

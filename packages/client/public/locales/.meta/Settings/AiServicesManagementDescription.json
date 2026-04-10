@@ -3,7 +3,7 @@
   "content": "Control the activation of AI features across {{productName}} and {{organizationName}} editors. When disabled, the {{aiSettings}} section will be hidden, {{aiAgents}} will be unavailable to all users (with history preserved), and the paid {{organizationName}} {{aiServices}} will no longer be accessible. However, all interaction history with the AI will be securely saved and fully restored upon re-enabling {{aiServices}}.",
   "content_en_sha1_hash": "804862e60d57ab10abceb8ef36877c2a3d804896",
   "created_at": "2026-03-26T08:26:46.818Z",
-  "updated_at": "2026-04-10T08:21:04.339Z",
+  "updated_at": "2026-04-10T08:58:38.064Z",
   "comment": {
     "text": "This description explains the impact of disabling AI services within the platform. It appears as a tooltip or short explanation in the Portal Settings, specifically within the AI Services Management section, detailing how disabling AI affects features and access while preserving interaction history. Translators should ensure the description accurately conveys the temporary nature of the change and data preservation.",
     "is_auto": true,
@@ -189,13 +189,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable {{productName}} is wrapped in <0></0> tags but the curly braces {{ }} are missing, which will prevent the code from injecting the actual product name.",
-          "suggestion": "Upravljanje aktivacije funkcij AI v <0>{{productName}}</0> in <1>{{organizationName}}</1> urednikih. Ko je onemogočeno, bo razdelek <2>{{aiSettings}}</2> skrit, <3>{{aiAgents}}</3> bo neuporjen za vse uporabnike (z ohranjeno zgodovino), in zaplačna <4>{{organizationName}}</4> <5>{{aiServices}}</5> ne bo več dostopna. Vendar pa bo vsa zgodovina interakcij z AI varnostno shranjena in popolnoma obnovljena po ponovnem vključitvi <5>{{aiServices}}</5>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

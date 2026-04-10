@@ -3,7 +3,7 @@
   "content": "Show the About window",
   "content_en_sha1_hash": "98aa21413f85ee58c0e572a4de32cd4c30502a72",
   "created_at": "2025-06-02T10:19:17.147Z",
-  "updated_at": "2026-04-07T23:02:47.437Z",
+  "updated_at": "2026-04-10T08:58:38.049Z",
   "comment": {
     "text": "Show the About window button label in a checkbox within a branding company info page.",
     "is_auto": true,
@@ -42,11 +42,6 @@
         {
           "type": "incorrect_translation",
           "description": "The translation uses a noun phrase 'About Pencərəsinin göstərilməsi' (Showing of the About window) instead of an imperative command 'Show the About window' suitable for a checkbox label. Additionally, it incorrectly treats 'About' as a variable/token by wrapping it in curly braces, which changes the technical meaning.",
-          "suggestion": "Haqqında pəncərəsini göstər"
-        },
-        {
-          "type": "missing_variable",
-          "description": "The English source does not contain any {{variable}} tokens, but the Azerbaijani translation introduced '{{About ...}}', which creates a non-existent variable in the code.",
           "suggestion": "Haqqında pəncərəsini göstər"
         }
       ],

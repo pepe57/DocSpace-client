@@ -88,7 +88,7 @@
   "InputCurrency": "{{currency}}/1M",
   "InsufficientPermissionsMessage": "권한이 충분하지 않습니다. 서비스에 액세스하고 구성하려면 지불자(<1>{{payerContact}}</1>)에게 문의하십시오.",
   "LastTopUp": "<1>최근 충전</1>: <2>{{currency}}</2>에 {{date}}.",
-  "LessThanOneDay": "<1>일</1>",
+  "LessThanOneDay": "<1일",
   "LowBalance": "크레딧 잔액이 부족합니다. 서비스가 중단되지 않도록 크레딧을 추가해 주세요.",
   "ModelSettings": "모델 설정",
   "NeedTopUpWallet": "지갑 잔액이 부족합니다. 지갑을 충전해 주세요.",

@@ -88,7 +88,7 @@
   "InputCurrency": "{{currency}}/1M",
   "InsufficientPermissionsMessage": "Nu aveți permisiuni suficiente. Vă rugăm să contactați plataatorul (<1>{{payerContact}}</1>) pentru a accesa și configura serviciile.",
   "LastTopUp": "<1>Ultima reîncărcare</1>: <2>{{currency}}</2> la {{date}}.",
-  "LessThanOneDay": "<1>zi</1>",
+  "LessThanOneDay": "<1 zi",
   "LowBalance": "Sold de credit redus. Adăugați credite pentru a asigura un serviciu neîntrerupt.",
   "ModelSettings": "Setările modelului",
   "NeedTopUpWallet": "Portofelul dumneavoastră are fonduri insuficiente. Vă rugăm să vă alimentați portofelul.",

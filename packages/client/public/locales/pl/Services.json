@@ -88,7 +88,7 @@
   "InputCurrency": "{{currency}}/1M",
   "InsufficientPermissionsMessage": "Nie posiada Pan/Pani wystarczających uprawnień. Prosimy o kontakt z płatnikiem (<1>{{payerContact}}</1>) w celu uzyskania dostępu i skonfigurowania usług.",
   "LastTopUp": "<1>Ostatnie doładowanie</1>: <2>{{currency}}</2> w dniu {{date}}.",
-  "LessThanOneDay": "<1>dzień</1>",
+  "LessThanOneDay": "<1 dzień",
   "LowBalance": "Niski stan salda kredytów. Dodaj kredyty, aby zapewnić nieprzerwane działanie usługi.",
   "ModelSettings": "Ustawienia modelu",
   "NeedTopUpWallet": "Niedostateczne środki na portfelu. Prosimy o doładowanie portfela.",

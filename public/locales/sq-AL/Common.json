@@ -418,7 +418,7 @@
   "EmptyTemplatesRoomsDescription": "Krijoni modelin tuaj të parë të dhomës dhe më pas mund të krijoni dhoma të reja bazuar mbi të.",
   "EmptyTemplatesRoomsHeader": "Nuk u gjetën modelo.",
   "Enable": "Aktivizoni",
-  "EnableAIAgent": "<N>Aktivizoni Agjentin AI</N>",
+  "EnableAIAgent": "Aktivizoni Agjentin AI",
   "EnableAutomaticBackup": "Aktivizoni rezervimin automatik.",
   "EnableAutomaticBackupDescription": "Përdoreni këtë opsion për të rezervuar të dhënat e hapësirës.",
   "EnableThirdPartyIntegration": "Ju lutemi, kërkoni nga një pronar ose administrator i {{productName}} të aktivizojë shërbimin përkatës në seksionin e Integrimit të cilësimeve të {{productName}}.",

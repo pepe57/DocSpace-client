@@ -3,7 +3,7 @@
   "content": "<2>{{title}}</2> successfully copied to <1>{{folderName}}</1>",
   "content_en_sha1_hash": "230031d75ca57d38f165f05a0fbf2c89bf74c2c6",
   "created_at": "2025-05-19T21:30:43.772Z",
-  "updated_at": "2026-04-08T14:12:32.897Z",
+  "updated_at": "2026-04-10T08:58:38.056Z",
   "comment": {
     "text": "This translation key is used to display a success message when an item (e.g. file or folder) is successfully copied in the UI. The message includes placeholders for the title and folder name of the copied item. It appears in success messages displayed via the toastr library, often as a toast notification.",
     "is_auto": true,
@@ -69,25 +69,13 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "There is a missing space between the closing tag </2> and the following text, which can cause the UI to render the title and the word 'se' stuck together (e.g., 'FileNamese ha copiado').",
-          "suggestion": "<2>{{title}}</2> se ha copiado correctamente en <1>{{folderName}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> is missing in the Finnish translation.",
-          "suggestion": "<2>{{title}}</2> onnistuneesti kopioitu <1>{{folderName}}</1>:n"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -99,13 +87,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> is missing or incorrectly merged with the suffix 'ում'. The tag must be closed before adding grammatical suffixes to ensure the placeholder is correctly wrapped.",
-          "suggestion": "<2>{{title}}</2> հաջողությամբ պատճենվեց <1>{{folderName}}</1>ում"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -177,13 +159,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </2> for the first component is missing in the Sinhala translation.",
-          "suggestion": "<2>{{title}}</2> <1>{{folderName}}</1> වෙත සාර්ථකව පිටපත් කරන ලදී"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

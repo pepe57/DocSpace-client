@@ -88,7 +88,7 @@
   "InputCurrency": "{{currency}}/1M",
   "InsufficientPermissionsMessage": "Bạn không có đủ quyền. Vui lòng liên hệ với bên thanh toán (<1>{{payerContact}}</1>) để truy cập và cấu hình các dịch vụ.",
   "LastTopUp": "<1>Nạp tiền lần cuối</1>: <2>{{currency}}</2> vào ngày {{date}}.",
-  "LessThanOneDay": "<1>ngày</1>",
+  "LessThanOneDay": "<1 ngày",
   "LowBalance": "Số dư tín dụng thấp. Thêm tín dụng để đảm bảo dịch vụ không bị gián đoạn.",
   "ModelSettings": "Cài đặt mô hình",
   "NeedTopUpWallet": "Ví tiền của bạn không đủ tiền. Vui lòng nạp tiền vào ví.",

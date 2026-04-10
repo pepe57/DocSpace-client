@@ -3,7 +3,7 @@
   "content": "You may create a new room specifically for the backup, choose one of the existing rooms, or save the copy in their {{roomName}} room.",
   "content_en_sha1_hash": "2f37d9051c90dfc970642bac71d6899484e612bd",
   "created_at": "2025-05-26T07:15:47.398Z",
-  "updated_at": "2026-04-08T00:10:58.297Z",
+  "updated_at": "2026-04-10T08:58:38.050Z",
   "comment": {
     "text": "This translation key is used to describe a room name in a backup process. It appears on buttons and dialogs in the auto-backup and manual-backup pages, prompting users to select or create a specific room for their backups.",
     "is_auto": true,
@@ -152,11 +152,6 @@
           "type": "extra_variable",
           "description": "Extra variable(s) not in English: {{ roomName }}",
           "suggestion": ""
-        },
-        {
-          "type": "missing_variable",
-          "description": "The variable token {{roomName}} in the Lao translation contains an extra space '{{ roomName }}', which breaks the variable matching required by the code.",
-          "suggestion": "ທ່ານອາດຈະສ້າງຫ້ອງໃຫມ່ໂດຍສະເພາະສໍາລັບການ ສໍາຮອງຂໍ້ມູນ, ເລືອກຫນຶ່ງຂອງຫ້ອງທີ່ມີຢູ່ແລ້ວ, ຫຼືບັນທຶກສໍາເນົາຢູ່ໃນ ຫ້ອງ {{roomName}} ຂອງເຂົາເຈົ້າ."
         }
       ],
       "approved_at": null

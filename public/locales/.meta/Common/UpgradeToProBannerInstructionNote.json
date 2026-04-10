@@ -3,7 +3,7 @@
   "content": "Please note that the editors will be unavailable during the upgrade. We also recommend to <1>backup your data</1> before you start.",
   "content_en_sha1_hash": "6254435f524d28160ed4c7af92aa2d841ada3ca0",
   "created_at": "2025-05-26T07:15:49.220Z",
-  "updated_at": "2026-04-07T20:49:24.535Z",
+  "updated_at": "2026-04-10T08:58:38.048Z",
   "comment": {
     "text": "This translation key is used to display a note informing users that editors will be unavailable during an upgrade process. The note also recommends backing up data before starting the process. It appears in the UI on the official documentation page for upgrading to a pro version, likely as part of a banner or informational message.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> contains extra spaces between the slash and the number, which breaks the React Trans component parsing.",
-          "suggestion": "يرجى ملاحظة أن المحررين لن يكونوا متوفرين أثناء الترقية. نوصي أيضًا بـ <1>نسخ بياناتك احتياطيًا</1> قبل البدء."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {

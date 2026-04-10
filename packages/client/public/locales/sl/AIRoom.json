@@ -16,7 +16,7 @@
   "UploadFilesDevice": "Naložite datoteke iz vaše osebne naprave.",
   "UploadFilesPortal": "Naložite datoteke iz  {{sectionNameFirst}} ali {{sectionNameSecond}}",
   "AgentInViewModeWarning": "Ste v <strong>samo za pregled</strong> načinu za {{aiAgent}}. Vidite rezultate aktivnosti {{aiChat}} drugih uporabnikov.",
-  "CreateChatDescription": "Pojdite na <{{aiChat}}> zagon, da začnete.",
+  "CreateChatDescription": "Pojdite na {{aiChat}} zavihek, da začnete.",
   "EmptyKnowledgeDescription": "Izgrajeni datoteke bodo indeksirane in uporabljene kot kontekst v zavihku {{aiChat}}. Dodajte datoteke (do 10 MB vsako) za postavljanje vprašanja AI, generiranje vsebine ali sodelovanje z informacijami.",
   "EmptyResultsDescription": "Vse spletne strani, ki jih generirate v {{aiChat}}, se bodo tukaj samodejno pojavile. Vsakokrat ko generirate vsebino, začnete pogovor ali pošljete sporočilo z rezultatom, bo rezultat shranjen v tem razdelku.",
   "EmptyResultsViewerDescription": "Tu boste videli rezultate aktivnosti {{aiChat}} drugih uporabnikov, ko bodo na voljo.",

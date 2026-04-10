@@ -51,7 +51,7 @@
   "MCPServerIntegrationURLHint": "Unesite adresu {{mcpServer}} koju je pružio vaš servis",
   "MCPSettingsDescription": "Ovaj deo vam omogućava da upravljate {{mcpServers}} za {{aiChats}} unutar soba. Možete omogućiti sistemske {{mcpServers}} ili dodati prilagođene radi zadovoljavanja potreba vaše kompanije. Nakon što se omoguće, ovi serveri će biti dostupni drugim korisnicima za njihove zadatke.",
   "PortalAiDisabledTooltip": "Da biste koristili AI provajdera {{productName}}, prvo se pobrinite da povežete AI uslugu.",
-  "ProviderAddedSuccess": "<0>{{aiProvider}}</0> uspešno dodan",
+  "ProviderAddedSuccess": "{{aiProvider}} uspešno dodan",
   "ProviderKeyInputHint": "Unesite API ključ generisan sa kontrolne table vašeg {{aiProvider}}",
   "ProviderRemovedSuccess": "Uspješno je uklonjen {{aiProvider}}",
   "ProviderUnavailableError": "{{aiProvider}} nije dostupan",

@@ -78,7 +78,7 @@
   "InputCurrency": "Vstup ({{currency}}/1M)",
   "InsufficientPermissionsMessage": "Nemáte dostatečné oprávnění. Kontaktujte platebníka (<1>{{payerContact}}</1>) pro přístup a konfiguraci služeb.",
   "LastTopUp": "<1>Poslední dobokladnění</1>: <2>{{currency}}</2> k datu {{date}}.",
-  "LessThanOneDay": "<1 den</N>",
+  "LessThanOneDay": "<1 den",
   "LowBalance": "Nízká zůstatková částka kreditů. Přidejte kredity, abyste zajistili nepřerušovanou službu.",
   "ModelSettings": "Nastavení modelu",
   "NeedTopUpWallet": "Vaše peněženka má nedostatečné prostředky. Prosím, doplňte peněženku.",

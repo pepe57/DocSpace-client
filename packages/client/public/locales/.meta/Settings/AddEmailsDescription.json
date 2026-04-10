@@ -3,7 +3,7 @@
   "content": "Check list of unimported users to import into {{organizationName}} {{productName}}.",
   "content_en_sha1_hash": "f813ddb0fd692acc396a9c04232098593d622568",
   "created_at": "2025-05-19T21:30:50.334Z",
-  "updated_at": "2026-04-09T04:30:07.588Z",
+  "updated_at": "2026-04-10T08:58:38.064Z",
   "comment": {
     "text": "Check list of unimported users to import into {{organizationName}} {{productName}}. This description appears on a button or dialog in the Add Emails step of a data import process, providing context for users about what to expect during the import operation.",
     "is_auto": true,
@@ -195,13 +195,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable {{organizationName}} and {{productName}} are concatenated without a space in the Turkish translation, which may lead to incorrect rendering if the variables themselves do not contain trailing/leading spaces.",
-          "suggestion": "{{organizationName}} {{productName}}’e aktarılacak içe aktarılmamış kullanıcıların listesini kontrol edin."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
@@ -219,13 +213,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "There is a missing space between the two variables {{organizationName}} and {{productName}} in the Chinese translation, which may cause them to merge into a single string in the UI.",
-          "suggestion": "检查要导入 {{organizationName}} {{productName}} 的未导入用户列表。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

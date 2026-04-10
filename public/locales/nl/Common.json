@@ -94,7 +94,7 @@
   "ApplyButton": "Toepassen",
   "Approve": "Goedkeuren",
   "Archive": "Archief",
-  "ArchivedRoomAction": "De kamer \"{{name}}\" is gearchiveerd",
+  "ArchivedRoomAction": "De kamer {{name}} is gearchiveerd",
   "Archives": "Archieven",
   "ArchivingData": "Gegevens archiveren",
   "AskAboutFormData": "Stel alles aan over \"{{name}}\" met behulp van de ingediende gegevens",

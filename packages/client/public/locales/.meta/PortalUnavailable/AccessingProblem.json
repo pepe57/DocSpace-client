@@ -3,7 +3,7 @@
   "content": "If you have problems accessing this {{productName}}, please contact the administrator.",
   "content_en_sha1_hash": "af425c7d33708c349709ce72580df5e20f7523a0",
   "created_at": "2025-05-19T21:30:53.444Z",
-  "updated_at": "2026-04-09T07:18:55.873Z",
+  "updated_at": "2026-04-10T08:58:38.067Z",
   "comment": {
     "text": "This translation key is used to display a message when users encounter difficulties accessing the product. It will be shown in a dialog box with the option to recover access, prompting users to contact the administrator for assistance. The message includes placeholders for the product name and registration email.",
     "is_auto": true,
@@ -75,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable {{productName}} has been modified with Finnish case endings (':een'), which breaks the technical placeholder requirement. Variables must appear with identical spelling and braces.",
-          "suggestion": "Jos sinulla on ongelmia tämän {{productName}} käyttöön liittyen, ota yhteyttä pääkäyttäjään."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {

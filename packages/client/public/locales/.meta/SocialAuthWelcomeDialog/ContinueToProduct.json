@@ -3,7 +3,7 @@
   "content": "Continue to {{productName}}",
   "content_en_sha1_hash": "474fade18676b3472f5128640b7cfd5461345cbd",
   "created_at": "2025-05-19T21:30:50.040Z",
-  "updated_at": "2026-04-08T21:41:07.732Z",
+  "updated_at": "2026-04-10T08:58:38.059Z",
   "comment": {
     "text": "This translation key is used to display a button label that continues to a product or docspace. It appears in a modal dialog footer and prompts the user to proceed to the next step after completing social authentication. The label includes the product name, which should be translated separately using another key.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable {{productName}} is missing from the German translation.",
-          "suggestion": "Weiter zu {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -75,13 +69,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable {{productName}} is missing from the Spanish translation.",
-          "suggestion": "Continuar a {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -93,13 +81,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable {{productName}} is missing from the French translation.",
-          "suggestion": "Continuer vers {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -165,13 +147,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The Romanian translation contains a trailing newline character/extra whitespace that is not present in the English source, which can affect UI layout in button labels.",
-          "suggestion": "Procedează la {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {

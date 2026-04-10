@@ -3,7 +3,7 @@
   "content": "<strong>Note:</strong> Your old space address will become unavailable to new users once you click the Save button.",
   "content_en_sha1_hash": "2c9edfd2e118ab897a57d7d5168c0a41b4ae4d12",
   "created_at": "2025-05-19T21:30:52.293Z",
-  "updated_at": "2026-04-09T01:56:48.132Z",
+  "updated_at": "2026-04-10T08:58:38.061Z",
   "comment": {
     "text": "This translation key is used to display a note about making an old space address unavailable to new users. It appears in a portal settings page and is displayed next to a save button. The translator should provide a message that informs users of this change's consequences.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The HTML <strong> tag is used incorrectly in the French translation. In the English version, only the word 'Note:' is wrapped in <strong>. In the French version, the entire introductory phrase 'Veuillez noter que' is wrapped in <strong>, which changes the intended emphasis and markup structure.",
-          "suggestion": "<strong>Note :</strong> votre ancienne adresse de l'espace deviendra indisponible pour les nouveaux utilisateurs une fois que vous aurez cliqué sur le bouton \"Sauvegarder\"."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {

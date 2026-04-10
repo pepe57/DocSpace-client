@@ -88,7 +88,7 @@
   "InputCurrency": "{{currency}}/1M",
   "InsufficientPermissionsMessage": "Você não tem permissões suficientes. Por favor, contate o pagador (<1>{{payerContact}}</1>) para acessar e configurar os serviços.",
   "LastTopUp": "<1>Último recarregamento</1>: <2>{{currency}}</2> em {{date}}.",
-  "LessThanOneDay": "<1>dia</1>",
+  "LessThanOneDay": "<1 dia",
   "LowBalance": "Saldo de créditos baixo. Adicione créditos para garantir um serviço ininterrupto.",
   "ModelSettings": "Configurações do Modelo",
   "NeedTopUpWallet": "Sua carteira possui fundos insuficientes. Por favor, recarregue sua carteira.",

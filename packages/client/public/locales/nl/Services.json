@@ -88,7 +88,7 @@
   "InputCurrency": "{{currency}}/1M",
   "InsufficientPermissionsMessage": "U heeft onvoldoende rechten. Neem contact op met de betaler (<1>{{payerContact}}</1>) om de diensten te bekijken en te configureren.",
   "LastTopUp": "<1>Laatste top-up</1>: <2>{{currency}}</2> op {{date}}.",
-  "LessThanOneDay": "<1>dag</1>",
+  "LessThanOneDay": "<1 dag",
   "LowBalance": "Laag kredietsaldo. Voeg credits toe om een ononderbroken service te garanderen.",
   "ModelSettings": "Instellingen van het model",
   "NeedTopUpWallet": "Uw portemonnee heeft onvoldoende saldo. Gelieve uw portemonnee aan te vullen.",

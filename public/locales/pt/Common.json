@@ -128,7 +128,7 @@
   "BadgeMyDraftTitle": "Meu rascunho",
   "BadgeStoppedTitle": "O preenchimento do formulário foi interrompido à força",
   "BadgeYourTurnTitle": "Este formulário deve ser preenchido por si",
-  "BarMaintenanceDescription": "Pedimos desculpa por quaisquer problemas de curta duração que possam surgir durante a manutenção da nossa plataforma, eles poderão surgir a {{targetDate}} durante a atualização do {{productName}}.",
+  "BarMaintenanceDescription": "Pedimos desculpa por quaisquer problemas de curta duração no funcionamento do serviço que possam surgir em {{targetDate}} durante a atualização do {{productName}}.",
   "BarMaintenanceDisclaimer": "Por favor, certifique-se que guardou todas as alterações feitas no dia indicado.",
   "BetaBadgeDescription": "Observação: você pode ativar idiomas RTL para a interface {{productName}} no modo beta. O suporte RTL para os editores estará disponível em breve.",
   "BetaBadgeFeedback": "Se você encontrou um bug, envie-o através do <1>fórum</1> ou entre em contato conosco em <3>{{supportEmail}}</3>.",

@@ -91,7 +91,7 @@
   "OffOn": "Encendido/Apagado",
   "OrderSummary": "Resumen del pedido",
   "OrganizationAI": "{{organizationName}} AI",
-  "OutputCurrency": "Resultado ({{currency}})/1M",
+  "OutputCurrency": "Resultado ({{currency}}/1M)",
   "PaidBackupDisabled": "Copias de seguridad pagadas deshabilitadas",
   "PricePerGB": "Precio por GB",
   "ReducedStorage": "Almacenamiento reducido",

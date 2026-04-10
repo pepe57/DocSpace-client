@@ -86,7 +86,7 @@
   "InputCurrency": "{{currency}}/1M",
   "InsufficientPermissionsMessage": "ທ່ານບໍ່ມີສິດອະນຸຍາດພຽງພໍ. ກະລຸນາຕິດຕໍ່ຜູ້ຈ່າຍເງິນ (<1>{{payerContact}}</1>) ເພື່ອເຂົ້າເຖິງ ແລະ ຕັ້ງຄ່າການບໍລິການ.",
   "LastTopUp": "<1>ການເຕີມເງິນຄັ້ງສຸດທ້າຍ</1>: <2>{{currency}}</2> ໃນວັນທີ {{date}}.",
-  "LessThanOneDay": "<1>ມື້</1>",
+  "LessThanOneDay": "<1 ມື້",
   "LowBalance": "ຍອດເຄຣດິດຕໍ່າ. ເພີ່ມເຄຣດິດເພື່ອຮັບປະກັນການບໍລິການບໍ່ຂັດຈັງຫວະ.",
   "ModelSettings": "ການຕັ້ງຄ່າ mô hình",
   "NewMonthlyPrice": "ລາຄາປະຈຳເດືອນໃໝ່",

@@ -78,7 +78,7 @@
   "InputCurrency": "Eingabe ({{currency}}/1M)",
   "InsufficientPermissionsMessage": "Sie verfügen nicht über ausreichende Berechtigungen. Bitte kontaktieren Sie den Zahler (<1>{{payerContact}}</1>), um auf die Dienste zuzugreifen und diese zu konfigurieren.",
   "LastTopUp": "<1>Letzte Aufladung</1>: <2>{{currency}}</2> am {{date}}.",
-  "LessThanOneDay": "1 Tag",
+  "LessThanOneDay": "<1 Tag",
   "LowBalance": "Geringer Guthabenstand. Fügen Sie Credits hinzu, um einen unterbrechungsfreien Dienst zu gewährleisten.",
   "ModelSettings": "Modelleinstellungen",
   "NeedTopUpWallet": "Ihr Wallet verfügt über unzureichende Mittel. Bitte laden Sie Ihr Wallet auf.",

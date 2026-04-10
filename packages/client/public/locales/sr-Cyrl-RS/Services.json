@@ -68,7 +68,7 @@
   "NewTotalStorage": "Нови тотален мемориј ({{storageUnit}})",
   "NextMonthBillDate": "Ваш следећи месечни рачун износиће {{currency}} и почиње са {{date}}",
   "OffOn": "Исиклоње/Укључено",
-  "OrderSummary": "<strong style=\"font-size: 1.2em;\">Сажетак саммари</strong>",
+  "OrderSummary": "Сажетак саммари",
   "PaidBackupDisabled": "Плаћени резервни бекапи искључени",
   "ReducedStorage": "Смањени меморијски простор",
   "ServiceIsDisabled": "Услуга је искључена",

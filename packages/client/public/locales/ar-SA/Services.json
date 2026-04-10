@@ -78,7 +78,7 @@
   "InputCurrency": "الإدخال ({{currency}}/1M)",
   "InsufficientPermissionsMessage": "ليس لديك صلاحيات كافية. يرجى الاتصال بالدافع (<1>{{payerContact}}</1>) للوصول إلى وتكوين الخدمات.",
   "LastTopUp": "<1>آخر عملية شحن</1>: <2>{{currency}}</2> في {{date}}.",
-  "LessThanOneDay": "<يوم واحد",
+  "LessThanOneDay": "<1 يوم",
   "LowBalance": "رصيد ائتماني منخفض. يرجى إضافة أرصدة لضمان استمرارية الخدمة دون انقطاع.",
   "ModelSettings": "إعدادات النموذج",
   "NeedTopUpWallet": "محفظتك لا تحتوي على رصيد كافٍ. يُرجى شحن محفظتك.",

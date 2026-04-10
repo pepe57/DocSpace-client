@@ -46,7 +46,7 @@
   "AIProviderSettingDescription": "Lidhni shërbimin tuaj të AI-së për të zhbllokuar funksionalitetet e avancuara në {{productName}}. Pasi të shtohet, do të jetë i aksesueshëm për të gjithë përdoruesit në {{aiChats}}.",
   "DefaultProviderDescription": "Zgjidhni {{aiProvider}} dhe modelin e paracaktuar për të gjitha funksionet në {{productName}} ({{aiAgents}}, redaktorët e dokumenteve, etj.).",
   "DeleteDefaultProviderDescription": "<1>Ky {{aiProvider}} është vendosur aktualisht si parazgjedhja.</1>\nFshirja e tij do të revokojë aksesin për të gjithë përdoruesit dhe cilësimet e tij do të zhduken përgjithmonë.\nNjë furnizues tjetër do të vendoset si parazgjedhja automatikisht dhe mund të ndryshohet më vonë në cilësime.",
-  "KnowledgeSettingsDescription": "<0>Aktivizoni një bazë të dijeve për {{aiAgents}}. Sistemi do të indeksojë dokumentet tuaja duke përdorur modelin {{modelName}} për të mbështetur kërkimin e bazuar në pyetje përmes të dhënave tuaja. Kjo veçori fokusohet në gjetjen e informacionit relevant, por nuk gjeneron përmbledhje apo nuk kryهن analiza globale.</0>",
+  "KnowledgeSettingsDescription": "Aktivizoni një bazë të dijeve për {{aiAgents}}. Sistemi do të indeksojë dokumentet tuaja duke përdorur modelin {{modelName}} për të mbështetur kërkimin e bazuar në pyetje përmes të dhënave tuaja. Kjo veçori fokusohet në gjetjen e informacionit relevant, por nuk gjeneron përmbledhje apo nuk kryهن analiza globale.",
   "MCPProductDescription": "{{organizationName}} {{productName}} {{mcpServer}} rregullon rrjedhët e punës të drejtuara nga AI, duke integruar LLM-t me sistemet e jashtme për menaxhim dokumentash efikas dhe të sigurt.",
   "MCPServerIntegrationURLHint": "Vendosni adresën {{mcpServer}} të ofruar nga shërbimi juaj",
   "MCPSettingsDescription": "Ky seksion ju lejon të menaxhoni {{mcpServers}} për {{aiChats}} brenda dhomave. Ju mund të aktivizoni {{mcpServers}} sistemike ose të shtoni ato të personalizuara për të përmbushur nevojat e kompanisë suaj. Pasi të aktivizohen, këta serverë do të jenë të aksesueshëm për përdoruesit e tjerë për detyrat e tyre.",
@@ -61,6 +61,6 @@
   "SearchEngine": "Motor {{webSearch}}",
   "ToUseAddProvider": "Për të përdorur {{value}}, sigurohuni që të lidhni së pari të paktën një {{aiProvider}}.",
   "WebSearchDisabledSuccess": "{{webSearch}} u fiksua me sukses",
-  "WebSearchEnabledSuccess": "<0>{{webSearch}}</0> uebësuar me sukses",
+  "WebSearchEnabledSuccess": "{{webSearch}} uebësuar me sukses",
   "WebSearchKeyDescription": "Vendosni çelësin API të marrë nga furnizuesi juaj {{webSearch}}"
 }

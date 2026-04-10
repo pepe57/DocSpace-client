@@ -766,7 +766,7 @@
   "NotFoundUsersDescription": "Neviens lietotājs neatbilst jūsu meklēšanas vaicājumam. Pielāgojiet meklēšanas parametrus vai notīriet meklēšanas lauku, lai skatītu pilnu lietotāju sarakstu.",
   "NothingToShowYet": "Vēl nav ko parādīt",
   "NoTimeLimit": "Nav laika ierobežojuma",
-  "NotIncludedInYourCurrentPlan": "Nav iekļauts {{variables}} jūsu pašreizējā plānā",
+  "NotIncludedInYourCurrentPlan": "Nav iekļauts jūsu pašreizējā plānā",
   "NotSupportedFormat": "Atvainojiet, bet šis faila formats nav atbalstīts",
   "OAuthAccountsName": "Pārskati",
   "OAuthAccountsReadDescription": "Skatīt visus kontus",

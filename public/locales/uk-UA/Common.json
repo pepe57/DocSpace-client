@@ -705,7 +705,7 @@
   "MergeFolders": "Об'єднати папки",
   "MergeFoldersDescription": "Дві папки буде об'єднано в одну з усім вмістом",
   "MessageCopiedSuccess": "Повідомлення скопійовано успішно",
-  "MessageExported": "Повідомлення експортовано у файл: <1>{{fileName}}<1>",
+  "MessageExported": "Повідомлення експортовано у файл: <1>{{fileName}}</1>",
   "MobileAndroid": "Отримати {{organizationName}} Documents в Google Play",
   "MobileEditPdfNotAvailableInfo": "Непідтримувана дія. Перемкніться на настільний режим, щоб мати можливість редагувати PDF-файли та створювати PDF-форми.",
   "MobileIos": "Завантажити {{organizationName}} Documents в App Store",

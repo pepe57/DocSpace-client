@@ -88,7 +88,7 @@
   "InputCurrency": "{{currency}}/1M",
   "InsufficientPermissionsMessage": "Nema dovoljno dozvola. Molimo kontaktirajte plaćenika (<1>{{payerContact}}</1>) radi pristupa i konfigurisanja usluga.",
   "LastTopUp": "<1>Poslednje punjenje</1>: <2>{{currency}}</2> dana {{date}}.",
-  "LessThanOneDay": "<1>dan</1>",
+  "LessThanOneDay": "<1 dan",
   "LowBalance": "Nizak saldo kredita. Dodajte kredite kako biste osigurali neprekidnu uslugu.",
   "ModelSettings": "Podešavanja modela",
   "NeedTopUpWallet": "Vaš novčanik ima nedovoljno sredstava. Molimo vas da dopunite novčanik.",

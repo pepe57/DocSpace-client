@@ -15,5 +15,5 @@
   "UsefulTipsDescription": "{{productName}} ගැන ප්‍රයෝජනවත් මාර්ගෝපදේශ ලබා ගන්න",
   "ActionsWithFilesDescription": "ලාංඡන මගින් {{rooms}}, {{shared}}, {{documents}}, සහ {{aiAgents}} යන කොටස් පුරා ගොනු ක්‍රියාකාරකම් — උඩුගත කිරීම්, සංස්කරණ හෝ බෙදාගැනීම් — ඉස්මතු කරනු ඇත.",
   "RoomsActivityDescription": "ඔබේ {{rooms}} සහ {{aiAgents}} තුළ නවීනව බෙදාගත් ගොනු/ෆෝල්ඩර් සහ ක්‍රියාකාරකම් පිළිබඳ ක්ෂණික ඊමේල් දැනුම්දීම් ලබා ගන්න.",
-  "RoomUpdateNotify": "<0>අන්තර්ගතය, {{rooms}} සහ {{aiAgents}} ක්‍රියාකාරකම්</0>"
+  "RoomUpdateNotify": "අන්තර්ගතය, {{rooms}} සහ {{aiAgents}} ක්‍රියාකාරකම්"
 }

@@ -88,7 +88,7 @@
   "InputCurrency": "{{currency}}/1M",
   "InsufficientPermissionsMessage": "您没有足够的权限。请联系付款人（<1>{{payerContact}}</1>）以访问和配置服务。",
   "LastTopUp": "<1>上次充值</1>: <2>{{currency}}</2> 于 {{date}}。",
-  "LessThanOneDay": "<1>天</1>",
+  "LessThanOneDay": "<1天",
   "LowBalance": "信用额度不足。请充值以确保服务不间断。",
   "ModelSettings": "模型设置",
   "NeedTopUpWallet": "您的钱包余额不足。请充值您的钱包。",

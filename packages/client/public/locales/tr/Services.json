@@ -87,7 +87,7 @@
   "HowDoesItWork": "Nasıl çalışır?",
   "InputCurrency": "{{currency}}/1M",
   "InsufficientPermissionsMessage": "Yeterli izniniz yok. Hizmetlere erişmek ve yapılandırmak için lütfen ödeme yapan kişiyle (<1>{{payerContact}}</1>) iletişime geçin.",
-  "LessThanOneDay": "<1>gün</1>",
+  "LessThanOneDay": "<1 gün",
   "LowBalance": "Düşük kredi bakiyesi. Kesintisiz hizmet sağlamak için kredi ekleyin.",
   "ModelSettings": "Model ayarları",
   "NeedTopUpWallet": "Cüzdanınızda yeterli bakiye bulunmamaktadır. Lütfen cüzdanınızı yükleyin.",

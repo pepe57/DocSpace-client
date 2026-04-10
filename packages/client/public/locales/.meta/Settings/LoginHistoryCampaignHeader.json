@@ -3,7 +3,7 @@
   "content": "Secure your {{productName}}",
   "content_en_sha1_hash": "dd0cf4fa1223874a80abb7d22c5bd183f7f2cc2d",
   "created_at": "2025-08-04T07:29:46.167Z",
-  "updated_at": "2026-04-09T02:29:49.013Z",
+  "updated_at": "2026-04-10T08:58:38.062Z",
   "comment": {
     "text": "This key displays a header message within the Login History section of the Portal Settings, specifically under the Security category. It's used to reassure users by highlighting the security of their {{productName}}. Translators should ensure the tone remains reassuring and emphasizes security.",
     "is_auto": true,
@@ -81,13 +81,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable {{productName}} is incorrectly formatted as {{productName}}-tilisi. In the original English, the variable is the object itself, whereas the Finnish translation appends '-tilisi' (your account) to the variable. This breaks the technical requirement for identical spelling and braces if the variable is intended to be a standalone noun.",
-          "suggestion": "Suojaa {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {

@@ -134,7 +134,7 @@
   "YourPrice": "Ваша цена",
   "AddCreditsToAI": "Додајте у еуредите за {{organizationName}} AI",
   "CurrencyPerBackup": "{{currency}} по резервной kopiji",
-  "MinCurrency": "<0>мин</0> {{currency}}",
+  "MinCurrency": "мин {{currency}}",
   "TopUpFrom": "Из",
   "TopUpTo": "До",
   "AdditionalDiskStorage": "Додатни дискови меморије",

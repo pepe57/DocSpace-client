@@ -23,7 +23,7 @@
   "ApiKeyCopied": "Chave API copiada",
   "APIKeyDeactivated": "A chave será desactivada depois: {{date}}",
   "APIKeyExpired": "Esta chave API expirou e já não está ativa",
-  "ApiKeyLifetime": "<1>O tempo de vida está definido.</1>A chave secreta será desactivada depois: {{days}} dias",
+  "ApiKeyLifetime": "<1>O tempo de vida está definido.</1> A chave secreta será desactivada depois: {{days}} dias",
   "APIKeyMaxDays": "Dias <1>(Máx. {{days}})</1>",
   "ApiKeys": "Chaves API",
   "ApiKeysDescription": "Como proprietário/administrador, pode ver e gerir todas as chaves API neste {{productName}}.",

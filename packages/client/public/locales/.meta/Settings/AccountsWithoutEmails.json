@@ -3,7 +3,7 @@
   "content": "We found <1>{{users}} users</1> without emails. You can fill their emails or continue without this action.",
   "content_en_sha1_hash": "d718ba1093dbe90e13bd71f2648b6016e01d6581",
   "created_at": "2025-10-27T16:14:25.407Z",
-  "updated_at": "2026-04-09T04:33:19.053Z",
+  "updated_at": "2026-04-10T08:58:38.064Z",
   "comment": {
     "text": "This text displays a notification to the user indicating the number of accounts missing email addresses. It appears within a block, likely on a data import or settings page, and provides the option to either manually add emails or proceed without doing so. Translators should ensure the message accurately conveys the user's choice to address missing email addresses.",
     "is_auto": true,
@@ -99,13 +99,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> is present, but the opening tag <1> is placed incorrectly. In the English version, <1> wraps '{{users}} users', whereas in the Italian version, it only wraps '{{users}}'. This changes the scope of the markup.",
-          "suggestion": "Abbiamo trovato <1>{{users}} utenti</1> senza email. Puoi compilare le loro email o continuare senza questa azione."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -127,11 +121,6 @@
         {
           "type": "missing_content",
           "description": "The translation is incomplete. It cuts off after 'You can fill' and fails to include the second part of the sentence: 'or continue without this action.'",
-          "suggestion": "ພວກເຮົາພົບຜູ້ໃຊ້ <1>{{users}}</1> ທີ່ບໍ່ມີອີເມວ. ທ່ານສາມາດຕື່ມອີເມວຂອງພວກເຂົາ ຫຼື ສືບຕໍ່ໂດຍບໍ່ຕ້ອງເຮັດການດຳເນີນການນີ້."
-        },
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> is missing in the Lao translation.",
           "suggestion": "ພວກເຮົາພົບຜູ້ໃຊ້ <1>{{users}}</1> ທີ່ບໍ່ມີອີເມວ. ທ່ານສາມາດຕື່ມອີເມວຂອງພວກເຂົາ ຫຼື ສືບຕໍ່ໂດຍບໍ່ຕ້ອງເຮັດການດຳເນີນການນີ້."
         }
       ],

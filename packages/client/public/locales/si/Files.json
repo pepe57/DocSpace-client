@@ -207,7 +207,7 @@
   "AIAgentUnpinned": "{{aiAgent}} අමුණා නැත",
   "ChangeRoomOwner": "කාමර හිමියා වෙනස් කරන්න",
   "LinkSettingsExpiredToastDescription": "සැකසුම් වල වලංගු කාලය දීර්ඝ කරන්න, නැතහොත් නව පරිශීලක ලියාපදිංචි කිරීම් සක්‍රීය කිරීමට නව සබැඳියක් සාදන්න.",
-  "LinkSettingsJoinedUsers": "<0>මෙම සබැඳිය හරහා පරිශීලකයින් සම්බන්ධ වී ඇත</0>",
+  "LinkSettingsJoinedUsers": "මෙම සබැඳිය හරහා පරිශීලකයින් සම්බන්ධ වී ඇත",
   "LinkSettingsLimitDescription": "මෙම සීමාවට ළඟා වූ පසු, සබැඳිය හරහා ලියාපදිංචිය ලබා ගත නොහැකි වනු ඇත",
   "LinkSettingsLimitExceeded": "සීමාව ඉක්මවා යාම නිසා සබැඳිය හරහා ලියාපදිංචි වීම තවදුරටත් ලබා ගත නොහැක.",
   "LinkSettingsUsersLimitToast": "සීමාව ඉක්මවා යාම නිසා, සබැඳිය හරහා ලියාපදිංචි වීම තවදුරටත් ලබා ගත නොහැක.",

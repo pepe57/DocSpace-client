@@ -3,7 +3,7 @@
   "content": "Contact link copied successfully. The link is <strong>valid for 7 days.</strong>",
   "content_en_sha1_hash": "5619f1f14069c03b91d2f3f6bab2a6c1a01e91af",
   "created_at": "2025-05-19T21:30:53.522Z",
-  "updated_at": "2026-04-09T07:22:48.536Z",
+  "updated_at": "2026-04-10T08:58:38.067Z",
   "comment": {
     "text": "This translation key is used to display a success message when a contact link is successfully copied. It will appear in a notification area, likely after a button click or confirmation action. The message should indicate that the link is valid for 7 days, providing context for users who may need to share it again soon.",
     "is_auto": true,
@@ -75,13 +75,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The HTML tag <strong> contains extra spaces around the content inside the tag, which can affect UI rendering, and the tag structure should be strictly preserved.",
-          "suggestion": "Kontaktilinkki kopioitu onnistuneesti. Linkki on <strong>voimassa 7 päivää.</strong>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -177,13 +171,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing </strong> tag is missing in the Russian translation, which will break the UI layout.",
-          "suggestion": "Ссылка на контакт успешно скопирована. Ссылка <strong>действительна в течение 7 дней.</strong>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -195,13 +183,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing </strong> tag contains an extra space before the closing bracket, which may cause rendering issues or mismatch with the component structure.",
-          "suggestion": "Odkaz na kontakt bol úspešne skopírovaný. Odkaz je <strong>platný 7 dní.</strong>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
