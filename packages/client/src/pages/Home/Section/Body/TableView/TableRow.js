@@ -122,8 +122,6 @@ const FilesTableRow = memo((props) => {
 
   const rowRef = React.useRef();
 
-  console.log(badgeUrl);
-
   const element = (
     <ItemIcon
       id={item.id}
