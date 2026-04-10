@@ -1351,6 +1351,17 @@
       }
     },
     {
+      "label": "Translation App | verify translations (LLM + recheck)",
+      "type": "shell",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && node src/scripts/verify-translations-spell-check.js --recheck",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
       "label": "Translation App | clear meta issues",
       "type": "shell",
       "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm run clear-meta-issues",

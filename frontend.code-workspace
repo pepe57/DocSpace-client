@@ -519,6 +519,11 @@
             "tooltip": "🤖 Run full LLM-based spell-check verification (slow)"
           },
           {
+            "label": "Verify Translations (LLM + recheck)",
+            "task": "Translation App | verify translations (LLM + recheck)",
+            "tooltip": "🔄 Re-verify only keys with existing issues in .meta (fast, targeted)"
+          },
+          {
             "label": "Update Metadata",
             "task": "Translation App | update metadata",
             "tooltip": "🔄 Regenerate all .meta files (generate-metadata + save-meta-keys-usage + auto-comments)"
