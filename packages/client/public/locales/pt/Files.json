@@ -10,7 +10,7 @@
   "AddUsersOrGroupsDescription": "Os administradores adicionados poderão criar salas utilizando este modelo.",
   "AddUsersOrGroupsInfo": "Apenas <1>{{productName}}</1> e <1>Administradores de salas</1> são mostrados aqui",
   "AddUsersOrGroupsInfoGroups": "Apenas <1>{{productName}}</1> e <1>Administradores de salas</1> dos grupos selecionados poderão criar salas utilizando este modelo.",
-  "AfterFilesWillBeDeletedPermanently": "{{date}} será eliminado permanentemente.",
+  "AfterFilesWillBeDeletedPermanently": "será eliminado permanentemente.",
   "AgentRemoved": "Agente removido",
   "AgentsRemoved": "Agentes removidos",
   "AllLinksAreDisabled": "Todos os links estão desativados",

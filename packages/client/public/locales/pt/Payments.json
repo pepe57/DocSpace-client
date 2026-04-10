@@ -8,7 +8,7 @@
   "NewUsersWillExceedMembersLimit": "Não é possível adicionar novos utilizadores pagos, uma vez que foi atingido o limite do número de administradores incluídos no seu plano atual.",
   "NotPossibleRoomRestoring": "Não é possível restaurar este quarto, uma vez que foi atingido o limite do número de quartos incluídos no seu plano atual.",
   "NumberOfRoomsAccordingToTariff": "Número de quartos de acordo com o seu plano tarifário: {{currentValue}}/{{maxValue}}",
-  "NumberOfUsersAccordingToTariff": "Número de administradores de acordo com o seu plano tarifário: {{currentValue}}/{{{maxValue}}",
+  "NumberOfUsersAccordingToTariff": "Número de administradores de acordo com o seu plano tarifário: {{currentValue}}/{{maxValue}}",
   "RoomsQuotaAlmostExhausted": "A quota de quartos está quase esgotada.",
   "UsersQuotaAlmostExhausted": "A quota de utilizadores pagos está quase esgotada.",
   "GracePeriodActive": "O período de carência está ativo <1>de {{fromDate}} a {{byDate}}</1> (dias restantes: {{delayDaysCount}}).",

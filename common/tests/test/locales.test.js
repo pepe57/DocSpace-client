@@ -657,6 +657,27 @@ describe("Locales Tests", () => {
       });
     });
 
+    // Reverse check: translations that have variables when English does NOT
+    const enWithoutVarsKeys = new Set(
+      groupedByLng["en"]
+        .filter((t) => t.variables.length === 0)
+        .map((t) => t.key),
+    );
+
+    otherLanguagesWithVariables.forEach((lng) => {
+      lng.translationsWithVariables.forEach((lngKey) => {
+        if (!enWithoutVarsKeys.has(lngKey.key)) return;
+        if (lngKey.variables.length === 0) return;
+
+        message +=
+          `${++i}. lng='${lng.language}' key='${lngKey.key}' has variables but 'en' has none ` +
+          `(en=0|${lng.language}=${lngKey.variables.length})\r\n` +
+          `'${lng.language}': '${lngKey.value}' Variables=[${lngKey.variables.join(",")}]\r\n\r\n`;
+        errorsCount++;
+        wrongVariableKeys.push({ language: lng.language, key: lngKey.key });
+      });
+    });
+
     clearWrongKeys(
       resolveTranslationEntries(wrongVariableKeys),
       "wrong variable translation keys",
@@ -2284,6 +2305,135 @@ describe("Locales Tests", () => {
     clearWrongKeys(
       resolveTranslationEntries(untranslatedKeys),
       "untranslated (EN-identical) keys",
+    );
+
+    expect(errorsCount, message).toBe(0);
+  });
+
+  it("SuspiciouslyShortTranslationTest: Verify that translations are not dramatically shorter than their English source.", () => {
+    // Catches cases like ClickButtonBelow being replaced with just "<br/>"
+    // when the English source is a full sentence.
+    const stripMarkup = (text) =>
+      text.replace(/\{\{[^}]+\}\}/g, "").replace(/<[^>]+>/g, "").replace(/&[a-zA-Z]+;/g, "").trim();
+
+    const enByNsKey = {};
+    translationFiles
+      .filter((f) => f.language === "en")
+      .forEach((file) => {
+        file.translations.forEach((t) => {
+          enByNsKey[`${file.namespace}|${t.key}`] = t.value;
+        });
+      });
+
+    let message = "Next keys have suspiciously short translations compared to English:\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const shortKeys = [];
+
+    translationFiles.forEach((file) => {
+      if (file.language === "en") return;
+
+      file.translations.forEach((t) => {
+        if (!t.value) return;
+
+        const enVal = enByNsKey[`${file.namespace}|${t.key}`];
+        if (!enVal) return;
+
+        const enClean = stripMarkup(enVal);
+        const trClean = stripMarkup(t.value);
+
+        // Only check strings where English text content is substantial (>30 chars)
+        if (enClean.length <= 30) return;
+
+        // CJK languages use fewer characters per concept — use a looser threshold
+        const cjkLanguages = new Set(["zh-CN", "ja-JP", "ko-KR"]);
+        const minRatio = cjkLanguages.has(file.language) ? 0.08 : 0.15;
+
+        // Flag if translation text content is suspiciously short relative to English
+        if (trClean.length > 0 && trClean.length < enClean.length * minRatio) {
+          message +=
+            `${++i}. lng='${file.language}' key='${file.namespace}:${t.key}' ` +
+            `(en=${enClean.length} chars, ${file.language}=${trClean.length} chars)\r\n` +
+            `'en': '${enVal.substring(0, 100)}${enVal.length > 100 ? "..." : ""}'\r\n` +
+            `'${file.language}': '${t.value}'\r\n\r\n`;
+          errorsCount++;
+          shortKeys.push({ language: file.language, key: `${file.namespace}:${t.key}` });
+        }
+      });
+    });
+
+    clearWrongKeys(
+      resolveTranslationEntries(shortKeys),
+      "suspiciously short translation keys",
+    );
+
+    expect(errorsCount, message).toBe(0);
+  });
+
+  it("InvalidVariableNamesTest: Verify that {{variables}} contain only valid identifier characters.", () => {
+    // Catches cases like {{azerbaijani text in braces}} or {{variable}}
+    // where non-identifier characters ended up inside double braces.
+    const regVariables = /\{\{([^}]+)\}\}/g;
+    // Valid variable: word chars, dots, spaces around commas (for i18next format)
+    const validVariablePattern = /^[\w]+(?:\s*,\s*[\w]+)*$/;
+
+    let message = "Next keys have invalid variable names inside {{}}:\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const invalidKeys = [];
+
+    translationFiles.forEach((file) => {
+      file.translations.forEach((t) => {
+        if (!t.value) return;
+
+        const matches = [...t.value.matchAll(regVariables)];
+        for (const match of matches) {
+          const varContent = match[1].trim();
+          if (!validVariablePattern.test(varContent)) {
+            message +=
+              `${++i}. lng='${file.language}' key='${file.namespace}:${t.key}' ` +
+              `invalid variable: '{{${varContent}}}'\r\n` +
+              `  value: '${t.value.substring(0, 120)}${t.value.length > 120 ? "..." : ""}'\r\n\r\n`;
+            errorsCount++;
+            invalidKeys.push({ language: file.language, key: `${file.namespace}:${t.key}` });
+            break; // one error per key is enough
+          }
+        }
+      });
+    });
+
+    clearWrongKeys(
+      resolveTranslationEntries(invalidKeys),
+      "invalid variable name keys",
+    );
+
+    expect(errorsCount, message).toBe(0);
+  });
+
+  it("TripleBracesTest: Verify that translations do not contain triple curly braces {{{ which break variable interpolation.", () => {
+    const tripleBracePattern = /\{\{\{/;
+
+    let message = "Next keys contain triple curly braces {{{ which break variable interpolation:\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+    const brokenKeys = [];
+
+    translationFiles.forEach((file) => {
+      file.translations.forEach((t) => {
+        if (!t.value) return;
+        if (tripleBracePattern.test(t.value)) {
+          message +=
+            `${++i}. lng='${file.language}' key='${file.namespace}:${t.key}'\r\n` +
+            `  value: '${t.value.substring(0, 120)}${t.value.length > 120 ? "..." : ""}'\r\n\r\n`;
+          errorsCount++;
+          brokenKeys.push({ language: file.language, key: `${file.namespace}:${t.key}` });
+        }
+      });
+    });
+
+    clearWrongKeys(
+      resolveTranslationEntries(brokenKeys),
+      "triple brace keys",
     );
 
     expect(errorsCount, message).toBe(0);

@@ -1373,7 +1373,7 @@
   "SubscriptionCancellation": "구독 취소",
   "SubscriptionWillBeAutomaticallyRenewed": "구독은 <1>{{finalDate}}</1>에 자동으로 갱신됩니다.",
   "SwitchPlan": "이제 <1>{{planName}} 요금제로 전환됩니다.</1>",
-  "ToppedUpWallet": "{{variables}}지갑 충전이 완료되었습니다.",
+  "ToppedUpWallet": "지갑 충전이 완료되었습니다.",
   "TopUp": "충전하기",
   "TopUpBalance": "잔액 충전",
   "TopUpFrom": "지",

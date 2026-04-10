@@ -1399,7 +1399,7 @@
   "WalletToppedUp": "Cüzdanınız başarıyla yüklendi",
   "WantToCancelStoragePlan": "Ek depolama aboneliğinizi iptal etmekten emin misiniz?",
   "WhenBalanceDropsTo": "Bakiye {{min}}'e düştüğünde, cüzdan otomatik olarak {{max}}'a kadar yüklenecektir.",
-  "WhenBalanceGoesBellow": "Bakiye {{variables}}’ın altına düştüğünde",
+  "WhenBalanceGoesBellow": "Bakiye ’ın altına düştüğünde",
   "WouldYouLikeToEnableAutoTopUps": "Bakiyeniz hiç bitmesin ister misiniz? Otomatik dolumları etkinleştirmek ister misiniz?",
   "YouHaveNotAddedAnyPayment": "Ödeme eklemeyi unuttunuz",
   "YourCurrentPlan": "<1>Mevcut planınız:</1> {{amount}} <2>({{price}}/ay)</2>",

@@ -7,7 +7,7 @@
   "DeleteFiles": "Jūs gatavojaties pārvietot <strong>failus ({{filesCount}})</strong> uz {{trashSection}}.",
   "DeleteFilesAndFolders": "Jūs gatavojaties dzēst <strong>failus ({{filesCount}})</strong> un <strong>mapes ({{foldersCount}})</strong> uz {{trashSection}}.",
   "DeleteFilesAndFoldersForever": "Jūs gatavojaties dzēst <strong>failus ({{filesCount}})</strong> un <strong>mapes ({{foldersCount}})</strong>.",
-  "DeleteFilesForever": "Jūs gatavojaties dzēst <strong>{{{filesCount}}}</strong>.",
+  "DeleteFilesForever": "Jūs gatavojaties dzēst <strong>{{filesCount}}}</strong>.",
   "DeleteFolders": "Jūs gatavojaties pārvietot <strong>mapes ({{foldersCount}})</strong> uz {{trashSection}}.",
   "DeleteFoldersForever": "Jūs gatavojaties dzēst <strong>mapes ({{foldersCount}})</strong>.",
   "DeleteGroupDescription": "Grupa {{groupName}} tiks izdzēsta. Grupu lietotāji netiks noņemti no {{productName}}. Vai tiešām vēlaties turpināt?",
