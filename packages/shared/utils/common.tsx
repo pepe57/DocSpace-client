@@ -27,6 +27,7 @@
 import type { Location } from "react-router";
 import find from "lodash/find";
 import { findWindows } from "windows-iana";
+import { getCultureLabel } from "../constants/cultures";
 import {
   parseToDateTime,
   startOf,
@@ -117,8 +118,6 @@ export const desktopConstants = Object.freeze({
 });
 
 let timer: null | ReturnType<typeof setTimeout> = null;
-type I18n = I18nextProviderProps["i18n"];
-
 export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
   return currentLng
     ? i18n.language !== currentLng
@@ -1154,14 +1153,8 @@ export const insertDataLayer = (id: string) => {
 export const mapCulturesToArray = (
   culturesArg: string[],
   isBetaBadge: boolean = true,
-  i18nArg?: I18n,
+  withLabel?: boolean,
 ) => {
-  let t = null;
-
-  if (i18nArg) {
-    t = i18nArg.getFixedT(null, "Common");
-  }
-
   return culturesArg.map((culture, index) => {
     let iconName = culture;
 
@@ -1176,10 +1169,10 @@ export const mapCulturesToArray = (
 
     const icon = flagsIcons?.get(`${iconName}.react.svg`);
 
-    const cultureObj = t
+    const cultureObj = withLabel
       ? {
           key: culture,
-          label: t(`Culture_${culture}`),
+          label: getCultureLabel(culture),
           icon,
           ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
           index,

@@ -30,7 +30,6 @@ import { withTranslation } from "react-i18next";
 
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { mapCulturesToArray } from "@docspace/shared/utils/common";
-import i18n from "../i18n";
 
 interface ComponentWithCultureNamesProps {
 	tReady?: boolean;
@@ -68,7 +67,7 @@ export default function withCultureNames<
 		}, []);
 
 		const cultureNames = useMemo(
-			() => (cultures ? mapCulturesToArray(cultures, true, i18n) : []),
+			() => (cultures ? mapCulturesToArray(cultures, true, true) : []),
 			[cultures, isAuthenticated],
 		);
 

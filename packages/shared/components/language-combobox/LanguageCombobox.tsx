@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useMemo } from "react";
-import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import {
   TOption,
@@ -56,8 +55,7 @@ const LanguageCombobox = (props: ComboboxProps) => {
     showLanguageName = false,
   } = props;
 
-  const { i18n } = useTranslation(["Common"]);
-  const withLabel = isMobileView || showLanguageName ? i18n : undefined;
+  const withLabel = isMobileView || showLanguageName;
 
   const cultureNames = useMemo(() => {
     return mapCulturesToArray(cultures, false, withLabel);

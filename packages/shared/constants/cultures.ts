@@ -1,0 +1,44 @@
+// Language display names in their native script.
+// These are locale-independent — the same for all UI languages.
+const cultureNames: Record<string, string> = {
+  "ar-SA": "عربي (المملكة العربية السعودية)",
+  az: "Azərbaycan (Latın, Azərbaycan)",
+  bg: "Български (България)",
+  cs: "Český (Česká republika)",
+  de: "Deutsch (Deutschland)",
+  "de-CH": "Deutsch (Schweiz)",
+  "el-GR": "Ελληνικά (Ελλάδα)",
+  "en-GB": "English (United Kingdom)",
+  "en-US": "English (United States)",
+  es: "Español (España)",
+  "es-MX": "Español (México)",
+  fi: "Suomi (Suomi)",
+  fr: "Français (France)",
+  "hy-AM": "Հայերեն",
+  it: "Italiano (Italia)",
+  "ja-JP": "日本語（日本）",
+  "ko-KR": "한국어(대한민국)",
+  "lo-LA": "ພາສາລາວ",
+  lv: "Latviešu (Latvija)",
+  nl: "Nederlands (Nederland)",
+  pl: "Polski (Polska)",
+  pt: "Português (Portugal)",
+  "pt-BR": "Português (Brasil)",
+  ro: "Română (România)",
+  ru: "Русский (Россия)",
+  si: "සිංහල (ශ්‍රී ලංකාව)",
+  sk: "Slovenčina (Slovensko)",
+  sl: "Slovensko (Slovenija)",
+  "sq-AL": "Shqip (Shqipëria)",
+  "sr-Cyrl-RS": "Српски (Србија)",
+  "sr-Latn-RS": "Srpski (Srbija)",
+  tr: "Türkçe (Türkiye)",
+  "uk-UA": "Українська (Україна)",
+  vi: "Tiếng Việt (Việt Nam)",
+  "zh-CN": "中文（简体，中国）",
+};
+
+export const getCultureLabel = (code: string): string =>
+  cultureNames[code] ?? code;
+
+export default cultureNames;

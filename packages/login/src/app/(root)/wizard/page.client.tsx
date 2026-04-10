@@ -152,7 +152,7 @@ function WizardForm(props: WizardFormProps) {
   const currCulture = i18n.language;
 
   const cultureNames = useMemo(() => {
-    if (portalCultures) return mapCulturesToArray(portalCultures, true, i18n);
+    if (portalCultures) return mapCulturesToArray(portalCultures, true, true);
     return [];
   }, [portalCultures, i18n]);
   const currentCulture = cultureNames?.find((item) => item.key === currCulture);
