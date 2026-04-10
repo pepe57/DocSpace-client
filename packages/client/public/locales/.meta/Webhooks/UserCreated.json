@@ -3,7 +3,7 @@
   "content": "User created",
   "content_en_sha1_hash": "e159a1be85770f93799fe38346253342f8e0dd31",
   "created_at": "2025-05-19T21:30:49.856Z",
-  "updated_at": "2026-04-07T19:35:05.235Z",
+  "updated_at": "2026-04-08T19:04:34.307Z",
   "comment": {
     "text": "This translation key is used to display the text \"User created\" in a user interface component, likely a webhook trigger selection option, allowing users to select when they want to receive notifications for new user creations.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Uživatel vytvořil' means 'User created [something]' (active voice, implying the user is the actor). In the context of a webhook trigger, it should mean 'A user has been created' (passive voice/event description).",
+          "suggestion": "Vytvoření uživatele"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

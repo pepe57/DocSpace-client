@@ -3,7 +3,7 @@
   "content": "{{productName}} Renaming",
   "content_en_sha1_hash": "0319b32930f9f565cf61d81d5d89dbc5851737dc",
   "created_at": "2025-05-19T21:30:52.254Z",
-  "updated_at": "2026-04-07T19:35:05.206Z",
+  "updated_at": "2026-04-09T01:59:18.248Z",
   "comment": {
     "text": "The translation key \"PortalRenaming\" is used to display a message when renaming a portal. It appears in a modal dialog header and footer. Translators should provide a phrase that informs users of the action they are about to perform on their portal.",
     "is_auto": true,
@@ -135,7 +135,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian word 'pārdēvēšana' means 'reselling' or 're-selling', whereas the English 'Renaming' refers to changing a name. The correct term for renaming is 'pārnamedošana' or 'nosaukuma maiņa'.",
+          "suggestion": "{{productName}} pārnamedošana"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -195,7 +201,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_variable",
+          "description": "The variable token '{{productName}}' is incorrectly modified with a suffix '-а'. In technical translations, variables must be preserved exactly as they appear in the source to prevent breaking the interpolation logic.",
+          "suggestion": "{{productName}} преименовање"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -223,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

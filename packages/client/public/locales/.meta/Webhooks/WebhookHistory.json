@@ -3,7 +3,7 @@
   "content": "Webhook history",
   "content_en_sha1_hash": "d5c876e94d902e5dbeaa0db16f985a22a99969df",
   "created_at": "2025-05-19T21:30:49.879Z",
-  "updated_at": "2026-04-07T19:35:05.236Z",
+  "updated_at": "2026-04-08T18:57:05.098Z",
   "comment": {
     "text": "This translation key is used for the label of a dropdown item that displays \"Webhook history\". It appears in a table or list where webhooks are displayed, likely as part of an interface for managing webhooks in the Portal Settings.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'تأريخ' (Ta'rikh) refers to the study of history or chronology. In a software UI context for 'history' (logs/records), 'سجل' (Sijill) is the correct technical term.",
+          "suggestion": "سجل الويب هوك"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -205,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

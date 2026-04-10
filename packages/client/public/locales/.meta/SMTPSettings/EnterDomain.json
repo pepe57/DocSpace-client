@@ -3,7 +3,7 @@
   "content": "Enter domain",
   "content_en_sha1_hash": "9eff7ed921a9f0545c57d5b06e9e53be925a95f4",
   "created_at": "2025-05-19T21:30:53.295Z",
-  "updated_at": "2026-04-07T19:35:05.183Z",
+  "updated_at": "2026-04-08T22:01:36.369Z",
   "comment": {
     "text": "This translation key is used to display a placeholder text in a form field when entering a domain. It appears as a prompt within an input field, guiding users to enter their domain information.",
     "is_auto": true,
@@ -153,7 +153,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'වසම' (vasama) means 'the same' or 'identical', which is a phonetic misspelling/mistranslation of 'domain' (ඩොමේන්). The current translation reads 'Enter the same' instead of 'Enter domain'.",
+          "suggestion": "ඩොමේන් එක ඇතුළත් කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

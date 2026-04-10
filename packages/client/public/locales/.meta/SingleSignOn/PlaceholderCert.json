@@ -3,7 +3,7 @@
   "content": "Paste or type text",
   "content_en_sha1_hash": "02f3028a3ce8d031866a3dd4465234dcb4a7c713",
   "created_at": "2025-05-19T21:30:50.118Z",
-  "updated_at": "2026-04-07T19:35:05.219Z",
+  "updated_at": "2026-04-08T23:10:29.832Z",
   "comment": {
     "text": "This translation key is used as a placeholder text in modal dialogs and form fields, instructing users to paste or type text into the provided field. It appears in various UI elements, such as text areas and labels, within application settings and certificate management pages.",
     "is_auto": true,
@@ -211,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

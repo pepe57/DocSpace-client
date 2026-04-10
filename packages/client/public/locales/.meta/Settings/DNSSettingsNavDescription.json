@@ -3,7 +3,7 @@
   "content": "DNS Settings is a way to set an alternative URL for your portal.",
   "content_en_sha1_hash": "3c82bb84a093eda60d3d1f18ddb01ff28bb6e063",
   "created_at": "2025-05-19T21:30:51.243Z",
-  "updated_at": "2026-04-07T19:35:05.195Z",
+  "updated_at": "2026-04-09T03:14:21.587Z",
   "comment": {
     "text": "The translation key \"DNSSettingsNavDescription\" is used to describe DNS Settings as an alternative URL option for a portal. It appears in a navigation bar, providing context for users interacting with the DNS Settings category on PortalSettings.",
     "is_auto": true,
@@ -105,7 +105,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'portal' is translated literally as 'ປະຕູ' (door/gate), which is incorrect in a technical software context. In IT, 'portal' should be transliterated or referred to as a web portal.",
+          "suggestion": "ການຕັ້ງຄ່າ DNS ແມ່ນວິທີການກໍານົດ URL ທາງເລືອກສໍາລັບ Portal ຂອງທ່ານ."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation incorrectly interprets 'DNS' as 'ව.නා.ප.' (which is the Sinhala abbreviation for Water Resources Board) and 'DNS Settings' as 'ඒ.ස.නි. සැකසීමට' (setting DNS), failing to convey that it is about setting an 'alternative URL'.",
+          "suggestion": "DNS සැකසුම් යනු ඔබගේ පෝටලය සඳහා විකල්ප URL එකක් සැකසීමේ ක්‍රමයකි."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

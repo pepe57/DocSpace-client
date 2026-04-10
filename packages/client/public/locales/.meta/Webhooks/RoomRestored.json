@@ -3,7 +3,7 @@
   "content": "Room restored",
   "content_en_sha1_hash": "056dcc7d185c90e55521946e4191b567be71b70a",
   "created_at": "2025-05-19T21:30:49.823Z",
-  "updated_at": "2026-04-07T19:35:05.234Z",
+  "updated_at": "2026-04-08T19:19:46.123Z",
   "comment": {
     "text": "This translation key is used to display a message when a room has been restored after being archived or deleted. It appears as a notification in the PortalSettings categories of developer tools, typically on a button or dialog to confirm restoration. Translators should provide a concise and descriptive phrase that indicates the action has been successfully reverted.",
     "is_auto": true,
@@ -135,7 +135,13 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "In the context of a digital workspace (DocSpace), 'Room' refers to a virtual space or channel, not a physical bedroom. 'Quarto' in Portuguese means a physical bedroom.",
+          "suggestion": "Sala restaurada"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

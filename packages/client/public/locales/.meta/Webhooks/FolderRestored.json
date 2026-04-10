@@ -3,7 +3,7 @@
   "content": "Folder restored",
   "content_en_sha1_hash": "f365ee67e4cc7e11a06fc7fab662e4e3a41e8779",
   "created_at": "2025-05-19T21:30:49.757Z",
-  "updated_at": "2026-04-07T19:35:05.231Z",
+  "updated_at": "2026-04-08T19:58:57.024Z",
   "comment": {
     "text": "The translation key \"FolderRestored\" is used to display a message indicating that a folder has been successfully restored. This message typically appears as part of a UI element, such as a button or dialog, and helps inform the user about the outcome of an action. Translators should aim to convey this positive outcome in their translated version.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Obnovení složky' means 'Folder restoration' (a noun phrase describing the process), whereas the English 'Folder restored' is a status message indicating the action is complete (past participle).",
+          "suggestion": "Složka byla obnovena"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

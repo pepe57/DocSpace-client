@@ -3,7 +3,7 @@
   "content": "Select sections for import. They will appear in the corresponding sections of {{productName}}.",
   "content_en_sha1_hash": "fdb4147ce80c84acaac01c116f234f42d5e0b2a7",
   "created_at": "2025-05-19T21:30:51.687Z",
-  "updated_at": "2026-04-07T19:35:05.201Z",
+  "updated_at": "2026-04-09T02:51:30.475Z",
   "comment": {
     "text": "This translation key is used to describe the action of selecting sections for import in various data import steps. It explains that selected sections will appear in corresponding sections of {{productName}} and is typically displayed as part of a button label or dialog description.",
     "is_auto": true,
@@ -63,7 +63,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'входиране' is a misspelling or incorrect term for 'import'. In Bulgarian, the correct term for data import is 'импортиране'. 'Входиране' is not a standard word in this context.",
+          "suggestion": "Изберете секции за импортиране. Те ще се появят в съответните секции на {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -117,7 +123,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation uses the singular 'このセクション' (this section) instead of the plural 'They' (these sections), which changes the meaning from multiple selected sections to a single section.",
+          "suggestion": "インポートするセクションを選択してください。これらは{{productName}}の対応するセクションに表示されます。"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -153,19 +165,37 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Gender disagreement: 'seções' (sections) is a feminine noun in Portuguese, but the pronoun 'Eles' (masculine) was used instead of 'Elas' (feminine).",
+          "suggestion": "Selecione seções para importação. Elas aparecerão nas seções correspondentes do {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Gender disagreement: 'seções' is a feminine noun in Portuguese, but the pronoun 'Eles' (masculine) is used instead of 'Elas' (feminine).",
+          "suggestion": "Selecione seções para importação. Elas aparecerão nas seções correspondentes do {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Typo in the word 'imoprt' (should be 'import').",
+          "suggestion": "Selectați secțiuni pentru import. Aceste secțiuni vor apărea în secțiunile corespunzătoare ale {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -195,7 +225,13 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The addition of the suffix '-а' to the variable {{productName}}-а is grammatically incorrect for a placeholder. If the variable contains a name, the suffix will be appended directly to the string, which may break the name or create incorrect declension depending on the value of the variable. In UI localization, variables should generally remain untouched to avoid breaking the dynamic content.",
+          "suggestion": "Изаберите секције за увоз. Оне ће се појавити у одговарајућим секцијама {{productName}}."
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -223,6 +259,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Deactivated successfully",
   "content_en_sha1_hash": "9a008aa01ec5413f82d1b6e5d24eb76ae227f7f9",
   "created_at": "2025-05-19T21:30:52.903Z",
-  "updated_at": "2026-04-07T19:35:05.213Z",
+  "updated_at": "2026-04-09T00:33:53.919Z",
   "comment": {
     "text": "This translation key is used to display a success message when a consumer toggle is deactivated successfully. It appears in the UI as part of a toast notification after a successful update operation, providing feedback to the user about the outcome of the action.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

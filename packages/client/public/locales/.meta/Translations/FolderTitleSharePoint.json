@@ -3,7 +3,7 @@
   "content": "SharePoint directory",
   "content_en_sha1_hash": "ba3b2bcebb6c52948e33724869585c561a7dec4f",
   "created_at": "2025-05-19T21:30:49.979Z",
-  "updated_at": "2026-04-07T19:35:05.225Z",
+  "updated_at": "2026-04-08T21:13:42.565Z",
   "comment": {
     "text": "This translation key is used to display the title of a SharePoint directory. It appears in various contexts, such as file lists or directories, where a user needs to identify the type of storage location. The label will be translated to reflect its specific content.",
     "is_auto": true,
@@ -81,7 +81,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'գրացուցակ' (list/directory in the sense of a contact list or index) is used instead of 'տնօրենություն' or 'թղթապանակ' (directory in the sense of a file system folder/structure). In the context of SharePoint and file storage, 'գրացուցակ' is semantically incorrect.",
+          "suggestion": "SharePoint թղթապանակ"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Director' in Romanian means 'Director/Manager' (a person), whereas 'Directory' in a technical context refers to a folder or storage location. The correct term is 'Directoriu'.",
+          "suggestion": "Directoriu SharePoint"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -177,7 +189,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation is in the instrumental case ('direktorijum'), whereas the English source is a noun phrase in the nominative case. In a UI title context, it should be 'SharePoint direktorijum'.",
+          "suggestion": "SharePoint direktorijum"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -202,6 +220,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Drejtoria' in Albanian means 'Directorate' or 'Management/Administration'. In the context of computing and file systems, 'directory' should be translated as 'dosja' or 'direktoria' (the latter is a loanword, but 'Drejtoria' specifically refers to a governing body/department).",
+          "suggestion": "Direktoria e SharePoint"
+        }
+      ],
       "approved_at": null
     }
   }

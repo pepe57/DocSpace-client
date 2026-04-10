@@ -3,7 +3,7 @@
   "content": "Complete",
   "content_en_sha1_hash": "1f5a1abf2f08ec18beb2664f458f86e399c233a4",
   "created_at": "2025-05-19T21:30:43.615Z",
-  "updated_at": "2026-04-07T19:35:04.948Z",
+  "updated_at": "2026-04-08T14:57:11.891Z",
   "comment": {
     "text": "This translation key is used to display a status update in the UI, indicating whether a file filling process has completed or stopped. It appears on a status indicator component and is rendered based on the current state of the file filling form status. The translation for this key should reflect the completion of the process.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation 'Tamamlayın' is an imperative verb meaning 'Complete!' (a command to the user). The English context indicates a status indicator (a state), which should be a past participle or adjective meaning 'Completed'.",
+          "suggestion": "Tamamlandı"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +57,25 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation 'Kompletní' means 'Complete' in the sense of 'comprehensive' or 'full' (adjective). In the context of a process status (Completed), the correct term should be 'Dokončeno' (Finished/Completed).",
+          "suggestion": "Dokončeno"
+        }
+      ],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation 'Vervollständigen' is a verb meaning 'to complete' (an action). In the context of a status indicator (Completed/Stopped), the adjective/past participle 'Abgeschlossen' or 'Fertig' should be used to describe the state.",
+          "suggestion": "Abgeschlossen"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -69,19 +87,37 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English 'Complete' is used as an adjective/status (meaning 'Finished'), whereas the Spanish 'Completar' is an infinitive verb (meaning 'To complete'). In a status indicator context, the past participle 'Completado' is the correct equivalent.",
+          "suggestion": "Completado"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation 'Täydennä' means 'Complete' in the sense of 'to fill out' or 'to supplement' (imperative verb). In the context of a status indicator (Completed vs Stopped), it should be a past participle or an adjective indicating the process is finished.",
+          "suggestion": "Valmis"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Complete' refers to a finished state (adjective/past participle), whereas the French 'Remplir' is an infinitive verb meaning 'to fill'. Based on the context of a status indicator (InProgress, Stopped, Completed), the translation should indicate that the process is finished.",
+          "suggestion": "Terminé"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -117,7 +153,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian word 'Aizpildīt' is an infinitive verb meaning 'To fill' or 'To complete (a task/form)'. In the context of a status indicator (Completed), it should be a past participle or an adjective indicating the state of being finished.",
+          "suggestion": "Aizpildīts"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -129,13 +171,25 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation 'Zakończ' is an imperative verb meaning 'Finish!' or 'Complete it!' (a command). The English 'Complete' in this context is an adjective/past participle describing a status (the process is complete).",
+          "suggestion": "Zakończono"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation 'Completo' is an adjective (meaning 'full' or 'complete' as a state of an object). In the context of a process status (Completed), the correct term should be the past participle 'Concluído' to indicate the action has finished.",
+          "suggestion": "Concluído"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -147,7 +201,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Complete' is used as an adjective/status (meaning 'Finished'), whereas the Romanian 'Completare' is a noun meaning 'Completion' or 'Filling process'. For a status indicator, the adjective 'Completat' should be used.",
+          "suggestion": "Completat"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -189,13 +249,25 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Complete' is used as an adjective/status (meaning 'Finished' or 'Completed'), whereas the Turkish 'Tamamla' is an imperative verb meaning 'Complete it!' or 'Finish it!'. For a status indicator, the past participle/adjective form is required.",
+          "suggestion": "Tamamlandı"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Complete' in this context refers to a finished state (adjective/past participle), whereas the Ukrainian 'Заповнити' is an imperative verb meaning 'to fill out' or 'to fill in'.",
+          "suggestion": "Завершено"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -208,6 +280,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation 'Përfundoni' is an imperative verb meaning 'Finish!' or 'Complete!' (command). In the context of a status indicator (Completed), it should be a past participle or an adjective indicating the state of being finished.",
+          "suggestion": "E përfunduar"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "{{productName}} address for internal requests from the Document Service",
   "content_en_sha1_hash": "d3815a656c220dde785b033d7fcf88dd267536a4",
   "created_at": "2025-05-19T21:30:51.400Z",
-  "updated_at": "2026-04-07T19:35:05.199Z",
+  "updated_at": "2026-04-09T03:08:57.657Z",
   "comment": {
     "text": "This translation key is used to display the address of the Document Service for internal requests. It appears as a label in an input field on the Portal Settings page. The value should match the product name to provide a specific location URL for internal requests.",
     "is_auto": true,
@@ -27,13 +27,25 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation omits the word 'internal' (داخلي), which is a key qualifier for the type of requests being described.",
+          "suggestion": "عنوان {{productName}} للطلبات الداخلية من خدمة المستندات"
+        }
+      ],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation omits the concept of 'address' (ünvan), which is the core subject of the label. The current translation reads as '{{productName}} for requests from the Document Service', whereas the English specifies it is the 'address' for those requests.",
+          "suggestion": "Sənəd Xidmətindən daxili sorğular üçün {{productName}} ünvanı"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -51,13 +63,25 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation reverses the relationship between the components. The English says the address is FOR the Document Service, but the German says the address is OF the Document Service FOR the product name.",
+          "suggestion": "{{productName}}-Adresse für interne Anfragen des Dokumenten-Services"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The phrase 'for internal requests' (για εσωτερικά αιτήματα) is missing from the Greek translation, which changes the specific scope of the address.",
+          "suggestion": "Διεύθυνση {{productName}} για εσωτερικά αιτήματα από την υπηρεσία εγγράφων"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -93,7 +117,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation omits the phrase 'for internal requests', which is a key part of the English meaning.",
+          "suggestion": "{{productName}}のドキュメントサービスからの内部リクエスト用のアドレス"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -199,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

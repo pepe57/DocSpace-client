@@ -3,7 +3,7 @@
   "content": "DocuSign account",
   "content_en_sha1_hash": "8923f31959d637d1c5bc0737b7c1292454bd7802",
   "created_at": "2025-05-19T21:30:49.972Z",
-  "updated_at": "2026-04-07T19:35:05.225Z",
+  "updated_at": "2026-04-08T21:18:48.681Z",
   "comment": {
     "text": "This translation key is used to display the title \"DocuSign account\" in various UI elements. It is typically displayed on a folder or file list view, and may appear as a button label or dialog heading. The translator should focus on conveying this information in a clear and concise manner.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

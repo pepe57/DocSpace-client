@@ -3,7 +3,7 @@
   "content": "Custom",
   "content_en_sha1_hash": "081ae3fdc403609cf6e760849ebb14117b7a50cb",
   "created_at": "2025-05-19T21:30:44.262Z",
-  "updated_at": "2026-04-07T19:35:04.954Z",
+  "updated_at": "2026-04-08T12:42:50.293Z",
   "comment": {
     "text": "This translation key is used for \"Custom\" labels and descriptions in the Portal Settings page, particularly in the categories and developer tools sections. It appears as a title or heading, indicating custom themes or settings. Translators should provide an equivalent label that accurately reflects the UI context.",
     "is_auto": true,
@@ -87,13 +87,25 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Personnalisées' is feminine plural, whereas the English 'Custom' is a neutral adjective/label. In a UI context for a heading or category, it should be the masculine singular 'Personnalisé' or the noun 'Personnalisation' to avoid gender agreement errors with unknown subsequent nouns.",
+          "suggestion": "Personnalisé"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Հարմարեցնել' means 'to adjust' or 'to adapt' (a verb). In the context of UI labels for themes or settings, 'Custom' should be an adjective/noun meaning 'customized' or 'user-defined'.",
+          "suggestion": "Անհատական"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -141,7 +153,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English word 'Custom' is an adjective meaning 'personalized' or 'bespoke' (e.g., Custom Themes). The Portuguese translation 'Personalizar' is a verb meaning 'to customize'. In a UI heading context, the adjective 'Personalizado' or the noun 'Personalização' should be used.",
+          "suggestion": "Personalizado"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -177,7 +195,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Po meri' means 'tailor-made' or 'according to my measure' in a literal/physical sense. In a UI context for settings, themes, or developer tools, 'Custom' should be translated as 'Prilagojeno' to denote user-defined or customized configurations.",
+          "suggestion": "Prilagojeno"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -211,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Select users",
   "content_en_sha1_hash": "8f2012e6097eda31bbf0f7e51ae403b08862e983",
   "created_at": "2025-05-19T21:30:52.552Z",
-  "updated_at": "2026-04-07T19:35:05.209Z",
+  "updated_at": "2026-04-09T01:31:19.952Z",
   "comment": {
     "text": "\"Select users\" is used to describe a step or action in data import processes within Google Workspace and OnlyOffice Workspaces. It appears on a settings page as part of a stepper component, guiding users through selecting specific files or users for import.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The French translation uses the singular 'utilisateur' instead of the plural 'utilisateurs', which fails to convey the plural meaning of 'users'.",
+          "suggestion": "Sélectionnez les utilisateurs"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -165,7 +171,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'පරිශ්‍රීලකයින්' is a misspelling of 'පරිශීලකයින්'. The extra '්‍ර' (ra-karaya) makes the word nonsensical.",
+          "suggestion": "පරිශීලකයින් තෝරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -211,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

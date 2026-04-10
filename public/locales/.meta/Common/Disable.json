@@ -3,7 +3,7 @@
   "content": "Disable",
   "content_en_sha1_hash": "9a7d4e0687b14e2b7cda406900b802782cd50a62",
   "created_at": "2025-05-19T21:30:44.526Z",
-  "updated_at": "2026-04-07T19:35:04.956Z",
+  "updated_at": "2026-04-08T12:01:00.815Z",
   "comment": {
     "text": "This translation key is used to display a label that enables users to disable guest access. In the \"ChangeUserStatusDialog\", it will be displayed as part of a button's label depending on the user type. It appears in a dialog for changing user status.",
     "is_auto": true,
@@ -135,7 +135,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Atspējot' is a gerund/participle meaning 'By disabling' or 'Disabling'. For a button label or a command, the imperative form 'Atspiet' or the infinitive 'Atspējošana' (depending on UI style) is required. However, 'Atspējot' specifically implies an action in progress or a method, which is grammatically incorrect for a direct action button.",
+          "suggestion": "Atspiet"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -177,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala term 'අබල කරන්න' (Abala karanna) is often used in legal or formal contexts meaning 'to invalidate' or 'to nullify'. In a software UI context for toggling a status (Enable/Disable), 'අක්‍රිය කරන්න' (Akriya karanna) is the standard and correct technical term for 'Disable'.",
+          "suggestion": "අක්‍රිය කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -223,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

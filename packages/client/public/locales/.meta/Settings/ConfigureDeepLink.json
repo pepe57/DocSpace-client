@@ -3,7 +3,7 @@
   "content": "Configure deep link",
   "content_en_sha1_hash": "edfb8002794be0c3c97a60c2efb077b54207446d",
   "created_at": "2025-05-19T21:30:50.950Z",
-  "updated_at": "2026-04-07T19:35:05.193Z",
+  "updated_at": "2026-04-09T03:55:23.046Z",
   "comment": {
     "text": "Configure deep link is used to display a title and subtitle for a configuration setting that allows users to customize a deep link within the portal settings. This translation key appears on a page in the portal settings category as part of a navigation bar, guiding users to configure their deep link.",
     "is_auto": true,
@@ -81,19 +81,37 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'hyperlinkki' (hyperlink) instead of 'syvälinkki' (deep link). In a technical context, a deep link is a specific type of URL that points to a specific location within an app or portal, whereas a hyperlink is a general term.",
+          "suggestion": "Konfiguroi syvälinkki"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'lien profond' is a literal translation of 'deep link' that is not the standard technical term in French. In a software/web context, 'deep link' is typically translated as 'lien profond' (rarely) or more accurately as 'lien direct'. However, 'lien profond' sounds unnatural to French users.",
+          "suggestion": "Configurer le lien direct"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation uses the plural form 'հղումները' (the links), whereas the English source is singular 'deep link'. This changes the meaning from configuring a single specific setting to configuring multiple links.",
+          "suggestion": "Կարգավորել խորը հղում"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -117,7 +135,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'deep link' is translated literally as 'ລິ້ງເຊື່ອມຕໍ່ເລິກ' (link connection deep), which is a semantic error in a technical context. In software localization, 'deep link' is a technical term that should either be transliterated or translated as a functional concept. The current translation sounds unnatural and nonsensical in Lao.",
+          "suggestion": "ຕັ້ງຄ່າ Deep Link"
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -153,7 +177,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'link de adâncime' is a literal, word-for-word translation of 'deep link' that is not used in Romanian technical terminology. In IT/Software contexts, 'deep link' is typically kept as is or referred to as 'link direct'. 'Adâncime' refers to physical depth (like a pool or ocean).",
+          "suggestion": "Configurează deep link"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -165,7 +195,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation uses 'දුඹුරු' (brown) instead of 'දීප්ත' or a technical term for 'deep'. 'Deep link' is a technical term, and translating 'deep' as the color 'brown' is a critical semantic error.",
+          "suggestion": "දීප්ත සබැඳිය සකසන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -211,6 +247,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

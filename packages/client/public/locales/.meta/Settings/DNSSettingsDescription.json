@@ -3,7 +3,7 @@
   "content": "Set an alternative URL address for your space. Send your request to our support team to get help with the settings.",
   "content_en_sha1_hash": "07909a29d7f524535573d7fd44621cfb9130ebf3",
   "created_at": "2025-05-19T21:30:51.221Z",
-  "updated_at": "2026-04-07T19:35:05.195Z",
+  "updated_at": "2026-04-09T03:16:33.158Z",
   "comment": {
     "text": "This translation key is used for a button or link that allows users to set an alternative URL address for their space. It provides instructions on how to send a request to support for assistance with DNS settings. This text appears in a dialog box or settings page, likely within the PortalSettings category of customization options.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text refers to 'your space', but the Azerbaijani translation uses 'Domeniniz' (Your domain). While contextually related to DNS, it changes the subject from the 'space' to the 'domain', which is a semantic shift.",
+          "suggestion": "Məkanınız üçün alternativ URL ünvanı təyin edin. Parametrlərlə bağlı kömək üçün sorğunuzu dəstək komandamıza göndərin."
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'ඒ.ස.නි.' (the phonetic transliteration of the letters D, N, S) instead of the standard technical term or the full meaning. While it attempts to translate 'URL', the context provided in the metadata explicitly mentions 'DNS settings'. The English text says 'URL address', but the Sinhala translation uses 'ඒ.ස.නි.' (DNS) which is a mismatch to the English source provided, or if it's meant to be URL, 'ඒ.ස.නි.' is the wrong acronym.",
+          "suggestion": "ඔබගේ අවකාශය සඳහා විකල්ප URL ලිපිනයක් සකසන්න. සැකසුම් සඳහා උදවු ලබා ගැනීමට ඔබගේ ඉල්ලීම අපගේ සහාය කණ්ඩායමට යවන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

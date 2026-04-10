@@ -3,7 +3,7 @@
   "content": "Individual events",
   "content_en_sha1_hash": "500875d6366d707999bfdf9346e38456a552c5b2",
   "created_at": "2025-05-19T21:30:49.775Z",
-  "updated_at": "2026-04-07T19:35:05.232Z",
+  "updated_at": "2026-04-08T19:51:41.198Z",
   "comment": {
     "text": "This translation key is used to display the label \"Individual events\" in a dropdown menu or form, indicating an option for selecting individual events in a trigger. It appears in a triggers form within developer tools on the portal settings page.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

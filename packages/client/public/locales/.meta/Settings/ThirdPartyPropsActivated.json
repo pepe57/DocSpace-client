@@ -3,7 +3,7 @@
   "content": "Updated successfully",
   "content_en_sha1_hash": "6d518cb77f8fee6fb91d236f4b3c5be23b28d204",
   "created_at": "2025-05-19T21:30:52.896Z",
-  "updated_at": "2026-04-07T19:35:05.213Z",
+  "updated_at": "2026-04-09T00:36:13.165Z",
   "comment": {
     "text": "This translation key is used for success messages when a consumer's third-party properties are updated successfully. It appears in a modal dialog after updating the consumer's properties via a specific button action. Translators should provide a message that conveys a positive outcome of this update process.",
     "is_auto": true,
@@ -51,7 +51,13 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation 'Einstellungen wurde aktualisiert' means 'Settings was updated', which is semantically different from the English 'Updated successfully'. Additionally, it contains a grammatical error (singular verb with plural subject), but the primary issue is the change in meaning from a general success message to a specific 'Settings' message.",
+          "suggestion": "Erfolgreich aktualisiert"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -147,13 +153,25 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Russian translation adds specific context ('Настройки сервиса' / 'Service settings') that is not present in the English source 'Updated successfully'. This makes the translation overly specific and potentially inaccurate if the context changes.",
+          "suggestion": "Обновлено успешно"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'යාවත්කාල' is an incomplete/incorrect form of the word for 'updated'. It should be 'යාවත්කාලීන' (Yāvatkālīna).",
+          "suggestion": "යාවත්කාලීන කෙරිණි"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Storage management",
   "content_en_sha1_hash": "aee08f8d5281c4277ee7ebdfe0a0f452865e73b5",
   "created_at": "2025-05-19T21:30:52.780Z",
-  "updated_at": "2026-04-07T19:35:05.211Z",
+  "updated_at": "2026-04-09T00:50:33.310Z",
   "comment": {
     "text": "The \"StorageManagement\" translation key is used to display the storage management section title on the Portal Settings page. It provides a clear and concise label for this section, helping users navigate through the settings. This translation key appears in a header context, likely as part of a category or tab navigation menu.",
     "is_auto": true,
@@ -141,7 +141,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "In a cloud/software context, 'Storage' refers to disk space or data storage (pamięć masowa/miejsce na dane), whereas 'pamięć' in Polish often implies RAM (memory). 'Zarządzanie pamięcią' is more commonly associated with RAM management.",
+          "suggestion": "Zarządzanie pamięcią masową"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -217,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

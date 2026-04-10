@@ -3,7 +3,7 @@
   "content": "Disable email verification",
   "content_en_sha1_hash": "6752c83196d2f72faefb0d749546f8b3600209a5",
   "created_at": "2025-05-19T21:30:51.198Z",
-  "updated_at": "2026-04-07T19:35:05.197Z",
+  "updated_at": "2026-04-09T03:18:25.358Z",
   "comment": {
     "text": "This translation key is used to display a label for a checkbox that controls email verification settings. In the PortalSettings page, it will be used as a label in an Advanced Settings component. The content should convey that this setting disables email verification, providing clarity for users navigating the portal's settings.",
     "is_auto": true,
@@ -87,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Անջատել մեյլի' is grammatically incorrect and uses 'մեյլի' (of mail/email) which sounds unnatural and incomplete. It translates more like 'Disable of email' rather than 'Disable email verification'.",
+          "suggestion": "Անջատել էլեկտրոնային փոստի հաստատումը"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -205,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

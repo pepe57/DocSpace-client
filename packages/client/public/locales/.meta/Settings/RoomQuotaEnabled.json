@@ -3,7 +3,7 @@
   "content": "Room quota has been successfully enabled.",
   "content_en_sha1_hash": "f8798ae2d7b3467cc9ad848be06b25332ae111b7",
   "created_at": "2025-05-19T21:30:52.450Z",
-  "updated_at": "2026-04-07T19:35:05.208Z",
+  "updated_at": "2026-04-09T01:40:27.729Z",
   "comment": {
     "text": "The RoomQuotaEnabled translation key is used to display a success message when room quota has been successfully enabled. This text appears in a toast notification after enabling room quota and is provided by the CurrentQuotaStore file.",
     "is_auto": true,
@@ -141,7 +141,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'sală' (room/hall) is used in a physical sense, whereas in the context of DocSpace/Cloud storage, 'Room' refers to a digital workspace or a specific storage container. 'Cotă de stocare pentru sală' sounds like a quota for a physical room. A more accurate technical term for 'Room' in this context is 'spațiu' or 'camere'.",
+          "suggestion": "Cotă pentru spațiu a fost activată cu succes."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -153,7 +159,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'ප්‍රමාණය' (pramāṇaya) means 'amount' or 'quantity', whereas 'quota' in this technical context refers to a 'limit' or 'allocation'. Using 'ප්‍රමාණය' makes the sentence sound like 'Room amount has been successfully enabled', which is semantically incorrect for a quota setting.",
+          "suggestion": "කාමර කෝටාව සාර්ථකව ක්‍රියාත්මක කර ඇත."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +211,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

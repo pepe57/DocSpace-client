@@ -3,7 +3,7 @@
   "content": "Disable certificate verification (insecure)",
   "content_en_sha1_hash": "3b6c75c57f9e4bd00424d14d59eb15255dc55259",
   "created_at": "2025-05-19T21:30:51.361Z",
-  "updated_at": "2026-04-07T19:35:05.198Z",
+  "updated_at": "2026-04-09T03:11:33.025Z",
   "comment": {
     "text": "This translation key is used for a checkbox label that enables or disables certificate verification in the DocumentService settings. It appears as a label on a checkbox within a UI component. Translators should provide an equivalent phrase indicating that certificate verification is insecure.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation means 'Disable email authentication' instead of 'Disable certificate verification'.",
+          "suggestion": "証明書の検証を無効にする (安全ではありません)"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation uses 'Atspējot' (Enabling/To enable) instead of 'Atspēgt' (Disable). This creates the opposite meaning of the English source.",
+          "suggestion": "Atspēgt sertifikāta verifikāciju (nedrošs)"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'පහත්පත්ර' (pahatpatra) is a misspelling or incorrect term for 'certificate' (සහතික). 'පහත්පත්ර' does not carry the meaning of a digital/security certificate in this context.",
+          "suggestion": "සහතික සත්‍යාපනය අක්‍රීය කරන්න (ආරක්ෂාව නැත)"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

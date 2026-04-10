@@ -3,7 +3,7 @@
   "content": "Yandex Directory",
   "content_en_sha1_hash": "2e1c5a40acb7713738807a3c81a7c13849dd96b5",
   "created_at": "2025-05-19T21:30:49.985Z",
-  "updated_at": "2026-04-07T19:35:05.225Z",
+  "updated_at": "2026-04-08T21:09:45.345Z",
   "comment": {
     "text": "The \"Yandex Directory\" translation key is used to display the title of a Yandex folder. It appears in UI elements that interact with Yandex folders, such as buttons or dialog titles. Translators should ensure this text accurately reflects the meaning of \"Yandex Directory\".",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'مجلد' means 'Folder', whereas 'Directory' in a technical context (like Yandex Directory) usually refers to a 'دليل'. While 'Folder' is a possible interpretation, 'Directory' is a specific term that should be translated more accurately to avoid confusion with a simple folder.",
+          "suggestion": "دليل Yandex"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -141,7 +147,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Director' in Romanian refers to a person (a manager or director), whereas 'Directory' in this context refers to a folder or a list of items. The correct term for a folder/directory is 'Directoriu'.",
+          "suggestion": "Directoriu Yandex"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -177,7 +189,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'direktorijum' is in the accusative/instrumental case, whereas the English title is in the nominative case. For a UI title/label, the nominative 'direktorijum' (or 'direktorij') is required.",
+          "suggestion": "Yandex direktorijum"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

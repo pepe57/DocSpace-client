@@ -3,7 +3,7 @@
   "content": "Import from Nextcloud",
   "content_en_sha1_hash": "404cbbe6db5d9f6a20a347688fdc4598b4e7dce7",
   "created_at": "2025-05-19T21:30:51.664Z",
-  "updated_at": "2026-04-07T19:35:05.201Z",
+  "updated_at": "2026-04-09T02:52:45.796Z",
   "comment": {
     "text": "Import from Nextcloud is used to describe a button or action that allows users to import data from their Nextcloud account. This translation key appears in the Portal Settings UI, specifically on the layout of the header section. It should be translated to provide a clear and descriptive label for users to understand what option they are selecting.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian verb 'Входирай' means 'Log in' or 'Sign in', which is incorrect for the action of 'Importing' data.",
+          "suggestion": "Импортирай от Nextcloud"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -147,7 +153,13 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Russian translation adds the word 'Workspace' which is not present in the English source text, potentially causing confusion with the 'Workspace' entity in ONLYOFFICE.",
+          "suggestion": "Импортировать из Nextcloud"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -177,7 +189,13 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'Uvezi' is in the imperative form (command), whereas 'Import' in a UI context functions as a noun or an infinitive action. In Serbian, 'Uvoz' (noun) or 'Uvezi' (imperative) are used, but 'Uvezi' sounds like a direct command to the user rather than a label for the action/button.",
+          "suggestion": "Uvoz sa Nextcloud-a"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

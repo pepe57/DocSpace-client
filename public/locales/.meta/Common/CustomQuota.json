@@ -3,7 +3,7 @@
   "content": "Custom quota",
   "content_en_sha1_hash": "b3c9bba8cb387eb569cf5f593876c1e621a96de3",
   "created_at": "2025-05-19T21:30:44.345Z",
-  "updated_at": "2026-04-07T19:35:04.954Z",
+  "updated_at": "2026-04-08T12:38:09.773Z",
   "comment": {
     "text": "The \"CustomQuota\" translation key is used to display a custom quota label in the filter section of the Home page. It is displayed when a user selects the \"Custom Quota\" option, indicating that they want to set their own quota threshold. The text appears on a dropdown or filter menu element.",
     "is_auto": true,
@@ -93,7 +93,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Հատուկ քվոտայով' means 'With a custom quota' (adverbial/instrumental case), whereas the English 'Custom quota' is a noun phrase used as a label. In a UI filter/dropdown context, it should be a noun.",
+          "suggestion": "Custom քվոտա"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -129,7 +135,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "In Dutch, 'quota' is the plural form of 'quota'. Since the English 'Custom quota' is singular, the correct singular form in Dutch is 'Aangepast quotum'.",
+          "suggestion": "Aangepast quotum"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -165,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'සලාකය' (salāka) means 'quota' in a very specific, archaic, or incorrect context (often referring to a portion or share in a way that doesn't fit software limits). In a technical UI context for storage or usage limits, 'quota' should be translated as 'කොටස' (portion) or more accurately 'සීමාව' (limit). Furthermore, 'අභිරුචි' is a literal translation of 'custom' but 'අභිරුචි කළ' (customized) is more appropriate for a setting.",
+          "suggestion": "අභිරුචි කළ සීමාව"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -211,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

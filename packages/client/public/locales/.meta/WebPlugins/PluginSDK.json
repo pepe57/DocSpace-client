@@ -3,7 +3,7 @@
   "content": "Plugin SDK",
   "content_en_sha1_hash": "db5137721d3c3c4eeffdfb6c023f6c7d28a1ca04",
   "created_at": "2025-05-19T21:30:49.920Z",
-  "updated_at": "2026-04-07T19:35:05.228Z",
+  "updated_at": "2026-04-08T18:35:00.494Z",
   "comment": {
     "text": "The translation key \"PluginSDK\" refers to the name of a plugin SDK used in developer tools. It is displayed as a label on a settings page and appears in a category title. Translators should provide a clear and concise translation for this text to be used consistently across different languages and regions.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'اضافات' (Add-ons/Extensions) is a plural noun, whereas 'Plugin SDK' refers to a specific Software Development Kit. In a technical context, 'Plugin' should be translated as 'إضافة' (singular) or kept as 'Plugin' to maintain the technical accuracy of the SDK name.",
+          "suggestion": "SDK الإضافات"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -123,7 +129,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Spraudnis' in Latvian refers to a physical electrical plug. In a software context, 'Plugin' should be transliterated or translated as 'Pievienotājprogramma'.",
+          "suggestion": "Pievienotājprogrammas SDK"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -165,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala word 'පේනු' (Penu) means 'Pen'. This is a mistranslation of 'Plugin'. The technical term 'Plugin' should be transliterated or translated to reflect software extensions, not writing instruments.",
+          "suggestion": "ප්ලගින් SDK"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -211,6 +229,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

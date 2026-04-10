@@ -3,7 +3,7 @@
   "content": "Collect the completed form copies and data from them into XLSX for analyzing responses in Form Filling rooms.",
   "content_en_sha1_hash": "3b43aef8ad1149a97c567527e3f169f5362b0735",
   "created_at": "2025-05-19T21:30:45.493Z",
-  "updated_at": "2026-04-07T19:35:04.968Z",
+  "updated_at": "2026-04-08T08:56:20.691Z",
   "comment": {
     "text": "Collect completed form copies and data into XLSX for analysis in Form Filling rooms. This description is used in buttons to initiate file sharing in various UI components such as dialogs, share panels, and share form dialogs.",
     "is_auto": true,
@@ -123,7 +123,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation is a noun phrase ('Aizpildīto veidlapu kopiju... apkopošana') instead of an imperative verb phrase ('Collect...'). In the context of a UI description for a button/action, the English 'Collect' implies an action to be performed, whereas the Latvian version reads like a title or a heading, which may feel unnatural for a description field.",
+          "suggestion": "Apkopojiet aizpildīto veidlapu kopijas un no tām iegūtos datus XLSX formatā, lai analizētu atbildes veidlapu aizpildīšanas telpās."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -135,7 +141,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'skopiowane formularze' (copied forms) incorrectly implies that the forms themselves are copies, whereas the English 'completed form copies' refers to the copies/instances of the completed forms. More importantly, 'zbierz... do formatu XLSX' is slightly awkward, but the main issue is the semantic shift in 'skopiowane formularze'.",
+          "suggestion": "Zbierz kopie wypełnionych formularzy oraz dane z nich do formatu XLSX w celu analizy odpowiedzi w pomieszczeniach do wypełniania formularzy."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -153,7 +165,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation adds 'formularul' (the form) before XLSX, changing the meaning from 'into XLSX' (the file format) to 'into the XLSX form'.",
+          "suggestion": "Colectați copiile formularelor completate și datele din acestea în XLSX pentru a analiza răspunsurile în săli de Completare a formularelor."
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -165,7 +183,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'වීදුරැණු ප්‍රශ්න පත්‍ර' (glass question papers) instead of 'පෝරම' (forms). This is a critical semantic error where 'form' was mistranslated as 'glass'. Additionally, 'පෝම් ෆිලිං කුම' is a phonetic transliteration that is nonsensical in Sinhala context.",
+          "suggestion": "සම්පූර්ණ කරන ලද පෝරම පිටපත් සහ ඒවායේ දත්ත, Form Filling කාමරවල ප්‍රතිචාර විශ්ලේෂණය කිරීම සඳහා XLSX ගොනුවක් ලෙස රැස් කරන්න."
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -195,7 +219,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation omits the target format 'XLSX', which is a key technical detail in the instruction.",
+          "suggestion": "Form Doldurma odalarındaki yanıtları analiz etmek için doldurulan form kopyalarını ve verilerini XLSX formatında toplayın."
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -214,6 +244,23 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "punctuation_mismatch",
+          "description": "English ends with \".\" but translation ends with \"r\"",
+          "suggestion": ""
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The translation contains a typo 'nl' instead of 'në' (in), and it fails to translate 'Form Filling rooms' correctly, ending the sentence abruptly with 'në formular' (in form) which changes the meaning from 'Form Filling rooms' to just 'form'.",
+          "suggestion": "Mblidhni kopjet e formularëve të plotësuar dhe të dhënat prej tyre në format XLSX për të analizuar përgjigjet në dhomat e plotësimit të formularit"
+        }
+      ],
       "approved_at": null
     }
   }

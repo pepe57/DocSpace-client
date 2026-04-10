@@ -3,7 +3,7 @@
   "content": "Create and copy",
   "content_en_sha1_hash": "664c11524d7aaec28682c1ec39a8d3e5f847912d",
   "created_at": "2025-05-19T21:30:43.837Z",
-  "updated_at": "2026-04-07T19:35:04.951Z",
+  "updated_at": "2026-04-08T13:58:24.250Z",
   "comment": {
     "text": "This translation key is used to display the text \"Create and copy\" in a shared component, appearing as a link within a row of links that allows users to create a new instance or duplicate an existing one. The text is used to describe the action associated with the link.",
     "is_auto": true,
@@ -199,6 +199,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

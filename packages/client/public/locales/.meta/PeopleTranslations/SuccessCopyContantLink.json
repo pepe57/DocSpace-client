@@ -3,7 +3,7 @@
   "content": "Contact link copied successfully. The link is <strong>valid for 7 days.</strong>",
   "content_en_sha1_hash": "5619f1f14069c03b91d2f3f6bab2a6c1a01e91af",
   "created_at": "2025-05-19T21:30:53.522Z",
-  "updated_at": "2026-04-07T19:35:05.179Z",
+  "updated_at": "2026-04-09T07:22:48.536Z",
   "comment": {
     "text": "This translation key is used to display a success message when a contact link is successfully copied. It will appear in a notification area, likely after a button click or confirmation action. The message should indicate that the link is valid for 7 days, providing context for users who may need to share it again soon.",
     "is_auto": true,
@@ -39,7 +39,13 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation is grammatically incomplete and lacks the necessary preposition to convey the meaning 'valid for 7 days'. It currently reads 'valid 7 days'.",
+          "suggestion": "Линкът за контакт е копиран успешно. Линкът е <strong>валиден за 7 дни.</strong>"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -69,7 +75,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The HTML tag <strong> contains extra spaces around the content inside the tag, which can affect UI rendering, and the tag structure should be strictly preserved.",
+          "suggestion": "Kontaktilinkki kopioitu onnistuneesti. Linkki on <strong>voimassa 7 päivää.</strong>"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -105,7 +117,13 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation incorrectly translates 'Contact link' as 'Project committee' (ຄະນະໂຄງການຕິດຕໍ່), which changes the meaning entirely. It should refer to a link for contact.",
+          "suggestion": "ຄັດລອກລິ້ງຕິດຕໍ່ສຳເລັດແລ້ວ. ລິ້ງນີ້ແມ່ນ <strong>ໃຊ້ໄດ້ເປັນເວລາ 7 ມື້</strong>."
+        }
+      ],
       "approved_at": null
     },
     "lv": {
@@ -123,7 +141,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation adds the word 'tylko' (only), which changes the meaning from 'valid for 7 days' to 'valid ONLY for 7 days'. While subtle, it adds a restrictive nuance not present in the source.",
+          "suggestion": "Link kontaktowy został skopiowany pomyślnie. Link jest <strong>ważny przez 7 dni.</strong>"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -141,13 +165,25 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation adds the word 'numai' (only), which changes the meaning from 'valid for 7 days' to 'valid ONLY for 7 days'. While subtle, it adds a restrictive nuance not present in the source.",
+          "suggestion": "Link-ul de contact a fost copiat cu succes. Linkul este <strong>valabil 7 zile.</strong>"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The closing </strong> tag is missing in the Russian translation, which will break the UI layout.",
+          "suggestion": "Ссылка на контакт успешно скопирована. Ссылка <strong>действительна в течение 7 дней.</strong>"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -159,7 +195,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The closing </strong> tag contains an extra space before the closing bracket, which may cause rendering issues or mismatch with the component structure.",
+          "suggestion": "Odkaz na kontakt bol úspešne skopírovaný. Odkaz je <strong>platný 7 dní.</strong>"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
@@ -171,13 +213,25 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation is grammatically incomplete and fails to convey the full meaning. 'Линк је <strong>важећи 7 дана.</strong>' translates to 'The link is <strong>valid 7 days.</strong>', missing the preposition 'for' or a verb structure that makes sense in Serbian (e.g., 'will be valid' or 'is valid for').",
+          "suggestion": "Линк за контакт је успешно копиран. Линк <strong>важи 7 дана.</strong>"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation is grammatically incomplete and changes the meaning. 'Link je važeći 7 dana' translates to 'Link is valid 7 days', which is an incorrect construction in Serbian. It should state that the link 'is valid for 7 days'.",
+          "suggestion": "Link za kontakt je uspešno kopiran. Link <strong>važi 7 dana.</strong>"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -199,6 +253,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

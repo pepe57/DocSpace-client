@@ -3,7 +3,7 @@
   "content": "{{length}} characters",
   "content_en_sha1_hash": "a7ed7492dec488d47f9502d4211e3214ea9ebdf5",
   "created_at": "2025-05-19T21:30:50.881Z",
-  "updated_at": "2026-04-07T19:35:05.193Z",
+  "updated_at": "2026-04-09T03:58:16.482Z",
   "comment": {
     "text": "This translation key is used to display the length of a password in the user interface. It appears on a page where users can set and view the strength of their passwords, providing feedback on the number of characters in the input field.",
     "is_auto": true,
@@ -33,7 +33,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'İşarələrin' means 'of the signs/symbols', which is semantically incorrect for 'characters' in the context of password length. In Azerbaijani, 'simvol' or 'simvollar' is the correct term for text characters.",
+          "suggestion": "{{length}} simvol"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

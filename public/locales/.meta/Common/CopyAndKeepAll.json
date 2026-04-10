@@ -3,7 +3,7 @@
   "content": "Copy and keep all",
   "content_en_sha1_hash": "971cae02621d8baa4bdf72eccc28d0438d12ba3d",
   "created_at": "2025-05-19T21:30:43.738Z",
-  "updated_at": "2026-04-07T19:35:04.950Z",
+  "updated_at": "2026-04-08T14:18:26.635Z",
   "comment": {
     "text": "This translation key is used as a default message for a button that allows users to copy and keep all files in a conflict resolution dialog. The exact wording may vary depending on the specific context where it appears, but its purpose remains consistent: to provide an alternative action when multiple files are involved.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Arabic translation 'انسخ واحتفظ بالجميع' translates to 'Copy and keep everyone/all people', which is incorrect in the context of files. In Arabic, 'الجميع' (al-jami') refers to people/persons, whereas 'الكل' (al-kull) or 'جميع الملفات' (all files) should be used for objects/files.",
+          "suggestion": "نسخ والاحتفاظ بالكل"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -75,7 +81,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 'garder tous' is grammatically incomplete and incorrect in this context. 'Tous' (all) requires a noun or a pronoun to function correctly in French. Since the context refers to files, it should be 'tout' (everything) or 'tous les fichiers' (all files). In a UI button context, 'Tout copier et conserver' or 'Copier et conserver tout' is the correct way to convey 'Copy and keep all'.",
+          "suggestion": "Copier et tout conserver"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -202,6 +214,18 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation 'të gjithë/a' refers to people (all of them/everyone) rather than objects/files. In the context of files, 'të gjitha' (feminine plural for 'files/skedarët') or 'të gjithë' (masculine plural) should be used, but 'të gjithë/a' is grammatically awkward for a UI button and implies people.",
+          "suggestion": "Kopjoni dhe ruani të gjitha"
+        }
+      ],
       "approved_at": null
     }
   }

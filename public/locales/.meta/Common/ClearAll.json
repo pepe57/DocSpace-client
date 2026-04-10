@@ -3,7 +3,7 @@
   "content": "Clear all",
   "content_en_sha1_hash": "c043160a89ba0acd714977735d49455f662b1c79",
   "created_at": "2025-05-19T21:30:43.466Z",
-  "updated_at": "2026-04-07T19:35:04.946Z",
+  "updated_at": "2026-04-08T15:24:24.788Z",
   "comment": {
     "text": "This translation key is used to display a button label in a filter component that clears all filters. It appears as a link within a filter control element. Translators should provide an alternative text that conveys the action of clearing all filters.",
     "is_auto": true,
@@ -141,7 +141,13 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation 'Golire totală' sounds like 'Total emptying' (as in a container) and is grammatically awkward for a UI action button. In the context of clearing filters, 'Șterge tot' or 'Curăță tot' is the standard functional translation.",
+          "suggestion": "Șterge tot"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

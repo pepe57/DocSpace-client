@@ -3,7 +3,7 @@
   "content": "Plugin samples",
   "content_en_sha1_hash": "52548adb731eeeda86b2df3c051c254dd28ffc5b",
   "created_at": "2025-05-19T21:30:49.918Z",
-  "updated_at": "2026-04-07T19:35:05.228Z",
+  "updated_at": "2026-04-08T18:36:59.289Z",
   "comment": {
     "text": "This translation key is used to display \"Plugin samples\" as a heading in the developer tools section of the Portal Settings page. It appears as a bold title above a list of plugin SDK-related content when the user clicks on a link or navigates to this page.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'zásuvné moduly' refers to physical electrical plug-in modules (like for a power strip or wall socket). In a software context, 'plugin' should be translated as 'plugin' or 'doplňkový modul'.",
+          "suggestion": "Ukázky pluginů"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -57,7 +63,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation uses the singular 'πρόσθετου' (plugin), whereas the English source is plural 'Plugin samples'. In a developer context, this should refer to multiple samples of plugins.",
+          "suggestion": "Δείγματα πρόσθετων"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -153,7 +165,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ආදර්ශ පේනු' means 'Sample pens'. In a technical context, 'Plugin' refers to software extensions, not writing instruments.",
+          "suggestion": "ප්ලගින් ආදර්ශ"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -165,19 +183,37 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'vtičnik' refers to a physical electrical plug/socket. In a software context (SDK/Developer tools), 'plugin' should be translated as 'vtičnik' only in very specific hardware contexts, but for software extensions, 'dodatek' or 'plugin' is the standard technical term. 'Vzorci' can mean 'patterns' or 'samples', but in this context, 'Primeri' (examples) is the correct term for code samples.",
+          "suggestion": "Primeri dodatkov"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Узорци' (Patterns/Ornaments) is an incorrect translation for 'Samples' in a software/developer context. The correct term for code or plugin samples is 'Примери'.",
+          "suggestion": "Примери додатка"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Uzorci' in Serbian typically refers to 'patterns' or 'templates'. In a software development context for 'Plugin samples', the correct term is 'Primeri'.",
+          "suggestion": "Primeri dodataka"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -199,6 +235,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

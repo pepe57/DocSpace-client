@@ -3,7 +3,7 @@
   "content": "Disabling {{organizationName}} AI will make {{organizationName}}-provided models unavailable.",
   "content_en_sha1_hash": "1baa3b9e3d6b8f9010478c4167d7c23aa99cae68",
   "created_at": "2026-03-20T09:07:40.733Z",
-  "updated_at": "2026-04-06T15:27:51.841Z",
+  "updated_at": "2026-04-09T05:32:04.354Z",
   "comment": {
     "text": "This key displays a confirmation message in a dialog or confirmation panel. It warns users that disabling AI tools will make the organization's AI models unavailable. The message includes the organization’s name, which should be localized appropriately.",
     "is_auto": true,
@@ -25,6 +25,222 @@
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Atspoguļot' means 'To reflect' or 'To mirror'. It is used incorrectly here instead of a term for 'Disabling'.",
+          "suggestion": "Atslēdzot {{organizationName}} AI, {{organizationName}} nodrošinātie modeļi kļūs nepieejami."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Gender mismatch: 'IA' (Inteligência Artificial) is a feminine noun in Portuguese, so the article should be 'a' instead of 'o'.",
+          "suggestion": "Desativar a IA da {{organizationName}} tornará os modelos fornecidos pela {{organizationName}} indisponíveis."
+        }
+      ],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical error in Romanian: 'modelele... indisponibile' is incorrect. Since 'modelele' is the subject, the adjective must agree in number. However, the current phrasing 'va face modelele... indisponibile' is grammatically awkward/incorrect in this context; it should be 'va face indisponibile modelele' or 'va face ca modelele... să fie indisponibile'. More critically, 'indisponibile' refers to 'modelele' (plural), but the structure 'va face [object] [adjective]' in Romanian requires careful agreement.",
+          "suggestion": "Dezactivarea AI-ului {{organizationName}} va face indisponibile modelele furnizate de {{organizationName}}."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'të papërshtatshëm' means 'unsuitable' or 'inappropriate', whereas the English 'unavailable' means 'not accessible' or 'not available' (të papërdorshëm/të padostępshëm).",
+          "suggestion": "Disaktivizimi i AI-s së {{organizationName}} do të bëjë modelët e ofruar nga {{organizationName}} të papërdorshëm."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The translation is a mix of Serbian Cyrillic and Serbian Latin (code-switching). The phrase 'koje pружи' is in Latin script, whereas the requirement is Serbian Cyrillic.",
+          "suggestion": "Искључивање {{organizationName}} AI учиниће моделе које пружи {{organizationName}} неактивним."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

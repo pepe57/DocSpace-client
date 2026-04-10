@@ -3,7 +3,7 @@
   "content": "This {{productName}} is deactivated",
   "content_en_sha1_hash": "192b71af1a142211b0f1573c4d3e056a55e4111b",
   "created_at": "2025-05-19T21:30:45.063Z",
-  "updated_at": "2026-04-07T19:35:04.963Z",
+  "updated_at": "2026-04-08T10:19:08.822Z",
   "comment": {
     "text": "This translation key is used to display a generic message indicating that a product is deactivated, typically found on an error page or unavailable component. It appears when there's an issue with accessing a specific product and is meant to provide a clear explanation without revealing detailed information about the issue.",
     "is_auto": true,
@@ -123,7 +123,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation adds the word 'Dane' (Data) and 'konto' (account), changing the meaning from 'This product is deactivated' to 'This product account has been deactivated'.",
+          "suggestion": "Ten {{productName}} został dezaktywowany"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -199,6 +205,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

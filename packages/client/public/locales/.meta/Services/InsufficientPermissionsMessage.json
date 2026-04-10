@@ -3,7 +3,7 @@
   "content": "You don't have sufficient permissions. Please contact the payer (<1>{{payerContact}}</1>) to access and configure the services.",
   "content_en_sha1_hash": "cb9d41656e1db84a50d244f7d087fe587c1651aa",
   "created_at": "2026-03-20T09:07:40.767Z",
-  "updated_at": "2026-04-06T15:27:51.839Z",
+  "updated_at": "2026-04-09T05:12:48.575Z",
   "comment": {
     "text": "This key displays an error message informing the user they lack the necessary permissions to access or configure services. It appears in the ServicesItems component within the Portal Settings, specifically when permission restrictions are encountered. The message instructs the user to contact the payer, providing their contact information via a dynamic field.",
     "is_auto": true,
@@ -19,6 +19,222 @@
   ],
   "languages": {
     "en": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ar-SA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "az": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "bg": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "cs": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "de": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "el-GR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'διαθέτερε' is a spelling error (should be 'διαθέτετε'). While minor, in a critical verification context, it affects the professional quality of the UI string.",
+          "suggestion": "Δεν διαθέτετε επαρκή δικαιώματα. Παρακαλούμε επικοινωνήστε με τον πληρωμιαστή (<1>{{payerContact}}</1>) για να έχετε πρόσβαση και να ρυθμίσετε τις υπηρεσίες."
+        }
+      ],
+      "approved_at": null
+    },
+    "es": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "fr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "hy-AM": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "it": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ja-JP": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ko-KR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lo-LA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "lv": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Jums nav pietiekami atļauju' is grammatically incorrect in Latvian (it should be 'Jums nav pietiekamu atļauju' or 'Jums nav pietiekami pieejamu atļauju'). More importantly, 'atļauju' is the genitive case, but the adjective 'pietiekami' is used incorrectly here, making the sentence sound broken/unnatural.",
+          "suggestion": "Jums nav pietiekamu atļauju. Lūdzu, sazinācieties ar maksātāju (<1>{{payerContact}}</1>), lai piekļūtu un konfigurētu pakalpojumus."
+        }
+      ],
+      "approved_at": null
+    },
+    "nl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "pt-BR": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "ro": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'plataatorul' is a misspelling/incorrect form of 'plătitorul' (the payer).",
+          "suggestion": "Nu aveți permisiuni suficiente. Vă rugăm să contactați plătitorul (<1>{{payerContact}}</1>) pentru a accesa și configura serviciile."
+        }
+      ],
+      "approved_at": null
+    },
+    "ru": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "si": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sk": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sl": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Prosim povežite z' is grammatically incorrect and semantically wrong in Slovenian. It translates to 'Please connect with' (implying a technical connection) instead of 'Please contact' (reaching out to a person). The correct verb for contacting someone is 'povežite se s' or 'kontaktirajte'.",
+          "suggestion": "Nimate zadostitvih dovoljenj. Prosim kontaktirajte plačilnika (<1>{{payerContact}}</1>) za dostop in konfiguracijo storitev."
+        }
+      ],
+      "approved_at": null
+    },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sr-Cyrl-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Немојте имате' is grammatically incorrect and translates to 'Do not have' (as a command/prohibition), whereas the English 'You don't have' is a statement of fact. This changes the meaning from a status report to a command.",
+          "suggestion": "Немате довољно овлашћења. Молим Вас да контактирате плаћача (<1>{{payerContact}}</1>) како бисте имали приступ и конфигурисали услуге."
+        }
+      ],
+      "approved_at": null
+    },
+    "sr-Latn-RS": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "tr": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "uk-UA": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "vi": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

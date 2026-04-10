@@ -3,7 +3,7 @@
   "content": "User updated",
   "content_en_sha1_hash": "6a0cc45d2e57ea19072e2ebdd78d91ae9a462f14",
   "created_at": "2025-05-19T21:30:49.863Z",
-  "updated_at": "2026-04-07T19:35:05.236Z",
+  "updated_at": "2026-04-08T19:02:36.410Z",
   "comment": {
     "text": "This translation key is used to display a message indicating that a user's information has been updated. It is likely displayed in a UI element such as a button or dialog when a user's profile is edited or updated. Translators should provide a concise and accurate translation for this context.",
     "is_auto": true,
@@ -57,7 +57,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation 'Ο χρήστης ενημερώθηκε' means 'The user was updated' (passive voice), implying the person themselves was modified. In a UI context for a webhook or status message, it should mean 'User information updated' or simply 'User updated' (referring to the action/entity).",
+          "suggestion": "Ενημέρωση χρήστη"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -81,7 +87,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Օգտատերը թարմացված է' means 'The user is updated' (describing the state of the user), whereas the English 'User updated' in this context (webhook trigger/notification) means 'User has been updated' or 'User information updated'. The current translation sounds like a description of a person's status rather than an action/event notification.",
+          "suggestion": "Օգտատերը թարմացվել է"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -99,7 +111,13 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '사용자가 업데이트되었습니다' means 'The user has been updated' (passive voice), which implies the user object itself was modified. In the context of a webhook trigger or a status message for 'User updated', it should more accurately reflect that the user's information/profile was updated, or simply 'User updated' as a status. However, the current translation is grammatically a complete sentence describing an event that happened to the user, whereas 'User updated' in UI contexts often refers to the action/status of the entity.",
+          "suggestion": "사용자 업데이트됨"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -165,7 +183,13 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian word 'osvežen' means 'refreshed' (as in a page refresh), whereas the English 'updated' in this context refers to data/information being modified or changed.",
+          "suggestion": "Uporabnik posodobljen"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -199,6 +223,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

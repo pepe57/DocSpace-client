@@ -3,7 +3,7 @@
   "content": "User quota has been successfully disabled.",
   "content_en_sha1_hash": "585603e4624841cd6229d6ab3952af2f88d04b1e",
   "created_at": "2025-05-19T21:30:53.131Z",
-  "updated_at": "2026-04-07T19:35:05.216Z",
+  "updated_at": "2026-04-09T00:02:00.662Z",
   "comment": {
     "text": "This translation key is used to display a success message when user quota is disabled. It is typically displayed after clicking a button or submitting a form that affects user quota settings, and appears in a toast notification dialog.",
     "is_auto": true,
@@ -45,7 +45,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The English text uses the singular 'User quota', while the Czech translation uses the plural 'Uživatelské kvóty' (User quotas).",
+          "suggestion": "Uživatelský kvót byl úspěšně zakázán."
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -111,7 +117,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Numuru' means 'Numbers' in Latvian, whereas the English text refers to 'User quota'. The correct term for 'User' in this context is 'Lietotāja'.",
+          "suggestion": "Lietotāja kvota ir veiksmīgi atspējota."
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -123,7 +135,13 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation 'Limit użytkowników' means 'User limit', whereas the English text refers to 'User quota'. In a technical context, 'quota' and 'limit' can be different concepts, but more importantly, 'Limit użytkowników' can be interpreted as a limit on the *number* of users, rather than a quota *assigned* to users.",
+          "suggestion": "Kwota użytkowników została pomyślnie wyłączona."
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -199,6 +217,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
