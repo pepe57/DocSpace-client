@@ -64,19 +64,19 @@ const TABS: {
 }[] = [
   {
     id: "wallet",
-    titleKey: "Payments:Wallet",
+    titleKey: "Wallet",
     iconClass: styles.billingIconWallet,
     icon: <WalletIcon />,
   },
   {
     id: "ai",
-    titleKey: "Services:OrganizationAI",
+    titleKey: "OrganizationAI",
     iconClass: styles.billingIconAi,
     icon: <AiIcon />,
   },
   {
     id: "payment-method",
-    titleKey: "Payments:PaymentMethod",
+    titleKey: "PaymentMethod",
     iconClass: styles.billingIconPayment,
     icon: <CardIcon />,
     nativeIcon: true,
@@ -85,14 +85,14 @@ const TABS: {
 
 const getTabDescription = (id: BillingTab, t: (key: string) => string) => {
   switch (id) {
-    case "wallet": return t("Common:BillingWalletCardDesc");
-    case "ai": return t("Common:BillingAICardDesc");
-    case "payment-method": return t("Common:BillingPaymentMethodCardDesc");
+    case "wallet": return t("BillingWalletCardDesc");
+    case "ai": return t("BillingAICardDesc");
+    case "payment-method": return t("BillingPaymentMethodCardDesc");
   }
 };
 
 const BillingForm = () => {
-  const { t, i18n } = useTranslation(["Common", "Payments", "Services"]);
+  const { t, i18n } = useTranslation();
   const { user } = useFormsUserStore();
   const [activeTab, setActiveTab] = React.useState<BillingTab>("ai");
 
@@ -119,7 +119,7 @@ const BillingForm = () => {
   return (
     <div className={styles.billingWrapper}>
       <Text fontSize="12px" lineHeight="16px" className={styles.billingNotice}>
-        {t("Common:BillingPortalNotice")}{" "}
+        {t("BillingPortalNotice")}{" "}
         <Link
           type={LinkType.action}
           fontSize="12px"
@@ -127,7 +127,7 @@ const BillingForm = () => {
           className={styles.billingPortalLink}
           onClick={onOpenBilling}
         >
-          {t("Common:OpenPortalBilling")}
+          {t("OpenPortalBilling")}
         </Link>
       </Text>
 
@@ -150,8 +150,8 @@ const BillingForm = () => {
             <div className={styles.billingCardText}>
               <Text fontSize="13px" fontWeight={600} truncate>
                 {t(tab.titleKey, {
-                  productName: t("Common:ProductName"),
-                  organizationName: t("Common:OrganizationName"),
+                  productName: t("ProductName"),
+                  organizationName: t("OrganizationName"),
                 })}
               </Text>
               <Text fontSize="11px" className={styles.billingCardDesc}>
