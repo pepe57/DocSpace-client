@@ -3,6 +3,7 @@
 .articleFlex {
 	display: flex;
 	flex-direction: column;
+	background-color: var(--sidebar-bg, transparent);
 	border-inline-end: none !important;
 
 	&:global([data-show-text="false"]) {
