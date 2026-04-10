@@ -811,7 +811,7 @@
   "PasswordMinimumLength": "Lungimea minimă",
   "PasswordProtectedFile": "Fișierul <1>{{fileName}}</1> este protejat cu parolă. Introduceți parola",
   "PasswordProtectedFiles": "Introduceți <0>parola</0> pentru fișiere protejate pentru a continua",
-  "PasswordProtectedFolder": "Folderul <1>{{folderName}}</1>este protejat cu parolă. Introduceți parola",
+  "PasswordProtectedFolder": "Folderul <1>{{folderName}}</1> este protejat cu parolă. Introduceți parola",
   "PasswordProtectedFolderFile": "Fișierul <1>{{fileName}}</1> se află în folderul protejat cu parolă. Introduceți parola pentru folderul",
   "PasswordProtectedFolderFolder": "Folderul <1>{{folderName}}</1> se află în folderul protejat cu parolă. Introduceți parola pentru folderul",
   "PasswordProtectedRoomFile": "Fișierul <1>{{fileName}}</1> se află în sală protejată prin parolă. Introduceți parola pentru sala",

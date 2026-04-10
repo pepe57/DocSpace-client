@@ -28,7 +28,7 @@
   "APIKeyDeactivated": "La clave se desactivará después después de: {{date}}",
   "APIKeyExpired": "Esta clave de la API ha expirado y ya no está activa",
   "ApiKeyLifetime": "<1>El tiempo de vida está establecido.</1> La clave secreta se desactivará después de: {{days}} días",
-  "APIKeyMaxDays": "Días<1>(Max {{days}})</1>",
+  "APIKeyMaxDays": "Días <1>(Max {{days}})</1>",
   "ApiKeys": "Claves de la la API",
   "ApiKeysCardDescription": "Crear y gestionar todas las claves API para su {{organizationName}} {{productName}}.",
   "ApiKeysDescription": "Como propietario/administrador, puede ver y gestionar todas las claves de la API en este {{productName}}.",

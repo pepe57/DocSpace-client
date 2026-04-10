@@ -875,7 +875,7 @@
   "ProviderTwitter": "X",
   "ProviderWechat": "WeChat",
   "ProviderZoom": "Zoom",
-  "PublicAuthorizeToast": "Cette salle est ouverte en mode <1>{{{roomMode}}</1>. Si vous avez un compte dans ce {{productName}}, veuillez l'autoriser.",
+  "PublicAuthorizeToast": "Cette salle est ouverte en mode <1>{{roomMode}}</1>. Si vous avez un compte dans ce {{productName}}, veuillez l'autoriser.",
   "PublicLink": "Lien public",
   "PublicRoom": "Salle publique",
   "PublicRoomInfo": "Partagez des documents pour les consulter, les éditer, les commenter ou les réviser sans inscription. Vous pouvez également intégrer cette salle dans n'importe quelle interface web.",

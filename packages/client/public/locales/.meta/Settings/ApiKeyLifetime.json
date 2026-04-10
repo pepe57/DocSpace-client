@@ -3,7 +3,7 @@
   "content": "<1>The lifetime is set.</1> The secret key will be deactivated after: {{days}} days",
   "content_en_sha1_hash": "4c403f0fc49d92c8b92de3d83b42fc2e04c09e28",
   "created_at": "2025-05-19T21:30:50.522Z",
-  "updated_at": "2026-04-09T04:15:30.959Z",
+  "updated_at": "2026-04-10T08:58:38.064Z",
   "comment": {
     "text": "This translation key controls the message displayed to users when setting the lifetime of an API secret key, indicating how long after activation the secret will expire. The value is a count of days and appears in a dialog window where users can set the API key's lifetime.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> is missing in the Azerbaijani translation.",
-          "suggestion": "<1>İstifadə müddəti təyin olunub.</1> Gizli açar {{days}} gündən sonra deaktiv ediləcək"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -75,25 +69,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> is missing in the Finnish translation.",
-          "suggestion": "<1>Käyttöikä on asetettu</1> Secret key poistuu käytöstä: {{days}} päivän jälkeen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> is placed before the period, but the period is outside the tag in English. However, more critically, there is an extra period after the closing tag </1> in the French translation that does not exist in the English source (English: '</1> The secret...', French: '</1>. La clé...'). While this is punctuation, the structural placement of the tag relative to the sentence flow is slightly altered.",
-          "suggestion": "<1>La durée de vie est fixée.</1> La clé secrète sera désactivée après : {{days}} jours"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -135,13 +117,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> is missing or improperly placed, causing a mismatch with the opening tag <1>.",
-          "suggestion": "<1>De levensduur is ingesteld.</1> De secret key wordt gedeactiveerd na: {{days}} dagen"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -153,13 +129,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "There is a missing space between the closing tag </1> and the start of the next sentence, which affects the visual layout/spacing compared to the English source.",
-          "suggestion": "<1>O tempo de vida está definido.</1> A chave secreta será desactivada depois: {{days}} dias"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {

@@ -3,7 +3,7 @@
   "content": "Output ({{currency}}/1M)",
   "content_en_sha1_hash": "e02b245e12993218dee7e0ca1be519a09823ecfc",
   "created_at": "2026-03-20T09:07:40.791Z",
-  "updated_at": "2026-04-09T04:56:14.872Z",
+  "updated_at": "2026-04-10T08:58:38.065Z",
   "comment": {
     "text": "This key displays the output currency amount for a model, formatted as \"Output ({{currency}}/1M)\". It's used as a column header in a table displaying AI model settings, specifically within the Portal Settings section. Translators should ensure the currency code is properly integrated.",
     "is_auto": true,
@@ -75,13 +75,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable '{{currency}}' is incorrectly formatted as '{{currency}})' in the Spanish translation, which breaks the variable token structure.",
-          "suggestion": "Resultado ({{currency}}/1M)"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {

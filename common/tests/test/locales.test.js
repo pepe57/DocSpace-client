@@ -737,6 +737,27 @@ describe("Locales Tests", () => {
       });
     });
 
+    // Reverse check: translations that have tags when English does NOT
+    const enWithoutTagsKeys = new Set(
+      groupedByLng["en"]
+        .filter((t) => t.tags.length === 0)
+        .map((t) => t.key),
+    );
+
+    otherLanguagesWithTags.forEach((lng) => {
+      lng.translationsWithTags.forEach((lngKey) => {
+        if (!enWithoutTagsKeys.has(lngKey.key)) return;
+        if (lngKey.tags.length === 0) return;
+
+        message +=
+          `${++i}. lng='${lng.language}' key='${lngKey.key}' has tags but 'en' has none ` +
+          `(en=0|${lng.language}=${lngKey.tags.length})\r\n` +
+          `'${lng.language}': '${lngKey.value}' Tags=[${lngKey.tags.join(",")}]\r\n\r\n`;
+        errorsCount++;
+        wrongTagKeys.push({ language: lng.language, key: lngKey.key });
+      });
+    });
+
     clearWrongKeys(
       resolveTranslationEntries(wrongTagKeys),
       "wrong tag translation keys",

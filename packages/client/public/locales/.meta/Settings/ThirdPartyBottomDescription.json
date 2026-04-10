@@ -3,7 +3,7 @@
   "content": "Got any problems? Contact our <2>Support Team.</2>",
   "content_en_sha1_hash": "b32f368f23a2f7b36d83a5c446ed8e499d7ca8cf",
   "created_at": "2025-05-19T21:30:52.888Z",
-  "updated_at": "2026-04-09T00:39:24.020Z",
+  "updated_at": "2026-04-10T08:58:38.060Z",
   "comment": {
     "text": "This translation key is used for a support contact message that appears on a consumer modal dialog. It provides an invitation to users who still have questions about connecting a third-party service or need technical assistance.",
     "is_auto": true,
@@ -27,25 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </2> contains an extra space before the number, which breaks the markup structure (</2> vs </ 2>).",
-          "suggestion": "هل لديك أي مشاكل؟ اتصل بـ <2>فريق الدعم.</2>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </2> is placed before the final word 'ilə əlaqə saxlayın', which breaks the intended markup structure. In the English source, the tag wraps only 'Support Team', but in the Azerbaijani translation, the tag is closed prematurely, leaving the verb outside the tag, which might affect the link styling.",
-          "suggestion": "Kömək lazımdır? <2>Dəstək Komandası</2> ilə əlaqə saxlayın"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -69,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </2> is missing at the end of the Greek translation.",
-          "suggestion": "Χρειάζεστε βοήθεια; Επικοινωνήστε με την <2>Ομάδα Υποστήριξης</2>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -87,13 +69,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The opening tag <2> is placed after the word 'yhteyttä' instead of before 'tukitiimiimme', which changes the clickable area of the link in the UI.",
-          "suggestion": "Tarvitsetko apua? Ota yhteyttä <2>tukitiimiimme.</2>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -165,13 +141,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </2> in the Portuguese translation contains a period inside the tag boundary, which may affect how the link is rendered or styled compared to the English source.",
-          "suggestion": "Precisa de ajuda? Entre em contato com nossa <2>Equipe de suporte</2>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -213,13 +183,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </2> contains a period inside the tag, which is technically incorrect markup compared to the English source where the period is outside the tag. However, more critically, the period in the Serbian version is placed inside the tag, which might affect the clickable area of the link in the UI.",
-          "suggestion": "Imate problem? Kontaktirajte naš <2>Tim za podršku</2>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -237,13 +201,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The opening tag <2> is placed incorrectly in the Vietnamese translation, wrapping 'của chúng tôi' instead of 'Nhóm Hỗ Trợ'. This changes the clickable area of the link.",
-          "suggestion": "Bạn cần trợ giúp? Hãy liên hệ với <2>Nhóm Hỗ Trợ</2> của chúng tôi."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

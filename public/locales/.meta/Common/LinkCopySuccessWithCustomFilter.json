@@ -3,7 +3,7 @@
   "content": "The link to the file with the enabled <strong>Custom filter</strong> is successfully copied to the clipboard.",
   "content_en_sha1_hash": "5fb2ad6180a6cc99acbd44e4f13dfba22b809b66",
   "created_at": "2025-05-19T21:30:46.153Z",
-  "updated_at": "2026-04-08T05:41:42.731Z",
+  "updated_at": "2026-04-10T08:58:38.053Z",
   "comment": {
     "text": "This translation key displays a success message when a shared link is copied to the clipboard after applying a custom filter. It appears as an alert notification and is used in the Context Options Store dialog or similar contexts where file sharing options are being accessed.",
     "is_auto": true,
@@ -183,13 +183,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing </strong> tag contains an extra space before the closing bracket, which can cause rendering issues in some environments, and more importantly, the tag structure is slightly malformed due to the trailing space inside the tag content/structure.",
-          "suggestion": "Veza do datoteke sa omogućenim <strong>Prilagođenim filterom</strong> je uspešno kopirana u privremenu memoriju."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

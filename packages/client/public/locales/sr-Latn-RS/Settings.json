@@ -243,7 +243,7 @@
   "TenantQuotaLimit": "{{tenantQuotaLimit}} za {{productName}}",
   "ThirdPartyAuthorization": "Autorizacija treće strane",
   "ThirdPartyBodyDescription": "Detaljna uputstva u našem <2>Centru za pomoć.</2>",
-  "ThirdPartyBottomDescription": "Imate problem? Kontaktirajte naš <2>Tim za podršku.</2>",
+  "ThirdPartyBottomDescription": "Imate problem? Kontaktirajte naš <2>Tim za podršku</2>.",
   "ThirdPartyPropsActivated": "Ažurirano uspešno",
   "ThirdPartyPropsDeactivated": "Deaktivirano uspešno",
   "ThirdPartyStorageDescription": "Rezervna kopija se može sačuvati na skladište treće strane. Pre toga, morate povezati odgovarajuću uslugu u odeljku 'Integracija'. U suprotnom, sledeća podešavanja će biti neaktivna.",

@@ -3,7 +3,7 @@
   "content": "The destination already contains a folder named «<1>{{folderName}}</1>».",
   "content_en_sha1_hash": "84e03768c28e7d8864816ce977c8c2b9f91a4f66",
   "created_at": "2025-05-19T21:30:45.425Z",
-  "updated_at": "2026-04-08T09:15:37.533Z",
+  "updated_at": "2026-04-10T08:58:38.055Z",
   "comment": {
     "text": "This translation key is used to display a message when a user attempts to add a new folder that already exists in the destination. The message informs the user that a folder with the same name already exists and cannot be created. It appears in the ConflictResolveDialog component where the user encounters conflicting actions for resolving folder additions.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The React tags <1> and </1> are swapped/inverted in the Arabic translation, which will break the bold styling applied to the variable.",
-          "suggestion": "الوجهة تحتوي بالفعل على مجلد اسمه «<1>{{folderName}}</1>»."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -171,13 +165,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The opening tag « is treated as a literal character in the translation, but the English source uses it as a delimiter. More importantly, there is a missing space between the word 'imenom.' and the opening tag '«', and the closing tag '»' is present but the structure is slightly malformed compared to the English intent regarding the tag placement.",
-          "suggestion": "Destinacija že vsebuje mapo z imenom «<1>{{folderName}}</1>»."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -207,25 +195,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable {{folderName}} contains an extra space inside the braces compared to the English source, which can break variable interpolation in some engines.",
-          "suggestion": "Đích đến đã chứa một thư mục có tên «<1>{{folderName}}</1>»."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "There is an extra space inside the closing tag </1> in the Chinese translation ('</1> ' vs '</1>'), which can cause rendering issues or incorrect spacing in the UI.",
-          "suggestion": "目标位置中已存在名为«<1>{{folderName}}</1>»的文件夹。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

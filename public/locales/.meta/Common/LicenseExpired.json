@@ -3,7 +3,7 @@
   "content": "License has expired",
   "content_en_sha1_hash": "51b52942d7e739731418d6a85f03059b538a0600",
   "created_at": "2026-02-18T14:56:00.676Z",
-  "updated_at": "2026-04-08T05:52:41.682Z",
+  "updated_at": "2026-04-10T08:58:38.054Z",
   "comment": {
     "text": "This key displays a message indicating that the user's license has expired. It appears within the TariffBar component, likely as a label, to inform the user about their license status and potentially provide a deadline. The message includes a date (paymentDate) to specify the expiration date.",
     "is_auto": true,
@@ -99,13 +99,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The English source contains a variable '{date}' (implied by the code usage `t(\"Common:LicenseExpired\", { date: paymentDate })`), but the Japanese translation does not include the placeholder for this variable.",
-          "suggestion": "ライセンスの有効期限が切れました ({date})"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

@@ -4,7 +4,7 @@
   "AccessRightsChangeOwnerConfirmText": "Le modifiche verranno applicate dopo la conferma via email.",
   "AccountAlreadyExists": "L'account esiste già",
   "AccountsUsersWithoutEmails": "Abbiamo trovato <1>{{users}}</1> utenti senza email. Puoi aggiungere i dati necessari ai loro account nel passaggio successivo.",
-  "AccountsWithoutEmails": "Abbiamo trovato <1>{{users}}</1> utenti senza email. Puoi compilare le loro email o continuare senza questa azione.",
+  "AccountsWithoutEmails": "Abbiamo trovato <1>{{users}} utenti</1> senza email. Puoi compilare le loro email o continuare senza questa azione.",
   "AddAllowedIP": "Aggiungi indirizzo IP consentito",
   "AddEmail": "Aggiungi e-mail",
   "AddEmails": "Aggiungi email agli account incompleti",

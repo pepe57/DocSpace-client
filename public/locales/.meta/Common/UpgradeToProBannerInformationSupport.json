@@ -3,7 +3,7 @@
   "content": "Get tech assistance <1>{{helpUrl}}</1>",
   "content_en_sha1_hash": "653923be289053ccbdd59fa114cf2caef5bfa3c5",
   "created_at": "2025-05-26T07:15:49.153Z",
-  "updated_at": "2026-04-07T20:53:48.865Z",
+  "updated_at": "2026-04-10T08:58:38.048Z",
   "comment": {
     "text": "This translation key is used to display a help message for contacting technical support. It appears as part of a payment contact container and is linked to a URL for additional information or feedback. The user will likely click on this text to access more detailed assistance.",
     "is_auto": true,
@@ -110,11 +110,6 @@
           "type": "extra_variable",
           "description": "Extra variable(s) not in English: {{ helpUrl }}",
           "suggestion": ""
-        },
-        {
-          "type": "missing_variable",
-          "description": "The variable name in the Lao translation contains extra spaces '{{ helpUrl }}' compared to the English '{{helpUrl}}'. This can cause interpolation failures in many i18n frameworks.",
-          "suggestion": "ຂໍຄວາມຊ່ວຍເຫຼືອດ້ານເທັກໂນໂລຍີ <1>{{helpUrl}}</1>"
         }
       ],
       "approved_at": null
@@ -206,13 +201,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The opening tag '<1>' has an extra space before the number ('< 1>'), which breaks the React Trans component mapping.",
-          "suggestion": "Nhận hỗ trợ kỹ thuật <1>{{helpUrl}}</1>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

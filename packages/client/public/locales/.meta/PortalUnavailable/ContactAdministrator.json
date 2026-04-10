@@ -3,7 +3,7 @@
   "content": "Contact the {{productName}} administrator",
   "content_en_sha1_hash": "129d3661ec0a3e94ee8109f655b98845c854006e",
   "created_at": "2025-05-19T21:30:53.449Z",
-  "updated_at": "2026-04-09T07:18:31.445Z",
+  "updated_at": "2026-04-10T08:58:38.067Z",
   "comment": {
     "text": "The \"PortalUnavailable:ContactAdministrator\" translation key is used to display a message prompting users to contact the administrator of the {{productName}} product. This text appears as a button in the Portal Unavailable page, encouraging users to take action for further assistance.",
     "is_auto": true,
@@ -99,13 +99,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable {{productName}} is missing a space before the following text, which may cause the product name and '관리자' to be concatenated incorrectly (e.g., 'ONLYOFFICE관리자' instead of 'ONLYOFFICE 관리자').",
-          "suggestion": "{{productName}} 관리자에게 문의"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {

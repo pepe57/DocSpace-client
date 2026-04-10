@@ -3,7 +3,7 @@
   "content": "This information will be displayed in the <1>{{link}}</1> window.",
   "content_en_sha1_hash": "feea1754462fa327a2109f784fab5e00ffad9082",
   "created_at": "2025-05-26T07:15:41.415Z",
-  "updated_at": "2026-04-08T15:00:45.768Z",
+  "updated_at": "2026-04-10T08:58:38.057Z",
   "comment": {
     "text": "This translation key is used for a description displayed in a dialog window. When users view certain settings, this text will be shown explaining where the information can be accessed further.",
     "is_auto": true,
@@ -33,13 +33,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable {{link}} is missing the required double curly braces. It is currently written as {{link}} with spaces inside the tags, which breaks the variable interpolation.",
-          "suggestion": "سيتم عرض هذه المعلومات في النافذة <1>{{link}}</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -117,13 +111,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The opening tag <1> has an extra space inside it ('<1 >'), which breaks the React Trans component mapping.",
-          "suggestion": "ຂໍ້ມູນນີ້ຈະຖືກສະແດງຢູ່ໃນປ່ອງຢ້ຽມ <1>{{link}}</1>."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

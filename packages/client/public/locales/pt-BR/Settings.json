@@ -244,7 +244,7 @@
   "TenantQuotaLimit": "{{tenantQuotaLimit}} para {{productName}}",
   "ThirdPartyAuthorization": "Autorização de terceiros",
   "ThirdPartyBodyDescription": "Instruções detalhadas em nosso <2>Centro de Ajuda</2>.",
-  "ThirdPartyBottomDescription": "Precisa de ajuda? Entre em contato com nossa <2>Equipe de suporte.</2>",
+  "ThirdPartyBottomDescription": "Precisa de ajuda? Entre em contato com nossa <2>Equipe de suporte</2>.",
   "ThirdPartyPropsActivated": "Atualizado com sucesso",
   "ThirdPartyPropsDeactivated": "Desativado com sucesso",
   "ThirdPartyStorageDescription": "O backup pode ser salvo em um armazenamento de terceiros. Primeiro, você precisa conectar o serviço correspondente na seção 'Integração'. Caso contrário, as configurações a seguir ficarão inativas.",

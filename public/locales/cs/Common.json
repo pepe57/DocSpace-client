@@ -548,7 +548,7 @@
   "GroupsNotFoundDescription": "Vašemu hledání neodpovídají žádné skupiny. Pro zobrazení úplného seznamu skupin upravte parametry vyhledávání nebo vymažte vyhledávací pole.",
   "Guest": "Host",
   "GuestApprovalNote": "Jakmile bude schváleno, sdílený host bude přidán do vašeho seznamu hostů v {{sectionName}}.",
-  "GuestInvitation": "<1>{{{displayName}}</1> chce s vámi sdílet kontakt na hosta.",
+  "GuestInvitation": "<1>{{displayName}}</1> chce s vámi sdílet kontakt na hosta.",
   "Guests": "Hosté",
   "Guide": "Příručka",
   "HasFullAccess": "Má plný přístup do místnosti",

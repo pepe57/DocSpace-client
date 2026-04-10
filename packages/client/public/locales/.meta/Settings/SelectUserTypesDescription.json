@@ -3,7 +3,7 @@
   "content": "Select {{productName}} roles for the imported users: <1>{{productName}} admin</1>, <1>Room admin</1> or <1>User</1>. By default, User role is selected for each user. You can manage the roles after the import.",
   "content_en_sha1_hash": "e90aa9f2a0e200f361dff9163df3131462ddc07f",
   "created_at": "2025-05-19T21:30:52.598Z",
-  "updated_at": "2026-04-09T01:15:35.815Z",
+  "updated_at": "2026-04-10T08:58:38.061Z",
   "comment": {
     "text": "\"This translation key describes a message that appears in the data import process for Google Workspace, Nextcloud Workspace, and Onlyoffice Workspace. It instructs users to select roles (admin, Room admin, or User) for imported users, explaining that User role is selected by default.\"",
     "is_auto": true,
@@ -171,13 +171,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The tag <1> is placed after the variable {{productName}} instead of before it, which breaks the intended markup structure for the first role.",
-          "suggestion": "Atlasiet importēto lietotāju {{productName}} lomas: <1>{{productName}} administrators</1>, <1>Telpas administrators</1> vai <1>Lietotājs</1>. Pēc noklusējuma katram lietotājam ir atlasīta lietotāja loma. Jūs varat pārvaldīt lomas pēc importēšanas."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -195,13 +189,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> is missing after the first occurrence of {{productName}} admin in the Polish translation.",
-          "suggestion": "Wybierz role {{productName}} dla zaimportowanych użytkowników: <1>Administrator {{productName}}</1>, <1>Administrator pokoju</1> lub <1>Użytkownik</1>. Domyślnie, wszystkim przypisywana jest rola Użytkownika. Role mogą zostać zmienione po zaimportowaniu."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -219,13 +207,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The first <1> tag is missing its closing </1> tag in the Romanian translation.",
-          "suggestion": "Selectați roluri pentru utilizatorii importați în {{productName}}: <1>Administrator {{productName}}</1>, <1>Administrator sală</1> sau <1>Utilizator</1>. În mod implicit, fiecărui utilizator îi este atribuit un rol de Utilizator. Puteți gestiona rolurile după import."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -291,13 +273,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The tag <1> is used around 'Người sử dụng' but the closing tag </1> is missing or incorrectly placed, and there is an extra space inside the tags which might affect UI rendering.",
-          "suggestion": "Chọn vai trò {{productName}} cho người dùng đã nhập: <1>{{productName}} admin</1>, <1>Quản trị viên phòng</1> hoặc <1>Người dùng</1>. Theo mặc định, vai trò Người dùng sẽ được chọn cho mỗi người dùng. Bạn có thể quản lý các vai trò sau khi nhập."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

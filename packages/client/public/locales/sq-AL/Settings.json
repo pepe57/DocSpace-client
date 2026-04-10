@@ -299,7 +299,7 @@
   "DefineQuotaPerAIAgent": "Krijoni kuotën për {{aiAgent}}",
   "DetailedHelpCenter": "Udhëzime të detajuara në <1>Qendrën Tonë Ndihmë</1>",
   "DeveloperToolsDescription": "Integroni, zgjeroni dhe automatizoni {{organizationName}} {{productName}} duke përdorur gamën tonë të plotë mjetesh për zhvillues — nga REST API dhe Embed SDK deri te webhooks dhe aplikacionet OAuth. Zgjidhni një mjet më poshtë për të filluar.",
-  "DisableAiServices": "<0>Shkaktivizoni {{aiServices}}</0>",
+  "DisableAiServices": "Shkaktivizoni {{aiServices}}",
   "DisableAiServicesAgentsDisabled": "{{aiAgents}} do të fshihet për të gjithë përdoruesit (historia e ndërveprimit do të ruhet).",
   "DisableAiServicesBalance": "Saldoja juaj e mbetur (<1>{{balance}}</1>) do të qëndrojë në llogarinë tuaj dhe do të jetë e disponueshme për përdorim nëse e zgjidhni të riaktivizoni {{aiServices}} në të ardhmen.",
   "DisableAiServicesConfirm": "Ju mund të riaktivizoni {{aiServices}} në çdo moment. Jeni të sigurt se dëshironi të vazhdoni?",

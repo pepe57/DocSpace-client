@@ -23,7 +23,7 @@
   "ApiKeyCopied": "API sleutel gekopieerd",
   "APIKeyDeactivated": "De sleutel wordt gedeactiveerd na: {{date}}",
   "APIKeyExpired": "Deze API sleutel is verlopen en niet langer actief",
-  "ApiKeyLifetime": "<1>De levensduur is ingesteld.</1>De secret key wordt gedeactiveerd na: {{days}} dagen",
+  "ApiKeyLifetime": "<1>De levensduur is ingesteld.</1> De secret key wordt gedeactiveerd na: {{days}} dagen",
   "APIKeyMaxDays": "Dagen <1>(Max. {{days}})</1>",
   "ApiKeys": "API sleutels",
   "ApiKeysDescription": "Als eigenaar/admin kunt u alle API-sleutels in deze {{productName}} bekijken en beheren.",
@@ -321,6 +321,6 @@
   "RestAPIDescription": "Creëer uw eigen productiviteitsplatform op basis van {{organizationName}} {{productName}} en samenwerk aan documenten met teams, klanten en partners.",
   "SetDefaultAIAgentQuota": "Stel de standaardopslagquota in voor {{aiAgents}} in deze {{productName}}. Dit kan later in de instellingen worden aangepast of individueel worden aangepast bij het aanmaken van elk {{aiAgent}}.",
   "StartEmbedding": "Inbedden starten",
-  "Top5AIAgents": "Top 5 {{aiAgents}} opgeslagen ruimte:",
+  "Top5AIAgents": "Top 5 {{aiAgents}} op basis van opslaggebruik:",
   "WebhooksDescription": "Voer aangepaste acties uit aan de zijkant van elke applicatie of website die u gebruikt, op basis van verschillende gebeurtenissen in {{organizationName}} {{productName}}."
 }

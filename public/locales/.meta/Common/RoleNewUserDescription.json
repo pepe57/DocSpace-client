@@ -3,7 +3,7 @@
   "content": "Users can only access the rooms they are invited to by admins. They can't create own rooms, folders or files.<br/><1>In {{agentSection}}</1>: can view the {{aiAgent}} results and shared chats if they were invited, but cannot create chats or modify the knowledge base.",
   "content_en_sha1_hash": "ef129e1554a846afbdb03bc4bbcb2555fbc97db8",
   "created_at": "2025-12-19T10:16:38.171Z",
-  "updated_at": "2026-04-08T00:47:19.563Z",
+  "updated_at": "2026-04-10T08:58:38.050Z",
   "comment": {
     "text": "This key provides a description of the limitations for new users, explaining they can only access invited rooms and cannot create content. It appears within user access option descriptions and user type descriptions, likely in a UI element explaining user roles or permissions. Translators should ensure the description clearly conveys the restricted functionality for new users.",
     "is_auto": true,
@@ -39,13 +39,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The HTML tag <br/> is missing in the Azerbaijani translation.",
-          "suggestion": "İstifadəçilər yalnız administratorlar tərəfindən dəvət olunduğu otaqlara daxil ola bilərlər. Onlar öz otaqlarını, qovluqlarını və ya fayllarını yarada bilməzlər.<br/><1>{{agentSection}}</1>: dəvət olundularsa, {{aiAgent}} nəticələrini və paylaşılmış söhbətləri görə bilərlər, lakin söhbət yarada və ya bilik bazasını dəyişdirə bilməzlər."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -129,13 +123,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The HTML tag '<br/>' is missing from the beginning of the second sentence in the Japanese translation.",
-          "suggestion": "ユーザーは、管理者から招待されたルームのみにアクセスできます。自身でルーム、フォルダ、またはファイルを作成することはできません。<br/><1>In {{agentSection}}</1>: 招待された場合、{{aiAgent}}の結果と共有チャットを閲覧できますが、チャットの作成やナレッジベースの変更はできません。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -201,13 +189,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable {{agentSection}} was not translated/localized; it was left in English within the tags, which breaks the dynamic content injection for that specific variable.",
-          "suggestion": "පරිශීලකයින්ට පරිපාලකයින් විසින් ආරාධනා කරන කාමර වෙත පමණක් ප්‍රවේශ විය හැකිය. ඔවුන්ට තමන්ගේම කාමර, ෆෝල්ඩර් හෝ ගොනු නිර්මාණය කළ නොහැක.<br/><1>{{agentSection}}</1>: ඔවුන්ට ආරාධනා කර ඇත්නම්, {{aiAgent}} ප්‍රතිඵල සහ බෙදාගත් chats නැරඹිය හැකි නමුත්, chats නිර්මාණය කිරීමට හෝ දැනුම පදනම සංශෝධනය කිරීමට නොහැකිය."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -249,13 +231,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The opening tag <1> is missing in the Turkish translation, although the closing tag </1> is present.",
-          "suggestion": "Kullanıcılar yalnızca yöneticiler tarafından davet edildikleri odalara erişebilirler. Kendi odalarını, klasörlerini veya dosyalarını oluşturamazlar.<br/><1>In {{agentSection}}</1>: davet edildilerse {{aiAgent}} sonuçlarını ve paylaşılan sohbetleri görüntüleyebilir, ancak sohbet oluşturamaz veya bilgi tabanını düzenleyemez."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

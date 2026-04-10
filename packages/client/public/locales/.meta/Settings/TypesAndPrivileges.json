@@ -3,7 +3,7 @@
   "content": "<1>Admin account types and their privileges</1> <br> <br> <2>{{productName}} admin</2> <br> {{productName}} configuration, room creation and administration, ability to invite and manage users in {{productName}} and in virtual rooms, ability to manage access rights. <br> <br> <3>Room admin</3> <br> Room administration and archiving, user invitation and management. Several admins can be assigned to a room. <br> <br> <4>User</4> <br> Users can create and edit files in the room, but can't create rooms, manage users, or access settings.",
   "content_en_sha1_hash": "a5f8e3f05414f4551551d409b8f3a24e8f1a73bc",
   "created_at": "2025-05-19T21:30:53.036Z",
-  "updated_at": "2026-04-09T00:11:39.872Z",
+  "updated_at": "2026-04-10T08:58:38.059Z",
   "comment": {
     "text": "This translation key is used for a tooltip that describes user roles and their corresponding privileges in a workspace configuration. It appears as a tooltip on a settings page, providing an overview of available roles (Admin, Room Admin, User) and their respective access rights.",
     "is_auto": true,
@@ -46,11 +46,6 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The numbered React tags <2>, <3>, and <4> are present, but the closing tags </2>, </3>, and </4> are missing for these specific segments, which breaks the React Trans component structure.",
-          "suggestion": "<1>Admin account types and their privileges</1> <br> <br> <2>{{productName}} admin</2> <br> {{productName}} konfiqurasiyası, otağın yaradılması və idarə edilməsi, dəvət etmək imkanı {{productName}} və virtual otaqlarda istifadəçiləri və giriş hüquqlarını idarə etmək imkanı. <br> <br> <3>Room admin</3> <br> Otağın idarə edilməsi və arxivləşdirilməsi, istifadəçi dəvəti və idarə edilməsi. Bir otağa birdən çox menecer təyin edilə bilər. <br> <br> <4>User</4> <br> İstifadəçilər otaqda fayllar yarada və redaktə edə bilərlər, lakin otaqlar yarada, istifadəçiləri idarə edə və ya parametrlərə daxil ola bilməzlər."
-        },
         {
           "type": "incorrect_translation",
           "description": "The translator left the role names 'Room admin' and 'User' in English instead of translating them into Azerbaijani, which is inconsistent with the rest of the UI string.",
@@ -110,11 +105,6 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </1> was replaced with an opening tag <1> in the first line.",
-          "suggestion": "<1>Järjestelmänvalvojatilityypit ja niiden edut</1> <br> <br> <2>{{productName}} järjestelmänvalvoja</2> <br>{{productName}} kokoonpano, huoneiden luonti ja hallinto, oikeus kutsua ja hallita käyttäjiä {{productName}}-ssa ja virtuaalisissa huoneissa, oikeus hallita oikeuksia. <br> <br> <3>Huoneen pääkäyttäjä</3> <br>Huoneen hallinto ja arkistointi, käyttäjien kutsuminen ja hallinta. Huoneessa voi olla useita pääkäyttäjiä.<br> <br> <4>Käyttäjä</4> <br> Käyttäjät voivat luoda ja muokata huoneen tiedostoja, mutta eivät voi luoda huoneita, hallita käyttäjiä tai asetuksia."
-        },
         {
           "type": "incorrect_translation",
           "description": "The final sentence says users cannot create 'files' (tiedostoja), whereas the English source says they cannot create 'rooms' (huoneita).",
@@ -190,13 +180,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The HTML tag '<br>' is missing before the second paragraph in the Latvian translation (it only contains '>' instead of '<br>').",
-          "suggestion": "<1>Administratora kontu veidi un to privilēģijas</1> <br> <br> <2>{{productName}} administrators</2> <br> {{productName}} konfigurācija, telpu izveide un administrēšana, iespēja uzaicināt un pārvaldīt lietotājus {{productName}} un virtuālajās telpās, iespēja pārvaldīt piekļuves tiesības. <br> <br> <3>Telpu administrators</3> <br> Telpu administrēšana un arhivēšana, lietotāju uzaicināšana un pārvaldība. Telpai var piešķirt vairākus administratorus. <br> <br> <4>Lietotājs</4> <br> Lietotāji var izveidot un rediģēt failus telpā, bet nevar izveidot telpas, pārvaldīt lietotājus vai piekļūt iestatījumiem."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -219,13 +203,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The tag <2> is not closed in the Polish translation. The English text has </2> after {{productName}}, but the Polish text has </2> missing after the variable.",
-          "suggestion": "<1>Rodzaje kont administratora i ich uprawnienia</1> <br> <br> <2>{{productName}} admin</2> <br> Konfiguracja {{productName}}, tworzenie pokoi i administrowanie nimi, możliwość zapraszania użytkowników i zarządzania nimi w {{productName}} oraz wirtualnych pokojach, a także możliwość zarządzania prawami dostępu. <br> <br> <3>Administrator pokoju</3> <br> Administrowanie pokojem i archiwizowanie, zapraszanie użytkowników i zarządzanie nimi. Do pokoju można przypisać kilku administratorów. <br> <br> <4>Użytkownik</4> <br> Użytkownicy mogą tworzyć i edytować pliki w pokoju, ale nie mogą tworzyć pokoi, zarządzać użytkownikami ani uzyskiwać dostępu do ustawień."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -273,13 +251,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The closing tag </2> is missing after 'Skrbnik {{productName}}'.",
-          "suggestion": "<1>Vrste skrbniških računov in njihovi privilegiji</1> <br> <br> <2>{{productName}} admin</2> <br> Konfiguracija {{productName}}, ustvarjanje in upravljanje sob, možnost vabljenja in upravljanja uporabnikov v {{productName}} in v virtualne sobe, možnost upravljanja pravic dostopa. <br> <br> <3>Administrator sobe</3> <br> Administracija in arhiviranje sobe, povabilo uporabnikov in upravljanje. Sobi je mogoče dodeliti več skrbnikov. <br> <br> <4>Uporabnik</4> <br> Uporabniki lahko ustvarjajo in urejajo datoteke v sobi, ne morejo pa ustvarjati sob, upravljati z uporabniki ali dostopati do nastavitev."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

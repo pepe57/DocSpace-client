@@ -215,7 +215,7 @@
   "SelectUsersDescriptionWorkspace": "Bifați utilizatorii din lista pentru a le importa în {{organizationName}} {{productName}}. Utilizatorii deja exstenți în {{organizationName}} {{productName}} sunt evidențiate cu verde și nu sunt bifați în mod implicit.",
   "SelectUsersWithEmail": "Secectați utilizatorii cu adresa de e-mail.",
   "SelectUserTypes": "Selectare tip de utilizator",
-  "SelectUserTypesDescription": "Selectați roluri pentru utilizatorii importați în {{productName}}: <1>Administrator {{productName}}</1>, <1>Administrator sală</1> sau <1>Utilizator</1>. În mod implicit, fiecărui utilizator îi este atribuit un rol de Utilizator. Puteți gestona roluri după importul.",
+  "SelectUserTypesDescription": "Selectați roluri pentru utilizatorii importați în {{productName}}: <1>Administrator {{productName}}</1>, <1>Administrator sală</1> sau <1>Utilizator</1>. În mod implicit, fiecărui utilizator îi este atribuit un rol de Utilizator. Puteți gestiona rolurile după import.",
   "SendInviteLetter": "Trimite scrisoarea de invitație",
   "Services": "Servicii",
   "SessionLifetime": "Durata de expirare a sesiunii ",

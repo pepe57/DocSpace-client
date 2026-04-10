@@ -3,7 +3,7 @@
   "content": "Select from {{productName}}",
   "content_en_sha1_hash": "3365d131cf57bbe561f947df5ac7dcf4feb0ca97",
   "created_at": "2025-05-19T21:30:48.440Z",
-  "updated_at": "2026-04-07T23:46:12.434Z",
+  "updated_at": "2026-04-10T08:58:38.049Z",
   "comment": {
     "text": "This translation key is used to display a message prompting users to select from a portal. It appears when selecting files or actions in certain contexts and asks users to choose from a list of options related to a product named \"Product Name\".",
     "is_auto": true,
@@ -201,13 +201,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable {{productName}} has been modified with a suffix '-а' which breaks the exact matching requirement for the variable token.",
-          "suggestion": "Izaberite iz {{productName}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

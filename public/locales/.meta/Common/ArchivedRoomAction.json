@@ -3,7 +3,7 @@
   "content": "The room '{{name}}' is archived",
   "content_en_sha1_hash": "4cf8fde269eac548a2798f4497add90e7c4d0b0a",
   "created_at": "2025-05-19T21:30:43.060Z",
-  "updated_at": "2026-04-08T16:49:10.820Z",
+  "updated_at": "2026-04-10T08:58:38.058Z",
   "comment": {
     "text": "This translation key is used to display a message when a room is archived, indicating that the specific room with the provided name has been archived. It appears in error messages or success notifications related to file actions, such as archiving files or updating folders.",
     "is_auto": true,
@@ -45,13 +45,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_variable",
-          "description": "The variable '{{name}}' is wrapped in different quotation marks in the Arabic translation, which may cause issues with the translation engine or variable interpolation if the engine expects exact character matching for the placeholder context.",
-          "suggestion": "تمت أرشفة الغرفة {{name}}"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -141,13 +135,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_tag",
-          "description": "The variable placeholder {{name}} is wrapped in double quotes in the Dutch translation, which were not present in the English source. This alters the technical markup/structure.",
-          "suggestion": "De kamer {{name}} is gearchiveerd"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
