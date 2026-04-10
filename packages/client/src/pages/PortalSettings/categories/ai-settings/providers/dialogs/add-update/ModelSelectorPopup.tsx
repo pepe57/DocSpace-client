@@ -26,7 +26,9 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useRef } from "react";
+// @ts-expect-error missing @types/react-dom in client package
+import { createPortal } from "react-dom";
 
 import { useTranslation } from "react-i18next";
 
@@ -34,11 +36,16 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
-import PenEditIcon from "@docspace/ui-kit/assets/icons/12/pen-edit.react.svg";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
+import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 
 import type { TProviderModelInfo } from "@docspace/shared/api/ai/types";
 
 import styles from "./ModelSelectorPopup.module.scss";
+
+const ROW_HEIGHT = 30;
+const SECTION_HEADER_HEIGHT = 28;
+const POPUP_PADDING = 16;
 
 type ModelSelectorPopupProps = {
   anchor: React.RefObject<HTMLDivElement | null>;
@@ -78,8 +85,8 @@ const ModelRow = ({
       {showPencil ? (
         <IconButton
           className={styles.pencilIcon}
-          iconNode={<PenEditIcon />}
-          size={12}
+          iconName={AccessEditReactSvgUrl}
+          size={16}
           onClick={(e) => {
             e.stopPropagation();
             onEdit(model.modelId);
@@ -89,6 +96,29 @@ const ModelRow = ({
       ) : null}
     </div>
   );
+};
+
+const calcContentHeight = (
+  recommended: TProviderModelInfo[],
+  other: TProviderModelInfo[],
+  isCustomProvider: boolean,
+): number => {
+  if (isCustomProvider) {
+    const totalModels = recommended.length + other.length;
+    return totalModels * ROW_HEIGHT;
+  }
+
+  let height = 0;
+
+  if (recommended.length > 0) {
+    height += SECTION_HEADER_HEIGHT + recommended.length * ROW_HEIGHT;
+  }
+
+  if (other.length > 0) {
+    height += SECTION_HEADER_HEIGHT + other.length * ROW_HEIGHT;
+  }
+
+  return height;
 };
 
 export const ModelSelectorPopup = ({
@@ -103,6 +133,39 @@ export const ModelSelectorPopup = ({
 }: ModelSelectorPopupProps) => {
   const { t } = useTranslation(["AISettings", "Common"]);
   const ref = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (!anchor.current || !ref.current) return;
+
+    // Anchor to the + button row, not the whole container
+    const addButton = anchor.current.querySelector(
+      '[data-testid="add-model-button"]',
+    );
+    const anchorEl = addButton ?? anchor.current;
+    const rect = anchorEl.getBoundingClientRect();
+    const popupEl = ref.current;
+
+    const top = rect.bottom + 4;
+    let left = anchor.current.getBoundingClientRect().left;
+
+    if (left + 285 > window.innerWidth) {
+      left = window.innerWidth - 285 - 8;
+    }
+
+    // Find the footer buttons to cap popup height
+    const footer = document.querySelector(
+      "[class*='modal-footer'], [class*='ModalDialog'] [class*='footer']",
+    );
+    const footerTop = footer
+      ? footer.getBoundingClientRect().top
+      : window.innerHeight;
+    const maxHeight = footerTop - top - 8;
+
+    popupEl.style.top = `${top}px`;
+    popupEl.style.left = `${left}px`;
+    popupEl.style.maxHeight = `${Math.max(maxHeight, 100)}px`;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [anchor]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -122,7 +185,12 @@ export const ModelSelectorPopup = ({
 
   const allModels = isCustomProvider ? [...recommended, ...other] : null;
 
-  return (
+  const scrollHeight = useMemo(
+    () => calcContentHeight(recommended, other, isCustomProvider),
+    [recommended, other, isCustomProvider],
+  );
+
+  return createPortal(
     <div
       ref={ref}
       className={styles.popup}
@@ -132,56 +200,17 @@ export const ModelSelectorPopup = ({
     >
       {isCustomProvider ? (
         <>
-          {allModels?.map((model) => (
-            <ModelRow
-              key={model.modelId}
-              model={model}
-              isSelected={selectedModelIds.has(model.modelId)}
-              showPencil
-              onToggle={onToggle}
-              onEdit={onEditModel}
-            />
-          ))}
-        </>
-      ) : (
-        <>
-          {recommended.length > 0 ? (
-            <>
-              <div className={styles.sectionHeader}>
-                <Text className={styles.sectionTitle}>
-                  {t("AISettings:RecommendedModels")}
-                </Text>
-                <HelpButton
-                  tooltipContent={t("AISettings:RecommendedModelsTooltip", {
-                    productName: t("Common:ProductName"),
-                  })}
-                  size={12}
-                />
-              </div>
-              {recommended.map((model) => (
-                <ModelRow
-                  key={model.modelId}
-                  model={model}
-                  isSelected={selectedModelIds.has(model.modelId)}
-                  showPencil={false}
-                  onToggle={onToggle}
-                  onEdit={onEditModel}
-                />
-              ))}
-            </>
-          ) : null}
-          {other.length > 0 ? (
-            <>
-              <div className={styles.sectionHeader}>
-                <Text className={styles.sectionTitle}>
-                  {t("AISettings:OtherModels")}
-                </Text>
-                <HelpButton
-                  tooltipContent={t("AISettings:OtherModelsTooltip")}
-                  size={12}
-                />
-              </div>
-              {other.map((model) => (
+          <div className={styles.sectionHeader}>
+            <Text className={styles.sectionTitle}>
+              {t("AISettings:SelectModels")}
+            </Text>
+          </div>
+          <div
+            className={styles.scrollWrapper}
+            style={{ height: scrollHeight }}
+          >
+            <Scrollbar fixedSize className={styles.scrollbar}>
+              {allModels?.map((model) => (
                 <ModelRow
                   key={model.modelId}
                   model={model}
@@ -191,11 +220,66 @@ export const ModelSelectorPopup = ({
                   onEdit={onEditModel}
                 />
               ))}
-            </>
-          ) : null}
+            </Scrollbar>
+          </div>
         </>
+      ) : (
+        <div className={styles.scrollWrapper} style={{ height: scrollHeight }}>
+          <Scrollbar fixedSize className={styles.scrollbar}>
+            {recommended.length > 0 ? (
+              <>
+                <div className={styles.sectionHeader}>
+                  <Text className={styles.sectionTitle}>
+                    {t("AISettings:RecommendedModels")}
+                  </Text>
+                  <HelpButton
+                    tooltipContent={t("AISettings:RecommendedModelsTooltip", {
+                      productName: t("Common:ProductName"),
+                    })}
+                    place="bottom"
+                    size={12}
+                  />
+                </div>
+                {recommended.map((model) => (
+                  <ModelRow
+                    key={model.modelId}
+                    model={model}
+                    isSelected={selectedModelIds.has(model.modelId)}
+                    showPencil={false}
+                    onToggle={onToggle}
+                    onEdit={onEditModel}
+                  />
+                ))}
+              </>
+            ) : null}
+            {other.length > 0 ? (
+              <>
+                <div className={styles.sectionHeader}>
+                  <Text className={styles.sectionTitle}>
+                    {t("AISettings:OtherModels")}
+                  </Text>
+                  <HelpButton
+                    tooltipContent={t("AISettings:OtherModelsTooltip")}
+                    place="bottom"
+                    size={12}
+                  />
+                </div>
+                {other.map((model) => (
+                  <ModelRow
+                    key={model.modelId}
+                    model={model}
+                    isSelected={selectedModelIds.has(model.modelId)}
+                    showPencil
+                    onToggle={onToggle}
+                    onEdit={onEditModel}
+                  />
+                ))}
+              </>
+            ) : null}
+          </Scrollbar>
+        </div>
       )}
-    </div>
+    </div>,
+    document.body,
   );
 };
-

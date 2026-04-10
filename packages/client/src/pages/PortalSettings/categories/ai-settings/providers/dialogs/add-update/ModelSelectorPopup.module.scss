@@ -29,14 +29,10 @@
 @use "@docspace/ui-kit/styles/variables/colors";
 
 .popup {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  margin-top: 4px;
-  z-index: 1000;
+  position: fixed;
+  z-index: 450;
   width: 285px;
-  max-height: 340px;
-  overflow-y: auto;
+  height: auto;
 
   border-radius: 8px;
   padding: 8px 16px;
@@ -51,10 +47,12 @@
 
   :global(.light) & {
     background-color: #{colors.$white};
+    border: 1px solid #{colors.$gray-light-mid};
   }
 
   :global(.dark) & {
     background-color: #{colors.$dark-gray-light};
+    border: 1px solid #{colors.$gray-dark-strong};
   }
 }
 
@@ -94,15 +92,38 @@
 }
 
 .modelLabel {
-  flex: 1;
+  display: inline-block;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 13px;
   line-height: 20px;
+  height: 24px;
+  padding: 1px 7px;
+  box-sizing: border-box;
+  margin-inline-end: auto;
+
+  :global(.light) & {
+    border: 1px solid #{colors.$gray-light-mid};
+  }
+
+  :global(.dark) & {
+    border: 1px solid #{colors.$gray-dark-strong};
+  }
+
+  border-radius: 6px;
 }
 
 .pencilIcon {
   visibility: hidden;
   flex-shrink: 0;
+}
+
+.scrollWrapper {
+  margin-inline-end: -17px;
+}
+
+.scrollbar {
+  // empty — needed as a class for Scrollbar component
 }
