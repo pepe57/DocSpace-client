@@ -77,7 +77,9 @@ const PaymentsPage = (props) => {
   const data = [
     {
       id: "portal-payments",
-      name: t("PortalTariffPlan", { productName: t("Common:ProductName") }),
+      name: t("Common:PortalTariffPlan", {
+        productName: t("Common:ProductName"),
+      }),
       content: <MainTariff />,
       onClick: () => {
         clearAbortControllerArr();
@@ -85,7 +87,7 @@ const PaymentsPage = (props) => {
     },
     {
       id: "payment-method",
-      name: t("PaymentMethod"),
+      name: t("Common:PaymentMethod"),
       content: <PaymentMethod />,
       onClick: () => {
         clearAbortControllerArr();
