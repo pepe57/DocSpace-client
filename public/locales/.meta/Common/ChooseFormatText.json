@@ -3,7 +3,7 @@
   "content": "Choose the format for each file to be downloaded",
   "content_en_sha1_hash": "2fb71e2e0362cf2ae30e23c9be7d0d121a6aaa14",
   "created_at": "2025-05-19T21:30:43.447Z",
-  "updated_at": "2026-04-10T15:22:27.235Z",
+  "updated_at": "2026-04-10T16:02:43.158Z",
   "comment": {
     "text": "The translation key \"ChooseFormatText\" is used to display a message prompting users to select the format for files to be downloaded in a download dialog. This text appears as a label within a file selection interface, guiding users through the conversion process.",
     "is_auto": true,
@@ -201,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The English text specifies 'for each file', implying a selection process for multiple files, whereas the Chinese translation '选择要下载的文件格式' (Choose the file format to be downloaded) implies a single format selection for the entire batch.",
-          "suggestion": "请为每个要下载的文件选择格式"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

@@ -3,7 +3,7 @@
   "content": "Commercial",
   "content_en_sha1_hash": "b48513e4d112b083333d204170e504fdb1a362c0",
   "created_at": "2025-05-19T21:30:43.578Z",
-  "updated_at": "2026-04-10T15:22:27.231Z",
+  "updated_at": "2026-04-10T16:02:43.154Z",
   "comment": {
     "text": "This translation key is used for the text \"Commercial\" in a branding and licensing context, typically found on a license agreement or permissions page where users can select a commercial usage option.",
     "is_auto": true,
@@ -195,13 +195,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation is in English instead of Vietnamese.",
-          "suggestion": "Thương mại"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

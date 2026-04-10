@@ -3,7 +3,7 @@
   "content": "Single Sign-On",
   "content_en_sha1_hash": "9cd5b7eb1680d90f18ef828206965ff742d88dda",
   "created_at": "2025-05-19T21:30:52.736Z",
-  "updated_at": "2026-04-10T15:22:27.338Z",
+  "updated_at": "2026-04-10T16:02:43.534Z",
   "comment": {
     "text": "This translation key is used to display a custom label for a single sign-on entry button. It appears in an IDP settings page and is used as a placeholder until a custom value is set. Translators should provide a clear and concise text that will be displayed on the UI.",
     "is_auto": true,
@@ -99,13 +99,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation is in English instead of Armenian.",
-          "suggestion": "Մեկանգամյա մուտք"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

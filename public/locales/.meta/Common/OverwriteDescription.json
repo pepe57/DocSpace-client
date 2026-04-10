@@ -3,7 +3,7 @@
   "content": "The new file will replace the existing one as a new version.",
   "content_en_sha1_hash": "0d9f5c9f81c7babac9ce4dd02769692be95654fb",
   "created_at": "2025-05-19T21:30:47.186Z",
-  "updated_at": "2026-04-10T15:22:27.137Z",
+  "updated_at": "2026-04-10T16:02:43.035Z",
   "comment": {
     "text": "The translation key \"OverwriteDescription\" is used to display a message when a user chooses to overwrite an existing file. This message informs users that their new file will replace the current one as a new version. It appears in dialog boxes, such as the ConflictResolveDialog, where users can select action options.",
     "is_auto": true,
@@ -207,13 +207,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation conveys the opposite meaning. The English text states the file WILL replace the existing one, whereas the Chinese text states they will exist as different versions (implying no replacement/overwrite occurs).",
-          "suggestion": "新文件将作为新版本替换现有文件。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

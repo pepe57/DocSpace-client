@@ -3,7 +3,7 @@
   "content": "<1>Admin account types and their privileges</1> <br> <br> <2>{{productName}} admin</2> <br> {{productName}} configuration, room creation and administration, ability to invite and manage users in {{productName}} and in virtual rooms, ability to manage access rights. <br> <br> <3>Room admin</3> <br> Room administration and archiving, user invitation and management. Several admins can be assigned to a room. <br> <br> <4>User</4> <br> Users can create and edit files in the room, but can't create rooms, manage users, or access settings.",
   "content_en_sha1_hash": "a5f8e3f05414f4551551d409b8f3a24e8f1a73bc",
   "created_at": "2025-05-19T21:30:53.036Z",
-  "updated_at": "2026-04-10T15:22:27.332Z",
+  "updated_at": "2026-04-10T16:02:43.520Z",
   "comment": {
     "text": "This translation key is used for a tooltip that describes user roles and their corresponding privileges in a workspace configuration. It appears as a tooltip on a settings page, providing an overview of available roles (Admin, Room Admin, User) and their respective access rights.",
     "is_auto": true,
@@ -69,30 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation for tag <4> is 'ισχύος' (power/force), which is a mistranslation of the role 'User'.",
-          "suggestion": "<4>Χρήστης</4>"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The sentence following tag <4> uses 'Οι ισχύος' (The powers), which is grammatically incorrect and semantically wrong for 'Users'.",
-          "suggestion": "Οι χρήστες μπορούν να δημιουργούν και να επεξεργάζονται αρχεία στο δωμάτιο, αλλά δεν μπορούν να δημιουργούν δωμάτια, να διαχειρίζονται χρήστες ή να έχουν πρόσβαση στις ρυθμίσεις."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation for tag <4> is 'Avanzado' (Advanced), whereas the English source is 'User'. This changes the meaning of the role description.",
-          "suggestion": "<4>Usuario</4> <br> Los usuarios pueden crear y editar archivos en la sala, pero no pueden crear salas, administrar usuarios ni acceder a la configuración."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -104,18 +87,7 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation for tag <4> is 'Avancé' (Advanced), whereas the English source is 'User'. This changes the meaning of the role description.",
-          "suggestion": "<4>Utilisateur</4>"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The description for tag <4> uses 'Avancés' (Advanced users) instead of 'Utilisateurs' (Users), which is inconsistent with the role name error and the source text.",
-          "suggestion": "Les utilisateurs peuvent créer et modifier des fichiers dans la salle, mais ne peuvent ni créer de salles, ni gérer des utilisateurs, ni accéder aux paramètres."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -127,18 +99,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation for tag <4> 'User' is 'Esperto' (Expert), which changes the meaning of the user role.",
-          "suggestion": "<4>Utente</4>"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The translation for tag <3> 'Room admin' is 'Amministrazione delle stanze' (Room administration), which describes an action/process rather than a role/title.",
-          "suggestion": "<3>Amministratore della stanza</3>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -168,18 +129,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Room admin' (a role/person) was translated as 'Kamerbeheer' (the action/management), which changes the meaning from a user type to a process.",
-          "suggestion": "<3>Kamerbeheerder</3>"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'User' (the role) was left in English ('Users') in the heading and the description, which is inconsistent with the rest of the Dutch translation.",
-          "suggestion": "<4>Gebruiker</4> <br> Gebruikers kunnen bestanden aanmaken en bewerken in de kamer, maar kunnen geen kamers aanmaken, gebruikers beheren of instellingen openen."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -269,13 +219,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation for tag <3> 'Room admin' is translated as 'Administrja e dhomës' (Room administration), which describes an action/process rather than a user role/type as required by the context.",
-          "suggestion": "<3>Administrator i dhomës</3>"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

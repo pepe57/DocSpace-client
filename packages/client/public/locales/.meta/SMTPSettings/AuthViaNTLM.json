@@ -3,7 +3,7 @@
   "content": "Auth via NTLM",
   "content_en_sha1_hash": "207bb87de2e4b6d870453e16a0021127ffef3143",
   "created_at": "2025-05-19T21:30:53.288Z",
-  "updated_at": "2026-04-10T15:22:27.396Z",
+  "updated_at": "2026-04-10T16:02:43.604Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Auth via NTLM\" as a label for a checkbox in a settings UI. When checked, it likely enables authentication using NTLM protocol. It appears in the SMTP Settings page under Custom Settings.",
     "is_auto": true,
@@ -27,13 +27,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "suspicious_length",
-          "description": "Translation is 6.1x longer than English (79 vs 13 chars) — possibly duplicated text",
-          "suggestion": ""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {

@@ -3,7 +3,7 @@
   "content": "Share the original form for filling out.",
   "content_en_sha1_hash": "d89e20141550449ea8d0537fbc588e697483a8fe",
   "created_at": "2025-05-19T21:30:48.698Z",
-  "updated_at": "2026-04-10T15:22:27.104Z",
+  "updated_at": "2026-04-10T16:02:42.978Z",
   "comment": {
     "text": "The translation key \"ShareTheOriginalFormForFillingOut\" is used to describe a feature that allows users to share their original form content. This message appears in UI elements such as buttons or dialog boxes, guiding users on how to share the unedited form data, typically for collaborative editing purposes.",
     "is_auto": true,

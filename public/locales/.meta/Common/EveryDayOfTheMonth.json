@@ -3,7 +3,7 @@
   "content": "Every day of the month",
   "content_en_sha1_hash": "ef1343444bcfd905b62e1f679563aa57bd5f7442",
   "created_at": "2025-05-19T21:30:45.139Z",
-  "updated_at": "2026-04-08T10:08:38.973Z",
+  "updated_at": "2026-04-10T16:02:43.106Z",
   "comment": {
     "text": "This translation key is used for displaying the placeholder \"Every day of the month\" when there are no days to select in a calendar component. It appears as a value option in a Select component and is displayed when certain conditions render it empty.",
     "is_auto": true,
@@ -93,13 +93,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation '毎月毎日' means 'Every month, every day', which implies a repetition of both months and days. The English source 'Every day of the month' refers to a selection of all available days within a single month context (e.g., 1st through 31st).",
-          "suggestion": "月の全日"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

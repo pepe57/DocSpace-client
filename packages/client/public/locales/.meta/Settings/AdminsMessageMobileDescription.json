@@ -3,7 +3,7 @@
   "content": "Administrator Message Settings is a way to contact the portal administrator.",
   "content_en_sha1_hash": "df02187a45136831faba4c5289c9e7fd61cd9fe2",
   "created_at": "2025-05-19T21:30:50.396Z",
-  "updated_at": "2026-04-10T15:22:27.388Z",
+  "updated_at": "2026-04-10T16:02:43.597Z",
   "comment": {
     "text": "The AdminsMessageMobileDescription translation key provides a short description of the \"Admin Message Settings\" category in a mobile view, used to display a brief explanation when accessing this setting through a mobile device.",
     "is_auto": true,

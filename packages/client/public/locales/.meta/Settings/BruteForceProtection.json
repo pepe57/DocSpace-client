@@ -3,7 +3,7 @@
   "content": "Brute Force Protection",
   "content_en_sha1_hash": "ad05e298131255f6f589995a3c3f681dfa43a007",
   "created_at": "2025-05-19T21:30:50.820Z",
-  "updated_at": "2026-04-10T15:22:27.383Z",
+  "updated_at": "2026-04-10T16:02:43.592Z",
   "comment": {
     "text": "This translation key is used to display a description of \"Brute Force Protection\" in the portal settings category, particularly on the mobile view and within the security access portal. It appears as a subtitle next to the category title, helping users understand its purpose.",
     "is_auto": true,
@@ -105,13 +105,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The Japanese translation is identical to the English text (Latin script) instead of being translated into Japanese.",
-          "suggestion": "ブルートフォース攻撃保護"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -219,13 +213,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '安全保护' (Security Protection) is too generic and fails to convey the specific technical meaning of 'Brute Force Protection'. It misses the 'Brute Force' aspect of the security feature.",
-          "suggestion": "暴力破解防护"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

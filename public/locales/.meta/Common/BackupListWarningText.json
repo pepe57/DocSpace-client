@@ -3,7 +3,7 @@
   "content": "If you delete any items from the list, their corresponding files will also be deleted. This action cannot be undone. To delete all the files use the link:",
   "content_en_sha1_hash": "a76a370dbddd6f072c3b10f98c0952d3c93070ad",
   "created_at": "2025-05-26T07:15:40.749Z",
-  "updated_at": "2026-04-10T15:22:27.256Z",
+  "updated_at": "2026-04-10T16:02:43.174Z",
   "comment": {
     "text": "This translation key is used for a warning message that alerts users about the irreversible nature of deleting items from a backup list. The text appears in a dialog box when the user attempts to delete files and cannot be undone, prompting them to use an alternative method instead.",
     "is_auto": true,

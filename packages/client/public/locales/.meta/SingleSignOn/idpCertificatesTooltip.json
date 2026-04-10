@@ -3,7 +3,7 @@
   "content": "The Identity provider public certificates used for either verification or decryption (or both) of the requests and responses from the IdP.",
   "content_en_sha1_hash": "7846c6461388c273f52adc2c6ee4a3e2120da395",
   "created_at": "2025-05-19T21:30:50.096Z",
-  "updated_at": "2026-04-10T15:22:27.318Z",
+  "updated_at": "2026-04-10T16:02:43.499Z",
   "comment": {
     "text": "This translation key is used to display a tooltip describing identity provider public certificates in the portal settings page. It provides context on the certificates' purpose and usage in single sign-on processes.",
     "is_auto": true,
@@ -201,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The translation omits 'responses' (响应), only mentioning 'requests and information' (请求与信息). The English text specifies 'requests and responses'.",
-          "suggestion": "用于对来自 IdP 的请求与响应进行验证或解密（或两者皆有）的身份供应商公共证书。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

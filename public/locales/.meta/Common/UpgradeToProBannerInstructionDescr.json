@@ -3,7 +3,7 @@
   "content": "Use the official documentation to upgrade:",
   "content_en_sha1_hash": "543e777ff5b1b9ec51febc46ab0a1b341669aea6",
   "created_at": "2025-05-26T07:15:49.164Z",
-  "updated_at": "2026-04-10T15:22:27.085Z",
+  "updated_at": "2026-04-10T16:02:42.944Z",
   "comment": {
     "text": "This translation key is used to provide a brief instruction on how to upgrade to a professional plan, likely appearing as a tooltip or inline message in a UI element such as a button. The text should encourage users to refer to official documentation for further instructions.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "New guests will be added here once you invite them to the room.",
   "content_en_sha1_hash": "67fb4d9324338a8ac05bfb73179d010e43aecfd7",
   "created_at": "2025-05-19T21:30:46.881Z",
-  "updated_at": "2026-04-10T15:22:27.143Z",
+  "updated_at": "2026-04-10T16:02:43.044Z",
   "comment": {
     "text": "This translation key describes a message that appears on an empty screen when there are no invited guests to display. It is used in the \"Contacts\" section of the Home page and is displayed as a default message when no guests have been added yet.",
     "is_auto": true,

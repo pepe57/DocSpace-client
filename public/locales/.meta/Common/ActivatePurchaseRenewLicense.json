@@ -3,7 +3,7 @@
   "content": "To continue getting support and updates, buy a renewal.",
   "content_en_sha1_hash": "ec58935d8687f19ed9ad71853d7932c9a2c5e29f",
   "created_at": "2025-05-26T07:15:40.078Z",
-  "updated_at": "2026-04-10T15:22:27.271Z",
+  "updated_at": "2026-04-10T16:02:43.196Z",
   "comment": {
     "text": "This translation key is used to display a message encouraging users to renew their license to continue receiving support and updates. It appears in a subscription-related UI element on an enterprise payment page.",
     "is_auto": true,

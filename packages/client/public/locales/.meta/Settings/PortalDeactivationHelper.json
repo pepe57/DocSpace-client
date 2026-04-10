@@ -3,7 +3,7 @@
   "content": "If you wish to deactivate this {{productName}}, your space and all information associated with it will be blocked so that no one has access to it for a particular period. To do that, click the Deactivate button. A link to confirm the operation will be sent to the email address of the space owner.\nIn case you want to come back to the space and continue using it, you will need to use the second link provided in the confirmation email. So, please, keep this email in a safe place.",
   "content_en_sha1_hash": "9a1c4489d8b479bfef9c9f90a924b29e8ecfec2c",
   "created_at": "2025-05-19T21:30:52.193Z",
-  "updated_at": "2026-04-10T15:22:27.351Z",
+  "updated_at": "2026-04-10T16:02:43.550Z",
   "comment": {
     "text": "\"This translation key is used to describe the process of deactivating a portal and blocking access to its associated information. It will appear on the Deactivate button in the Portal Settings page, providing users with instructions and warnings about the impact of deactivation.\"",
     "is_auto": true,
@@ -201,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The second paragraph of the English text, which explains how to reactivate the space using the second link in the email, is completely missing from the Chinese translation.",
-          "suggestion": "如果您希望停用此{{productName}}，您的空间及其所有相关信息将被阻止，以便在特定时期内无人可以访问它。为此，请点击停用按钮。确认操作的链接将发送到空间所有者的电子邮件地址。\n\n如果您想重新回到该空间并继续使用，您需要使用确认邮件中提供的第二个链接。因此，请务必妥善保存此邮件。"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

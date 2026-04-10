@@ -3,7 +3,7 @@
   "content": "Use special characters",
   "content_en_sha1_hash": "4fd46a4ca880394c20ea7a80b64f2c6478a48924",
   "created_at": "2025-05-19T21:30:53.176Z",
-  "updated_at": "2026-04-10T15:22:27.330Z",
+  "updated_at": "2026-04-10T16:02:43.518Z",
   "comment": {
     "text": "This translation key is used to display a checkbox label that enables users to select \"Use special characters\" in password strength settings. The checkbox appears on a form in a portal settings page, allowing users to toggle this feature on or off.",
     "is_auto": true,
@@ -201,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '必须包含特殊字符' means 'Must contain special characters', which implies a requirement/rule. The English 'Use special characters' is a command/option for a checkbox to enable a feature. This changes the meaning from a setting toggle to a validation rule.",
-          "suggestion": "使用特殊字符"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

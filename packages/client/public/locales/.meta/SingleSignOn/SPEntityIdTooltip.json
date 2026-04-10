@@ -3,7 +3,7 @@
   "content": "The Service provider XML URL address which can be downloaded and used by the Identity provider to unequivocally identify the SP",
   "content_en_sha1_hash": "7e16034dafb05ab76e9dff0e286b4ab633a7939f",
   "created_at": "2025-05-19T21:30:50.165Z",
-  "updated_at": "2026-04-10T15:22:27.322Z",
+  "updated_at": "2026-04-10T16:02:43.508Z",
   "comment": {
     "text": "The \"SPEntityIdTooltip\" translation key provides a tooltip to help users understand that the metadata URL address is used to uniquely identify a Service Provider in the Single Sign-On process. This tooltip appears on the MetadataUrlField component in the PortalSettings page and helps clarify its purpose.",
     "is_auto": true,
@@ -201,13 +201,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation contains a typo '克由' (kè yóu) which is nonsensical in this context. It appears to be a mistranslation or a typo for '可由' (kě yóu), meaning 'can be'.",
-          "suggestion": "可由身份供应商下载和使用以明确识别 SP 的服务供应商 XML URL 地址"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

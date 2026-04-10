@@ -3,7 +3,7 @@
   "content": "Admins can assign default templates for DOCX, XLSX, and other formats. When users create new documents, these templates are applied automatically based on language and region. Admins can upload or reset templates to default. Each template shows its status, last modified date, and file size.",
   "content_en_sha1_hash": "a69271c260bdb74fce8be26cdc6a3b62b54ede4f",
   "created_at": "2026-02-18T14:56:26.355Z",
-  "updated_at": "2026-04-10T15:22:27.375Z",
+  "updated_at": "2026-04-10T16:02:43.579Z",
   "comment": {
     "text": "This text describes the default templates feature, explaining that administrators can set templates for various file formats (DOCX, XLSX, etc.) which are automatically applied to new documents based on language and region. It appears as a descriptive text on the Default Templates page within Portal Settings.",
     "is_auto": true,
@@ -171,13 +171,7 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'reset' was translated as 'rikuperojnë' (to recover/retrieve), which changes the meaning from resetting to a default state to recovering something lost.",
-          "suggestion": "Administratorët mund të ngarkojnë ose të kthejnë shabllonet në të paracaktuar."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
