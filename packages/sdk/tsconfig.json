@@ -33,8 +33,7 @@
         "../../public/*"
       ],
       "ASSETS_DIR/*": [
-        "./public/*",
-        "../../libs/ui-kit/*"
+        "./public/*"
       ]
     }
   },
