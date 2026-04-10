@@ -1286,5 +1286,11 @@
   "YourFurtherEditsNotSaved": "Vaše ďalšie úpravy nemusí byť uložené.",
   "YourLogo": "Vaše logo",
   "YourTurn": "Ste na rade",
-  "StopFillingBody": "Niste si istý, že chcete prestať vypĺňať? Po zrušení nebude možné vypĺňanie tohto formulára obnoviť. Vypĺňanie formulára bude zastavené v aktuálnej fáze. Súbor bude označený ako „Zastavený“."
+  "StopFillingBody": "Niste si istý, že chcete prestať vypĺňať? Po zrušení nebude možné vypĺňanie tohto formulára obnoviť. Vypĺňanie formulára bude zastavené v aktuálnej fáze. Súbor bude označený ako „Zastavený“.",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Pre úplné spravovanie fakturácie a predplatného navštívte portál.",
+  "OpenPortalBilling": "Prejsť na fakturáciu portálu",
+  "BillingWalletCardDesc": "Zostatok, dobitie kreditu a história transakcií",
+  "BillingAICardDesc": "Kredity AI, nastavenia modelu a používanie",
+  "BillingPaymentMethodCardDesc": "Prepojené údaje karty a platcu"
 }

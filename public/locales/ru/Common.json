@@ -1286,5 +1286,11 @@
   "YourCurrentDomain": "Ваш текущий домен",
   "YourFurtherEditsNotSaved": "Ваши дальнейшие изменения могут не сохраниться.",
   "YourLogo": "Ваш логотип",
-  "YourTurn": "Ваша очередь"
+  "YourTurn": "Ваша очередь",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Для полного управления выставлением счетов и подписками, пожалуйста, посетите портал.",
+  "OpenPortalBilling": "Перейти к биллингу портала",
+  "BillingWalletCardDesc": "Баланс, пополнение и история транзакций",
+  "BillingAICardDesc": "Кредиты ИИ, настройки модели и использование",
+  "BillingPaymentMethodCardDesc": "Привязанная карта и данные плательщика"
 }

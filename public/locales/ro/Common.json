@@ -1286,5 +1286,11 @@
   "YourLogo": "Logo-ul dvs",
   "YourTurn": "Acum e rândul dvs.",
   "AboutCompanyEmailTitle": "E-mail",
-  "Email": "Email"
+  "Email": "Email",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Pentru gestionarea completă a facturării și a abonamentelor, vă rugăm să vizitați portalul.",
+  "OpenPortalBilling": "Mergeți la facturarea portalului",
+  "BillingWalletCardDesc": "Sold, completare și istoric tranzacții",
+  "BillingAICardDesc": "Credite AI, setări model și utilizare",
+  "BillingPaymentMethodCardDesc": "Card conectată și detalii despre platați"
 }

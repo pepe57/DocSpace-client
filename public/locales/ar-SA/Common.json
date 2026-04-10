@@ -1286,5 +1286,11 @@
   "YourFurtherEditsNotSaved": "قد لا يتم حفظ تعديلاتك الإضافية.",
   "YourLogo": "شعاركم",
   "YourTurn": "دوركم الآن",
-  "ItemsSuccessfullyUploaded": "العناصر التي تم تحميلها: {{count}}"
+  "ItemsSuccessfullyUploaded": "العناصر التي تم تحميلها: {{count}}",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "لإدارة الفواتير والاشتراكات بالكامل، يرجى زيارة البوابة.",
+  "OpenPortalBilling": "الانتقال إلى فوترة البوابة",
+  "BillingWalletCardDesc": "الرصيد، والشحن، وسجل المعاملات",
+  "BillingAICardDesc": "رصيد الذكاء الاصطناعي، وإعدادات النموذج، والاستخدام",
+  "BillingPaymentMethodCardDesc": "تفاصيل البطاقة والدافع المرتبطة"
 }

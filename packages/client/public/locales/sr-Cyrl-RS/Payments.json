@@ -165,5 +165,6 @@
   "GoToTariffPlan": "Отиђи на тарифни план",
   "GracePeriodActive": "Период попуштања је активан <1>од {{fromDate}} до {{byDate}}</1> (преостало дана: {{delayDaysCount}}).",
   "PortalTariffPlan": "{{productName}} тарифни план",
-  "SizePerMonth": "/месец <1>({{size}})</1>"
+  "SizePerMonth": "/месец <1>({{size}})</1>",
+  "LinkNewCardDescription": "Кликните на дугме испод за повезивање нове картице"
 }

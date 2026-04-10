@@ -165,5 +165,6 @@
   "YouHaveNotAddedAnyPayment": "Ödəniş əlavə etməmisiniz.",
   "YourCurrentPlan": "<1>Hazırda olan planınız:</1> {{amount}} <2>({{price}}/ay)</2>",
   "YourPrice": "Qiymətiniz",
-  "OnlyPayerCanManageSection": "Yalnız Ödəyən bu bölməni idarə edə bilər. <1>Daha çox öyrənin</1>"
+  "OnlyPayerCanManageSection": "Yalnız Ödəyən bu bölməni idarə edə bilər. <1>Daha çox öyrənin</1>",
+  "LinkNewCardDescription": "Yeni kartı bağlama üçün aşağıdakı düyməni klikləyin"
 }

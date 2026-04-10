@@ -1286,5 +1286,11 @@
   "YourTurn": "Votre tour",
   "AboutCompanyEmailTitle": "E-mail",
   "CopyOperation": "Copie en cours",
-  "New": "Nouveau"
+  "New": "Nouveau",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Pour la gestion complète de la facturation et des abonnements, veuillez consulter le portail.",
+  "OpenPortalBilling": "Accéder à la facturation du portail",
+  "BillingWalletCardDesc": "Solde, recharge et historique des transactions",
+  "BillingAICardDesc": "Crédits IA, paramètres du modèle et utilisation",
+  "BillingPaymentMethodCardDesc": "Détails de la carte liée et du payeur"
 }

@@ -165,5 +165,6 @@
   "UnknownPayerForOwner": "Nie znaleźliśmy kontaktu pasującego do adresu e-mail Stripe. Państwa rozliczenia i usługi będą działać dalej, ale zalecamy przypisanie nowego Payera do zarządzania ustawieniami rozliczeniowymi w {{productName}}.",
   "WalletSectionDescription": "Portfel {{productName}} umożliwia łatwy zakup usług takich jak pamięć masowa, narzędzia AI i kopie zapasowe. Dodaj środki i wybierz usługi, których potrzebujesz, aby zacząć.",
   "OnlyPayerCanManageSection": "Tylko Płatnik może zarządzać tą sekcją. <1>Dowiedz się więcej</1>",
-  "CurrencyPerBackup": "({{currency}} za kopię zapasową)"
+  "CurrencyPerBackup": "({{currency}} za kopię zapasową)",
+  "LinkNewCardDescription": "Kliknij poniższy przycisk, aby powiązać nową kartę"
 }

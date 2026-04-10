@@ -1286,5 +1286,11 @@
   "YourFurtherEditsNotSaved": "Redaktimet tuaja të mëtejshme mund të mos ruhen.",
   "YourLogo": "Logos juaj",
   "YourTurn": "Radha jote",
-  "PM": "PM"
+  "PM": "PM",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Për menaxhimin e plotë të faturimit dhe abonimit, ju lutemi vizitoni portalin.",
+  "OpenPortalBilling": "Shko te faturimi i portalit",
+  "BillingWalletCardDesc": "Bilanci, rikarikim dhe historiku i transaksioneve",
+  "BillingAICardDesc": "Kreditet e AI, cilësimet e modelit dhe përdorimi",
+  "BillingPaymentMethodCardDesc": "Kartat e lidhur dhe detajet e pagesës"
 }

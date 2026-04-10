@@ -165,5 +165,6 @@
   "YourCurrentPlan": "<1>Nykyinen suunnitelmasi:</1> {{amount}} <2>({{price}}/kk)</2>",
   "YourPrice": "Hintasi",
   "TopUpTo": "Kohti",
-  "OnlyPayerCanManageSection": "Vain maksaja voi hallita tätä osiota. <1>Lue lisää</1>"
+  "OnlyPayerCanManageSection": "Vain maksaja voi hallita tätä osiota. <1>Lue lisää</1>",
+  "LinkNewCardDescription": "Klikkaa alla olevaa painiketta linkittääksesi uuden kortin"
 }

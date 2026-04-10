@@ -165,5 +165,6 @@
   "UnknownPayerForAdmin": "We konden geen contactpersoon vinden die overeenkomt met het Stripe-e-mailadres. Facturering en diensten zullen blijven werken, maar wij raden aan de eigenaar van {{productName}} te contacteren om een nieuwe betaler toe te wijzen.",
   "UnknownPayerForOwner": "We konden geen contactpersoon vinden die overeenkomt met het Stripe-e-mailadres. Uw facturatie en diensten zullen doorgaan, maar wij raden aan een nieuwe Betaler toe te wijzen om de factuurinstellingen in {{productName}} te beheren.",
   "WalletSectionDescription": "De {{productName}} Wallet stelt u in staat om eenvoudig diensten zoals opslag, AI-tools en back-ups aan te schaffen. Voeg fondsen toe en selecteer de diensten die u nodig heeft om te beginnen.",
-  "OnlyPayerCanManageSection": "Alleen de betaler kan deze sectie beheren. <1>Meer informatie</1>"
+  "OnlyPayerCanManageSection": "Alleen de betaler kan deze sectie beheren. <1>Meer informatie</1>",
+  "LinkNewCardDescription": "Klik op de onderstaande knop om een nieuwe kaart te koppelen"
 }

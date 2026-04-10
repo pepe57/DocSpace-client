@@ -1286,5 +1286,11 @@
   "YourFurtherEditsNotSaved": "Các chỉnh sửa tiếp theo của bạn có thể không được lưu.",
   "YourLogo": "Logo của bạn",
   "YourTurn": "Phiên của bạn",
-  "AboutCompanyEmailTitle": "E-mail"
+  "AboutCompanyEmailTitle": "E-mail",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Để quản lý đầy đủ việc thanh toán và đăng ký, vui lòng truy cập cổng thông tin.",
+  "OpenPortalBilling": "Đi tới thanh toán cổng thông tin",
+  "BillingWalletCardDesc": "Số dư, nạp tiền và lịch sử giao dịch",
+  "BillingAICardDesc": "Tín dụng AI, cài đặt mô hình và mức độ sử dụng",
+  "BillingPaymentMethodCardDesc": "Chi tiết thẻ và người thanh toán đã liên kết"
 }

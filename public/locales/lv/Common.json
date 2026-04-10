@@ -1286,5 +1286,11 @@
   "YourFurtherEditsNotSaved": "Jūsu turpmāko rediģēšanu var nesaglabāt.",
   "YourLogo": "Jūsu logotips",
   "YourTurn": "Jūsu kārta",
-  "AboutCompanyEmailTitle": "E-pasts"
+  "AboutCompanyEmailTitle": "E-pasts",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Piln pilnā rēķinu un abonementu pārvaldība, lūdzu, apmeklējietālu.",
+  "OpenPortalBilling": "Lejiet uz portāla maksas",
+  "BillingWalletCardDesc": "Balance, papildināšana un transakciju vēsture",
+  "BillingAICardDesc": "AI kredīti, modeļa iestatījumi un lietošana",
+  "BillingPaymentMethodCardDesc": "Saistīta kartas un maksātāja informācija"
 }

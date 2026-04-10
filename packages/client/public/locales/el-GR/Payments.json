@@ -165,5 +165,6 @@
   "YourCurrentPlan": "<1>Το τρέχον πρόγραμμα σας:</1> {{amount}} <2>({{price}}/μήνα)</2>",
   "YourPrice": "Η τιμή σας",
   "OnlyPayerCanManageSection": "Μόνο ο Πληρωτής μπορεί να διαχειριστεί αυτήν την ενότητα. <1>Περισσότερα</1>",
-  "SubscriptionAutoRenewedWithUpdate": "Η συνδρομή θα ανανεωθεί αυτόματα <1>στις {{finalDate}}</1> με ενημερωμένες τιμές και προδιαγραφές — <1>{{price}}/μήνας ({{amount}})</1>"
+  "SubscriptionAutoRenewedWithUpdate": "Η συνδρομή θα ανανεωθεί αυτόματα <1>στις {{finalDate}}</1> με ενημερωμένες τιμές και προδιαγραφές — <1>{{price}}/μήνας ({{amount}})</1>",
+  "LinkNewCardDescription": "Κάντε κλικ στο κουμπί παρακάτω για να συνδέσετε μια νέα κάρτα"
 }

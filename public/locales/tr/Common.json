@@ -1286,5 +1286,11 @@
   "YourFurtherEditsNotSaved": "Yapacağınız ek düzenlemeler kaydedilmeyebilir.",
   "YourLogo": "Logonuz",
   "YourTurn": "Sıra sizde",
-  "AboutCompanyEmailTitle": "E-posta"
+  "AboutCompanyEmailTitle": "E-posta",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Tam faturalandırma ve abonelik yönetimi için lütfen portalı ziyaret edin.",
+  "OpenPortalBilling": "Portal faturalandırmaya git",
+  "BillingWalletCardDesc": "Bakiye, yükleme ve işlem geçmişi",
+  "BillingAICardDesc": "Yapay zeka kredileri, model ayarları ve kullanım",
+  "BillingPaymentMethodCardDesc": "Bağlı kart ve ödeme yapan kişi ayrıntıları"
 }

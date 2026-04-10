@@ -165,5 +165,6 @@
   "UnknownPayerForAdmin": "Nu am reușit să găsim un contact care să corespundă emailului Stripe. Facturarea și serviciile vor continua să funcționeze, dar vă recomandăm să contactați proprietarul {{productName}} pentru a-i atribui un Noul Plătitor.",
   "UnknownPayerForOwner": "Nu am reușit să găsim un contact care să corespundă emailului Stripe. Facturarea și serviciile dumneavoastră vor continua să funcționeze, dar vă recomandăm să atribuiți un Payer nou pentru a gestiona setările de facturare în {{productName}}.",
   "WalletSectionDescription": "Portofelul {{productName}} vă permite să achiziționați cu ușurință servicii precum stocarea, instrumentele AI și backup-urile. Adăugați fonduri și selectați serviciile de care aveți nevoie pentru a începe.",
-  "OnlyPayerCanManageSection": "Doar Plătitor poate gestiona această secțiune. <1>Află mai multe</1>"
+  "OnlyPayerCanManageSection": "Doar Plătitor poate gestiona această secțiune. <1>Află mai multe</1>",
+  "LinkNewCardDescription": "Clickați butonul de mai jos pentru a asocia un nou card"
 }

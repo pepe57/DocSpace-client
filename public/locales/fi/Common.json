@@ -1286,5 +1286,11 @@
   "YourLogo": "Logosi",
   "YourTurn": "Sinun vuorosi",
   "AboutCompanyEmailTitle": "Sähköposti",
-  "Comment": "Kommentoi"
+  "Comment": "Kommentoi",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Voit hallinnoida laskutusta ja tilauksia kokonaisu vierailemalla portaalissa.",
+  "OpenPortalBilling": "Siirry portaalin laskutukseen",
+  "BillingWalletCardDesc": "Saldo, lataus ja tilitapahtumahistoria",
+  "BillingAICardDesc": "Tekoälyluotot, malliasetukset ja käyttö",
+  "BillingPaymentMethodCardDesc": "Liitetty kortti ja maksajan tiedot"
 }

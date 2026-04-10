@@ -165,5 +165,6 @@
   "YourCurrentPlan": "<1>Váš aktuální tarif:</1> {{amount}} <2>({{price}}/měsíc)</2>",
   "YourPrice": "Vaše cena",
   "OnlyPayerCanManageSection": "Pouze platitel může spravovat tuto sekci. <1>Zjistit více</1>",
-  "BalanceText": "Zůstatek"
+  "BalanceText": "Zůstatek",
+  "LinkNewCardDescription": "Klikněte na tlačítko níže pro propojení nové karty"
 }

@@ -1286,5 +1286,11 @@
   "YourTurn": "Jste na řadě",
   "PM": "PM",
   "StopFillingBody": "Opravdu chcete zastavit vyplňování? Po zrušení nebude možné vyplňování tohoto formuláře obnovit. Vyplňování formuláře bude zastaveno v aktuální fázi. Soubor bude označen jako „Zastaven“.",
-  "AboutCompanyEmailTitle": "E-mail"
+  "AboutCompanyEmailTitle": "E-mail",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Pro úplnou správu fakturace a předplatného navštivte portál.",
+  "OpenPortalBilling": "P naaci portálu",
+  "BillingWalletCardDesc": "Zůstatek, dobití a historie transakcí",
+  "BillingAICardDesc": "Kredity AI, nastavení modelu a využití",
+  "BillingPaymentMethodCardDesc": "Propojené údaje karty a plátce"
 }

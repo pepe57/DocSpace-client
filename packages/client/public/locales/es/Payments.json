@@ -165,5 +165,6 @@
   "YouHaveNotAddedAnyPayment": "No ha añadido ningún pago",
   "YourCurrentPlan": "<1>Su plan actual:</1> {{amount}} <2>({{price}}/mes)</2>",
   "YourPrice": "Su precio",
-  "OnlyPayerCanManageSection": "Solo el pagador puede gestionar esta sección. <1>Más información</1>"
+  "OnlyPayerCanManageSection": "Solo el pagador puede gestionar esta sección. <1>Más información</1>",
+  "LinkNewCardDescription": "Haga clic en el botón de abajo para vincular una nueva tarjeta"
 }

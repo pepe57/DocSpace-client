@@ -1286,5 +1286,11 @@
   "YourCurrentDomain": "現在お使いのドメイン",
   "YourFurtherEditsNotSaved": "さらなる編集は保存されない場合があります。",
   "YourLogo": "あなたのロゴ",
-  "YourTurn": "あなたの番です"
+  "YourTurn": "あなたの番です",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "請求およびサブスクリプション管理の詳細については、ポータルにアクセスしてください。",
+  "OpenPortalBilling": "ポータル請求へ移動",
+  "BillingWalletCardDesc": "残高、チャージ、および取引履歴",
+  "BillingAICardDesc": "AIクレジット、モデル設定、および使用状況",
+  "BillingPaymentMethodCardDesc": "連携されたカードと支払者の詳細"
 }

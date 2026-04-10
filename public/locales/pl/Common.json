@@ -1286,5 +1286,11 @@
   "YourTurn": "Twoja kolej",
   "RoleAIAgentManagerDescription": "Menedżerowie agentów mogą zarządzać przypisanym {{aiAgent}}, zapraszać nowych użytkowników i przypisywać role niższych poziomów.\nMogą korzystać z czatu, przesyłać pliki wiedzy, pracować z Result storage oraz zarządzać ustawieniami czatu.",
   "StopFillingBody": "Czy na pewno chcesz przerwać wypełnianie? Po anulowaniu nie będzie można wznowić wypełniania tego formularza. Wypełnianie formularza zostanie przerwane na etapie, na którym się obecnie znajduje. Plik zostanie oznaczony jako „Przerwany”.",
-  "AboutCompanyEmailTitle": "E-mail"
+  "AboutCompanyEmailTitle": "E-mail",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Aby uzyskaćny dostęp do zarządzania płatnościami i subskrypcjami, odwiedź portal.",
+  "OpenPortalBilling": "Przejdź do płatności w portalu",
+  "BillingWalletCardDesc": "Saldo, doładowanie i historia transakcji",
+  "BillingAICardDesc": "Kredyty AI, ustawienia modelu i użycie",
+  "BillingPaymentMethodCardDesc": "Powiązane dane karty i płatnika"
 }

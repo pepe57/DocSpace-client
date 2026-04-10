@@ -165,5 +165,6 @@
   "UnknownPayerForAdmin": "Non è stato trovato un contatto corrispondente all'email di Stripe. Fatturazione e servizi continueranno a funzionare, ma raccomandiamo di contattare il proprietario di {{productName}} per assegnare un nuovo Pagatore.",
   "UnknownPayerForOwner": "Non è stato trovato un contatto corrispondente all'email di Stripe. La fatturazione e i servizi continueranno a funzionare, ma raccomandiamo di assegnare un nuovo Pagatore per gestire le impostazioni di fatturazione in {{productName}}.",
   "WalletSectionDescription": "Il portafoglio {{productName}} consente di acquistare facilmente servizi come lo storage, strumenti AI e backup. Aggiungete fondi e selezionate i servizi di cui avete bisogno per iniziare.",
-  "OnlyPayerCanManageSection": "Solo il pagatore può gestire questa sezione. <1>Scopri di più</1>"
+  "OnlyPayerCanManageSection": "Solo il pagatore può gestire questa sezione. <1>Scopri di più</1>",
+  "LinkNewCardDescription": "Clicca sul pulsante sottostante per collegare una nuova carta"
 }

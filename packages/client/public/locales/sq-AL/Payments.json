@@ -165,5 +165,6 @@
   "UnknownPayerForAdmin": "Nuk mund të gjemi një kontakt që përputhet me emailin e Stripe. Fakturimi dhe shërbimet do të vazhdojnë të funksionojnë, por ju rekomandojmë të kontaktoni pronarin e {{productName}} për të caktuar një Pageshëm (Payer) të ri.",
   "UnknownPayerForOwner": "Nuk mund të gjemi një kontakt që përputhet me emailin e Stripe. Fakturimi dhe shërbimet tuaja do të vazhdojnë të funksionojnë, por ju rekomandojmë të caktoni një Pageshës (Payer) të ri për të menaxhuar cilësimet e fakturimit në {{productName}}.",
   "WalletSectionDescription": "Portofoli {{productName}} ju lejon të blini me lehtësi shërbime si ruajtja, mjetet AI dhe rezervimet. Shtoja fonde dhe zgjidhni shërbimet që ju nevojiten për të filluar.",
-  "OnlyPayerCanManageSection": "Vetëm Pagesi mund të menaxhojë këtë seksion. <1>Mësoni më shumë</1>"
+  "OnlyPayerCanManageSection": "Vetëm Pagesi mund të menaxhojë këtë seksion. <1>Mësoni më shumë</1>",
+  "LinkNewCardDescription": "Klikoni butonin më poshtë për të lidhur një kartë të"
 }

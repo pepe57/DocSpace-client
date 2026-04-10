@@ -1286,5 +1286,11 @@
   "OAuthRoomsWriteDescription": "සියලුම කාමර නැරඹීම සහ කළමනාකරණය කිරීම",
   "ProcessDetails": "ක්‍රියාවලියේ විස්තර",
   "TemporaryStorageDescription": "Backup ගොනුව 'Backup' කොටසේ ගබඩා කර ඇති අතර, එය නිර්මාණය කර පැය 24ක් ඇතුළත ඔබට බාගත කරගත හැක.",
-  "UpgradeToProBannerItemLicenseDescr": "ක්‍රියාකාරීත්ව සහ ආරක්ෂක යාවත්කාලීන කිරීම් සඳහා වසර 1ක දායකත්වයක්."
+  "UpgradeToProBannerItemLicenseDescr": "ක්‍රියාකාරීත්ව සහ ආරක්ෂක යාවත්කාලීන කිරීම් සඳහා වසර 1ක දායකත්වයක්.",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "සම්පූර්ණ බිල්පත් සහ දායකත්ව කළමනාකරණය සඳහා, කරුණාකර ද්වාරය වෙත පිවිසෙන්න.",
+  "OpenPortalBilling": "පෝටල් බිල් කිරීම් වෙත යන්න",
+  "BillingWalletCardDesc": "ශේෂය, මුදල් පිරවීම සහ ගනුදෙනු ඉතිහාසය",
+  "BillingAICardDesc": "AI ක්‍රෙඩිට්, මාදිලි සැකසුම් සහ භාවිතය",
+  "BillingPaymentMethodCardDesc": "සම්බන්ධිත කාඩ්පත් සහ ගෙවන්නාගේ විස්තර"
 }

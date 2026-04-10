@@ -1286,5 +1286,11 @@
   "UseSSL": "Користи SSL",
   "NoMCPServers": "Још увек нема повезаних {{mcpServers}}",
   "TourCompletedFolder": "Сваки завршени фајл је именован бројем, именом пошаљаоца и датумом слања. Користите дугме AI Chat да поставите питања или добијете резимее о послатим задацима.",
-  "WhoFilledItOutPrompt": "Излистајте све особе које су попуниле формулар „{{formName}}“"
+  "WhoFilledItOutPrompt": "Излистајте све особе које су попуниле формулар „{{formName}}“",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "За потпуно управљање наплатама и претплатата, молимо посетимо портал.",
+  "OpenPortalBilling": "Идите на портал за наплату",
+  "BillingWalletCardDesc": "Стање, допуна и историја трансакција",
+  "BillingAICardDesc": "AI кредити, подешавања модела и употреба",
+  "BillingPaymentMethodCardDesc": "Повезани подаци картице и платилаца"
 }

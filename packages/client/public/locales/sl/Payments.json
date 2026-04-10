@@ -165,5 +165,6 @@
   "UnknownPayerForOwner": "Nisem lahko našli stika, ki bi se zgodil s e-poštom Stripe. Vaše naplata in storitve bodo nadalje delovale, vendar priporočamo, da v {{productName}} dodelite novega plačnika za upravljanje nastavitev naplati.",
   "WalletSectionDescription": "Den {{productName}} Wallet vam om lazen nakup storitev, kot so shranjevanje, orodja za umetno inteligenco in varnostno kopiranje. Dodajte sredstva in izberite storitve, ki jih potrebujete, da začnete.",
   "OnlyPayerCanManageSection": "Ležaj lahko upravlja ta razdelek. <1>Več natančnega</1>",
-  "BalanceText": "Saldo"
+  "BalanceText": "Saldo",
+  "LinkNewCardDescription": "Kliknite na spodnjiumb za povezavo nove kartice"
 }

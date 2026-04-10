@@ -1286,5 +1286,11 @@
   "YourLogo": "Ihr Logo",
   "YourTurn": "Jetzt sind Sie dran",
   "PM": "PM",
-  "LibraryTemplateHowToText": "Klicken Sie auf „Vorlage verwenden“, um eine Kopie zu „Meine Formulare“ hinzuzufügen. Von dort aus können Sie die Formularfelder bearbeiten, den Ausfüllprozess einrichten und das Formular mit Empfängern teilen. Sobald es ausgefüllt wurde, werden die Ergebnisse automatisch gesammelt."
+  "LibraryTemplateHowToText": "Klicken Sie auf „Vorlage verwenden“, um eine Kopie zu „Meine Formulare“ hinzuzufügen. Von dort aus können Sie die Formularfelder bearbeiten, den Ausfüllprozess einrichten und das Formular mit Empfängern teilen. Sobald es ausgefüllt wurde, werden die Ergebnisse automatisch gesammelt.",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Für vollständige Abrechnungs- und Abonnementverwaltung besuchen Sie bitte das",
+  "OpenPortalBilling": "Zum Portal-Abrechnungssystem gehen",
+  "BillingWalletCardDesc": "Guthaben, Aufladen und Transaktionsverlauf",
+  "BillingAICardDesc": "KI-Guthaben, Modelleinstellungen und Nutzung",
+  "BillingPaymentMethodCardDesc": "Verknüpfte Karten- und Zahlerdetails"
 }

@@ -1286,5 +1286,11 @@
   "YourTurn": "Sizin növbəniz",
   "FileActionRequired": "Hədəf qovluqda artıq «<1>{{fileName}}</1>» adlı fayl mövcuddur.",
   "FolderActionRequired": "Təyinat yerində artıq «<1>{{folderName}}</1>» adlı qovluq mövcuddur.",
-  "AboutCompanyEmailTitle": "E-poçt"
+  "AboutCompanyEmailTitle": "E-poçt",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Tam əməliyyatların və abunəliklərin tam idarə edilməsi üçün, lütfən portalı ziyarət edin.",
+  "OpenPortalBilling": "Portal ödənişlərinə keçid edin",
+  "BillingWalletCardDesc": "Balans, balansın artırılması və tranzaksiya tarixçəsi",
+  "BillingAICardDesc": "AI kreditləri, model tənzimləmələri və istifadəsi",
+  "BillingPaymentMethodCardDesc": "Bağlı kart və ödəyici məlumatları"
 }

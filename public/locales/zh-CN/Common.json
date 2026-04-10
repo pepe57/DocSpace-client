@@ -1286,5 +1286,11 @@
   "YourCurrentDomain": "您当前的域",
   "YourFurtherEditsNotSaved": "您后续的修改可能无法保存。",
   "YourLogo": "您的logo",
-  "YourTurn": "轮到您了"
+  "YourTurn": "轮到您了",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "如需进行完整的账单和订阅管理，请访问门户网站。",
+  "OpenPortalBilling": "前往门户账单",
+  "BillingWalletCardDesc": "余额、充值和交易历史",
+  "BillingAICardDesc": "AI 积分、模型设置和使用情况",
+  "BillingPaymentMethodCardDesc": "已定的卡片和付款人详情"
 }

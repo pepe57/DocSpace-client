@@ -165,5 +165,6 @@
   "WalletSectionDescription": "Portfél {{productName}} vám umožňuje ľahko zakúpiť služby ako úložisko, AI nástroje a zálohovanie. Pridajte fondy a vyberte služby, ktoré potrebujete, aby ste sa začali.",
   "OnlyPayerCanManageSection": "Pouze platiteľ môže spravovať túto sekciu. <1>Zistiť viac</1>",
   "PaymentMethodDescription": "Karty platby spojené so vašou {{productName}} peňaženkou",
-  "ChooseNewPayerOrRefrashData": "<1>Vyberte nového platobníka</1> alebo <2>Obnovte údaje</2>"
+  "ChooseNewPayerOrRefrashData": "<1>Vyberte nového platobníka</1> alebo <2>Obnovte údaje</2>",
+  "LinkNewCardDescription": "Kliknite na nižšie tlačidlo apojte novú kartu"
 }

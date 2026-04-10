@@ -1286,5 +1286,11 @@
   "YourFurtherEditsNotSaved": "Vaše nadaljnje urejevanje morda ne bo shranjeno.",
   "YourLogo": "Vaš logotip",
   "YourTurn": "Vi ste na vrsti",
-  "AboutCompanyEmailTitle": "E-pošta"
+  "AboutCompanyEmailTitle": "E-pošta",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Za celovito upravljanje z obračuni in naročninami obiščite portal.",
+  "OpenPortalBilling": "Pojdite na račun portalov",
+  "BillingWalletCardDesc": "Stanje, polnjenje in zgodovina transakcij",
+  "BillingAICardDesc": "AI krediti, nastavitve modelov in uporaba",
+  "BillingPaymentMethodCardDesc": "Povezana kartica in podatki plačalca"
 }

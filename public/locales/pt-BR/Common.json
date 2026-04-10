@@ -1286,5 +1286,11 @@
   "YourFurtherEditsNotSaved": "Suas edições adicionais podem não ser salvas.",
   "YourLogo": "Seu logotipo",
   "YourTurn": "Sua vez",
-  "AboutCompanyEmailTitle": "E-mail"
+  "AboutCompanyEmailTitle": "E-mail",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Para o gerenciamento completo de faturamento e assinatura, visite o portal.",
+  "OpenPortalBilling": "Ir para o faturamento do portal",
+  "BillingWalletCardDesc": "Saldo, recarga e histórico de transações",
+  "BillingAICardDesc": "Créditos de IA, configurações do modelo e uso",
+  "BillingPaymentMethodCardDesc": "Cartão vinculado e detalhes do pagador"
 }

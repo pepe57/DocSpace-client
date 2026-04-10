@@ -1286,5 +1286,11 @@
   "YourLogo": "Uw logo",
   "YourTurn": "Uw beurt",
   "PM": "PM",
-  "AboutCompanyEmailTitle": "E-mail"
+  "AboutCompanyEmailTitle": "E-mail",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Ga voor volledig facturatie- en abonnementenbeheer de portal.",
+  "OpenPortalBilling": "Ga naar portalfacturering",
+  "BillingWalletCardDesc": "Saldo, opwaarderen en transactiegeschiedenis",
+  "BillingAICardDesc": "AI-credits, modelinstellingen en gebruik",
+  "BillingPaymentMethodCardDesc": "Gekoppelde kaart- en betalergegevens"
 }

@@ -1286,5 +1286,11 @@
   "YourFurtherEditsNotSaved": "Vaše daljnje izmene možda neće biti sačuvane.",
   "YourLogo": "Vaš logo",
   "YourTurn": "Vaš red",
-  "PM": "PM"
+  "PM": "PM",
+  "Nextcloud": "Nextcloud",
+  "BillingPortalNotice": "Za potpuno upravljanje naplatom i pretplatama, posetite portal.",
+  "OpenPortalBilling": "Idi na portal za naplatu",
+  "BillingWalletCardDesc": "Stanje, dopuna i istorija transakcija",
+  "BillingAICardDesc": "AI krediti, podešavanja modela i upotreba",
+  "BillingPaymentMethodCardDesc": "Povezana kartica i podaci o platiocu"
 }
