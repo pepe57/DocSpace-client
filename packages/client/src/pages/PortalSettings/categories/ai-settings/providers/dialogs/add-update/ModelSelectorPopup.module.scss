@@ -130,13 +130,13 @@
   .modelRow:hover & {
     visibility: visible;
   }
+
+  --icon-button-hover-color: var(--icon-button-color);
 }
 
 .scrollWrapper {
   margin-inline-end: -17px;
 }
 
-.scrollbar {
-  // empty — needed as a class for Scrollbar component
-}
+
 

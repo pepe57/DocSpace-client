@@ -26,8 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { useEffect, useLayoutEffect, useMemo, useRef } from "react";
-// @ts-expect-error missing @types/react-dom in client package
+import React, { memo, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
 
 import { useTranslation } from "react-i18next";
@@ -46,6 +45,7 @@ import styles from "./ModelSelectorPopup.module.scss";
 const ROW_HEIGHT = 30;
 const ROW_GAP = 2;
 const SECTION_HEADER_HEIGHT = 36;
+const FOOTER_PADDING = 80;
 
 type ModelSelectorPopupProps = {
   anchor: React.RefObject<HTMLDivElement | null>;
@@ -58,47 +58,47 @@ type ModelSelectorPopupProps = {
   onClose: () => void;
 };
 
-const ModelRow = ({
-  model,
-  isSelected,
-  showPencil,
-  onToggle,
-  onEdit,
-}: {
+type ModelRowProps = {
   model: TProviderModelInfo;
   isSelected: boolean;
   showPencil: boolean;
   onToggle: (modelId: string) => void;
   onEdit: (modelId: string) => void;
-}) => {
-  return (
-    <div
-      className={styles.modelRow}
-      onClick={() => onToggle(model.modelId)}
-      data-testid={`model-row-${model.modelId}`}
-    >
-      <span onClick={(e) => e.stopPropagation()}>
-        <Checkbox
-          isChecked={isSelected}
-          onChange={() => onToggle(model.modelId)}
-        />
-      </span>
-      <span className={styles.modelLabel}>{model.displayName}</span>
-      {showPencil ? (
-        <IconButton
-          className={styles.pencilIcon}
-          iconName={AccessEditReactSvgUrl}
-          size={16}
-          onClick={(e) => {
-            e.stopPropagation();
-            onEdit(model.modelId);
-          }}
-          dataTestId={`edit-model-${model.modelId}`}
-        />
-      ) : null}
-    </div>
-  );
 };
+
+const ModelRow = memo(
+  ({ model, isSelected, showPencil, onToggle, onEdit }: ModelRowProps) => {
+    return (
+      <div
+        className={styles.modelRow}
+        onClick={() => onToggle(model.modelId)}
+        data-testid={`model-row-${model.modelId}`}
+      >
+        <span onClick={(e) => e.stopPropagation()}>
+          <Checkbox
+            isChecked={isSelected}
+            onChange={() => onToggle(model.modelId)}
+          />
+        </span>
+        <span className={styles.modelLabel}>{model.displayName}</span>
+        {showPencil ? (
+          <IconButton
+            className={styles.pencilIcon}
+            iconName={AccessEditReactSvgUrl}
+            size={16}
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit(model.modelId);
+            }}
+            dataTestId={`edit-model-${model.modelId}`}
+          />
+        ) : null}
+      </div>
+    );
+  },
+);
+
+ModelRow.displayName = "ModelRow";
 
 const calcContentHeight = (
   recommended: TProviderModelInfo[],
@@ -158,20 +158,12 @@ export const ModelSelectorPopup = ({
       left = window.innerWidth - 285 - 8;
     }
 
-    // Find the footer buttons to cap popup height
-    const footer = document.querySelector(
-      "[class*='modal-footer'], [class*='ModalDialog'] [class*='footer']",
-    );
-    const footerTop = footer
-      ? footer.getBoundingClientRect().top
-      : window.innerHeight;
-    const maxHeight = footerTop - top - 8;
+    const maxHeight = window.innerHeight - top - FOOTER_PADDING;
 
     popupEl.style.top = `${top}px`;
     popupEl.style.left = `${left}px`;
     popupEl.style.maxHeight = `${Math.max(maxHeight, 100)}px`;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [anchor]);
+  }, [anchor, recommended.length, other.length]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -294,4 +286,3 @@ export const ModelSelectorPopup = ({
     document.body,
   );
 };
-

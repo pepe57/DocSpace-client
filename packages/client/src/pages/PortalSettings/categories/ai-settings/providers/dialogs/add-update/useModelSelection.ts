@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useMemo, useEffect } from "react";
 
 import { ProviderType } from "@docspace/shared/api/ai/enums";
 import type {
@@ -60,7 +60,12 @@ const sortSelectedFirst = (
   });
 };
 
-export const useModelSelection = () => {
+const DEBOUNCE_MS = 500;
+
+export const useModelSelection = (
+  providerType: ProviderType,
+  providerKey: string,
+) => {
   const [availableModels, setAvailableModels] = useState<TProviderModelInfo[]>(
     [],
   );
@@ -72,14 +77,38 @@ export const useModelSelection = () => {
   const [settingsModelId, setSettingsModelId] = useState<string | null>(null);
   const [isLoadingModels, setIsLoadingModels] = useState(false);
   const [modelsLoaded, setModelsLoaded] = useState(false);
-  const [popupOpenedSelectedIds, setPopupOpenedSelectedIds] = useState<
-    Set<string>
-  >(new Set());
 
+  const frozenSortIds = useRef<Set<string> | null>(null);
   const modelOverrides = useRef<Record<string, TModelOverride>>({});
 
+  useEffect(() => {
+    if (!providerKey) return;
+
+    const timer = setTimeout(async () => {
+      setIsLoadingModels(true);
+      try {
+        const models = await fetchModelsForProviderByKey(
+          providerType,
+          providerKey,
+        );
+        setAvailableModels(models);
+
+        const recommendedIds = getRecommendedModelIds(providerType);
+        setSelectedModelIds((prev) =>
+          prev.size > 0 ? prev : new Set(recommendedIds),
+        );
+
+        setModelsLoaded(true);
+      } finally {
+        setIsLoadingModels(false);
+      }
+    }, DEBOUNCE_MS);
+
+    return () => clearTimeout(timer);
+  }, [providerType, providerKey]);
+
   const loadModelsForProvider = useCallback(
-    (type: ProviderType, savedState?: TModelSelectionState) => {
+    (savedState?: TModelSelectionState) => {
       if (savedState) {
         setSelectedModelIds(new Set(savedState.selectedIds));
         modelOverrides.current = { ...savedState.overrides };
@@ -94,26 +123,6 @@ export const useModelSelection = () => {
       setAvailableModels([]);
       setModelsLoaded(false);
       setHasError(false);
-    },
-    [],
-  );
-
-  const fetchModels = useCallback(
-    async (type: ProviderType, key: string) => {
-      setIsLoadingModels(true);
-      try {
-        const models = await fetchModelsForProviderByKey(type, key);
-        setAvailableModels(models);
-
-        const recommendedIds = getRecommendedModelIds(type);
-        setSelectedModelIds((prev) =>
-          prev.size > 0 ? prev : new Set(recommendedIds),
-        );
-
-        setModelsLoaded(true);
-      } finally {
-        setIsLoadingModels(false);
-      }
     },
     [],
   );
@@ -148,35 +157,20 @@ export const useModelSelection = () => {
     [],
   );
 
-  const getOrderedModels = useCallback(() => {
+  const orderedModels = useMemo(() => {
+    const sortIds = frozenSortIds.current ?? selectedModelIds;
     const recommended = availableModels.filter((m) => m.isRecommended);
     const other = availableModels.filter((m) => !m.isRecommended);
 
-    const idsToUseForSorting = isPopupOpen
-      ? popupOpenedSelectedIds
-      : selectedModelIds;
-
     return {
-      recommended: sortSelectedFirst(recommended, idsToUseForSorting),
-      other: sortSelectedFirst(other, idsToUseForSorting),
+      recommended: sortSelectedFirst(recommended, sortIds),
+      other: sortSelectedFirst(other, sortIds),
     };
-  }, [availableModels, selectedModelIds, isPopupOpen, popupOpenedSelectedIds]);
+  }, [availableModels, selectedModelIds, isPopupOpen]);
 
-  const getSelectedModels = useCallback(() => {
+  const selectedModels = useMemo(() => {
     return availableModels.filter((m) => selectedModelIds.has(m.modelId));
   }, [availableModels, selectedModelIds]);
-
-  const validate = useCallback((): boolean => {
-    if (selectedModelIds.size === 0) {
-      setHasError(true);
-      return false;
-    }
-    return true;
-  }, [selectedModelIds]);
-
-  const clearError = useCallback(() => {
-    setHasError(false);
-  }, []);
 
   const getState = useCallback((): TModelSelectionState => {
     return {
@@ -188,20 +182,20 @@ export const useModelSelection = () => {
   const togglePopup = useCallback(() => {
     setIsPopupOpen((prev) => {
       if (prev) {
-        setPopupOpenedSelectedIds(new Set());
+        frozenSortIds.current = null;
         if (selectedModelIds.size === 0) {
           setHasError(true);
         }
         return false;
       }
-      setPopupOpenedSelectedIds(new Set(selectedModelIds));
+      frozenSortIds.current = new Set(selectedModelIds);
       return true;
     });
   }, [selectedModelIds]);
 
   const closePopup = useCallback(() => {
+    frozenSortIds.current = null;
     setIsPopupOpen(false);
-    setPopupOpenedSelectedIds(new Set());
     if (selectedModelIds.size === 0) {
       setHasError(true);
     }
@@ -230,14 +224,12 @@ export const useModelSelection = () => {
     isLoadingModels,
     modelsLoaded,
 
+    orderedModels,
+    selectedModels,
+
     loadModelsForProvider,
-    fetchModels,
     toggleModel,
     updateModelSettings,
-    getOrderedModels,
-    getSelectedModels,
-    validate,
-    clearError,
     getState,
 
     togglePopup,
@@ -247,4 +239,3 @@ export const useModelSelection = () => {
     getModelForSettings,
   };
 };
-

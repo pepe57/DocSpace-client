@@ -62,10 +62,8 @@ import { Text } from "@docspace/ui-kit/components/text";
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
 import styles from "./AddUpdateDialog.module.scss";
-import {
-  useModelSelection,
-  type TModelSelectionState,
-} from "./useModelSelection";
+import { useModelSelection } from "./useModelSelection";
+import type { TModelSelectionState } from "./useModelSelection";
 import { SelectedModelsList } from "./SelectedModelsList";
 import { ModelSelectorPopup } from "./ModelSelectorPopup";
 import { ModelSettingsPanel } from "./ModelSettingsPanel";
@@ -171,20 +169,24 @@ const AddUpdateDialogComponent = ({
 
   const addButtonRef = useRef<HTMLDivElement>(null);
 
-  const modelSelection = useModelSelection();
+  const modelSelection = useModelSelection(
+    selectedOption.key as ProviderType,
+    providerKey,
+  );
 
   const valuesByProvider = useRef<
-    Record<
-      ProviderType,
-      {
-        title: string;
-        url: string;
-        key: string;
-        models?: TModelSelectionState;
-      }
+    Partial<
+      Record<
+        ProviderType,
+        {
+          title: string;
+          url: string;
+          key: string;
+          models?: TModelSelectionState;
+        }
+      >
     >
   >({
-    [ProviderType.PortalAi]: { title: "", url: "", key: "" },
     [ProviderType.OpenAi]: { title: "", url: "", key: "" },
     [ProviderType.Anthropic]: { title: "", url: "", key: "" },
     [ProviderType.TogetherAi]: { title: "", url: "", key: "" },
@@ -234,7 +236,7 @@ const AddUpdateDialogComponent = ({
     setSelectedOption(option);
 
     const savedValues = valuesByProvider.current[newProviderType];
-    if (savedValues.title || savedValues.url || savedValues.key) {
+    if (savedValues?.title || savedValues?.url || savedValues?.key) {
       setProviderTitle(savedValues.title);
       setProviderUrl(savedValues.url);
       setProviderKey(savedValues.key);
@@ -247,7 +249,7 @@ const AddUpdateDialogComponent = ({
       setProviderKey("");
     }
 
-    modelSelection.loadModelsForProvider(newProviderType, savedValues.models);
+    modelSelection.loadModelsForProvider(savedValues?.models);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -328,14 +330,6 @@ const AddUpdateDialogComponent = ({
     }
   }, [providerData]);
 
-  useEffect(() => {
-    if (providerKey.length === 0) return;
-
-    const type = selectedOption.key as ProviderType;
-    modelSelection.fetchModels(type, providerKey);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [providerKey]);
-
   const handleModelSettingsSave = useCallback(
     (
       modelId: string,
@@ -348,8 +342,7 @@ const AddUpdateDialogComponent = ({
   );
 
   const settingsModel = modelSelection.getModelForSettings();
-  const orderedModels = modelSelection.getOrderedModels();
-  const selectedModels = modelSelection.getSelectedModels();
+  const { orderedModels, selectedModels } = modelSelection;
 
   return (
     <>
