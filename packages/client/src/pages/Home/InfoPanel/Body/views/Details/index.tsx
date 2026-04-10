@@ -91,6 +91,7 @@ type DetailsProps = {
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
 
   roomLifetime?: TRoomLifetime;
+  isExternalShareRestricted?: boolean;
 };
 
 const Details = ({
@@ -110,6 +111,7 @@ const Details = ({
   onChangeFile,
   roomLifetime,
   onCreateRoomFromTemplate,
+  isExternalShareRestricted,
 }: DetailsProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -189,7 +191,14 @@ const Details = ({
         : getInfoPanelItemIcon?.(selection, 96);
 
   const badgeUrl =
-    "external" in selection ? getRoomBadgeUrl(selection, 24) : undefined;
+    "external" in selection
+      ? getRoomBadgeUrl(selection, 24, isExternalShareRestricted)
+      : undefined;
+
+  const badgeIconColor =
+    isExternalShareRestricted && badgeUrl
+      ? "var(--info-panel-link-blocked)"
+      : undefined;
 
   const isLoadedRoomIcon =
     "logo" in selection && !!(selection.logo?.cover || selection.logo?.large);
@@ -284,6 +293,7 @@ const Details = ({
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
             badgeUrl={badgeUrl ?? undefined}
+            badgeIconColor={badgeIconColor}
             tooltipContent={tooltipContent ?? undefined}
             tooltipId="info-panel-details_icon-tooltip"
             withEditing={
@@ -324,6 +334,7 @@ export default inject(
     settingsStore,
     filesStore,
     filesActionsStore,
+    filesSettingsStore,
     infoPanelStore,
     userStore,
     currentQuotaStore,
@@ -363,6 +374,7 @@ export default inject(
       roomLifetime:
         infoPanelRoomSelection?.lifetime ?? selectedFolderStore?.lifetime,
       onCreateRoomFromTemplate,
+      isExternalShareRestricted: !filesSettingsStore.externalShare,
     };
   },
 )(observer(Details));

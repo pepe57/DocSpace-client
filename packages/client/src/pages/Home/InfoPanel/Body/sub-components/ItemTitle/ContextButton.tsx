@@ -64,6 +64,7 @@ type RoomsContextBtnProps = {
   getItemContextOptionsActions?: ContextOptionsStore["getFilesContextOptions"];
 
   getIcon?: FilesSettingsStore["getIcon"];
+  isExternalShareRestricted?: boolean;
 };
 
 const RoomsContextBtn = ({
@@ -71,6 +72,7 @@ const RoomsContextBtn = ({
 
   getItemContextOptionsActions,
   getIcon,
+  isExternalShareRestricted,
 }: RoomsContextBtnProps) => {
   const { t } = useTranslation([
     "Files",
@@ -96,7 +98,9 @@ const RoomsContextBtn = ({
     if (!selection) return undefined;
 
     const isRoom = "isRoom" in selection && selection.isRoom;
-    const badgeUrl = isRoom ? getRoomBadgeUrl(selection) : null;
+    const badgeUrl = isRoom
+      ? getRoomBadgeUrl(selection, 12, isExternalShareRestricted)
+      : null;
 
     const isFile = "isFile" in selection && selection.isFile;
 
@@ -171,6 +175,7 @@ export default inject(
   ({ contextOptionsStore, filesSettingsStore }: TStore) => ({
     getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
     getIcon: filesSettingsStore.getIcon,
+    isExternalShareRestricted: !filesSettingsStore.externalShare,
   }),
 )(observer(RoomsContextBtn));
 
