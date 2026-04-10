@@ -485,7 +485,6 @@ const AddUpdateDialogComponent = ({
                 <SelectedModelsList
                   selectedModels={selectedModels}
                   onAddClick={modelSelection.togglePopup}
-                  onTagClick={modelSelection.togglePopup}
                   hasError={modelSelection.hasError}
                 />
                 {modelSelection.isPopupOpen ? (

@@ -40,14 +40,12 @@ import styles from "./AddUpdateDialog.module.scss";
 type SelectedModelsListProps = {
   selectedModels: TProviderModelInfo[];
   onAddClick: () => void;
-  onTagClick: () => void;
   hasError: boolean;
 };
 
 export const SelectedModelsList = ({
   selectedModels,
   onAddClick,
-  onTagClick,
   hasError,
 }: SelectedModelsListProps) => {
   const { t } = useTranslation(["AISettings"]);
@@ -82,7 +80,6 @@ export const SelectedModelsList = ({
             key={model.modelId}
             tag={model.modelId}
             label={model.displayName}
-            onClick={onTagClick}
             className="model-tag"
             dataTestId={`model-tag-${model.modelId}`}
           />

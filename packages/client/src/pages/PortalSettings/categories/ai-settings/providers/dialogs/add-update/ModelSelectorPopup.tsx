@@ -76,10 +76,12 @@ const ModelRow = ({
       onClick={() => onToggle(model.modelId)}
       data-testid={`model-row-${model.modelId}`}
     >
-      <Checkbox
-        isChecked={isSelected}
-        onChange={() => onToggle(model.modelId)}
-      />
+      <span onClick={(e) => e.stopPropagation()}>
+        <Checkbox
+          isChecked={isSelected}
+          onChange={() => onToggle(model.modelId)}
+        />
+      </span>
       <span className={styles.modelLabel}>{model.displayName}</span>
       {showPencil ? (
         <IconButton
@@ -282,3 +284,4 @@ export const ModelSelectorPopup = ({
     document.body,
   );
 };
+
