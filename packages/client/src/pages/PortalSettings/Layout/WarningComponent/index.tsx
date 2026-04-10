@@ -146,7 +146,7 @@ const Warning = ({
 
       if (maxFreeBackups > 0) {
         try {
-          const backupText = t("Services:FreeBackupsPerMonth", {
+          const backupText = t("Common:FreeBackupsPerMonth", {
             value:
               backupsCount >= maxFreeBackups ? maxFreeBackups : backupsCount,
             maxValue: maxFreeBackups,
