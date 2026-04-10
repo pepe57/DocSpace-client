@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "Este necesară o reîncărcare: {{currency}}",
   "AndMoreCount": "Și nu numai!",
   "ThirdPartyResourceDescription2": "Conectați-vă și salvați copia de rezervă în contul cloud precum Dropbox, Box, OneDrive sau Google Drive.",
-  "ThirdPartyStorageDescription2": "Utilizați servicii externe pentru a vă stoca copii de rezervă. Ideal pentru conectarea platformelor externe de stocare în cloud."
+  "ThirdPartyStorageDescription2": "Utilizați servicii externe pentru a vă stoca copii de rezervă. Ideal pentru conectarea platformelor externe de stocare în cloud.",
+  "DownloadReportBtnText": "Descărcare raport",
+  "ReportSaveLocation": "Raportul va fi salvat în {{sectionName}}"
 }

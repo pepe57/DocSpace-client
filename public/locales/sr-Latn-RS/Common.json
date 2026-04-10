@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "Potrebno dopunjavanje: {{currency}}",
   "AndMoreCount": "Dodajte više",
   "ThirdPartyResourceDescription2": "Poveži i sačuvaj bekape na cloud naloge kao što su Dropbox, Box, OneDrive ili Google Drive.",
-  "ThirdPartyStorageDescription2": "Koristi servise trećih strana za skladištenje svojih bekapa. Idealno za povezivanje eksternih cloud platformi."
+  "ThirdPartyStorageDescription2": "Koristi servise trećih strana za skladištenje svojih bekapa. Idealno za povezivanje eksternih cloud platformi.",
+  "DownloadReportBtnText": "Preuzmi izveštaj",
+  "ReportSaveLocation": "Izveštaj će biti sačuvan u {{sectionName}}"
 }

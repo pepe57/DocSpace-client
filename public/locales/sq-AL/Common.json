@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "Krijoni top-up: {{currency}}",
   "AndMoreCount": "Dhe më shumë!",
   "ThirdPartyResourceDescription2": "Lidhuni dhe ruani backup-et në llogari cloud si Dropbox, Box, OneDrive ose Google Drive.",
-  "ThirdPartyStorageDescription2": "Përdorni shërbime të palëve të treta për të ruajtur backup-et. Ideale për lidhje me platformat e jashtme cloud."
+  "ThirdPartyStorageDescription2": "Përdorni shërbime të palëve të treta për të ruajtur backup-et. Ideale për lidhje me platformat e jashtme cloud.",
+  "DownloadReportBtnText": "Shkarkoni raportin",
+  "ReportSaveLocation": "Raporti do të ruhet në {{sectionName}}"
 }

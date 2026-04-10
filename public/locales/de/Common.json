@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "Aufladung erforderlich: {{currency}}",
   "AndMoreCount": "Und vieles mehr!",
   "ThirdPartyResourceDescription2": "Verbinden und speichern Sie Backups in Cloud-Konten wie Dropbox, Box, OneDrive oder Google Drive.",
-  "ThirdPartyStorageDescription2": "Nutzen Sie Drittanbieterdienste zum Speichern Ihrer Backups. Ideal für die Anbindung externer Cloud-Speicherplattformen."
+  "ThirdPartyStorageDescription2": "Nutzen Sie Drittanbieterdienste zum Speichern Ihrer Backups. Ideal für die Anbindung externer Cloud-Speicherplattformen.",
+  "DownloadReportBtnText": "Bericht herunterladen",
+  "ReportSaveLocation": "Der Bericht wird unter {{sectionName}} gespeichert"
 }

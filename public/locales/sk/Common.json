@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "Je potrebné doplniť: {{currency}}",
   "AndMoreCount": "A ešte!",
   "ThirdPartyResourceDescription2": "Pripojte sa a zálohujte dáta do cloudových účtov ako Dropbox, Box, OneDrive alebo Google Drive.",
-  "ThirdPartyStorageDescription2": "Používajte služby tretích strán na ukladanie záloh. Ideálne na pripojenie externých cloudových úložiskových platforiem."
+  "ThirdPartyStorageDescription2": "Používajte služby tretích strán na ukladanie záloh. Ideálne na pripojenie externých cloudových úložiskových platforiem.",
+  "DownloadReportBtnText": "Stiahnuť správu",
+  "ReportSaveLocation": "Správa bude uložená do {{sectionName}}"
 }

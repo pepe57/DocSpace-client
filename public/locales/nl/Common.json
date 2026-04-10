@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "Bijvullen vereist: {{currency}}",
   "AndMoreCount": "En meer!",
   "ThirdPartyResourceDescription2": "Maak verbinding en bewaar back-ups naar cloud accounts zoals Dropbox, Box, OneDrive of Google Drive.",
-  "ThirdPartyStorageDescription2": "Gebruik externe services om uw backups op te slaan. Ideaal voor het verbinden van externe cloud storage platforms."
+  "ThirdPartyStorageDescription2": "Gebruik externe services om uw backups op te slaan. Ideaal voor het verbinden van externe cloud storage platforms.",
+  "DownloadReportBtnText": "Download verslag",
+  "ReportSaveLocation": "Het rapport wordt opgeslagen in {{sectionName}}"
 }

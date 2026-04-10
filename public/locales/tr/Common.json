@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "Yükleme gerekiyor: {{currency}}",
   "AndMoreCount": "Ve daha fazlası!",
   "ThirdPartyResourceDescription2": "Dropbox, Box, OneDrive veya Google Drive gibi bulut hesaplarına bağlanın ve yedeklemeleri kaydedin.",
-  "ThirdPartyStorageDescription2": "Yedeklemelerinizi üçüncü taraf hizmetlerde saklayın. Harici bulut depolama platformlarını bağlamak için idealdir."
+  "ThirdPartyStorageDescription2": "Yedeklemelerinizi üçüncü taraf hizmetlerde saklayın. Harici bulut depolama platformlarını bağlamak için idealdir.",
+  "DownloadReportBtnText": "Raporu indir",
+  "ReportSaveLocation": "Rapor {{sectionName}} bölümüne kaydedilecektir"
 }

@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "Պահանջվում է լիցքավորում՝ {{currency}}",
   "AndMoreCount": "և ավելին",
   "ThirdPartyResourceDescription2": "Միացրեք և պահեք պահուստները ամպային հաշիվներում, օրինակ՝ Dropbox, Box, OneDrive կամ Google Drive։",
-  "ThirdPartyStorageDescription2": "Օգտվեք երրորդ կողմի ծառայություններից ձեր պահուստները պահպանելու համար։ Հարմար է արտաքին ամպային պահուստներ միանալու համար։"
+  "ThirdPartyStorageDescription2": "Օգտվեք երրորդ կողմի ծառայություններից ձեր պահուստները պահպանելու համար։ Հարմար է արտաքին ամպային պահուստներ միանալու համար։",
+  "DownloadReportBtnText": "Ներբեռնել զեկույցը",
+  "ReportSaveLocation": "Հաշվետվությունը կպահվի {{sectionName}}-ում"
 }

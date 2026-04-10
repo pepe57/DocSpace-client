@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "Potrebno je nadgraditi: {{currency}}",
   "AndMoreCount": "In več!",
   "ThirdPartyResourceDescription2": "Povežite in varnostno kopirajte na račune v oblaku, kot so Dropbox, Box, OneDrive ali Google Drive.",
-  "ThirdPartyStorageDescription2": "Uporabljajte storitve tretjih oseb za shranjevanje varnih kopij. Idealno za povezavo z zunanjimi platformami za shranjevanja v oblaku."
+  "ThirdPartyStorageDescription2": "Uporabljajte storitve tretjih oseb za shranjevanje varnih kopij. Idealno za povezavo z zunanjimi platformami za shranjevanja v oblaku.",
+  "DownloadReportBtnText": "Prenesi poročilo",
+  "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}"
 }

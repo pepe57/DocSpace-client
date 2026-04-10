@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "チャージが必要です: {{currency}}",
   "AndMoreCount": "などなど！",
   "ThirdPartyResourceDescription2": "Dropbox、Box、OneDrive、またはGoogle Driveなどのクラウドアカウントに接続してバックアップを保存します。",
-  "ThirdPartyStorageDescription2": "バックアップを保存するためにサードパーティのサービスを使用します。外部クラウドストレージプラットフォームに接続するのに最適です。"
+  "ThirdPartyStorageDescription2": "バックアップを保存するためにサードパーティのサービスを使用します。外部クラウドストレージプラットフォームに接続するのに最適です。",
+  "DownloadReportBtnText": "ダウンロードのレポート",
+  "ReportSaveLocation": "レポートは {{sectionName}} に保存されます"
 }

@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "يتطلب شحنًا: {{currency}}",
   "AndMoreCount": "وأكثر!",
   "ThirdPartyResourceDescription2": "قوموا بتوصيل وحفظ النسخ الاحتياطية في حسابات سحابية مثل Dropbox، Box، OneDrive، أو Google Drive.",
-  "ThirdPartyStorageDescription2": "استخدموا خدمات الطرف الثالث لتخزين نسخكم الاحتياطية. مثالي لربط منصات التخزين السحابي الخارجية."
+  "ThirdPartyStorageDescription2": "استخدموا خدمات الطرف الثالث لتخزين نسخكم الاحتياطية. مثالي لربط منصات التخزين السحابي الخارجية.",
+  "DownloadReportBtnText": "تنزيل التقرير",
+  "ReportSaveLocation": "سيتم حفظ التقرير في {{sectionName}}"
 }

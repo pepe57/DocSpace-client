@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "Wymagane doładowanie: {{currency}}",
   "AndMoreCount": "A więcej!",
   "ThirdPartyResourceDescription2": "Połącz i zapisuj kopie zapasowe w chmurze, takich jak Dropbox, Box, OneDrive lub Google Drive.",
-  "ThirdPartyStorageDescription2": "Korzystaj z zewnętrznych usług do przechowywania kopii zapasowych. Idealne do łączenia platform zewnętrznych magazynów w chmurze."
+  "ThirdPartyStorageDescription2": "Korzystaj z zewnętrznych usług do przechowywania kopii zapasowych. Idealne do łączenia platform zewnętrznych magazynów w chmurze.",
+  "DownloadReportBtnText": "Pobierz raport",
+  "ReportSaveLocation": "Raport zostanie zapisany w {{sectionName}}"
 }

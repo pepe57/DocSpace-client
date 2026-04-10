@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "Требуется пополнение: {{currency}}",
   "AndMoreCount": "И многое другое!",
   "ThirdPartyResourceDescription2": "Подключайте и сохраняйте резервные копии в облачных хранилищах: Dropbox, Box, OneDrive или Google Drive.",
-  "ThirdPartyStorageDescription2": "Используйте сторонние сервисы для хранения резервных копий. Идеально подходит для подключения внешних облачных хранилищ."
+  "ThirdPartyStorageDescription2": "Используйте сторонние сервисы для хранения резервных копий. Идеально подходит для подключения внешних облачных хранилищ.",
+  "DownloadReportBtnText": "Скачать отчет",
+  "ReportSaveLocation": "Отчет будет сохранен в {{sectionName}}"
 }

@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "Yeniləmə tələb olunur: {{currency}}",
   "AndMoreCount": "Və daha çox!",
   "ThirdPartyResourceDescription2": "Dropbox, Box, OneDrive və ya Google Drive kimi bulud hesablarına qoşulub ehtiyat növbəsizləri saxlayın.",
-  "ThirdPartyStorageDescription2": "Sizə məlumatlarınızı saxlamaq üçün üçüncü tərəf xidmətlərindən istifadə edin. Xarici bulud saxlama platformalarını birləşdirmək üçün idealdır."
+  "ThirdPartyStorageDescription2": "Sizə məlumatlarınızı saxlamaq üçün üçüncü tərəf xidmətlərindən istifadə edin. Xarici bulud saxlama platformalarını birləşdirmək üçün idealdır.",
+  "DownloadReportBtnText": "Hesabatı yükləyin",
+  "ReportSaveLocation": "Hesabat {{sectionName}} bölməsində qeyd ediləcək"
 }

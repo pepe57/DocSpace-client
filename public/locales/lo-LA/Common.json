@@ -1559,5 +1559,7 @@
   "WalletTopUpRequired": "ຕ້ອງການເຕີມ: {{currency}}",
   "AndMoreCount": "ແລະອື່ນໆອີກ!",
   "ThirdPartyResourceDescription2": "ເຊື່ອມຕໍ່ ແລະບັນທຶກຂໍ້ມູນສຳຮອງໃສ່ບັນຊີຄລາວເຊັ່ນ Dropbox, Box, OneDrive ຫຼື Google Drive.",
-  "ThirdPartyStorageDescription2": "ໃຊ້ບໍລິການພາກສ່ວນທີສາມເພື່ອເກັບຮັກສາການສໍາຮອງຂໍ້ມູນຂອງທ່ານ. ເຫມາະສໍາລັບການເຊື່ອມຕໍ່ເວທີການເກັບຮັກສາຟັງພາຍນອກ."
+  "ThirdPartyStorageDescription2": "ໃຊ້ບໍລິການພາກສ່ວນທີສາມເພື່ອເກັບຮັກສາການສໍາຮອງຂໍ້ມູນຂອງທ່ານ. ເຫມາະສໍາລັບການເຊື່ອມຕໍ່ເວທີການເກັບຮັກສາຟັງພາຍນອກ.",
+  "DownloadReportBtnText": "ດາວໂຫລດບົດລາຍງານ",
+  "ReportSaveLocation": "ບົດລາຍງານຈະຖືກບັນທຶກໄວ້ໃນ {{sectionName}}"
 }
