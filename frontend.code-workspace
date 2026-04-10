@@ -519,6 +519,11 @@
             "tooltip": "🤖 Run full LLM-based spell-check verification (slow)"
           },
           {
+            "label": "Update Metadata",
+            "task": "Translation App | update metadata",
+            "tooltip": "🔄 Regenerate all .meta files (generate-metadata + save-meta-keys-usage + auto-comments)"
+          },
+          {
             "label": "Clear Meta Issues",
             "task": "Translation App | clear meta issues",
             "tooltip": "🗑️ Reset all ai_spell_check_issues in .meta files to empty"

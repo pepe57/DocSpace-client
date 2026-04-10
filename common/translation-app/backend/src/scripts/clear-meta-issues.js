@@ -28,21 +28,16 @@
  * Clear all ai_spell_check_issues in .meta files across all projects.
  *
  * Usage:
- *   node common/scripts/clear-meta-issues.js
+ *   cd common/translation-app/backend && node src/scripts/clear-meta-issues.js
  */
 
 const fs = require("fs");
 const path = require("path");
+const { appRootPath, projectLocalesMap } = require("../config/config");
 
-const ROOT = path.resolve(__dirname, "../../");
-
-const LOCALES_DIRS = [
-  path.join(ROOT, "public/locales"),
-  path.join(ROOT, "packages/client/public/locales"),
-  path.join(ROOT, "packages/doceditor/public/locales"),
-  path.join(ROOT, "packages/login/public/locales"),
-  path.join(ROOT, "packages/management/public/locales"),
-];
+const LOCALES_DIRS = Object.values(projectLocalesMap).map((rel) =>
+  path.join(appRootPath, rel),
+);
 
 function walkJson(dir) {
   const results = [];
