@@ -66,30 +66,21 @@ export default function AuthClient({
             token?: unknown;
           };
         } catch (loginError) {
-          const errorMessage =
-            (loginError as { response?: { data?: { error?: { message?: string } } } })
-              ?.response?.data?.error?.message || "";
+          if (loginError instanceof TypeError) throw loginError;
 
-          if (errorMessage === "user not found") {
-            const signupData: Record<string, string> = {
-              SerializedProfile: profile,
-            };
+          const signupData: Record<string, string> = {
+            SerializedProfile: profile,
+          };
 
-            if (emplType) signupData.EmployeeType = emplType;
-            if (inviteKey) signupData.Key = inviteKey;
+          if (emplType) signupData.EmployeeType = emplType;
+          if (inviteKey) signupData.Key = inviteKey;
 
-            await signupOAuth(
-              signupData,
-              inviteKey ? confirmHeader : null,
-            );
+          await signupOAuth(signupData, inviteKey ? confirmHeader : null);
 
-            response = (await thirdPartyLogin(profile)) as {
-              confirmUrl?: string;
-              token?: unknown;
-            };
-          } else {
-            throw loginError;
-          }
+          response = (await thirdPartyLogin(profile)) as {
+            confirmUrl?: string;
+            token?: unknown;
+          };
         }
 
         if (!response || (!response.token && !response.confirmUrl)) {
@@ -234,3 +225,4 @@ export default function AuthClient({
     </div>
   );
 }
+

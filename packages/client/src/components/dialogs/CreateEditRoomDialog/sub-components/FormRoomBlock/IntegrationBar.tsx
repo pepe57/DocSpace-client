@@ -78,7 +78,8 @@ const IntegrationBar = ({
             color="accent"
             type={LinkType.page}
             className={styles.barLink}
-            href="/portal-settings/integration/third-party-services"
+            href="/portal-settings/integration/third-party-services?consumer=externaldb"
+            isHovered
           >
             {t("GoToIntegrations")}
           </Link>

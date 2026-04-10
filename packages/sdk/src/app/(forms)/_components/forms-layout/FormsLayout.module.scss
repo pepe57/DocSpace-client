@@ -26,6 +26,19 @@
 .headerNavigation {
   flex: 1;
   min-width: 0;
+  position: relative;
+}
+
+.tourAnchor {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0;
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .root :global([class*="Navigation_item"]:not([class*="itemWrapper"])) {
@@ -91,4 +104,17 @@
 .contentHidden {
   opacity: 0;
   transition: opacity 0.15s ease;
+}
+
+.floatingButtonContainer {
+  position: absolute;
+  z-index: 300;
+  inset-inline-end: 24px;
+  bottom: 24px;
+
+  :global(.layout-progress-bar_wrapper) {
+    position: static;
+    width: fit-content;
+    height: fit-content;
+  }
 }

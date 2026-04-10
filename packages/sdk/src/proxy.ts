@@ -28,6 +28,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 import {
+  AGENT_ID_HEADER,
   FILTER_HEADER,
   LIBRARY_ID_HEADER,
   LOCALE_HEADER,
@@ -96,6 +97,19 @@ export async function proxy(request: NextRequest) {
     });
   }
 
+  if (request.nextUrl.pathname === "/chat") {
+    const agentId = searchParams.get("agentId") ?? "";
+
+    requestHeaders.set(AGENT_ID_HEADER, agentId);
+    requestHeaders.set(FILTER_HEADER, searchParams.toString());
+
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
+
   if (request.nextUrl.pathname.includes("public-room")) {
     const validationResult = await handlePublicRoomValidation(
       request,
@@ -110,6 +124,24 @@ export async function proxy(request: NextRequest) {
           headers: requestHeaders,
         },
       );
+    }
+
+    if (validationResult?.anonymousSessionKeyCookie) {
+      const cookieNameValue =
+        validationResult.anonymousSessionKeyCookie.split(";")[0]?.trim();
+
+      if (cookieNameValue) {
+        const existingCookies = requestHeaders.get("cookie") || "";
+
+        if (!existingCookies.includes("anonymous_session_key=")) {
+          requestHeaders.set(
+            "cookie",
+            existingCookies
+              ? `${existingCookies}; ${cookieNameValue}`
+              : cookieNameValue,
+          );
+        }
+      }
     }
 
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
@@ -148,5 +180,6 @@ export const config = {
     "/public-room/password",
     "/forms",
     "/forms/:path*",
+    "/chat",
   ],
 };

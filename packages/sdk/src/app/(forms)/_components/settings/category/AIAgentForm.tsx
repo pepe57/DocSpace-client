@@ -298,9 +298,17 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
           </div>
         )}
         {!isCheckingProviders && !aiProvidersAvailable && (
-          <Text fontSize="12px" fontWeight={400} color={globalColors.gray}>
-            {t("Common:AIProvidersNotAvailable")}
-          </Text>
+          <div className={styles.statusRow}>
+            <Text fontSize="12px" fontWeight={400} color={globalColors.gray}>
+              {t("Common:AIProvidersNotAvailable")}
+            </Text>
+            <Button
+              label={t("Common:TryAgain")}
+              size={ButtonSize.extraSmall}
+              onClick={() => store.checkAiAvailability()}
+              scale={false}
+            />
+          </div>
         )}
         {isCreatingAgents && (
           <div className={styles.statusRow}>
