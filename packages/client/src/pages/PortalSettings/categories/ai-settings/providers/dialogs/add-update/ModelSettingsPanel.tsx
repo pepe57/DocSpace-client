@@ -127,7 +127,7 @@ export const ModelSettingsPanel = ({
             removeMargin
           >
             <Text className={styles.capabilitiesDescription}>
-              {t("AISettings:CapabilitiesDescription")}
+              {t("AISettings:CapabilitiesDescription", { productName: t("Common:ProductName") })}
             </Text>
             <div className={styles.checkboxList}>
               <Checkbox
