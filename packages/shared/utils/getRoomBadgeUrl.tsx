@@ -33,6 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
+import RestrictedAlert12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/restricted.alert.react.svg?url";
 import Link12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/link.svg?url";
 
 import SharedLinkIconURL from "PUBLIC_DIR/images/icons/24/shared.svg?url";
@@ -48,27 +49,30 @@ type ItemType = {
 };
 
 type SizeIcon = 12 | 24;
-type IconsURLType = "link" | "planet";
+type IconsURLType = "link" | "planet" | "alert";
 type IconsType = Record<SizeIcon, Record<IconsURLType, string>>;
 
 const icons: IconsType = {
   12: {
     link: Link12ReactSvgUrl,
     planet: Planet12ReactSvgUrl,
+    alert: RestrictedAlert12ReactSvgUrl,
   },
   24: {
     link: SharedLinkIconURL,
     planet: PlanetIconURL,
+    alert: RestrictedAlert12ReactSvgUrl,
   },
 };
 
 export const getRoomBadgeUrl = (
   item?: Nullable<ItemType>,
   size: SizeIcon = 12,
+  isExternalShareRestricted?: boolean,
 ) => {
   if (!item || !item.roomType) return null;
 
-  const { link, planet } = icons[size];
+  const { link, planet, alert } = icons[size];
 
   if (item.external) return link;
 
@@ -78,7 +82,7 @@ export const getRoomBadgeUrl = (
       item.roomType === RoomsType.CustomRoom) &&
     item.shared;
 
-  if (showPlanetIcon) return planet;
+  if (showPlanetIcon) return isExternalShareRestricted ? alert : planet;
 
   return null;
 };

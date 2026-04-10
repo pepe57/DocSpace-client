@@ -371,7 +371,12 @@ export default function withFileActions(WrappedFileItem) {
 
       const checkedProps = id <= 0 ? false : isSelected;
 
-      const badgeUrl = getRoomBadgeUrl(item);
+      const { isExternalShareRestricted } = this.props;
+      const isRestrictedRoom = true || isExternalShareRestricted;
+      const badgeUrl = getRoomBadgeUrl(item, 12, isRestrictedRoom);
+      const badgeIconColor = isRestrictedRoom
+        ? "var(--info-panel-link-blocked)"
+        : undefined;
 
       return (
         <WrappedFileItem
@@ -399,6 +404,7 @@ export default function withFileActions(WrappedFileItem) {
           onDragOver={this.onDragOver}
           onDragLeave={this.onDragLeave}
           badgeUrl={badgeUrl}
+          badgeIconColor={badgeIconColor}
           isRecentFolder={isRecentFolder}
           canDrag={canDrag}
           {...this.props}
@@ -412,6 +418,7 @@ export default function withFileActions(WrappedFileItem) {
       {
         settingsStore,
         filesActionsStore,
+        filesSettingsStore,
         dialogsStore,
         treeFoldersStore,
         selectedFolderStore,
@@ -596,6 +603,8 @@ export default function withFileActions(WrappedFileItem) {
         isBlockingOperation,
 
         withContentSelection,
+
+        isExternalShareRestricted: true || !filesSettingsStore.externalShare,
 
         isNewBadgePanelVisible:
           newFilesPanelFolderId === item.id &&
