@@ -40,7 +40,7 @@ import { getSinglePDFTitle } from "@docspace/shared/utils/getPDFTite";
 import { StyledTypeCell } from "./CellStyles";
 import { getRoomTypeName } from "../../../../../../helpers/filesUtils";
 
-const TypeCell = ({ t, item, sideColor, isExternalShareRestricted }) => {
+const TypeCell = ({ t, item, sideColor, isExternalShareRestricted = false }) => {
   const { fileExst, fileTypeName, fileType, roomType, isPDFForm } = item;
   const getItemType = () => {
     switch (fileType) {
