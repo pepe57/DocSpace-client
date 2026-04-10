@@ -494,6 +494,11 @@
         "label": "Tools",
         "tasks": [
           {
+            "label": "Translation Stats",
+            "task": "Translation App | translation stats",
+            "tooltip": "📊 Show translation statistics (keys, coverage, size per language)"
+          },
+          {
             "label": "Translation App : Start (with metadata)",
             "task": "Translation App | start",
             "tooltip": "🌐 Start translation app (backend + frontend + generate metadata)"
@@ -502,11 +507,6 @@
             "label": "Translation App : Start (skip meta)",
             "task": "Translation App | start (skip meta)",
             "tooltip": "⚡ Start translation app quickly — skip metadata generation"
-          },
-          {
-            "label": "Translation Stats",
-            "task": "Translation App | translation stats",
-            "tooltip": "📊 Show translation statistics (keys, coverage, size per language)"
           },
           {
             "label": "Verify Translations (fast, no LLM)",
