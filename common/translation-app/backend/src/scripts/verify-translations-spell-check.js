@@ -14,12 +14,16 @@
  *
  * Options:
  *   --no-llm                   Run only deterministic checks (no API calls, very fast)
+ *   --recheck                  Only re-verify keys that already have issues in .meta
+ *   --recheck-types=TYPE,...   With --recheck, filter by issue types (e.g. incorrect_translation,wrong_language)
  *
  * Examples:
  *   node verify-translations-spell-check.js fr,de
  *   node verify-translations-spell-check.js --provider=openrouter
  *   node verify-translations-spell-check.js fr,de --provider=openrouter
  *   node verify-translations-spell-check.js --no-llm
+ *   node verify-translations-spell-check.js --recheck --provider=openrouter
+ *   node verify-translations-spell-check.js --recheck --recheck-types=incorrect_translation,wrong_script
  */
 const fs = require("fs-extra");
 const { writeJsonWithConsistentEol } = require("../utils/fsUtils");
@@ -42,6 +46,11 @@ const providerArg = cliArgs.find((a) => a.startsWith("--provider="));
 const positionalArgs = cliArgs.filter((a) => !a.startsWith("--"));
 
 const NO_LLM = cliArgs.includes("--no-llm");
+const RECHECK = cliArgs.includes("--recheck");
+const recheckTypesArg = cliArgs.find((a) => a.startsWith("--recheck-types="));
+const RECHECK_TYPES = recheckTypesArg
+  ? new Set(recheckTypesArg.split("=")[1].split(","))
+  : null;
 
 // Auto-detect provider: use openrouter if key is set and no explicit --provider
 const PROVIDER = NO_LLM
@@ -1162,6 +1171,25 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
 
         const metadata = await fs.readJson(metadataFile);
 
+        // --recheck: skip keys that have no issues at all (fast path)
+        if (RECHECK && metadata.languages) {
+          const hasAnyIssues = Object.entries(metadata.languages).some(
+            ([lang, data]) => {
+              if (lang === "en") return false;
+              const issues = data.ai_spell_check_issues || [];
+              if (issues.length === 0) return false;
+              if (RECHECK_TYPES) {
+                return issues.some((i) => RECHECK_TYPES.has(i.type));
+              }
+              return true;
+            },
+          );
+          if (!hasAnyIssues) {
+            stats.skippedKeys++;
+            continue;
+          }
+        }
+
         // Extract context from metadata (comment + usage examples)
         const keyContext = extractKeyContext(metadata);
 
@@ -1215,6 +1243,24 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
             );
             if (!translatedContent) {
               continue;
+            }
+
+            // --recheck mode: skip key+lang pairs that have no existing issues
+            if (RECHECK) {
+              const existingIssues =
+                metadata.languages?.[language]?.ai_spell_check_issues || [];
+              if (existingIssues.length === 0) {
+                continue;
+              }
+              // If --recheck-types is set, only re-check if at least one issue matches
+              if (RECHECK_TYPES) {
+                const hasMatchingType = existingIssues.some((i) =>
+                  RECHECK_TYPES.has(i.type),
+                );
+                if (!hasMatchingType) {
+                  continue;
+                }
+              }
             }
 
             const progress = {
@@ -1424,6 +1470,12 @@ async function verifyAllTranslationsSpellCheck() {
   console.log("LANGUAGES_TO_CHECK: ", LANGUAGES_TO_CHECK);
   console.log("CHECKPOINT_FILE: ", CHECKPOINT_FILE);
   console.log("RESUMING: ", resuming ? "yes" : "no");
+  if (RECHECK) {
+    console.log("MODE: RECHECK — only keys with existing issues in .meta");
+    if (RECHECK_TYPES) {
+      console.log("RECHECK_TYPES: ", [...RECHECK_TYPES].join(", "));
+    }
+  }
 
   if (!NO_LLM) {
     const providerReady = await verifyProviderConnection();
