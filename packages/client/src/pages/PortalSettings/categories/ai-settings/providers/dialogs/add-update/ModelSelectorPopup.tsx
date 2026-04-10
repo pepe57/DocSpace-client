@@ -45,7 +45,6 @@ import styles from "./ModelSelectorPopup.module.scss";
 
 const ROW_HEIGHT = 30;
 const SECTION_HEADER_HEIGHT = 28;
-const POPUP_PADDING = 16;
 
 type ModelSelectorPopupProps = {
   anchor: React.RefObject<HTMLDivElement | null>;

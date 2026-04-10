@@ -66,7 +66,7 @@ export const ModelSettingsPanel = ({
   onSave,
   onClose,
 }: ModelSettingsPanelProps) => {
-  const { t } = useTranslation(["AISettings", "Common"]);
+  const { t } = useTranslation(["AISettings", "Common", "Services"]);
 
   const [displayName, setDisplayName] = useState(model.displayName);
   const [capabilities, setCapabilities] = useState<TModelCapabilities>({
@@ -98,7 +98,7 @@ export const ModelSettingsPanel = ({
       onBackClick={onClose}
     >
       <ModalDialog.Header>
-        {t("AISettings:ModelSettings")}
+        {t("Services:ModelSettings")}
       </ModalDialog.Header>
 
       <ModalDialog.Body>

@@ -69,7 +69,7 @@ export const SelectedModelsList = ({
       >
         <Tag
           tag="add-model"
-          label=""
+          label={t("AISettings:SelectModels")}
           icon={PlusIcon}
           withLabel={false}
           onClick={() => onAddClick()}

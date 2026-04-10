@@ -202,7 +202,6 @@ const AddUpdateDialogComponent = ({
     providerKey,
   });
 
-  const isKeyVisible = !isKeyInputHidden || providerKey.length > 0;
   const showModelsBlock = modelSelection.modelsLoaded;
   const isCustomProvider =
     (selectedOption.key as ProviderType) === ProviderType.OpenAiCompatible;
