@@ -39,136 +39,71 @@
   var CSPApiUrl = "/api/2.0/security/csp";
   var FRAME_NAME = "frameDocSpace";
   var defaultConfig = {
-    /** DocSpace server URL. Must be set — no default. Used as the iframe `src` origin. */
     src: "",
-    /** Base navigation path for {@link SDKMode.Manager}. Default: `"/rooms/shared/"`. */
     rootPath: "/rooms/shared/",
-    /** Auth token for public rooms ({@link SDKMode.PublicRoom}). `null` = no token. */
     requestToken: null,
-    /** Iframe width. CSS value: `"100%"`, `"800px"`, etc. */
     width: "100%",
-    /** Iframe height. CSS value: `"100%"`, `"600px"`, etc. */
     height: "100%",
-    /** Iframe `name` attribute prefix. Default: {@link FRAME_NAME}. */
     name: FRAME_NAME,
-    /** Platform layout type. Affects iframe CSS (e.g. `"mobile"` sets `position: fixed`). See {@link EditorType}. */
     type: "desktop" /* Desktop */,
-    /** Unique frame identifier. Used as the DOM element `id` and the postMessage routing key. */
     frameId: "ds-frame",
-    /** SDK mode. Determines UI and available methods. See {@link SDKMode}. */
     mode: "manager" /* Manager */,
-    /** Entity ID (file, folder, or room) for modes that require it ({@link SDKMode.Editor}, {@link SDKMode.Viewer}, {@link SDKMode.Uploader}). `null` = none. */
     id: null,
-    /** UI locale as a BCP 47 code (e.g. `"en-US"`, `"ru-RU"`). `null` = DocSpace default. */
     locale: null,
-    /** Color theme. See {@link Theme}. Default: follows the OS preference. */
     theme: "System" /* System */,
-    /** Editor UI layout sent to the backend. See {@link EditorType}. */
     editorType: "desktop" /* Desktop */,
-    /** Show "Open file location" button in editor/viewer modes. `true` = show, `"event"` = trigger `onEditorCloseCallback` instead. */
     editorGoBack: true,
-    /** Content filter for selector modes. See {@link SelectorFilterType}. */
     selectorType: "all" /* All */,
-    /** Show "Cancel" button in selector modes. */
     showSelectorCancel: false,
-    /** Show header bar in selector modes. */
     showSelectorHeader: false,
-    /** Show header bar in mobile manager view. */
     showHeader: false,
-    /** Header banner visibility. See {@link HeaderBannerDisplaying}. */
     showHeaderBanner: "none" /* None */,
-    /** Show the current section/room/folder title in manager mode. */
     showTitle: true,
-    /** Show the left navigation menu in manager mode. */
     showMenu: false,
-    /** Show the filter toolbar in manager mode. */
     showFilter: false,
-    /** Show "Sign out" button. */
     showSignOut: true,
-    /** HTML string inserted into the placeholder `div` after {@link SDKInstance.destroyFrame} is called. */
     destroyText: "",
-    /** Item layout in manager mode. See {@link ManagerViewMode}. */
     viewAs: "row" /* Row */,
-    /** Visible table columns when `viewAs` is `"table"`. Comma-separated names: `"Index,Name,Size,Type,Tags"`. */
     viewTableColumns: "Index,Name,Size,Type,Tags",
-    /** Validate CSP headers before loading the iframe. Set to `false` to skip the fetch to {@link CSPApiUrl}. */
     checkCSP: true,
-    /** Hide the "Actions" button in manager mode. */
     disableActionButton: false,
-    /** Show "Manage displayed columns" button in table view. */
     showSettings: false,
-    /** Delay iframe rendering. When `true`, the iframe is not appended until `setConfig` is called. Exception: {@link SDKMode.System} always appends. */
     waiting: false,
-    /** Skip the loading spinner. `true` = show the iframe immediately with `opacity: 1`. Note: {@link SDKMode.Manager} and {@link SDKMode.System} force this to `false`. */
     noLoader: true,
-    /** Show the search bar in selector modes. */
     withSearch: true,
-    /** Show breadcrumb navigation in selector modes. */
     withBreadCrumbs: true,
-    /** Show subtitle with folder description in selector modes. */
     withSubtitle: true,
-    /** File type filter for the file selector. `"ALL"` = no restriction. */
     filterParam: "ALL",
-    /** HEX color for the selector accept button. */
     buttonColor: "#5299E0",
-    /** Show the info panel toggle button in manager mode. */
     infoPanelVisible: true,
-    /** Redirect download links to {@link TFrameEvents.onDownload} instead of downloading directly. */
     downloadToEvent: false,
-    /** Default filter/sort/pagination for the file list in manager mode. See {@link TFrameFilter}. */
     filter: {
-      /** Items per page. */
       count: "100",
-      /** Page number (1-based). */
       page: "1",
-      /** Sort direction. See {@link FilterSortOrder}. */
       sortOrder: "descending" /* Descending */,
-      /** Sort criterion. See {@link FilterSortBy}. */
       sortBy: "DateAndTime" /* ModifiedDate */,
-      /** Search query string. Empty = no search. */
       search: "",
-      /** Include items from sub-folders in search results. */
       withSubfolders: false
     },
-    /** Editor customization options (toolbar, plugins, macros, etc.). See {@link TEditorCustomization}. */
     editorCustomization: {},
-    /** Event handlers. All callbacks are `null` by default (disabled). See {@link TFrameEvents}. */
     events: {
-      /** Fired in selector modes when a room or file is selected. Receives the selected item data. */
       onSelectCallback: null,
-      /** Fired in selector modes when the dialog is closed or selection is canceled. */
       onCloseCallback: null,
-      /** Fired once when the DocSpace app inside the iframe is fully initialized. */
       onAppReady: null,
-      /** Fired when the DocSpace app encounters an initialization error. Receives the error message. */
       onAppError: null,
-      /** Fired when the document editor is closed (via UI or programmatically). */
       onEditorCloseCallback: null,
-      /** Fired after successful user authorization. */
       onAuthSuccess: null,
-      /** Fired when the user signs out. */
       onSignOut: null,
-      /** Fired on file download when `downloadToEvent` is `true`. Receives the download URL. */
       onDownload: null,
-      /** Fired when navigating to an inaccessible or deleted room/folder. */
       onNoAccess: null,
-      /** Fired when navigating to a non-existent room/folder. */
       onNotFound: null,
-      /** Fired when the iframe content is fully loaded and visible. Triggered by {@link SDKInstance.setIsLoaded}. */
       onContentReady: null,
-      /** Fired when the editor is opened from the manager (via context menu, hotkeys, etc.). */
       onEditorOpen: null,
-      /** Fired when a file row is clicked in the manager file list. */
       onFileManagerClick: null,
-      /** Fired when a file upload completes successfully. */
       onUploadSuccess: null,
-      /** Fired when a file upload fails. */
       onUploadError: null,
-      /** Fired on file upload progress update. */
       onUploadProgress: null,
-      /** Fired when a custom context menu action is clicked in {@link SDKMode.Forms}. */
       onCustomAction: null,
-      /** Fired when the user navigates to a different section in {@link SDKMode.Forms}. */
       onNavigate: null
     }
   };
@@ -237,7 +172,30 @@
   };
   var getCSPErrorBody = (src) => {
     const safeSrc = src.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    return `<body style="background:#f3f4f4"><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet"><div style="display:flex;flex-direction:column;gap:80px;align-items:center;justify-content:flex-start;margin-top:60px;padding:0 30px"><div style="flex-shrink:0;position:relative"><img src="${safeSrc}/static/images/logo/lightsmall.svg"></div><div style="display:flex;flex-direction:column;gap:16px;align-items:center;justify-content:flex-start;flex-shrink:0;position:relative"><div style="flex-shrink:0;width:120px;height:100px;position:relative"><img src="${safeSrc}/static/images/frame-error.svg"></div><span style="color:#a3a9ae;text-align:center;font-family:Open Sans;font-size:14px;font-style:normal;font-weight:700;line-height:16px">${cspErrorText} Please add it via <a href="${safeSrc}/developer-tools/javascript-sdk" style="color:#4781d1;text-align:center;font-family:Open Sans;font-size:14px;font-style:normal;font-weight:700;line-height:16px;text-decoration-line:underline" target="_blank">the Developer Tools section</a>.</span></div></div></body>`;
+    return [
+      `<body style="background:#f3f4f4">`,
+      `<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet">`,
+      `<div style="display:flex;flex-direction:column;gap:80px;align-items:center;`,
+      `justify-content:flex-start;margin-top:60px;padding:0 30px">`,
+      `<div style="flex-shrink:0;position:relative">`,
+      `<img src="${safeSrc}/static/images/logo/lightsmall.svg">`,
+      `</div>`,
+      `<div style="display:flex;flex-direction:column;gap:16px;align-items:center;`,
+      `justify-content:flex-start;flex-shrink:0;position:relative">`,
+      `<div style="flex-shrink:0;width:120px;height:100px;position:relative">`,
+      `<img src="${safeSrc}/static/images/frame-error.svg">`,
+      `</div>`,
+      `<span style="color:#a3a9ae;text-align:center;font-family:Open Sans;`,
+      `font-size:14px;font-style:normal;font-weight:700;line-height:16px">`,
+      `${cspErrorText} Please add it via `,
+      `<a href="${safeSrc}/developer-tools/javascript-sdk" `,
+      `style="color:#4781d1;text-align:center;font-family:Open Sans;`,
+      `font-size:14px;font-style:normal;font-weight:700;line-height:16px;`,
+      `text-decoration-line:underline" target="_blank">`,
+      `the Developer Tools section</a>.`,
+      `</span>`,
+      `</div></div></body>`
+    ].join("");
   };
   var getLoaderStyle = (className) => {
     return `@keyframes rotate { 0%{ transform: rotate(-45deg); will-change: transform; } 15%{ transform: rotate(45deg); } 30%{ transform: rotate(135deg); } 45%{ transform: rotate(225deg); } 60%, 100%{ transform: rotate(315deg); } } .${className} { width: 74px; height: 74px; border: 4px solid rgba(51,51,51, 0.1); border-top-color: #333333; border-radius: 50%; transform: rotate(-45deg); position: relative; box-sizing: border-box; animation: 1s linear infinite rotate; will-change: transform; } @media (prefers-color-scheme: dark) { .${className} { border-color: rgba(204, 204, 204, 0.1); border-top-color: #CCCCCC; } } @media (prefers-reduced-motion: reduce) { .${className} { animation-duration: 1.5s; } }`;
@@ -280,6 +238,10 @@
       is_file: config2.requestToken ? true : void 0,
       editorGoBack: ((_a = config2.events) == null ? void 0 : _a.onEditorCloseCallback) && typeof config2.events.onEditorCloseCallback === "function" ? "event" : config2.editorGoBack ? config2.editorGoBack : void 0
     };
+    const buildPath = (base, params) => {
+      const qs = customUrlSearchParams(params);
+      return qs ? `${base}?${qs}` : base;
+    };
     switch (config2.mode) {
       case "manager" /* Manager */: {
         const filter = { ...config2.filter };
@@ -291,16 +253,13 @@
         const urlParams = customUrlSearchParams(params);
         return `${config2.rootPath}${config2.requestToken ? `?${urlParams}` : `${config2.id ? config2.id + "/" : ""}filter?${urlParams}`}`;
       }
-      case "room-selector" /* RoomSelector */: {
-        const roomSelectorConfig = {
+      case "room-selector" /* RoomSelector */:
+        return buildPath("/sdk/room-selector", {
           ...baseFrameOptions,
           ...baseSelectorOptions
-        };
-        const urlParams = customUrlSearchParams(roomSelectorConfig);
-        return `/sdk/room-selector${urlParams ? `?${urlParams}` : ""}`;
-      }
-      case "file-selector" /* FileSelector */: {
-        const fileSelectorConfig = {
+        });
+      case "file-selector" /* FileSelector */:
+        return buildPath("/sdk/file-selector", {
           ...baseFrameOptions,
           ...baseSelectorOptions,
           breadCrumbs: config2.withBreadCrumbs,
@@ -308,47 +267,27 @@
           id: config2.id,
           selectorType: config2.selectorType,
           subtitle: config2.withSubtitle
-        };
-        const urlParams = customUrlSearchParams(fileSelectorConfig);
-        return `/sdk/file-selector${urlParams ? `?${urlParams}` : ""}`;
-      }
-      case "public-room" /* PublicRoom */: {
-        const publicRoomConfig = {
+        });
+      case "public-room" /* PublicRoom */:
+        return buildPath("/sdk/public-room", {
           ...baseFrameOptions,
           folder: config2.id,
           key: config2.requestToken,
           showFilter: config2.showFilter,
           showHeader: config2.showHeader,
           showTitle: config2.showTitle
-        };
-        const urlParams = customUrlSearchParams(publicRoomConfig);
-        return `/sdk/public-room${urlParams ? `?${urlParams}` : ""}`;
-      }
-      case "system" /* System */: {
-        const urlParams = customUrlSearchParams(baseFrameOptions);
-        return `/old-sdk/system${urlParams ? `?${urlParams}` : ""}`;
-      }
-      case "editor" /* Editor */: {
-        const editorConfig = {
-          ...baseFrameOptions,
-          ...baseEditorOptions
-        };
-        const urlParams = customUrlSearchParams(editorConfig);
-        const path = `/doceditor${urlParams ? `?${urlParams}` : ""}`;
-        return path;
-      }
-      case "viewer" /* Viewer */: {
-        const viewerConfig = {
+        });
+      case "system" /* System */:
+        return buildPath("/old-sdk/system", baseFrameOptions);
+      case "editor" /* Editor */:
+      case "viewer" /* Viewer */:
+        return buildPath("/doceditor", {
           ...baseFrameOptions,
           ...baseEditorOptions,
-          action: "view"
-        };
-        const urlParams = customUrlSearchParams(viewerConfig);
-        const path = `/doceditor${urlParams ? `?${urlParams}` : ""}`;
-        return path;
-      }
-      case "uploader" /* Uploader */: {
-        const uploaderConfig = {
+          ...config2.mode === "viewer" /* Viewer */ && { action: "view" }
+        });
+      case "uploader" /* Uploader */:
+        return buildPath("/sdk/uploader", {
           ...baseFrameOptions,
           targetId: config2.id,
           acceptExtensions: config2.acceptExtensions,
@@ -359,12 +298,9 @@
           isMultipleUpload: config2.isMultipleUpload,
           maxPerUploadSize: config2.maxPerUploadSize,
           maxTotalUploadSize: config2.maxTotalUploadSize
-        };
-        const urlParams = customUrlSearchParams(uploaderConfig);
-        return `/sdk/uploader${urlParams ? `?${urlParams}` : ""}`;
-      }
-      case "forms" /* Forms */: {
-        const formsConfig = {
+        });
+      case "forms" /* Forms */:
+        return buildPath("/sdk/forms/my-forms", {
           ...baseFrameOptions,
           roomId: config2.id,
           libraryId: config2.libraryId,
@@ -373,31 +309,25 @@
           inviteKey: config2.inviteKey,
           emplType: config2.emplType,
           uid: config2.uid
-        };
-        const urlParams = customUrlSearchParams(formsConfig);
-        return `/sdk/forms/my-forms${urlParams ? `?${urlParams}` : ""}`;
-      }
-      case "chat" /* Chat */: {
-        const chatConfig = {
+        });
+      case "chat" /* Chat */:
+        return buildPath("/sdk/chat", {
           ...baseFrameOptions,
           agentId: config2.agentId,
-          fileId: config2.fileId || void 0,
+          fileId: config2.fileId ?? void 0,
           chatId: config2.chatId || void 0,
           providerName: config2.providerName || void 0,
           inviteKey: config2.inviteKey || void 0,
           emplType: config2.emplType || void 0,
           uid: config2.uid || void 0
-        };
-        const urlParams = customUrlSearchParams(chatConfig);
-        return `/sdk/chat${urlParams ? `?${urlParams}` : ""}`;
-      }
+        });
       default:
         return config2.rootPath || "/";
     }
   };
 
   // src/instance/index.ts
-  var _isConnected, _callIdCounter, _callbacks, _tasks, _classNames, _expectedOrigin, _iframe, _uploadIdCounter, _pendingUploads, _createLoader, _createIframe, _SDKInstance_instances, setupCSPValidation_fn, _sendMessage, _onMessage, parseMessageData_fn, handleMethodResponse_fn, drainNextTask_fn, createMethodTimer_fn, rejectAllPending_fn, processEvent_fn, _allowedCommands, executeCommand_fn, handleError_fn, executeMethod_fn, prepareFrameConfig_fn, createContainer_fn, setupContainer_fn, setupIframe_fn, setupFrameEventHandlers_fn, assembleFrame_fn, registerFrame_fn, _getMethodPromise;
+  var _isConnected, _callIdCounter, _callbacks, _tasks, _classNames, _expectedOrigin, _iframe, _uploadIdCounter, _pendingUploads, _createLoader, _createIframe, _SDKInstance_instances, setupCSPValidation_fn, _sendMessage, _onMessage, parseMessageData_fn, handleMethodResponse_fn, drainNextTask_fn, createMethodTimer_fn, clearAllPending_fn, rejectAllPending_fn, processEvent_fn, _allowedCommands, executeCommand_fn, handleError_fn, executeMethod_fn, prepareFrameConfig_fn, createContainer_fn, setupIframe_fn, setupFrameEventHandlers_fn, assembleFrame_fn, _getMethodPromise;
   var _SDKInstance = class _SDKInstance {
     constructor(config2) {
       __privateAdd(this, _SDKInstance_instances);
@@ -427,9 +357,7 @@
         if (!styleCache.has(loaderClassName)) {
           const style = document.createElement("style");
           style.textContent = getLoaderStyle(loaderClassName);
-          const fragment = document.createDocumentFragment();
-          fragment.appendChild(style);
-          document.head.appendChild(fragment);
+          document.head.appendChild(style);
           styleCache.set(loaderClassName, style);
         }
         let container;
@@ -465,45 +393,30 @@
        * @returns A configured `HTMLIFrameElement`, ready for DOM insertion.
        */
       __privateAdd(this, _createIframe, (config2) => {
-        if (!_SDKInstance._iframeCache) {
+        if (!_SDKInstance._iframeTemplate) {
           const template = document.createElement("iframe");
           template.allowFullscreen = true;
           template.setAttribute("allow", "storage-access *");
-          _SDKInstance._iframeCache = {
-            template,
-            pathCache: /* @__PURE__ */ new Map(),
-            styleCache: /* @__PURE__ */ new Map()
-          };
+          _SDKInstance._iframeTemplate = template;
         }
-        const { mode, id, frameId, type, width, height, src, checkCSP } = config2;
+        const { frameId, type, width, height, src, checkCSP } = config2;
         const isMobile = type === "mobile";
-        const iframe = _SDKInstance._iframeCache.template.cloneNode();
-        const cacheKey = `${mode}_${id || ""}_${frameId}`;
-        const styleCacheKey = `${width}_${height}_${isMobile ? "mobile" : "desktop"}`;
-        let path = _SDKInstance._iframeCache.pathCache.get(cacheKey);
-        if (!path) {
-          path = getFramePath(config2);
-          _SDKInstance._iframeCache.pathCache.set(cacheKey, path);
-        }
+        const iframe = _SDKInstance._iframeTemplate.cloneNode();
+        const path = getFramePath(config2);
         iframe.id = frameId;
         iframe.name = `${FRAME_NAME}__#${frameId}`;
         iframe.src = src + path;
-        let styleObj = _SDKInstance._iframeCache.styleCache.get(styleCacheKey);
-        if (!styleObj) {
-          styleObj = {
-            width,
-            height,
-            border: "0px",
-            opacity: "0",
-            ...isMobile && {
-              position: "fixed",
-              overflow: "hidden",
-              webkitOverflowScrolling: "touch"
-            }
-          };
-          _SDKInstance._iframeCache.styleCache.set(styleCacheKey, styleObj);
-        }
-        Object.assign(iframe.style, styleObj);
+        Object.assign(iframe.style, {
+          width,
+          height,
+          border: "0px",
+          opacity: "0",
+          ...isMobile && {
+            position: "fixed",
+            overflow: "hidden",
+            webkitOverflowScrolling: "touch"
+          }
+        });
         if (isMobile) {
           if (document.body.style.overscrollBehaviorY !== "contain") {
             document.body.style.overscrollBehaviorY = "contain";
@@ -594,16 +507,11 @@
        *
        * @param methodName - The name of the method to execute.
        * @param params - The parameters to pass to the method. Defaults to null.
-       * @returns A promise that resolves to an object containing the result of the method execution, or the current configuration if reloaded.
+       * @returns A promise that resolves to an object containing the result of the method execution.
        */
-      __privateAdd(this, _getMethodPromise, (methodName, params = null, withReload = false) => {
+      __privateAdd(this, _getMethodPromise, (methodName, params = null) => {
         const promise = new Promise((resolve, reject) => {
-          if (withReload) {
-            this.initFrame(this.config);
-            resolve(this.config);
-          } else {
-            __privateMethod(this, _SDKInstance_instances, executeMethod_fn).call(this, methodName, params, resolve, reject);
-          }
+          __privateMethod(this, _SDKInstance_instances, executeMethod_fn).call(this, methodName, params, resolve, reject);
         });
         promise.catch(() => {
         });
@@ -624,39 +532,34 @@
       const parent = targetFrame == null ? void 0 : targetFrame.parentElement;
       if (!targetFrame || !parent) return;
       requestAnimationFrame(() => {
-        var _a, _b;
+        var _a;
         try {
           parent.style.width = width;
           parent.style.height = height;
           const loader = document.getElementById(`${frameId}-loader`);
           if (loader) {
             loader.style.opacity = "0";
-            requestAnimationFrame(() => {
-              var _a2, _b2;
-              try {
-                if (loader.parentNode) {
-                  loader.parentNode.removeChild(loader);
-                }
-                (_a2 = events == null ? void 0 : events.onContentReady) == null ? void 0 : _a2.call(events);
-              } catch (error) {
-                console.error("Error removing loader:", error);
-                (_b2 = events == null ? void 0 : events.onContentReady) == null ? void 0 : _b2.call(events);
-              }
-            });
-          } else {
-            (_a = events == null ? void 0 : events.onContentReady) == null ? void 0 : _a.call(events);
           }
           requestAnimationFrame(() => {
-            Object.assign(targetFrame.style, {
-              opacity: "1",
-              position: "relative",
-              width,
-              height
-            });
+            var _a2;
+            try {
+              if (loader == null ? void 0 : loader.parentNode) {
+                loader.parentNode.removeChild(loader);
+              }
+              Object.assign(targetFrame.style, {
+                opacity: "1",
+                position: "relative",
+                width,
+                height
+              });
+            } catch (error) {
+              console.error("Error in setIsLoaded:", error);
+            }
+            (_a2 = events == null ? void 0 : events.onContentReady) == null ? void 0 : _a2.call(events);
           });
         } catch (error) {
           console.error("Error in setIsLoaded:", error);
-          (_b = events == null ? void 0 : events.onContentReady) == null ? void 0 : _b.call(events);
+          (_a = events == null ? void 0 : events.onContentReady) == null ? void 0 : _a.call(events);
         }
       });
     }
@@ -707,18 +610,7 @@
         __privateSet(this, _expectedOrigin, "");
       }
       __privateSet(this, _isConnected, false);
-      const reloadError = new SDKError("DISCONNECTED" /* Disconnected */, "Frame reloaded");
-      for (const entry of __privateGet(this, _callbacks).values()) {
-        if (entry.timer) clearTimeout(entry.timer);
-        entry.reject(reloadError);
-      }
-      __privateGet(this, _callbacks).clear();
-      __privateSet(this, _tasks, []);
-      for (const [, pending] of __privateGet(this, _pendingUploads)) {
-        clearTimeout(pending.timer);
-        pending.reject(reloadError);
-      }
-      __privateGet(this, _pendingUploads).clear();
+      __privateMethod(this, _SDKInstance_instances, clearAllPending_fn).call(this, new SDKError("DISCONNECTED" /* Disconnected */, "Frame reloaded"));
       const setupResult = __privateMethod(this, _SDKInstance_instances, createContainer_fn).call(this, this.config.frameId);
       if (!setupResult) return null;
       const { container, target } = setupResult;
@@ -726,7 +618,8 @@
       __privateSet(this, _iframe, iframe);
       __privateMethod(this, _SDKInstance_instances, setupFrameEventHandlers_fn).call(this, iframe);
       __privateMethod(this, _SDKInstance_instances, assembleFrame_fn).call(this, container, target, iframe);
-      __privateMethod(this, _SDKInstance_instances, registerFrame_fn).call(this);
+      window.DocSpace.SDK.frames = window.DocSpace.SDK.frames || {};
+      window.DocSpace.SDK.frames[this.config.frameId] = this;
       return iframe;
     }
     /**
@@ -765,10 +658,6 @@
         } else {
           document.body.appendChild(replacementDiv);
         }
-        if (_SDKInstance._iframeCache) {
-          const cacheKey = `${this.config.mode}_${this.config.id || ""}_${this.config.frameId}`;
-          _SDKInstance._iframeCache.pathCache.delete(cacheKey);
-        }
       }
       window.removeEventListener("message", __privateGet(this, _onMessage));
       __privateSet(this, _iframe, null);
@@ -779,18 +668,7 @@
       }
       _SDKInstance._loaderCache.style.delete(loaderClassName);
       __privateSet(this, _isConnected, false);
-      const destroyError = new SDKError("DISCONNECTED" /* Disconnected */, "Frame destroyed");
-      for (const entry of __privateGet(this, _callbacks).values()) {
-        if (entry.timer) clearTimeout(entry.timer);
-        entry.reject(destroyError);
-      }
-      __privateGet(this, _callbacks).clear();
-      __privateSet(this, _tasks, []);
-      for (const [, pending] of __privateGet(this, _pendingUploads)) {
-        clearTimeout(pending.timer);
-        pending.reject(destroyError);
-      }
-      __privateGet(this, _pendingUploads).clear();
+      __privateMethod(this, _SDKInstance_instances, clearAllPending_fn).call(this, new SDKError("DISCONNECTED" /* Disconnected */, "Frame destroyed"));
       const sdkFrames = (_b = (_a = window.DocSpace) == null ? void 0 : _a.SDK) == null ? void 0 : _b.frames;
       if (sdkFrames && frameId in sdkFrames) {
         delete sdkFrames[frameId];
@@ -828,7 +706,11 @@
           __privateSet(this, _expectedOrigin, "");
         }
       }
-      return __privateGet(this, _getMethodPromise).call(this, "setConfig" /* SetConfig */, this.config, reload);
+      if (reload) {
+        this.initFrame(this.config);
+        return Promise.resolve(this.config);
+      }
+      return __privateGet(this, _getMethodPromise).call(this, "setConfig" /* SetConfig */, this.config);
     }
     /**
      * Returns the current merged configuration object.
@@ -1635,18 +1517,36 @@
     }, this.config.methodTimeout || 3e4);
   };
   /**
+   * Rejects all pending callbacks and uploads, then clears every queue.
+   * @internal
+   */
+  clearAllPending_fn = function(error) {
+    for (const entry of __privateGet(this, _callbacks).values()) {
+      if (entry.timer) clearTimeout(entry.timer);
+      entry.reject(error);
+    }
+    __privateGet(this, _callbacks).clear();
+    __privateSet(this, _tasks, []);
+    for (const [, pending] of __privateGet(this, _pendingUploads)) {
+      clearTimeout(pending.timer);
+      pending.reject(error);
+    }
+    __privateGet(this, _pendingUploads).clear();
+  };
+  /**
    * Rejects all pending method callbacks and clears the queue.
+   * Does not touch {@link #pendingUploads} — uploads are resolved
+   * separately via event handlers.
    * @internal
    */
   rejectAllPending_fn = function(reason) {
-    const entries = [...__privateGet(this, _callbacks).values()];
-    __privateGet(this, _callbacks).clear();
-    __privateSet(this, _tasks, []);
     const err = new SDKError("DISCONNECTED" /* Disconnected */, reason);
-    for (const entry of entries) {
+    for (const entry of __privateGet(this, _callbacks).values()) {
       if (entry.timer) clearTimeout(entry.timer);
       entry.reject(err);
     }
+    __privateGet(this, _callbacks).clear();
+    __privateSet(this, _tasks, []);
     __privateSet(this, _isConnected, false);
     __privateMethod(this, _SDKInstance_instances, handleError_fn).call(this, err);
   };
@@ -1779,7 +1679,7 @@
    * @returns An object containing the container and target elements, or null if the target element was not found.
    */
   createContainer_fn = function(targetId) {
-    const target = document.getElementById(targetId);
+    let target = document.getElementById(targetId);
     if (!target) return null;
     const existingContainer = document.getElementById(`${targetId}-container`);
     if (existingContainer) {
@@ -1788,30 +1688,20 @@
         const restoredTarget = document.createElement("div");
         restoredTarget.id = targetId;
         parentNode.replaceChild(restoredTarget, existingContainer);
-        const cacheKey = `${this.config.mode}_${this.config.id || ""}_${this.config.frameId}`;
-        _SDKInstance._iframeCache.pathCache.delete(cacheKey);
-        return __privateMethod(this, _SDKInstance_instances, setupContainer_fn).call(this, restoredTarget);
+        target = restoredTarget;
       }
+    } else {
+      __privateSet(this, _classNames, target.className);
     }
-    __privateSet(this, _classNames, target.className);
-    return __privateMethod(this, _SDKInstance_instances, setupContainer_fn).call(this, target);
-  };
-  /**
-   * Configures and styles the container element for frame presentation.
-   *
-   * @param target - The DOM element to be replaced by the container.
-   * @returns An object containing the configured container and the target element.
-   */
-  setupContainer_fn = function(target) {
-    const renderContainer = document.createElement("div");
-    renderContainer.id = target.id + "-container";
-    renderContainer.className = "frame-container";
-    Object.assign(renderContainer.style, {
+    const container = document.createElement("div");
+    container.id = target.id + "-container";
+    container.className = "frame-container";
+    Object.assign(container.style, {
       position: "relative",
       width: this.config.width,
       height: this.config.height
     });
-    return { container: renderContainer, target };
+    return { container, target };
   };
   /**
    * Creates and applies styling to the iframe element for DocSpace integration.
@@ -1878,20 +1768,13 @@
     }
     return iframe;
   };
-  /**
-   * Registers the current frame instance in the global DocSpace SDK registry.
-   */
-  registerFrame_fn = function() {
-    window.DocSpace.SDK.frames = window.DocSpace.SDK.frames || {};
-    window.DocSpace.SDK.frames[this.config.frameId] = this;
-  };
   _getMethodPromise = new WeakMap();
   __publicField(_SDKInstance, "_loaderCache", {
     style: /* @__PURE__ */ new Map(),
     container: null,
     templates: /* @__PURE__ */ new Map()
   });
-  __publicField(_SDKInstance, "_iframeCache");
+  __publicField(_SDKInstance, "_iframeTemplate");
   /** Methods the iframe is allowed to invoke via `onCallCommand`. */
   __privateAdd(_SDKInstance, _allowedCommands, /* @__PURE__ */ new Set([
     "setIsLoaded",
@@ -1948,7 +1831,7 @@
         return instance;
       });
       /**
-       * Alias for {@link SDK.init}. Prefer the mode-specific wrappers instead.
+       * @deprecated Use {@link SDK.init} or a mode-specific wrapper instead.
        *
        * @param config - Frame configuration. See {@link TFrameConfig}.
        * @returns The created or reinitialized {@link SDKInstance}.
