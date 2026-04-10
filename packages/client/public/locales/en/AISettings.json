@@ -42,7 +42,7 @@
   "MCPUnavailableError": "The {{mcpServer}} is unavailable",
   "Model": "Model",
   "ModelName": "Model name",
-  "ModelNameHint": "Use a name that helps you identify this model",
+  "ModelNameHint": "Use a name that helps you identify this model.",
   "OtherModels": "Other models",
   "OtherModelsTooltip": "Some models may not support certain actions or features",
   "PortalAiDisabledTooltip": "To use {{productName}} AI provider, make sure to connect an AI service first.",

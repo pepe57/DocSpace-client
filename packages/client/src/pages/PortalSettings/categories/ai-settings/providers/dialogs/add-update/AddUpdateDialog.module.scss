@@ -62,10 +62,11 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  margin-top: 5px;
 }
 
 .selectedModelsLabel {
-  margin-bottom: 4px;
+  margin-bottom: 13px;
 }
 
 .requiredMark {
@@ -76,10 +77,17 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 4px;
-
+  row-gap: 4px;
   :global(.add-model-tag) {
+    width: 32px;
+    min-height: 24px;
+    max-width: 32px;
     cursor: pointer;
+
+    svg {
+      width: 12px;
+      height: 12px;
+    }
 
     &:hover {
       background: var(--tag-background) !important;
@@ -88,6 +96,9 @@
   }
 
   :global(.model-tag) {
+    min-height: 24px;
+    pointer-events: none;
+
     &:hover {
       background: var(--tag-background) !important;
       border: var(--tag-border) !important;

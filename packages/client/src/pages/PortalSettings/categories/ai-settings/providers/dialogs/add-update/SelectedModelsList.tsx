@@ -31,7 +31,7 @@ import classNames from "classnames";
 
 import { Tag } from "@docspace/ui-kit/components/tag";
 import { Text } from "@docspace/ui-kit/components/text";
-import PlusIcon from "@docspace/ui-kit/assets/icons/12/plus.svg";
+import PlusIcon from "@docspace/ui-kit/assets/icons/16/plus.svg";
 
 import type { TProviderModelInfo } from "@docspace/shared/api/ai/types";
 
@@ -71,7 +71,6 @@ export const SelectedModelsList = ({
           icon={PlusIcon}
           withLabel={false}
           onClick={() => onAddClick()}
-          style={{ maxWidth: "32px" }}
           className="add-model-tag"
           dataTestId="add-model-button"
         />

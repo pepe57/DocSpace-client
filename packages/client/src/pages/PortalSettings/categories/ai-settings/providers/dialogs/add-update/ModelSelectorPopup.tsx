@@ -31,7 +31,7 @@ import React, { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
 
 import { useTranslation } from "react-i18next";
-
+import classNames from "classnames";
 import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Text } from "@docspace/ui-kit/components/text";
@@ -44,7 +44,8 @@ import type { TProviderModelInfo } from "@docspace/shared/api/ai/types";
 import styles from "./ModelSelectorPopup.module.scss";
 
 const ROW_HEIGHT = 30;
-const SECTION_HEADER_HEIGHT = 28;
+const ROW_GAP = 2;
+const SECTION_HEADER_HEIGHT = 36;
 
 type ModelSelectorPopupProps = {
   anchor: React.RefObject<HTMLDivElement | null>;
@@ -106,17 +107,21 @@ const calcContentHeight = (
 ): number => {
   if (isCustomProvider) {
     const totalModels = recommended.length + other.length;
-    return totalModels * ROW_HEIGHT;
+    const gaps = totalModels > 1 ? (totalModels - 1) * ROW_GAP : 0;
+    return totalModels * ROW_HEIGHT + gaps;
   }
 
   let height = 0;
 
   if (recommended.length > 0) {
-    height += SECTION_HEADER_HEIGHT + recommended.length * ROW_HEIGHT;
+    const gaps =
+      recommended.length > 1 ? (recommended.length - 1) * ROW_GAP : 0;
+    height += SECTION_HEADER_HEIGHT + recommended.length * ROW_HEIGHT + gaps;
   }
 
   if (other.length > 0) {
-    height += SECTION_HEADER_HEIGHT + other.length * ROW_HEIGHT;
+    const gaps = other.length > 1 ? (other.length - 1) * ROW_GAP : 0;
+    height += SECTION_HEADER_HEIGHT + other.length * ROW_HEIGHT + gaps;
   }
 
   return height;
@@ -146,7 +151,7 @@ export const ModelSelectorPopup = ({
     const rect = anchorEl.getBoundingClientRect();
     const popupEl = ref.current;
 
-    const top = rect.bottom + 4;
+    const top = rect.bottom + 8;
     let left = anchor.current.getBoundingClientRect().left;
 
     if (left + 285 > window.innerWidth) {
@@ -210,7 +215,7 @@ export const ModelSelectorPopup = ({
             className={styles.scrollWrapper}
             style={{ height: scrollHeight }}
           >
-            <Scrollbar fixedSize className={styles.scrollbar}>
+            <Scrollbar className={styles.scrollbar}>
               {allModels?.map((model) => (
                 <ModelRow
                   key={model.modelId}
@@ -255,7 +260,12 @@ export const ModelSelectorPopup = ({
             ) : null}
             {other.length > 0 ? (
               <>
-                <div className={styles.sectionHeader}>
+                <div
+                  className={classNames(
+                    styles.sectionHeader,
+                    styles.sectionHeaderOther,
+                  )}
+                >
                   <Text className={styles.sectionTitle}>
                     {t("AISettings:OtherModels")}
                   </Text>

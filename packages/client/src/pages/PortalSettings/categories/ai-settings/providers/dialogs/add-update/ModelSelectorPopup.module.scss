@@ -35,7 +35,7 @@
   height: auto;
 
   border-radius: 8px;
-  padding: 8px 16px;
+  padding: 12px 16px;
   box-sizing: border-box;
 
   display: flex;
@@ -59,14 +59,21 @@
 .sectionHeader {
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 0 8px;
+  gap: 8px;
+  height: 16px;
   flex-shrink: 0;
+  padding-bottom: 7px;
+}
+
+.sectionHeaderOther {
+  height: 36px;
+  padding-bottom: 0px;
+  padding-top: 5px;
 }
 
 .sectionTitle {
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 16px;
 
   :global(.light) & {
@@ -85,8 +92,8 @@
   height: 30px;
   flex-shrink: 0;
 
-  &:hover .pencilIcon {
-    visibility: visible;
+  & + & {
+    margin-top: 2px;
   }
 }
 
@@ -101,8 +108,6 @@
   height: 24px;
   padding: 1px 7px;
   box-sizing: border-box;
-  margin-inline-end: auto;
-
   :global(.light) & {
     border: 1px solid #{colors.$gray-light-mid};
   }
@@ -115,8 +120,16 @@
 }
 
 .pencilIcon {
-  visibility: hidden;
   flex-shrink: 0;
+  cursor: pointer;
+  visibility: hidden;
+  margin-inline-start: auto;
+  padding-inline-start: 12px;
+  margin-inline-end: 3px;
+
+  .modelRow:hover & {
+    visibility: visible;
+  }
 }
 
 .scrollWrapper {
@@ -126,3 +139,4 @@
 .scrollbar {
   // empty — needed as a class for Scrollbar component
 }
+

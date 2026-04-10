@@ -97,9 +97,7 @@ export const ModelSettingsPanel = ({
       isBackButton
       onBackClick={onClose}
     >
-      <ModalDialog.Header>
-        {t("Services:ModelSettings")}
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("Services:ModelSettings")}</ModalDialog.Header>
 
       <ModalDialog.Body>
         <div className={styles.body}>
@@ -125,9 +123,12 @@ export const ModelSettingsPanel = ({
             labelVisible
             isVertical
             removeMargin
+            className={styles.capabilitiesField}
           >
             <Text className={styles.capabilitiesDescription}>
-              {t("AISettings:CapabilitiesDescription", { productName: t("Common:ProductName") })}
+              {t("AISettings:CapabilitiesDescription", {
+                productName: t("Common:ProductName"),
+              })}
             </Text>
             <div className={styles.checkboxList}>
               <Checkbox
