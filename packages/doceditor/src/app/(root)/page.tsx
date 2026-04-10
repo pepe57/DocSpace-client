@@ -41,7 +41,7 @@ import { logger } from "@/../logger.mjs";
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
 import FilePassword from "@/components/file-password";
-import { TFrameConfig } from "@docspace/shared/types/Frame";
+import type { TFrameConfig, TFrameTheme } from "@docspace/shared/types/Frame";
 
 const initialSearchParams: Awaited<RootPageProps["searchParams"]> = {
 	fileId: undefined,
@@ -82,7 +82,6 @@ async function Page(props: RootPageProps) {
 		withoutGoBackText?: boolean;
 	} = {
 		frameId: "",
-		mode: "",
 		src: "",
 		editorCustomization: { uiTheme: theme },
 		editorGoBack,
@@ -91,7 +90,7 @@ async function Page(props: RootPageProps) {
 		id: fileId,
 		locale,
 		requestToken: share,
-		theme,
+		theme: theme as TFrameTheme,
 		is_file,
 		isSDK,
 	};

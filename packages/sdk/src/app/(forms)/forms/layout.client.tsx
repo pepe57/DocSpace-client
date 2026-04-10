@@ -44,6 +44,7 @@ import {
   frameCallbackData,
   frameCallEvent,
   frameHandlePing,
+  getFrameId,
 } from "@docspace/shared/utils/common";
 import { ShareAccessRights } from "@docspace/shared/enums";
 
@@ -152,7 +153,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   React.useEffect(() => {
     if (isReady && !appReadySent.current) {
       appReadySent.current = true;
-      frameCallEvent({ event: "onAppReady", data: {} });
+      frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
     }
   }, [isReady]);
 

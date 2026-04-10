@@ -1353,11 +1353,22 @@
     {
       "label": "Translation App | clear meta issues",
       "type": "shell",
-      "command": "node '${workspaceFolder}/common/scripts/clear-meta-issues.js'",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm run clear-meta-issues",
       "group": "build",
       "presentation": {
         "reveal": "always",
         "panel": "shared",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | update metadata",
+      "type": "shell",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm run generate-metadata && npm run save-meta-keys-usage && npm run generate-auto-comments-metadata",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
         "focus": true
       }
     }
