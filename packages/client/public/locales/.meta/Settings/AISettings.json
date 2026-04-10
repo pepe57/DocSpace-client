@@ -3,7 +3,7 @@
   "content": "AI settings",
   "content_en_sha1_hash": "6dcf51d7630d6e48c2162d10dfcc2c61485912c7",
   "created_at": "2025-10-27T16:14:27.398Z",
-  "updated_at": "2026-04-09T04:20:19.762Z",
+  "updated_at": "2026-04-10T08:21:04.313Z",
   "comment": {
     "text": "This key displays the label for AI-related settings within the Portal Settings section, likely as a menu item or heading. It refers to configurations or options related to artificial intelligence functionality within the application. Translators should ensure the term \"AI\" is appropriate for the target audience.",
     "is_auto": true,
@@ -24,8 +24,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 86,
-      "context": "handleServicesQuotas,\n fetchAiServiceBalance,\n defaultFolderType,\n updateDefaultFolderType,\n }: AiServicesManagementProps) => {\n const { t, ready } = useTranslation([\"Settings\", \"Common\", \"AISettings\"]);\n const navigate = useNavigate();\n const location = useLocation();\n \n const [type, setType] = useState(true);\n const [showReminder, setShowReminder] = useState(false);",
+      "line_number": 87,
+      "context": "handleServiceQuota,\n fetchAiServiceBalance,\n defaultFolderType,\n updateDefaultFolderType,\n }: AiServicesManagementProps) => {\n const { t, ready } = useTranslation([\"Settings\", \"Common\", \"AISettings\"]);\n const navigate = useNavigate();\n const location = useLocation();\n \n const [type, setType] = useState(true);\n const [showReminder, setShowReminder] = useState(false);",
       "module": "/packages/client"
     },
     {

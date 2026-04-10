@@ -3,7 +3,7 @@
   "content": "Upload folder",
   "content_en_sha1_hash": "e77a1496f8e8093547d02f31abdfb67b6e95e806",
   "created_at": "2026-04-03T21:51:34.737Z",
-  "updated_at": "2026-04-07T20:42:47.183Z",
+  "updated_at": "2026-04-10T08:21:04.284Z",
   "comment": {
     "text": "Used as a label for the folder upload action in a dropdown menu and as a descriptive text for the 'Shift + i' keyboard shortcut in the hotkeys panel. It refers to the action of uploading an entire directory.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3568,
+      "line_number": 3567,
       "context": "icon: ActionsUploadReactSvgUrl,\n };\n \n const uploadFolder = {\n key: \"upload-folder\",\n label: t(\"Common:UploadFolder\"),\n onClick: () => this.onUploadAction(\"folder\"),\n icon: ActionsUploadReactSvgUrl,\n };\n \n const templateGallery = templateGalleryAvailable",
       "module": "/packages/client"
     }
