@@ -3,7 +3,7 @@
   "content": "Services",
   "content_en_sha1_hash": "5cbd584046863bc7b753e57e8681a98a87f36f0f",
   "created_at": "2025-06-03T20:59:25.520Z",
-  "updated_at": "2026-04-10T08:21:04.335Z",
+  "updated_at": "2026-04-10T13:53:52.463Z",
   "comment": {
     "text": "The translation key \"Services\" is used to display the label for a section or category related to services in a UI setting. It appears as part of a settings tree structure and is likely used on a page that allows users to manage or configure their services. The exact location may vary, but it is commonly found on pages related to portal settings or configurations.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/index.js",
-      "line_number": 104,
+      "line_number": 106,
       "context": "clearAbortControllerArr();\n },\n },\n {\n id: \"services\",\n name: t(\"Settings:Services\"),\n content: <ServicesList getAIConfig={getAIConfig} />,\n onClick: () => {\n clearAbortControllerArr();\n },\n },",
       "module": "/packages/client"
     },

@@ -916,7 +916,6 @@
   "RemoveFromFavorites": "Видалити з вподобань",
   "RemoveFromList": "Видалити зі списку",
   "Rename": "Перейменувати",
-  "RenewSubscription": "Поновити підписку?",
   "RenewTheLicense": "Поновити ліцензію",
   "RepeatInvitation": "Повторити запрошення",
   "RequiredField": "Обов'язкове поле",
@@ -1557,8 +1556,6 @@
   "Usage": "Використання",
   "WalletBalance": "Баланс гаманця",
   "WalletTopUpRequired": "Потрібно поповнити: {{currency}}",
-  "ThirdPartyResourceDescription2": "Підключіться та зберігайте резервні копії в хмарні облікові записи, такі як Dropbox, Box, OneDrive або Google Drive.",
-  "ThirdPartyStorageDescription2": "Використовуйте сторонні сервіси для зберігання ваших резервних копій. Ідеально підходить для підключення зовнішніх платформ хмарного сховища.",
   "DownloadReportBtnText": "Завантажити звіт",
   "ReportSaveLocation": "Звіт буде збережено у {{sectionName}}"
 }

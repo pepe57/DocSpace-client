@@ -914,7 +914,6 @@
   "RemoveFromFavorites": "Odebrat z oblíbených",
   "RemoveFromList": "Odebrat ze seznamu",
   "Rename": "Přejmenovat",
-  "RenewSubscription": "Obnovit předplatné?",
   "RenewTheLicense": "```\nObnovit licenci\n```",
   "RepeatInvitation": "Zopakovat pozvání",
   "RequiredField": "Povinné pole",
@@ -1557,8 +1556,6 @@
   "Usage": "Použití",
   "WalletBalance": "Zůstatek peněženky",
   "WalletTopUpRequired": "Top-up je nutné: {{currency}}",
-  "ThirdPartyResourceDescription2": "Propojte a zálohujte data do cloudových účtů, jako jsou Dropbox, Box, OneDrive nebo Google Drive.",
-  "ThirdPartyStorageDescription2": "Používejte služby třetích stran pro ukládání záloh. Ideální pro připojení externích cloudových úložišť.",
   "DownloadReportBtnText": "Stáhnout zprávu",
   "ReportSaveLocation": "Zpráva bude uložena do {{sectionName}}"
 }

@@ -915,7 +915,6 @@
   "RemoveFromFavorites": "Usuń z ulubionych",
   "RemoveFromList": "Usuń z listy",
   "Rename": "Zmień nazwę",
-  "RenewSubscription": "Odnowić subskrypcję?",
   "RenewTheLicense": "Odnowić licencję",
   "RepeatInvitation": "Ponów zaproszenie",
   "RequiredField": "Pole wymagane",
@@ -1557,8 +1556,6 @@
   "Usage": "Wykorzystanie",
   "WalletBalance": "Saldo portfela",
   "WalletTopUpRequired": "Wymagane doładowanie: {{currency}}",
-  "ThirdPartyResourceDescription2": "Połącz i zapisuj kopie zapasowe w chmurze, takich jak Dropbox, Box, OneDrive lub Google Drive.",
-  "ThirdPartyStorageDescription2": "Korzystaj z zewnętrznych usług do przechowywania kopii zapasowych. Idealne do łączenia platform zewnętrznych magazynów w chmurze.",
   "DownloadReportBtnText": "Pobierz raport",
   "ReportSaveLocation": "Raport zostanie zapisany w {{sectionName}}"
 }

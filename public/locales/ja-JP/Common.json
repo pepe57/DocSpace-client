@@ -916,7 +916,6 @@
   "RemoveFromFavorites": "お気に入りから削除",
   "RemoveFromList": "リストからの削除",
   "Rename": "名前の変更",
-  "RenewSubscription": "サブスクリプションを更新しますか？",
   "RenewTheLicense": "ライセンスを更新する",
   "RepeatInvitation": "もう一度招待する",
   "RequiredField": "必須項目",
@@ -1557,8 +1556,6 @@
   "Usage": "使用法",
   "WalletBalance": "ウォレット残高",
   "WalletTopUpRequired": "チャージが必要です: {{currency}}",
-  "ThirdPartyResourceDescription2": "Dropbox、Box、OneDrive、またはGoogle Driveなどのクラウドアカウントに接続してバックアップを保存します。",
-  "ThirdPartyStorageDescription2": "バックアップを保存するためにサードパーティのサービスを使用します。外部クラウドストレージプラットフォームに接続するのに最適です。",
   "DownloadReportBtnText": "ダウンロードのレポート",
   "ReportSaveLocation": "レポートは {{sectionName}} に保存されます"
 }

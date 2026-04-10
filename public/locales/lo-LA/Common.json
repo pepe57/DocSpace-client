@@ -901,7 +901,6 @@
   "RemoveFromFavorites": "ລຶບອອກຈາກລາຍການທີ່ມັກ",
   "RemoveFromList": "ລຶບອອກຈາກລາຍການ",
   "Rename": "ປ່ຽນຊື່",
-  "RenewSubscription": "ຕໍ່ອາຍຸການສະໝັກສິດນຳໃຊ້ບໍ?",
   "RenewTheLicense": "ຕໍ່ອາຍຸໃບອະນຸຍາດ",
   "RepeatInvitation": "ເຊີນຊ້ຳ",
   "RequiredField": "ຟີວທີ່ຈຳເປັນ",
@@ -1557,8 +1556,6 @@
   "Usage": "ການນຳໃຊ້",
   "WalletBalance": "ດຸນເງິນກະເປົ໋າ",
   "WalletTopUpRequired": "ຕ້ອງການເຕີມ: {{currency}}",
-  "ThirdPartyResourceDescription2": "ເຊື່ອມຕໍ່ ແລະບັນທຶກຂໍ້ມູນສຳຮອງໃສ່ບັນຊີຄລາວເຊັ່ນ Dropbox, Box, OneDrive ຫຼື Google Drive.",
-  "ThirdPartyStorageDescription2": "ໃຊ້ບໍລິການພາກສ່ວນທີສາມເພື່ອເກັບຮັກສາການສໍາຮອງຂໍ້ມູນຂອງທ່ານ. ເຫມາະສໍາລັບການເຊື່ອມຕໍ່ເວທີການເກັບຮັກສາຟັງພາຍນອກ.",
   "DownloadReportBtnText": "ດາວໂຫລດບົດລາຍງານ",
   "ReportSaveLocation": "ບົດລາຍງານຈະຖືກບັນທຶກໄວ້ໃນ {{sectionName}}"
 }

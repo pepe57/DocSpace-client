@@ -915,7 +915,6 @@
   "RemoveFromFavorites": "Noņemt no izlases",
   "RemoveFromList": "Noņemt no saraksta",
   "Rename": "Pārdēvēt",
-  "RenewSubscription": "Vai atjaunot abonementu?",
   "RenewTheLicense": "Atjaunot licenziju",
   "RepeatInvitation": "Atkārtoti uzaicināt",
   "RequiredField": "Obligāts lauks",
@@ -1557,8 +1556,6 @@
   "Usage": "Iestatījumi",
   "WalletBalance": "Mānekļa saldo",
   "WalletTopUpRequired": "Iespējojams papildinājums: {{currency}}",
-  "ThirdPartyResourceDescription2": "Pievienojieties un saglabājiet rezerves kopijas mākoņa kontos, piemēram, Dropbox, Box, OneDrive vai Google Drive.",
-  "ThirdPartyStorageDescription2": "Izmantojiet trešo pušu pakalpojumus, lai saglabātu savus dubultniekus. Ideāli piemēroti, lai savienotu ārējus mākoņu krātuves platformas.",
   "DownloadReportBtnText": "Lejupielādēt pārskatu",
   "ReportSaveLocation": "Atskaite tiks saglabāta {{sectionName}}"
 }

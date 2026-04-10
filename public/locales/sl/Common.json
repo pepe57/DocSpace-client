@@ -915,7 +915,6 @@
   "RemoveFromFavorites": "Odstrani iz priljubljenih",
   "RemoveFromList": "Odstrani iz seznama",
   "Rename": "Preimenuj",
-  "RenewSubscription": "Želite obnoviti naročnino?",
   "RenewTheLicense": "Obnovite licenco",
   "RepeatInvitation": "Ponovi povabilo",
   "RequiredField": "Obvezno polje",
@@ -1457,7 +1456,7 @@
   "AIGetStartedStep3Description": "Vsak zahtev AI samodejno zniža kredite na podlagi funkcije in uporabljenega modela, kar zagotavlja, da so stroški v skladu z dejansko uporabo.",
   "AIGetStartedStep3Title": "Plačajte le za to, kar uporabljate",
   "AIModel": "Model",
-  "AIModelListTitle": "<0>Modeli</0>",
+  "AIModelListTitle": "Modeli",
   "AIModelPrice": "{{inputPrice}}/M vstopnih tokenov | {{outputPrice}}/M izstopnih tokenov",
   "AIModelsIntro": "Izberite pravi model za vaš zadatek — od prijaznega za plačilo do naprednega. <1>Cenik OpenRouter</1> je prikazan. Na uporabo se nanaša strošek storitve v višini 20 %.",
   "AIPricingAdditionalFeaturesTitle": "Dodatne funkcije",
@@ -1557,8 +1556,6 @@
   "Usage": "Uporaba",
   "WalletBalance": "Saldo denarnice",
   "WalletTopUpRequired": "Potrebno je nadgraditi: {{currency}}",
-  "ThirdPartyResourceDescription2": "Povežite in varnostno kopirajte na račune v oblaku, kot so Dropbox, Box, OneDrive ali Google Drive.",
-  "ThirdPartyStorageDescription2": "Uporabljajte storitve tretjih oseb za shranjevanje varnih kopij. Idealno za povezavo z zunanjimi platformami za shranjevanja v oblaku.",
   "DownloadReportBtnText": "Prenesi poročilo",
   "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}"
 }

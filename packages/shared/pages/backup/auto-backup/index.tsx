@@ -553,7 +553,7 @@ const AutomaticBackup = ({
                 "backup-description",
               )}
             >
-              {t("Common:ThirdPartyResourceDescription2")}
+              {t("Common:ThirdPartyResourceDescription")}
             </Text>
             {isCheckedThirdParty ? (
               <ThirdPartyModule

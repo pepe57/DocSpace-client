@@ -916,7 +916,6 @@
   "RemoveFromFavorites": "Удалить из избранного",
   "RemoveFromList": "Убрать из списка",
   "Rename": "Переименовать",
-  "RenewSubscription": "Продлить подписку?",
   "RenewTheLicense": "Возобновить лицензию",
   "RepeatInvitation": "Повторное приглашение",
   "RequiredField": "Обязательное поле",
@@ -1557,8 +1556,6 @@
   "Usage": "Использование",
   "WalletBalance": "Баланс кошелька",
   "WalletTopUpRequired": "Требуется пополнение: {{currency}}",
-  "ThirdPartyResourceDescription2": "Подключайте и сохраняйте резервные копии в облачных хранилищах: Dropbox, Box, OneDrive или Google Drive.",
-  "ThirdPartyStorageDescription2": "Используйте сторонние сервисы для хранения резервных копий. Идеально подходит для подключения внешних облачных хранилищ.",
   "DownloadReportBtnText": "Скачать отчет",
   "ReportSaveLocation": "Отчет будет сохранен в {{sectionName}}"
 }

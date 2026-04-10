@@ -915,7 +915,6 @@
   "RemoveFromFavorites": "Xóa khỏi danh sách yêu thích",
   "RemoveFromList": "Xóa khỏi danh sách",
   "Rename": "Đổi tên",
-  "RenewSubscription": "Gia hạn đăng ký?",
   "RenewTheLicense": "Gia hạn giấy phép",
   "RepeatInvitation": "Lặp lại lời mời",
   "RequiredField": "Trường bắt buộc",
@@ -1557,8 +1556,6 @@
   "Usage": "Cách sử dụng",
   "WalletBalance": "Số dư ví",
   "WalletTopUpRequired": "Nạp tiền: {{currency}}",
-  "ThirdPartyResourceDescription2": "Kết nối và lưu trữ bản sao lưu lên các tài khoản đám mây như Dropbox, Box, OneDrive hoặc Google Drive.",
-  "ThirdPartyStorageDescription2": "Sử dụng các dịch vụ của bên thứ ba để lưu trữ bản sao lưu của bạn. Lý tưởng để kết nối các nền tảng lưu trữ đám mây bên ngoài.",
   "DownloadReportBtnText": "Tải báo cáo xuống",
   "ReportSaveLocation": "Báo cáo sẽ được lưu vào {{sectionName}}"
 }

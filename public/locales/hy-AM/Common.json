@@ -908,7 +908,6 @@
   "RemoveFromFavorites": "Հեռացնել ընտրյալներից",
   "RemoveFromList": "Հեռացնել ցանկից",
   "Rename": "Վերանվանել",
-  "RenewSubscription": "Թարմացնե՞լ բաժանորդագրությունը:",
   "RenewTheLicense": "Թարմացնել լիցենզիան",
   "RepeatInvitation": "Կրկնել հրավերը",
   "RequiredField": "Պարտադիր դաշտ",
@@ -1557,8 +1556,6 @@
   "Usage": "Օգտագործում",
   "WalletBalance": "Հաշվի մնացորդ",
   "WalletTopUpRequired": "Պահանջվում է լիցքավորում՝ {{currency}}",
-  "ThirdPartyResourceDescription2": "Միացրեք և պահեք պահուստները ամպային հաշիվներում, օրինակ՝ Dropbox, Box, OneDrive կամ Google Drive։",
-  "ThirdPartyStorageDescription2": "Օգտվեք երրորդ կողմի ծառայություններից ձեր պահուստները պահպանելու համար։ Հարմար է արտաքին ամպային պահուստներ միանալու համար։",
   "DownloadReportBtnText": "Ներբեռնել զեկույցը",
   "ReportSaveLocation": "Հաշվետվությունը կպահվի {{sectionName}}-ում"
 }

@@ -592,7 +592,7 @@ const ManualBackup = ({
         <Text
           className={classNames(styles.backupDescription, "backup-description")}
         >
-          {t("Common:ThirdPartyResourceDescription2")}
+          {t("Common:ThirdPartyResourceDescription")}
         </Text>
         {isCheckedThirdParty ? (
           <ThirdPartyModule

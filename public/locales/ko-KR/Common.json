@@ -916,7 +916,6 @@
   "RemoveFromFavorites": "즐겨 찾기에서 제거",
   "RemoveFromList": "목록에서 제거",
   "Rename": "이름 변경",
-  "RenewSubscription": "구독을 갱신하시겠습니까?",
   "RenewTheLicense": "라이선스 갱신",
   "RepeatInvitation": "초대 반복",
   "RequiredField": "필수 항목입니다",
@@ -1557,8 +1556,6 @@
   "Usage": "사용법",
   "WalletBalance": "지갑 잔액",
   "WalletTopUpRequired": "충전 필요: {{currency}}",
-  "ThirdPartyResourceDescription2": "Dropbox, Box, OneDrive 또는 Google Drive와 같은 클라우드 계정에 연결하고 백업을 저장하세요.",
-  "ThirdPartyStorageDescription2": "세 번째 서비스(third-party services)를 사용하여 백업을 저장하세요. 외부 클라우드 스토리지 플랫폼을 연결하는 데 적합합니다.",
   "DownloadReportBtnText": "보고서 다운로드",
   "ReportSaveLocation": "보고서가 {{sectionName}}(으)로 저장됩니다"
 }

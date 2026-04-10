@@ -922,7 +922,6 @@
   "RemoveFromFavorites": "Remove from favorites",
   "RemoveFromList": "Remove from list",
   "Rename": "Rename",
-  "RenewSubscription": "Renew subscription?",
   "RenewTheLicense": "Renew the license",
   "RepeatInvitation": "Repeat invitation",
   "RequiredField": "Required field",
@@ -1557,8 +1556,6 @@
   "Usage": "Usage",
   "WalletBalance": "Wallet balance",
   "WalletTopUpRequired": "Top up required: {{currency}}",
-  "ThirdPartyResourceDescription2": "Connect and save backups to cloud accounts like Dropbox, Box, OneDrive, or Google Drive.",
-  "ThirdPartyStorageDescription2": "Use third-party services to store your backups. Ideal for connecting external cloud storage platforms.",
   "DownloadReportBtnText": "Download report",
   "ReportSaveLocation": "The report will be saved to {{sectionName}}"
 }

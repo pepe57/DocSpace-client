@@ -915,7 +915,6 @@
   "RemoveFromFavorites": "Remover dos favoritos",
   "RemoveFromList": "Remover da lista",
   "Rename": "Renomear",
-  "RenewSubscription": "Renovar a subscrição?",
   "RenewTheLicense": "Renovar a licença",
   "RepeatInvitation": "Repetir convite",
   "RequiredField": "Campo obrigatório",
@@ -1557,8 +1556,6 @@
   "Usage": "Uso",
   "WalletBalance": "Saldo da carteira",
   "WalletTopUpRequired": "Recarga necessária: {{currency}}",
-  "ThirdPartyResourceDescription2": "Conecte e salve backups para contas na nuvem como Dropbox, Box, OneDrive ou Google Drive.",
-  "ThirdPartyStorageDescription2": "Use serviços de terceiros para armazenar seus backups. Ideal para conectar plataformas de armazenamento em nuvem externas.",
   "DownloadReportBtnText": "Transferir o relatório",
   "ReportSaveLocation": "O relatório será salvo em {{sectionName}}"
 }

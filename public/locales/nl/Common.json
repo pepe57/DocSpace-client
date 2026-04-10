@@ -914,7 +914,6 @@
   "RemoveFromFavorites": "Verwijderd uit favorieten",
   "RemoveFromList": "Verwijder uit de lijst",
   "Rename": "Hernoemen",
-  "RenewSubscription": "Abonnement verlengen?",
   "RenewTheLicense": "Verleng de licentie",
   "RepeatInvitation": "Uitnodiging herhalen",
   "RequiredField": "Verplicht veld",
@@ -1557,8 +1556,6 @@
   "Usage": "Gebruik",
   "WalletBalance": "Portemonnee saldo",
   "WalletTopUpRequired": "Bijvullen vereist: {{currency}}",
-  "ThirdPartyResourceDescription2": "Maak verbinding en bewaar back-ups naar cloud accounts zoals Dropbox, Box, OneDrive of Google Drive.",
-  "ThirdPartyStorageDescription2": "Gebruik externe services om uw backups op te slaan. Ideaal voor het verbinden van externe cloud storage platforms.",
   "DownloadReportBtnText": "Download verslag",
   "ReportSaveLocation": "Het rapport wordt opgeslagen in {{sectionName}}"
 }

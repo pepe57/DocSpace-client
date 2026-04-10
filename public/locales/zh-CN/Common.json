@@ -916,7 +916,6 @@
   "RemoveFromFavorites": "从收藏中移除",
   "RemoveFromList": "从列表中移除",
   "Rename": "重命名",
-  "RenewSubscription": "是否续订？",
   "RenewTheLicense": "续订许可证",
   "RepeatInvitation": "重复邀请",
   "RequiredField": "必要字段",
@@ -1557,8 +1556,6 @@
   "Usage": "用法",
   "WalletBalance": "钱包余额",
   "WalletTopUpRequired": "充值所需：{{currency}}",
-  "ThirdPartyResourceDescription2": "连接并保存备份到 Dropbox、Box、OneDrive 或 Google Drive 等云帐户。",
-  "ThirdPartyStorageDescription2": "使用第三方服务存储备份。此功能非常适合连接外部云存储平台。",
   "DownloadReportBtnText": "下载报告",
   "ReportSaveLocation": "报告将保存至{{sectionName}}"
 }

@@ -911,7 +911,6 @@
   "RemoveFromFavorites": "Κατάργηση από τα αγαπημένα",
   "RemoveFromList": "Κατάργηση από τη λίστα",
   "Rename": "Μετονομασία",
-  "RenewSubscription": "Ανανέωση συνδρομής;",
   "RepeatInvitation": "Επανάληψη πρόσκλησης",
   "RequiredField": "Υποχρεωτικό πεδίο",
   "ResetAndStartFilling": "Επαναφορά και έναρξη συμπλήρωσης",
@@ -1451,7 +1450,7 @@
   "AIAgentsDescription": "Δημιουργήστε έναν εξατομικευμένο βοηθό για την ομάδα σας προσθέτοντας μια βάση γνώσης, επιλέγοντας το ιδανικό μοντέλο και συνδέοντας ένα {{mcpServer}}.",
   "AIBalance": "AI ισορροπία",
   "AIGetStartedStep1Description": "Μεταφέρετε πιστώσεις από το πορτοφόλι {{productName}} στο {{organizationName}} AI. Εάν το πορτοφόλι σας είναι κενό, συμπληρώστε πρώτα. Οι πιστώσεις δεν λήγουν ποτέ.",
-  "AIGetStartedStep1Title": "Προσθήκη κεφαλαίων στο <b>AI</b> σας",
+  "AIGetStartedStep1Title": "Προσθήκη κεφαλαίων στο AI σας",
   "AIGetStartedStep2Description": "Μόλις προσθέσετε credits, όλα τα χαρακτηριστικά AI θα είναι άμεσα διαθέσιμα. Δεν απαιτείται επιπλέον ρύθμιση.",
   "AIGetStartedStep2Title": "Πρόσβαση σε όλες τις λειτουργίες Τεχνητής Νοημοσύνης",
   "AIGetStartedStep3Description": "Κάθε αίτημα AI αποδίδει αυτόματα πιστώσεις βάσει της λειτουργίας και του μοντέλου που χρησιμοποιούνται, διασφαλίζοντας ότι οι χρεώσεις αντιστοιχούν στην πραγματική χρήση.",
@@ -1557,8 +1556,6 @@
   "Usage": "Χρήση",
   "WalletBalance": "Υπόλοιπο Πορτοφολιού",
   "WalletTopUpRequired": "Απαιτείται συμπλήρωση: {{currency}}",
-  "ThirdPartyResourceDescription2": "Συνδέστε και αποθηκεύστε αντίγραφα ασφαλείας σε λογαριασμούς cloud όπως Dropbox, Box, OneDrive ή Google Drive.",
-  "ThirdPartyStorageDescription2": "Χρησιμοποιήστε υπηρεσίες τρίτων για να αποθηκεύσετε τα αντίγραφα ασφαλείας σας. Ιδανικό για τη σύνδεση εξωτερικών πλατφορμών αποθήκευσης στο cloud.",
   "DownloadReportBtnText": "Λήψη αναφοράς",
   "ReportSaveLocation": "Η αναφορά θα αποθηκευτεί στο {{sectionName}}"
 }

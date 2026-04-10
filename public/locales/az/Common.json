@@ -913,7 +913,6 @@
   "RemoveFromFavorites": "Favoritlərdən sil",
   "RemoveFromList": "Siyahıdan sil",
   "Rename": "Adını dəyiş",
-  "RenewSubscription": "Abunəlik yenilənsin?",
   "RenewTheLicense": "Lisenziyanı yeniləyin",
   "RepeatInvitation": "Dəvəti təkrarlayın",
   "RequiredField": "Tələb olunan sahə",
@@ -1557,8 +1556,6 @@
   "Usage": "İstifadə",
   "WalletBalance": "Cüzdan balans",
   "WalletTopUpRequired": "Yeniləmə tələb olunur: {{currency}}",
-  "ThirdPartyResourceDescription2": "Dropbox, Box, OneDrive və ya Google Drive kimi bulud hesablarına qoşulub ehtiyat növbəsizləri saxlayın.",
-  "ThirdPartyStorageDescription2": "Sizə məlumatlarınızı saxlamaq üçün üçüncü tərəf xidmətlərindən istifadə edin. Xarici bulud saxlama platformalarını birləşdirmək üçün idealdır.",
   "DownloadReportBtnText": "Hesabatı yükləyin",
   "ReportSaveLocation": "Hesabat {{sectionName}} bölməsində qeyd ediləcək"
 }

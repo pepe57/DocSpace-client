@@ -916,7 +916,6 @@
   "RemoveFromFavorites": "Odstrániť z obľúbených",
   "RemoveFromList": "Odstrániť zo zoznamu",
   "Rename": "Premenovať",
-  "RenewSubscription": "Obnoviť predplatné?",
   "RenewTheLicense": "Obnoviť licenci",
   "RepeatInvitation": "Opakovať pozvanie",
   "RequiredField": "Požadované pole",
@@ -1557,8 +1556,6 @@
   "Usage": "Použitie",
   "WalletBalance": "Vyvážený stav portfelya",
   "WalletTopUpRequired": "Je potrebné doplniť: {{currency}}",
-  "ThirdPartyResourceDescription2": "Pripojte sa a zálohujte dáta do cloudových účtov ako Dropbox, Box, OneDrive alebo Google Drive.",
-  "ThirdPartyStorageDescription2": "Používajte služby tretích strán na ukladanie záloh. Ideálne na pripojenie externých cloudových úložiskových platforiem.",
   "DownloadReportBtnText": "Stiahnuť správu",
   "ReportSaveLocation": "Správa bude uložená do {{sectionName}}"
 }

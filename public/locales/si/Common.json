@@ -907,7 +907,6 @@
   "RemoveFromFavorites": "ප්‍රියතමයන්ගෙන් ඉවත් කරන්න",
   "RemoveFromList": "ලැයිස්තුවෙන් ඉවත් කරන්න",
   "Rename": "නම් කරන්න",
-  "RenewSubscription": "දායකත්‍වය අළුත් කරන්න?",
   "RenewTheLicense": "බලපත්‍රය අලුත් කරන්න",
   "RepeatInvitation": "ආරාධනය නැවතත්",
   "RequiredField": "වුවමනා ක්‍ෂේත්‍රයකි",
@@ -1557,8 +1556,6 @@
   "Usage": "භාවිතය",
   "WalletBalance": "පොට්ෆෝලියෝ ශේෂය",
   "WalletTopUpRequired": "අවශ්‍ය අලුත් කිරීම: {{currency}}",
-  "ThirdPartyResourceDescription2": "Dropbox, Box, OneDrive, හෝ Google Drive වැනි වලාකුළු ගිණුම් වෙත උපස්ථ සම්බන්ධ කර සුරකින්න.",
-  "ThirdPartyStorageDescription2": "ඔබගේ උපස්ථ ගබඩා කිරීමට තෙවන පාර්ශවීය සේවාවන් භාවිතා කරන්න. බාහිර වලාකුළු ගබඩා වේදිකා සම්බන්ධ කිරීම සඳහා කදිමයි.",
   "DownloadReportBtnText": "වාර්තාව බාගන්න",
   "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}"
 }
