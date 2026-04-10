@@ -56,7 +56,7 @@ const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
     if (!agentId) {
       frameCallEvent({
         event: "onAppError",
-        data: { message: "agentId is required" },
+        data: "agentId is required",
       });
       return;
     }
@@ -79,7 +79,7 @@ const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
         console.error("Failed to fetch file info:", err);
         frameCallEvent({
           event: "onAppError",
-          data: { message: String(err) },
+          data: String(err),
         });
       })
       .finally(() => {
