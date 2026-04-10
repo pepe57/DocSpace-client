@@ -3,7 +3,7 @@
   position: absolute;
   inset: 0;
   z-index: 400;
-  background-color: var(--color-background);
+  background-color: var(--mobile-stub-bg, var(--color-background));
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -30,13 +30,13 @@
   font-size: 19px;
   font-weight: 600;
   line-height: 26px;
-  color: var(--color-text-primary);
+  color: var(--mobile-stub-title-color, var(--color-text-primary));
   margin-bottom: 8px;
 }
 
 .description {
   font-size: 13px;
   line-height: 20px;
-  color: var(--color-text-secondary);
+  color: var(--mobile-stub-description-color, var(--color-text-secondary));
   max-width: 320px;
 }
