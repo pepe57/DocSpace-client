@@ -1,4 +1,9 @@
 .floatingButton {
+  --ai-chat-button-bg-default: var(
+    --ai-chat-button-bg,
+    var(--color-scheme-main-buttons)
+  );
+
   position: absolute;
   bottom: 24px;
   z-index: 100;
@@ -6,7 +11,7 @@
   height: 48px;
   border-radius: 50%;
   border: none;
-  background: var(--color-scheme-main-buttons);
+  background: var(--ai-chat-button-bg-default);
   color: var(--color-scheme-text-buttons);
   cursor: pointer;
   display: flex;
@@ -49,3 +54,4 @@
     }
   }
 }
+
