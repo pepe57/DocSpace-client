@@ -69,8 +69,8 @@ describe("<MoreLoginModal />", () => {
 
   it("renders all provided social providers", () => {
     render(<MoreLoginModal {...baseProps} />);
-    expect(screen.getByTexgetBrandName("ProviderGoogle")).toBeInTheDocument();
-    expect(screen.getByTexgetBrandName("ProviderFacebook")).toBeInTheDocument();
+    expect(screen.getByText(getBrandName("ProviderGoogle"))).toBeInTheDocument();
+    expect(screen.getByText(getBrandName("ProviderFacebook"))).toBeInTheDocument();
   });
 
   it("calls onSocialLoginClick when click on provider", () => {
