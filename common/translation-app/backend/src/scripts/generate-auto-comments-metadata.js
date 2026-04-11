@@ -290,6 +290,7 @@ async function generateAutoComment(projectName) {
 
               keyMeta.comment.text = comment;
               keyMeta.comment.is_auto = true;
+              keyMeta.comment.model = MODEL;
               const now = new Date().toISOString();
               keyMeta.comment.updated_at = now;
               keyMeta.updated_at = now;
