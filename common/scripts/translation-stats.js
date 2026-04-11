@@ -158,7 +158,8 @@ async function langDirSize(localesDir, lang) {
 async function loadMetaIssues(localesDir) {
   // .meta lives inside the localesDir
   const metaDir = path.join(localesDir, ".meta");
-  const result = {}; // lang → spellIssueCount
+  // result[lang] = { total, byType: { type → count } }
+  const result = {};
 
   let namespaceDirs;
   try {
@@ -185,8 +186,13 @@ async function loadMetaIssues(localesDir) {
             const meta = JSON.parse(raw);
             for (const [lang, lm] of Object.entries(meta.languages || {})) {
               if (!lm) continue;
-              if (Array.isArray(lm.ai_spell_check_issues) && lm.ai_spell_check_issues.length > 0) {
-                result[lang] = (result[lang] || 0) + 1;
+              const issues = lm.ai_spell_check_issues;
+              if (!Array.isArray(issues) || issues.length === 0) continue;
+              if (!result[lang]) result[lang] = { total: 0, byType: {} };
+              result[lang].total += issues.length;
+              for (const issue of issues) {
+                const t = issue.type || "unknown";
+                result[lang].byType[t] = (result[lang].byType[t] || 0) + 1;
               }
             }
           } catch {
@@ -253,6 +259,7 @@ async function analyzePackage(pkg) {
         }
       }
 
+      const langMeta = metaIssues[lang] || { total: 0, byType: {} };
       return {
         lang,
         translatedKeys,
@@ -260,7 +267,8 @@ async function analyzePackage(pkg) {
         missingKeys,
         translatedPct: pct(translatedKeys, totalKeys),
         fileSizeBytes,
-        spellIssues: metaIssues[lang] || 0,
+        spellIssues: langMeta.total,
+        spellByType: langMeta.byType,
       };
     })
   );
@@ -392,7 +400,7 @@ async function main() {
     // Aggregate per language across all packages
     const langAgg = {};
     for (const lang of filteredLangs) {
-      langAgg[lang] = { lang, translatedKeys: 0, sameAsEn: 0, missingKeys: 0, fileSizeBytes: 0, spellIssues: 0 };
+      langAgg[lang] = { lang, translatedKeys: 0, sameAsEn: 0, missingKeys: 0, fileSizeBytes: 0, spellIssues: 0, spellByType: {} };
       for (const pkg of results) {
         const ls = pkg.langStats.find((s) => s.lang === lang);
         if (!ls) continue;
@@ -401,6 +409,9 @@ async function main() {
         langAgg[lang].missingKeys += ls.missingKeys;
         langAgg[lang].fileSizeBytes += ls.fileSizeBytes;
         langAgg[lang].spellIssues += ls.spellIssues;
+        for (const [t, c] of Object.entries(ls.spellByType || {})) {
+          langAgg[lang].spellByType[t] = (langAgg[lang].spellByType[t] || 0) + c;
+        }
       }
       langAgg[lang].translatedPct = pct(langAgg[lang].translatedKeys, grandTotalKeys);
     }
@@ -493,7 +504,7 @@ async function main() {
   console.log("");
 
   const aggRows = filteredLangs.map((lang) => {
-    const agg = { lang, translatedKeys: 0, sameAsEn: 0, missingKeys: 0, fileSizeBytes: 0, spellIssues: 0 };
+    const agg = { lang, translatedKeys: 0, sameAsEn: 0, missingKeys: 0, fileSizeBytes: 0, spellIssues: 0, spellByType: {} };
     for (const pkg of results) {
       const ls = pkg.langStats.find((s) => s.lang === lang);
       if (!ls) continue;
@@ -502,6 +513,9 @@ async function main() {
       agg.missingKeys += ls.missingKeys;
       agg.fileSizeBytes += ls.fileSizeBytes;
       agg.spellIssues += ls.spellIssues;
+      for (const [t, c] of Object.entries(ls.spellByType || {})) {
+        agg.spellByType[t] = (agg.spellByType[t] || 0) + c;
+      }
     }
     agg.translatedPct = pct(agg.translatedKeys, grandTotalKeys);
     return agg;
@@ -517,6 +531,68 @@ async function main() {
   console.log(`  Average coverage   : ${colorize(String(avgPct) + "%", pctColor(avgPct))}`);
 
   renderTable(sortedAgg, grandTotalKeys, { title: "All packages — aggregated by language" });
+
+  // ─── Issues summary (if any) ────────────────────────────────────────────
+  if (!skipMeta) {
+    const totalIssues = aggRows.reduce((s, r) => s + r.spellIssues, 0);
+    if (totalIssues > 0) {
+      // Aggregate by type across all languages
+      const globalByType = {};
+      for (const r of aggRows) {
+        for (const [t, c] of Object.entries(r.spellByType)) {
+          globalByType[t] = (globalByType[t] || 0) + c;
+        }
+      }
+      const sortedTypes = Object.entries(globalByType).sort((a, b) => b[1] - a[1]);
+
+      console.log(`\n  ${colorize("SPELL-CHECK ISSUES SUMMARY", "bold")}`);
+      console.log("  " + colorize("─".repeat(50), "dim"));
+      console.log(`  Total issues: ${colorize(String(totalIssues), "yellow")}`);
+      console.log("");
+
+      // By type
+      const COL_TYPE = 26;
+      const COL_CNT = 6;
+      console.log(
+        "  " +
+        colorize(padEnd("Issue type", COL_TYPE), "bold") + "  " +
+        colorize(padStart("Count", COL_CNT), "bold")
+      );
+      console.log("  " + colorize("─".repeat(COL_TYPE + COL_CNT + 2), "dim"));
+      for (const [type, count] of sortedTypes) {
+        console.log(
+          "  " +
+          padEnd(type, COL_TYPE) + "  " +
+          colorize(padStart(String(count), COL_CNT), "yellow")
+        );
+      }
+      console.log("  " + colorize("─".repeat(COL_TYPE + COL_CNT + 2), "dim"));
+
+      // Top languages by issues
+      const langsWithIssues = aggRows
+        .filter((r) => r.spellIssues > 0)
+        .sort((a, b) => b.spellIssues - a.spellIssues);
+
+      if (langsWithIssues.length > 0) {
+        console.log(`\n  ${colorize("Issues by language:", "bold")}`);
+        for (const r of langsWithIssues) {
+          const types = Object.entries(r.spellByType)
+            .sort((a, b) => b[1] - a[1])
+            .map(([t, c]) => `${t}:${c}`)
+            .join(", ");
+          console.log(
+            "  " +
+            padEnd(r.lang, 14) +
+            colorize(padStart(String(r.spellIssues), 4), "yellow") +
+            "  " +
+            colorize(types, "dim")
+          );
+        }
+      }
+    } else {
+      console.log(`\n  ${colorize("No spell-check issues found in .meta files.", "green")}`);
+    }
+  }
 
   printLegend(true);
 }
