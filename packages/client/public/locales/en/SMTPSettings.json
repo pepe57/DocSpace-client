@@ -2,6 +2,7 @@
   "AuthViaNTLM": "Auth via NTLM",
   "EnableSSL": "Enable SSL",
   "EnterDomain": "Enter domain",
+  "EnterEmail": "",
   "EnterLogin": "Enter login",
   "EnterPort": "Enter port",
   "Host": "Host",
