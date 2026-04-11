@@ -42,6 +42,11 @@ const MODEL = modelArg
     || process.env.OLLAMA_MODEL
     || "gemma4:latest";
 
+console.log(`Model: ${MODEL}`);
+if (!openRouterConfig.apiKey && !modelArg) {
+  console.log("Note: OPENROUTER_API_KEY not set — using Ollama. Set it in .env to use OpenRouter.");
+}
+
 /**
  * Generates a comment for a translation key using Ollama with retry mechanism
  * @param {string} keyPath - The key path
