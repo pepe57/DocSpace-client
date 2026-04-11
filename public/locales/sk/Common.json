@@ -1493,5 +1493,11 @@
   "WalletBalance": "Vyvážený stav portfelya",
   "WalletTopUpRequired": "Je potrebné doplniť: {{currency}}",
   "DownloadReportBtnText": "Stiahnuť správu",
-  "ReportSaveLocation": "Správa bude uložená do {{sectionName}}"
+  "ReportSaveLocation": "Správa bude uložená do {{sectionName}}",
+  "SalesDepartmentRequest": "Žiadosť obchodného oddelenia",
+  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím.",
+  "YourName": "Vaše meno",
+  "RequestDetails": "Tu popíšte podrobnosti vašej žiadosti.",
+  "EnterEmail": "Zadajte email",
+  "SuccessfullySentMessage": "Vaša správa bola úspešne odoslaná. Obchodné oddelenie vás bude kontaktovať."
 }

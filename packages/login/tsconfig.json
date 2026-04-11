@@ -16,7 +16,7 @@
     "esModuleInterop": true,
     "module": "ESNext",
     "moduleResolution": "node",
-    "rootDir": "./",
+    "rootDir": "../../",
     "baseUrl": "./",
     "resolveJsonModule": true,
     "isolatedModules": true,

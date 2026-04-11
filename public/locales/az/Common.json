@@ -1493,5 +1493,11 @@
   "WalletBalance": "Cüzdan balans",
   "WalletTopUpRequired": "Yeniləmə tələb olunur: {{currency}}",
   "DownloadReportBtnText": "Hesabatı yükləyin",
-  "ReportSaveLocation": "Hesabat {{sectionName}} bölməsində qeyd ediləcək"
+  "ReportSaveLocation": "Hesabat {{sectionName}} bölməsində qeyd ediləcək",
+  "SalesDepartmentRequest": "Satış şöbəsinə müraciət",
+  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq.",
+  "YourName": "Adınız",
+  "RequestDetails": "Lütfən, sorğunuzun təfərrüatlarını burada təsvir edin.",
+  "EnterEmail": "E-poçtu daxil edin",
+  "SuccessfullySentMessage": "Mesajınız uğurla göndərildi. Satış departamenti sizinlə əlaqə saxlayacaq."
 }

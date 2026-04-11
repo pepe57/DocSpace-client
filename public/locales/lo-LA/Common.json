@@ -1493,5 +1493,11 @@
   "WalletBalance": "ດຸນເງິນກະເປົ໋າ",
   "WalletTopUpRequired": "ຕ້ອງການເຕີມ: {{currency}}",
   "DownloadReportBtnText": "ດາວໂຫລດບົດລາຍງານ",
-  "ReportSaveLocation": "ບົດລາຍງານຈະຖືກບັນທຶກໄວ້ໃນ {{sectionName}}"
+  "ReportSaveLocation": "ບົດລາຍງານຈະຖືກບັນທຶກໄວ້ໃນ {{sectionName}}",
+  "SalesDepartmentRequest": "ຄໍາ​ຮ້ອງ​ສະ​ຫມັກ​ພະ​ແນກ​ການ​ຂາຍ​",
+  "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ.",
+  "YourName": "ຊື່​ຂອງ​ເຈົ້າ",
+  "RequestDetails": "ກະລຸນາອະທິບາຍລາຍລະອຽດການຮ້ອງຂໍຂອງທ່ານທີ່ນີ້.",
+  "EnterEmail": "ໃສ່ອີເມວ",
+  "SuccessfullySentMessage": "ຂໍ້ຄວາມຂອງທ່ານໄດ້ຖືກສົ່ງໄປແລ້ວ. ທ່ານຈະໄດ້ຮັບການຕິດຕໍ່ໂດຍພະແນກການຂາຍ."
 }

@@ -1493,5 +1493,11 @@
   "WalletBalance": "Mānekļa saldo",
   "WalletTopUpRequired": "Iespējojams papildinājums: {{currency}}",
   "DownloadReportBtnText": "Lejupielādēt pārskatu",
-  "ReportSaveLocation": "Atskaite tiks saglabāta {{sectionName}}"
+  "ReportSaveLocation": "Atskaite tiks saglabāta {{sectionName}}",
+  "SalesDepartmentRequest": "Pārdošanas nodaļas pieprasījums",
+  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides.",
+  "YourName": "Jūsu vārds, uzvārds",
+  "RequestDetails": "Lūdzu, aprakstiet sīkāku informāciju par savu pieprasījumu šeit.",
+  "EnterEmail": "Ievadiet e-pastu",
+  "SuccessfullySentMessage": "Jūsu ziņojums tika veiksmīgi nosūtīts! Ar jums sazināsies Pārdošanas nodaļa."
 }

@@ -1493,5 +1493,11 @@
   "WalletBalance": "Saldo novčanika",
   "WalletTopUpRequired": "Potrebno dopunjavanje: {{currency}}",
   "DownloadReportBtnText": "Preuzmi izveštaj",
-  "ReportSaveLocation": "Izveštaj će biti sačuvan u {{sectionName}}"
+  "ReportSaveLocation": "Izveštaj će biti sačuvan u {{sectionName}}",
+  "SalesDepartmentRequest": "Zahtev odeljenja prodaje",
+  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva.",
+  "YourName": "Vaše ime",
+  "RequestDetails": "Molimo opišite detalje vašeg zahteva ovde.",
+  "EnterEmail": "Unesi email",
+  "SuccessfullySentMessage": "Vaša poruka je uspešno poslata. Bićete kontaktirani od strane Odeljenja prodaje."
 }

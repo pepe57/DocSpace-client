@@ -1493,5 +1493,11 @@
   "WalletBalance": "Số dư ví",
   "WalletTopUpRequired": "Nạp tiền: {{currency}}",
   "DownloadReportBtnText": "Tải báo cáo xuống",
-  "ReportSaveLocation": "Báo cáo sẽ được lưu vào {{sectionName}}"
+  "ReportSaveLocation": "Báo cáo sẽ được lưu vào {{sectionName}}",
+  "SalesDepartmentRequest": "Yêu cầu phòng kinh doanh",
+  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi bạn gửi yêu cầu.",
+  "YourName": "Tên của bạn",
+  "RequestDetails": "Xin vui lòng mô tả chi tiết yêu cầu của bạn tại đây.",
+  "EnterEmail": "Nhập địa chỉ email",
+  "SuccessfullySentMessage": "Tin nhắn của bạn đã được gửi đi thành công. Bộ  phận Kinh doanh sẽ liên hệ với bạn."
 }

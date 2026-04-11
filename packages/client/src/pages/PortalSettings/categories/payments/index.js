@@ -55,6 +55,7 @@ const PaymentsPage = (props) => {
     logoText,
     walletHelpUrl,
     getAIConfig,
+    openOnNewPage,
   } = props;
   const location = useLocation();
   const tabIds = ["portal-payments", "payment-method", "wallet", "services"];
@@ -70,9 +71,10 @@ const PaymentsPage = (props) => {
       logoText,
       walletHelpUrl,
       user,
+      openOnNewPage,
       routes: PAYMENT_ROUTES,
     }),
-    [language, logoText, walletHelpUrl, user],
+    [language, logoText, walletHelpUrl, user, openOnNewPage],
   );
 
   const data = [
@@ -96,7 +98,7 @@ const PaymentsPage = (props) => {
     },
     {
       id: "wallet",
-      name: t("Wallet"),
+      name: t("Common:Wallet"),
       content: <Wallet />,
       onClick: () => {
         clearAbortControllerArr();
@@ -143,33 +145,37 @@ const PaymentsPage = (props) => {
   );
 };
 
-export const Component = inject(({ settingsStore, authStore, userStore }) => {
-  const {
-    standalone,
-    currentDeviceType,
-    clearAbortControllerArr,
-    logoText,
-    walletHelpUrl,
-    getAIConfig,
-  } = settingsStore;
+export const Component = inject(
+  ({ settingsStore, authStore, userStore, filesSettingsStore }) => {
+    const {
+      standalone,
+      currentDeviceType,
+      clearAbortControllerArr,
+      logoText,
+      walletHelpUrl,
+      getAIConfig,
+    } = settingsStore;
 
-  const { user } = userStore;
+    const { user } = userStore;
+    const { openOnNewPage } = filesSettingsStore;
 
-  return {
-    standalone,
-    currentDeviceType,
-    clearAbortControllerArr,
-    logoText,
-    walletHelpUrl,
-    getAIConfig,
-    language: authStore?.language,
-    user: user
-      ? {
-          id: user.id,
-          email: user.email,
-          isOwner: user.isOwner,
-        }
-      : undefined,
-  };
-})(observer(PaymentsPage));
+    return {
+      standalone,
+      currentDeviceType,
+      clearAbortControllerArr,
+      logoText,
+      walletHelpUrl,
+      getAIConfig,
+      openOnNewPage,
+      language: authStore?.language,
+      user: user
+        ? {
+            id: user.id,
+            email: user.email,
+            isOwner: user.isOwner,
+          }
+        : undefined,
+    };
+  },
+)(observer(PaymentsPage));
 

@@ -1493,5 +1493,11 @@
   "WalletBalance": "ウォレット残高",
   "WalletTopUpRequired": "チャージが必要です: {{currency}}",
   "DownloadReportBtnText": "ダウンロードのレポート",
-  "ReportSaveLocation": "レポートは {{sectionName}} に保存されます"
+  "ReportSaveLocation": "レポートは {{sectionName}} に保存されます",
+  "SalesDepartmentRequest": "営業部への依頼",
+  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。",
+  "YourName": "お名前",
+  "RequestDetails": "ご要望内容をこちらにご記入ください。",
+  "EnterEmail": "メールアドレスを入力",
+  "SuccessfullySentMessage": "メッセージは正常に送信されました。営業部よりご連絡させていただきます。"
 }

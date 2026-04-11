@@ -1493,5 +1493,11 @@
   "WalletBalance": "Saldo denarnice",
   "WalletTopUpRequired": "Potrebno je nadgraditi: {{currency}}",
   "DownloadReportBtnText": "Prenesi poročilo",
-  "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}"
+  "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}",
+  "SalesDepartmentRequest": "Zahteva prodajnega oddelka",
+  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala.",
+  "YourName": "Vaše ime",
+  "RequestDetails": "Tukaj opiši podrobnosti svoje zahteve.",
+  "EnterEmail": "Vnesi email",
+  "SuccessfullySentMessage": "Vaše sporočilo je bilo uspešno poslano. Kontaktirali vas bodo iz oddelka prodaje."
 }

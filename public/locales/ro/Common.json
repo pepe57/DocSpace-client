@@ -1493,5 +1493,11 @@
   "WalletBalance": "Soldul portofelului",
   "WalletTopUpRequired": "Este necesară o reîncărcare: {{currency}}",
   "DownloadReportBtnText": "Descărcare raport",
-  "ReportSaveLocation": "Raportul va fi salvat în {{sectionName}}"
+  "ReportSaveLocation": "Raportul va fi salvat în {{sectionName}}",
+  "SalesDepartmentRequest": "Solicitarea către departamentul de vânzări",
+  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
+  "YourName": "Numele dvs.",
+  "RequestDetails": "Descrieţi detaliile solicitării dvs. aici.",
+  "EnterEmail": "Introduceți adresa de e-mail",
+  "SuccessfullySentMessage": "Mesajul a fost trimis cu succes. Veţi fi contactat de Departamentul Vânzări."
 }

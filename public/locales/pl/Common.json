@@ -1493,5 +1493,11 @@
   "WalletBalance": "Saldo portfela",
   "WalletTopUpRequired": "Wymagane doładowanie: {{currency}}",
   "DownloadReportBtnText": "Pobierz raport",
-  "ReportSaveLocation": "Raport zostanie zapisany w {{sectionName}}"
+  "ReportSaveLocation": "Raport zostanie zapisany w {{sectionName}}",
+  "SalesDepartmentRequest": "Prośba do działu sprzedaży",
+  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby.",
+  "YourName": "Jak się nazywasz",
+  "RequestDetails": "Dokładnie opisz swoją prośbę tutaj.",
+  "EnterEmail": "Wpisz e-mail",
+  "SuccessfullySentMessage": "Twoja wiadomość została wysłana. Dział sprzedaży skontaktuje się z Tobą."
 }

@@ -1493,5 +1493,11 @@
   "WalletBalance": "Баланс на портфейла",
   "WalletTopUpRequired": "Изисква се попълване: {{currency}}",
   "DownloadReportBtnText": "Изтегляне на доклад",
-  "ReportSaveLocation": "Отчетът ще бъде запазен в {{sectionName}}"
+  "ReportSaveLocation": "Отчетът ще бъде запазен в {{sectionName}}",
+  "SalesDepartmentRequest": "Заявка от отдел продажби",
+  "YouWillBeContacted": "Търговският екип ще се свърже с вас след създаване на заявката.",
+  "YourName": "Вашето име",
+  "RequestDetails": "Моля, опишете подробностите за вашата заявка тук.",
+  "EnterEmail": "Въведете имейл",
+  "SuccessfullySentMessage": "Съобщението Ви беше изпратено успешно. Ще се свържем с Вас от отдел Продажби."
 }

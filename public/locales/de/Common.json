@@ -1493,5 +1493,11 @@
   "WalletBalance": "Guthaben",
   "WalletTopUpRequired": "Aufladung erforderlich: {{currency}}",
   "DownloadReportBtnText": "Bericht herunterladen",
-  "ReportSaveLocation": "Der Bericht wird unter {{sectionName}} gespeichert"
+  "ReportSaveLocation": "Der Bericht wird unter {{sectionName}} gespeichert",
+  "SalesDepartmentRequest": "Anfrage zur Verkaufsabteilung",
+  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren.",
+  "YourName": "Ihr Name",
+  "RequestDetails": "Bitte beschreiben Sie hier die Details Ihrer Anfrage.",
+  "EnterEmail": "Geben Sie E-Mail ein",
+  "SuccessfullySentMessage": "Ihre Nachricht wurde erfolgreich gesendet. Sie werden von der Verkaufsabteilung kontaktiert."
 }

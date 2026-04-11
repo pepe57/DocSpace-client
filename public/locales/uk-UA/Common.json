@@ -1493,5 +1493,11 @@
   "WalletBalance": "Баланс гаманця",
   "WalletTopUpRequired": "Потрібно поповнити: {{currency}}",
   "DownloadReportBtnText": "Завантажити звіт",
-  "ReportSaveLocation": "Звіт буде збережено у {{sectionName}}"
+  "ReportSaveLocation": "Звіт буде збережено у {{sectionName}}",
+  "SalesDepartmentRequest": "Заявка відділу продажів",
+  "YouWillBeContacted": "Після створення запиту з вами зв’яжеться відділ продажів.",
+  "YourName": "Ваше ім’я",
+  "RequestDetails": "Опишіть деталі свого запиту тут.",
+  "EnterEmail": "Введіть адресу ел. пошти",
+  "SuccessfullySentMessage": "Ваше повідомлення успішно надіслано. З вами зв’яжеться відділ продажів."
 }

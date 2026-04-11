@@ -1493,5 +1493,11 @@
   "WalletBalance": "Zůstatek peněženky",
   "WalletTopUpRequired": "Top-up je nutné: {{currency}}",
   "DownloadReportBtnText": "Stáhnout zprávu",
-  "ReportSaveLocation": "Zpráva bude uložena do {{sectionName}}"
+  "ReportSaveLocation": "Zpráva bude uložena do {{sectionName}}",
+  "SalesDepartmentRequest": "Požadavek obchodního oddělení",
+  "YouWillBeContacted": "Po vytvoření požadavku vás bude kontaktovat prodejní tým.",
+  "YourName": "Vaše jméno",
+  "RequestDetails": "Zde prosím popište podrobnosti svého požadavku.",
+  "EnterEmail": "Zadejte e-mail",
+  "SuccessfullySentMessage": "Vaše zpráva byla úspěšně odeslána. Bude vás kontaktovat obchodní oddělení."
 }

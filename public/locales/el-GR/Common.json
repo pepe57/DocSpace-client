@@ -1493,5 +1493,11 @@
   "WalletBalance": "Υπόλοιπο Πορτοφολιού",
   "WalletTopUpRequired": "Απαιτείται συμπλήρωση: {{currency}}",
   "DownloadReportBtnText": "Λήψη αναφοράς",
-  "ReportSaveLocation": "Η αναφορά θα αποθηκευτεί στο {{sectionName}}"
+  "ReportSaveLocation": "Η αναφορά θα αποθηκευτεί στο {{sectionName}}",
+  "SalesDepartmentRequest": "Αίτημα του τμήματος πωλήσεων",
+  "YouWillBeContacted": "Η ομάδα πωλήσεων θα επικοινωνήσει μαζί σας μετά τη δημιουργία του αιτήματος.",
+  "YourName": "Το όνομά σας",
+  "RequestDetails": "Περιγράψτε τις λεπτομέρειες του αιτήματός σας εδώ.",
+  "EnterEmail": "Εισάγετε email",
+  "SuccessfullySentMessage": "Το μήνυμά σας στάλθηκε με επιτυχία. Θα επικοινωνήσει μαζί σας το Τμήμα Πωλήσεων."
 }

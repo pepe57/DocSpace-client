@@ -13,7 +13,8 @@
       "Bash(grep -rn \"BrandNames:\" /Users/alexeysafronov/Git/Gitea/DocSpace/client/packages/*/src /Users/alexeysafronov/Git/Gitea/DocSpace/client/libs/*/src --include=\"*.ts\" --include=\"*.tsx\" --include=\"*.js\" --include=\"*.jsx\")",
       "Bash(node common/scripts/translation-stats.js)",
       "Bash(pnpm tsc:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(echo \"EXIT: $?\")"
     ],
     "additionalDirectories": [
       "/Users/alexeysafronov/Documents/Obsidian Vault/DocSpace/Translations"
