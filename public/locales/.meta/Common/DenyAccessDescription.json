@@ -3,11 +3,12 @@
   "content": "No access to view, edit, or manage files or folders.",
   "content_en_sha1_hash": "ee305f19919eb7024191f766db1eea827b2d84da",
   "created_at": "2025-09-23T07:24:08.399Z",
-  "updated_at": "2026-04-11T18:34:21.612Z",
+  "updated_at": "2026-04-11T20:55:14.828Z",
   "comment": {
-    "text": "This text explains that the user has no permissions to view, edit, or manage files or folders. It's used to describe a \"Deny Access\" permission setting, likely appearing in a sharing or access control interface. Translators should ensure the description accurately conveys the restriction of access.",
+    "text": "This is a description of a user's access rights. It appears in the sharing settings when a user has been explicitly denied access to a file or folder.",
     "is_auto": true,
-    "updated_at": "2025-09-23T07:26:24.609Z"
+    "updated_at": "2026-04-11T20:55:14.828Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

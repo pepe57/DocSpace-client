@@ -3,11 +3,12 @@
   "content": "AI Agent Updated",
   "content_en_sha1_hash": "1e8e2610162971e7e7bfc54bdfdca58255c0fec8",
   "created_at": "2026-03-31T15:18:27.267Z",
-  "updated_at": "2026-04-10T15:22:27.301Z",
+  "updated_at": "2026-04-11T21:29:22.533Z",
   "comment": {
-    "text": "This key displays a message indicating that an AI agent has been updated. It's used within the Webhooks settings section to label a specific event trigger. Translators should ensure this message accurately reflects the completion of an agent update action.",
+    "text": "This is a toast message indicating that an AI agent's settings or configuration have been successfully updated.",
     "is_auto": true,
-    "updated_at": "2026-03-31T15:19:31.345Z"
+    "updated_at": "2026-04-11T21:29:22.533Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

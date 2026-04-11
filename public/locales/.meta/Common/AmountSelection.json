@@ -3,11 +3,12 @@
   "content": "Amount selection",
   "content_en_sha1_hash": "f9d87870427f634b9f275e3875115ffdc765daaa",
   "created_at": "2026-04-10T13:53:41.861Z",
-  "updated_at": "2026-04-11T18:58:55.473Z",
+  "updated_at": "2026-04-11T20:59:16.397Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a section title for choosing an amount. It appears on a billing page where users select a top-up value.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:16.397Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

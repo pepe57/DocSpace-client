@@ -3,11 +3,12 @@
   "content": "Share for users",
   "content_en_sha1_hash": "bf53de1cbc0dfc480132454f260d5d9fc5503d8a",
   "created_at": "2025-09-23T07:24:16.793Z",
-  "updated_at": "2026-04-10T15:22:27.104Z",
+  "updated_at": "2026-04-11T20:42:58.695Z",
   "comment": {
-    "text": "This text appears in the UI as the title of a header section, likely within a sharing interface. It indicates a list or group of users who have access or are involved in a shared resource. Translators should consider this as a label for a user list.",
+    "text": "This is a section header in a sharing dialog. It introduces the list of users with whom a document or folder is shared.",
     "is_auto": true,
-    "updated_at": "2025-09-23T07:25:23.811Z"
+    "updated_at": "2026-04-11T20:42:58.695Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

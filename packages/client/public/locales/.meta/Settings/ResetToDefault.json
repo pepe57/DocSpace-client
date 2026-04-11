@@ -3,11 +3,12 @@
   "content": "Reset to default",
   "content_en_sha1_hash": "39c90eb758c57422548baebb38a39652279feb65",
   "created_at": "2026-02-18T14:56:29.456Z",
-  "updated_at": "2026-04-11T18:34:21.403Z",
+  "updated_at": "2026-04-11T21:22:39.029Z",
   "comment": {
-    "text": "This text appears on a button or action within a settings interface, likely within a dialog. It indicates an action to revert settings or templates to their original, default configuration. Translators should ensure the wording conveys the meaning of restoring to a pre-defined state.",
+    "text": "This is a button label and a dialog title. It indicates an action to revert settings or a template to their original, factory-set values.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:26:12.299Z"
+    "updated_at": "2026-04-11T21:22:39.029Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

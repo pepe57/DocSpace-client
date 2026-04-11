@@ -3,11 +3,12 @@
   "content": "Go to the Stripe",
   "content_en_sha1_hash": "841ba13a25e1b8452c1dd6a17e7ab3bec47e74a9",
   "created_at": "2026-04-10T13:53:42.565Z",
-  "updated_at": "2026-04-11T18:58:55.456Z",
+  "updated_at": "2026-04-11T20:51:32.648Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label that appears on the billing page. It directs the user to the Stripe portal to manage their payment methods.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:51:32.648Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

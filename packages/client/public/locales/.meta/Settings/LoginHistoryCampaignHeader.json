@@ -3,11 +3,12 @@
   "content": "Secure your {{productName}}",
   "content_en_sha1_hash": "dd0cf4fa1223874a80abb7d22c5bd183f7f2cc2d",
   "created_at": "2025-08-04T07:29:46.167Z",
-  "updated_at": "2026-04-11T18:34:21.626Z",
+  "updated_at": "2026-04-11T21:23:29.041Z",
   "comment": {
-    "text": "This key displays a header message within the Login History section of the Portal Settings, specifically under the Security category. It's used to reassure users by highlighting the security of their {{productName}}. Translators should ensure the tone remains reassuring and emphasizes security.",
+    "text": "This is the header for a campaign banner promoting security features. It appears at the top of the banner and includes a variable `{{productName}}` which will be replaced by the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-08-04T08:12:12.821Z"
+    "updated_at": "2026-04-11T21:23:29.041Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "AI can make mistakes. Please double-check responses.",
   "content_en_sha1_hash": "b55d36ccb29f649d216d835fd6fa2dbdad309c53",
   "created_at": "2025-11-13T07:57:41.751Z",
-  "updated_at": "2026-04-11T18:58:55.447Z",
+  "updated_at": "2026-04-11T21:00:33.776Z",
   "comment": {
-    "text": "This key displays a disclaimer reminding users that the AI may produce errors and requires verification of its responses. It appears as small text near the chat input field, likely providing a subtle cautionary message. Translators should maintain the disclaimer's tone and ensure it accurately conveys the AI's limitations.",
+    "text": "This is a small informational text displayed below the AI chat input field. It warns users that AI-generated responses may be inaccurate and should be verified.",
     "is_auto": true,
-    "updated_at": "2025-11-13T08:04:57.026Z"
+    "updated_at": "2026-04-11T21:00:33.776Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

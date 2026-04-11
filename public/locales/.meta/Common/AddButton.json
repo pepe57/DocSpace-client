@@ -3,11 +3,12 @@
   "content": "Add",
   "content_en_sha1_hash": "61cc55aa0453184734c3fa0b621eda6fa874bd83",
   "created_at": "2025-05-19T21:30:42.915Z",
-  "updated_at": "2026-04-11T19:02:12.228Z",
+  "updated_at": "2026-04-11T21:01:07.650Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Add\" as a button label in various UI elements, such as buttons, input fields, and dialogs. It appears in contexts where users need to add new items or content, including form submissions, editing comments, and OAuth client settings. Translators should provide a clear and concise alternative for this key to ensure consistent and accurate display across the application.",
+    "text": "This is a button label that initiates an \"add\" action, such as adding a file, a server, or an item to a selection.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:26.534Z"
+    "updated_at": "2026-04-11T21:01:07.650Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

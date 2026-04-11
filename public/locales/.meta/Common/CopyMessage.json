@@ -3,11 +3,12 @@
   "content": "Copy message",
   "content_en_sha1_hash": "26902efda37d4a30d3f6fd110ba9cc653bae0c8b",
   "created_at": "2025-10-27T16:14:24.116Z",
-  "updated_at": "2026-04-11T18:58:55.450Z",
+  "updated_at": "2026-04-11T20:56:15.691Z",
   "comment": {
-    "text": "This text appears as the tooltip on a button that copies a message. It informs the user that clicking the button will initiate a copy action for the message content. This helps users quickly duplicate and share messages.",
+    "text": "Tooltip for a button that copies the content of a chat message to the clipboard.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:42:45.026Z"
+    "updated_at": "2026-04-11T20:56:15.691Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

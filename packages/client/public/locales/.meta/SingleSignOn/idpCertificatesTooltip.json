@@ -3,11 +3,12 @@
   "content": "The Identity provider public certificates used for either verification or decryption (or both) of the requests and responses from the IdP.",
   "content_en_sha1_hash": "7846c6461388c273f52adc2c6ee4a3e2120da395",
   "created_at": "2025-05-19T21:30:50.096Z",
-  "updated_at": "2026-04-10T16:02:43.499Z",
+  "updated_at": "2026-04-11T21:26:49.410Z",
   "comment": {
-    "text": "This translation key is used to display a tooltip describing identity provider public certificates in the portal settings page. It provides context on the certificates' purpose and usage in single sign-on processes.",
+    "text": "This is a tooltip that appears when hovering over the \"IdP Certificates\" field. It explains the purpose of these certificates in verifying or decrypting requests and responses from the Identity Provider.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:15.125Z"
+    "updated_at": "2026-04-11T21:26:49.410Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

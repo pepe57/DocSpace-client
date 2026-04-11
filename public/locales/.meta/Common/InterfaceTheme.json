@@ -3,11 +3,12 @@
   "content": "Interface theme",
   "content_en_sha1_hash": "f47f8ed32464b7b3aa479c8638758420470a60e9",
   "created_at": "2026-04-03T21:51:34.678Z",
-  "updated_at": "2026-04-11T19:02:12.297Z",
+  "updated_at": "2026-04-11T20:50:43.218Z",
   "comment": {
-    "text": "This key serves as the label for the interface theme setting option. It appears as a name within a list of configuration items in the user's profile section.",
+    "text": "This is a label for a setting that allows users to change the visual theme of the interface.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:54:30.053Z"
+    "updated_at": "2026-04-11T20:50:43.218Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

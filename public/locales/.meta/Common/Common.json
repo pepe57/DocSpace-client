@@ -3,11 +3,12 @@
   "content": "Common",
   "content_en_sha1_hash": "7de90a65241a6cdbd9ade485d777715d99285a1e",
   "created_at": "2025-05-19T21:30:43.587Z",
-  "updated_at": "2026-04-11T18:34:21.481Z",
+  "updated_at": "2026-04-11T20:56:55.830Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Common\" as a section label on a data import form. It appears in a dialog box where users can choose which type of files to import and is used to identify the common files category.",
+    "text": "This is a section heading in the portal settings. It labels a section related to common files.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:02.764Z"
+    "updated_at": "2026-04-11T20:56:55.830Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

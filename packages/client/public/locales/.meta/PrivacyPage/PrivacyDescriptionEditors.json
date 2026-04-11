@@ -3,11 +3,12 @@
   "content": "If you have {{OnlyofficeDesktopEditors}} installed but can't open it from this page, your browser might be blocking it.",
   "content_en_sha1_hash": "6584633736a73c5fdfee6f60b4fb3ee9a2e67b10",
   "created_at": "2026-04-11T18:34:17.086Z",
-  "updated_at": "2026-04-11T18:35:19.406Z",
+  "updated_at": "2026-04-11T21:20:27.295Z",
   "comment": {
-    "text": "This text serves as an informational warning displayed on the Private Rooms Page. It advises users who have the OnlyOffice desktop editor installed but are unable to launch it from the page, suggesting that their browser might be blocking the connection.",
+    "text": "This is a paragraph of text displayed on the Private Rooms page. It informs the user that their browser might be blocking the ONLYOFFICE Desktop Editors if it's installed but not opening. The `{{OnlyofficeDesktopEditors}}` variable will be replaced with the brand name \"ONLYOFFICE Desktop Editors\".",
     "is_auto": true,
-    "updated_at": "2026-04-11T18:35:19.406Z"
+    "updated_at": "2026-04-11T21:20:27.295Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Pay",
   "content_en_sha1_hash": "80c37573afed72cb3ec54133cd32508d33bcb52d",
   "created_at": "2026-04-10T13:53:42.887Z",
-  "updated_at": "2026-04-11T18:58:55.454Z",
+  "updated_at": "2026-04-11T20:46:37.060Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label that initiates a payment process, such as purchasing a subscription or adding funds.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:46:37.060Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

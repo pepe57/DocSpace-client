@@ -3,11 +3,12 @@
   "content": "Ad Management",
   "content_en_sha1_hash": "18c92cf5613e4306b2ab3e01e2c3b8b2c34e9b43",
   "created_at": "2025-07-02T07:49:04.410Z",
-  "updated_at": "2026-04-11T18:34:21.464Z",
+  "updated_at": "2026-04-11T21:25:58.331Z",
   "comment": {
-    "text": "The \"AdManagement\" translation key is used for the label displayed on a configuration option page within the portal settings, guiding users to manage ads. This text appears in a mobile category wrapper and may also be referenced in tooltips or other UI elements related to ad management options.",
+    "text": "This is a category item title in the portal settings, referring to the section for managing advertisements within the platform.",
     "is_auto": true,
-    "updated_at": "2025-07-02T07:49:34.712Z"
+    "updated_at": "2026-04-11T21:25:58.331Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

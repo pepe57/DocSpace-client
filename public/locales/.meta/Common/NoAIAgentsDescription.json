@@ -3,11 +3,12 @@
   "content": "It looks like there are no agents ready to continue this chat. Create a new agent to pick up the conversation right where it left off.",
   "content_en_sha1_hash": "b8f3801ce205d8ab2b39d02905f634cb46d49e34",
   "created_at": "2025-10-27T16:14:24.547Z",
-  "updated_at": "2026-04-11T18:58:55.480Z",
+  "updated_at": "2026-04-11T20:48:01.883Z",
   "comment": {
-    "text": "This text explains to the user that no AI agents are currently available to continue the conversation. It appears as a description on an empty screen, prompting them to create a new agent to resume the chat. Translators should focus on conveying the message that a new agent is needed to proceed.",
+    "text": "This is an empty state message displayed when no AI agents are available to continue a chat. It prompts the user to create a new agent.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:33:50.699Z"
+    "updated_at": "2026-04-11T20:48:01.883Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

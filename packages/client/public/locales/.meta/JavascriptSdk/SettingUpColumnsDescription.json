@@ -3,11 +3,12 @@
   "content": "You can disable the ability for users to manage and customize file information columns in list view.",
   "content_en_sha1_hash": "76868dd0a3859dca5c680f703c78401724009d5e",
   "created_at": "2025-05-19T21:30:54.686Z",
-  "updated_at": "2026-04-11T18:34:21.497Z",
+  "updated_at": "2026-04-11T21:14:32.814Z",
   "comment": {
-    "text": "You can disable the ability for users to manage and customize file information columns in list view. This setting is typically found on a portal settings page or similar configuration option.",
+    "text": "This is the description text for a tooltip. It explains that disabling this setting prevents users from customizing file information columns in the list view.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:19.748Z"
+    "updated_at": "2026-04-11T21:14:32.814Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

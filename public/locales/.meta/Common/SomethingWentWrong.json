@@ -3,11 +3,12 @@
   "content": "Something went wrong.",
   "content_en_sha1_hash": "bee54c9cc30c539ab2ed15c0c936e055cf8ef67e",
   "created_at": "2025-05-19T21:30:48.934Z",
-  "updated_at": "2026-04-11T19:02:12.220Z",
+  "updated_at": "2026-04-11T20:42:20.142Z",
   "comment": {
-    "text": "This translation key is used to display an error message when a specific action fails, such as clicking a button or importing data. It appears in the UI as a generic error notification and can be found in a catch block of code that handles errors thrown during certain user interactions. Translators should provide a clear and concise alternative text for this key to help users understand what went wrong.",
+    "text": "This is an error message displayed in a toast notification or as a title in an empty state view. It appears when an unexpected error occurs during an operation, such as submitting to a form gallery, server communication, or data import.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:21.496Z"
+    "updated_at": "2026-04-11T20:42:20.142Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

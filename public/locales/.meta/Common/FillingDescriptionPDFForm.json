@@ -3,11 +3,12 @@
   "content": "Viewing, filling.",
   "content_en_sha1_hash": "4c0c1fb84d1dd5019ebf978003edb0a20e04ce98",
   "created_at": "2025-09-29T18:22:04.277Z",
-  "updated_at": "2026-04-11T18:34:21.611Z",
+  "updated_at": "2026-04-11T20:52:31.949Z",
   "comment": {
-    "text": "This text describes a PDF document that can be viewed and filled out. It's likely used as a label or tooltip to indicate that a PDF form is accessible for editing. Translators should consider wording appropriate for a button or link prompting form access.",
+    "text": "This text describes the permissions for a PDF form. It appears as a short label indicating that the user can view and fill out the form.",
     "is_auto": true,
-    "updated_at": "2025-09-29T18:25:11.836Z"
+    "updated_at": "2026-04-11T20:52:31.949Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

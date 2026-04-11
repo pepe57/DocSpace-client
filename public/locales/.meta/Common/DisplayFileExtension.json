@@ -3,11 +3,12 @@
   "content": "Display file extension next to file name",
   "content_en_sha1_hash": "5aca0949443f945850e45a5d1a5def5c80406042",
   "created_at": "2026-04-03T21:51:34.715Z",
-  "updated_at": "2026-04-11T19:02:12.297Z",
+  "updated_at": "2026-04-11T20:54:56.849Z",
   "comment": {
-    "text": "This is a label for a toggle switch in the file management settings. It describes the option to show or hide file extensions next to the file names.",
+    "text": "This is a label for a toggle button in the user's profile settings. It controls whether file extensions (e.g., \".docx\", \".pdf\") are shown next to file names in the interface.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:55:06.124Z"
+    "updated_at": "2026-04-11T20:54:56.849Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,12 +3,12 @@
   "content": "Your name",
   "content_en_sha1_hash": "ab42293e29e1ffb306c1403dd95144d664853a60",
   "created_at": "2026-04-11T18:34:14.938Z",
-  "updated_at": "2026-04-11T19:04:22.180Z",
+  "updated_at": "2026-04-11T20:38:36.934Z",
   "comment": {
-    "text": "This text serves as the placeholder prompt for the name input field within the Sales Department Request Dialog. It guides the user on what information should be entered into the field.",
+    "text": "This is a placeholder text for an input field where the user enters their name.",
     "is_auto": true,
-    "updated_at": "2026-04-11T19:04:22.180Z",
-    "model": "gemma4:latest"
+    "updated_at": "2026-04-11T20:38:36.934Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

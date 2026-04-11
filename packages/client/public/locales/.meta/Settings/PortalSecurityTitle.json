@@ -3,11 +3,12 @@
   "content": "This subsection allows you to provide users with secure and convenient ways to access the portal.",
   "content_en_sha1_hash": "0f3b230f6983fda1db2a358a7aa46ce3c5840a0f",
   "created_at": "2025-05-19T21:30:52.300Z",
-  "updated_at": "2026-04-11T18:34:21.542Z",
+  "updated_at": "2026-04-11T21:22:51.423Z",
   "comment": {
-    "text": "This translation key is used for the subtitle displayed next to a button or similar element that allows users to access the secure portal. It provides a brief description of the functionality offered by this section, helping users understand its purpose in the portal settings page.",
+    "text": "This is a subtitle for the \"Security\" section of the portal settings, introducing options related to user access.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:43.037Z"
+    "updated_at": "2026-04-11T21:22:51.423Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

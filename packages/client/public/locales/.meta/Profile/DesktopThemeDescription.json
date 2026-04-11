@@ -3,11 +3,12 @@
   "content": "Automatically switch between light and dark themes depending on the current theme of Desktop Editors.",
   "content_en_sha1_hash": "f22c34003047b47698610a16f3357dd63749f1ba",
   "created_at": "2025-05-19T21:30:53.350Z",
-  "updated_at": "2026-04-10T15:22:27.401Z",
+  "updated_at": "2026-04-11T21:20:50.269Z",
   "comment": {
-    "text": "This translation key is used to describe the automatically switching theme feature between light and dark themes on Desktop Editors. The text appears in a system settings or preferences section, likely as part of the interface that controls this feature. Translators should focus on conveying the idea of automatic theme adaptation for desktop editors.",
+    "text": "This is a description for a radio button option in the interface theme settings. It explains that selecting this option will synchronize the DocSpace theme with the user's Desktop Editors theme.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:54.620Z"
+    "updated_at": "2026-04-11T21:20:50.269Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Star files and folders to keep them easily accessible and within reach.",
   "content_en_sha1_hash": "93cf58fd17f758b088070b1be787919168c6f809",
   "created_at": "2025-08-29T14:33:36.168Z",
-  "updated_at": "2026-04-11T18:34:21.299Z",
+  "updated_at": "2026-04-11T21:07:05.265Z",
   "comment": {
-    "text": "This text explains the purpose of the Favorites folder – to allow users to save files and folders for easy access. It appears within the UI to describe the empty state of the Favorites folder. Translators should focus on conveying the benefit of saving items to Favorites.",
+    "text": "This is a message displayed when the \"Favorites\" section is empty, explaining how to add items to it.",
     "is_auto": true,
-    "updated_at": "2025-08-29T14:34:52.234Z"
+    "updated_at": "2026-04-11T21:07:05.265Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

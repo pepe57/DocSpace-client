@@ -3,11 +3,12 @@
   "content": "Copy here",
   "content_en_sha1_hash": "92816e8a2d8cd79faa7d9b23fa0080284e21fef3",
   "created_at": "2025-05-19T21:30:43.763Z",
-  "updated_at": "2026-04-11T19:02:12.225Z",
+  "updated_at": "2026-04-11T20:56:20.702Z",
   "comment": {
-    "text": "This translation key is used as a default label for a \"Copy\" button in various UI components, including files selectors and share collectors. The text is meant to encourage users to select or copy content from an interface. It appears on buttons and labels where users interact with shared documents or folders.",
+    "text": "This is a button label. It appears in file selection dialogs to confirm copying selected files to the current location.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:56.661Z"
+    "updated_at": "2026-04-11T20:56:20.702Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

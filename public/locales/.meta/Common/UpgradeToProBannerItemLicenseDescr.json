@@ -3,11 +3,12 @@
   "content": "+ 1-year subscription for functionality and security updates.",
   "content_en_sha1_hash": "bf909f01efdd41c4e5073f4e8f004d859d3df47c",
   "created_at": "2025-05-26T07:15:49.243Z",
-  "updated_at": "2026-04-11T18:46:16.658Z",
+  "updated_at": "2026-04-11T20:39:53.763Z",
   "comment": {
-    "text": "This translation key is used for a one-year subscription license description, indicating the duration and benefits of the upgraded plan. It will appear in a banner or similar UI element, likely on a payment page or benefits container. The translation should convey a sense of time-based duration.",
+    "text": "This is a description for a banner item, detailing a benefit of upgrading to a Pro plan. It explains that the upgrade includes a one-year subscription for updates.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:17.418Z"
+    "updated_at": "2026-04-11T20:39:53.763Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

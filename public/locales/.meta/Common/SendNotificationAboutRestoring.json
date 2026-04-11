@@ -3,11 +3,12 @@
   "content": "Send notification about space restoring to users",
   "content_en_sha1_hash": "e040fbeb56224222df87a697364fe2553d230591",
   "created_at": "2025-05-26T07:15:47.743Z",
-  "updated_at": "2026-04-11T18:34:21.644Z",
+  "updated_at": "2026-04-11T20:43:21.303Z",
   "comment": {
-    "text": "This translation key is used to display a notification message about restoring space to users. It appears on a checkbox label in a UI element where users can choose to send notifications upon restoring their space. The translated text should be concise and clear for users.",
+    "text": "This is a checkbox label. It allows the user to choose whether to send a notification to users when a space is restored from backup.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:45.881Z"
+    "updated_at": "2026-04-11T20:43:21.303Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

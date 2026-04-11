@@ -3,11 +3,12 @@
   "content": "Recover access",
   "content_en_sha1_hash": "3f0e9f892fde12d93db01b89396951762c8bb282",
   "created_at": "2025-05-19T21:30:57.252Z",
-  "updated_at": "2026-04-07T19:35:05.251Z",
+  "updated_at": "2026-04-11T21:31:09.836Z",
   "comment": {
-    "text": "The translation key \"RecoverAccess\" is used to display a text message that allows users to recover access to their account. In this case, it appears as a button or link on a modal dialog in the login process, prompting users to regain access if they encounter issues.",
+    "text": "This is the label for a link that, when clicked, opens a dialog to help users regain access to their account.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:45.234Z"
+    "updated_at": "2026-04-11T21:31:09.836Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

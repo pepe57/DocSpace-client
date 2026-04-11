@@ -3,11 +3,12 @@
   "content": "Knowledge base",
   "content_en_sha1_hash": "70cd2e748fd8d867b9e8c7a55f97c1f3930136f7",
   "created_at": "2025-12-17T07:49:06.312Z",
-  "updated_at": "2026-04-11T18:34:21.373Z",
+  "updated_at": "2026-04-11T21:01:58.357Z",
   "comment": {
-    "text": "This key refers to the \"Knowledge\" section within the AI Room settings, likely related to managing or accessing a knowledge base. It appears in the Portal Settings and is used to set the current tab to the knowledge section. Translators should ensure the term conveys a collection of information or resources.",
+    "text": "This is a tab label or section title. It refers to a knowledge base feature within the AI Room or Portal Settings.",
     "is_auto": true,
-    "updated_at": "2025-12-17T07:52:12.796Z"
+    "updated_at": "2026-04-11T21:01:58.357Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

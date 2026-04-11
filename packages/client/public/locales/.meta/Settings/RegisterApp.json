@@ -3,11 +3,12 @@
   "content": "Register app",
   "content_en_sha1_hash": "d377a3cb1713d903c61de93c2313f56ca7857d84",
   "created_at": "2026-04-03T21:51:36.610Z",
-  "updated_at": "2026-04-11T18:34:21.507Z",
+  "updated_at": "2026-04-11T21:22:41.632Z",
   "comment": {
-    "text": "This text serves as the title for a card or link within the Developer Tools section of the Portal Settings. It refers to the action of registering a new application for OAuth integration.",
+    "text": "This is the label for a link that allows users to register a new application within the developer tools settings.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:58:40.335Z"
+    "updated_at": "2026-04-11T21:22:41.632Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Balance",
   "content_en_sha1_hash": "90eef613042c5a51f542421065b68b886d473807",
   "created_at": "2026-04-10T13:53:42.015Z",
-  "updated_at": "2026-04-11T18:58:55.477Z",
+  "updated_at": "2026-04-11T20:58:26.233Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for the user's account balance, displayed next to the amount in the wallet section.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:26.233Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "{{count}} {{productName}} users",
   "content_en_sha1_hash": "bae40159efb2f2263adf84c6e57307ea8d807a8a",
   "created_at": "2025-09-19T15:39:07.642Z",
-  "updated_at": "2026-04-11T18:34:21.620Z",
+  "updated_at": "2026-04-11T20:54:17.054Z",
   "comment": {
-    "text": "This key displays the number of users who have edited something, formatted as \"{{count}} {{productName}} users\". It's used within the User Statistics Dialog to show a specific count of users who have made edits, likely related to a product. Translators should ensure \"productName\" is also translated appropriately.",
+    "text": "This string displays the number of users with editing permissions. It appears within a dialog showing user statistics, where `{{count}}` is the number of users and `{{productName}}` is the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-09-19T16:00:58.292Z"
+    "updated_at": "2026-04-11T20:54:17.054Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

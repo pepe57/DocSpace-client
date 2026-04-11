@@ -3,11 +3,12 @@
   "content": "SP Certificates",
   "content_en_sha1_hash": "ddb5368e6f2802175629771e18ffdae9be88db3d",
   "created_at": "2025-05-19T21:30:50.156Z",
-  "updated_at": "2026-04-10T15:22:27.317Z",
+  "updated_at": "2026-04-11T21:26:27.212Z",
   "comment": {
-    "text": "\"SP Certificates\" - This translation key is used to display a label for Single Sign-On certificates in the PortalSettings UI. It typically appears as a button or modal title, guiding users to select their SP certificates.",
+    "text": "This is a label for a section or setting related to Service Provider (SP) certificates within the Single Sign-On (SSO) configuration. It appears in the integration settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:06.714Z"
+    "updated_at": "2026-04-11T21:26:27.212Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

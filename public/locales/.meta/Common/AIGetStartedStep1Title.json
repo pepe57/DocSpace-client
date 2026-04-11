@@ -3,11 +3,12 @@
   "content": "Add funds to your AI balance",
   "content_en_sha1_hash": "638ffb4e2cae310af4440dc6003188cb2618a8db",
   "created_at": "2026-04-10T13:53:44.222Z",
-  "updated_at": "2026-04-11T18:58:55.469Z",
+  "updated_at": "2026-04-11T21:00:12.937Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title for the first step in a \"Get Started\" guide for AI services. It instructs the user to add money to their AI balance.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:12.937Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

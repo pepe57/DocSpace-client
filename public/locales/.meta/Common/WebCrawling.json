@@ -3,11 +3,12 @@
   "content": "Web crawling",
   "content_en_sha1_hash": "358b1643a23f6468c430bdf829af3459c4b5ac48",
   "created_at": "2025-10-27T16:14:24.665Z",
-  "updated_at": "2026-04-11T18:58:55.449Z",
+  "updated_at": "2026-04-11T20:39:09.996Z",
   "comment": {
-    "text": "This key translates to \"Web crawling\" and is used as a label describing the type of tool call within a chat message body. It appears as part of a header that indicates a search tool was used to generate a response, alongside the tool's specific name. Translators should consider a brief and descriptive term for web search functionality.",
+    "text": "This is a label indicating that a web crawling operation is in progress. It appears in the header of a tool call message within the AI agent chat.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:24:03.469Z"
+    "updated_at": "2026-04-11T20:39:09.996Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

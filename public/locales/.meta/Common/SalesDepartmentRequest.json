@@ -3,11 +3,12 @@
   "content": "Sales department request",
   "content_en_sha1_hash": "0e3ac6e1bce337108997dca6f6f3b9a728a8e578",
   "created_at": "2026-04-11T18:34:14.915Z",
-  "updated_at": "2026-04-11T18:58:55.451Z",
+  "updated_at": "2026-04-11T20:43:58.993Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title of a dialog box that appears when a user wants to contact the sales department.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:43:58.993Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

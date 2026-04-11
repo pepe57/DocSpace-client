@@ -3,11 +3,12 @@
   "content": "Check users from the list to import into {{organizationName}} {{productName}}. Users from Google Workspace will be imported without First Name / Last Name, and their email name will be used instead. Names of the users can be changed after the import. Users already existing in {{organizationName}} {{productName}} are highlighted with a green color and are not checked by default.",
   "content_en_sha1_hash": "24b72ad22f9e64bc2e50b7ce28e5cc96671b7535",
   "created_at": "2025-05-19T21:30:52.560Z",
-  "updated_at": "2026-04-11T18:34:21.472Z",
+  "updated_at": "2026-04-11T21:22:23.827Z",
   "comment": {
-    "text": "This translation key is used to describe the step in the data import process that allows users to select and import Google Workspace users into {{organizationName}} {{productName}}. It explains how the import will handle user names and highlights existing users within the organization. This text appears on a UI component, likely a stepper or dialog, guiding users through the data import process.",
+    "text": "This is a description displayed on a step in the Google Workspace user import wizard. It explains how users are imported, specifically noting that Google Workspace users will have their email name used as their first/last name, and that existing users are highlighted. It contains `{{organizationName}}` (e.g., \"ONLYOFFICE\") and `{{productName}}` (e.g., \"DocSpace\") variables.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:32.975Z"
+    "updated_at": "2026-04-11T21:22:23.827Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

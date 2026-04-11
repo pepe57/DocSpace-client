@@ -3,11 +3,12 @@
   "content": "Share",
   "content_en_sha1_hash": "09ca55ca52d207f2cc1d9339e0226a88e9e96e2f",
   "created_at": "2025-05-19T21:30:48.615Z",
-  "updated_at": "2026-04-11T19:02:12.229Z",
+  "updated_at": "2026-04-11T20:43:09.256Z",
   "comment": {
-    "text": "The translation key \"Share\" is used to display a button label in the user interface. It appears on a shared form panel and is linked to an icon representing sharing. The purpose of this text is to enable users to share content.",
+    "text": "This is a button label that initiates the sharing process for a file or document.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:23.957Z"
+    "updated_at": "2026-04-11T20:43:09.256Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

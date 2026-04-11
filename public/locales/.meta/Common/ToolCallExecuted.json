@@ -3,11 +3,12 @@
   "content": "Tool call executed",
   "content_en_sha1_hash": "47bfb28be7a9603602255086a241d44ceab46a69",
   "created_at": "2025-10-27T16:14:24.073Z",
-  "updated_at": "2026-04-11T18:58:55.449Z",
+  "updated_at": "2026-04-11T20:40:57.605Z",
   "comment": {
-    "text": "This text indicates that a tool call has been successfully executed. It appears as a label within a ToolCallHeader component in a chat message, confirming a tool action has completed. Translators should ensure the tone remains informative and concise.",
+    "text": "This is a label displayed in the chat interface, indicating that a tool call has been successfully executed.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:26:39.562Z"
+    "updated_at": "2026-04-11T20:40:57.605Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

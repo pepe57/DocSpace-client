@@ -3,11 +3,12 @@
   "content": "Create key",
   "content_en_sha1_hash": "e028cb09f2a481aec3b30e1b7d57d0e8976efb23",
   "created_at": "2026-04-03T21:51:36.617Z",
-  "updated_at": "2026-04-11T18:34:21.507Z",
+  "updated_at": "2026-04-11T21:25:13.605Z",
   "comment": {
-    "text": "Used as a link title or button label within the Developer Tools section of the Portal Settings. It represents the action of generating a new API key.",
+    "text": "This is a button label that creates a new API key.",
     "is_auto": true,
-    "updated_at": "2026-04-03T22:01:11.557Z"
+    "updated_at": "2026-04-11T21:25:13.605Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

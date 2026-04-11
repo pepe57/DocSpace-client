@@ -3,11 +3,12 @@
   "content": "Room administration and archiving, user invitation and management. Several admins can be assigned to the room.",
   "content_en_sha1_hash": "fcf79ad90b7d19194bb1754fbe16c0cc2c3a8dc2",
   "created_at": "2026-04-10T13:53:43.179Z",
-  "updated_at": "2026-04-11T18:58:55.453Z",
+  "updated_at": "2026-04-11T20:44:12.741Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a descriptive text providing details about the Room Manager feature. It appears below the \"RoomAdmin\" label within a help section, explaining its functionalities like administration, archiving, and user management.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:44:12.741Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Change {{productName}} owner",
   "content_en_sha1_hash": "b3bac1aca6a46d00f19fb61e5298c3e7a5b510ac",
   "created_at": "2025-05-19T21:30:56.985Z",
-  "updated_at": "2026-04-11T19:53:45.171Z",
+  "updated_at": "2026-04-11T21:03:32.449Z",
   "comment": {
-    "text": "\"Change the owner of a portal. This message is used in the 'ChangePortalOwner' dialog to prompt users to update the owner of a specific portal.\"",
+    "text": "This is a dialog title for changing the ownership of the DocSpace portal. `{{productName}}` will be replaced with the product's brand name (e.g., \"DocSpace\").",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:37:41.838Z"
+    "updated_at": "2026-04-11T21:03:32.449Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

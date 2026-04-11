@@ -3,11 +3,12 @@
   "content": "Company info settings",
   "content_en_sha1_hash": "192f2a8a9bec6d013a113f97fc1ce9b3cdd0c794",
   "created_at": "2025-05-26T07:15:41.404Z",
-  "updated_at": "2026-04-11T18:34:21.552Z",
+  "updated_at": "2026-04-11T20:56:54.284Z",
   "comment": {
-    "text": "This translation key is used for the label \"Company info settings\" that appears on a page, likely in a portal or branding section, and is displayed as a header or button. It provides a brief description of the content users will access when clicking the link or navigating to this setting. The text is typically shown in a dialog or modal context.",
+    "text": "This is a page title and a navigation link label for the section where users can configure their company's information within the ONLYOFFICE DocSpace settings.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:06:30.719Z"
+    "updated_at": "2026-04-11T20:56:54.284Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

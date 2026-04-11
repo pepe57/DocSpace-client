@@ -3,11 +3,12 @@
   "content": "Click Open <1>{{OnlyofficeDesktopEditors}}</1> in the browser dialog to work with the encrypted documents.",
   "content_en_sha1_hash": "413091284d3d1d64db586e5145a702fc0cfb6fb8",
   "created_at": "2026-04-11T18:34:17.082Z",
-  "updated_at": "2026-04-11T18:35:40.657Z",
+  "updated_at": "2026-04-11T21:20:29.288Z",
   "comment": {
-    "text": "This key is an instructional message displayed on the Private Rooms Page. It guides the user on how to access and work with encrypted documents by instructing them to click the specified editor name within the browser dialog.",
+    "text": "This is a message displayed on the Privacy page, instructing the user to click \"Open ONLYOFFICE Desktop Editors\" in their browser to access encrypted documents. `{{OnlyofficeDesktopEditors}}` is a variable representing the product name.",
     "is_auto": true,
-    "updated_at": "2026-04-11T18:35:40.657Z"
+    "updated_at": "2026-04-11T21:20:29.288Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "The {{productName}} Wallet allows you to easily purchase services such as storage, AI tools, and backups. Add funds and select the services you need to get started.",
   "content_en_sha1_hash": "1512af4bdecc76d22ea3fbb5de9c045a7ba5ba43",
   "created_at": "2026-04-10T13:53:43.909Z",
-  "updated_at": "2026-04-11T18:58:55.477Z",
+  "updated_at": "2026-04-11T20:39:16.424Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a descriptive text displayed in the Wallet section. It explains the purpose of the Wallet feature, which is to purchase services like storage, AI tools, and backups. The `{{productName}}` variable will be replaced with the product's brand name.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:39:16.424Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

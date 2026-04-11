@@ -3,11 +3,12 @@
   "content": "Room groups",
   "content_en_sha1_hash": "23e8b8d6adb6d989089f0fd3181a1a44f1c6ccb8",
   "created_at": "2026-02-19T13:36:15.152Z",
-  "updated_at": "2026-04-11T18:58:55.478Z",
+  "updated_at": "2026-04-11T20:44:16.741Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a filter or section heading, referring to collections of rooms. It appears when managing or filtering rooms within DocSpace.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:44:16.741Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

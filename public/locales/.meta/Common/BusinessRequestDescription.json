@@ -3,11 +3,12 @@
   "content": "The pricing plans with more {{peopleNumber}} admins are available upon request only.",
   "content_en_sha1_hash": "55e0fa870af75f04c44b2449bd583a48a3d1adcf",
   "created_at": "2026-04-10T13:53:42.100Z",
-  "updated_at": "2026-04-11T18:58:55.454Z",
+  "updated_at": "2026-04-11T20:58:00.452Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a descriptive text displayed on the billing page, informing users that pricing plans for more than `{{peopleNumber}}` administrators require a special request. `{{peopleNumber}}` represents the maximum number of administrators available in standard plans.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:00.452Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

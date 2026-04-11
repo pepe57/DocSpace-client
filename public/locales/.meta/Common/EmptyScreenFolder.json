@@ -3,11 +3,12 @@
   "content": "No docs here yet",
   "content_en_sha1_hash": "13f65c49b67384ae354aca724c941bd51b597bb5",
   "created_at": "2025-05-19T21:30:44.896Z",
-  "updated_at": "2026-04-11T19:02:12.223Z",
+  "updated_at": "2026-04-11T20:53:46.556Z",
   "comment": {
-    "text": "This translation key displays a message indicating that there are no files or content available in an empty screen folder. It is used to inform users when they navigate to a folder without any contents, typically found on folders like \"EmptyFormFolder\" within the application's UI. The exact display of this message may vary depending on the context in which it appears.",
+    "text": "This text appears on an empty folder screen, indicating that no documents have been added to it yet.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:28.173Z"
+    "updated_at": "2026-04-11T20:53:46.556Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

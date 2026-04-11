@@ -3,11 +3,12 @@
   "content": "Move to {{sectionName}}",
   "content_en_sha1_hash": "5d6defb8d637574434a5dbe9189fed399ce413e6",
   "created_at": "2025-06-02T10:19:17.346Z",
-  "updated_at": "2026-04-10T15:22:27.149Z",
+  "updated_at": "2026-04-11T20:48:24.700Z",
   "comment": {
-    "text": "This translation key is used to display a button label that allows users to move files to a specified section or category. The section name can be customized through this translation key, typically displayed as \"Move to {{sectionName}}\" in UI elements such as buttons or dialog boxes.",
+    "text": "This is a button label in a dialog, indicating that a file will be moved to a specified section. The `{{sectionName}}` variable will be replaced with the name of the destination section (e.g., \"Trash\").",
     "is_auto": true,
-    "updated_at": "2025-06-02T10:21:31.287Z"
+    "updated_at": "2026-04-11T20:48:24.700Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Your current domain",
   "content_en_sha1_hash": "b3923c670b1406884e6e252bae5cd97477f25260",
   "created_at": "2025-05-26T07:15:49.720Z",
-  "updated_at": "2026-04-07T19:53:26.288Z",
+  "updated_at": "2026-04-11T20:38:40.543Z",
   "comment": {
-    "text": "This translation key is used to display \"Your current domain\" in various UI elements, such as settings pages and input fields, to provide users with clear information about their active domain. It appears on screens related to domain management and DNS settings, where users can edit or configure their domain details.",
+    "text": "This is a label for a text input field that displays the user's current domain name. It appears in the portal settings and domain settings sections.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:01:42.070Z"
+    "updated_at": "2026-04-11T20:38:40.543Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

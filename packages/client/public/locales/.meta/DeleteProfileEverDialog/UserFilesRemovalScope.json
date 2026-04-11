@@ -3,11 +3,12 @@
   "content": "Personal data, all files and folders in the {{sectionNameFirst}} and {{sectionNameSecond}} sections of this user will be permanently deleted.",
   "content_en_sha1_hash": "8e8526e553b6a2fa34f8aaf2a83da2857e899496",
   "created_at": "2025-05-19T21:30:56.684Z",
-  "updated_at": "2026-04-11T18:34:21.389Z",
+  "updated_at": "2026-04-11T21:05:53.865Z",
   "comment": {
-    "text": "This translation key is used to display a warning message when deleting a user's profile, stating that personal files and folders will be permanently deleted from specific sections of the user's account. It appears in a dialog box where users confirm deletion, providing context for translators on the scope of data being removed.",
+    "text": "This is a warning message displayed in a dialog when a user's profile is being deleted. It informs the user that all personal data, files, and folders in the specified sections will be permanently removed. `{{sectionNameFirst}}` and `{{sectionNameSecond}}` are placeholders for the names of these sections (e.g., \"My Documents\" and \"Trash\").",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:24.953Z"
+    "updated_at": "2026-04-11T21:05:53.865Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

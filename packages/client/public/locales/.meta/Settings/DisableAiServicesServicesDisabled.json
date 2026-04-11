@@ -3,11 +3,12 @@
   "content": "The paid {{aiServices}} will be deactivated.",
   "content_en_sha1_hash": "643e1bbcdfeeb50d81382ef8e043be2d9fa556ea",
   "created_at": "2026-03-26T08:26:46.857Z",
-  "updated_at": "2026-04-11T18:34:21.393Z",
+  "updated_at": "2026-04-11T21:24:35.693Z",
   "comment": {
-    "text": "This key displays a message within a dialog informing the user that paid AI services are being deactivated. It's used to explain the consequence of disabling AI services, likely in a settings or configuration dialog. The `{{aiServices}}` variable should be replaced with the specific name of the AI service.",
+    "text": "This is a line of text within a modal dialog, informing the user that their paid AI services will be deactivated. `{{aiServices}}` is a variable representing the name of the AI services.",
     "is_auto": true,
-    "updated_at": "2026-03-26T08:28:20.146Z"
+    "updated_at": "2026-04-11T21:24:35.693Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

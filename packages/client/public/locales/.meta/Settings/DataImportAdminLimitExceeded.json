@@ -3,11 +3,12 @@
   "content": "Admin limit exceeded. To continue, please either adjust the number of admins or increase the admin limit.",
   "content_en_sha1_hash": "ff2ffc7d2f57c649e3c547236602e231eea5b81f",
   "created_at": "2025-10-27T16:14:25.843Z",
-  "updated_at": "2026-04-11T18:34:21.485Z",
+  "updated_at": "2026-04-11T21:25:02.340Z",
   "comment": {
-    "text": "This text appears in an info block within the Data Import settings, specifically when the maximum number of administrators has been reached. It informs the user that they need to adjust the number of admins or increase the admin limit to proceed. Translators should ensure the wording accurately conveys this limitation and the available solutions.",
+    "text": "This is an error message displayed when the number of administrators for data import exceeds the allowed limit. It suggests adjusting the admin count or increasing the limit.",
     "is_auto": true,
-    "updated_at": "2025-10-27T18:00:35.024Z"
+    "updated_at": "2026-04-11T21:25:02.340Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

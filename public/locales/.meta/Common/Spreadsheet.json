@@ -3,11 +3,12 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2026-04-11T19:02:12.218Z",
+  "updated_at": "2026-04-11T20:42:13.841Z",
   "comment": {
-    "text": "This translation key is used for the label \"Spreadsheet\" which appears on a button in the \"Actions\" dropdown menu, allowing users to create a new spreadsheet. It is also used as part of a dialog and links within the application, consistently displaying the term \"Spreadsheet\". The text should be translated to appear cohesively across these different contexts.",
+    "text": "This is a button label or menu item for creating a new spreadsheet, or a label within a conversion dialog. It refers to the file type.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:59.574Z"
+    "updated_at": "2026-04-11T20:42:13.841Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

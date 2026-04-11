@@ -3,11 +3,12 @@
   "content": "Pick a template, edit and fill it in, then collect and analyze responses with AI agents",
   "content_en_sha1_hash": "012f1a828de9e96d7d886497d65bc76f3223234c",
   "created_at": "2026-03-31T15:18:14.806Z",
-  "updated_at": "2026-04-11T19:02:12.329Z",
+  "updated_at": "2026-04-11T20:50:14.819Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a descriptive paragraph displayed on the Library landing page, explaining the functionality of picking, editing, filling, collecting, and analyzing responses using AI agents.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:14.819Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

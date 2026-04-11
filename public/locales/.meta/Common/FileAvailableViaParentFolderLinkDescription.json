@@ -3,11 +3,12 @@
   "content": "This file is accessible via a shared link from its parent folder, but you can create a custom external link with specific permissions.",
   "content_en_sha1_hash": "21b1fc46186eef68a1016e49be49251201770088",
   "created_at": "2025-08-26T11:15:03.874Z",
-  "updated_at": "2026-04-10T15:22:27.190Z",
+  "updated_at": "2026-04-11T20:52:52.223Z",
   "comment": {
-    "text": "This text explains that a file or folder can be accessed through a parent folder's shared link, but users have the option to create a custom link with tailored permissions. It appears as explanatory text within a UI element, likely a dialog or panel, related to sharing files or folders. Translators should ensure the meaning of accessibility via a parent link and the possibility of custom links is preserved.",
+    "text": "This is the body text of an informational message displayed in the Share Info Bar for a file. It informs the user that the file is accessible through a shared link of its parent folder, but a custom external link can still be created for it.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:28:23.765Z"
+    "updated_at": "2026-04-11T20:52:52.223Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

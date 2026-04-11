@@ -3,11 +3,12 @@
   "content": "Sign in with LinkedIn",
   "content_en_sha1_hash": "c3ef8d2884998eed756a696c641cca91c150684a",
   "created_at": "2025-05-19T21:30:48.771Z",
-  "updated_at": "2026-04-11T18:34:21.648Z",
+  "updated_at": "2026-04-11T20:42:42.895Z",
   "comment": {
-    "text": "The translation key \"SignInWithLinkedIn\" is used to display a label for signing in with LinkedIn on the login screen. It appears as part of a button or similar UI element, allowing users to connect their LinkedIn account to access the application. The text should be clear and concise for internationalization purposes.",
+    "text": "This is a button label that allows users to sign in to DocSpace using their LinkedIn account.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:40:22.096Z"
+    "updated_at": "2026-04-11T20:42:42.895Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "This room is opened in the <1>{{roomMode}}</1> mode. If you have an account in this {{productName}}, please authorize.",
   "content_en_sha1_hash": "966e9f6f87aa9004801797a1570d6371db7bf248",
   "created_at": "2025-06-24T16:31:00.928Z",
-  "updated_at": "2026-04-11T18:34:21.560Z",
+  "updated_at": "2026-04-11T20:45:47.511Z",
   "comment": {
-    "text": "This translation key is used to display a toast message prompting users to authorize access to their account when they enter a public room in the application. The message includes placeholders for room mode and product name, which will be replaced by actual values during translation. It appears as a modal or dialog prompt.",
+    "text": "This is a toast message displayed to users accessing a public room. It informs them about the room's mode and prompts them to authorize if they have an account, with `{{roomMode}}` indicating the room's access level and `{{productName}}` being the brand name.",
     "is_auto": true,
-    "updated_at": "2025-06-24T16:31:40.712Z"
+    "updated_at": "2026-04-11T20:45:47.511Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

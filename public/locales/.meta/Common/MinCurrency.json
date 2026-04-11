@@ -3,11 +3,12 @@
   "content": "min {{currency}}",
   "content_en_sha1_hash": "867afbebb2d8f291b3ef9d86d74dd959c6966586",
   "created_at": "2026-04-10T13:53:42.720Z",
-  "updated_at": "2026-04-11T18:58:55.467Z",
+  "updated_at": "2026-04-11T20:48:41.579Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Error text displayed below an input field when the entered value is below the minimum allowed. `{{currency}}` will be replaced with the minimum value and its unit (e.g., \"10 GB\" or \"5 USD\").",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:48:41.579Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

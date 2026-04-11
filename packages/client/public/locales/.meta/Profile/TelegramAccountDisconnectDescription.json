@@ -3,11 +3,12 @@
   "content": "Your @{{username}} account is connected for Telegram notifications. You can disconnect from this account. In this case, you will not receive notifications.",
   "content_en_sha1_hash": "95c57b78036ac34ad47ddaf4ffde62ac2b15acc2",
   "created_at": "2025-10-13T13:22:22.961Z",
-  "updated_at": "2026-04-11T18:34:21.394Z",
+  "updated_at": "2026-04-11T21:20:32.892Z",
   "comment": {
-    "text": "This text explains to the user that their Telegram account is connected for notifications and provides the option to disconnect. It appears within a disconnect account dialog, informing the user that disconnecting will prevent them from receiving Telegram notifications. The username will be dynamically inserted into the text.",
+    "text": "This is the body text of a dialog box that appears when a user chooses to disconnect their Telegram account. It informs the user that their account is currently connected for notifications and explains the consequence of disconnecting. The `{{username}}` variable will be replaced with the user's Telegram username.",
     "is_auto": true,
-    "updated_at": "2025-10-13T14:27:47.715Z"
+    "updated_at": "2026-04-11T21:20:32.892Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

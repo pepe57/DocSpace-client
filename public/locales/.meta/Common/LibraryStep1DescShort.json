@@ -3,11 +3,12 @@
   "content": "Browse available templates in the library",
   "content_en_sha1_hash": "30c4b329e6ca09c9c2c89624e7099ee9d1e7708c",
   "created_at": "2026-03-31T15:18:14.880Z",
-  "updated_at": "2026-04-11T19:02:12.334Z",
+  "updated_at": "2026-04-11T20:50:07.785Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a short description displayed below a step title in a multi-step process. It instructs the user to browse templates in the library.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:07.785Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

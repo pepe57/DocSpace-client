@@ -3,11 +3,12 @@
   "content": "AI Agent Created",
   "content_en_sha1_hash": "492946ca8bbd5072556015fdec837b3b8b076c35",
   "created_at": "2026-03-31T15:18:27.255Z",
-  "updated_at": "2026-04-10T15:22:27.302Z",
+  "updated_at": "2026-04-11T21:29:25.704Z",
   "comment": {
-    "text": "This key displays a message indicating that an AI agent has been successfully created. It appears within a list of webhook trigger events, likely in a settings or configuration panel related to webhooks. Translators should ensure the wording accurately reflects the creation event.",
+    "text": "This is a webhook trigger label that appears in a list of available webhook events. It indicates that an AI agent has been successfully created.",
     "is_auto": true,
-    "updated_at": "2026-03-31T15:19:42.300Z"
+    "updated_at": "2026-04-11T21:29:25.704Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

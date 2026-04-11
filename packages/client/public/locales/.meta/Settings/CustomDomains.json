@@ -3,11 +3,12 @@
   "content": "Custom domains",
   "content_en_sha1_hash": "b18c921ec5318c9e2ce5dfcd1e4ec6b536183c22",
   "created_at": "2025-05-19T21:30:50.996Z",
-  "updated_at": "2026-04-10T15:22:27.380Z",
+  "updated_at": "2026-04-11T21:25:08.402Z",
   "comment": {
-    "text": "This translation key controls the label and value displayed for custom domain options on a portal settings page. It appears as a dropdown or select field in the UI where users can choose between \"All Domains\" or \"Custom Domains\".",
+    "text": "This is a radio button label. It allows the user to specify that only custom domains are trusted for email.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:29.161Z"
+    "updated_at": "2026-04-11T21:25:08.402Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

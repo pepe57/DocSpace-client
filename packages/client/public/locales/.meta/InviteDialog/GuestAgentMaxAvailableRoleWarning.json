@@ -3,11 +3,12 @@
   "content": "Guests cannot be assigned as Content creator.\nOnly Room admins, {{productName}} admins and Users are eligible for this role.",
   "content_en_sha1_hash": "bacaf2f76e9af70543835bf7fba7c43feaf4363e",
   "created_at": "2025-11-20T14:21:54.083Z",
-  "updated_at": "2026-04-11T18:34:21.422Z",
+  "updated_at": "2026-04-11T21:14:12.177Z",
   "comment": {
-    "text": "This text appears as a tooltip or warning message explaining why guests cannot be assigned the Content Creator role. It clarifies that only Room admins, {{productName}} admins, and Users are eligible for this role, and it's used in invitation panels and member management sections. Translators should ensure the message accurately reflects role eligibility restrictions.",
+    "text": "This is a tooltip or warning message that appears when attempting to assign a guest user the \"Content creator\" role. It explains that guests cannot be assigned this role and lists the eligible user types. The `{{productName}}` variable will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-11-21T07:43:17.431Z"
+    "updated_at": "2026-04-11T21:14:12.177Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

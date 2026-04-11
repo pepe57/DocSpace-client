@@ -3,11 +3,12 @@
   "content": "Link <1>«{{linkTitle}}»</1> deleted.",
   "content_en_sha1_hash": "7cea2e32f802fb146ced190da8dbe579760bc862",
   "created_at": "2025-05-19T21:30:54.914Z",
-  "updated_at": "2026-04-07T19:35:05.119Z",
+  "updated_at": "2026-04-11T21:12:53.278Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that an external link has been deleted. It will appear in UI elements such as infopanel pages, typically after deleting a room's external link. Translators should focus on conveying a neutral tone and avoiding any hints at the deletion action itself.",
+    "text": "This is a toast message displayed in the activity feed when an external link to a room has been deleted. `{{linkTitle}}` is the title of the deleted link, and `<1>` is used to bold the link title.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:40:49.710Z"
+    "updated_at": "2026-04-11T21:12:53.278Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

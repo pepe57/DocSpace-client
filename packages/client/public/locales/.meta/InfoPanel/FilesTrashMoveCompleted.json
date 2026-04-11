@@ -3,11 +3,12 @@
   "content": "Files moved to {{sectionName}}.",
   "content_en_sha1_hash": "1a4e20715b0d1234e1d3b9bd7c2718b767d813cc",
   "created_at": "2025-06-02T10:19:22.107Z",
-  "updated_at": "2026-04-11T19:53:45.200Z",
+  "updated_at": "2026-04-11T21:13:29.464Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that files have been moved to the trash section. It typically appears in UI elements where file history or moves are being displayed.",
+    "text": "This is a toast message that appears after a user moves files to the trash. `{{sectionName}}` will be replaced with \"Trash\".",
     "is_auto": true,
-    "updated_at": "2025-06-02T10:22:04.692Z"
+    "updated_at": "2026-04-11T21:13:29.464Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

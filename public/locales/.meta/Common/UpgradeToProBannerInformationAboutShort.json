@@ -3,11 +3,12 @@
   "content": "Learn more about {{license}} Edition on the <1>official website</1>",
   "content_en_sha1_hash": "62cad8c148a203ce2ed7a69d5c5c57a129dd8912",
   "created_at": "2025-05-26T07:15:49.119Z",
-  "updated_at": "2026-04-10T15:22:27.085Z",
+  "updated_at": "2026-04-11T20:40:04.814Z",
   "comment": {
-    "text": "This translation key is used to display a message about learning more about the Enterprise License on the official website. It appears in a banner or notification component and provides a link to access further information about the license edition.",
+    "text": "This is a short informational message displayed in a banner, encouraging users to learn more about a specific ONLYOFFICE edition. `{{license}}` will be replaced with the name of the edition (e.g., \"Enterprise\"). `<1></1>` is a tag for a clickable link to the official website.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:02:42.201Z"
+    "updated_at": "2026-04-11T20:40:04.814Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Set quota to define storage limit.",
   "content_en_sha1_hash": "76b938d40e18046c5b737223c4a69f182b330d1c",
   "created_at": "2025-05-19T21:30:48.578Z",
-  "updated_at": "2026-04-10T15:22:27.106Z",
+  "updated_at": "2026-04-11T20:43:12.493Z",
   "comment": {
-    "text": "This translation key is used to display a label that informs the user about the storage limit they are setting. It appears in a change quota dialog where users can adjust the storage limits for files.",
+    "text": "This is a descriptive text within a modal dialog, explaining the purpose of setting a quota to define a storage limit.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:41.333Z"
+    "updated_at": "2026-04-11T20:43:12.493Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

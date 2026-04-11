@@ -3,11 +3,12 @@
   "content": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an {{mcpServer}}.",
   "content_en_sha1_hash": "142c2a083c72acdf70eb5dda1a7ad5a3f3cee7e5",
   "created_at": "2026-04-10T13:53:44.177Z",
-  "updated_at": "2026-04-11T18:58:55.467Z",
+  "updated_at": "2026-04-11T21:00:36.620Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a description for a service option. It explains how to set up a personalized AI assistant, mentioning that `{{mcpServer}}` will be replaced with the localized term for \"MCP Server\".",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:36.620Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

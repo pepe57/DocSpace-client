@@ -3,11 +3,12 @@
   "content": "Off/On",
   "content_en_sha1_hash": "80992795b814b85328bd3dd85a4a30f6c24dbf19",
   "created_at": "2026-04-10T13:53:45.522Z",
-  "updated_at": "2026-04-11T18:58:55.463Z",
+  "updated_at": "2026-04-11T20:47:20.595Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Table header for a column indicating whether a feature is off or on.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:47:20.595Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

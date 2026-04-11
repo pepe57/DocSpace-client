@@ -3,11 +3,12 @@
   "content": "Folder deleted",
   "content_en_sha1_hash": "80fa7315b0ebe24ae6902123622edb0e1f4c01f3",
   "created_at": "2025-05-19T21:30:49.752Z",
-  "updated_at": "2026-04-11T19:53:45.263Z",
+  "updated_at": "2026-04-11T21:28:55.402Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a toast message indicating that a folder has been permanently removed. It appears after a user deletes a folder.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:28:55.402Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

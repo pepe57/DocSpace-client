@@ -3,11 +3,12 @@
   "content": "Submit your templates to share them with the {{organizationName}} community.",
   "content_en_sha1_hash": "f402c1826e5738eb55c2ef6d097ef02787db7f76",
   "created_at": "2025-05-19T21:30:49.165Z",
-  "updated_at": "2026-04-10T15:22:27.095Z",
+  "updated_at": "2026-04-11T20:41:48.829Z",
   "comment": {
-    "text": "This translation key is used to display a message encouraging users to submit their templates to share them within the organization's community. It appears in the body of a form gallery tile.",
+    "text": "This is the body text for a block encouraging users to submit templates. It appears within the template gallery and includes the variable `{{organizationName}}` which will be replaced by the name of the organization.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:12.708Z"
+    "updated_at": "2026-04-11T20:41:48.829Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

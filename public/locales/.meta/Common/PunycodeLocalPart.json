@@ -3,11 +3,12 @@
   "content": "Punycode local part is not supported",
   "content_en_sha1_hash": "527a2aa6c62b234fef95360c6517ee1bcfa5a635",
   "created_at": "2025-05-19T21:30:47.687Z",
-  "updated_at": "2026-04-11T18:58:55.352Z",
+  "updated_at": "2026-04-11T20:45:42.231Z",
   "comment": {
-    "text": "The translation key \"PunycodeLocalPart\" indicates an error message that is used when a local part of an email address cannot be converted to Punycode. This error typically appears in UI elements such as dialog boxes or input fields where email addresses are entered. The phrase translates to the user-friendly error description \"Punycode local part is not supported\".",
+    "text": "Error text. This message appears when the local part of an email address (the part before the \"@\" symbol) uses Punycode, which is not supported.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:49.852Z"
+    "updated_at": "2026-04-11T20:45:42.231Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

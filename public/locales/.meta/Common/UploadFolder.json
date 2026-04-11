@@ -3,11 +3,12 @@
   "content": "Upload folder",
   "content_en_sha1_hash": "e77a1496f8e8093547d02f31abdfb67b6e95e806",
   "created_at": "2026-04-03T21:51:34.737Z",
-  "updated_at": "2026-04-11T19:02:12.218Z",
+  "updated_at": "2026-04-11T20:39:43.240Z",
   "comment": {
-    "text": "Used as a label for the folder upload action in a dropdown menu and as a descriptive text for the 'Shift + i' keyboard shortcut in the hotkeys panel. It refers to the action of uploading an entire directory.",
+    "text": "This is the label for a button that allows users to upload an entire folder of files. It also appears in the hotkeys panel to describe the shortcut for this action.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:52:04.493Z"
+    "updated_at": "2026-04-11T20:39:43.240Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

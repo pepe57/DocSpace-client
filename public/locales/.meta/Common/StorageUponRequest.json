@@ -3,11 +3,12 @@
   "content": "Additional storage exceeding {{amount}} is available upon request.",
   "content_en_sha1_hash": "96d1a8d7da572c73f3ebe1d76840e01702df0791",
   "created_at": "2026-04-10T13:53:43.412Z",
-  "updated_at": "2026-04-11T18:58:55.465Z",
+  "updated_at": "2026-04-11T20:41:52.897Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label indicating that more storage can be requested. It appears in an order summary and includes a variable `{{amount}}` representing the current storage limit.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:52.897Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

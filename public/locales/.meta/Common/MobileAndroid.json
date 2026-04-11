@@ -3,11 +3,12 @@
   "content": "Get {{organizationName}} Documents on Google Play",
   "content_en_sha1_hash": "83f79085a2fb2d5efa055d36fc04645c91a6887d",
   "created_at": "2025-05-19T21:30:46.548Z",
-  "updated_at": "2026-04-11T18:58:55.478Z",
+  "updated_at": "2026-04-11T20:48:40.561Z",
   "comment": {
-    "text": "This translation key is used for the title of a download app button on an Android device, prompting users to access organization documents on Google Play. The key appears in a mobile app and will be displayed on screen as part of a UI element.",
+    "text": "This is a button label for downloading the Android app. It appears on the download page, with `{{organizationName}}` replaced by the product's name.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:30.088Z"
+    "updated_at": "2026-04-11T20:48:40.561Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

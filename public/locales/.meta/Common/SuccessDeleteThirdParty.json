@@ -3,11 +3,12 @@
   "content": "Third-party {{service}} is deleted",
   "content_en_sha1_hash": "d86937aacc3666d3c688a15acd671e3d6e2dafd7",
   "created_at": "2025-05-26T07:15:48.633Z",
-  "updated_at": "2026-04-10T15:22:27.095Z",
+  "updated_at": "2026-04-11T20:41:37.130Z",
   "comment": {
-    "text": "This translation key is used to display a success message when a third-party service is deleted. It will appear as a toast notification in a delete confirmation dialog.",
+    "text": "This is a toast message confirming the successful deletion of a third-party service. The `{{service}}` variable will be replaced with the name of the deleted service.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:31.489Z"
+    "updated_at": "2026-04-11T20:41:37.130Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

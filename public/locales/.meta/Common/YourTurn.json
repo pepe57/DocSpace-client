@@ -3,11 +3,12 @@
   "content": "Your turn",
   "content_en_sha1_hash": "8a4e60471b34b8af985c6dd2d93792af71788f57",
   "created_at": "2025-05-19T21:30:49.657Z",
-  "updated_at": "2026-04-10T15:22:27.075Z",
+  "updated_at": "2026-04-11T20:38:35.180Z",
   "comment": {
-    "text": "\"This translation key displays the message 'Your turn' to indicate whose action is being requested or awaited. It is used in UI elements where a user's input or submission is required.\"",
+    "text": "This is a short status label indicating that it is the user's turn to take action on a file or task.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:24:16.337Z"
+    "updated_at": "2026-04-11T20:38:35.180Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

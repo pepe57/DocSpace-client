@@ -3,11 +3,12 @@
   "content": "There are no rooms here yet",
   "content_en_sha1_hash": "a00289e348e163164ea7a94f54699117bbd7df83",
   "created_at": "2025-05-19T21:30:56.498Z",
-  "updated_at": "2026-04-11T18:34:21.322Z",
+  "updated_at": "2026-04-11T21:06:58.569Z",
   "comment": {
-    "text": "This translation key is used for the empty room header message, displayed when there are no rooms available. It appears as part of a header component in an application related to room management and organization, likely on a list or view of empty rooms.",
+    "text": "This text appears in the main content area when a user has no rooms yet. It informs the user that the room list is empty.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:38:47.742Z"
+    "updated_at": "2026-04-11T21:06:58.569Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

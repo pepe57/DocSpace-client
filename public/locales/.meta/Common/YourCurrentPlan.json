@@ -3,12 +3,12 @@
   "content": "<1>Your current plan:</1> {{amount}} <2>({{price}}/month)</2>",
   "content_en_sha1_hash": "af4d7920977d822cc7285b7a7dd65bad51970d18",
   "created_at": "2026-04-10T13:53:44.017Z",
-  "updated_at": "2026-04-11T19:04:40.053Z",
+  "updated_at": "2026-04-11T20:38:39.502Z",
   "comment": {
-    "text": "This key displays the user's current storage plan details within a cancellation dialog. It serves as a billing summary, showing the plan name, the specific amount/size, and the recurring price per month. Translators should ensure the structure clearly separates the label, the amount, and the price.",
+    "text": "This is a line of text within a dialog box, displaying the user's current storage plan details. It shows the `amount` of storage and the `price` per month.",
     "is_auto": true,
-    "updated_at": "2026-04-11T19:04:40.053Z",
-    "model": "gemma4:latest"
+    "updated_at": "2026-04-11T20:38:39.502Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

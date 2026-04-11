@@ -3,11 +3,12 @@
   "content": "Tools",
   "content_en_sha1_hash": "4fa8cc860c52b268dc6a3adcde7305e9415db5bb",
   "created_at": "2025-10-27T16:14:24.060Z",
-  "updated_at": "2026-04-11T18:58:55.448Z",
+  "updated_at": "2026-04-11T20:40:54.988Z",
   "comment": {
-    "text": "This key refers to a label for a section or settings related to available tools within the chat interface. It likely appears in a settings panel or options menu, indicating a grouping of functions or features accessible to the user. Translators should consider a term for \"tools\" or \"utilities\" in this context.",
+    "text": "This is a button label that opens a menu or dialog for managing tools within the AI chat feature.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:25:43.407Z"
+    "updated_at": "2026-04-11T20:40:54.988Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

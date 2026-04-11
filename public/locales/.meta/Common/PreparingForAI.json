@@ -3,11 +3,12 @@
   "content": "Preparing for AI",
   "content_en_sha1_hash": "455777c640a50d823923704cc725c569104b685e",
   "created_at": "2025-10-27T16:14:24.396Z",
-  "updated_at": "2026-04-10T15:22:27.131Z",
+  "updated_at": "2026-04-11T20:46:05.622Z",
   "comment": {
-    "text": "This key displays the text \"Preparing for AI\" within a tooltip. It appears alongside explanatory text, likely to inform users about AI-related features or readiness. Translators should ensure the meaning is clear and concise for a general audience.",
+    "text": "This is a tooltip title that appears when hovering over an AI-related feature that is currently being prepared or initialized.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:29:29.236Z"
+    "updated_at": "2026-04-11T20:46:05.622Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

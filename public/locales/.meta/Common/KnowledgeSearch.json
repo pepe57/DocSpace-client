@@ -3,11 +3,12 @@
   "content": "Knowledge search",
   "content_en_sha1_hash": "30c8bc7af59d4f92c383f90eeb2ec4c907ca8c85",
   "created_at": "2025-10-27T16:14:24.683Z",
-  "updated_at": "2026-04-11T18:58:55.449Z",
+  "updated_at": "2026-04-11T20:50:27.400Z",
   "comment": {
-    "text": "This key displays the label \"Knowledge search\" next to a search tool call within a chat message. It appears as part of the header for a tool call and provides context about the search performed. Translators should ensure this accurately reflects the action being performed.",
+    "text": "This is a label for a search tool. It indicates that the tool performs a search within a knowledge base.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:37:04.486Z"
+    "updated_at": "2026-04-11T20:50:27.400Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

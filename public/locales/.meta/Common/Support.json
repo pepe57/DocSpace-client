@@ -3,11 +3,12 @@
   "content": "Support",
   "content_en_sha1_hash": "f32d5a3b17e614297417cc279a7ec1cd02274d65",
   "created_at": "2025-05-19T21:30:49.224Z",
-  "updated_at": "2026-04-11T18:58:55.478Z",
+  "updated_at": "2026-04-11T20:41:27.384Z",
   "comment": {
-    "text": "This translation key is used to display \"Support\" as a label for live chat widgets. It appears on the web widget settings page and will be displayed in both the launcher and chat sections. The translated version of this key should be used to provide support-related content to users.",
+    "text": "This is the label for the live chat launcher and the chat window itself, allowing users to access support.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:37:59.404Z"
+    "updated_at": "2026-04-11T20:41:27.384Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

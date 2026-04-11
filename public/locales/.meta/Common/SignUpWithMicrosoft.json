@@ -3,11 +3,12 @@
   "content": "Sign up with Microsoft",
   "content_en_sha1_hash": "e42ef65d8922b6518d457278329d7e64a6f24601",
   "created_at": "2025-05-19T21:30:48.853Z",
-  "updated_at": "2026-04-11T18:34:21.649Z",
+  "updated_at": "2026-04-11T20:42:32.895Z",
   "comment": {
-    "text": "This translation key is used to display the label for a Microsoft sign-up button. It appears on the login form and is translated to support different languages, ensuring a consistent user experience across various regions.",
+    "text": "Button label for signing up using a Microsoft account.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:50.292Z"
+    "updated_at": "2026-04-11T20:42:32.895Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

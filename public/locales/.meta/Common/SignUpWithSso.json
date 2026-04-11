@@ -3,11 +3,12 @@
   "content": "Sign up with SSO",
   "content_en_sha1_hash": "aa2bbf27ca1af663107f2a143436cf3c8c71d4e8",
   "created_at": "2025-05-19T21:30:48.862Z",
-  "updated_at": "2026-04-11T18:34:21.649Z",
+  "updated_at": "2026-04-11T20:42:32.181Z",
   "comment": {
-    "text": "This translation key is used to display a sign-up option via Single Sign-On (SSO) method in the UI. It appears as a button or dialog prompt where users can choose to sign up using their SSO credentials. The purpose of this text is to inform users about an alternative way to create an account.",
+    "text": "This is a button label for initiating the sign-up process using Single Sign-On (SSO). It appears on the sign-up screen.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:47.745Z"
+    "updated_at": "2026-04-11T20:42:32.181Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

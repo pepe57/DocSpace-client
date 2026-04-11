@@ -3,11 +3,12 @@
   "content": "Price per GB",
   "content_en_sha1_hash": "f4dec55c03402f56571dd35aa4ebca31e6bf33d8",
   "created_at": "2026-04-10T13:53:45.601Z",
-  "updated_at": "2026-04-11T18:58:55.465Z",
+  "updated_at": "2026-04-11T20:45:56.332Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label in the order summary for additional storage. It indicates the cost for each gigabyte of storage.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:45:56.332Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

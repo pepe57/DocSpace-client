@@ -3,11 +3,12 @@
   "content": "AI Processing",
   "content_en_sha1_hash": "56cdb0eb53c5f0eba01491c2be88894ec37f3e2c",
   "created_at": "2026-03-31T15:18:26.977Z",
-  "updated_at": "2026-04-11T19:02:12.332Z",
+  "updated_at": "2026-04-11T20:39:02.092Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title for the third feature card in the welcome tour dialog, highlighting a key capability of the application.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:39:02.092Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

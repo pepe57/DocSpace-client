@@ -3,11 +3,12 @@
   "content": "Folder created",
   "content_en_sha1_hash": "d757fedebf319cb3697fac09278dd18e5a03e9bf",
   "created_at": "2025-05-19T21:30:49.749Z",
-  "updated_at": "2026-04-11T19:53:45.263Z",
+  "updated_at": "2026-04-11T21:28:56.210Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a toast message indicating that a new folder has been successfully created. It appears briefly after a user creates a folder.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:28:56.210Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

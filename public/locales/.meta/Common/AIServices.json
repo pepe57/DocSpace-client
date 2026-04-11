@@ -3,11 +3,12 @@
   "content": "AI services",
   "content_en_sha1_hash": "7452369e2f15817a4414cc5653aa2101c5c608f4",
   "created_at": "2026-03-26T08:26:29.053Z",
-  "updated_at": "2026-04-11T18:34:21.393Z",
+  "updated_at": "2026-04-11T20:59:42.535Z",
   "comment": {
-    "text": "This key translates the text \"AI services,\" which refers to the artificial intelligence features available within the application. It's used within the Disable AI Services dialog to label a specific AI-related setting. Translators should consider the general meaning of AI-powered functionalities.",
+    "text": "This is a short label for a section or feature related to artificial intelligence functionalities within the application. It appears in various contexts, including a dialog for disabling AI services.",
     "is_auto": true,
-    "updated_at": "2026-03-26T08:27:20.141Z"
+    "updated_at": "2026-04-11T20:59:42.535Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

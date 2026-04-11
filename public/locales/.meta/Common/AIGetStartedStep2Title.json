@@ -3,11 +3,12 @@
   "content": "Access all AI features",
   "content_en_sha1_hash": "47255992007786b8bfbd7b8f4e607d3d3c1255ce",
   "created_at": "2026-04-10T13:53:44.251Z",
-  "updated_at": "2026-04-11T18:58:55.469Z",
+  "updated_at": "2026-04-11T21:00:11.196Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title for the second step in a \"Get Started\" guide for AI features. It appears as a short heading within a numbered list.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:00:11.196Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

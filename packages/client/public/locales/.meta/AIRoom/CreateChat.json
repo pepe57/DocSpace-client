@@ -3,11 +3,12 @@
   "content": "Create chat",
   "content_en_sha1_hash": "0ab18beec76b33e2266ae6544d0fd24d05ff4fc5",
   "created_at": "2025-10-27T16:14:31.663Z",
-  "updated_at": "2026-04-11T18:34:21.285Z",
+  "updated_at": "2026-04-11T21:02:06.965Z",
   "comment": {
-    "text": "This text appears on a button or link that initiates the creation of a new chat room. It's used within a results tab, likely to allow users to start a chat based on search results. Translators should ensure the phrasing accurately reflects the action of creating a chat.",
+    "text": "Button label. This text appears on a button that, when clicked, initiates the creation of a new chat.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:11:29.078Z"
+    "updated_at": "2026-04-11T21:02:06.965Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

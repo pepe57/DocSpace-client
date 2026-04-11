@@ -3,11 +3,12 @@
   "content": "By authenticator app",
   "content_en_sha1_hash": "3b67ff7b02933cd6dfbd70b74628ba41aaf1425f",
   "created_at": "2025-05-19T21:30:50.850Z",
-  "updated_at": "2026-04-11T18:34:21.547Z",
+  "updated_at": "2026-04-11T21:25:23.188Z",
   "comment": {
-    "text": "\"This translation key is used for 'By authenticator app' and appears on a settings page. It's likely part of an accessibility option or feature related to two-factor authentication.\"",
+    "text": "Radio button label. It indicates that two-factor authentication will be performed using an authenticator application.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:34.727Z"
+    "updated_at": "2026-04-11T21:25:23.188Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

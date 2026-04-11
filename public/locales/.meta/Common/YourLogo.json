@@ -3,11 +3,12 @@
   "content": "Your logo",
   "content_en_sha1_hash": "bcf2253991976c9d41f18ecca9f3eed026899b53",
   "created_at": "2025-05-26T07:15:49.731Z",
-  "updated_at": "2026-04-10T15:22:27.075Z",
+  "updated_at": "2026-04-11T20:38:37.859Z",
   "comment": {
-    "text": "This translation key is used to display a placeholder text for a logo input field. It appears as the initial value of the \"YourLogo\" text when the component is loaded or disabled.",
+    "text": "Placeholder text for an input field where the user can enter text to be displayed as a logo.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:01:39.327Z"
+    "updated_at": "2026-04-11T20:38:37.859Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

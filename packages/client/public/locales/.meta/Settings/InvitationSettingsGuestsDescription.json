@@ -3,11 +3,12 @@
   "content": "Enable this option to allow all {{productName}} members to invite external guests to rooms.",
   "content_en_sha1_hash": "fd538e3b4365662acfad838486a8e1b6925b6d53",
   "created_at": "2025-05-26T07:15:51.100Z",
-  "updated_at": "2026-04-11T18:34:21.544Z",
+  "updated_at": "2026-04-11T21:23:44.982Z",
   "comment": {
-    "text": "Enable all {{productName}} members to invite external guests to rooms on a portal. This setting affects room invitation permissions and is displayed in Portal Settings.",
+    "text": "This is a description for a checkbox option in the portal settings. It explains that enabling the option allows all members to invite external guests to rooms. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:09:50.482Z"
+    "updated_at": "2026-04-11T21:23:44.982Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

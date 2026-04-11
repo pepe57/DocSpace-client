@@ -3,11 +3,12 @@
   "content": "Live chat was successfully connected",
   "content_en_sha1_hash": "7bcf42efaa0f21c0fcd4e7feb04b48e397e369c3",
   "created_at": "2025-05-19T21:30:46.253Z",
-  "updated_at": "2026-04-10T15:22:27.159Z",
+  "updated_at": "2026-04-11T20:49:23.641Z",
   "comment": {
-    "text": "This translation key is used to display a success message when live chat is successfully connected. It appears as a toast notification and indicates that the live chat feature is now active.",
+    "text": "This is a toast message confirming that the live chat widget has successfully connected and is now visible to the user.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:35:37.537Z"
+    "updated_at": "2026-04-11T20:49:23.641Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

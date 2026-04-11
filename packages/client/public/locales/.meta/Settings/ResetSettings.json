@@ -3,11 +3,12 @@
   "content": "Reset settings",
   "content_en_sha1_hash": "9ba8d6e6aaec0b4ced7d02008b670d094f276531",
   "created_at": "2025-10-27T16:14:26.774Z",
-  "updated_at": "2026-04-11T18:34:21.459Z",
+  "updated_at": "2026-04-11T21:22:40.671Z",
   "comment": {
-    "text": "This key is used for the label on a button that restores settings to their default values. It appears on a button within the AI settings section of the portal, likely used to reset user preferences. Translators should ensure the translation clearly conveys the action of reverting to original settings.",
+    "text": "This is the title of a dialog box and the label of a button. It appears when a user wants to revert AI settings (knowledge base or web search) to their default values.",
     "is_auto": true,
-    "updated_at": "2025-10-27T18:00:21.540Z"
+    "updated_at": "2026-04-11T21:22:40.671Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

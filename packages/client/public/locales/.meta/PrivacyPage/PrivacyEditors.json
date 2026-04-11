@@ -3,11 +3,12 @@
   "content": "Don't have {{OnlyofficeDesktopEditors}}?",
   "content_en_sha1_hash": "b2ab24e32eb8b547e1a5462aa757278ed7cb6202",
   "created_at": "2026-04-11T18:34:17.090Z",
-  "updated_at": "2026-04-11T18:35:00.625Z",
+  "updated_at": "2026-04-11T21:20:25.312Z",
   "comment": {
-    "text": "This message is displayed in a toast notification on the Private Rooms page. It informs the user that the required OnlyOffice Desktop Editors are missing. The placeholder `{{OnlyofficeDesktopEditors}}` will be dynamically replaced with the specific brand name.",
+    "text": "This is a toast message informing the user that they don't have the desktop editors installed. It appears when the system fails to detect the desktop editors. `{{OnlyofficeDesktopEditors}}` will be replaced with the brand name of the desktop editors.",
     "is_auto": true,
-    "updated_at": "2026-04-11T18:35:00.625Z"
+    "updated_at": "2026-04-11T21:20:25.312Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

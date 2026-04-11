@@ -3,11 +3,12 @@
   "content": "Room copied",
   "content_en_sha1_hash": "84a37f78a1044b9e21ef84fec5b8c4ffddbd830b",
   "created_at": "2025-05-19T21:30:49.819Z",
-  "updated_at": "2026-04-10T15:22:27.286Z",
+  "updated_at": "2026-04-11T21:28:29.561Z",
   "comment": {
-    "text": "This translation key is used to display a confirmation message when a room has been successfully copied. The text will appear in a UI context where rooms are being duplicated or transferred, providing feedback to users about the outcome of this action.",
+    "text": "Toast message. Appears briefly to confirm that a room has been successfully duplicated.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:54.188Z"
+    "updated_at": "2026-04-11T21:28:29.561Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

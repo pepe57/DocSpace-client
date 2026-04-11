@@ -3,11 +3,12 @@
   "content": "Blank Presentation",
   "content_en_sha1_hash": "5ebca94910c33575be9dd15d0cde900d516e7474",
   "created_at": "2026-02-18T14:56:25.410Z",
-  "updated_at": "2026-04-10T15:22:27.383Z",
+  "updated_at": "2026-04-11T21:25:29.202Z",
   "comment": {
-    "text": "This key represents the title for a blank presentation template. It's used to identify and display a default presentation file type within the settings panel. Translators should ensure the translation accurately conveys the concept of an empty or starter presentation.",
+    "text": "This is a label for a template option. It appears in a list of default templates, indicating an empty presentation file type.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:28:43.724Z"
+    "updated_at": "2026-04-11T21:25:29.202Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "The title can't contain any of the following characters: *+:\"<>?|/",
   "content_en_sha1_hash": "2988d94a573dbf375e5668150d952ca1022bdb80",
   "created_at": "2025-05-26T07:15:41.554Z",
-  "updated_at": "2026-04-11T18:58:55.345Z",
+  "updated_at": "2026-04-11T20:56:30.363Z",
   "comment": {
-    "text": "The translation key \"ContainsSpecCharacter\" is used to display an error message when a file title contains specific characters. It appears in a dialog box that allows users to input a file name and is linked to validation rules for folder names. Translators should replace this text with a corresponding message in their language, ensuring it conveys the same meaning as the original English content.",
+    "text": "This is an error message that appears when a user enters an invalid character in a title field, such as for a room or an agent.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:06:09.589Z"
+    "updated_at": "2026-04-11T20:56:30.363Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Try again",
   "content_en_sha1_hash": "042c862e4467d7d057cced262e6869dd75c22b7d",
   "created_at": "2025-10-27T16:14:24.460Z",
-  "updated_at": "2026-04-11T19:02:12.312Z",
+  "updated_at": "2026-04-11T20:40:22.974Z",
   "comment": {
-    "text": "This key provides the text for a button that allows a user to retry a failed vectorization process. It appears as a \"Try again\" link, likely within a badge or alert indicating a previous failure. Translators should ensure the translation conveys a clear action to reattempt the operation.",
+    "text": "This is a button label that appears when an error occurs or a service is unavailable, allowing the user to retry the action or check availability.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:25:12.228Z"
+    "updated_at": "2026-04-11T20:40:22.974Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

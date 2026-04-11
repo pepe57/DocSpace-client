@@ -3,11 +3,12 @@
   "content": "Your next monthly bill will be {{currency}} starting from {{date}}",
   "content_en_sha1_hash": "f633a3b3a877ad4deb71534c453ea1ff56f3f91b",
   "created_at": "2026-04-10T13:53:45.460Z",
-  "updated_at": "2026-04-11T18:58:55.464Z",
+  "updated_at": "2026-04-11T20:48:05.151Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a text string displayed in the billing section, informing the user about their next monthly bill. It includes the `currency` and `date` of the upcoming payment.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:48:05.151Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

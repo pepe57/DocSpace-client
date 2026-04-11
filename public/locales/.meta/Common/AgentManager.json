@@ -3,11 +3,12 @@
   "content": "Agent manager",
   "content_en_sha1_hash": "9eb4782eb2942928e3b10def6aee29e8e6780164",
   "created_at": "2025-11-03T12:10:13.383Z",
-  "updated_at": "2026-04-11T18:34:21.443Z",
+  "updated_at": "2026-04-11T21:00:48.880Z",
   "comment": {
-    "text": "This key refers to the text \"Agent manager,\" likely used as a label or title for a role or permission related to managing agents within a room or organization. It appears in UI elements like buttons or dialogs, granting access to agent management functions. Translators should ensure the description accurately reflects the agent management capabilities.",
+    "text": "This is a label for a user role, \"Agent manager\". It appears in user role selection menus and describes a user with specific management permissions.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:14:48.417Z"
+    "updated_at": "2026-04-11T21:00:48.880Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

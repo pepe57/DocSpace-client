@@ -3,11 +3,12 @@
   "content": "Import data from a third party service to {{organizationName}} {{productName}}. Data import allows transferring data such as all users, their personal and shared documents.",
   "content_en_sha1_hash": "d3eff090b70a55f1d87037e6d061a57396691184",
   "created_at": "2025-05-19T21:30:51.065Z",
-  "updated_at": "2026-04-11T18:34:21.481Z",
+  "updated_at": "2026-04-11T21:25:00.676Z",
   "comment": {
-    "text": "The translation key \"DataImportDescription\" is used to describe the data import feature for transferring data from a third party service to an organization's product. It appears in UI elements related to data import settings, such as portals and workspaces. The translation should provide a clear and concise explanation of this functionality.",
+    "text": "This is a descriptive text explaining the Data Import feature. It appears on the Data Import settings page and informs the user about transferring data from a third-party service. `{{organizationName}}` is the name of the user's organization, and `{{productName}}` is the name of the ONLYOFFICE product.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:26.266Z"
+    "updated_at": "2026-04-11T21:25:00.676Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

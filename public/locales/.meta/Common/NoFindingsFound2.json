@@ -3,11 +3,12 @@
   "content": "No findings found",
   "content_en_sha1_hash": "78b12ecb6b8bbc30258b279a0e94745b20baf5fe",
   "created_at": "2026-04-10T13:53:44.113Z",
-  "updated_at": "2026-04-11T18:58:55.476Z",
+  "updated_at": "2026-04-11T20:47:58.387Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a message displayed when no results are found after applying a date filter to a list of transactions.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:47:58.387Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "We couldn’t deliver this payload: failed to connect to host",
   "content_en_sha1_hash": "1b25cf1f64afabdb272c5f4f640f17f53dbc8be8",
   "created_at": "2025-05-19T21:30:49.718Z",
-  "updated_at": "2026-04-10T15:22:27.298Z",
+  "updated_at": "2026-04-11T21:29:03.721Z",
   "comment": {
-    "text": "This translation key is used to display an error message when a connection to a host fails. It appears as a status message in the UI, typically under a request details section, and indicates that the payload delivery was unsuccessful.",
+    "text": "This is an error message displayed within the Webhook Event Details when a webhook payload could not be delivered due to a connection failure.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:04.100Z"
+    "updated_at": "2026-04-11T21:29:03.721Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

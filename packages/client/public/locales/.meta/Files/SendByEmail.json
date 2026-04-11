@@ -3,11 +3,12 @@
   "content": "Send by email",
   "content_en_sha1_hash": "6ec82549f3e3a32eba90bc618cdb8d0b58d0dbf3",
   "created_at": "2025-05-19T21:30:56.176Z",
-  "updated_at": "2026-04-11T18:34:21.567Z",
+  "updated_at": "2026-04-11T21:08:10.609Z",
   "comment": {
-    "text": "Send by email is a label used on settings options in the client application. It appears as part of an option's label and indicates that this setting controls sending emails.",
+    "text": "This is a button label that, when clicked, allows the user to send the current document or file as an email attachment.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:08.572Z"
+    "updated_at": "2026-04-11T21:08:10.609Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

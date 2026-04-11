@@ -3,11 +3,12 @@
   "content": "Deactivate or delete space.",
   "content_en_sha1_hash": "b70998fc4817a45d4d7119737e6a46662004d7ed",
   "created_at": "2025-05-19T21:30:51.081Z",
-  "updated_at": "2026-04-11T19:53:45.171Z",
+  "updated_at": "2026-04-11T21:24:58.969Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a menu item label in a dialog. It allows the user to deactivate or delete their workspace.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:24:58.969Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

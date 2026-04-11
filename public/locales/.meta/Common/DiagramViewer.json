@@ -3,11 +3,12 @@
   "content": "Diagram Viewer",
   "content_en_sha1_hash": "efc325eb22799039f69cef2d57bc575842e16a98",
   "created_at": "2025-08-07T11:18:30.575Z",
-  "updated_at": "2026-04-11T18:34:21.632Z",
+  "updated_at": "2026-04-11T20:55:08.672Z",
   "comment": {
-    "text": "This key displays the text \"Diagram Viewer\" within a settings section, likely related to logo configuration. It's used to indicate the viewer used for displaying diagrams, alongside logo dimensions. Translators should ensure the term accurately reflects the diagram viewing functionality.",
+    "text": "This is a label for the \"Diagram Viewer\" application within the ONLYOFFICE DocSpace suite. It appears in the settings for branding, specifically when configuring the logo for the diagram viewer.",
     "is_auto": true,
-    "updated_at": "2025-08-07T11:22:33.053Z"
+    "updated_at": "2026-04-11T20:55:08.672Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

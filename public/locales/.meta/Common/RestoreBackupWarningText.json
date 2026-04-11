@@ -3,11 +3,12 @@
   "content": "{{productName}} will become unavailable during the restore process. After the restore is complete all the changes made after the date of the selected restore point will be lost.",
   "content_en_sha1_hash": "95f4959d72ad296d2309ba5ebff78078d35592ae",
   "created_at": "2025-05-26T07:15:46.930Z",
-  "updated_at": "2026-04-11T18:34:21.643Z",
+  "updated_at": "2026-04-11T20:44:51.964Z",
   "comment": {
-    "text": "This translation key is used for a warning message that informs users about potential data loss during the restore process of their {productName}. It appears in a UI component that displays settings or options related to file restoration.",
+    "text": "This is a warning message displayed when initiating a backup restore. It informs the user that the product will be unavailable and recent changes will be lost. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:56.760Z"
+    "updated_at": "2026-04-11T20:44:51.964Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

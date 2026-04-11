@@ -3,11 +3,12 @@
   "content": "File locked",
   "content_en_sha1_hash": "d56ec25816d2caab4e55bb34552b52e102303854",
   "created_at": "2025-05-19T21:30:49.965Z",
-  "updated_at": "2026-04-11T19:53:45.201Z",
+  "updated_at": "2026-04-11T21:27:36.807Z",
   "comment": {
-    "text": "FileLocked is a translation key used to display the message \"File locked\" when a file's locking status is unavailable or cannot be updated. It appears in various UI elements where file locking status is being attempted or shown.",
+    "text": "This is a toast message that appears when a file is successfully locked. It indicates that the file is now protected from editing by others.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:35.523Z"
+    "updated_at": "2026-04-11T21:27:36.807Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

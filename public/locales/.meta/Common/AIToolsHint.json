@@ -3,11 +3,12 @@
   "content": "AI tools and integrations",
   "content_en_sha1_hash": "647cfdd2c06961f3756768e640186ab58be2c1f2",
   "created_at": "2025-11-17T07:51:05.550Z",
-  "updated_at": "2026-04-11T18:58:55.448Z",
+  "updated_at": "2026-04-11T20:59:38.936Z",
   "comment": {
-    "text": "This text appears as a tooltip on a button or setting related to AI tools and integrations within the chat interface. It explains the functionality of the tools being offered and provides a brief label for those features. Translators should ensure the meaning accurately reflects AI tool integrations.",
+    "text": "This is a tooltip that appears when hovering over the AI tools button, indicating its functionality.",
     "is_auto": true,
-    "updated_at": "2025-11-17T07:53:51.931Z"
+    "updated_at": "2026-04-11T20:59:38.936Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,12 +3,12 @@
   "content": "Who filled it out",
   "content_en_sha1_hash": "c51f4dbf88247627ead979617e981ea807c6a6eb",
   "created_at": "2026-03-31T15:18:26.270Z",
-  "updated_at": "2026-04-11T19:06:14.772Z",
+  "updated_at": "2026-04-11T20:38:52.422Z",
   "comment": {
-    "text": "This key translates the title \"Who filled it out.\" It is used within the AI chat panel to label a section that provides information regarding the form's origin or creator. This title helps the user understand who is responsible for the data in the attached form.",
+    "text": "This is a button label within an AI chat panel. It suggests a prompt to the AI about who completed a specific form.",
     "is_auto": true,
-    "updated_at": "2026-04-11T19:06:14.772Z",
-    "model": "gemma4:latest"
+    "updated_at": "2026-04-11T20:38:52.422Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

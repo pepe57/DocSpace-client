@@ -3,11 +3,12 @@
   "content": "Provide access to the document and set the permission levels.",
   "content_en_sha1_hash": "fadee6246aa07df38bf00a87b1e091ea755c3d52",
   "created_at": "2025-05-19T21:30:48.651Z",
-  "updated_at": "2026-04-10T15:22:27.105Z",
+  "updated_at": "2026-04-11T20:43:03.371Z",
   "comment": {
-    "text": "Provide access to the document and set the permission levels. This translation key is used as a descriptive text in a UI component, likely a button or dialog, to inform users about the purpose of sharing a document.",
+    "text": "This is the descriptive text displayed in an info bar when sharing a document. It explains that users can grant access and define permission levels for the document.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:12.823Z"
+    "updated_at": "2026-04-11T20:43:03.371Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

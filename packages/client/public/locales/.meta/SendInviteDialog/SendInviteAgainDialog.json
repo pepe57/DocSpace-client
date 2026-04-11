@@ -3,11 +3,12 @@
   "content": "The invitation will be sent again to the selected users with the 'Pending' status.",
   "content_en_sha1_hash": "55886668778f3f617d123dd0f693ab2a77946f58",
   "created_at": "2025-05-19T21:30:53.268Z",
-  "updated_at": "2026-04-10T15:22:27.393Z",
+  "updated_at": "2026-04-11T21:21:13.999Z",
   "comment": {
-    "text": "\"This translation key is used for a modal dialog's header, displaying 'The invitation will be sent again to the selected users with the 'Pending' status'. It appears on the footer of a send invite dialog.\"",
+    "text": "This is a message in a confirmation dialog. It informs the user that invitations will be resent to users whose previous invitations are still pending.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:04.317Z"
+    "updated_at": "2026-04-11T21:21:13.999Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

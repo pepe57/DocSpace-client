@@ -3,11 +3,12 @@
   "content": "Backup: {{progress}}%",
   "content_en_sha1_hash": "67556deadd1d0bbd475e81e5accc92229e607451",
   "created_at": "2025-05-26T07:15:40.772Z",
-  "updated_at": "2026-04-11T18:34:21.641Z",
+  "updated_at": "2026-04-11T20:58:38.464Z",
   "comment": {
-    "text": "This translation key displays the progress percentage and corresponding label (\"Backup\", \"Preparing Backup\" or a dynamic progress value) during an automated backup process. It appears in various UI elements, such as buttons and dialogues, to inform users about the status of the backup operation.",
+    "text": "This is a progress indicator that appears during a backup operation. It shows the current percentage of completion, where `{{progress}}` is a number from 0 to 100.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:07:11.337Z"
+    "updated_at": "2026-04-11T20:58:38.464Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Show link to Help Center",
   "content_en_sha1_hash": "f1caebab0b9dd55772001bc3d83522b321581b0b",
   "created_at": "2025-05-26T07:15:48.005Z",
-  "updated_at": "2026-04-11T18:34:21.627Z",
+  "updated_at": "2026-04-11T20:42:47.488Z",
   "comment": {
-    "text": "The translation key \"ShowHelpCenter\" is used to display a label for a checkbox that toggles visibility of the Help Center link in the UI. It appears as a button option and is intended to provide users with easy access to support resources when the \"help enabled\" setting is turned on.",
+    "text": "This is a checkbox label. It allows the user to enable or disable the display of a link to the Help Center within the application.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:37.336Z"
+    "updated_at": "2026-04-11T20:42:47.488Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

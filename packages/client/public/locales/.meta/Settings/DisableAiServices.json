@@ -3,11 +3,12 @@
   "content": "Disable {{aiServices}}",
   "content_en_sha1_hash": "ff9221e8d16c8a8a5865acce6a73670a6019e447",
   "created_at": "2026-03-26T08:26:46.833Z",
-  "updated_at": "2026-04-11T18:34:21.393Z",
+  "updated_at": "2026-04-11T21:24:40.908Z",
   "comment": {
-    "text": "This key is used for a dialog component that allows users to disable AI services. The text, \"Disable {{aiServices}}\", appears within a button or other element in the dialog, likely prompting the user to disable specified AI services. Translators should ensure the text accurately conveys the action of disabling AI features.",
+    "text": "This is the title of a confirmation dialog. It appears when a user attempts to disable AI services, asking them to confirm the action. `{{aiServices}}` will be replaced with the name of the AI services being disabled.",
     "is_auto": true,
-    "updated_at": "2026-03-26T08:29:11.438Z"
+    "updated_at": "2026-04-11T21:24:40.908Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

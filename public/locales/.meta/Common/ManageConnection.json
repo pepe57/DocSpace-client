@@ -3,11 +3,12 @@
   "content": "Manage connection",
   "content_en_sha1_hash": "3ca4794faf5c82e76336e37b70c07375fb9ed946",
   "created_at": "2025-10-27T16:14:24.262Z",
-  "updated_at": "2026-04-11T18:58:55.448Z",
+  "updated_at": "2026-04-11T20:49:03.726Z",
   "comment": {
-    "text": "This text likely refers to a button or link that allows users to manage their connection settings or connected accounts within the chat interface. Translators should ensure the translated text accurately conveys the ability to adjust or oversee connection-related configurations.",
+    "text": "This is a button label that opens a dialog to manage connections for AI tools.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:36:14.080Z"
+    "updated_at": "2026-04-11T20:49:03.726Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

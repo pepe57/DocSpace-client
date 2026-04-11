@@ -3,11 +3,12 @@
   "content": "Restore to default",
   "content_en_sha1_hash": "4679ca338a63ec93afce427c08feb4f9b69c6008",
   "created_at": "2025-05-19T21:30:52.427Z",
-  "updated_at": "2026-04-10T15:22:27.345Z",
+  "updated_at": "2026-04-11T21:22:36.084Z",
   "comment": {
-    "text": "RestoreToDefault is used as a label for the cancel button on a portal settings page, prompting users to revert to default brute force protection settings. This translation key appears in a dialog box where users can customize security settings.",
+    "text": "Button label. This button reverts all settings on the current page to their default values.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:38.035Z"
+    "updated_at": "2026-04-11T21:22:36.084Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

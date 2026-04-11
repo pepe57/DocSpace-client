@@ -3,11 +3,12 @@
   "content": "The correspondence of the Single Sign-On attributes to the entries of the 'Accounts' section.",
   "content_en_sha1_hash": "c7591a0a501267c1ec099b33a718569ff4884c4e",
   "created_at": "2025-05-19T21:30:50.065Z",
-  "updated_at": "2026-04-10T15:22:27.326Z",
+  "updated_at": "2026-04-11T21:27:00.191Z",
   "comment": {
-    "text": "This translation key is used for a tooltip that describes the purpose of matching Single Sign-On attributes to account entries in the 'Accounts' section. It appears as an icon button next to a form field on a settings page. Translators should provide a clear and concise explanation of this process for internationalization purposes.",
+    "text": "This is a tooltip that appears when hovering over the \"Attribute Matching\" section. It explains how Single Sign-On attributes map to user account fields.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:19.251Z"
+    "updated_at": "2026-04-11T21:27:00.191Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

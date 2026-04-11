@@ -3,11 +3,12 @@
   "content": "Amount",
   "content_en_sha1_hash": "43dc8532f7e57be250d7397de3d14085d51516f0",
   "created_at": "2026-04-10T13:53:41.848Z",
-  "updated_at": "2026-04-11T18:58:55.473Z",
+  "updated_at": "2026-04-11T20:59:17.241Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a table header or input field label indicating a monetary value. It appears in billing sections, such as when topping up a balance or viewing transaction history.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:17.241Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

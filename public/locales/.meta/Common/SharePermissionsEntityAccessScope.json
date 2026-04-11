@@ -3,11 +3,12 @@
   "content": "<1>{{accessType}}</1> will be able to <3>{{accessRights}}</3> {{shareContents}} of {{shareParent}}.",
   "content_en_sha1_hash": "d60c21d40db2e8ae5b6226321b0b0a4a461a4f2e",
   "created_at": "2025-08-26T11:15:00.768Z",
-  "updated_at": "2026-04-11T18:34:21.609Z",
+  "updated_at": "2026-04-11T20:42:57.230Z",
   "comment": {
-    "text": "This key displays a message explaining the access granted to a user, specifying their access type, rights, and the content/parent they can access. It's used to clarify sharing permissions within the UI, likely in a sharing dialog or permissions management section. Translators should ensure the phrasing accurately reflects the level of access being described.",
+    "text": "This is a sentence displayed in the sharing permissions dialog, indicating what a specific user or group ({{accessType}}) can do ({{accessRights}}) with the shared content ({{shareContents}}) within its parent folder or project ({{shareParent}}).",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:16:42.149Z"
+    "updated_at": "2026-04-11T20:42:57.230Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

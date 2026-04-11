@@ -3,11 +3,12 @@
   "content": "Sharing with {{productName}} users",
   "content_en_sha1_hash": "fa06dae4b65dd82f0df19959cee1423e63f3cf26",
   "created_at": "2025-09-23T07:24:16.874Z",
-  "updated_at": "2026-04-11T18:34:21.580Z",
+  "updated_at": "2026-04-11T20:42:53.042Z",
   "comment": {
-    "text": "This key displays text for a sharing option, indicating that the file will be shared with users of the {{productName}} product. It appears as part of a sharing dialog or form, likely as a button or option label. Translators should ensure the wording accurately conveys sharing access to the product's user base.",
+    "text": "This is the title for a section within the sharing dialog, indicating the option to share the document with other users registered on the DocSpace portal. `{{productName}}` will be replaced with the brand name of the product (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
-    "updated_at": "2025-09-23T07:25:14.180Z"
+    "updated_at": "2026-04-11T20:42:53.042Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

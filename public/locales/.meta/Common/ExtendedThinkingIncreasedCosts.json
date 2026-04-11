@@ -3,11 +3,12 @@
   "content": "This model uses advanced reasoning, which may increase costs",
   "content_en_sha1_hash": "501d146f9c9f86da83fc294b01d1fa3cb6048e7b",
   "created_at": "2026-03-26T08:26:34.738Z",
-  "updated_at": "2026-04-11T18:58:55.447Z",
+  "updated_at": "2026-04-11T20:52:58.479Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a tooltip that appears when hovering over a help button. It explains that using an advanced reasoning model might incur higher costs.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:52:58.479Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

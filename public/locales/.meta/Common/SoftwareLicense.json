@@ -3,11 +3,12 @@
   "content": "Software license",
   "content_en_sha1_hash": "cb2cde9860819e645714e5902ea20dfa6c78f38b",
   "created_at": "2025-05-26T07:15:48.283Z",
-  "updated_at": "2026-04-11T18:34:21.594Z",
+  "updated_at": "2026-04-11T20:42:21.103Z",
   "comment": {
-    "text": "This translation key is used to display software license information. It appears in a dialog box about the software's licensing terms.",
+    "text": "This is a label in the \"About\" dialog, indicating the type of license under which the software is distributed. It appears next to a link to the license details.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:03:32.920Z"
+    "updated_at": "2026-04-11T20:42:21.103Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

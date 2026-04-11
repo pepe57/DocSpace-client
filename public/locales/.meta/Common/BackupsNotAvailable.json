@@ -3,11 +3,12 @@
   "content": "Backups unavailable — top up wallet",
   "content_en_sha1_hash": "3a4aab80f5cbc306d68ddb95680bef4bc8fa5ef9",
   "created_at": "2026-04-10T13:53:44.836Z",
-  "updated_at": "2026-04-11T18:58:55.458Z",
+  "updated_at": "2026-04-11T20:58:35.871Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an error message displayed when a user's backup service is active but no backups are available due to insufficient funds. It prompts the user to add money to their wallet.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:35.871Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

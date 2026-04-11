@@ -3,11 +3,12 @@
   "content": "Card unlinked",
   "content_en_sha1_hash": "e03b19150f5805fbb3aba830ef26e26249fb29e2",
   "created_at": "2026-04-10T13:53:42.208Z",
-  "updated_at": "2026-04-11T18:58:55.454Z",
+  "updated_at": "2026-04-11T20:57:32.942Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an error message or status text indicating that a credit card is no longer associated with the account. It appears when a card has been unlinked, often prompting the user to link a new one.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:57:32.942Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

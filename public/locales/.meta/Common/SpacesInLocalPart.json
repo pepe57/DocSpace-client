@@ -3,11 +3,12 @@
   "content": "Local part can't contain spaces",
   "content_en_sha1_hash": "1303a27e549235cda77cad1ed3ebba10af960eb5",
   "created_at": "2025-05-19T21:30:48.980Z",
-  "updated_at": "2026-04-11T18:58:55.352Z",
+  "updated_at": "2026-04-11T20:42:15.676Z",
   "comment": {
-    "text": "The translation key \"SpacesInLocalPart\" is used to display an error message when a local part of a username or email address contains spaces. This error typically appears in dialogs or input fields where users can edit their account information. The goal is to prevent usernames from being set up incorrectly and to ensure consistency with standard naming conventions.",
+    "text": "This is an error message displayed when a user enters a space in the local part of an email address (the part before the \"@\" symbol).",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:02.817Z"
+    "updated_at": "2026-04-11T20:42:15.676Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

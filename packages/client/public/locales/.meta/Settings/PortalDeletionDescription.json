@@ -3,11 +3,12 @@
   "content": "Use this option to delete your space permanently.",
   "content_en_sha1_hash": "eda8701798195496d0dcc13393b3bf9f69ca3417",
   "created_at": "2025-05-19T21:30:52.208Z",
-  "updated_at": "2026-04-11T18:34:21.487Z",
+  "updated_at": "2026-04-11T21:22:59.474Z",
   "comment": {
-    "text": "This translation key is used for a description that informs users about the permanent deletion of their space. It appears on a button in the Portal Settings page when the user has not activated their account.",
+    "text": "This is a descriptive text displayed below the \"Delete Space\" heading in the portal settings. It explains that selecting this option will permanently delete the user's ONLYOFFICE DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:47.213Z"
+    "updated_at": "2026-04-11T21:22:59.474Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "URL",
   "content_en_sha1_hash": "0e2d9b0777a485c1276de0803c12a7d76fbc5c39",
   "created_at": "2025-10-27T16:14:31.653Z",
-  "updated_at": "2026-04-11T19:53:45.238Z",
+  "updated_at": "2026-04-11T21:02:28.676Z",
   "comment": {
-    "text": "This key represents a URL input field, likely for specifying a provider endpoint. It appears in dialogs and settings pages, such as when configuring AI settings or Single Sign-On integrations, and translators should ensure the translation accurately conveys the concept of a web address.",
+    "text": "This is a label for a text input field where the user enters the URL of an AI provider.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:20:51.171Z"
+    "updated_at": "2026-04-11T21:02:28.676Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

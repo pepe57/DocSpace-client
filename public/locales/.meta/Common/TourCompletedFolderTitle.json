@@ -3,11 +3,12 @@
   "content": "Completed submissions",
   "content_en_sha1_hash": "1fd53940677c024b1bb98327953b52df8c3ec2c8",
   "created_at": "2026-03-31T15:18:26.702Z",
-  "updated_at": "2026-04-11T19:02:12.334Z",
+  "updated_at": "2026-04-11T20:40:36.488Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the title for a tour step explaining the \"Completed submissions\" folder. It appears as a short label.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:36.488Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

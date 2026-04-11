@@ -3,11 +3,12 @@
   "content": "These {{itemCount}} items will be moved to Trash.",
   "content_en_sha1_hash": "376801e3e09ca786042c3c56c04667dc6dacc5ae",
   "created_at": "2026-04-03T21:51:30.652Z",
-  "updated_at": "2026-04-11T19:02:12.336Z",
+  "updated_at": "2026-04-11T20:48:22.967Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a confirmation message in a dialog box, informing the user that multiple selected items will be moved to the Trash. `{{itemCount}}` is a number representing how many items will be moved.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:48:22.967Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

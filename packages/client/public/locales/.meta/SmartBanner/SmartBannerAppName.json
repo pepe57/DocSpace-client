@@ -3,11 +3,12 @@
   "content": "{{organizationName}} Documents",
   "content_en_sha1_hash": "db01b8765ec0bbda9628a90d2f7c09d5e66f8c63",
   "created_at": "2025-05-19T21:30:50.041Z",
-  "updated_at": "2026-04-11T19:53:45.166Z",
+  "updated_at": "2026-04-11T21:27:04.571Z",
   "comment": {
-    "text": "This translation key is used to display the title of a smart banner component on mobile devices. It will be translated as \"{{organizationName}} Documents\" and appears in the banner's title field when displayed on touch-enabled devices.",
+    "text": "This is the title of the smart banner that appears on mobile devices. It displays the name of the organization, represented by the `{{organizationName}}` variable, followed by \"Documents\".",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:21.364Z"
+    "updated_at": "2026-04-11T21:27:04.571Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

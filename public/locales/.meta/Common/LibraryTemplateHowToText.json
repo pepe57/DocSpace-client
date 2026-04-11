@@ -3,11 +3,12 @@
   "content": "Click \"Use Template\" to add a copy to My Forms. From there you can edit the form fields, set up the filling flow, and share it with recipients. Once filled, the results are collected automatically.",
   "content_en_sha1_hash": "f0990df8a4218f8a375ff12af06ec90ff3c9f876",
   "created_at": "2026-03-31T15:18:15.194Z",
-  "updated_at": "2026-04-11T19:02:12.335Z",
+  "updated_at": "2026-04-11T20:49:58.018Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a paragraph of text explaining how to use a form template. It appears below the \"How to use this template\" heading on the template details page.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:49:58.018Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "HTTPS required",
   "content_en_sha1_hash": "61b83d2d44a85c0926a570851f3a01e8ab6c10aa",
   "created_at": "2025-05-19T21:30:54.424Z",
-  "updated_at": "2026-04-11T18:34:21.504Z",
+  "updated_at": "2026-04-11T21:15:59.433Z",
   "comment": {
-    "text": "This translation key is used to display a message indicating that HTTPS is required. It appears as a header in a UI component related to content security policies (CSP) and is used to notify users about this specific requirement.",
+    "text": "This is the title of an informational bar that appears when the DocSpace portal is accessed via HTTP instead of HTTPS, indicating that HTTPS is required for certain features.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:46.036Z"
+    "updated_at": "2026-04-11T21:15:59.433Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

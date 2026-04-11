@@ -3,11 +3,12 @@
   "content": "Errors occurred during data import. Download the log to check them.",
   "content_en_sha1_hash": "aabe25d4edb5d4821ac11cc9654982a6b1cee13a",
   "created_at": "2025-05-19T21:30:51.549Z",
-  "updated_at": "2026-04-10T15:22:27.366Z",
+  "updated_at": "2026-04-11T21:24:06.881Z",
   "comment": {
-    "text": "This translation key is used for an error message that displays when data import fails. It prompts users to download a log file to diagnose and resolve issues. This text appears as an error notification in the \"Import Complete Step\" component.",
+    "text": "This is an error message displayed when data import completes with errors. It informs the user that issues occurred and prompts them to download a log for details.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:10.267Z"
+    "updated_at": "2026-04-11T21:24:06.881Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Total submissions",
   "content_en_sha1_hash": "5b3201416a97db9ccabb5284544ae7cca2973e50",
   "created_at": "2026-03-31T15:18:24.699Z",
-  "updated_at": "2026-04-11T19:02:12.326Z",
+  "updated_at": "2026-04-11T20:40:43.025Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a button or menu item within an AI chat panel, indicating an option to ask about the total number of submissions for a specific form.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:43.025Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

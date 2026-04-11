@@ -3,11 +3,12 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-04-11T19:02:12.225Z",
+  "updated_at": "2026-04-11T20:43:56.538Z",
   "comment": {
-    "text": "The translation key \"SaveButton\" is used to display the label for a save button on a UI component. In a file editor and dialog contexts, it appears as a button that triggers saving changes made to a document or form.",
+    "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:34:27.353Z"
+    "updated_at": "2026-04-11T20:43:56.538Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

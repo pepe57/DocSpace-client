@@ -3,11 +3,12 @@
   "content": "Try Business",
   "content_en_sha1_hash": "1355ceed14169abd7406ec07f2a5ad9a56c2c888",
   "created_at": "2025-05-19T21:30:49.352Z",
-  "updated_at": "2026-04-10T15:22:27.087Z",
+  "updated_at": "2026-04-11T20:40:22.050Z",
   "comment": {
-    "text": "This translation key is used for the label on a tariff-related component. It displays \"Try Business\" when applicable and indicates whether a user can try a free business tariff or not, depending on the page context.",
+    "text": "This is a button label that appears in the tariff bar for users on a free plan, prompting them to upgrade to a business plan.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:37:20.335Z"
+    "updated_at": "2026-04-11T20:40:22.050Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

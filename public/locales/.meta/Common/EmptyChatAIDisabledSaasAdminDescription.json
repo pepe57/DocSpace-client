@@ -3,11 +3,12 @@
   "content": "The AI service is turned off, preventing this agent from processing chats or performing tasks. To restore full functionality, enable AI features in the {{productName}} settings.",
   "content_en_sha1_hash": "3701608d9d13b0f9a0ae4b7a8e7ac16d12d3d769",
   "created_at": "2025-11-03T12:10:17.296Z",
-  "updated_at": "2026-04-11T18:58:55.450Z",
+  "updated_at": "2026-04-11T20:54:07.025Z",
   "comment": {
-    "text": "This text explains to users, specifically SaaS administrators, that the AI service is disabled, preventing chat processing. It guides them to enable AI features in the product settings to restore functionality; it appears within a screen indicating lack of access.",
+    "text": "This is an error message displayed to a SaaS administrator when the AI service is disabled, explaining that the AI agent cannot process chats or perform tasks. It includes the `{{productName}}` variable for the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-11-03T12:13:29.098Z"
+    "updated_at": "2026-04-11T20:54:07.025Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

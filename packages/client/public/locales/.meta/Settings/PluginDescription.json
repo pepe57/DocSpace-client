@@ -3,11 +3,12 @@
   "content": "Extend your {{productName}} functionality, connect third-party services or enhance the existing user experience.",
   "content_en_sha1_hash": "24b35eff4b6cbc59b4eb1ff806f2234eb9201d6e",
   "created_at": "2026-04-03T21:51:36.597Z",
-  "updated_at": "2026-04-11T18:34:21.506Z",
+  "updated_at": "2026-04-11T21:23:05.728Z",
   "comment": {
-    "text": "This key provides the description text for the Plugin SDK card within the Developer Tools section of the Portal Settings. It explains how users can extend functionality and connect services, and it includes a dynamic placeholder for the product name.",
+    "text": "This is a description for a card in the settings, explaining the purpose of plugins. `{{productName}}` is a variable for the product's brand name.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:59:03.736Z"
+    "updated_at": "2026-04-11T21:23:05.728Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Drop to: {{folderName}}",
   "content_en_sha1_hash": "e078085b1f00e4e3d886ab2241801879621c6a7f",
   "created_at": "2025-08-11T18:11:29.863Z",
-  "updated_at": "2026-04-11T18:58:55.479Z",
+  "updated_at": "2026-04-11T20:54:38.687Z",
   "comment": {
-    "text": "This key displays a tooltip on a button indicating the destination folder when dropping a file. The text \"Drop to: {{folderName}}\" informs the user where the file will be placed. Translators should ensure the destination folder name is clearly communicated.",
+    "text": "This is a tooltip that appears when dragging an item, indicating the target folder where the item will be dropped. `{{folderName}}` is the name of the destination folder.",
     "is_auto": true,
-    "updated_at": "2025-08-11T18:12:30.269Z"
+    "updated_at": "2026-04-11T20:54:38.687Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "To protect the portal against brute-force attacks, you can set up the limits of unsuccessful login attempts by the user.",
   "content_en_sha1_hash": "df581d5d7ed874eec5e55be026d206a447996258",
   "created_at": "2025-05-19T21:30:50.835Z",
-  "updated_at": "2026-04-11T18:34:21.546Z",
+  "updated_at": "2026-04-11T21:25:25.102Z",
   "comment": {
-    "text": "This translation key is used to describe the protection mechanism against brute-force attacks on mobile devices. It helps users understand how to set limits on unsuccessful login attempts made by a user.",
+    "text": "This is a subtitle for a settings category item. It describes the purpose of the \"Brute-Force Protection\" setting, explaining that it allows users to configure limits for failed login attempts to enhance portal security.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:35.237Z"
+    "updated_at": "2026-04-11T21:25:25.102Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

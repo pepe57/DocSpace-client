@@ -3,11 +3,12 @@
   "content": "Automatically switch between light and dark themes when your system does.",
   "content_en_sha1_hash": "c63fc79ca86878cd4320587abf222c6e63118c5c",
   "created_at": "2026-04-03T21:51:34.692Z",
-  "updated_at": "2026-04-11T19:02:12.298Z",
+  "updated_at": "2026-04-11T20:41:21.847Z",
   "comment": {
-    "text": "This key provides the description for the \"System\" theme option within the interface theme selection settings. It explains that the application will automatically switch between light and dark modes to match the user's operating system preferences.",
+    "text": "This is a description for a radio button option. It explains that selecting this option will make the application's theme (light or dark) automatically match the operating system's theme setting.",
     "is_auto": true,
-    "updated_at": "2026-04-03T21:52:49.699Z"
+    "updated_at": "2026-04-11T20:41:21.847Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

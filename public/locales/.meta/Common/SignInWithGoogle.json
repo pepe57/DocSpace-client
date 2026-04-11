@@ -3,11 +3,12 @@
   "content": "Sign in with Google",
   "content_en_sha1_hash": "4a0b7281397ff6a6cf1e5d19aad8dd3b71043677",
   "created_at": "2025-05-19T21:30:48.762Z",
-  "updated_at": "2026-04-11T18:34:21.647Z",
+  "updated_at": "2026-04-11T20:42:43.702Z",
   "comment": {
-    "text": "The \"Sign in with Google\" translation key is used to display a button label or title that allows users to sign in to the application using their Google account credentials. This text typically appears on a login form, such as a button or dialog prompt, and is intended for display in multiple languages.",
+    "text": "This is the label for a button that allows users to log into their account using their Google credentials.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:40:26.158Z"
+    "updated_at": "2026-04-11T20:42:43.702Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

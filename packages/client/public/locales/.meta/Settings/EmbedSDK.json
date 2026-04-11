@@ -3,11 +3,12 @@
   "content": "Embed SDK",
   "content_en_sha1_hash": "a9ccf1a96c44b79062482e5c0b3db74a1df2a6dd",
   "created_at": "2026-04-03T21:51:36.584Z",
-  "updated_at": "2026-04-11T18:34:21.491Z",
+  "updated_at": "2026-04-11T21:24:11.864Z",
   "comment": {
-    "text": "Used as the title for the Embed SDK feature card and header within the Developer Tools section of the Portal Settings. It identifies the JavaScript SDK integration option for developers.",
+    "text": "This is a title for a section in the Developer Tools settings, referring to the Embed SDK. It also appears as a card title in the same section.",
     "is_auto": true,
-    "updated_at": "2026-04-03T22:00:35.340Z"
+    "updated_at": "2026-04-11T21:24:11.864Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

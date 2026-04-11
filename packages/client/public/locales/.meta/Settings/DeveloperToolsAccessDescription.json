@@ -3,11 +3,12 @@
   "content": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the owner and {{productName}} administrators only, select Disable and click Save button.",
   "content_en_sha1_hash": "01d2a8045315e8f0f4963266d4c08d273e77ec34",
   "created_at": "2025-07-10T11:10:58.987Z",
-  "updated_at": "2026-04-11T18:34:21.542Z",
+  "updated_at": "2026-04-11T21:24:43.653Z",
   "comment": {
-    "text": "This translation key is used to describe a setting that controls access to Developer Tools on a portal. It will appear in a dialog or settings page, providing guidance on how to restrict or enable access to this section.",
+    "text": "This is a descriptive text explaining the \"Developer Tools Access\" setting. It appears below the setting title and describes how to control visibility of the Developer Tools section. `{{productName}}` is a placeholder for the product's brand name.",
     "is_auto": true,
-    "updated_at": "2025-07-10T11:11:12.688Z"
+    "updated_at": "2026-04-11T21:24:43.653Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "No file will be copied. The original file will be retained in the destination folder.",
   "content_en_sha1_hash": "d031adeeb4ad91e6a7490531b401915486d79266",
   "created_at": "2025-05-19T21:30:48.907Z",
-  "updated_at": "2026-04-10T15:22:27.099Z",
+  "updated_at": "2026-04-11T20:42:23.736Z",
   "comment": {
-    "text": "This translation key provides a message to be displayed when skipping file copy operations, indicating that the original file will remain in the destination folder. It appears in UI elements where users can choose to skip copying files, such as a conflict resolution dialog.",
+    "text": "This is a description that appears in a dialog when a file conflict is detected. It informs the user that the original file will be kept and no copy will be made.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:31.002Z"
+    "updated_at": "2026-04-11T20:42:23.736Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Work in progress",
   "content_en_sha1_hash": "e47daa7a6731608211a6729ba435943b8d544c06",
   "created_at": "2025-10-27T16:14:24.228Z",
-  "updated_at": "2026-04-11T18:58:55.357Z",
+  "updated_at": "2026-04-11T20:38:48.047Z",
   "comment": {
-    "text": "This key displays a \"Work in progress\" message, typically shown in a toastr notification when an action is initiated but not yet completed. It appears in various components like dialogs and chat message buttons to inform the user that something is being processed and may take some time. Translators should ensure the translation conveys the meaning of an ongoing, incomplete process.",
+    "text": "This toast message indicates that a feature is not yet fully implemented.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:17:18.665Z"
+    "updated_at": "2026-04-11T20:38:48.047Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

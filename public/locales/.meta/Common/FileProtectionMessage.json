@@ -3,11 +3,12 @@
   "content": "These files are protected. Please try entering the password for all files. If you don't remember the password but need these files, you can download them in their original format or simply remove them from the list. Then you can download the rest of the files.",
   "content_en_sha1_hash": "f5fddb42e87596a64459b490711a116988ce134e",
   "created_at": "2025-05-19T21:30:45.260Z",
-  "updated_at": "2026-04-10T15:22:27.189Z",
+  "updated_at": "2026-04-11T20:52:43.235Z",
   "comment": {
-    "text": "\"This translation key is used for a warning message that informs users their files are protected and prompts them to enter a password for download. The text appears in a password input field or related dialog component.\"",
+    "text": "This is a message displayed within a dialog box, informing the user that some files they are trying to download are password-protected and offering options to proceed.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:36:14.760Z"
+    "updated_at": "2026-04-11T20:52:43.235Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

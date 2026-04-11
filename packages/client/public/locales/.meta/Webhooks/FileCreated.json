@@ -3,11 +3,12 @@
   "content": "File created",
   "content_en_sha1_hash": "c31110d4975b0bad1ea1e2be1bc41fb9a13d5680",
   "created_at": "2025-05-19T21:30:49.723Z",
-  "updated_at": "2026-04-11T19:53:45.262Z",
+  "updated_at": "2026-04-11T21:29:02.029Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a webhook trigger event label, indicating that a file has been created. It appears in a list of available webhook triggers within the developer tools settings.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:29:02.029Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

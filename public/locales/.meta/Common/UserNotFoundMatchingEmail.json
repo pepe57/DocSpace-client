@@ -3,11 +3,12 @@
   "content": "We couldn’t find the user with the matching Stripe e-mail.",
   "content_en_sha1_hash": "60160aa846de84503c5bbb1f1aa6962502abe150",
   "created_at": "2026-04-10T13:53:43.862Z",
-  "updated_at": "2026-04-11T18:58:55.472Z",
+  "updated_at": "2026-04-11T20:39:33.754Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an error message displayed when a user cannot be found in Stripe using the provided email address. It appears as part of a longer sentence.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:39:33.754Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

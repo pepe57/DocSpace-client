@@ -3,11 +3,12 @@
   "content": "Click the <strong>Save</strong> button below to apply.",
   "content_en_sha1_hash": "e5bcd7758390272606784c8910f6e312db64ff6d",
   "created_at": "2025-05-19T21:30:53.028Z",
-  "updated_at": "2026-04-11T18:34:21.542Z",
+  "updated_at": "2026-04-11T21:21:35.906Z",
   "comment": {
-    "text": "This translation key is used to display a confirmation message when applying Two-Factor Authentication settings. It prompts the user to click the \"Save\" button to apply the changes.",
+    "text": "This is a sentence fragment that instructs the user to click the \"Save\" button. It appears after the user has made changes to two-factor authentication settings.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:44:13.893Z"
+    "updated_at": "2026-04-11T21:21:35.906Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

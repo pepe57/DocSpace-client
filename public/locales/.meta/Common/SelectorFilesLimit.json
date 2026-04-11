@@ -3,11 +3,12 @@
   "content": "Maximum {{count}} files allowed",
   "content_en_sha1_hash": "4886f6d97491793d45f7b46f21d0ad5ac83aa7c5",
   "created_at": "2025-11-13T07:57:55.552Z",
-  "updated_at": "2026-04-11T18:58:55.447Z",
+  "updated_at": "2026-04-11T20:43:33.488Z",
   "comment": {
-    "text": "This key displays a limit on the number of files that can be selected, informing the user how many files are allowed. It appears in a file selection interface, likely within a chat attachment component on mobile devices, to show the maximum file upload count. The `count` variable will be replaced with the actual file limit value.",
+    "text": "This is an informational message displayed in a file selection dialog, indicating the maximum number of files a user can attach. The `{{count}}` variable represents this maximum number.",
     "is_auto": true,
-    "updated_at": "2025-11-13T08:04:15.993Z"
+    "updated_at": "2026-04-11T20:43:33.488Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Dropbox directory",
   "content_en_sha1_hash": "1a991dfb32e8cd8808fd95385917355bc689cb86",
   "created_at": "2025-05-19T21:30:49.974Z",
-  "updated_at": "2026-04-11T18:34:21.430Z",
+  "updated_at": "2026-04-11T21:27:33.064Z",
   "comment": {
-    "text": "This translation key is used to display the title of a Dropbox directory. It appears as part of file names or folder labels in the application, and its value will be translated by users based on their language settings.",
+    "text": "This is a folder title displayed in the file explorer when a user connects their Dropbox account.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:33.847Z"
+    "updated_at": "2026-04-11T21:27:33.064Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

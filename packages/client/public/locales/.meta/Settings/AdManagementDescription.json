@@ -3,11 +3,12 @@
   "content": "Choose whether promotional banners are shown in your {{productName}}.",
   "content_en_sha1_hash": "2a6b030bb7ef724467eef21491f93e99dd805096",
   "created_at": "2025-07-02T07:49:04.418Z",
-  "updated_at": "2026-04-11T18:34:21.464Z",
+  "updated_at": "2026-04-11T21:25:57.536Z",
   "comment": {
-    "text": "This translation key is used for a descriptive text that explains the choice to display promotional banners in the product name. It appears in the UI as part of a Portal Settings category and is displayed next to an \"Ad Management\" option on a customization page.",
+    "text": "This is a subtitle for a settings category. It describes the purpose of the \"Ad Management\" section, which allows users to control the display of promotional banners within their {{productName}} (e.g., ONLYOFFICE DocSpace).",
     "is_auto": true,
-    "updated_at": "2025-07-02T07:49:31.824Z"
+    "updated_at": "2026-04-11T21:25:57.536Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

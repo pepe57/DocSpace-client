@@ -3,11 +3,12 @@
   "content": "SP Assertion Consumer URL (support POST and Redirect binding)",
   "content_en_sha1_hash": "2b8529e9db8bb8d718ee9270222543091dfae4c0",
   "created_at": "2025-05-19T21:30:50.149Z",
-  "updated_at": "2026-04-10T15:22:27.323Z",
+  "updated_at": "2026-04-11T21:26:29.689Z",
   "comment": {
-    "text": "The SP Assertion Consumer URL is a required field for setting up Single Sign-On. It should be a URL that supports both POST and Redirect binding methods. This value appears in fields related to Single Sign-On settings, likely within portal configuration or provider metadata sections.",
+    "text": "This is a label for a text input field. It identifies the URL where the Service Provider (ONLYOFFICE DocSpace) expects to receive SAML assertions from an Identity Provider.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:07.756Z"
+    "updated_at": "2026-04-11T21:26:29.689Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

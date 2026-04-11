@@ -3,11 +3,12 @@
   "content": "Send request",
   "content_en_sha1_hash": "a89d64179469a9dcedf347dc7dddae85a2272b3e",
   "created_at": "2025-05-19T21:30:48.550Z",
-  "updated_at": "2026-04-11T18:58:55.389Z",
+  "updated_at": "2026-04-11T20:43:20.465Z",
   "comment": {
-    "text": "This translation key is used for the label of a button that sends a request. It appears on various screens, such as in payment settings and registration modals, and should be translated to indicate sending a request or a similar action in different languages.",
+    "text": "Button label. This text appears on a button that, when clicked, sends a request to the system, often related to billing or service upgrades.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:56.114Z"
+    "updated_at": "2026-04-11T20:43:20.465Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

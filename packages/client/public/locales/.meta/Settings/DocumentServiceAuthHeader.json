@@ -3,11 +3,12 @@
   "content": "Authorization header",
   "content_en_sha1_hash": "b4e71c87b167fcd1f2219f26ed7bbc978140646c",
   "created_at": "2025-05-19T21:30:51.346Z",
-  "updated_at": "2026-04-11T18:34:21.524Z",
+  "updated_at": "2026-04-11T21:24:24.647Z",
   "comment": {
-    "text": "The \"Authorization header\" translation key is used to display a label for an input field in portal settings, asking users to enter authentication details. It appears on a form where advanced settings are shown, likely as part of configuring integration options with Document Service.",
+    "text": "This is a label for an input field where users can enter an authorization header for document service integration.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:18.456Z"
+    "updated_at": "2026-04-11T21:24:24.647Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

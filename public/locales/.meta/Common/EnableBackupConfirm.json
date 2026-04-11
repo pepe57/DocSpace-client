@@ -3,11 +3,12 @@
   "content": "Enabling the Backup service will allow all {{productName}} administrators to create backups anytime, as long as the wallet balance is sufficient. Are you sure you want to continue?",
   "content_en_sha1_hash": "30f47a8085a7a1bf1f7bbd806bf81f5a52c764c0",
   "created_at": "2026-04-10T13:53:45.114Z",
-  "updated_at": "2026-04-11T18:58:55.459Z",
+  "updated_at": "2026-04-11T20:53:39.889Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is the body text of a confirmation dialog that appears when a user attempts to enable the Backup service. It informs the user about the implications of enabling the service and asks for confirmation. `{{productName}}` will be replaced with the product's brand name.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:53:39.889Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

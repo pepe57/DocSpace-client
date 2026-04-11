@@ -3,11 +3,12 @@
   "content": "Authenticator application configuration will be reset.",
   "content_en_sha1_hash": "ffbed1b3d21982dae035e132087888bf52daaf37",
   "created_at": "2025-05-19T21:30:53.322Z",
-  "updated_at": "2026-04-10T15:22:27.398Z",
+  "updated_at": "2026-04-11T21:20:58.407Z",
   "comment": {
-    "text": "This translation key is used to display a message when resetting an authenticator application's configuration. It appears in a modal dialog and serves as a warning or notification to the user about the upcoming action.",
+    "text": "This is a sentence in a dialog body, informing the user that the authenticator application's configuration will be reset.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:57.748Z"
+    "updated_at": "2026-04-11T21:20:58.407Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

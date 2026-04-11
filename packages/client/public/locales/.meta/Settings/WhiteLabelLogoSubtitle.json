@@ -3,11 +3,12 @@
   "content": "Upload logos with a transparent background (PNG, SVG, JPG) for light and dark themes, or generate one instantly by entering your Your logo below.",
   "content_en_sha1_hash": "e61d8428cf859d3858fc88a9afffb78e6116a9dd",
   "created_at": "2025-08-04T07:29:48.337Z",
-  "updated_at": "2026-04-11T19:53:45.295Z",
+  "updated_at": "2026-04-11T21:21:15.780Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a helper text displayed below the logo upload area in the branding settings. It provides instructions on supported file types and an alternative logo generation method.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T21:21:15.780Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

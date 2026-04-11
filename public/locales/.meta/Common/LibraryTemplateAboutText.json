@@ -3,11 +3,12 @@
   "content": "This is a ready-made form template that you can use as a starting point for your document. Pick it, customize the fields to match your needs, then share it for filling. Completed forms are saved to My Forms where you can review, download, or process them with AI agents.",
   "content_en_sha1_hash": "b2d5dbe0b1bfcfe8325bca8df1aae536f937e2f5",
   "created_at": "2026-03-31T15:18:15.154Z",
-  "updated_at": "2026-04-11T19:02:12.335Z",
+  "updated_at": "2026-04-11T20:50:00.760Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a paragraph of descriptive text explaining how to use a form template from the library. It appears below the \"About\" section title on the template's detail page.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:00.760Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

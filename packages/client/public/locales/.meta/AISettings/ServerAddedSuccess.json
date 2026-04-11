@@ -3,11 +3,12 @@
   "content": "Server added successfully",
   "content_en_sha1_hash": "71c59f07e31d46ed034d0f31fc0aae5017e415d6",
   "created_at": "2025-10-27T16:14:31.650Z",
-  "updated_at": "2026-04-11T18:34:21.462Z",
+  "updated_at": "2026-04-11T21:02:22.173Z",
   "comment": {
-    "text": "This key displays a success message in a dialog after a new server has been successfully added in the AI settings portal. It's used to confirm the successful creation of a new server to the user.",
+    "text": "Toast message. Appears after a new AI server has been successfully added to the DocSpace settings.",
     "is_auto": true,
-    "updated_at": "2025-10-27T17:17:17.090Z"
+    "updated_at": "2026-04-11T21:02:22.173Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

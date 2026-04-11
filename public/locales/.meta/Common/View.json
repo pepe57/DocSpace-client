@@ -3,11 +3,12 @@
   "content": "View",
   "content_en_sha1_hash": "69bd4ef9fbd0894a22759c3766b859defbdedbc8",
   "created_at": "2025-05-19T21:30:49.521Z",
-  "updated_at": "2026-04-11T19:53:45.166Z",
+  "updated_at": "2026-04-11T20:39:24.409Z",
   "comment": {
-    "text": "This translation key is used to display the text \"View\" as a label for a button or similar UI element. It appears in various contexts, including a Smart Banner component and a filter section on the Home page, where it serves as a placeholder for an action that allows users to view content or settings.",
+    "text": "This is a button label or menu item for viewing content. It can appear as a standalone button on a smart banner or as a menu option in a context menu.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:35:22.854Z"
+    "updated_at": "2026-04-11T20:39:24.409Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

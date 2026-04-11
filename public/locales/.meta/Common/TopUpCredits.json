@@ -3,11 +3,12 @@
   "content": "Top up credits",
   "content_en_sha1_hash": "d1af034cd110e9c741c358564c4c9e120bca1364",
   "created_at": "2026-04-10T13:53:45.807Z",
-  "updated_at": "2026-04-11T18:58:55.462Z",
+  "updated_at": "2026-04-11T20:40:51.700Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a button label. It allows users to add more credits to their account for AI tools.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:51.700Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

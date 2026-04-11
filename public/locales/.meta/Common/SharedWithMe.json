@@ -3,11 +3,12 @@
   "content": "Shared with me",
   "content_en_sha1_hash": "f40ca84f04474455cba711b1643a006b59aa1210",
   "created_at": "2025-05-19T21:30:48.661Z",
-  "updated_at": "2026-04-11T18:34:21.477Z",
+  "updated_at": "2026-04-11T20:43:02.424Z",
   "comment": {
-    "text": "This translation key is used to display the phrase \"Shared with me\" in various contexts within a workspace settings page. It likely appears as a label on buttons or sections related to shared files and folders, guiding users through the export process.",
+    "text": "A label for a section or category in the UI, referring to files and folders that have been shared with the current user. It appears as a short label, often within settings or import/export options.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:40:43.380Z"
+    "updated_at": "2026-04-11T20:43:02.424Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

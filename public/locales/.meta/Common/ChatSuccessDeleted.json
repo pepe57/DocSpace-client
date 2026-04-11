@@ -3,11 +3,12 @@
   "content": "Chat successfully deleted",
   "content_en_sha1_hash": "20a3ccaa93eb756843a2b5e2576d39b01c45d620",
   "created_at": "2025-11-17T13:24:47.224Z",
-  "updated_at": "2026-04-11T18:58:55.445Z",
+  "updated_at": "2026-04-11T20:57:23.164Z",
   "comment": {
-    "text": "This key displays a success message in a toast notification after a chat is successfully deleted. It appears after the `updateUrlChatId` function is executed and the chat selection modal is closed. Translators should ensure the message clearly conveys the action's completion.",
+    "text": "Toast message confirming that a chat has been successfully removed. It appears after a user deletes a chat.",
     "is_auto": true,
-    "updated_at": "2025-11-17T13:26:38.497Z"
+    "updated_at": "2026-04-11T20:57:23.164Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

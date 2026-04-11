@@ -3,11 +3,12 @@
   "content": "Third-party storage",
   "content_en_sha1_hash": "f9863ef0415f207037f70275c921c5f88e760b2e",
   "created_at": "2025-05-19T21:30:49.279Z",
-  "updated_at": "2026-04-11T18:34:21.381Z",
+  "updated_at": "2026-04-11T20:41:07.257Z",
   "comment": {
-    "text": "This translation key is used to display a label for \"Third-party storage\" in various UI components, such as radio buttons and toggle parameters, indicating a storage option for files. It appears in dialog windows and page settings for data management and backup features.",
+    "text": "This is a label for a toggle or radio button. It refers to an external storage service, like Google Drive or Dropbox, that can be integrated with ONLYOFFICE DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:37:41.925Z"
+    "updated_at": "2026-04-11T20:41:07.257Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

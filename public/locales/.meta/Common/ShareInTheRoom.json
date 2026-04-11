@@ -3,11 +3,12 @@
   "content": "Share in the room",
   "content_en_sha1_hash": "0bc4be3bcb493239585642bc4f39bfd12f5c7c05",
   "created_at": "2025-05-19T21:30:48.670Z",
-  "updated_at": "2026-04-11T18:34:21.396Z",
+  "updated_at": "2026-04-11T20:42:57.905Z",
   "comment": {
-    "text": "This translation key is used to display the text \"Share in the room\" as a button label on a form panel, indicating that the action will share the current form data. It appears in the \"/packages/client/src/components/panels/ShareFormPanel/index.js\" file and may also be displayed in dialog boxes related to form management.",
+    "text": "This is a button label that allows users to share a form in a room for data collection.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:41:09.934Z"
+    "updated_at": "2026-04-11T20:42:57.905Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

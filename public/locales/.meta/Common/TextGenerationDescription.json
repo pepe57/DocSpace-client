@@ -3,11 +3,12 @@
   "content": "Create unique content like articles, letters, or marketing materials in minutes, right within the editor.",
   "content_en_sha1_hash": "b05f18160edca387f58758b1b157c7b93e7bee9f",
   "created_at": "2026-04-10T13:53:45.760Z",
-  "updated_at": "2026-04-11T18:58:55.468Z",
+  "updated_at": "2026-04-11T20:41:13.700Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "Description for a feature that generates text content. It explains the purpose of the text generation tool within the editor.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:41:13.700Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

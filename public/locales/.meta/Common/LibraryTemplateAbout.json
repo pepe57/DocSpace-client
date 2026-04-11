@@ -3,11 +3,12 @@
   "content": "About this template",
   "content_en_sha1_hash": "459be0f10e4ee77078f691e32a06cf1bd1695964",
   "created_at": "2026-03-31T15:18:15.135Z",
-  "updated_at": "2026-04-11T19:02:12.335Z",
+  "updated_at": "2026-04-11T20:50:01.621Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a section title displayed above a description of the selected template in the template library.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:01.621Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

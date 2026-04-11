@@ -3,11 +3,12 @@
   "content": "NameId Format",
   "content_en_sha1_hash": "09c33ee71511c0a8e0cba56fd26679f490c998fe",
   "created_at": "2025-05-19T21:30:50.112Z",
-  "updated_at": "2026-04-10T15:22:27.324Z",
+  "updated_at": "2026-04-11T21:26:41.432Z",
   "comment": {
-    "text": "This translation key is used for the label of a dropdown menu in a user interface, specifically related to Single Sign-On settings. It will appear as \"NameId Format\" in the application, and its purpose is to provide a clear indication of the option being selected from a list.",
+    "text": "This is a combo box label for selecting the format of the NameID attribute used in SAML authentication.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:13.041Z"
+    "updated_at": "2026-04-11T21:26:41.432Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Automatically analyze and process responses",
   "content_en_sha1_hash": "dbdd0c940852dce39f897bcf0671e80f9ac60945",
   "created_at": "2026-03-31T15:18:26.957Z",
-  "updated_at": "2026-04-11T19:02:12.332Z",
+  "updated_at": "2026-04-11T20:39:03.122Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a feature description in a welcome tour dialog. It explains that the system can automatically analyze and process responses, likely using AI.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:39:03.122Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

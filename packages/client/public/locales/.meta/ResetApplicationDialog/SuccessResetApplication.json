@@ -3,11 +3,12 @@
   "content": "Application settings for authentication have been successfully reset.",
   "content_en_sha1_hash": "04485034a5d6d72d584937bd147b79bc74b54daa",
   "created_at": "2025-05-19T21:30:53.329Z",
-  "updated_at": "2026-04-10T15:22:27.397Z",
+  "updated_at": "2026-04-11T21:20:56.805Z",
   "comment": {
-    "text": "This translation key is used for a success message that is displayed when application authentication settings have been successfully reset. It appears as a toast notification in a Reset Application Dialog.",
+    "text": "This is a toast message confirming that the application settings for two-factor authentication have been successfully reset. It appears after a user initiates the reset process.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:57.187Z"
+    "updated_at": "2026-04-11T21:20:56.805Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

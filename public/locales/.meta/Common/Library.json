@@ -3,11 +3,12 @@
   "content": "Library",
   "content_en_sha1_hash": "b8100f5ba8bd048a7cf11d116fbbd73130c3c6f5",
   "created_at": "2026-03-26T08:26:36.907Z",
-  "updated_at": "2026-04-11T19:02:12.327Z",
+  "updated_at": "2026-04-11T20:50:15.908Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a section in the Forms module, referring to a collection of form templates. It appears as a navigation item in the sidebar and as a header title when the \"Library\" section is active.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:50:15.908Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

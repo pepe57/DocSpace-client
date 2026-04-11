@@ -3,11 +3,12 @@
   "content": "Sign up with X",
   "content_en_sha1_hash": "c9d454650713a7d52e23aafa112622948303592f",
   "created_at": "2025-11-18T14:41:35.160Z",
-  "updated_at": "2026-04-11T18:34:21.648Z",
+  "updated_at": "2026-04-11T20:42:31.277Z",
   "comment": {
-    "text": "This key displays the text for a button that allows users to sign up or sign in using their X (formerly Twitter) account. It's used to present the user with a social login option, typically on a registration or login screen. Translators should ensure the phrasing aligns with the overall tone of the signup/login flow.",
+    "text": "Button label. This text appears on a button allowing users to create an account using their X (formerly Twitter) credentials.",
     "is_auto": true,
-    "updated_at": "2025-11-18T14:43:39.244Z"
+    "updated_at": "2026-04-11T20:42:31.277Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

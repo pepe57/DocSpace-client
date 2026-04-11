@@ -3,11 +3,12 @@
   "content": "Sign up with Google",
   "content_en_sha1_hash": "338492d670292a6edd749c6b68952f5de10e1c01",
   "created_at": "2025-05-19T21:30:48.835Z",
-  "updated_at": "2026-04-11T18:34:21.647Z",
+  "updated_at": "2026-04-11T20:42:34.900Z",
   "comment": {
-    "text": "Sign up with Google is a text used to describe the option to create an account using a Google account. It appears in a sign-up flow, providing clarity on how users can proceed with the registration process.",
+    "text": "Button label. This text appears on a button that allows users to create a new account using their Google credentials.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:39:56.642Z"
+    "updated_at": "2026-04-11T20:42:34.900Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

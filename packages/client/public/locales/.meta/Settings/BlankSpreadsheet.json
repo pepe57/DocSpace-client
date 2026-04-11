@@ -3,11 +3,12 @@
   "content": "Blank Spreadsheet",
   "content_en_sha1_hash": "a5da75f1bb925b30f2f1c319c42d7a11feb6f0e3",
   "created_at": "2026-02-18T14:56:25.425Z",
-  "updated_at": "2026-04-10T15:22:27.383Z",
+  "updated_at": "2026-04-11T21:25:28.375Z",
   "comment": {
-    "text": "This key provides the title for a blank spreadsheet template. It appears as the name of the default spreadsheet file when creating a new document. Translators should ensure the title accurately reflects an empty, ready-to-use spreadsheet.",
+    "text": "This is a label for a template option. It appears when a user is selecting a new spreadsheet template to create a blank spreadsheet.",
     "is_auto": true,
-    "updated_at": "2026-03-20T10:28:30.969Z"
+    "updated_at": "2026-04-11T21:25:28.375Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

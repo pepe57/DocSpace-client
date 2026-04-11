@@ -3,11 +3,12 @@
   "content": "Grace period is effective <1>from {{fromDate}} to {{byDate}}</1> (days remaining: {{delayDaysCount}}).",
   "content_en_sha1_hash": "17f271e408c9a614c0e239a4b3bf4bfd27199bb6",
   "created_at": "2026-04-10T13:53:42.611Z",
-  "updated_at": "2026-04-11T18:58:55.366Z",
+  "updated_at": "2026-04-11T20:51:29.840Z",
   "comment": {
-    "text": "Displays the active grace period dates and the number of days remaining within the InviteQuotaWarningDialog. It informs the user of the specific timeframe (from and to) during which the grace period is effective.",
+    "text": "This is an informational message displayed when a grace period is active. It informs the user about the start and end dates of the grace period (`{{fromDate}}`, `{{byDate}}`) and the number of remaining days (`{{delayDaysCount}}`).",
     "is_auto": true,
-    "updated_at": "2026-04-10T13:55:52.235Z"
+    "updated_at": "2026-04-11T20:51:29.840Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

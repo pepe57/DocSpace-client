@@ -3,11 +3,12 @@
   "content": "Standard",
   "content_en_sha1_hash": "2dfa66079d9b7229409430972fd5f1567d78a3b6",
   "created_at": "2025-05-19T21:30:49.027Z",
-  "updated_at": "2026-04-10T15:22:27.097Z",
+  "updated_at": "2026-04-11T20:42:12.088Z",
   "comment": {
-    "text": "This translation key is used to display the \"Standard\" theme name in a portal settings category. It appears as part of the \"Appearance\" section and is displayed below a button that toggles its visibility.",
+    "text": "This is a label for a theme option in the appearance settings. It refers to the default or standard visual theme.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:38:52.879Z"
+    "updated_at": "2026-04-11T20:42:12.088Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

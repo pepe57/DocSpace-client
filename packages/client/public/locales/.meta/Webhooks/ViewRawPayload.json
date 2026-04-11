@@ -3,11 +3,12 @@
   "content": "View raw payload",
   "content_en_sha1_hash": "f9816af43fcbbce0fd79cf925d8a03b716aa0802",
   "created_at": "2025-05-19T21:30:49.865Z",
-  "updated_at": "2026-04-10T15:22:27.281Z",
+  "updated_at": "2026-04-11T21:28:11.769Z",
   "comment": {
-    "text": "This translation key is used to display a button label that prompts users to view the raw payload of a webhook event. In the UI, this label appears as \"View raw payload\" on a small-sized button within a specific page component, typically accessible when viewing detailed information about webhooks or responses.",
+    "text": "Button label. Clicking it opens a modal window displaying the raw data of a webhook response.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:46:47.816Z"
+    "updated_at": "2026-04-11T21:28:11.769Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

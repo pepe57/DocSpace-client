@@ -3,11 +3,12 @@
   "content": "Auto top-up",
   "content_en_sha1_hash": "b9b9f21850a422a621b702b5f395e673f86075a8",
   "created_at": "2026-04-10T13:53:41.905Z",
-  "updated_at": "2026-04-11T18:58:55.474Z",
+  "updated_at": "2026-04-11T20:58:49.823Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for a feature that automatically adds funds to a user's balance. It appears as a short title within a settings block.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:49.823Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "TB",
   "content_en_sha1_hash": "f8a902b067d4344b687920f92c669bffad7b0e0e",
   "created_at": "2025-05-19T21:30:49.270Z",
-  "updated_at": "2026-04-11T18:58:55.432Z",
+  "updated_at": "2026-04-11T20:41:16.384Z",
   "comment": {
-    "text": "This translation key is used to display a unit of measurement for file sizes (\"TB\") and is included in a dropdown list within the Quota Form component. The label is part of a common size unit system and is used to help users understand the quantity of data being measured. It appears on the \"Common:Bytes\" option selection screen.",
+    "text": "This is a unit of data storage, \"Terabyte,\" used as a short label in dropdown menus and size displays.",
     "is_auto": true,
-    "updated_at": "2025-05-20T08:37:45.199Z"
+    "updated_at": "2026-04-11T20:41:16.384Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Allow",
   "content_en_sha1_hash": "3ad0e3698278f45b2af94445396e9865f213f617",
   "created_at": "2025-10-27T16:14:24.335Z",
-  "updated_at": "2026-04-11T18:58:55.450Z",
+  "updated_at": "2026-04-11T20:59:31.387Z",
   "comment": {
-    "text": "This translation key is for a button labeled \"Allow\" that appears within a confirmation dialog (likely related to tool calls). It allows the user to grant permission for a tool call. The text should convey a clear, affirmative action.",
+    "text": "This is a button label. It allows the user to confirm an action, specifically related to tool calls within a chat message.",
     "is_auto": true,
-    "updated_at": "2025-10-27T16:51:05.492Z"
+    "updated_at": "2026-04-11T20:59:31.387Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "Developer Tools section",
   "content_en_sha1_hash": "8e2edfe027bccc66916acfd0ca199bbf466f8f61",
   "created_at": "2025-05-19T21:30:51.166Z",
-  "updated_at": "2026-04-11T18:34:21.542Z",
+  "updated_at": "2026-04-11T21:24:44.446Z",
   "comment": {
-    "text": "The \"DeveloperToolsAccess\" translation key is used to display the title and description of a section in the Portal Settings application. This text appears as a category title and brief description within a settings page, providing context about developer tools access.",
+    "text": "This is a section title within the portal settings, indicating the area for managing developer tools access.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:45:22.687Z"
+    "updated_at": "2026-04-11T21:24:44.446Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

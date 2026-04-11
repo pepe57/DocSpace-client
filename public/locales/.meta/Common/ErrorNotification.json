@@ -3,11 +3,12 @@
   "content": "Failed to update tariff plan. Try again later or contact the sales department.",
   "content_en_sha1_hash": "bc9b4b305a68ff27847f763ef309786faf03e5d0",
   "created_at": "2026-04-10T13:53:42.490Z",
-  "updated_at": "2026-04-11T18:58:55.454Z",
+  "updated_at": "2026-04-11T20:53:18.966Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is an error toast message that appears when the system fails to update the user's tariff plan or open the payment portal.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:53:18.966Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

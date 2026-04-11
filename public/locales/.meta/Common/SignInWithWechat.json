@@ -3,11 +3,12 @@
   "content": "Sign in with WeChat",
   "content_en_sha1_hash": "9044841df03cf83e460dec7b8fdfd51a25bf49e2",
   "created_at": "2025-09-09T10:39:43.472Z",
-  "updated_at": "2026-04-11T18:34:21.650Z",
+  "updated_at": "2026-04-11T20:42:38.941Z",
   "comment": {
-    "text": "This key provides the text for a button or link that allows users to sign in or sign up using their WeChat account. It appears when the user is signing in (not signing up) and chooses WeChat as their authentication method. Translators should ensure the phrasing accurately reflects the action of signing in with WeChat.",
+    "text": "This is a button label for signing into the application using a WeChat account. It appears on the sign-in page.",
     "is_auto": true,
-    "updated_at": "2025-09-09T10:40:28.908Z"
+    "updated_at": "2026-04-11T20:42:38.941Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

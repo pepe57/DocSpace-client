@@ -3,11 +3,12 @@
   "content": "Balance, top-up, and transaction history",
   "content_en_sha1_hash": "0385c223663da1db3ba03a3f7ec4c51dfa611861",
   "created_at": "2026-04-10T08:20:53.280Z",
-  "updated_at": "2026-04-11T19:02:12.330Z",
+  "updated_at": "2026-04-11T20:58:15.737Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a short description displayed on a card in the billing settings. It summarizes the features available within the \"Wallet\" section.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:58:15.737Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

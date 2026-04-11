@@ -3,11 +3,12 @@
   "content": "Share folder",
   "content_en_sha1_hash": "687c04c1582283164463bd86282100f45da05c54",
   "created_at": "2025-05-19T21:30:56.180Z",
-  "updated_at": "2026-04-11T19:53:45.189Z",
+  "updated_at": "2026-04-11T21:08:08.482Z",
   "comment": {
-    "text": "This translation key is used to display a folder sharing label on a file-related modal dialog. The phrase \"Share folder\" will be shown when the user interacts with the dialog related to sharing files within the application.",
+    "text": "Dialog title for sharing a folder.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:39:08.351Z"
+    "updated_at": "2026-04-11T21:08:08.482Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

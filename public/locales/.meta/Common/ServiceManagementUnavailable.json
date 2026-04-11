@@ -3,11 +3,12 @@
   "content": "Service management is unavailable during the grace period, and no charges will apply to the services during this time. To regain full functionality, please upgrade to a {{planName}} plan.",
   "content_en_sha1_hash": "ceb82bec4023b3e839d5c3db0aeaed838a8c2841",
   "created_at": "2026-04-10T13:53:43.229Z",
-  "updated_at": "2026-04-11T18:58:55.464Z",
+  "updated_at": "2026-04-11T20:43:16.052Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a warning message displayed in a modal dialog. It informs the user that service management is restricted during a grace period and prompts them to upgrade their plan. `{{planName}}` will be replaced with the name of the suggested plan.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:43:16.052Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

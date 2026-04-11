@@ -3,11 +3,12 @@
   "content": "Folders moved to {{sectionName}}.",
   "content_en_sha1_hash": "8d9a3570837569f5b50061430a22c1e6c8b2d08e",
   "created_at": "2025-06-02T10:19:22.140Z",
-  "updated_at": "2026-04-11T19:53:45.202Z",
+  "updated_at": "2026-04-11T21:13:18.193Z",
   "comment": {
-    "text": "This translation key is used for a UI message that displays when files have been successfully moved to the trash folder. It appears in an info panel on a file management page.",
+    "text": "This is a toast message that appears after a user moves one or more folders to the Trash. `{{sectionName}}` will always be \"Trash\".",
     "is_auto": true,
-    "updated_at": "2025-06-02T10:22:00.723Z"
+    "updated_at": "2026-04-11T21:13:18.193Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

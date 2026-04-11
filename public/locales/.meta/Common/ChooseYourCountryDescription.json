@@ -3,11 +3,12 @@
   "content": "Select a language to browse available form templates",
   "content_en_sha1_hash": "574338d250ff1757c26dc808e2ccb0092a976b92",
   "created_at": "2026-03-31T15:18:06.609Z",
-  "updated_at": "2026-04-11T19:02:12.327Z",
+  "updated_at": "2026-04-11T20:57:14.937Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a descriptive text displayed below the \"Choose your country\" heading. It instructs the user to select a language to view available form templates.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:57:14.937Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

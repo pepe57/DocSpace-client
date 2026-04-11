@@ -3,11 +3,12 @@
   "content": "Need more? Go to the <1>Services</1>",
   "content_en_sha1_hash": "4261636c8382f1071446fa0820c94b82fd61734e",
   "created_at": "2026-04-10T13:53:42.734Z",
-  "updated_at": "2026-04-11T18:58:55.452Z",
+  "updated_at": "2026-04-11T20:48:18.134Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a tooltip message that appears when a user hovers over an icon, suggesting they visit the \"Services\" page for more options. The `<1>Services</1>` tag represents a clickable link to that page.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:48:18.134Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

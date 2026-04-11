@@ -3,11 +3,12 @@
   "content": "Amount ({{storageUnit}})",
   "content_en_sha1_hash": "b4559dbe21b1ca7027e19a270f055b9c889fa91f",
   "created_at": "2026-04-10T13:53:44.775Z",
-  "updated_at": "2026-04-11T18:58:55.466Z",
+  "updated_at": "2026-04-11T20:59:15.490Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a label for an input field or display, indicating a quantity of storage. The `{{storageUnit}}` variable will be replaced with a unit like \"Gigabyte\".",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:59:15.490Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

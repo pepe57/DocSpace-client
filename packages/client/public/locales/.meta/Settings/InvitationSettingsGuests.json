@@ -3,11 +3,12 @@
   "content": "Allow inviting guests",
   "content_en_sha1_hash": "4a09c16f30591c146b613bc29c19cb5ea20bb65c",
   "created_at": "2025-05-26T07:15:51.094Z",
-  "updated_at": "2026-04-11T18:34:21.544Z",
+  "updated_at": "2026-04-11T21:23:45.843Z",
   "comment": {
-    "text": "This translation key controls the text displayed on a button that allows users to invite guests. The text is used in a portal settings page and changes depending on the user's preference. It appears as part of a styled text element with an onClick event listener, indicating its interactive function.",
+    "text": "This is a checkbox label in the portal settings. It allows administrators to control whether users can invite external guests to DocSpace.",
     "is_auto": true,
-    "updated_at": "2025-05-26T08:09:53.925Z"
+    "updated_at": "2026-04-11T21:23:45.843Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

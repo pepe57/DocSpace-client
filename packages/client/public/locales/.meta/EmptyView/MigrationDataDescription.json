@@ -3,11 +3,12 @@
   "content": "Transfer your data into {{productName}} from {{organizationName}} Workspace, Google Workspace, or Nextcloud.",
   "content_en_sha1_hash": "d3b422061a0509ff44d85a0d81ae48cae305749e",
   "created_at": "2025-11-25T18:15:42.146Z",
-  "updated_at": "2026-04-11T18:34:21.285Z",
+  "updated_at": "2026-04-11T21:06:45.496Z",
   "comment": {
-    "text": "This text explains how to move data into the product from other platforms like Google Workspace or Nextcloud. It appears as a description related to data migration, likely within an empty state or welcome flow. Translators should ensure the phrasing is clear and inviting to users considering data transfer.",
+    "text": "This is a description displayed in an empty state view. It informs the user about the ability to migrate data from other platforms into DocSpace. `{{productName}}` will be replaced with \"ONLYOFFICE DocSpace\" and `{{organizationName}}` will be replaced with the user's organization name.",
     "is_auto": true,
-    "updated_at": "2025-11-25T18:24:03.127Z"
+    "updated_at": "2026-04-11T21:06:45.496Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

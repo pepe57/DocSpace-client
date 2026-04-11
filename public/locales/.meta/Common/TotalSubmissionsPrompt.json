@@ -3,11 +3,12 @@
   "content": "How many times has the form \"{{formName}}\" been submitted?",
   "content_en_sha1_hash": "e0f429db1b42b106eec7f0e62a00cf8810eab3d9",
   "created_at": "2026-03-31T15:18:24.717Z",
-  "updated_at": "2026-04-11T19:02:12.326Z",
+  "updated_at": "2026-04-11T20:40:42.018Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a prompt for an AI chat panel, asking about the submission count for a specific form. The `{{formName}}` variable will be replaced with the title of the form.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:40:42.018Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

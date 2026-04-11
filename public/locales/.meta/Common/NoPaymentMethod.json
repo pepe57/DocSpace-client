@@ -3,11 +3,12 @@
   "content": "No payment method linked",
   "content_en_sha1_hash": "bd77fff3aa7020e19b54fe144836ff0e62903058",
   "created_at": "2026-04-10T13:53:42.749Z",
-  "updated_at": "2026-04-11T18:58:55.456Z",
+  "updated_at": "2026-04-11T20:47:52.960Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This is a text label indicating that no payment method has been associated with the account. It appears on the billing page when no payment details are present.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T20:47:52.960Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

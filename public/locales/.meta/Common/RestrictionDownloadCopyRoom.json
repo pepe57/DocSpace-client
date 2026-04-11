@@ -3,11 +3,12 @@
   "content": "You cannot disable the restriction on downloading and copying data because this setting is enforced at the room level for all files.",
   "content_en_sha1_hash": "5fc62c010d3055bab64d90486b438d05848dc72f",
   "created_at": "2025-08-26T11:15:00.099Z",
-  "updated_at": "2026-04-10T15:22:27.118Z",
+  "updated_at": "2026-04-11T20:44:48.365Z",
   "comment": {
-    "text": "This text explains why a user cannot disable download and copy restrictions. It appears as a tooltip in a dialog (EditLinkPanel) when download restrictions are enforced at the room level, informing the user that the setting cannot be changed. Translators should convey the reason for the restriction.",
+    "text": "This is a tooltip that appears when a user tries to disable the download and copy restriction for a file, explaining that the setting is enforced at the room level.",
     "is_auto": true,
-    "updated_at": "2025-08-26T11:18:07.011Z"
+    "updated_at": "2026-04-11T20:44:48.365Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {

@@ -3,11 +3,12 @@
   "content": "The element will be called after clicking",
   "content_en_sha1_hash": "f74ab04736b423fd87596ef7106470f399e142c5",
   "created_at": "2025-05-19T21:30:54.461Z",
-  "updated_at": "2026-04-11T18:34:21.502Z",
+  "updated_at": "2026-04-11T21:15:50.643Z",
   "comment": {
-    "text": "This translation key is used to describe the action that occurs after an element is clicked. It appears as a tooltip on the \"Common:Button\" in the PortalSettings categories sub-component, providing context about the main element parameter when interacting with the button.",
+    "text": "This is a short descriptive text that appears next to the \"Button\" label in the Developer Tools settings. It clarifies that the element being referred to is activated upon a click.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:41:42.908Z"
+    "updated_at": "2026-04-11T21:15:50.643Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
