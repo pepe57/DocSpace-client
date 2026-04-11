@@ -3,7 +3,7 @@
   "content": "Please take a moment to review your account details:",
   "content_en_sha1_hash": "f9bcd9e44c5ea626e9028da56100bd8e43de65b8",
   "created_at": "2025-05-19T21:30:50.036Z",
-  "updated_at": "2026-04-11T21:27:07.210Z",
+  "updated_at": "2026-04-11T21:48:30.675Z",
   "comment": {
     "text": "This is a line of text in a dialog box, prompting the user to check their account information after social authentication.",
     "is_auto": true,
@@ -93,7 +93,7 @@
           "type": "wrong_script",
           "description": "Translation for hy-AM contains only Latin/ASCII characters — likely untranslated",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:16.975Z",
+          "checked_at": "2026-04-11T21:48:29.441Z",
           "checked_by": "deterministic"
         }
       ],
@@ -113,7 +113,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"。\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:16.976Z",
+          "checked_at": "2026-04-11T21:48:30.667Z",
           "checked_by": "deterministic"
         }
       ],

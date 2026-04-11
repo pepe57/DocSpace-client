@@ -3,7 +3,7 @@
   "content": "IdP Single Sign-On Endpoint URL",
   "content_en_sha1_hash": "a1e3d72c09933def1425afc0eedb3892df293ce0",
   "created_at": "2025-05-19T21:30:50.145Z",
-  "updated_at": "2026-04-11T21:26:31.436Z",
+  "updated_at": "2026-04-11T21:48:37.310Z",
   "comment": {
     "text": "This is a label for a text input field where the user enters the URL for the Identity Provider's Single Sign-On endpoint.",
     "is_auto": true,
@@ -63,7 +63,7 @@
           "type": "wrong_script",
           "description": "Translation for el-GR contains only Latin/ASCII characters — likely untranslated",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:16.982Z",
+          "checked_at": "2026-04-11T21:48:37.301Z",
           "checked_by": "deterministic"
         }
       ],

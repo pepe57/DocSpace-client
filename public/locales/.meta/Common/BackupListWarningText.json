@@ -3,7 +3,7 @@
   "content": "If you delete any items from the list, their corresponding files will also be deleted. This action cannot be undone. To delete all the files use the link:",
   "content_en_sha1_hash": "a76a370dbddd6f072c3b10f98c0952d3c93070ad",
   "created_at": "2025-05-26T07:15:40.749Z",
-  "updated_at": "2026-04-11T20:58:40.076Z",
+  "updated_at": "2026-04-11T21:48:12.290Z",
   "comment": {
     "text": "This is a warning message displayed in a dialog box when managing backup lists. It informs the user that deleting items from the list will also delete the corresponding files, and this action is irreversible. It also provides a link to delete all files.",
     "is_auto": true,
@@ -87,8 +87,15 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \".\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:16.796Z",
+          "checked_at": "2026-04-11T21:48:12.281Z",
           "checked_by": "deterministic"
+        },
+        {
+          "type": "missing_content",
+          "description": "Missing space between sentences - 'հետարկել:Բոլոր' should be 'հետարկել: Բոլոր'",
+          "suggestion": "Եթե ​​ցանկից որևէ միավոր ջնջեք, դրանց համապատասխան ֆայլերը նույնպես կջնջվեն: Այս գործողությունը հնարավոր չէ հետարկել: Բոլոր ֆայլերը ջնջելու համար օգտագործեք հղումը:",
+          "checked_at": "2026-04-11T21:48:12.281Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null

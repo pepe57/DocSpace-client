@@ -3,7 +3,7 @@
   "content": "License limit Admins:",
   "content_en_sha1_hash": "1c1e914844eff8d3f3c5049d1d0c96c41a4de0ab",
   "created_at": "2025-05-19T21:30:51.790Z",
-  "updated_at": "2026-04-11T21:23:32.660Z",
+  "updated_at": "2026-04-11T21:49:01.899Z",
   "comment": {
     "text": "This is a tooltip and a label for a counter displaying the number of administrators. It indicates the current license limit for administrators.",
     "is_auto": true,
@@ -87,7 +87,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"s\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:17.016Z",
+          "checked_at": "2026-04-11T21:48:56.349Z",
           "checked_by": "deterministic"
         }
       ],
@@ -101,7 +101,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \".\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:17.016Z",
+          "checked_at": "2026-04-11T21:48:58.365Z",
           "checked_by": "deterministic"
         }
       ],
@@ -199,7 +199,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"е\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:17.017Z",
+          "checked_at": "2026-04-11T21:49:00.877Z",
           "checked_by": "deterministic"
         }
       ],
@@ -213,7 +213,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"e\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:17.017Z",
+          "checked_at": "2026-04-11T21:49:01.897Z",
           "checked_by": "deterministic"
         }
       ],

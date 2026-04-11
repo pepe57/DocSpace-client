@@ -3,7 +3,7 @@
   "content": "File content copy, file downloading and printing restriction activated.",
   "content_en_sha1_hash": "ebb37aa6cdb89eeddede98c5708c63779c37e554",
   "created_at": "2025-05-19T21:30:48.264Z",
-  "updated_at": "2026-04-11T20:44:05.648Z",
+  "updated_at": "2026-04-11T21:47:26.396Z",
   "comment": {
     "text": "This is a short message that appears next to a shared link, indicating that restrictions on copying, downloading, and printing the file content are active. It is appended to an existing sentence.",
     "is_auto": true,
@@ -213,8 +213,15 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"\"\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:16.693Z",
+          "checked_at": "2026-04-11T21:47:26.392Z",
           "checked_by": "deterministic"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation changes the meaning from a statement that restrictions 'are activated' to 'activation of restrictions', which is grammatically incomplete and unclear",
+          "suggestion": "Kufizimi i kopjimit të përmbajtjes së skedarit, shkarkimit dhe printimit të skedarëve është aktivizuar.",
+          "checked_at": "2026-04-11T21:47:26.392Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Turn off disk space limit for this {{productName}}.",
   "content_en_sha1_hash": "00f04ca4180774b7c9a26c6f91babcdac9551e23",
   "created_at": "2025-05-19T21:30:49.361Z",
-  "updated_at": "2026-04-11T20:40:21.284Z",
+  "updated_at": "2026-04-11T21:46:30.977Z",
   "comment": {
     "text": "This is a sentence displayed in a modal dialog. It informs the user that the disk space limit will be removed for the specified product. `{{productName}}` will be replaced with the name of the ONLYOFFICE product (e.g., \"DocSpace\").",
     "is_auto": true,
@@ -57,7 +57,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"n\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:16.663Z",
+          "checked_at": "2026-04-11T21:46:30.970Z",
           "checked_by": "deterministic"
         }
       ],

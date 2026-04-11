@@ -3,7 +3,7 @@
   "content": "The destination already contains folders with the same name.",
   "content_en_sha1_hash": "211b5f07618651e79a94b58f1d8a0324638ed564",
   "created_at": "2025-05-19T21:30:45.443Z",
-  "updated_at": "2026-04-11T20:52:17.252Z",
+  "updated_at": "2026-04-11T21:47:53.964Z",
   "comment": {
     "text": "This is an error message displayed in a dialog when a user attempts to move or copy folders to a location that already contains folders with identical names.",
     "is_auto": true,
@@ -75,7 +75,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"a\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:16.752Z",
+          "checked_at": "2026-04-11T21:47:53.958Z",
           "checked_by": "deterministic"
         }
       ],

@@ -3,7 +3,7 @@
   "content": "If this property is set to true, the client attempts to use HTTP protocol, if the target endpoint supports it. By default, this property is set to false.",
   "content_en_sha1_hash": "cee047b295247a75beff622fdf5c057a35ac83a4",
   "created_at": "2025-05-26T07:15:40.376Z",
-  "updated_at": "2026-04-11T20:59:21.907Z",
+  "updated_at": "2026-04-11T21:48:17.254Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over a setting related to Amazon S3 backup storage. It explains that enabling this option forces the client to use HTTP if the endpoint supports it, otherwise HTTPS is used by default.",
     "is_auto": true,
@@ -75,8 +75,15 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"i\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:16.803Z",
+          "checked_at": "2026-04-11T21:48:17.247Z",
           "checked_by": "deterministic"
+        },
+        {
+          "type": "missing_content",
+          "description": "Missing period at the end of the sentence",
+          "suggestion": "Jos tämä ominaisuus on asetettu todeksi, asiakas yrittää käyttää HTTP-protokollaa, jos kohdepäätepiste tukee sitä. Oletuksena tämä ominaisuus on epätosi.",
+          "checked_at": "2026-04-11T21:48:17.247Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null

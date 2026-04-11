@@ -3,7 +3,7 @@
   "content": "By disabling {{organizationName}} AI, the following changes will take effect:",
   "content_en_sha1_hash": "24635b4d0cae6095d5694c9227cd5d9ee63d01a5",
   "created_at": "2026-03-26T08:26:46.840Z",
-  "updated_at": "2026-04-11T21:24:36.659Z",
+  "updated_at": "2026-04-11T21:49:07.404Z",
   "comment": {
     "text": "This is a descriptive text within a dialog, explaining the consequences of disabling AI services for the organization. It appears when a user chooses to disable AI services and includes the variable `{{organizationName}}` for the organization's name.",
     "is_auto": true,
@@ -87,7 +87,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"։\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:17.025Z",
+          "checked_at": "2026-04-11T21:49:05.124Z",
           "checked_by": "deterministic"
         }
       ],
@@ -107,7 +107,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"。\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:17.025Z",
+          "checked_at": "2026-04-11T21:49:07.391Z",
           "checked_by": "deterministic"
         }
       ],

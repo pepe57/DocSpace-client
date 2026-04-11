@@ -3,7 +3,7 @@
   "content": "Share the original form for filling out.",
   "content_en_sha1_hash": "d89e20141550449ea8d0537fbc588e697483a8fe",
   "created_at": "2025-05-19T21:30:48.698Z",
-  "updated_at": "2026-04-11T20:42:55.524Z",
+  "updated_at": "2026-04-11T21:46:42.046Z",
   "comment": {
     "text": "This is a description for a card in a sharing panel, explaining that the option allows sharing the original form for others to fill out.",
     "is_auto": true,
@@ -81,7 +81,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"i\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:16.680Z",
+          "checked_at": "2026-04-11T21:46:39.805Z",
           "checked_by": "deterministic"
         }
       ],
@@ -227,7 +227,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"m\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:16.681Z",
+          "checked_at": "2026-04-11T21:46:42.044Z",
           "checked_by": "deterministic"
         }
       ],

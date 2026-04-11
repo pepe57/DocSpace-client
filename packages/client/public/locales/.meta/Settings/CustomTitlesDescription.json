@@ -3,7 +3,7 @@
   "content": "Adjust the default space title displayed on the Welcome Page and in the From field of the email notifications.",
   "content_en_sha1_hash": "509f4c811b4bd79763d49e1085f1eb0c426ff7a3",
   "created_at": "2025-05-19T21:30:51.019Z",
-  "updated_at": "2026-04-11T21:25:05.876Z",
+  "updated_at": "2026-04-11T21:49:13.170Z",
   "comment": {
     "text": "This is a descriptive text explaining where the custom space title appears: on the Welcome Page and in email notifications.",
     "is_auto": true,
@@ -147,7 +147,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"l\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:17.037Z",
+          "checked_at": "2026-04-11T21:49:13.168Z",
           "checked_by": "deterministic"
         }
       ],

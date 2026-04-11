@@ -3,7 +3,7 @@
   "content": "Enter domain name like this:",
   "content_en_sha1_hash": "ca975fa1b67c66cb5b4feebcdcf330bdab3ca160",
   "created_at": "2025-05-19T21:30:51.228Z",
-  "updated_at": "2026-04-11T21:24:29.440Z",
+  "updated_at": "2026-04-11T21:49:04.130Z",
   "comment": {
     "text": "This is a hint text displayed below an input field for a custom domain name. It provides an example of the expected format for the domain.",
     "is_auto": true,
@@ -87,7 +87,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"՝\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T18:46:17.033Z",
+          "checked_at": "2026-04-11T21:49:04.113Z",
           "checked_by": "deterministic"
         }
       ],
