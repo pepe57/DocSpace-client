@@ -1494,5 +1494,12 @@
   "WalletBalance": "رصيد المحفظة",
   "WalletTopUpRequired": "يتطلب شحنًا: {{currency}}",
   "DownloadReportBtnText": "تنزيل التقرير",
-  "ReportSaveLocation": "سيتم حفظ التقرير في {{sectionName}}"
+  "ReportSaveLocation": "سيتم حفظ التقرير في {{sectionName}}",
+  "OCR": "التعرف الضوئي على الحروف (OCR)",
+  "PDF": "ملف PDF",
+  "ProviderFacebook": "فيسبوك",
+  "ProviderGoogle": "جوجل",
+  "ProviderLinkedIn": "لينكدان",
+  "ProviderMicrosoft": "مايكروسوفت",
+  "ProviderZoom": "زووم"
 }

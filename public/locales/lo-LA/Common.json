@@ -1494,5 +1494,6 @@
   "WalletBalance": "ດຸນເງິນກະເປົ໋າ",
   "WalletTopUpRequired": "ຕ້ອງການເຕີມ: {{currency}}",
   "DownloadReportBtnText": "ດາວໂຫລດບົດລາຍງານ",
-  "ReportSaveLocation": "ບົດລາຍງານຈະຖືກບັນທຶກໄວ້ໃນ {{sectionName}}"
+  "ReportSaveLocation": "ບົດລາຍງານຈະຖືກບັນທຶກໄວ້ໃນ {{sectionName}}",
+  "ProviderZoom": "ຊູມ"
 }

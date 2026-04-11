@@ -1494,5 +1494,7 @@
   "WalletBalance": "Баланс кошелька",
   "WalletTopUpRequired": "Требуется пополнение: {{currency}}",
   "DownloadReportBtnText": "Скачать отчет",
-  "ReportSaveLocation": "Отчет будет сохранен в {{sectionName}}"
+  "ReportSaveLocation": "Отчет будет сохранен в {{sectionName}}",
+  "OCR": "Распознавание текста",
+  "TypeTitleYandex": "Яндекс.Диск"
 }

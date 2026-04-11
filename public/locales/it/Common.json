@@ -1494,5 +1494,6 @@
   "WalletBalance": "Saldo del portafoglio",
   "WalletTopUpRequired": "Ricarica richiesta: {{currency}}",
   "DownloadReportBtnText": "Scarica il report",
-  "ReportSaveLocation": "Il report verrà salvato in {{sectionName}}"
+  "ReportSaveLocation": "Il report verrà salvato in {{sectionName}}",
+  "TypeTitleDocuSign": "Docusign"
 }

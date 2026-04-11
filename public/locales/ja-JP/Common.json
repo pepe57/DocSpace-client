@@ -1494,5 +1494,6 @@
   "WalletBalance": "ウォレット残高",
   "WalletTopUpRequired": "チャージが必要です: {{currency}}",
   "DownloadReportBtnText": "ダウンロードのレポート",
-  "ReportSaveLocation": "レポートは {{sectionName}} に保存されます"
+  "ReportSaveLocation": "レポートは {{sectionName}} に保存されます",
+  "UTC": "協定世界時"
 }

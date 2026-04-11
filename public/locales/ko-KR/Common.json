@@ -1494,5 +1494,7 @@
   "WalletBalance": "지갑 잔액",
   "WalletTopUpRequired": "충전 필요: {{currency}}",
   "DownloadReportBtnText": "보고서 다운로드",
-  "ReportSaveLocation": "보고서가 {{sectionName}}(으)로 저장됩니다"
+  "ReportSaveLocation": "보고서가 {{sectionName}}(으)로 저장됩니다",
+  "ProviderTelegram": "텔레그램",
+  "ProviderWechat": "위챗"
 }

@@ -1494,5 +1494,6 @@
   "WalletBalance": "Баланс на портфейла",
   "WalletTopUpRequired": "Изисква се попълване: {{currency}}",
   "DownloadReportBtnText": "Изтегляне на доклад",
-  "ReportSaveLocation": "Отчетът ще бъде запазен в {{sectionName}}"
+  "ReportSaveLocation": "Отчетът ще бъде запазен в {{sectionName}}",
+  "ProviderTelegram": "Телеграм"
 }

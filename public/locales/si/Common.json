@@ -1494,5 +1494,18 @@
   "WalletBalance": "පොට්ෆෝලියෝ ශේෂය",
   "WalletTopUpRequired": "අවශ්‍ය අලුත් කිරීම: {{currency}}",
   "DownloadReportBtnText": "වාර්තාව බාගන්න",
-  "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}"
+  "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}",
+  "BetaLabel": "බීටා",
+  "ProviderApple": "ඇපල්",
+  "ProviderFacebook": "ෆේස්බුක්",
+  "ProviderGoogle": "ගූගල්",
+  "ProviderLinkedIn": "ලින්ක්ඩින්",
+  "ProviderMicrosoft": "මයික්‍රොසොෆ්ට්",
+  "ProviderZoom": "සූම්",
+  "TypeTitleDocuSign": "ඩොකුසයින්",
+  "TypeTitleDropBox": "ඩ්‍රොප්බොක්ස්",
+  "TypeTitleGoogle": "ගූගල් ඩ්‍රයිව්",
+  "TypeTitleSharePoint": "ෂෙයාර්පොයින්ට්",
+  "TypeTitleSkyDrive": "වන්ඩ්‍රයිව්",
+  "TypeTitleYandex": "යාන්ඩෙක්ස්.ඩිස්ක්"
 }

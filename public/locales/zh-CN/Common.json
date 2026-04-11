@@ -1494,5 +1494,12 @@
   "WalletBalance": "钱包余额",
   "WalletTopUpRequired": "充值所需：{{currency}}",
   "DownloadReportBtnText": "下载报告",
-  "ReportSaveLocation": "报告将保存至{{sectionName}}"
+  "ReportSaveLocation": "报告将保存至{{sectionName}}",
+  "OCR": "OCR 文字识别",
+  "ProviderGoogle": "Google谷歌",
+  "ProviderLinkedIn": "LinkedIn领英",
+  "ProviderMicrosoft": "Microsoft微软",
+  "ProviderWechat": "微信",
+  "SSO": "单点登录（SSO）",
+  "TypeTitleGoogle": "Google 云端硬盘"
 }
