@@ -3,13 +3,26 @@
   "content": "Storage capacity has been updated",
   "content_en_sha1_hash": "3eb6406c46e8164622584626f24aef1424e211c3",
   "created_at": "2026-04-10T13:53:43.341Z",
-  "updated_at": "2026-04-10T13:53:43.341Z",
+  "updated_at": "2026-04-11T18:58:55.460Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 173,
+      "context": "fetchPortalTariff?.(),\n fetchBalance?.(),\n fetchTransactionHistory(null, null, true, true, \"\", DISK_STORAGE),\n ]);\n \n toastr.success(t(\"StorageCapacityUpdated\"));\n } catch (e) {\n toastr.error(e as unknown as string);\n } finally {\n setIsCancelLoading(false);\n }",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "line_number": 197,
+      "context": "if (isCancellation || !isUpgradeStoragePlan)\n setAmount(String(currentStoragePlanSize ?? \"\"));\n \n if (intervalRef.current) {\n toastr.success(t(\"StorageCapacityUpdated\"));\n clearInterval(intervalRef.current);\n intervalRef.current = null;\n }\n \n if (localStorage.getItem(STORAGE_TARIFF_DEACTIVATED) !== null) {",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

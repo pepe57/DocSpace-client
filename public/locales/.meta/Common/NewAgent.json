@@ -3,13 +3,19 @@
   "content": "New agent",
   "content_en_sha1_hash": "d200d92a331aabd52dfb0d7911c95be2fdd35eab",
   "created_at": "2025-10-27T16:14:17.785Z",
-  "updated_at": "2026-04-11T18:34:21.274Z",
+  "updated_at": "2026-04-11T18:58:55.337Z",
   "comment": {
     "text": "This key is used for the label of a button that creates a new agent. It appears on a button, likely within an agent creation interface or folder view, and translators should understand it refers to the action of creating a new agent.",
     "is_auto": true,
     "updated_at": "2025-10-27T16:34:50.763Z"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/selectors/utils/hooks/useAgentsHelper.tsx",
+      "line_number": 184,
+      "context": "// if (withCreate && security.Create) {\n //   setTotal(total + 1);\n //   const createItem: TSelectorItem = {\n //     isCreateNewItem: true,\n //     label: createDefineLabel ?? t(\"NewAgent\"),\n //     id: \"create-room-item\",\n //     key: \"create-room-item\",\n //     hotkey: \"r\",\n //     // isRoomsOnly,",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/Article/MainButton/index.js",
       "line_number": 733,

@@ -3,13 +3,20 @@
   "content": "Room groups",
   "content_en_sha1_hash": "23e8b8d6adb6d989089f0fd3181a1a44f1c6ccb8",
   "created_at": "2026-02-19T13:36:15.152Z",
-  "updated_at": "2026-04-10T15:22:27.114Z",
+  "updated_at": "2026-04-11T18:58:55.478Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/components/filter/index.tsx",
+      "line_number": 129,
+      "context": "initSearchValue,\n initSelectedFilterData,\n \n renderSelector,\n setEditRoomGroupsDialogVisible,\n getAllRoomGroups,\n roomGroups,\n onFilterByGroup,\n currentGroupId,\n isRoomsFolder,",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

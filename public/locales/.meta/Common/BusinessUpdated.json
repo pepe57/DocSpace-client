@@ -3,13 +3,20 @@
   "content": "{{planName}} plan updated",
   "content_en_sha1_hash": "d072992aaddc06db95b3109b8a055ea6d40dc9e2",
   "created_at": "2026-04-10T13:53:42.147Z",
-  "updated_at": "2026-04-10T13:53:42.147Z",
+  "updated_at": "2026-04-11T18:58:55.454Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/sub-components/UpdatePlanButtonContainer.tsx",
+      "line_number": 108,
+      "context": "useState(false);\n \n const resetIntervalSuccess = () => {\n intervalId &&\n toastr.success(\n t(\"BusinessUpdated\", { planName: currentTariffPlanTitle }),\n );\n clearInterval(intervalId);\n intervalId = undefined;\n setIsLoading(false);\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

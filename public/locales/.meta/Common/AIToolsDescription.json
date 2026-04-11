@@ -3,13 +3,26 @@
   "content": "Enabling {{organizationName}} AI will make {{organizationName}}-provided AI models available to all {{productName}} users.",
   "content_en_sha1_hash": "43fcbaf34c235a78d88dc202602dee64e879f318",
   "created_at": "2026-04-10T13:53:44.687Z",
-  "updated_at": "2026-04-10T13:53:44.687Z",
+  "updated_at": "2026-04-11T18:58:55.460Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "line_number": 203,
+      "context": "}}\n />,\n t(\"DisableAIToolsConfirmReEnable\"),\n ]\n : [\n t(\"AIToolsDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n <CommonTrans\n key=\"CurrentBalance\"",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 209,
+      "context": "],\n }\n : {\n title: t(\"Confirmation\"),\n body: [\n t(\"AIToolsDescription\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }),\n t(\"WantToContinue\"),\n ],",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

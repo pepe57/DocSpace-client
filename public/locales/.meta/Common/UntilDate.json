@@ -3,13 +3,20 @@
   "content": "until {{date}}",
   "content_en_sha1_hash": "c3717d11ed3589f3f0ea0359c9c06b79a8717b5d",
   "created_at": "2026-04-10T13:53:45.841Z",
-  "updated_at": "2026-04-10T13:53:45.841Z",
+  "updated_at": "2026-04-11T18:58:55.465Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "line_number": 262,
+      "context": "<Text\n as=\"span\"\n fontSize=\"14px\"\n className={styles.rowSubtext}\n >\n ({t(\"UntilDate\", { date: storageExpiryDate })})\n </Text>\n </>\n )}\n </Text>\n </div>",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,13 +3,31 @@
   "content": "Rooms",
   "content_en_sha1_hash": "3a28d6f078fd35a505195a0f8ec6f59e9801d7c2",
   "created_at": "2025-05-19T21:30:48.236Z",
-  "updated_at": "2026-04-11T18:34:21.277Z",
+  "updated_at": "2026-04-11T18:58:55.339Z",
   "comment": {
     "text": "The \"Rooms\" translation key is used to display the content \"Rooms\" in various parts of the user interface. This includes a file selector and a dialog box where it appears as a section title, providing context for users navigating room templates or reassigning data. It appears in UI elements such as buttons, text labels, and progress indicators.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:34:29.688Z"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
+      "line_number": 40,
+      "context": "import type { TSelectorItem } from \"../../../components/selector\";\n import { getDefaultBreadCrumb } from \"../../utils\";\n import { LoadersContext } from \"../../utils/contexts/Loaders\";\n \n import CatalogDocumentsSvg from \"../../../assets/icons/16/catalog.documents.react.svg\";\n import CatalogRoomsSvg from \"../../../assets/icons/16/catalog.rooms.react.svg\";\n import CatalogArchiveSvg from \"../../../assets/icons/16/catalog.archive.react.svg\";\n import CatalogSharedSvg from \"../../../assets/icons/16/catalog.shared.outline.svg\";\n import CatalogPortfolioSvg from \"../../../assets/icons/16/catalog.portfolio.react.svg\";\n import CatalogFavoritesSvg from \"../../../assets/icons/16/catalog.favorites.react.svg\";\n import CatalogRecentSvg from \"../../../assets/icons/16/catalog-settings-restore.svg\";",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
+      "line_number": 30,
+      "context": "// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n import { use, useMemo } from \"react\";\n \n import EmptyScreenFilterFilesLight from \"../../../assets/emptyFilter/empty.filter.files.light.svg\";\n import EmptyScreenFilterFilesDark from \"../../../assets/emptyFilter/empty.filter.files.dark.svg\";\n import EmptyScreenRoomsLight from \"../../../assets/emptyview/empty.rooms.root.user.light.svg\";\n import EmptyScreenRoomsDark from \"../../../assets/emptyview/empty.rooms.root.user.dark.svg\";\n \n import { useCommonTranslation } from \"../../../utils/i18n\";\n import {\n Selector,",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
+      "line_number": 29,
+      "context": "// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import React, { useEffect } from \"react\";\n \n import EmptyScreenFilterRoomsLight from \"../../assets/emptyFilter/empty.filter.rooms.light.svg\";\n import EmptyScreenFilterRoomsDark from \"../../assets/emptyFilter/empty.filter.rooms.dark.svg\";\n import EmptyScreenRoomsLight from \"../../assets/emptyview/empty.rooms.root.user.light.svg\";\n import EmptyScreenRoomsDark from \"../../assets/emptyview/empty.rooms.root.user.dark.svg\";\n \n import { useCommonTranslation } from \"../../utils/i18n\";",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/RoomTypeList/index.tsx",
       "line_number": 63,

@@ -3,13 +3,19 @@
   "content": "Room admin",
   "content_en_sha1_hash": "50dcd25d31ede11f1a215aad608488dd7f404e89",
   "created_at": "2025-05-19T21:30:48.170Z",
-  "updated_at": "2026-04-11T18:34:21.484Z",
+  "updated_at": "2026-04-11T18:58:55.393Z",
   "comment": {
     "text": "This translation key is used as a label for a dropdown button that displays \"Room admin\" in the PortalSettings page. It is also used in a payment form to display the term \"AdministratorDescription\". The text appears in a dialog and a payment container, indicating its use in UI elements related to user management and payment processing.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:34:32.187Z"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "line_number": 88,
+      "context": "{t(\"AdministratorDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n <br />\n <Text isBold>{t(\"RoomAdmin\")}</Text>\n <Text>{t(\"RoomManagerDescription\")}</Text>\n </>\n }\n dataTestId=\"admin_accounts_help_button\"\n />",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/SelectUsersTypeStep/AccountsTable/index.tsx",
       "line_number": 70,

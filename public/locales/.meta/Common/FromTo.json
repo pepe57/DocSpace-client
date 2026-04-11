@@ -3,13 +3,20 @@
   "content": "From <1>{{fromDate}}</1> To <2>{{toDate}}</2>",
   "content_en_sha1_hash": "2beac382b2359cd84f93b1d8ec9aafa6db41a774",
   "created_at": "2026-04-10T13:53:42.532Z",
-  "updated_at": "2026-04-10T13:53:42.532Z",
+  "updated_at": "2026-04-11T18:58:55.476Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "line_number": 530,
+      "context": "};\n \n const datesComponent = (\n <div className={styles.transactionDates}>\n <CommonTrans\n i18nKey=\"FromTo\"\n components={{\n 1: (\n <DatePicker\n key=\"start-date-picker\"\n initialDate={",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,7 +3,7 @@
   "content": "Web search",
   "content_en_sha1_hash": "381ceddd75a893f19764c7e4cf9cd12c0f6e88c3",
   "created_at": "2025-10-27T16:14:24.651Z",
-  "updated_at": "2026-04-10T15:22:27.079Z",
+  "updated_at": "2026-04-11T18:58:55.449Z",
   "comment": {
     "text": "This key translates the label \"Web search\" displayed next to a search tool icon in a chat message. It appears as part of a header indicating a web search was performed, along with details about the tool used. Translators should ensure the phrasing accurately describes a web search action.",
     "is_auto": true,
@@ -11,10 +11,10 @@
   },
   "usage": [
     {
-      "file_path": "/packages/shared/components/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallHeader/SearchToolContent.tsx",
-      "line_number": 86,
-      "context": "return (\n <>\n <ReactSVG className={styles.searchToolIcon} src={UniverseIcon} />\n <Text fontSize=\"13px\" lineHeight=\"20px\" fontWeight={600} truncate>\n {t(\"Common:WebSearch\")} | <span title={toolInfo}>{toolInfo}</span>\n </Text>\n </>\n );\n };",
-      "module": "/packages/shared"
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/ToolCallHeader/search-tool-content/index.tsx",
+      "line_number": 100,
+      "context": "/>\n </Link>\n );\n };\n \n const WebSearchToolContent = ({ content }: { content: TToolCallContent }) => {\n const t = useCommonTranslation();\n const toolInfo = content.arguments.query as string;\n \n return (\n <>",
+      "module": "/libs/ui-kit"
     }
   ],
   "languages": {

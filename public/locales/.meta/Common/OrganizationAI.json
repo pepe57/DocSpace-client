@@ -3,13 +3,20 @@
   "content": "{{organizationName}} AI",
   "content_en_sha1_hash": "b826f8d5d40f9f64f6e214ed2a7387a993bebb67",
   "created_at": "2026-04-10T13:53:45.553Z",
-  "updated_at": "2026-04-10T13:53:45.553Z",
+  "updated_at": "2026-04-11T18:58:55.474Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/FromWalletToAi.tsx",
+      "line_number": 91,
+      "context": "<div className={modalStyles.transferBlock}>\n <Text fontWeight=\"600\">{t(\"TopUpTo\")}</Text>\n \n <WalletInfo\n title={t(\"OrganizationAI\", {\n organizationName: logoText,\n })}\n balance={aiServiceBalanceValue}\n icon={<AiAgentsIcon />}\n />",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

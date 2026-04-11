@@ -3,13 +3,20 @@
   "content": "Service management is unavailable during the grace period, and no charges will apply to the services during this time. To regain full functionality, please upgrade to a {{planName}} plan.",
   "content_en_sha1_hash": "ceb82bec4023b3e839d5c3db0aeaed838a8c2841",
   "created_at": "2026-04-10T13:53:43.229Z",
-  "updated_at": "2026-04-10T13:53:43.229Z",
+  "updated_at": "2026-04-11T18:58:55.464Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/GracePeriodModal.tsx",
+      "line_number": 74,
+      "context": "isLarge\n >\n <ModalDialog.Header>{t(\"Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontWeight={600}>\n {t(\"ServiceManagementUnavailable\", { planName: tariffPlanTitle })}\n </Text>\n <br />\n <Text fontWeight={600}>{t(\"Reminder\")}</Text>\n <Text as=\"span\" dataTestId=\"grace_period_info\">\n <CommonTrans",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

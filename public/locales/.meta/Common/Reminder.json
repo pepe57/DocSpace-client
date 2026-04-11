@@ -3,13 +3,20 @@
   "content": "Reminder:",
   "content_en_sha1_hash": "ecad37f9b3850ac8c48d2f17f5a77c854889d954",
   "created_at": "2026-04-10T13:53:43.161Z",
-  "updated_at": "2026-04-10T13:53:43.161Z",
+  "updated_at": "2026-04-11T18:58:55.464Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/GracePeriodModal.tsx",
+      "line_number": 77,
+      "context": "<ModalDialog.Body>\n <Text fontWeight={600}>\n {t(\"ServiceManagementUnavailable\", { planName: tariffPlanTitle })}\n </Text>\n <br />\n <Text fontWeight={600}>{t(\"Reminder\")}</Text>\n <Text as=\"span\" dataTestId=\"grace_period_info\">\n <CommonTrans\n \n i18nKey=\"GracePeriodActivatedInfo\"\n values={{",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

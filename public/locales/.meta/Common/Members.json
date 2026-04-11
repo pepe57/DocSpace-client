@@ -3,13 +3,19 @@
   "content": "Members",
   "content_en_sha1_hash": "1cb449c1126609b4b41e1d87f65f0d7cd19b49b9",
   "created_at": "2025-05-19T21:30:46.449Z",
-  "updated_at": "2026-04-11T18:34:21.266Z",
+  "updated_at": "2026-04-11T18:58:55.336Z",
   "comment": {
     "text": "This translation key is used to display the label \"Members\" in various UI contexts, such as headers and buttons, within dialogs and other interactive components. It appears on screens related to user management, group creation, and contact filtering, providing context for users navigating these sections.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:35:31.314Z"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/selectors/People/index.tsx",
+      "line_number": 247,
+      "context": "withoutBackground,\n withBlur,\n setActiveTab,\n injectedElement,\n alwaysShowFooter = false,\n onlyRoomMembers,\n targetEntityType = \"room\",\n disabledInvitedText,\n isAgent,\n }: PeopleSelectorProps) => {\n const t = useCommonTranslation();",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/Article/Body/AccountsItems.tsx",
       "line_number": 63,

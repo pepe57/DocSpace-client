@@ -3,13 +3,20 @@
   "content": "You have not added any payment",
   "content_en_sha1_hash": "4fb29167e163f23123e64c8fb677cce0b14f19d0",
   "created_at": "2026-04-10T13:53:44.003Z",
-  "updated_at": "2026-04-10T13:53:44.003Z",
+  "updated_at": "2026-04-11T18:58:55.474Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/PaymentMethod.tsx",
+      "line_number": 143,
+      "context": ") : null}\n </div>\n \n {!walletCustomerEmail ? (\n <Text fontSize=\"12px\" className={styles.noPayment}>\n {t(\"YouHaveNotAddedAnyPayment\")}\n </Text>\n ) : null}\n </div>\n {walletCustomerEmail ? (\n <CardInformation scale withoutMargin />",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,13 +3,20 @@
   "content": "Backups unavailable — top up wallet",
   "content_en_sha1_hash": "3a4aab80f5cbc306d68ddb95680bef4bc8fa5ef9",
   "created_at": "2026-04-10T13:53:44.836Z",
-  "updated_at": "2026-04-10T13:53:44.836Z",
+  "updated_at": "2026-04-11T18:58:55.458Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 202,
+      "context": "amount: getConvertedSize(t, storageSizeIncrement || 0),\n });\n \n case BACKUP_SERVICE:\n if (isBackupServiceOn && availableBackupsCount === 0) {\n return t(\"BackupsNotAvailable\");\n }\n \n if (isBackupServiceOn) {\n return t(\"BackupsAvailable\", {\n currency: formatWalletCurrency(priceValue!, 2),",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

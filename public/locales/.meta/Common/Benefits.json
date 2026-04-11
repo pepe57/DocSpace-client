@@ -3,13 +3,20 @@
   "content": "Benefits",
   "content_en_sha1_hash": "927f40673764a27aad14fdedb385b31e3b85f976",
   "created_at": "2026-04-10T13:53:42.036Z",
-  "updated_at": "2026-04-10T13:53:42.036Z",
+  "updated_at": "2026-04-11T18:58:55.452Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/BenefitsContainer.tsx",
+      "line_number": 44,
+      "context": "import HelpReactSvgUrl from \"../../assets/help.react.svg?url\";\n \n import { usePaymentStore } from \"../store/PaymentStoreProvider\";\n import styles from \"./MainTariff.module.scss\";\n \n const BenefitsContainer = observer(({ t }: { t: TTranslation }) => {\n const store = usePaymentStore();\n const { portalPaymentQuotasFeatures: features } = store.paymentQuotas;\n \n const renderTooltip = () => {\n const onClickServiceUrl = () => {",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

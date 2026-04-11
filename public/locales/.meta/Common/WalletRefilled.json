@@ -3,13 +3,20 @@
   "content": "Wallet refilled",
   "content_en_sha1_hash": "3e6914b46ab17dae7b1ef9f7e4b0941ca7645e71",
   "created_at": "2026-04-10T13:53:43.895Z",
-  "updated_at": "2026-04-10T13:53:43.895Z",
+  "updated_at": "2026-04-11T18:58:55.477Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/WalletRefilledModal.tsx",
+      "line_number": 45,
+      "context": "import AutomaticPaymentsBlock from \"../shared/top-up-balance/sub-components/AutoPayments\";\n \n import styles from \"./styles/Wallet.module.scss\";\n import { usePaymentStore } from \"../store/PaymentStoreProvider\";\n \n type WalletRefilledModalProps = {\n visible: boolean;\n };\n \n const WalletRefilledModal = (props: WalletRefilledModalProps) => {\n const { visible } = props;",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

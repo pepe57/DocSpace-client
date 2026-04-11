@@ -3,13 +3,26 @@
   "content": "Additional disk storage",
   "content_en_sha1_hash": "ea3c32df1d9ec757ba8a262fccd8dfacc12bae03",
   "created_at": "2026-04-10T13:53:41.750Z",
-  "updated_at": "2026-04-10T13:53:41.750Z",
+  "updated_at": "2026-04-11T18:58:55.460Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 224,
+      "context": "<div className={styles.container}>\n <ServiceToggleSection\n isEnabled={hasStorageSubscription}\n isDisabled={isDisabled || isScheduled}\n onToggle={handleToggleChange}\n title={t(\"AdditionalDiskStorage\")}\n priceText={t(\"PerStorage\", {\n currency: formatWalletCurrency(storagePriceIncrement, 2),\n amount: getConvertedSize(t, storageSizeIncrement || 0),\n })}\n description={t(\"AdjustStorageToExactAmount\")}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "line_number": 382,
+      "context": ">\n <ModalDialog.Container>{container}</ModalDialog.Container>\n <ModalDialog.Header>\n {hasStorageSubscription\n ? t(\"EditSubscription\")\n : t(\"AdditionalDiskStorage\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.dialogBody}>\n <WalletContainer\n onTopUp={onTopUpClick}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

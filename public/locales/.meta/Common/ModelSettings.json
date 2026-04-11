@@ -3,13 +3,20 @@
   "content": "Model settings",
   "content_en_sha1_hash": "d96087de9dbc0b37ecd0f1abf73e0b437acf2d75",
   "created_at": "2026-04-10T13:53:45.363Z",
-  "updated_at": "2026-04-10T13:53:45.363Z",
+  "updated_at": "2026-04-11T18:58:55.461Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 52,
+      "context": "import ConfirmationDialog from \"../../sub-components/ConfirmationDialog\";\n \n import PricingBillingBody from \"../../panels/ai-service/PricingBillingBody\";\n \n import ModelSettingsTable from \"./sub-components/ModelSettingsTable\";\n import AiPageLoader from \"./AiPageLoader\";\n \n import styles from \"./AiPage.module.scss\";\n import { formatDateLocalized, getAppTimezone } from \"../../../../utils/date\";\n import { useApi } from \"../../../../providers\";",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

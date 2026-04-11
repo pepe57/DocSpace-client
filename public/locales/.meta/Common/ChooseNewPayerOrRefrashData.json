@@ -3,13 +3,20 @@
   "content": "<1>Choose a new Payer</1> or <2>Refresh data</2>",
   "content_en_sha1_hash": "2ba8fb3b567a6e845a2b067a941a5273eec9d7ee",
   "created_at": "2026-04-10T13:53:42.251Z",
-  "updated_at": "2026-04-10T13:53:42.251Z",
+  "updated_at": "2026-04-11T18:58:55.472Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
+      "line_number": 130,
+      "context": "<div>\n {isStripePortalAvailable ? (\n <div className={styles.infoContainer}>\n <CommonTrans\n \n i18nKey=\"ChooseNewPayerOrRefrashData\"\n components={{\n 1: (\n <Link\n noSelect\n fontWeight={600}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

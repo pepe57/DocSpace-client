@@ -3,13 +3,26 @@
   "content": "Payer",
   "content_en_sha1_hash": "9b33e083f7a40171b773d68eec2c2293739d7774",
   "created_at": "2026-04-10T13:53:42.906Z",
-  "updated_at": "2026-04-10T13:53:42.906Z",
+  "updated_at": "2026-04-11T18:58:55.456Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "line_number": 43,
+      "context": "import { usePaymentStore } from \"../store/PaymentStoreProvider\";\n import { toAbsoluteUrl } from \"../utils/url\";\n \n import styles from \"./PaymentMethod.module.scss\";\n import PaymentMethodLoader from \"./PaymentMethodLoader\";\n import PayerInformation from \"../shared/payer-information\";\n import { CardInformation } from \"../shared/card-information\";\n import StorageTariffDeactivated from \"../dialogs/StorageTariffDeactivated\";\n import { getBrandName } from \"@docspace/shared/constants/brands\";\n \n interface PaymentMethodProps {",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/payment-method/index.tsx",
+      "line_number": 43,
+      "context": "import { usePaymentStore } from \"../store/PaymentStoreProvider\";\n import { toAbsoluteUrl } from \"../utils/url\";\n \n import styles from \"./PaymentMethod.module.scss\";\n import PaymentMethodLoader from \"./PaymentMethodLoader\";\n import PayerInformation from \"../shared/payer-information\";\n import { CardInformation } from \"../shared/card-information\";\n import StorageTariffDeactivated from \"../dialogs/StorageTariffDeactivated\";\n import { getBrandName } from \"@docspace/shared/constants/brands\";\n \n interface PaymentMethodProps {",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

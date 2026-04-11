@@ -3,13 +3,20 @@
   "content": "Current payment: {{price}}/month ({{size}})",
   "content_en_sha1_hash": "e0b56f598b09a6685c82e581985607c0b6f37582",
   "created_at": "2026-04-10T13:53:42.371Z",
-  "updated_at": "2026-04-10T13:53:42.371Z",
+  "updated_at": "2026-04-11T18:58:55.458Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 183,
+      "context": "if (hasScheduledStorageChange) {\n return t(\"ChangeShedule\");\n }\n \n if (!hasScheduledStorageChange && currentStoragePlanSize! > 0) {\n return t(\"CurrentPaymentMonth\", {\n price: formatWalletCurrency(\n calculateTotalPrice(\n currentStoragePlanSize!,\n storagePriceIncrement,\n ),",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

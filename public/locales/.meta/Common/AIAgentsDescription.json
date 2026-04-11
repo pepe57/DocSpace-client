@@ -3,13 +3,20 @@
   "content": "Set up a personalized assistant for your team by adding a knowledge base, selecting the ideal model, and connecting an {{mcpServer}}.",
   "content_en_sha1_hash": "142c2a083c72acdf70eb5dda1a7ad5a3f3cee7e5",
   "created_at": "2026-04-10T13:53:44.177Z",
-  "updated_at": "2026-04-10T13:53:44.177Z",
+  "updated_at": "2026-04-11T18:58:55.467Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 59,
+      "context": "const serviceOptions: ServiceOption[] = [\n {\n id: \"ai-tools\",\n title: t(\"AIAgents\"),\n description: t(\"AIAgentsDescription\", {\n mcpServer: t(\"MCPServer\"),\n }),\n icon: <AIAgentsIcon />,\n },\n {",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

@@ -3,13 +3,55 @@
   "content": "Confirmation",
   "content_en_sha1_hash": "3424edc2354c7c55f6eb740b673d349b02d27c8d",
   "created_at": "2025-05-19T21:30:43.625Z",
-  "updated_at": "2026-04-10T15:22:27.230Z",
+  "updated_at": "2026-04-11T18:58:55.350Z",
   "comment": {
     "text": "This translation key is used to display a confirmation message in a user interface. It appears as the title of a dialog header, indicating that the application is seeking user confirmation before proceeding with an action such as canceling an operation or deleting a file or room.",
     "is_auto": true,
     "updated_at": "2025-05-20T09:37:01.479Z"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/open-file-confirm-dialog/index.tsx",
+      "line_number": 86,
+      "context": "autoMaxHeight\n closeOnBackdropClick={false}\n data-testid=\"open-file-confirm-dialog\"\n >\n <ModalDialog.Header>\n {t(\"Confirmation\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.toolCallManage}>\n <Text>{t(\"AIWouldLikeToOpenFile\")}</Text>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/sub-components/message/ToolCallMessage/tool-call-confirm-dialog/index.tsx",
+      "line_number": 106,
+      "context": "autoMaxHeight\n closeOnBackdropClick={false}\n data-testid=\"tool-call-confirm-dialog\"\n >\n <ModalDialog.Header>\n {t(\"Confirmation\")}\n </ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.toolCallManage}>\n <Text>{t(\"AIWouldLikeToUseThisTool\")}</Text>",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "line_number": 57,
+      "context": "import ServicesLoader from \"./ServicesLoader\";\n import StorageTariffDeactivated from \"../dialogs/StorageTariffDeactivated\";\n import StoragePlanUpgrade from \"./panels/additional-storage/StoragePlanUpgrade\";\n import StoragePlanCancel from \"./panels/additional-storage/StoragePlanCancel\";\n import GracePeriodModal from \"./panels/additional-storage/GracePeriodModal\";\n import ConfirmationDialog from \"./sub-components/ConfirmationDialog\";\n import AIServiceDialog from \"./panels/ai-service/AIServiceDialog\";\n import { getBrandName } from \"@docspace/shared/constants/brands\";\n type TServicesProps = {\n showPortalSettingsLoader?: boolean;\n initialOpenDialog?: string;",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/index.tsx",
+      "line_number": 57,
+      "context": "import ServicesLoader from \"./ServicesLoader\";\n import StorageTariffDeactivated from \"../dialogs/StorageTariffDeactivated\";\n import StoragePlanUpgrade from \"./panels/additional-storage/StoragePlanUpgrade\";\n import StoragePlanCancel from \"./panels/additional-storage/StoragePlanCancel\";\n import GracePeriodModal from \"./panels/additional-storage/GracePeriodModal\";\n import ConfirmationDialog from \"./sub-components/ConfirmationDialog\";\n import AIServiceDialog from \"./panels/ai-service/AIServiceDialog\";\n import { getBrandName } from \"@docspace/shared/constants/brands\";\n type TServicesProps = {\n showPortalSettingsLoader?: boolean;\n initialOpenDialog?: string;",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 48,
+      "context": "import BalanceAmount from \"../../../shared/balance-amount\";\n \n import ServiceToggleSection from \"../../sub-components/ServiceToggleSection\";\n import { finishRefreshingWithMinCycle } from \"../../../utils/refreshing\";\n \n import ConfirmationDialog from \"../../sub-components/ConfirmationDialog\";\n \n import PricingBillingBody from \"../../panels/ai-service/PricingBillingBody\";\n \n import ModelSettingsTable from \"./sub-components/ModelSettingsTable\";\n import AiPageLoader from \"./AiPageLoader\";",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
+      "line_number": 48,
+      "context": "import BalanceAmount from \"../../../shared/balance-amount\";\n \n import ServiceToggleSection from \"../../sub-components/ServiceToggleSection\";\n import { finishRefreshingWithMinCycle } from \"../../../utils/refreshing\";\n \n import ConfirmationDialog from \"../../sub-components/ConfirmationDialog\";\n \n import PricingBillingBody from \"../../panels/ai-service/PricingBillingBody\";\n \n import ModelSettingsTable from \"./sub-components/ModelSettingsTable\";\n import AiPageLoader from \"./AiPageLoader\";",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
+      "line_number": 44,
+      "context": "import { BACKUP_SERVICE } from \"../../../constants\";\n import WalletInfo from \"../../../shared/top-up-balance/sub-components/WalletInfo\";\n import { useApi } from \"../../../../providers\";\n import { now, formatDateLocalized } from \"../../../../utils/date\";\n import { toastr } from \"../../../../components\";\n import ConfirmationDialog from \"../../sub-components/ConfirmationDialog\";\n import TopUpModal from \"../../../shared/top-up-balance/TopUpModal\";\n import BackupPageLoader from \"./BackupPageLoader\";\n \n import { usePaymentStore } from \"../../../store/PaymentStoreProvider\";\n import { useServicesStore } from \"../../../store/ServicesStoreProvider\";",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/CancelOperationDialog/index.tsx",
       "line_number": 90,

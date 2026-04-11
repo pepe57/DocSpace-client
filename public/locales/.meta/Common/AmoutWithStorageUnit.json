@@ -3,13 +3,20 @@
   "content": "Amount ({{storageUnit}})",
   "content_en_sha1_hash": "b4559dbe21b1ca7027e19a270f055b9c889fa91f",
   "created_at": "2026-04-10T13:53:44.775Z",
-  "updated_at": "2026-04-10T13:53:44.775Z",
+  "updated_at": "2026-04-11T18:58:55.466Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "line_number": 399,
+      "context": "/>\n \n <div className={styles.inputSection}>\n <Text fontWeight={600}>\n {!hasStorageSubscription\n ? t(\"AmoutWithStorageUnit\", {\n storageUnit: t(\"Gigabyte\"),\n })\n : t(\"NewTotalStorage\", {\n storageUnit: t(\"Gigabyte\"),\n })}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

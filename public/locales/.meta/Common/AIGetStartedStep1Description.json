@@ -3,13 +3,20 @@
   "content": "Transfer credits from your {{productName}} wallet to {{organizationName}} AI. If your wallet is empty, top it up first. Credits never expire.",
   "content_en_sha1_hash": "bdcef4bea620590f727c0164402c236371580f65",
   "created_at": "2026-04-10T13:53:44.207Z",
-  "updated_at": "2026-04-10T13:53:44.207Z",
+  "updated_at": "2026-04-11T18:58:55.469Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 134,
+      "context": "<Text\n fontSize=\"12px\"\n lineHeight=\"16px\"\n className={styles.stepDescription}\n >\n {t(\"AIGetStartedStep1Description\", {\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n })}\n </Text>\n </div>",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

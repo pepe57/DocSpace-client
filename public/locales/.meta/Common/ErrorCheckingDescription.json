@@ -3,13 +3,20 @@
   "content": "Correct typos and grammar mistakes to enhance text quality.",
   "content_en_sha1_hash": "61e9cc716827f1cb64163ef98fc685575beb5a8e",
   "created_at": "2026-04-10T13:53:45.178Z",
-  "updated_at": "2026-04-10T13:53:45.178Z",
+  "updated_at": "2026-04-11T18:58:55.469Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 103,
+      "context": "icon: <ImageGenerationIcon />,\n },\n {\n id: \"error-checking\",\n title: t(\"ErrorChecking\"),\n description: t(\"ErrorCheckingDescription\"),\n icon: <ErrorIcon />,\n },\n ];\n \n return (",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

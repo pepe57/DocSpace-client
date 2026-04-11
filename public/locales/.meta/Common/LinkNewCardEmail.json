@@ -3,13 +3,20 @@
   "content": "To link a new card, please reach out to the payer <1>{{email}}</1>",
   "content_en_sha1_hash": "e0b9119befb6c578fd167272c90ec65e04901281",
   "created_at": "2026-04-10T13:53:42.673Z",
-  "updated_at": "2026-04-10T13:53:42.673Z",
+  "updated_at": "2026-04-11T18:58:55.477Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
+      "line_number": 181,
+      "context": "{isPayer ? (\n t(\"LinkNewCard\")\n ) : (\n <CommonTrans\n \n i18nKey=\"LinkNewCardEmail\"\n values={{\n email: payerEmail,\n }}\n components={{\n 1: (",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

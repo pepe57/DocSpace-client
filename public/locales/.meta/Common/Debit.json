@@ -3,13 +3,20 @@
   "content": "Debit",
   "content_en_sha1_hash": "cf558941e04e97365be9cdc222455630c571fa11",
   "created_at": "2026-04-10T13:53:42.398Z",
-  "updated_at": "2026-04-10T13:53:42.398Z",
+  "updated_at": "2026-04-11T18:58:55.475Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "line_number": 81,
+      "context": "};\n \n const getTransactionType = (key: string) => {\n return {\n isCredit: key !== \"debit\",\n isDebit: key !== \"credit\",\n };\n };\n \n const filter = (): PeopleFilter => ({\n employeeStatus: EmployeeStatus.Active,",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

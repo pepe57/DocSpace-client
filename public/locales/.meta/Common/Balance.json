@@ -3,13 +3,20 @@
   "content": "Balance: <1>{{balance}}</1>",
   "content_en_sha1_hash": "7e5c34d10f5c64693045e238d4218431c25f1de0",
   "created_at": "2026-04-10T13:53:41.988Z",
-  "updated_at": "2026-04-10T13:53:41.988Z",
+  "updated_at": "2026-04-11T18:58:55.475Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/WalletInfo.tsx",
+      "line_number": 43,
+      "context": "import { getBrandName } from \"@docspace/shared/constants/brands\";\n \n type WalletInfoProps = {\n balance?: string;\n onTopUp?: () => void;\n isBalanceInsufficient?: boolean;\n title?: string;\n icon?: React.ReactNode;\n shortView?: boolean;\n withoutBackground?: boolean;\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

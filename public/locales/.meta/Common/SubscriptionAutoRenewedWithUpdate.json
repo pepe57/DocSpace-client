@@ -3,13 +3,20 @@
   "content": "Subscription will be automatically renewed <1>on {{finalDate}}</1> with updated pricing and specifications — <1>{{price}}/month ({{amount}})</1>",
   "content_en_sha1_hash": "970e60c3a629d39134d3e840abb8947cdfd43b05",
   "created_at": "2026-04-10T13:53:43.498Z",
-  "updated_at": "2026-04-10T13:53:43.498Z",
+  "updated_at": "2026-04-11T18:58:55.461Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 314,
+      "context": "{currentStoragePlanSize ? (\n <Text className={styles.renewalText}>\n {isDowngrade ? (\n <CommonTrans\n i18nKey=\"SubscriptionAutoRenewedWithUpdate\"\n values={{\n finalDate: storageExpiryDate,\n price: formatWalletCurrency(monthlyPrice, 2),\n amount: `${currentStoragePlanSize} ${t(\"Gigabyte\")}`,\n }}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

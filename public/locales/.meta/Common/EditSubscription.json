@@ -3,13 +3,32 @@
   "content": "Edit subscription",
   "content_en_sha1_hash": "ff7f89fc702e468dbff110a0c725497b81c29c76",
   "created_at": "2026-04-10T13:53:45.069Z",
-  "updated_at": "2026-04-10T13:53:45.069Z",
+  "updated_at": "2026-04-11T18:58:55.460Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 200,
+      "context": "const balance = formatWalletCurrency();\n \n const contextMenuItems = [\n {\n key: \"edit\",\n label: t(\"EditSubscription\"),\n icon: PencilIcon,\n onClick: openUpgradeDialog,\n },\n {\n key: \"cancel\",",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/pages/additional-storage/AdditionalStoragePage.tsx",
+      "line_number": 200,
+      "context": "const balance = formatWalletCurrency();\n \n const contextMenuItems = [\n {\n key: \"edit\",\n label: t(\"EditSubscription\"),\n icon: PencilIcon,\n onClick: openUpgradeDialog,\n },\n {\n key: \"cancel\",",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/StoragePlanUpgrade.tsx",
+      "line_number": 381,
+      "context": "withBodyScroll\n >\n <ModalDialog.Container>{container}</ModalDialog.Container>\n <ModalDialog.Header>\n {hasStorageSubscription\n ? t(\"EditSubscription\")\n : t(\"AdditionalDiskStorage\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.dialogBody}>\n <WalletContainer",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

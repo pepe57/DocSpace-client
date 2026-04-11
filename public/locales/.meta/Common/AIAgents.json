@@ -3,13 +3,49 @@
   "content": "AI agents",
   "content_en_sha1_hash": "2b51b10f658502a5ad4e50a7005f9bddf67f44c0",
   "created_at": "2025-09-26T15:20:53.940Z",
-  "updated_at": "2026-04-11T18:34:21.276Z",
+  "updated_at": "2026-04-11T18:58:55.338Z",
   "comment": {
     "text": "This translation key represents the label for a folder displaying AI agents within the user interface. It's used as the \"title\" of a tree folder, likely within a navigation or organization panel, and indicates a collection of AI agent resources. Translators should ensure the translation accurately reflects the concept of AI agents.",
     "is_auto": true,
     "updated_at": "2025-09-26T15:54:48.163Z"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
+      "line_number": 8,
+      "context": "import { CommonTrans } from \"../../../../utils/i18n/CommonTrans\";\n \n import { Text } from \"../../../../components/text\";\n import { Link } from \"../../../../components/link\";\n \n import AIAgentsIcon from \"../../../../assets/icons/32/ai-agents.svg\";\n import ChatIcon from \"../../../../assets/icons/32/ai-chat.svg\";\n import SummarizationIcon from \"../../../../assets/icons/32/ai-summarization.svg\";\n import TranslationIcon from \"../../../../assets/icons/32/ai-translation.svg\";\n import OcrIcon from \"../../../../assets/icons/32/ai-ocr.svg\";\n import GenerationIcon from \"../../../../assets/icons/32/ai-text-generation.svg\";",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
+      "line_number": 30,
+      "context": "// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import React, { useEffect } from \"react\";\n \n import InfoIconSvgUrl from \"../../assets/info.outline.react.svg\";\n import EmptyScreenAIAgentsSelectorLight from \"../../assets/ai.agents.selector.light.react.svg\";\n import EmptyScreenAIAgentsSelectorDark from \"../../assets/ai.agents.selector.dark.react.svg\";\n \n import { useTheme } from \"../../context/ThemeContext\";\n import { useCommonTranslation } from \"../../utils/i18n\";",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
+      "line_number": 30,
+      "context": "// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import React, { useEffect } from \"react\";\n \n import InfoIconSvgUrl from \"../../assets/info.outline.react.svg\";\n import EmptyScreenAIAgentsSelectorLight from \"../../assets/ai.agents.selector.light.react.svg\";\n import EmptyScreenAIAgentsSelectorDark from \"../../assets/ai.agents.selector.dark.react.svg\";\n \n import { useTheme } from \"../../context/ThemeContext\";\n import { useCommonTranslation } from \"../../utils/i18n\";",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
+      "line_number": 30,
+      "context": "// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import React, { useEffect } from \"react\";\n \n import InfoIconSvgUrl from \"../../assets/info.outline.react.svg\";\n import EmptyScreenAIAgentsSelectorLight from \"../../assets/ai.agents.selector.light.react.svg\";\n import EmptyScreenAIAgentsSelectorDark from \"../../assets/ai.agents.selector.dark.react.svg\";\n \n import { useTheme } from \"../../context/ThemeContext\";\n import { useCommonTranslation } from \"../../utils/i18n\";",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
+      "line_number": 72,
+      "context": "setItems,\n treeFolders,\n withRecentTreeFolder,\n withFavoritesTreeFolder,\n withAIAgentsTreeFolder,\n \n setTotal,\n setHasNextPage,\n isUserOnly,\n setIsInit,",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
+      "line_number": 239,
+      "context": "const emptyScreenDescription = isEmptyFilesRootScreen\n ? \"\"\n : isEmptyAgentsRootScreen\n ? t(\"EmptyRoomsDescriptionTextAgent\", {\n sectionName: t(\"AIAgents\"),\n })\n : t(\"EmptyRoomsDescriptionText\", {\n sectionName: t(\"Rooms\"),\n });",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
       "line_number": 55,

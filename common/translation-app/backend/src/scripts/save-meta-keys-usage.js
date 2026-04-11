@@ -37,6 +37,7 @@ const moduleWorkspaces = [
   "packages/login",
   "packages/shared",
   "packages/management",
+  "libs/ui-kit",
 ];
 
 const getWorkSpaces = () => {

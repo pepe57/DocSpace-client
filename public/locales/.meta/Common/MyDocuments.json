@@ -3,13 +3,25 @@
   "content": "My documents",
   "content_en_sha1_hash": "143f7ba1fed6d88c5657c9a23c89975723c9f700",
   "created_at": "2025-09-02T08:31:42.199Z",
-  "updated_at": "2026-04-11T18:34:21.281Z",
+  "updated_at": "2026-04-11T18:58:55.340Z",
   "comment": {
     "text": "This key displays the label \"My documents\" to indicate a section or area within the UI where users can access their personal documents. It appears as a section name in a link, likely directing users to their personal document storage area. Translators should ensure the translation accurately conveys the meaning of a user's personal files.",
     "is_auto": true,
     "updated_at": "2025-09-02T08:32:39.546Z"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "line_number": 723,
+      "context": "scale={isMobile}\n testId=\"download_report_button\"\n />\n <Text as=\"span\" className={styles.downloadReportDescription}>\n {t(\"ReportSaveLocation\", {\n sectionName: t(\"MyDocuments\"),\n })}\n </Text>\n </div>\n </>\n ) : null}",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/selectors/Files/hooks/useRootHelper.tsx",
+      "line_number": 131,
+      "context": ") {\n let title = \"\";\n \n switch (folder.rootFolderType) {\n case FolderType.USER:\n title = t(\"MyDocuments\");\n break;\n case FolderType.VirtualRooms:\n title = t(\"Rooms\");\n break;\n case FolderType.Favorites:",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserTypeDialog/index.tsx",
       "line_number": 92,

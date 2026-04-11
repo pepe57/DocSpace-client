@@ -3,13 +3,20 @@
   "content": "Your additional storage subscription has been deactivated due to non-payment",
   "content_en_sha1_hash": "d95e5887fc80daff26ead869b2eb0182bf416e2c",
   "created_at": "2026-04-10T13:53:43.376Z",
-  "updated_at": "2026-04-10T13:53:43.376Z",
+  "updated_at": "2026-04-11T18:58:55.451Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/StorageTariffDeactivated.tsx",
+      "line_number": 44,
+      "context": "import { usePaymentStore } from \"../store/PaymentStoreProvider\";\n import { useNavigate } from \"react-router\";\n import styles from \"./StorageTariff.module.scss\";\n \n type StorageTariffDeactivatedProps = {\n visible: boolean;\n onClose?: () => void;\n onOpenPanel?: () => void;\n };",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

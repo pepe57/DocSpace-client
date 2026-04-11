@@ -3,13 +3,25 @@
   "content": "During the grace period, admins cannot create new rooms and add new users. After the due date of the grace period, {{productName}} will become unavailable until the payment is made.",
   "content_en_sha1_hash": "b7a0c210f73172985d0560ba94236b522d1ece70",
   "created_at": "2026-04-10T13:53:42.598Z",
-  "updated_at": "2026-04-11T18:34:21.398Z",
+  "updated_at": "2026-04-11T18:58:55.366Z",
   "comment": {
     "text": "This key provides a warning message within the InviteQuotaWarningDialog explaining the limitations of the license grace period. It informs admins that they cannot create rooms or add users and warns that the product will become unavailable once the grace period expires if payment is not received.",
     "is_auto": true,
     "updated_at": "2026-04-10T13:55:54.016Z"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PaymentContainer.tsx",
+      "line_number": 188,
+      "context": "1: <Text as=\"span\" />,\n }}\n />\n \n <Text as=\"span\" fontSize=\"14px\" lineHeight=\"16px\">\n {t(\"GracePeriodActivatedDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n </Text>\n );",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/GracePeriodModal.tsx",
+      "line_number": 93,
+      "context": "1: <Text as=\"span\" />,\n }}\n />\n </Text>{\" \"}\n <Text as=\"span\">\n {t(\"GracePeriodActivatedDescription\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/InviteQuotaWarningDialog/index.js",
       "line_number": 153,

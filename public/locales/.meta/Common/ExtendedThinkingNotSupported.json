@@ -3,13 +3,20 @@
   "content": "This option is not supported by the currently selected AI model for this chat.",
   "content_en_sha1_hash": "116add2afe0f1356630a3a8ac16c8bf0d48d5295",
   "created_at": "2026-03-26T08:26:34.723Z",
-  "updated_at": "2026-04-08T09:56:16.178Z",
+  "updated_at": "2026-04-11T18:58:55.448Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
+      "line_number": 427,
+      "context": "disabled: !thinkingSupported,\n disabledStylesType: \"toggle\",\n tooltipTarget: \"toggle\",\n getTooltipContent: () =>\n !thinkingSupported ? (\n <Text>{t(\"ExtendedThinkingNotSupported\")}</Text>\n ) : null,\n },\n ...(showManageConnectionItem || serverItems.length > 0\n ? [{ key: \"separator-1\", isSeparator: true }]\n : []),",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

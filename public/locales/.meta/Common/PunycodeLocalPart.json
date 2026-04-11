@@ -3,13 +3,19 @@
   "content": "Punycode local part is not supported",
   "content_en_sha1_hash": "527a2aa6c62b234fef95360c6517ee1bcfa5a635",
   "created_at": "2025-05-19T21:30:47.687Z",
-  "updated_at": "2026-04-11T18:34:21.357Z",
+  "updated_at": "2026-04-11T18:58:55.352Z",
   "comment": {
     "text": "The translation key \"PunycodeLocalPart\" indicates an error message that is used when a local part of an email address cannot be converted to Punycode. This error typically appears in UI elements such as dialog boxes or input fields where email addresses are entered. The phrase translates to the user-friendly error description \"Punycode local part is not supported\".",
     "is_auto": true,
     "updated_at": "2025-05-20T09:34:49.852Z"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
+      "line_number": 130,
+      "context": "return t(\"IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:\n return t(\"PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"SpacesInLocalPart\");",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
       "line_number": 135,

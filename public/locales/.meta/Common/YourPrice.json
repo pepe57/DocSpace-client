@@ -3,13 +3,20 @@
   "content": "Your price",
   "content_en_sha1_hash": "16a067af179c1f81645e2954ee05c68337fd773c",
   "created_at": "2026-04-10T13:53:44.036Z",
-  "updated_at": "2026-04-10T13:53:44.036Z",
+  "updated_at": "2026-04-11T18:58:55.454Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/main-tariff/PriceCalculation.tsx",
+      "line_number": 142,
+      "context": "className={classNames(styles.paymentMainTitle, {\n [styles.isDisabled]: isDisabled,\n })}\n >\n {isGracePeriod || isNotPaidPeriod\n ? t(\"YourPrice\")\n : t(\"PriceCalculation\")}\n </Text>\n {isGracePeriod || isNotPaidPeriod ? (\n <CurrentUsersCountContainer\n isNeedPlusSign={isNeedPlusSign}",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

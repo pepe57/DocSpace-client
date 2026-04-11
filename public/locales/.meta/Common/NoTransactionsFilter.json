@@ -3,13 +3,20 @@
   "content": "No transactions match this filter. Try another or remove the filter to view all transactions.",
   "content_en_sha1_hash": "eba4ef52edab3fd64687b2eb2518afb2c5ec427d",
   "created_at": "2026-04-10T13:53:42.776Z",
-  "updated_at": "2026-04-10T13:53:42.776Z",
+  "updated_at": "2026-04-11T18:58:55.476Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/sub-components/TransactionBody.tsx",
+      "line_number": 36,
+      "context": "import { EmptyView } from \"../../../../components/empty-view\";\n \n import { Consumer } from \"../../../../utils\";\n \n import NoTransactionsIcon from \"../../../../assets/no.transactions.react.svg\";\n import NoTransactionsFilterIcon from \"../../../../assets/no.transactions.filter.react.svg\";\n import NoTransactionsFilterDarkIcon from \"../../../../assets/no.transactions.filter.dark.theme.react.svg\";\n \n import { usePaymentStore } from \"../../../store/PaymentStoreProvider\";\n import useViewEffect from \"../../../../hooks/useViewEffect\";\n import useDeviceType from \"../../../hooks/useDeviceType\";",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

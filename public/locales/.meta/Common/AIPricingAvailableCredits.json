@@ -3,13 +3,20 @@
   "content": "Available credits: {{price}}",
   "content_en_sha1_hash": "35efcce25815a4b04cb99c4502dfc6bf65ea15f2",
   "created_at": "2026-04-10T13:53:44.436Z",
-  "updated_at": "2026-04-10T13:53:44.436Z",
+  "updated_at": "2026-04-11T18:58:55.458Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
+      "line_number": 217,
+      "context": "currency: formatWalletCurrency(priceValue!, 2),\n });\n \n case AI_ENUM:\n if (isAiServiceLowBalance) {\n return t(\"AIPricingAvailableCreditsLowBalance\", {\n price: formatAiServiceCurrency(),\n });\n }\n \n if (aiServiceBalance && aiServiceBalance > 0) {",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

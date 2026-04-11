@@ -3,13 +3,31 @@
   "content": "Go to Settings",
   "content_en_sha1_hash": "afc288b1ffb91b961cd8fa6fbe17bd6255268ca9",
   "created_at": "2025-11-03T12:10:26.886Z",
-  "updated_at": "2026-04-11T18:34:21.277Z",
+  "updated_at": "2026-04-11T18:58:55.339Z",
   "comment": {
     "text": "This text is used as a button label or link text that directs users to the application's settings page. It appears in components like EmptyViewContainer and in the Profile section, and should be translated to clearly indicate navigation to settings.",
     "is_auto": true,
     "updated_at": "2025-11-03T12:12:51.612Z"
   },
   "usage": [
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/tools-settings/index.tsx",
+      "line_number": 404,
+      "context": "isHovered\n fontWeight={600}\n onClick={goToWebSearchSettings}\n dataTestId=\"go-to-settings-link\"\n >\n {t(\"GoToSettings\")}\n </Link>\n ) : null}\n </>\n ),\n },",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-no-access-screen/index.tsx",
+      "line_number": 94,
+      "context": ")\n .otherwise(() => \"\");\n \n const goToServices = {\n type: \"button\",\n title: t(\"GoToSettings\"),\n key: \"go-to-services\",\n onClick: goToAISettings,\n } as const;\n \n const goToAIProviderSettings = {",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-no-access-screen/index.tsx",
+      "line_number": 94,
+      "context": ")\n .otherwise(() => \"\");\n \n const goToServices = {\n type: \"button\",\n title: t(\"GoToSettings\"),\n key: \"go-to-services\",\n onClick: goToAISettings,\n } as const;\n \n const goToAIProviderSettings = {",
+      "module": "/libs/ui-kit"
+    },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/KnowledgeDisabledContainer.js",
       "line_number": 81,

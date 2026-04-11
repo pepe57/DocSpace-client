@@ -3,13 +3,32 @@
   "content": "Top up",
   "content_en_sha1_hash": "91d42a8b742abdae628f62177ef45374076d645e",
   "created_at": "2026-04-10T13:53:43.578Z",
-  "updated_at": "2026-04-10T13:53:43.578Z",
+  "updated_at": "2026-04-11T18:58:55.471Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/ai-service/PricingBillingBody.tsx",
+      "line_number": 27,
+      "context": "import { useServicesStore } from \"../../../store/ServicesStoreProvider\";\n \n interface PricingBillingBodyProps {\n visible: boolean;\n onClose: () => void;\n onTopUpClick?: () => void;\n onBack?: () => void;\n withoutFooter?: boolean;\n isBackButton?: boolean;\n }",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/TopUpButtons.tsx",
+      "line_number": 36,
+      "context": "import { toastr } from \"../../../../components/toast\";\n \n import { Text } from \"../../../../components/text\";\n \n import { useAmountValue } from \"../../../wallet/context\";\n import styles from \"../styles/TopUpModal.module.scss\";\n import { AI_TOOLS } from \"../../../constants\";\n import { observer } from \"mobx-react\";\n import { DateTime } from \"luxon\";\n import { usePaymentStore } from \"../../../store/PaymentStoreProvider\";",
+      "module": "/libs/ui-kit"
+    },
+    {
+      "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/WalletInfo.tsx",
+      "line_number": 37,
+      "context": "import { Text } from \"../../../../components/text\";\n import { Link } from \"../../../../components/link\";\n \n import WalletIcon from \"../../../../assets/icons/16/wallet.react.svg\";\n \n import styles from \"../styles/TopUpModal.module.scss\";\n import { getBrandName } from \"@docspace/shared/constants/brands\";\n \n type WalletInfoProps = {\n balance?: string;\n onTopUp?: () => void;",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

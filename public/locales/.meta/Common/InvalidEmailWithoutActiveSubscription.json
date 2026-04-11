@@ -3,13 +3,20 @@
   "content": "We recommend choosing a new Payer who gets access to subscription settings in {{productName}}.",
   "content_en_sha1_hash": "9892967bb06c7eefb95a79087af920be8fb6dea6",
   "created_at": "2026-04-10T13:53:42.627Z",
-  "updated_at": "2026-04-10T13:53:42.627Z",
+  "updated_at": "2026-04-11T18:58:55.472Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/payer-information/index.tsx",
+      "line_number": 107,
+      "context": "productName: getBrandName(\"ProductName\"),\n });\n \n if (isNotPaidPeriod) {\n invalidEmailDescription = isOwner\n ? t(\"InvalidEmailWithoutActiveSubscription\", {\n productName: getBrandName(\"ProductName\"),\n })\n : t(\"InvalidEmailWithoutActiveSubscriptionByAdmin\", {\n productName: getBrandName(\"ProductName\"),\n });",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

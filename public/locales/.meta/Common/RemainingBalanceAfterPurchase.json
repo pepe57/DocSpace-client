@@ -3,13 +3,20 @@
   "content": "Remaining balance after purchase: {{currency}}",
   "content_en_sha1_hash": "5891a98ce5ca71a2920c4467a35d7d0195859450",
   "created_at": "2026-04-10T13:53:45.633Z",
-  "updated_at": "2026-04-10T13:53:45.633Z",
+  "updated_at": "2026-04-11T18:58:55.466Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/services/panels/additional-storage/OrderSummary.tsx",
+      "line_number": 342,
+      "context": ">\n {reccomendedAmount\n ? t(\"WalletTopUpRequired\", {\n currency: formatWalletCurrency(reccomendedAmount, 2),\n })\n : t(\"RemainingBalanceAfterPurchase\", {\n currency: formatWalletCurrency(remainingBalance, 2),\n })}\n </Text>\n ) : null}\n </div>",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

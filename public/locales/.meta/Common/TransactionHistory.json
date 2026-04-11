@@ -3,13 +3,20 @@
   "content": "Transaction history",
   "content_en_sha1_hash": "aa7d3d7dd9d1706c1bda7bd97c31b7c47a7d310f",
   "created_at": "2026-04-10T13:53:43.722Z",
-  "updated_at": "2026-04-10T13:53:43.722Z",
+  "updated_at": "2026-04-11T18:58:55.476Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
+      "line_number": 54,
+      "context": "import PeopleSelector from \"../../../selectors/People\";\n import type { PeopleFilter } from \"../../../selectors/People/PeopleSelector.types\";\n \n import FilterPanel from \"./sub-components/FilterPanel\";\n import TransactionBody from \"./sub-components/TransactionBody\";\n import styles from \"./styles/TransactionHistory.module.scss\";\n import TableLoader from \"./sub-components/TableLoader\";\n import { Link } from \"../../../components/link\";\n import { usePaymentStore } from \"../../store/PaymentStoreProvider\";\n import { AI_TOOLS } from \"../../constants\";\n import { getBrandName } from \"@docspace/shared/constants/brands\";",
+      "module": "/libs/ui-kit"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
