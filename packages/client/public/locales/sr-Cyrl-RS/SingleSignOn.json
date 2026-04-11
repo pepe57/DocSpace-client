@@ -28,7 +28,6 @@
   "OpenCertificate": "Јавни сертификат",
   "PlaceholderCert": "Налепи или куцај текст",
   "PrivateKey": "Приватни кључ",
-  "ProviderURL": "IdP Entity Id",
   "ProviderURLTooltip": "Entitet IdP-а (URL издаваоца)",
   "ServiceProviderSettings": "Подешавања  SP-а за {{organizationName}}",
   "ServiceProviderSettingsDescription": "Конфигуришите подешавања пружаоца услуга и додајте сертификате SP-а за Single Sign-On.",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "Омогућите ову опцију ако желите да аутоматски додате кориснике из SSO сервиса у ваш простор.",
   "UploadXML": "Учитајте метаподатке из XML-а да бисте аутоматски попунили потребна поља.",
   "UploadXMLPlaceholder": "URL за IdP метаподатке XML",
-  "UsedFor": "Користи за"
+  "UsedFor": "Користи за",
+  "IdpEntityId": "IdP Entity Id"
 }

@@ -38,7 +38,6 @@
   "Descending": "Zostupne",
   "DestinationFolderId": "ID cieľovej папки",
   "DisplayColumns": "Zobrazenie stĺpcov v riadku súboru",
-  "EditorDescription": "Vložte editor, aby ste používateľom umožnili upravovať súbor z príslušnej miestnosti.",
   "ElementCalledAfterClicking": "Prvok bude vyvolaný po kliknutí",
   "ElementItself": "Samotný prvok",
   "EmbedCodeSuccessfullyCopied": "Kód vloženia úspešne skopírovaný do schránky",
@@ -48,7 +47,6 @@
   "EnterPage": "Zadajte číslo strany",
   "EnterWidth": "Zadajte šírku",
   "EventLog": "Záznam udalostí",
-  "FeedbackAndSupport": "Spätná väzba a Podpora",
   "FileContentCopy": "Obmedzenie kopírovania obsahu súboru",
   "FileFilter": "Filter súborov",
   "FileId": "ID súboru",
@@ -57,7 +55,6 @@
   "FilesSearchDescription": "Vyhľadávanie súborov v otvorenom priečinku/miestnosti.",
   "FileTypeDisplay": "Zobrazenie typu súboru",
   "FrameId": "ID rámu",
-  "GetCode": "Získať kód na vloženie",
   "Header": "Hlavička",
   "HeaderDescription": "V mobilnej verzii môžete vypnúť hlavičku a obmedziť tak prístup k sekciám {{productName}} (rovnako ako keď vypnete ľavé menu v počítačovej verzii).",
   "HelperText": "Pomocné texty",
@@ -150,5 +147,8 @@
   "UploadLimits": "Limitácie nahrávania",
   "UploadMode": "Režim nahrávania",
   "ViewerDescription": "Vložte prehliadač, ktorý používateľom umožní otvoriť súbor na prehliadanie z príslušnej miestnosti.",
-  "VoidReturn": "Prázdnota"
+  "VoidReturn": "Prázdnota",
+  "EditorPresetDescription": "Vložte editor, aby ste používateľom umožnili upravovať súbor z príslušnej miestnosti.",
+  "FeedbackAndSupportLink": "Spätná väzba a Podpora",
+  "GetCodeToInsert": "Získať kód na vloženie"
 }

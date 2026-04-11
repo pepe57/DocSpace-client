@@ -20,8 +20,6 @@
   "EncryptDataWarningDescription": "Criptarea spațiului de stocare va dura ceva timp. În cursul procesului, spațiile vor deveni indisponibil. Verificați dacă spațiul de stocare rămas este suficient pentru salvarea backup-ului datelor. Nu uitați să dezactivați backup-urile automate și  opriți backup-urile în curs. Altfel, se va salva automat.",
   "EncryptStorage": "Criptare spațiu de stocare",
   "EncryptWarningDialogContent": "În timpul procesului de criptare toate spaţiile vor deveni indisponibile. Sigur doriţi să continuați?",
-  "EnterDomain": "Introducere nume domeniu",
-  "EnterName": "Introducere nume spațiu",
   "MoreDetails": "Pentru informaţii suplimentare despre intreruperea serviciilor, consultaţi <1>{{link}}</1>.",
   "NewSpace": "Spaţiu nou",
   "NotifyUsers": "Anunțați utilizatorii dacă spațiu nu va fi disponibil.",
@@ -34,5 +32,7 @@
   "StorageEncrypted": "Spațiu de stocare este criptat",
   "Subheader": "Folosiți această secțiune pentru a crea mai multe spații și a le face accesibile pentru utilizatorii dvs.",
   "SubmitDelete": "Trimite solicitare de ștergere",
-  "VisitSpace": "Vizitați acest spațiu după creare"
+  "VisitSpace": "Vizitați acest spațiu după creare",
+  "EnterSpaceName": "Introducere nume spațiu",
+  "EnterDomainName": "Introducere nume domeniu"
 }

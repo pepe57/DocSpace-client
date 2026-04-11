@@ -28,7 +28,6 @@
   "OpenCertificate": "Genel Sertifika",
   "PlaceholderCert": "Metni yapıştır veya yaz",
   "PrivateKey": "Özel Anahtar",
-  "ProviderURL": "IdP Varlık Kimliği",
   "ProviderURLTooltip": "Kimlik Sağlayıcı Varlık Kimliği (Sağlayıcı URL)",
   "ServiceProviderSettings": "{{organizationName}} SP Ayarları",
   "ServiceProviderSettingsDescription": "Tek Oturum Açma için Servis Sağlayıcı ayarlarını yapılandırın ve SP sertifikaları ekleyin.",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "SSO hizmetinden alanınıza otomatik olarak kullanıcı eklemek istiyorsanız bu seçeneği etkinleştirin.",
   "UploadXML": "Gerekli alanları otomatik olarak doldurmak için meta verileri XML'den yükleyin.",
   "UploadXMLPlaceholder": "IdP Meta Veri XML URL'si",
-  "UsedFor": "Şunun için kullan"
+  "UsedFor": "Şunun için kullan",
+  "IdpEntityId": "IdP Varlık Kimliği"
 }

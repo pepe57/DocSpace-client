@@ -8,7 +8,6 @@
   "DisablingRoomGroups": "Deaktiviranje grupa soba",
   "DisablingRoomGroupsDescription": "Grupe će biti sačuvane, ali skrivene. Ponovo omogućite u Profilu, upravljanju fajlovima.",
   "EditRoomGroups": "Urediti grupe soba",
-  "EmptyGroupDescription": "Nema soba ovde. Pokušajte dodati sobu ili ukloniti ovu grupu.",
   "GroupHasBeenDeleted": "Grupa je obrisana",
   "GroupIcon": "Ikona grupe",
   "GroupIsEmpty": "Grupa je prazna",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "Možete grupisati sobe u foldere i lako se prebacivati između njih.",
   "RoomRemovedFromGroup": "Izabrana sala je uklonjena iz <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Izabrane sobe su dodate u <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Izabrane sobe su uklonjene iz <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Izabrane sobe su uklonjene iz <1>{{groupName}}</1>.",
+  "EmptyGroupRoomsDescription": "Nema soba ovde. Pokušajte dodati sobu ili ukloniti ovu grupu."
 }

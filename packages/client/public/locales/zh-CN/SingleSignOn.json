@@ -28,7 +28,6 @@
   "OpenCertificate": "公共证书",
   "PlaceholderCert": "粘贴或输入文本",
   "PrivateKey": "私钥",
-  "ProviderURL": "IdP 实体 ID",
   "ProviderURLTooltip": "身份供应商实体 ID（发布者 URL）",
   "ServiceProviderSettings": "{{organizationName}} SP 设置",
   "ServiceProviderSettingsDescription": "配置服务提供方设置，添加用于单一登录的 SP 证书。",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "如果您想将 SSO 服务中的用户自动添加至空间中，请使用此选项。",
   "UploadXML": "从 XML 中加载元数据以自动填充所需字段。",
   "UploadXMLPlaceholder": "IdP 元数据 XML URL",
-  "UsedFor": "用于"
+  "UsedFor": "用于",
+  "IdpEntityId": "IdP 实体 ID"
 }

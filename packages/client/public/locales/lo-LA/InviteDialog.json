@@ -17,10 +17,10 @@
   "InviteViaLinkDescriptionAgentMembers": "ສ້າງລິ້ງທົ່ວໄປສຳລັບສະມາຊິກ {{productName}} ສຳລັບການອະນຸຍາດດ້ວຍຕົນເອງໃນຕົວແທນ.",
   "InviteViaLinkDescriptionRoomGuest": "ສ້າງລິ້ງທົ່ວໄປສໍາລັບການອະນຸມັດດ້ວຍຕົນເອງໃນຫ້ອງເປັນແຂກ.",
   "InviteViaLinkDescriptionRoomMembers": "ສ້າງລິ້ງທົ່ວໄປສໍາລັບສະມາຊິກ {{productName}} ເພື່ອການອະນຸມັດດ້ວຍຕົນເອງໃນຫ້ອງ.",
-  "LinkCopySuccess": "ລິ້ງຖືກຄັດລອກແລ້ວ",
   "SendInvitation": "ສົ່ງຄຳເຊີນ",
   "UserAgentMaxAvailableRoleWarning": "ບໍ່ສາມາດມອບໝາຍແຂກ ແລະ ຜູ້ໃຊ້ໃຫ້ເປັນຜູ້ຈັດການຕົວແທນໄດ້. ມີພຽງຜູ້ເບິ່ງແຍງລະບົບຫ້ອງ ແລະ {{productName}} ເທົ່ານັ້ນທີ່ເໝາະສົມກັບບົດບາດທີ່ລະບຸໄວ້.",
   "UserMaxAvailableRoleWarning": "ແຂກ ແລະ ຜູ້ໃຊ້ ບໍ່ສາມາດຖືກກຳນົດໃຫ້ເປັນຜູ້ການຫ້ອງໄດ້. ມີພຽງແຕ່ຜູ້ດູແລຫ້ອງ ແລະ {{productName}} ເທົ່ານັ້ນ ທີ່ເໝາະສົມສຳລັບບົດບາດທີ່ລະບຸໄວ້.",
   "UsersAlreadyAdded": "ຜູ້ໃຊ້ບາງຄົນໄດ້ຖືກເພີ່ມແລ້ວ",
-  "UsersCannotBeAdded": "ຜູ້ຕິດຕໍ່ທີ່ຖືກປິດການໃຊ້ງານ ບໍ່ສາມາດເພີ່ມເຂົ້າຫ້ອງໄດ້"
+  "UsersCannotBeAdded": "ຜູ້ຕິດຕໍ່ທີ່ຖືກປິດການໃຊ້ງານ ບໍ່ສາມາດເພີ່ມເຂົ້າຫ້ອງໄດ້",
+  "InviteLinkCopySuccess": "ລິ້ງຖືກຄັດລອກແລ້ວ"
 }

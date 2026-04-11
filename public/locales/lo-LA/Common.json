@@ -398,7 +398,6 @@
   "DenyAccess": "ປະຕິເສດການເຂົ້າເຖິງ",
   "DenyAccessDescription": "ບໍ່ມີການເຂົ້າເຖິງເພື່ອເບິ່ງ, ແກ້ໄຂ, ຫຼືຈັດການໄຟລ໌ ຫຼືໂຟນເດີ.",
   "DenyAccessDescriptionDocument": "ບໍ່ມີການເຂົ້າເຖິງເພື່ອເບິ່ງ, ແກ້ໄຂ, ຫຼືຈັດການໄຟລ໌ນີ້.",
-  "Description": "ລາຍລະອຽດ",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "ເຄື່ອງມືພັດທະນາ",
   "Diagram": "ແຜນວາດ",
@@ -1499,5 +1498,6 @@
   "YourName": "ຊື່​ຂອງ​ເຈົ້າ",
   "YourPrice": "ລາຄາຂອງເຈົ້າ",
   "YourTurn": "ຮອດຕາເຈົ້າແລ້ວ",
-  "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ."
+  "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ.",
+  "DescriptionLabel": "ລາຍລະອຽດ"
 }

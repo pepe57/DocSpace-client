@@ -166,7 +166,7 @@ const Info = ({ t, plugin, withDelete, withSeparator }: InfoProps) => {
         {plugin.descriptionLocale ? (
           <>
             <Text fontSize="13px" fontWeight={400} lineHeight="20px" truncate>
-              {t("Common:Description")}
+              {t("Common:DescriptionLabel")}
             </Text>
             <Text
               dataTestId="settings_plugin_description"

@@ -8,7 +8,6 @@
   "DisablingRoomGroups": "Oda gruplarını devre dışı bırakma",
   "DisablingRoomGroupsDescription": "Gruplar kaydedilecek ancak gizlenecektir. Profil, Dosya yönetimi'nden yeniden etkinleştirin.",
   "EditRoomGroups": "Oda gruplarını düzenle",
-  "EmptyGroupDescription": "Burada oda yok. Bir oda eklemeyi veya bu grubu kaldırmayı deneyin.",
   "GroupHasBeenDeleted": "Grup silindi",
   "GroupIcon": "Grup simgesi",
   "GroupIsEmpty": "Grup boş",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "Odaları klasörlere gruplayabilir ve aralarında kolayca geçiş yapabilirsiniz.",
   "RoomRemovedFromGroup": "Seçilen oda <1>{{groupName}}</1>'dan kaldırıldı.",
   "RoomsAddedToGroup": "Seçilen odalar <1>{{groupName}}</1>'a eklendi.",
-  "RoomsRemovedFromGroup": "Seçilen odalar <1>{{groupName}}</1>'dan kaldırıldı."
+  "RoomsRemovedFromGroup": "Seçilen odalar <1>{{groupName}}</1>'dan kaldırıldı.",
+  "EmptyGroupRoomsDescription": "Burada oda yok. Bir oda eklemeyi veya bu grubu kaldırmayı deneyin."
 }

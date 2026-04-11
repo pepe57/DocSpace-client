@@ -1,7 +1,6 @@
 {
   "BackToRoom": "Compilalo di nuovo",
   "CheckReadyForms": "Controlla i moduli pronti",
-  "Description": "Compilalo di nuovo",
   "DescriptionForAnonymous": "Al modulo PDF inviato è stato assegnato un numero di modulo univoco. Per controllare lo stato, contatta il proprietario del modulo.",
   "DescriptionForRegisteredUser": "Il modulo PDF inviato è disponibile nella cartella Completato.",
   "FillItOutAgain": "Compilalo di nuovo",
@@ -19,5 +18,6 @@
   "LinkToFillOutForm": "Link per compilare il modulo:",
   "LinkToForm": "Link al modulo:",
   "LinkToViewOnlyForm": "Link alla versione di sola visualizzazione del modulo:",
-  "Title": "Il modulo è completato"
+  "CompletedFormTitle": "Il modulo è completato",
+  "CompletedFormDescription": "Compilalo di nuovo"
 }

@@ -1,6 +1,5 @@
 {
   "AuthViaNTLM": "Autentifikácia cez NTLM",
-  "EnableSSL": "Povoliť SSL",
   "EnterDomain": "Zadajte doménu",
   "EnterLogin": "Zadajte prihlasovacie meno",
   "EnterPort": "Zadajte port",
@@ -10,5 +9,6 @@
   "Port": "Port",
   "SenderDisplayName": "Meno odosielateľa pre zobrazenie",
   "SenderEmailAddress": "E-mailová adresa odosielateľa",
-  "SendTestMail": "Odoslať testovací e-mail"
+  "SendTestMail": "Odoslať testovací e-mail",
+  "EnableSMTPSSL": "Povoliť SSL"
 }

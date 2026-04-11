@@ -398,7 +398,6 @@
   "DenyAccess": "Estä pääsy",
   "DenyAccessDescription": "Ei käyttöoikeutta tarkastella, muokata tai hallita tiedostoja tai kansioita.",
   "DenyAccessDescriptionDocument": "Ei käyttöoikeutta tarkastella, muokata tai hallita tätä tiedostoa.",
-  "Description": "Kuvaus",
   "DeveloperLicense": "Kehittäjä",
   "DeveloperTools": "Kehittäjän työkalut",
   "Diagram": "Kaavio",
@@ -1499,5 +1498,6 @@
   "YourName": "Nimesi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
+  "DescriptionLabel": "Kuvaus"
 }

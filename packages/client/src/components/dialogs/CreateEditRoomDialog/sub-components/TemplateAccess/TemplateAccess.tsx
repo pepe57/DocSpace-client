@@ -145,7 +145,7 @@ const TemplateAccess = ({
 								fontSize="13px"
 								onClick={onOpenAccessSettings}
 							>
-								{t("Files:AccessSettings")}
+								{t("Files:AccessSettingsTitle")}
 							</Link>
 						</>
 					}
@@ -189,7 +189,7 @@ const TemplateAccess = ({
 						fontSize="13px"
 						onClick={onOpenAccessSettings}
 					>
-						{t("Files:AccessSettings")}
+						{t("Files:AccessSettingsTitle")}
 					</Link>
 				</div>
 			)}

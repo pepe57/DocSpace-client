@@ -8,7 +8,6 @@
   "DisablingRoomGroups": "Onemrejevanje skupin sob",
   "DisablingRoomGroupsDescription": "Skupine bodo shranjene, vendar skrite. Ponovno aktivirajte v Profilu, upravljanje datotek.",
   "EditRoomGroups": "Ureditev skupin sob",
-  "EmptyGroupDescription": "Ni sob v tem prostoru. Poskusite dodati sobo ali pa odstraniti skupino.",
   "GroupHasBeenDeleted": "Skupina je bila izbrisana",
   "GroupIcon": "Ikona skupine",
   "GroupIsEmpty": "Skupina je prazna",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "Shranjujte sobe v mapiranje in preklopite med njima zlahice.",
   "RoomRemovedFromGroup": "Izbrana soba je odstranjena iz <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Izbrane sobe so dodane v <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Izbrane sobe so bile odstranjene iz <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Izbrane sobe so bile odstranjene iz <1>{{groupName}}</1>.",
+  "EmptyGroupRoomsDescription": "Ni sob v tem prostoru. Poskusite dodati sobo ali pa odstraniti skupino."
 }

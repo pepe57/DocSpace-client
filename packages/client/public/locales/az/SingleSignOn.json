@@ -28,7 +28,6 @@
   "OpenCertificate": "İctimai Sertifikat",
   "PlaceholderCert": "Mətni yapışdırın və ya yazın",
   "PrivateKey": "Şəxsi açar",
-  "ProviderURL": "IdP Entiti ID",
   "ProviderURLTooltip": "İdentifikasiya Provayderi Müəssisə ID-si (Emit edən URL)",
   "ServiceProviderSettings": "{{organizationName}} SP Parametrləri",
   "ServiceProviderSettingsDescription": "Tək Giriş üçün Xidmət Provayderi parametrlərini konfiqurasiya edin və SP sertifikatları əlavə edin.",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "SSO xidmətindən istifadəçiləri avtomatik olaraq space-nizə əlavə etmək istəyirsinizsə, bu seçimi aktiv edin.",
   "UploadXML": "Tələb olunan sahələri avtomatik doldurmaq üçün XML-dən metadata yükləyin.",
   "UploadXMLPlaceholder": "IdP Metadata XML üçün URL",
-  "UsedFor": "İstifadə etmək üçün"
+  "UsedFor": "İstifadə etmək üçün",
+  "IdpEntityId": "IdP Entiti ID"
 }

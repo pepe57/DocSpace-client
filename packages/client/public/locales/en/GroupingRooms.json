@@ -8,7 +8,6 @@
   "DisablingRoomGroups": "Disabling room groups",
   "DisablingRoomGroupsDescription": "Groups will be saved but hidden. Re-enable in Profile, File management.",
   "EditRoomGroups": "Edit room groups",
-  "EmptyGroupDescription": "There are no rooms here. Try adding a room or remove this group.",
   "GroupHasBeenDeleted": "The group has been deleted",
   "GroupIcon": "Group icon",
   "GroupIsEmpty": "Group is empty",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "You can group rooms into folders and easily switch between them.",
   "RoomRemovedFromGroup": "The selected room has been removed from <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "The selected rooms have been added to <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "The selected rooms have been removed from <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "The selected rooms have been removed from <1>{{groupName}}</1>.",
+  "EmptyGroupRoomsDescription": "There are no rooms here. Try adding a room or remove this group."
 }

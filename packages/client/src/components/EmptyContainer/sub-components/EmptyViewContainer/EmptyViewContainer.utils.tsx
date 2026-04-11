@@ -177,7 +177,7 @@ export const getRoomDescription = (
   if (isNotAdmin || isArchiveFolderRoot)
     return t("Common:UserEmptyDescription");
 
-  return t("EmptyView:EmptyDescription");
+  return t("EmptyView:EmptyViewDescription");
 };
 
 const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {

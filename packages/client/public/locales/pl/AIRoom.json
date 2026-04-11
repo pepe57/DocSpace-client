@@ -21,11 +21,11 @@
   "KnowledgeUnavailableDescriptionUser": "Baza wiedzy jest obecnie wyłączona. Aby aktywować wyszukiwanie semantyczne i przetwarzanie dokumentów dla {{aiAgents}}, skontaktuj się z administratorem {{productName}}, aby skonfigurować dostawcę osadzeń.",
   "MCP": "Narzędzia MCP do tego pomieszczenia",
   "MCPDescriptionServers": "Wykorzystaj {{mcpServers}} podłączone przez administratora, aby ulepszyć doświadczenie czatu z AI. {{mcpServers}} może pomóc w ekstrakcji danych, podsumowaniach, inteligentnych sugestiach itp.",
-  "Model": "{{aiProvider}} i model",
   "ModelDescription": "Wybierz {{aiProvider}} i model, które mają być używane w czatach tego pokoju. Ustawienie to jest obowiązkowe i dotyczy wszystkich uczestników.",
   "NoAccessAIAgentTitle": "Przepraszam, nie ma Pan/Pani dostępu do {{aiAgent}}",
   "ResponseQualityNode": "<1>Uwaga:</1> Jakość odpowiedzi może się różnić w zależności od modelu; zaleca się używanie nowszych modeli, aby uzyskać najlepsze wyniki.",
   "ResultStorage": "Przechowywanie wyników",
   "UploadFilesDevice": "Wgraj pliki z urządzenia osobistego.",
-  "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}"
+  "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}",
+  "AIProviderAndModel": "{{aiProvider}} i model"
 }

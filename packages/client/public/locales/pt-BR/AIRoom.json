@@ -21,11 +21,11 @@
   "KnowledgeUnavailableDescriptionUser": "A base de conhecimento está desativada no momento. Para ativar a busca semântica e o processamento de documentos para {{aiAgents}}, entre em contato com o administrador do seu {{productName}} para configurar o provedor de embeddings.",
   "MCP": "Ferramentas MCP para esta sala",
   "MCPDescriptionServers": "Use {{mcpServers}} conectado pelo administrador para aprimorar a experiência de chat com IA. {{mcpServers}} pode ajudar com extração de dados, resumos, sugestões inteligentes, etc.",
-  "Model": "{{aiProvider}} e modelo",
   "ModelDescription": "Selecione o {{aiProvider}} e o modelo a serem usados nos chats desta sala. Esta configuração é obrigatória e se aplica a todos os participantes.",
   "NoAccessAIAgentTitle": "Desculpe, você não tem acesso a este {{aiAgent}}",
   "ResponseQualityNode": "<1>Nota:</1> A qualidade da resposta pode variar dependendo do modelo; modelos mais recentes são recomendados para melhores resultados.",
   "ResultStorage": "Armazenamento de resultados",
   "UploadFilesDevice": "Carregue arquivos a partir do seu dispositivo pessoal",
-  "UploadFilesPortal": "Carregue arquivos de {{sectionNameFirst}} ou {{sectionNameSecond}}"
+  "UploadFilesPortal": "Carregue arquivos de {{sectionNameFirst}} ou {{sectionNameSecond}}",
+  "AIProviderAndModel": "{{aiProvider}} e modelo"
 }

@@ -398,7 +398,6 @@
   "DenyAccess": "Nega l'accesso",
   "DenyAccessDescription": "Nessun accesso per visualizzare, modificare o gestire file o cartelle.",
   "DenyAccessDescriptionDocument": "Nessun accesso per visualizzare, modificare o gestire questo file.",
-  "Description": "Descrizione",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Strumenti di sviluppo",
   "Diagram": "Diagramma",
@@ -1499,5 +1498,6 @@
   "YourName": "Il tuo nome",
   "YourPrice": "Il tuo prezzo",
   "YourTurn": "Il tuo turno",
-  "YouWillBeContacted": "Il team di vendita ti contatterà dopo aver creato la richiesta."
+  "YouWillBeContacted": "Il team di vendita ti contatterà dopo aver creato la richiesta.",
+  "DescriptionLabel": "Descrizione"
 }

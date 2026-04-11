@@ -13,9 +13,7 @@
   "DeleteGroupDescription": "Group {{groupName}} will be deleted. Users in the group will not be removed from {{productName}}. Are you sure you want to continue?",
   "DeleteGroupTitle": "Delete group",
   "DeleteItem": "You are about to move <strong>{{name}}</strong> to {{trashSection}}.",
-  "DeleteItemForever": "You are about to delete <strong>{{name}}</strong>.",
   "DeleteItemsSharedNote": "Please note that if you have shared them with someone, they will become unavailable.",
-  "DeleteRoom": "The room <strong>\"{{roomName}}\"</strong> will be permanently deleted. All data and user accesses will be lost.",
   "DeleteRooms": "The selected <strong>rooms ({{count}})</strong> will be permanently deleted. All data and user access will be lost.",
   "DeleteRoomsTitle": "Delete this room?",
   "DeleteRoomTitle": "Delete this room?",
@@ -34,5 +32,7 @@
   "ItemsDeletedAfter": "These items will be permanently deleted in 30 days.",
   "ItemsPermanentlyDeleted": "These items will be permanently removed from the {{trashSection}}.",
   "removeFromListDescription": "You are about to remove <1>{{title}}</1> from the list. Are you sure you want to continue?",
-  "removeFromListDescriptionPlural": "You are about to remove <1>items ({{count}})</1> from the list. Are you sure you want to continue? "
+  "removeFromListDescriptionPlural": "You are about to remove <1>items ({{count}})</1> from the list. Are you sure you want to continue? ",
+  "DeleteItemForeverConfirm": "You are about to delete <strong>{{name}}</strong>.",
+  "DeleteRoomConfirm": "The room <strong>\"{{roomName}}\"</strong> will be permanently deleted. All data and user accesses will be lost."
 }

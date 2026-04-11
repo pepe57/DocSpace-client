@@ -77,7 +77,6 @@
   "DataImportComplete": "Import dat dokončen",
   "DataImportDescription": "Import dat ze služby třetí strany do {{organizationName}} {{productName}}. Import dat umožňuje přenést data, jako jsou všichni uživatelé, jejich osobní a sdílené dokumenty.",
   "DataImportProcessing": "Zpracování importu dat",
-  "DeactivateOrDeletePortal": "Deaktivovat nebo odstranit prostor.",
   "DefaultSettings": "Výchozí nastavení",
   "DefaultTemplateApplied": "Nová výchozí šablona byla aplikována.",
   "DefaultTemplateRestored": "Výchozí šablona byla obnovena.",
@@ -181,7 +180,6 @@
   "LoginHistoryTitle": "Historie přihlášení",
   "LoginLatestText": "Na této stránce se zobrazují pouze nejnovější aktivity. Samotná data se ukládají po dobu uvedenou v poli níže (max. 180 dní).",
   "LoginSubheaderTitle": "Tato podsekce slouží ke sledování posledních přihlašovacích aktivit uživatelů včetně úspěšných přihlášení a neúspěšných pokusů s uvedením důvodů.",
-  "LogoLightSmall": "Logo pro portál",
   "ManagementCategoryDataManagement": "Správa dat",
   "ManagementCategoryIntegration": "Integrace",
   "ManagementCategorySecurity": "Bezpečnost",
@@ -286,7 +284,6 @@
   "ThirdPartyBottomDescription": "Potřebujete pomoc? Kontaktujte náš <2>Tým podpory.</2>",
   "ThirdPartyPropsActivated": "Úspěšně aktualizováno",
   "ThirdPartyPropsDeactivated": "Úspěšně deaktivováno",
-  "ThirdPartyStorageDescription": "Zálohu lze uložit do úložiště třetí strany. Předtím je třeba připojit příslušnou službu v části 'Integrace'. V opačném případě budou následující nastavení neaktivní.",
   "TimeLanguageSettingsDescription": "Změna nastavení jazyka a časového pásma pro nastavení běžného jazyka a času v {{productName}}.",
   "TimeLanguageSettingsSave": "Klikněte v dolní části na <strong>Uložit</strong> pro aplikování změn.",
   "TimeZone": "Časové pásmo",
@@ -319,8 +316,11 @@
   "UseUpperCase": "Použijte velká písmena",
   "WantToCancelDataImport": "Chcete zrušit import dat?",
   "WantToCancelUpload": "Chcete zrušit nahrávání?",
-  "WantToContinue": "Chcete pokračovat nebo změnit kvótu uživatelského úložiště?",
   "WebhooksDescription": "Vykonávejte vlastní akce v jakékoli aplikaci nebo na jakékoli webové stránce, které používáte, na základě různých událostí v {{organizationName}} {{productName}}.",
-  "WhiteLabelSubtitle": "Nahrajte loga s průhledným pozadím (PNG, SVG, JPG) pro světlé a tmavé motivy, nebo okamžitě vygenerujte nové zadáním vašeho loga níže.",
-  "WithoutEmailHint": "Nemáte žádné uživatele bez e-mailů. Pokračujte v dalším kroku."
+  "WithoutEmailHint": "Nemáte žádné uživatele bez e-mailů. Pokračujte v dalším kroku.",
+  "LogoLightSmallPortal": "Logo pro portál",
+  "ThirdPartyBackupStorageDescription": "Zálohu lze uložit do úložiště třetí strany. Předtím je třeba připojit příslušnou službu v části 'Integrace'. V opačném případě budou následující nastavení neaktivní.",
+  "WantToContinueQuota": "Chcete pokračovat nebo změnit kvótu uživatelského úložiště?",
+  "WhiteLabelLogoSubtitle": "Nahrajte loga s průhledným pozadím (PNG, SVG, JPG) pro světlé a tmavé motivy, nebo okamžitě vygenerujte nové zadáním vašeho loga níže.",
+  "DeactivateOrDeleteSpace": "Deaktivovat nebo odstranit prostor."
 }

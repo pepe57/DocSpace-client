@@ -28,7 +28,6 @@
   "OpenCertificate": "Julkinen Sertifikaatti",
   "PlaceholderCert": "Liitä tai kirjoita teksti",
   "PrivateKey": "Yksityinen Avain",
-  "ProviderURL": "IdP Entiteetti Id",
   "ProviderURLTooltip": "Identiteetin tarjoajan entiteetti Id (Myöntäjän URL)",
   "ServiceProviderSettings": "{{organizationName}} SP Asetukset",
   "ServiceProviderSettingsDescription": "Määritä Palveluntarjoajan asetukset ja lisää SP-sertifikaatit kertakirjautumista varten.",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "Salli tämä vaihtoehto jos haluat automaattisesti lisätä käyttäjiä SSO palvelusta tilaasi.",
   "UploadXML": "Lataa metadata XML:stä täyttääksesi vaaditut kentät automaattisesti.",
   "UploadXMLPlaceholder": "URL:sta IdP:n metadata XML",
-  "UsedFor": "Käyttötarkoitus"
+  "UsedFor": "Käyttötarkoitus",
+  "IdpEntityId": "IdP Entiteetti Id"
 }

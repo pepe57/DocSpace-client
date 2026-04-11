@@ -1,7 +1,6 @@
 {
   "BackToRoom": "Kthehuni në dhomë",
   "CheckReadyForms": "Kontrolloni formularët e gatshëm",
-  "Description": "Formulari juaj u plotësua dhe u ruajt",
   "DescriptionForAnonymous": "Formulari juaj PDF i dorëzuar iu caktua një numër unik i formularit. Për të kontrolluar statusin, ju lutemi kontaktoni zotëruesin e formularit.",
   "DescriptionForRegisteredUser": "Formulari juaj PDF i dorëzuar në dispozicion për ju në dosjen e plotë.",
   "FillItOutAgain": "Plotësojeni përsëri",
@@ -19,5 +18,6 @@
   "LinkToFillOutForm": "Lidhje për të plotësuar formularin:",
   "LinkToForm": "Lidhje për te formulari:",
   "LinkToViewOnlyForm": "Lidhje për të parë vetëm formularin:",
-  "Title": "Formulari është plotësuar"
+  "CompletedFormTitle": "Formulari është plotësuar",
+  "CompletedFormDescription": "Formulari juaj u plotësua dhe u ruajt"
 }

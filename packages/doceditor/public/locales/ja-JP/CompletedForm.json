@@ -1,7 +1,6 @@
 {
   "BackToRoom": "ルームに戻る",
   "CheckReadyForms": "完成させたフォームを見る",
-  "Description": "フォームが完成させ、保存された",
   "DescriptionForAnonymous": "ご提出いただいたPDFフォームには固有のフォーム番号が割り当てられています。状況を確認するには、フォームのオーナーまでご連絡ください。",
   "DescriptionForRegisteredUser": "ご提出いただいたPDFフォームは、「完成」フォルダでご確認いただけます。",
   "FillItOutAgain": "もう一度記入してください",
@@ -19,5 +18,6 @@
   "LinkToFillOutForm": "フォームに記入するリンク：",
   "LinkToForm": "フォームへのリンク：",
   "LinkToViewOnlyForm": "閲覧専用フォームへのリンク：",
-  "Title": "フォームが完成しました"
+  "CompletedFormTitle": "フォームが完成しました",
+  "CompletedFormDescription": "フォームが完成させ、保存された"
 }

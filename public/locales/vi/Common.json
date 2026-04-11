@@ -398,7 +398,6 @@
   "DenyAccess": "Từ chối quyền truy cập",
   "DenyAccessDescription": "Không có quyền xem, chỉnh sửa hoặc quản lý tệp hoặc thư mục.",
   "DenyAccessDescriptionDocument": "Không có quyền xem, chỉnh sửa hoặc quản lý tệp này.",
-  "Description": "Mô tả",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Công cụ nhà phát triển",
   "Diagram": "Sơ đồ",
@@ -1499,5 +1498,6 @@
   "YourName": "Tên của bạn",
   "YourPrice": "Phí thanh toán của bạn",
   "YourTurn": "Phiên của bạn",
-  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi bạn gửi yêu cầu."
+  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi bạn gửi yêu cầu.",
+  "DescriptionLabel": "Mô tả"
 }

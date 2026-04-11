@@ -398,7 +398,6 @@
   "DenyAccess": "Մերժել մատչումը",
   "DenyAccessDescription": "Ֆայլերը կամ թղթապանակները դիտելու, խմբագրելու կամ կառավարելու մուտք չկա:",
   "DenyAccessDescriptionDocument": "Այս ֆայլը դիտելու, խմբագրելու կամ կառավարելու մուտք չկա:",
-  "Description": "Նկարագրություն",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Մշակողի գործիքներ",
   "Diagram": "Դիագրամ",
@@ -1499,5 +1498,6 @@
   "YourName": "Ձեր անունը",
   "YourPrice": "Ձեր գինը",
   "YourTurn": "Ձեր հերթն է",
-  "YouWillBeContacted": "Վաճառքի թիմը կկապվի ձեզ հետ հարցումը ստեղծելուց հետո:"
+  "YouWillBeContacted": "Վաճառքի թիմը կկապվի ձեզ հետ հարցումը ստեղծելուց հետո:",
+  "DescriptionLabel": "Նկարագրություն"
 }

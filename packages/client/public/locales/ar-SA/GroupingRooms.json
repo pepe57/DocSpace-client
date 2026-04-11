@@ -8,7 +8,6 @@
   "DisablingRoomGroups": "تعطيل مجموعات الغرف",
   "DisablingRoomGroupsDescription": "سيتم حفظ المجموعات ولكنها مخفية. أعد التمكين في الملف الشخصي، إدارة الملفات.",
   "EditRoomGroups": "تعديل مجموعات الغرفة",
-  "EmptyGroupDescription": "لا توجد غرف هنا. حاول إضافة غرفة أو قم بإزالة هذه المجموعة.",
   "GroupHasBeenDeleted": "تم حذف المجموعة",
   "GroupIcon": "أيقونة المجموعة",
   "GroupIsEmpty": "المجموعة فارغة",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "يمكنكم تجميع المساحات في مجلدات والتبديل بينها بسهولة.",
   "RoomRemovedFromGroup": "تمت إزالة الغرفة المحددة من <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "تمت إضافة الغرف المحددة إلى <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "تمت إزالة الغرف المحددة من <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "تمت إزالة الغرف المحددة من <1>{{groupName}}</1>.",
+  "EmptyGroupRoomsDescription": "لا توجد غرف هنا. حاول إضافة غرفة أو قم بإزالة هذه المجموعة."
 }

@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "Laipni lūdzam sadarbības telpā",
   "CollaboratorEmptyTitle": "Telpa ir tukša.",
-  "CreateAIAgent": "Izveidot jaunu aģentu",
   "CreateAIAgentDescription": "Sāciet veidot savu pirmo {{aiAgent}}",
   "CreateDocument": "Izveidot jaunu dokumentu",
   "CreateDocumentDescription": "Izmantojiet plašo teksta apstrādes funkcionalitāti.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "Izveidojiet personalizētu asistantu savai komandai, pievienojot zināšanu bāzi, izvēlot ideālo modeli un savienojot ar {{mcpServer}}. Ielietojiet savus kolēģus, lai sadarbotu un maksimāli izmantotu agenta sarunas spējas.",
   "EmptyAIAgentsTitle": "Izveido savu {{aiAgent}}",
   "EmptyAIAgentsUserTitle": "Nopierdisi {{aiAgents}} pieejami",
-  "EmptyDescription": "Sāciet ar ātrām darbībām:",
   "EmptyFavoritesDescription": "Noņem zvaigznītes failiem un mapēm, lai tie būtu viegli pieejami un rokas stienī.",
   "EmptyFavoritesTitle": "Vēl nav iecienītāko.",
   "EmptyGroupAddedUserOptionDescription": "Pievienojiet grupas dalībniekus un piešķiriet vadītāju",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Augšupielādēt no ierīces",
   "UploadFromPortalTitle": "Augšupielādēt no {{productName}}",
   "UploadPDFFormOptionDescription": "Izvēlieties gatavu PDF veidlapu, kas pieejama šeit: {{productName}}, un augšupielādējiet to telpā.",
-  "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā"
+  "VirtualDataRoomEmptyTitle": "Laipni lūdzam virtuālajā datu telpā",
+  "CreateNewAIAgent": "Izveidot jaunu aģentu",
+  "EmptyViewDescription": "Sāciet ar ātrām darbībām:"
 }

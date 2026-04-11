@@ -113,7 +113,7 @@ const InviteQuotaWarningDialog = (props) => {
     <>
       <Text fontWeight={700}>
         {standalone
-          ? t("LicenseExpired")
+          ? t("LicenseExpiredRestriction")
           : t("PlanPaymentOverdue", {
               planName: currentTariffPlanTitle,
             })}

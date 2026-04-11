@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "Witaj w pokoju do współpracy",
   "CollaboratorEmptyTitle": "Pokój jest pusty.",
-  "CreateAIAgent": "Utwórz nowego agenta",
   "CreateAIAgentDescription": "Rozpocznij budowanie swojego pierwszego {{aiAgent}}",
   "CreateDocument": "Utwórz nowy dokument",
   "CreateDocumentDescription": "Wykorzystaj rozbudowaną funkcjonalność edytora tekstów.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "Ustaw spersonalisanego asystenta dla swojego zespołu, dodając bazę wiedzy, wybierając idealny model i łącząc {{mcpServer}}. Zaproś swoich współpracowników do współpracy i zmaksymalizuj możliwości czatu agenta.",
   "EmptyAIAgentsTitle": "Stwórz swojego {{aiAgent}}",
   "EmptyAIAgentsUserTitle": "Brak dostępnych {{aiAgents}}",
-  "EmptyDescription": "Rozpocznij od szybkich działań:",
   "EmptyFavoritesDescription": "Oznacz gwiazdką pliki i foldery, aby utrzymać je w łatwo dostępnym miejscu i na wyciągnięcie ręki.",
   "EmptyFavoritesTitle": "Nie ma jeszcze ulubionych.",
   "EmptyGroupAddedUserOptionDescription": "Dodaj do grupy członków i przypisz jej lidera",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Prześlij z urządzenia",
   "UploadFromPortalTitle": "Prześlij z {{productName}}",
   "UploadPDFFormOptionDescription": "Wybierz gotowy formularz PDF dostępny w {{productName}} i prześlij go do pokoju.",
-  "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych"
+  "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych",
+  "CreateNewAIAgent": "Utwórz nowego agenta",
+  "EmptyViewDescription": "Rozpocznij od szybkich działań:"
 }

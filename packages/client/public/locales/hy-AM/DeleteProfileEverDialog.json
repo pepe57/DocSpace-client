@@ -1,5 +1,4 @@
 {
-  "ActionCannotBeUndone": "Ընտրված անջատված օգտվողները կհեռացվեն {{productName}}-ից: Այս գործողությունը հնարավոր չէ հետարկել:",
   "ActionCannotBeUndoneGuests": "Ընտրված սահմանափակ հնարավորություններով հյուրերը կհեռացվեն {{productName}}ից: Այս գործողությունը հնարավոր չէ հետարկել:",
   "CannotReassignFiles": "Եթե դուք միանգամից ջնջեք մի քանի օգտատերերի, չեք կարող նրանց ֆայլերը վերահանձնել այլ օգտատերերի:",
   "DeleteGroupGuestsSuccessMessage": "Հյուրերը հաջողությամբ ջնջվել են:",
@@ -18,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Հյուրը հաջողությամբ ջնջվել է",
   "SuccessfullyDeleteUserInfoMessage": "Օգտվողը հաջողությամբ ջնջվել է",
   "ToBeAbleToReassignData": "Որպեսզի կարողանաք վերանշանակել տվյալները, ջնջեք մեկ օգտատեր:",
-  "UserFilesRemovalScope": "Անձնական տվյալները, բոլոր ֆայլերն ու թղթապանակները այս օգտատիրոջ {{sectionNameFirst}} և {{sectionNameSecond}} բաժիններում ընդմիշտ կջնջվեն:"
+  "UserFilesRemovalScope": "Անձնական տվյալները, բոլոր ֆայլերն ու թղթապանակները այս օգտատիրոջ {{sectionNameFirst}} և {{sectionNameSecond}} բաժիններում ընդմիշտ կջնջվեն:",
+  "ActionCannotBeUndoneUsers": "Ընտրված անջատված օգտվողները կհեռացվեն {{productName}}-ից: Այս գործողությունը հնարավոր չէ հետարկել:"
 }

@@ -1,5 +1,4 @@
 {
-  "ActionCannotBeUndone": "The selected disabled users will be removed from {{productName}}. This action cannot be undone.",
   "ActionCannotBeUndoneGuests": "The selected disabled guests will be removed from {{productName}}. This action cannot be undone.",
   "CannotReassignFiles": "If you delete multiple users at once, you cannot reassign their files to other users.",
   "DeleteGroupGuestsSuccessMessage": "Guests have been successfully deleted.",
@@ -18,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "The guest has been successfully deleted",
   "SuccessfullyDeleteUserInfoMessage": "The user has been successfully deleted",
   "ToBeAbleToReassignData": "To be able to reassign data, delete one user at a time.",
-  "UserFilesRemovalScope": "Personal data, all files and folders in the {{sectionNameFirst}} and {{sectionNameSecond}} sections of this user will be permanently deleted."
+  "UserFilesRemovalScope": "Personal data, all files and folders in the {{sectionNameFirst}} and {{sectionNameSecond}} sections of this user will be permanently deleted.",
+  "ActionCannotBeUndoneUsers": "The selected disabled users will be removed from {{productName}}. This action cannot be undone."
 }

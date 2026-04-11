@@ -77,7 +77,6 @@
   "DataImportComplete": "Uvoz podatkov zaključen",
   "DataImportDescription": "Uvozite podatke iz storitve tretjih oseb v {{organizationName}} {{productName}}. Uvoz podatkov omogoča prenos podatkov, kot so vsi uporabniki, njihovi osebni in skupni dokumenti.",
   "DataImportProcessing": "Obdelava uvoza podatkov",
-  "DeactivateOrDeletePortal": "Deaktivirajte ali izbrišite prostor.",
   "DefaultSettings": "Privzete nastavitve",
   "DefaultTemplateApplied": "Nova privzeta predloga je bila uporabljena.",
   "DefaultTemplateRestored": "Privzeto predlogo je bilo obnovljeno.",
@@ -181,7 +180,6 @@
   "LoginHistoryTitle": "Zgodovina vpisa",
   "LoginLatestText": "Na tej strani je prikazana samo zadnja aktivnost. Podatki se hranijo za obdobje, ki je navedeno v spodnjem polju (največ 180 dni).",
   "LoginSubheaderTitle": "Ta pododdelek se uporablja za spremljanje zadnje dejavnosti prijave uporabnikov, vključno z uspešnimi prijavami in neuspelimi poskusi z opisi razlogov.",
-  "LogoLightSmall": "Logotip za portal",
   "ManagementCategoryDataManagement": "Urejanje podatkov",
   "ManagementCategoryIntegration": "Integracija",
   "ManagementCategorySecurity": "Varnost",
@@ -286,7 +284,6 @@
   "ThirdPartyBottomDescription": "Potrebujete pomoč? Obrnite se na našo <2>Podporno ekipo.</2>",
   "ThirdPartyPropsActivated": "Uspešno posodobljeno",
   "ThirdPartyPropsDeactivated": "Uspešno deaktivirano",
-  "ThirdPartyStorageDescription": "Varnostno kopijo lahko shranite pri zunanjem ponudniku. Pred tem morate v razdelku «Integracija» povezati ustrezno storitev. V nasprotnem primeru bodo naslednje nastavitve neaktivne.",
   "TimeLanguageSettingsDescription": "Spremenite nastavitve jezika in časovnega pasu, da prilagodite običajni jezik in čas {{productName}}.",
   "TimeLanguageSettingsSave": "Klikni <strong>Shrani</strong> na dnu, da uveljaviš spremembe.",
   "TimeZone": "Časovni pas",
@@ -319,8 +316,11 @@
   "UseUpperCase": "Uporabi velike črke",
   "WantToCancelDataImport": "Ali želite preklicati uvoz podatkov?",
   "WantToCancelUpload": "Ali želite preklicati nalaganje?",
-  "WantToContinue": "Ali želite nadaljevati ali spremeniti uporabniško kvoto prostora za shranjevanje?",
   "WebhooksDescription": "Izvedite prilagojene akcije na strani vsake aplikacije ali spletne strani, ki jo uporabljate, na podlagi različnih dogodkov v {{organizationName}} {{productName}}.",
-  "WhiteLabelSubtitle": "Naložite logotipe s transparentno ozadjem (PNG, SVG, JPG) za svetlo in temno temo ali pa hitro ustvarite enega z vnosom vašega logotipa spodaj.",
-  "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom."
+  "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom.",
+  "LogoLightSmallPortal": "Logotip za portal",
+  "ThirdPartyBackupStorageDescription": "Varnostno kopijo lahko shranite pri zunanjem ponudniku. Pred tem morate v razdelku «Integracija» povezati ustrezno storitev. V nasprotnem primeru bodo naslednje nastavitve neaktivne.",
+  "WantToContinueQuota": "Ali želite nadaljevati ali spremeniti uporabniško kvoto prostora za shranjevanje?",
+  "WhiteLabelLogoSubtitle": "Naložite logotipe s transparentno ozadjem (PNG, SVG, JPG) za svetlo in temno temo ali pa hitro ustvarite enega z vnosom vašega logotipa spodaj.",
+  "DeactivateOrDeleteSpace": "Deaktivirajte ali izbrišite prostor."
 }

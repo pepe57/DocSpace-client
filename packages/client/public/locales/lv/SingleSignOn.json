@@ -28,7 +28,6 @@
   "OpenCertificate": "Publiskais sertifikāts",
   "PlaceholderCert": "Ielīmēt vai ierakstīt tekstu",
   "PrivateKey": "Privātā atslēga",
-  "ProviderURL": "IdP entītijas ID",
   "ProviderURLTooltip": "Identitātes nodrošinātāja entītijas ID (izdevēja URL)",
   "ServiceProviderSettings": "{{organizationName}} SP iestatījumi",
   "ServiceProviderSettingsDescription": "Konfigurējiet pakalpojumu sniedzēja iestatījumus un pievienojiet SP sertifikātus vienreizējai pierakstīšanai.",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "Iespējot šo opciju, ja vēlaties automātiski pievienot lietotājus no SSO pakalpojuma jūsu telpai.",
   "UploadXML": "Ielādēt metadatus no XML, lai automātiski aizpildītu nepieciešamos laukus.",
   "UploadXMLPlaceholder": "IdP metadatu XML URL",
-  "UsedFor": "Izmanto priekšmetam"
+  "UsedFor": "Izmanto priekšmetam",
+  "IdpEntityId": "IdP entītijas ID"
 }

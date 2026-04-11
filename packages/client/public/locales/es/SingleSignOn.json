@@ -28,7 +28,6 @@
   "OpenCertificate": "Certificado público",
   "PlaceholderCert": "Pegue o escriba texto",
   "PrivateKey": "Clave privada",
-  "ProviderURL": "Id. de entidad IdP",
   "ProviderURLTooltip": "Id. de entidad del proveedor de identidad (URL del emisor)",
   "ServiceProviderSettings": "Configuración de {{organizationName}} SP",
   "ServiceProviderSettingsDescription": "Configure los ajustes del proveedor de servicios y añada certificados SP para Single Sign-On.",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "Habilite esta opción si desea añadir usuarios del servicio SSO a su espacio automáticamente.",
   "UploadXML": "Cargar metadatos desde XML para rellenar automáticamente los campos obligatorios.",
   "UploadXMLPlaceholder": "URL al XML de metadatos IdP",
-  "UsedFor": "Se usa para"
+  "UsedFor": "Se usa para",
+  "IdpEntityId": "Id. de entidad IdP"
 }

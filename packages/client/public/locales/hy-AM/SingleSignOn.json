@@ -28,7 +28,6 @@
   "OpenCertificate": "Հանրային վկայական",
   "PlaceholderCert": "Տեղադրեք կամ մուտքագրեք տեքստ",
   "PrivateKey": "Անձնական բանալի",
-  "ProviderURL": "IdP Entity Id",
   "ProviderURLTooltip": "Ինքնության տրամադրողի Entity Id (Թողարկողի URL)",
   "ServiceProviderSettings": "{{organizationName}} SP Կարգավորումներ",
   "ServiceProviderSettingsDescription": "Կարգավորեք Ծառայությունների Մատակարարի կարգավորումները և ավելացրեք SP սերտիֆիկատներ Միակ Մուտք սիստեմի համար:",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "Միացրեք այս տարբերակը, եթե ցանկանում եք SSO ծառայության օգտվողներին ավտոմատ կերպով ավելացնել ձեր տարածք:",
   "UploadXML": "Բեռնեք մետատվյալները XML-ից՝ պահանջվող դաշտերը ավտոմատ կերպով լրացնելու համար:",
   "UploadXMLPlaceholder": "URL դեպի IdP Մետատվյալների XML",
-  "UsedFor": "օգտագործել"
+  "UsedFor": "օգտագործել",
+  "IdpEntityId": "IdP Entity Id"
 }

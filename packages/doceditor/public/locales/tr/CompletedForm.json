@@ -1,7 +1,6 @@
 {
   "BackToRoom": "Odaya geri dön",
   "CheckReadyForms": "Hazır formları kontrol edin",
-  "Description": "Formunuz tamamlandı ve kaydedildi",
   "DescriptionForAnonymous": "Benzersiz bir numara atanmış olan doldurulmuş PDF formunu gönderdiniz. Durumu kontrol etmek için, form sahibi ile iletişime geçin.",
   "DescriptionForRegisteredUser": "Doldurulan PDF formu ve Tamamlandı klasöründe sizin için kullanılabilir durumdadır.",
   "FillItOutAgain": "Tekrar doldurun",
@@ -19,5 +18,6 @@
   "LinkToFillOutForm": "Formu doldurma bağlantısı:",
   "LinkToForm": "Form bağlantısı:",
   "LinkToViewOnlyForm": "Salt görüntülenebilir form bağlantısı:",
-  "Title": "Form tamamlandı"
+  "CompletedFormTitle": "Form tamamlandı",
+  "CompletedFormDescription": "Formunuz tamamlandı ve kaydedildi"
 }

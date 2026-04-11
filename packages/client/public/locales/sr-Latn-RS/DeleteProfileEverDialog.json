@@ -1,5 +1,4 @@
 {
-  "ActionCannotBeUndone": "Izabrani onemogućeni korisnici će biti uklonjeni iz {{productName}}-a. Ova radnja se ne može opozvati.",
   "ActionCannotBeUndoneGuests": "Izabrani onemogućeni gosti biće uklonjeni iz {{productName}}. Ova radnja se ne može poništiti.",
   "CannotReassignFiles": "Ako obrišete više korisnika odjednom, ne možete da dodelite njihove datoteke drugim korisnicima.",
   "DeleteGroupGuestsSuccessMessage": "Gosti su uspešno obrisani.",
@@ -18,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Gost je uspešno obrisan",
   "SuccessfullyDeleteUserInfoMessage": "Korisnik je uspešno obrisan",
   "ToBeAbleToReassignData": "Da biste mogli ponovo da dodelite podatke, brišite jednog po jednog korisnika.",
-  "UserFilesRemovalScope": "Lični podaci, sve datoteke i fascikle u odeljcima {{sectionNameFirst}} i {{sectionNameSecond}} ovog korisnika će biti trajno izbrisani."
+  "UserFilesRemovalScope": "Lični podaci, sve datoteke i fascikle u odeljcima {{sectionNameFirst}} i {{sectionNameSecond}} ovog korisnika će biti trajno izbrisani.",
+  "ActionCannotBeUndoneUsers": "Izabrani onemogućeni korisnici će biti uklonjeni iz {{productName}}-a. Ova radnja se ne može opozvati."
 }

@@ -28,7 +28,6 @@
   "OpenCertificate": "Certyfikat publiczny",
   "PlaceholderCert": "Wklej lub wpisz tekst",
   "PrivateKey": "Klucz prywatny",
-  "ProviderURL": "ID podmiotu IdP",
   "ProviderURLTooltip": "ID podmiotu dostawcy tożsamości (adres URL wystawcy)",
   "ServiceProviderSettings": "Ustawienia usługodawcy {{organizationName}}",
   "ServiceProviderSettingsDescription": "Skonfiguruj ustawienia usługodawcy i dodaj jego certyfikaty dla pojedynczego logowania.",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "Włącz tę opcję, jeśli chcesz automatycznie dodawać użytkowników z usługi pojedynczego logowania do swojego obszaru roboczego.",
   "UploadXML": "Wczytaj metadane z XML, aby automatycznie wypełnić wymagane pola.",
   "UploadXMLPlaceholder": "Adres URL do XML z metadanymi IdP",
-  "UsedFor": "Użyj do"
+  "UsedFor": "Użyj do",
+  "IdpEntityId": "ID podmiotu IdP"
 }

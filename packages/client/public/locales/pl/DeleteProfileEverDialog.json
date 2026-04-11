@@ -1,5 +1,4 @@
 {
-  "ActionCannotBeUndone": "Wybrani wyłączeni użytkownicy zostaną usunięci z {{productName}}. Nie będziesz w stanie cofnąć tego działania.",
   "ActionCannotBeUndoneGuests": "Wybrani wyłączeni goście zostaną usunięci z {{productName}}. Nie można cofnąć tej czynności.",
   "CannotReassignFiles": "Jeśli usuniesz kilku użytkowników jednocześnie, nie będziesz w stanie przypisać ich plików innym użytkownikom.",
   "DeleteGroupGuestsSuccessMessage": "Goście zostali pomyślnie usunięci.",
@@ -18,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Gość został pomyślnie usunięty",
   "SuccessfullyDeleteUserInfoMessage": "Użytkownik został pomyślnie usunięty",
   "ToBeAbleToReassignData": "Aby móc ponownie przypisać dane, należy usuwać po jednym użytkowniku na raz.",
-  "UserFilesRemovalScope": "Dane osobowe, wszystkie pliki i foldery w sekcjach {{sectionNameFirst}} i {{sectionNameSecond}} tego użytkownika zostaną trwale usunięte."
+  "UserFilesRemovalScope": "Dane osobowe, wszystkie pliki i foldery w sekcjach {{sectionNameFirst}} i {{sectionNameSecond}} tego użytkownika zostaną trwale usunięte.",
+  "ActionCannotBeUndoneUsers": "Wybrani wyłączeni użytkownicy zostaną usunięci z {{productName}}. Nie będziesz w stanie cofnąć tego działania."
 }

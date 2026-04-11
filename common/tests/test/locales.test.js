@@ -2492,8 +2492,7 @@ describe("Locales Tests", () => {
     expect(errorsCount, message).toBe(0);
   });
 
-  // TODO: Fix 47 duplicate keys across namespaces, then remove .skip
-  it.skip("DuplicateKeysAcrossNamespacesTest: Verify that the same translation key does not appear in multiple namespaces.", () => {
+  it("DuplicateKeysAcrossNamespacesTest: Verify that the same translation key does not appear in multiple namespaces.", () => {
     // Duplicate keys across namespaces cause confusion: it's unclear which
     // translation is actually used, and changes to one copy may not propagate
     // to the other. Each key should exist in exactly one namespace.

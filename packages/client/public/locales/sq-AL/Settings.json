@@ -77,7 +77,6 @@
   "DataImportComplete": "Importimi i të dhënave përfundoi",
   "DataImportDescription": "Importoni të dhëna nga një shërbim i palës së tretë në {{organizationName}} {{productName}}. Importi i të dhënave lejon transferimin e të dhënave si të gjithë përdoruesit, dokumentet e tyre personale dhe të përbashkëta.",
   "DataImportProcessing": "Përpunimi i importit të të dhënave",
-  "DeactivateOrDeletePortal": "Çaktivizoni ose fshini hapësirën.",
   "DefaultSettings": "Cilësimet e parazgjedhura",
   "DefaultTemplateApplied": "Template-i i paracaktuar i ri është aplikuar.",
   "DefaultTemplateRestored": "Shablloni i paracaktuar u rikuperua.",
@@ -181,7 +180,6 @@
   "LoginHistoryTitle": "Historia e hyrjes",
   "LoginLatestText": "Vetëm aktiviteti më i fundit shfaqet në këtë faqe. Vetë të dhënat ruhen gjatë periudhës së specifikuar në fushën më poshtë (maksimumi 180 ditë).",
   "LoginSubheaderTitle": "Ky nënseksion përdoret për të monitoruar aktivitetin më të fundit të hyrjes së përdoruesit, duke përfshirë hyrjet e suksesshme dhe përpjekjet e dështuara me një tregues të arsyeve.",
-  "LogoLightSmall": "Logo për portalin",
   "ManagementCategoryDataManagement": "Menaxhimi i të dhënave",
   "ManagementCategoryIntegration": "Integrimi",
   "ManagementCategorySecurity": "Siguria",
@@ -286,7 +284,6 @@
   "ThirdPartyBottomDescription": "Keni ndonjë problem? Kontaktoni <2>Ekipin tonë të Mbështetjes.</2>",
   "ThirdPartyPropsActivated": "Përditësuar me sukses",
   "ThirdPartyPropsDeactivated": "U çaktivizua me sukses",
-  "ThirdPartyStorageDescription": "Ruajtja mund të ruhet në një ruajtje të palëve të treta. Para kësaj, duhet të lidhni shërbimin përkatës në seksionin 'Integrimi'. Përndryshe, cilësimet e mëposhtme do të jenë joaktive.",
   "TimeLanguageSettingsDescription": "Ndrysho cilësimet e gjuhës dhe të zonës kohore për të rregulluar gjuhën dhe orën e zakonshme të {{productName}}.",
   "TimeLanguageSettingsSave": "Kliko <strong>Ruaj</strong> në fund për të aplikuar.",
   "TimeZone": "Zona kohore",
@@ -319,8 +316,11 @@
   "UseUpperCase": "Përdorni shkronja të mëdha",
   "WantToCancelDataImport": "Dëshironi të anuloni importimin e të dhënave?",
   "WantToCancelUpload": "Dëshironi ta anuloni ngarkimin?",
-  "WantToContinue": "Dëshironi të vazhdoni apo të ndryshoni kuotën e ruajtjes së përdoruesit?",
   "WebhooksDescription": "Kryeni veprime të personalizuara në anën e çdo aplikacioni ose webfaqe që po përdorni bazuar në ngjarje të ndryshme në {{organizationName}} {{productName}}.",
-  "WhiteLabelSubtitle": "Ngarkoni logove me sfond transparent (PNG, SVG, JPG) për tema të lehta dhe të errëta, ose gjeneroni një menjëherë duke futur logon tuaj më poshtë.",
-  "WithoutEmailHint": "Ju nuk keni përdorues pa email. Ju lutemi vazhdoni në hapin tjetër."
+  "WithoutEmailHint": "Ju nuk keni përdorues pa email. Ju lutemi vazhdoni në hapin tjetër.",
+  "LogoLightSmallPortal": "Logo për portalin",
+  "ThirdPartyBackupStorageDescription": "Ruajtja mund të ruhet në një ruajtje të palëve të treta. Para kësaj, duhet të lidhni shërbimin përkatës në seksionin 'Integrimi'. Përndryshe, cilësimet e mëposhtme do të jenë joaktive.",
+  "WantToContinueQuota": "Dëshironi të vazhdoni apo të ndryshoni kuotën e ruajtjes së përdoruesit?",
+  "WhiteLabelLogoSubtitle": "Ngarkoni logove me sfond transparent (PNG, SVG, JPG) për tema të lehta dhe të errëta, ose gjeneroni një menjëherë duke futur logon tuaj më poshtë.",
+  "DeactivateOrDeleteSpace": "Çaktivizoni ose fshini hapësirën."
 }

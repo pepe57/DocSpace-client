@@ -398,7 +398,6 @@
   "DenyAccess": "Liegt piekļuvi",
   "DenyAccessDescription": "Nav piekļuves skatīšanai, rediģēšanai vai failu un mapju pārvaldībai.",
   "DenyAccessDescriptionDocument": "Nav piekļuves, lai skatītu, rediģētu vai pārvaldītu šo failu.",
-  "Description": "Apraksts",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Izstrādātāja rīki",
   "Diagram": "Diagramma",
@@ -1499,5 +1498,6 @@
   "YourName": "Jūsu vārds, uzvārds",
   "YourPrice": "Jūsu cena",
   "YourTurn": "Jūsu kārta",
-  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides."
+  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides.",
+  "DescriptionLabel": "Apraksts"
 }

@@ -38,7 +38,6 @@
   "Descending": "Padajoče",
   "DestinationFolderId": "ID namenske police",
   "DisplayColumns": "Prikaz stolpcev v vrstici datoteke",
-  "EditorDescription": "Vdelajte urejevalnik, da uporabnikom omogočite urejanje datoteke iz ustrezne sobe.",
   "ElementCalledAfterClicking": "Element bo priklican po kliku",
   "ElementItself": "Sam element",
   "EmbedCodeSuccessfullyCopied": "Koda za vdelavo je bila uspešno kopirana v odložišče",
@@ -48,7 +47,6 @@
   "EnterPage": "Vnesi številko strani",
   "EnterWidth": "Vnesi širino",
   "EventLog": "Zgodbnik dogodkov",
-  "FeedbackAndSupport": "Povratne informacije in podpora",
   "FileContentCopy": "Omejitev kopiranja vsebine datoteke",
   "FileFilter": "Filter datotek",
   "FileId": "ID datoteke",
@@ -57,7 +55,6 @@
   "FilesSearchDescription": "Iskanje datotek v odprti mapi/sobi.",
   "FileTypeDisplay": "Prikaz tipa datoteke",
   "FrameId": "ID okvirja",
-  "GetCode": "Pridobite kodo za vstavljanje",
   "Header": "Glava",
   "HeaderDescription": "V mobilni različici lahko onemogočite glavo, da omejite dostop do razdelkov {{productName}} (tako kot onemogočite levi meni v namizni različici).",
   "HelperText": "Nasvetni tekst",
@@ -150,5 +147,8 @@
   "UploadLimits": "Omejitve za nalaganje",
   "UploadMode": "Način nalaganja",
   "ViewerDescription": "Vdelajte pregledovalnik, da uporabnikom omogočite odpiranje datoteke za ogled iz ustrezne sobe.",
-  "VoidReturn": "Praznina"
+  "VoidReturn": "Praznina",
+  "EditorPresetDescription": "Vdelajte urejevalnik, da uporabnikom omogočite urejanje datoteke iz ustrezne sobe.",
+  "FeedbackAndSupportLink": "Povratne informacije in podpora",
+  "GetCodeToInsert": "Pridobite kodo za vstavljanje"
 }

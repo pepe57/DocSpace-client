@@ -21,11 +21,11 @@
   "KnowledgeUnavailableDescriptionUser": "ナレッジベースは現在無効になっています。{{aiAgents}}のセマンティック検索とドキュメント処理を有効にするには、埋め込みプロバイダーを設定するために{{productName}}の管理者に連絡してください。",
   "MCP": "このルーム用のMCPツール",
   "MCPDescriptionServers": "管理者によって接続された{{mcpServers}}を使用して、AIによるチャット体験を強化します。{{mcpServers}}は、データ抽出、要約、スマートな提案などで役立ちます。",
-  "Model": "{{aiProvider}} およびモデル",
   "ModelDescription": "このルームのチャットで使用する{{aiProvider}}とモデルを選択してください。この設定は必須であり、すべての参加者に適用されます。",
   "NoAccessAIAgentTitle": "申し訳ありませんが、この{{aiAgent}}にはアクセスできません",
   "ResponseQualityNode": "<1>注:</1> モデルによって応答品質は異なります。最新のモデルを使用すると最良の結果が得られます。",
   "ResultStorage": "結果ストレージ",
   "UploadFilesDevice": "個人用デバイスからファイルをアップロードする",
-  "UploadFilesPortal": "{{sectionNameFirst}}または{{sectionNameSecond}}からファイルをアップロードする"
+  "UploadFilesPortal": "{{sectionNameFirst}}または{{sectionNameSecond}}からファイルをアップロードする",
+  "AIProviderAndModel": "{{aiProvider}} およびモデル"
 }

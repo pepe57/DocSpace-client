@@ -28,7 +28,6 @@
   "OpenCertificate": "Javni certifikat",
   "PlaceholderCert": "Prilepi ali vnesi besedilo",
   "PrivateKey": "Zasebni ključ",
-  "ProviderURL": "IdP identifikator entitete",
   "ProviderURLTooltip": "ID subjekta ponudnika identitete (URL izdajatelja)",
   "ServiceProviderSettings": "{{organizationName}} SP Nastavitve",
   "ServiceProviderSettingsDescription": "Konfigurirajte nastavitve ponudnika storitev in dodajte potrdila SP za enotno prijavo.",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "Omogočite to možnost, če želite samodejno dodati uporabnike iz storitve SSO v svoj prostor.",
   "UploadXML": "Naloži metapodatke iz XML, da se samodejno izpolnijo zahtevana polja.",
   "UploadXMLPlaceholder": "URL do IdP Meta podatkov XML",
-  "UsedFor": "Uporabi za"
+  "UsedFor": "Uporabi za",
+  "IdpEntityId": "IdP identifikator entitete"
 }

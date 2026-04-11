@@ -398,7 +398,6 @@
   "DenyAccess": "Refuzoni qasjen",
   "DenyAccessDescription": "Nuk ka akses për të parë, redaktuar ose menaxhuar skedarët apo dosjet.",
   "DenyAccessDescriptionDocument": "Nuk ka akses për të parë, redaktuar apo menaxhuar këtë skedar.",
-  "Description": "Përshkrimi",
   "DeveloperLicense": "Zhvilluesi",
   "DeveloperTools": "Mjetet e Zhvilluesit",
   "Diagram": "Diagram",
@@ -1499,5 +1498,6 @@
   "YourName": "Emri juaj",
   "YourPrice": "Çmimi juaj",
   "YourTurn": "Radha jote",
-  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës."
+  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës.",
+  "DescriptionLabel": "Përshkrimi"
 }

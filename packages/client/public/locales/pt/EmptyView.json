@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "Bem-vindo à sala de colaboração",
   "CollaboratorEmptyTitle": "A sala está vazia.",
-  "CreateAIAgent": "Criar um novo agente",
   "CreateAIAgentDescription": "Comece a construir seu primeiro {{aiAgent}}",
   "CreateDocument": "Criar um novo documento",
   "CreateDocumentDescription": "Tire partido da vasta funcionalidade de processamento de texto.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "Configure um assistente personalizado para sua equipe adicionando uma base de conhecimento, selecionando o modelo ideal e conectando um {{mcpServer}}. Convide seus colegas para colaborar e aproveitar ao máximo os recursos de chat do agente.",
   "EmptyAIAgentsTitle": "Crie seu {{aiAgent}}",
   "EmptyAIAgentsUserTitle": "Nenhum {{aiAgents}} disponível ainda",
-  "EmptyDescription": "Comece com ações rápidas:",
   "EmptyFavoritesDescription": "Arquive arquivos e pastas para mantê-los facilmente acessíveis e ao seu alcance.",
   "EmptyFavoritesTitle": "Ainda não há favoritos.",
   "EmptyGroupAddedUserOptionDescription": "Adicionar membros do grupo e atribuir o cabeçalho",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Carregar do dispositivo",
   "UploadFromPortalTitle": "Fazer upload de {{productName}}",
   "UploadPDFFormOptionDescription": "Selecione um formulário PDF pronto disponível em {{productName}} e carregue-o na sala.",
-  "VirtualDataRoomEmptyTitle": "Bem-vindo ao Data Room Virtual"
+  "VirtualDataRoomEmptyTitle": "Bem-vindo ao Data Room Virtual",
+  "CreateNewAIAgent": "Criar um novo agente",
+  "EmptyViewDescription": "Comece com ações rápidas:"
 }

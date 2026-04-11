@@ -1,6 +1,5 @@
 {
   "AuthViaNTLM": "Autorizare prin NTLM",
-  "EnableSSL": "Activează SSL",
   "EnterDomain": "Introduceți domeniul",
   "EnterLogin": "Introduceți nume de conectare",
   "EnterPort": "Introduceți numărul de port",
@@ -10,5 +9,6 @@
   "Port": "Port",
   "SenderDisplayName": "Nume afișat expeditor",
   "SenderEmailAddress": "Adresa e-mail expeditor",
-  "SendTestMail": "Trimite un e-mail de testare"
+  "SendTestMail": "Trimite un e-mail de testare",
+  "EnableSMTPSSL": "Activează SSL"
 }

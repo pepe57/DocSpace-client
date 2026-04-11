@@ -1,6 +1,5 @@
 {
   "AuthViaNTLM": "Аутентифікація через NTLM",
-  "EnableSSL": "Увімкнути SSL",
   "EnterDomain": "Введіть домен",
   "EnterLogin": "Введіть логін",
   "EnterPort": "Введіть порт",
@@ -10,5 +9,6 @@
   "Port": "Порт",
   "SenderDisplayName": "Ім'я відправника, яке відображається",
   "SenderEmailAddress": "Адреса електронної пошти відправника",
-  "SendTestMail": "Надіслати тестове поштове повідомлення"
+  "SendTestMail": "Надіслати тестове поштове повідомлення",
+  "EnableSMTPSSL": "Увімкнути SSL"
 }

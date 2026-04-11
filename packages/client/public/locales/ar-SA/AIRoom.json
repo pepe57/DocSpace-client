@@ -21,11 +21,11 @@
   "KnowledgeUnavailableDescriptionUser": "قاعدة المعرفة معطلة حاليًا. لتفعيل البحث الدلالي ومعالجة المستندات لـ {{aiAgents}}، يرجى الاتصال بمسؤول {{productName}} لتهيئة مزود التضمينات.",
   "MCP": "أدوات MCP لهذه الغرفة",
   "MCPDescriptionServers": "استخدم {{mcpServers}} التي يربطها المسؤول لتعزيز تجربة الدردشة مع الذكاء الاصطناعي. يمكن لـ {{mcpServers}} المساعدة في استخراج البيانات، والملخصات، والاقتراحات الذكية، إلخ.",
-  "Model": "{{aiProvider}} و نموذج",
   "ModelDescription": "حدد {{aiProvider}} والنموذج المراد استخدامه في محادثات هذه الغرفة. هذا الإعداد إلزامي وينطبق على جميع المشاركين.",
   "NoAccessAIAgentTitle": "عذراً، ليس لديك وصول إلى {{aiAgent}}",
   "ResponseQualityNode": "<1>ملاحظة:</1> قد تختلف جودة الاستجابة حسب النموذج؛ يوصى بالنماذج الأحدث للحصول على أفضل النتائج.",
   "ResultStorage": "تخزين النتائج",
   "UploadFilesDevice": "تحميل الملفات من جهازكم الشخصي",
-  "UploadFilesPortal": "تحميل الملفات من {{sectionNameFirst}} أو {{sectionNameSecond}}"
+  "UploadFilesPortal": "تحميل الملفات من {{sectionNameFirst}} أو {{sectionNameSecond}}",
+  "AIProviderAndModel": "{{aiProvider}} و نموذج"
 }

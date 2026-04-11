@@ -13,9 +13,7 @@
   "DeleteGroupDescription": "Grupul {{groupName}} va fi șters. Utilizatorii care fac parte din acest grup nu vor fi eliminați din {{productName}}. Sigur doriţi să continuați?",
   "DeleteGroupTitle": "Ștergere grup",
   "DeleteItem": "Sunteți pe cale să mutați <strong>{{name}}</strong> în {{trashSection}} de gunoi.",
-  "DeleteItemForever": "Sunteți pe cale să ștergeți <strong>{{name}}</strong>.",
   "DeleteItemsSharedNote": "Rețineți că, dacă le-ați partajat cu altcineva, aceste vor deveni indisponibile.",
-  "DeleteRoom": "Sala <strong>\"{{roomName}}\"</strong> va fi ștearsă definitiv. Toate datele  și conectările utilizatorilor se vor pierde.",
   "DeleteRooms": "<strong>Săli ({{count}})</strong> selectate vor fi șterse permanent. Toate datele și accesul utilizatorilor vor fi pierdute.",
   "DeleteRoomsTitle": "Șterge această sală?",
   "DeleteRoomTitle": "Doriți să ștergeți această sală?",
@@ -34,5 +32,7 @@
   "ItemsDeletedAfter": "Aceste elemente vor fi şterse definitiv după 30 de zile.",
   "ItemsPermanentlyDeleted": "Aceste elemente vor fi şterse definitiv din {{trashSection}} de gunoi.",
   "removeFromListDescription": "Sunteți pe cale să eliminați <1>{{title}}</1> din listă. Sunteți sigur că doriți să continuați?",
-  "removeFromListDescriptionPlural": "Sunteți pe cale să eliminați <1>elemente ({{count}})</1> din listă. Sunteți sigur că doriți să continuați?"
+  "removeFromListDescriptionPlural": "Sunteți pe cale să eliminați <1>elemente ({{count}})</1> din listă. Sunteți sigur că doriți să continuați?",
+  "DeleteItemForeverConfirm": "Sunteți pe cale să ștergeți <strong>{{name}}</strong>.",
+  "DeleteRoomConfirm": "Sala <strong>\"{{roomName}}\"</strong> va fi ștearsă definitiv. Toate datele  și conectările utilizatorilor se vor pierde."
 }

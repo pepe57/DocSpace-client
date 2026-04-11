@@ -398,7 +398,6 @@
   "DenyAccess": "Odmów dostępu",
   "DenyAccessDescription": "Brak możliwości przeglądania, edycji lub zarządzania plikami lub folderami.",
   "DenyAccessDescriptionDocument": "Brak możliwości wyświetlania, edycji lub zarządzania tym plikiem.",
-  "Description": "Opis",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Narzędzia programistyczne",
   "Diagram": "Schemat",
@@ -1499,5 +1498,6 @@
   "YourName": "Jak się nazywasz",
   "YourPrice": "Twoja cena",
   "YourTurn": "Twoja kolej",
-  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby."
+  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby.",
+  "DescriptionLabel": "Opis"
 }

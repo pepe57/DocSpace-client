@@ -398,7 +398,6 @@
   "DenyAccess": "Erişimi reddet",
   "DenyAccessDescription": "Dosyalara veya klasörlere erişme, düzenleme veya yönetme yetkiniz yok.",
   "DenyAccessDescriptionDocument": "Bu dosyayı görüntüleme, düzenleme veya yönetme erişiminiz yok.",
-  "Description": "Tanım",
   "DeveloperLicense": "Geliştirici",
   "DeveloperTools": "Geliştirici Araçları",
   "Diagram": "Şema",
@@ -1499,5 +1498,6 @@
   "YourName": "Adınız",
   "YourPrice": "Ücret",
   "YourTurn": "Sıra sizde",
-  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir."
+  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir.",
+  "DescriptionLabel": "Tanım"
 }

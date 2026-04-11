@@ -21,11 +21,11 @@
   "KnowledgeUnavailableDescriptionUser": "Baza e dijes është e fikur për momentin. Për të aktivizuar kërkimin semantik dhe përpunimin e dokumenteve për {{aiAgents}}, ju lutemi kontaktoni administratorin e {{productName}} për të konfiguruar ofruesin e embedding-ve.",
   "MCP": "Mjetet MCP për këtë dhomë",
   "MCPDescriptionServers": "Përdorni {{mcpServers}} të lidhur nga administratorit për të përmirësuar përvojën e bisedës me AI. {{mcpServers}} mund të ndihmojnë me nxjerrjen e të dhënave, përmbledhjet, sugjerimet e inteligjencës, etj.",
-  "Model": "{{aiProvider}} dhe modeli",
   "ModelDescription": "Zgjidhni {{aiProvider}} dhe modelin që do të përdoren në bisedat e kësaj dhinformative. Kjo cilësim është i detyrueshëm dhe i zbatohet të gjithë pjesëmarrësve.",
   "NoAccessAIAgentTitle": "Më vjen keq, ju nuk keni akses në {{aiAgent}}",
   "ResponseQualityNode": "<1>Shënim:</1> Cilësia e përgjigjeve mund të ndryshojë sipas modelit; modelet më të reja rekomandohen për rezultate më të mira.",
   "ResultStorage": "Ruajtja e rezultateve",
   "UploadFilesDevice": "Ngarko skedarë nga pajisja jote personale",
-  "UploadFilesPortal": "Ngarko skedarë nga {{sectionNameFirst}} ose {{sectionNameSecond}}"
+  "UploadFilesPortal": "Ngarko skedarë nga {{sectionNameFirst}} ose {{sectionNameSecond}}",
+  "AIProviderAndModel": "{{aiProvider}} dhe modeli"
 }

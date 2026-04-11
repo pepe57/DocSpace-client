@@ -1,5 +1,4 @@
 {
-  "ActionCannotBeUndone": "選択された無効なユーザーは{{productName}}から削除されます。この操作は取り消すことができません。",
   "ActionCannotBeUndoneGuests": "選択された障害のあるゲストは、{{productName}}から削除されます。この操作は元に戻すことはできません。",
   "CannotReassignFiles": "複数のユーザーを一度に削除した場合、そのユーザーのファイルを他のユーザーに再割り当てすることはできません。",
   "DeleteGroupGuestsSuccessMessage": "ゲストは正常に削除されました。",
@@ -18,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "ゲストは正常に削除されました",
   "SuccessfullyDeleteUserInfoMessage": "ユーザーの削除に成功しました。",
   "ToBeAbleToReassignData": "データを再割り当てするためには、一度に一人のユーザーを削除してください。",
-  "UserFilesRemovalScope": "このユーザーの個人データ、{{sectionNameFirst}} および {{sectionNameSecond}} セクション内のすべてのファイルとフォルダは完全に削除されます。"
+  "UserFilesRemovalScope": "このユーザーの個人データ、{{sectionNameFirst}} および {{sectionNameSecond}} セクション内のすべてのファイルとフォルダは完全に削除されます。",
+  "ActionCannotBeUndoneUsers": "選択された無効なユーザーは{{productName}}から削除されます。この操作は取り消すことができません。"
 }

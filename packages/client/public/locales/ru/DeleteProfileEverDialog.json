@@ -1,5 +1,4 @@
 {
-  "ActionCannotBeUndone": "Выбранные отключенные пользователи будут удалены из {{productName}}. Это действие необратимо.",
   "ActionCannotBeUndoneGuests": "Выбранные отключенные гости будут удалены из {{productName}}. Это действие не может быть отменено.",
   "CannotReassignFiles": "Если вы удалите нескольких пользователей одновременно, вы не сможете переназначить их файлы другим пользователям.",
   "DeleteGroupGuestsSuccessMessage": "Гости успешно удалены.",
@@ -18,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Гость успешно удален",
   "SuccessfullyDeleteUserInfoMessage": "Пользователь успешно удален",
   "ToBeAbleToReassignData": "Чтобы иметь возможность переназначать данные, удаляйте не более одного пользователя за один раз.",
-  "UserFilesRemovalScope": "Персональные данные, все файлы и папки в разделах {{sectionNameFirst}} и {{sectionNameSecond}} этого пользователя будут удалены навсегда."
+  "UserFilesRemovalScope": "Персональные данные, все файлы и папки в разделах {{sectionNameFirst}} и {{sectionNameSecond}} этого пользователя будут удалены навсегда.",
+  "ActionCannotBeUndoneUsers": "Выбранные отключенные пользователи будут удалены из {{productName}}. Это действие необратимо."
 }

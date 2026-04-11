@@ -216,7 +216,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
       <div className={styles.logosContainer}>
         <div className={styles.logoWrapper}>
           <Text fontSize="15px" fontWeight="600">
-            {t("LogoLightSmall")} ({logoUrls[0].size.width}x
+            {t("LogoLightSmallPortal")} ({logoUrls[0].size.width}x
             {logoUrls[0].size.height})
           </Text>
           <div className={styles.logosWrapper}>

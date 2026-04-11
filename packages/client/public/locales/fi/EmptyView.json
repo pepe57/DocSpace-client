@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "Tervetuloa yhteistyöhuoneseen",
   "CollaboratorEmptyTitle": "Huone on tyhjä. ",
-  "CreateAIAgent": "Luo uusi agentti",
   "CreateAIAgentDescription": "Aloita ensimmäisen {{aiAgent}}in rakentaminen",
   "CreateDocument": "Luo uusi asiakirja",
   "CreateDocumentDescription": "Hyödynnä laaja tekstinkäsittelytoiminto.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "Määritä henkilökohtainen avustaja tiimillesi lisäämällä tietopankin, valitsemalla ihanteellisen mallin ja yhdistämällä {{mcpServer}}:n. Kutsu kollegasi yhteistyöhön ja hyödynnä agentin chat-ominaisuudet parhaiten.",
   "EmptyAIAgentsTitle": "Luo {{aiAgent}}-agenttisi",
   "EmptyAIAgentsUserTitle": "Ei {{aiAgents}} saatavilla vielä",
-  "EmptyDescription": "Aloita nopeilla toimilla:",
   "EmptyFavoritesDescription": "Tähdellä voit merkitä tiedostot ja kansiot, jotta ne pysyvät helposti saatavilla ja ulottuvilla.",
   "EmptyFavoritesTitle": "Ei suosikkeja vielä",
   "EmptyGroupAddedUserOptionDescription": "Lisää ryhmän jäseniä ja määritä johtaja",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Lataa laitteesta",
   "UploadFromPortalTitle": "Lataa {{productName}}:sta",
   "UploadPDFFormOptionDescription": "Valitse valmis PDF-lomake, joka on {{productName}}:ssa ja lataa se huoneeseen.",
-  "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen."
+  "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen.",
+  "CreateNewAIAgent": "Luo uusi agentti",
+  "EmptyViewDescription": "Aloita nopeilla toimilla:"
 }

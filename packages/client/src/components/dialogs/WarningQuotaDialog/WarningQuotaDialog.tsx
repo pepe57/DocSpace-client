@@ -93,7 +93,7 @@ export const WarningQuotaDialog = ({
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text style={{ marginBottom: "16px" }}>{getWarningDescription()}</Text>
-        <Text>{t("Settings:WantToContinue")}</Text>
+        <Text>{t("Settings:WantToContinueQuota")}</Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

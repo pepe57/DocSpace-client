@@ -1,7 +1,6 @@
 {
   "BackToRoom": "Completaţi-l  încă o dată",
   "CheckReadyForms": "Verificați formulare completate",
-  "Description": "Completaţi-l  încă o dată",
   "DescriptionForAnonymous": "Formularului PDF pe care l-ați trimis i s-a atribuit un număr unic. Pentru verificarea statutului, contactaţi proprietarul formularului.",
   "DescriptionForRegisteredUser": "Formularul PDF trimis este salvat în folderul Formulare competate.",
   "FillItOutAgain": "Completaţi-l  încă o dată",
@@ -19,5 +18,6 @@
   "LinkToFillOutForm": "Link-ul pentru completarea formularului:",
   "LinkToForm": "Link-ul către formular:",
   "LinkToViewOnlyForm": "Link-ul către formular numai cu vizualizare:",
-  "Title": "Formularul este completat"
+  "CompletedFormTitle": "Formularul este completat",
+  "CompletedFormDescription": "Completaţi-l  încă o dată"
 }

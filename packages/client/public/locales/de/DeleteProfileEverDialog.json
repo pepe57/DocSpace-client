@@ -1,5 +1,4 @@
 {
-  "ActionCannotBeUndone": "Die ausgewählten deaktivierten Benutzer werden aus {{productName}} entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
   "ActionCannotBeUndoneGuests": "Die ausgewählten deaktivierten Gäste werden aus {{productName}} entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
   "CannotReassignFiles": "Wenn Sie mehrere Benutzer gleichzeitig löschen, können Sie deren Dateien nicht anderen Benutzern neu zuweisen.",
   "DeleteGroupGuestsSuccessMessage": "Gäste wurden erfolgreich gelöscht.",
@@ -18,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Der Gast wurde erfolgreich gelöscht",
   "SuccessfullyDeleteUserInfoMessage": "Der Benutzer wurde erfolgreich gelöscht",
   "ToBeAbleToReassignData": "Um Daten neu zuweisen zu können, löschen Sie jeweils einen Benutzer.",
-  "UserFilesRemovalScope": "Persönliche Daten, alle Dateien und Ordner in den Abschnitten {{sectionNameFirst}} und {{sectionNameSecond}} dieses Benutzers werden dauerhaft gelöscht."
+  "UserFilesRemovalScope": "Persönliche Daten, alle Dateien und Ordner in den Abschnitten {{sectionNameFirst}} und {{sectionNameSecond}} dieses Benutzers werden dauerhaft gelöscht.",
+  "ActionCannotBeUndoneUsers": "Die ausgewählten deaktivierten Benutzer werden aus {{productName}} entfernt. Diese Aktion kann nicht rückgängig gemacht werden."
 }

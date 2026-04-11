@@ -97,7 +97,7 @@ const PortalIntegration = (props) => {
     },
     {
       title: t("Common:Editor"),
-      description: t("EditorDescription"),
+      description: t("EditorPresetDescription"),
       image: theme.isBase ? EditorImg : EditorImgDark,
       handleOnClick: navigateToEditor,
     },

@@ -28,7 +28,6 @@
   "OpenCertificate": "Certificat Public",
   "PlaceholderCert": "Lipiţi sau tastaţi textul",
   "PrivateKey": "Cheie privată",
-  "ProviderURL": "ID-ul de entitate al furnizorului de identitate (IdP)",
   "ProviderURLTooltip": "ID-ul de entitate al furnizorului de identitate (Adresa URL a emitentului)",
   "ServiceProviderSettings": "Setări furnizor de servicii {{organizationName}}",
   "ServiceProviderSettingsDescription": "Configurați setări Furnizor de serviciu și adăugați certificate de furnizor de servicii pentru autentificarea unică.",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "Activați această opţiune dacă doriţi să adăugaţi automat utilizatori în spaţiul prin serviciu SSO.",
   "UploadXML": "Încărcați metadatele din XML pentru a completa automat câmpurile necesare.",
   "UploadXMLPlaceholder": "Adresa URL la fişierul de metadate XML al furnizorului ID",
-  "UsedFor": "Utilizare pentru"
+  "UsedFor": "Utilizare pentru",
+  "IdpEntityId": "ID-ul de entitate al furnizorului de identitate (IdP)"
 }

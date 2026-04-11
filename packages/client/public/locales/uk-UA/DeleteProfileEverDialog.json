@@ -1,5 +1,4 @@
 {
-  "ActionCannotBeUndone": "Вибрані вимкнені користувачі будуть видалені з {{productName}}. Цю дію не можна скасувати.",
   "ActionCannotBeUndoneGuests": "Вибрані деактивовані гості будуть видалені з {{productName}}. Цю дію неможливо скасувати.",
   "CannotReassignFiles": "Якщо ви видалите кількох користувачів одночасно, то не зможете перепризначити їхні файли іншим користувачам.",
   "DeleteGroupGuestsSuccessMessage": "Гостей успішно видалено.",
@@ -18,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Гостя успішно видалено",
   "SuccessfullyDeleteUserInfoMessage": "Користувача успішно видалено",
   "ToBeAbleToReassignData": "Щоб мати можливість перепризначити дані, видаляйте по одному користувачу за раз.",
-  "UserFilesRemovalScope": "Особисті дані, усі файли та папки у розділах {{sectionNameFirst}} та {{sectionNameSecond}} цього користувача будуть видалені назавжди."
+  "UserFilesRemovalScope": "Особисті дані, усі файли та папки у розділах {{sectionNameFirst}} та {{sectionNameSecond}} цього користувача будуть видалені назавжди.",
+  "ActionCannotBeUndoneUsers": "Вибрані вимкнені користувачі будуть видалені з {{productName}}. Цю дію не можна скасувати."
 }

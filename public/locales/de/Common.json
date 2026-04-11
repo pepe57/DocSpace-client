@@ -398,7 +398,6 @@
   "DenyAccess": "Zugriff verweigern",
   "DenyAccessDescription": "Kein Zugriff zum Anzeigen, Bearbeiten oder Verwalten von Dateien oder Ordnern.",
   "DenyAccessDescriptionDocument": "Kein Zugriff zum Anzeigen, Bearbeiten oder Verwalten dieser Datei.",
-  "Description": "Beschreibung",
   "DeveloperLicense": "Entwickler",
   "DeveloperTools": "Entwicklungstools",
   "Diagram": "Diagramm",
@@ -1499,5 +1498,6 @@
   "YourName": "Ihr Name",
   "YourPrice": "Ihr Preis",
   "YourTurn": "Jetzt sind Sie dran",
-  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren."
+  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren.",
+  "DescriptionLabel": "Beschreibung"
 }

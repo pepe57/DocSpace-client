@@ -1,7 +1,6 @@
 {
   "BackToRoom": "Takaisin huoneeseen",
   "CheckReadyForms": "Katso valmiit lomakkeet",
-  "Description": "Lomakkeesi on täytetty ja tallennettu",
   "DescriptionForAnonymous": "Lähetit täytetyn PDF-lomakkeen, jolle annettiin oma numero. Ota yhteyttä lomakkeen omistajaanja tarkistaaksesi tilan.",
   "DescriptionForRegisteredUser": "Täytetty PDF-lomake löytyy Valmiit-kansiosta.",
   "FillItOutAgain": "Täytä uudelleen",
@@ -19,5 +18,6 @@
   "LinkToFillOutForm": "Linkki lomakkeen täyttämiseen:",
   "LinkToForm": "Linkki lomakkeeseen:",
   "LinkToViewOnlyForm": "Linkki katselutilaiseen lomakkeeseen:",
-  "Title": "Lomake on valmis"
+  "CompletedFormTitle": "Lomake on valmis",
+  "CompletedFormDescription": "Lomakkeesi on täytetty ja tallennettu"
 }

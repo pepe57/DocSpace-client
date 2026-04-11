@@ -1,5 +1,4 @@
 {
-  "ActionCannotBeUndone": "ຜູ້ໃຊ້ພິການທີ່ເລືອກຈະຖືກລຶບອອກຈາກ {{productName}}. ຄຳສັ່ງນີ້ບໍ່ສາມາດຍົກເລີກໄດ້.",
   "ActionCannotBeUndoneGuests": "ບັນຊີລາຍຊື່ຜູ້ຮັບບໍານານທີ່ຖືກເລືອກຈະຖືກລົບອອກຈາກ {{productName}} ດ້ວຍການກະ ທຳ ນີ້ບໍ່ສາມາດຍົກເລີກໄດ້.",
   "CannotReassignFiles": "ຖ້າ​ຫາກ​ທ່ານ​ລຶບ​ຜູ້​ໃຊ້​ຫຼາຍ​ຄົນ​ໃນ​ເວ​ລາ​ດຽວ​ກັນ​, ທ່ານ​ບໍ່​ສາ​ມາດ​ກໍາ​ນົດ​ໄຟລ​໌​ຂອງ​ເຂົາ​ເຈົ້າ​ກັບ​ຜູ້​ໃຊ້​ອື່ນໆ​.",
   "DeleteGroupGuestsSuccessMessage": "ບັນຊີລາຍຊື່ຜູ້ເຂົ້າຊົມຖືກລົບອອກສຳເລັດແລ້ວ.",
@@ -18,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "ແຂກຖືກລົບອອກສຳເລັດແລ້ວ",
   "SuccessfullyDeleteUserInfoMessage": "ຜູ້ໃຊ້ຖືກລຶບອອກແລ້ວ",
   "ToBeAbleToReassignData": "ເພື່ອສາມາດມອບໝາຍຂໍ້ມູນຄືນໃໝ່ໄດ້, ໃຫ້ລຶບຜູ້ໃຊ້ເທື່ອລະຄົນອອກ.\n",
-  "UserFilesRemovalScope": "ຂໍ້ມູນສ່ວນຕົວ, ເອກະສານ ແລະ ໂຟນເດີທັງໝົດໃນພື້ນທີ່ {{sectionNameFirst}} ແລະ {{sectionNameSecond}} ຂອງຜູ້ໃຊ້ນີ້ ຈະຖືກລົບຖິ້ມຖາວອນ."
+  "UserFilesRemovalScope": "ຂໍ້ມູນສ່ວນຕົວ, ເອກະສານ ແລະ ໂຟນເດີທັງໝົດໃນພື້ນທີ່ {{sectionNameFirst}} ແລະ {{sectionNameSecond}} ຂອງຜູ້ໃຊ້ນີ້ ຈະຖືກລົບຖິ້ມຖາວອນ.",
+  "ActionCannotBeUndoneUsers": "ຜູ້ໃຊ້ພິການທີ່ເລືອກຈະຖືກລຶບອອກຈາກ {{productName}}. ຄຳສັ່ງນີ້ບໍ່ສາມາດຍົກເລີກໄດ້."
 }

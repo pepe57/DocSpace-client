@@ -398,7 +398,6 @@
   "DenyAccess": "Zamietnuť prístup",
   "DenyAccessDescription": "Bez prístupu na prezeranie, úpravu alebo spravovanie súborov alebo priečinkov.",
   "DenyAccessDescriptionDocument": "Bez prístupu na zobrazenie, úpravu alebo správu tohto súboru.",
-  "Description": "Popis",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Nástroje pre vývojárov",
   "Diagram": "Diagram",
@@ -1499,5 +1498,6 @@
   "YourName": "Vaše meno",
   "YourPrice": "Vaša cena",
   "YourTurn": "Ste na rade",
-  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím."
+  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím.",
+  "DescriptionLabel": "Popis"
 }

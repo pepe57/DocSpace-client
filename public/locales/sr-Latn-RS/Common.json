@@ -398,7 +398,6 @@
   "DenyAccess": "Odbij pristup",
   "DenyAccessDescription": "Nema pristupa za pregled, uređivanje ili upravljanje fajlovima ili fasciklama.",
   "DenyAccessDescriptionDocument": "Nema pristupa za pregled, uređivanje ili upravljanje ovim fajlom.",
-  "Description": "Opis",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Alati programera",
   "Diagram": "Dijagram",
@@ -1499,5 +1498,6 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vaš red",
-  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva."
+  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva.",
+  "DescriptionLabel": "Opis"
 }

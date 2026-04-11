@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "Chào mừng bạn đến với phòng Cộng tác",
   "CollaboratorEmptyTitle": "Phòng trống.",
-  "CreateAIAgent": "Tạo một tác nhân mới",
   "CreateAIAgentDescription": "Bắt đầu xây dựng {{aiAgent}} đầu tiên của bạn",
   "CreateDocument": "Tạo một tài liệu mới",
   "CreateDocumentDescription": "Tận dụng chức năng xử lý văn bản lớn.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "Thiết lập trợ lý cá nhân hóa cho nhóm của bạn bằng cách thêm cơ sở kiến thức, chọn mô hình lý tưởng và kết nối với {{mcpServer}}. Mời đồng nghiệp của bạn cộng tác và tận dụng tối đa khả năng trò chuyện của tác nhân.",
   "EmptyAIAgentsTitle": "Tạo {{aiAgent}} của bạn",
   "EmptyAIAgentsUserTitle": "Chưa có {{aiAgents}} nào khả dụng",
-  "EmptyDescription": "Bắt đầu với các hành động nhanh:",
   "EmptyFavoritesDescription": "Đánh dấu sao vào các tệp và thư mục để giữ chúng dễ dàng truy cập và luôn trong tầm tay.",
   "EmptyFavoritesTitle": "Chưa có mục yêu thích nào cả",
   "EmptyGroupAddedUserOptionDescription": "Thêm thành viên nhóm và chỉ định trưởng nhóm",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Tải lên từ thiết bị",
   "UploadFromPortalTitle": "Tải lên từ {{productName}}",
   "UploadPDFFormOptionDescription": "Chọn một biểu mẫu PDF sẵn có trong {{productName}} và tải nó lên phòng.",
-  "VirtualDataRoomEmptyTitle": "Chào mừng bạn đến với Phòng Dữ liệu Ảo"
+  "VirtualDataRoomEmptyTitle": "Chào mừng bạn đến với Phòng Dữ liệu Ảo",
+  "CreateNewAIAgent": "Tạo một tác nhân mới",
+  "EmptyViewDescription": "Bắt đầu với các hành động nhanh:"
 }

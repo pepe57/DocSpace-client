@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "Vítejte v místnosti pro spolupráci",
   "CollaboratorEmptyTitle": "Místnost je prázdná.",
-  "CreateAIAgent": "Vytvořit nového agenta",
   "CreateAIAgentDescription": "Začněte vytvářet svého prvního {{aiAgent}}",
   "CreateDocument": "Vytvoření nového dokumentu",
   "CreateDocumentDescription": "Využijte rozsáhlé funkce pro zpracování textu.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "Nastavte personalizovaného asistenta pro váš tým přidáním znalostní báze, výběrem ideálního modelu a připojením {{mcpServer}}. Pozvěte své kolegy na spolupráci a plně využijte chatovací schopnosti agenta.",
   "EmptyAIAgentsTitle": "Vytvořte si svého {{aiAgent}}",
   "EmptyAIAgentsUserTitle": "Žádné {{aiAgents}} dostupné zatím",
-  "EmptyDescription": "Začněte s rychlými akcemi:",
   "EmptyFavoritesDescription": "Označte soubory a složky, abyste je měli snadno dostupné a na dosah ruky.",
   "EmptyFavoritesTitle": "Ještě žádné oblíbené položky.",
   "EmptyGroupAddedUserOptionDescription": "Přidání členů skupiny a přiřazení vedoucího",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Nahrávání ze zařízení",
   "UploadFromPortalTitle": "Nahrát z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte připravený PDF formulář dostupný v {{productName}} a nahrajte jej do místnosti.",
-  "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti"
+  "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti",
+  "CreateNewAIAgent": "Vytvořit nového agenta",
+  "EmptyViewDescription": "Začněte s rychlými akcemi:"
 }

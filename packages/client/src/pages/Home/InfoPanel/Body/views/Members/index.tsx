@@ -342,7 +342,7 @@ const Members = ({
                   onClick={onOpenAccessSettings}
                   dataTestId="info_panel_members_template_access_settings_link"
                 >
-                  {t("Files:AccessSettings")}
+                  {t("Files:AccessSettingsTitle")}
                 </Link>
               ) : null}
             </>

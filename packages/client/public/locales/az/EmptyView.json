@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "Əməkdaşlıq otağına xoş gəlmisiniz",
   "CollaboratorEmptyTitle": "Otaq boşdur.",
-  "CreateAIAgent": "Yeni agent yarat",
   "CreateAIAgentDescription": "İlk {{aiAgent}}-inizi qurmağa başlayın",
   "CreateDocument": "Yeni sənəd yaradın",
   "CreateDocumentDescription": "Geniş mətn emal funksiyasından yararlanın.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "Bilik bazası əlavə etməklə, ideal modeli seçməklə və bir {{mcpServer}} qoşmaqla komandanız üçün şəxsi köməkçi qurun. Həmkarlarınızı əməkdaşlıq etməyə dəvət edin və agentin söhbət imkanlarından maksimum dərəcədə istifadə edin.",
   "EmptyAIAgentsTitle": "{{aiAgent}}-inizi yaradın",
   "EmptyAIAgentsUserTitle": "Hələ {{aiAgents}} mövcud deyil",
-  "EmptyDescription": "Sürətli əməliyyatlara başlayın:",
   "EmptyFavoritesDescription": "Ulduzlaq fayl və qovluqları, onlar asan əldə edilə bilən və çatdırılabilən olsunlar.",
   "EmptyFavoritesTitle": "Hələ ki sevimli hec nə yoxdur",
   "EmptyGroupAddedUserOptionDescription": "Qrup üzvlərini əlavə edin və lider təyin edin",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükləyin",
   "UploadFromPortalTitle": "{{productName}} dan yükləyin",
   "UploadPDFFormOptionDescription": "{{productName}}-də mövcud olan hazır PDF formasını seçin və onu otağa yükləyin.",
-  "VirtualDataRoomEmptyTitle": "Virtual Məlumat Otağına xoş gəlmisiniz"
+  "VirtualDataRoomEmptyTitle": "Virtual Məlumat Otağına xoş gəlmisiniz",
+  "CreateNewAIAgent": "Yeni agent yarat",
+  "EmptyViewDescription": "Sürətli əməliyyatlara başlayın:"
 }

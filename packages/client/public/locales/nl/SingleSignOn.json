@@ -28,7 +28,6 @@
   "OpenCertificate": "Openbaar Certificaat",
   "PlaceholderCert": "Plak of typ tekst",
   "PrivateKey": "Privésleutel",
-  "ProviderURL": "IdP Entiteit Id",
   "ProviderURLTooltip": "Identity Provider Entity Id (Uitgever URL)",
   "ServiceProviderSettings": "{{organizationName}} SP Instellingen",
   "ServiceProviderSettingsDescription": "Configureer Service Provider instellingen en voeg SP certificaten toe voor Single Sign-On.",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "Schakel deze optie in als u gebruikers van de SSO-service automatisch wilt toevoegen aan uw ruimte.",
   "UploadXML": "Metagegevens uit XML laden om de vereiste velden automatisch te vullen.",
   "UploadXMLPlaceholder": "URL naar IdP Metadata XML",
-  "UsedFor": "Gebruik voor"
+  "UsedFor": "Gebruik voor",
+  "IdpEntityId": "IdP Entiteit Id"
 }

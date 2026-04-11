@@ -146,7 +146,7 @@ export const Body = ({
         <TextInput
           type={InputType.text}
           size={InputSize.base}
-          placeholder={t("EnterDomain")}
+          placeholder={t("EnterDomainName")}
           value={domain}
           onChange={onChangeDomain}
           tabIndex={1}
@@ -163,7 +163,7 @@ export const Body = ({
         <TextInput
           type={InputType.text}
           size={InputSize.base}
-          placeholder={t("EnterName")}
+          placeholder={t("EnterSpaceName")}
           value={name}
           onChange={onChangeName}
           tabIndex={2}

@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "Dobrodošli v sobi za sodelovanje",
   "CollaboratorEmptyTitle": "Soba je prazna.",
-  "CreateAIAgent": "Ustvarite novega agenta",
   "CreateAIAgentDescription": "Začnite ustvarjati svojega prvega {{aiAgent}}",
   "CreateDocument": "Ustvari nov dokument",
   "CreateDocumentDescription": "Izkoristite obsežno funkcionalnost obdelave besedila.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "Nastavite osebnega asistenta za svoj ekipo z dodajanjem zbirke znanja, izbiro idealnega modela in povezavo z {{mcpServer}}. Povabite kolege za sodelovanje in izkoristite klepnice asistenta.",
   "EmptyAIAgentsTitle": "Ustvarite svojega {{aiAgent}}",
   "EmptyAIAgentsUserTitle": "Ni še nobenih {{aiAgents}} na voljo",
-  "EmptyDescription": "Začni s hitrimi dejanji:",
   "EmptyFavoritesDescription": "Označite datoteke in mape, da jih boste lahko zlahka dostopali in imeli na dosegu roke.",
   "EmptyFavoritesTitle": "Še ni priljubljenih.",
   "EmptyGroupAddedUserOptionDescription": "Dodajte člane skupine in dodelite vodjo",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Naloži iz naprave",
   "UploadFromPortalTitle": "Naloži iz {{productName}}",
   "UploadPDFFormOptionDescription": "Izberi pripravljen PDF obrazec, ki je na voljo v {{productName}} in ga naloži v sobo.",
-  "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi"
+  "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi",
+  "CreateNewAIAgent": "Ustvarite novega agenta",
+  "EmptyViewDescription": "Začni s hitrimi dejanji:"
 }

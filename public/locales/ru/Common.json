@@ -398,7 +398,6 @@
   "DenyAccess": "Запретить доступ",
   "DenyAccessDescription": "Нет доступа для просмотра, редактирования или управления файлами и папками.",
   "DenyAccessDescriptionDocument": "Нет доступа для просмотра, редактирования или управления этим файлом.",
-  "Description": "Описание",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Инструменты разработчика",
   "Diagram": "Диаграмма",
@@ -1499,5 +1498,6 @@
   "YourName": "Ваше имя",
   "YourPrice": "Ваша стоимость",
   "YourTurn": "Ваша очередь",
-  "YouWillBeContacted": "Отдел продаж свяжется с вами после создания запроса."
+  "YouWillBeContacted": "Отдел продаж свяжется с вами после создания запроса.",
+  "DescriptionLabel": "Описание"
 }

@@ -21,11 +21,11 @@
   "KnowledgeUnavailableDescriptionUser": "Základné znalosti sú momentálne deaktivované. Ak chcete aktivovať semantické vyhľadávanie a spracovanie dokumentov pre {{aiAgents}}, kontaktujte administrátora vášho {{productName}} a nakonfigurujte poskytovateľa vložení (embeddings provider).",
   "MCP": "MCP nástroje pre túto miestnosť",
   "MCPDescriptionServers": "Použite {{mcpServers}}, ktoré ich administrátor pripojil, na vylepšenie chatu s umelou inteligenciou. {{mcpServers}} môže pomôcť pri extrakcii údajov, zhrnutí, inteligentných návrhov atď.",
-  "Model": "{{aiProvider}} a model",
   "ModelDescription": "Vyberte {{aiProvider}} a model, ktorý sa bude používať v chatach v tomto miestnosti. Toto nastavenie je povinné a platí pre všetkých účastníkov.",
   "NoAccessAIAgentTitle": "Prepáčte, nemáte prístup k tomuto {{aiAgent}}",
   "ResponseQualityNode": "<1>Poznámka:</1> Kvalita odpovede sa môže líšiť v závislosti od modelu; na dosiahnutie najlepších výsledkov sa odporúčajú novšie modely.",
   "ResultStorage": "Ukladanie výsledkov",
   "UploadFilesDevice": "Nahrajte súbory z vášho osobného zariadenia.",
-  "UploadFilesPortal": "Uploadnite súbory z {{sectionNameFirst}} alebo {{sectionNameSecond}}"
+  "UploadFilesPortal": "Uploadnite súbory z {{sectionNameFirst}} alebo {{sectionNameSecond}}",
+  "AIProviderAndModel": "{{aiProvider}} a model"
 }

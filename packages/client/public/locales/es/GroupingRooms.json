@@ -8,7 +8,6 @@
   "DisablingRoomGroups": "Deshabilitar grupos de salas",
   "DisablingRoomGroupsDescription": "Los grupos se guardarán pero estarán ocultos. Vuelva a habilitar en Perfil, Gestión de archivos.",
   "EditRoomGroups": "Editar grupos de salas",
-  "EmptyGroupDescription": "No hay salas aquí. Intente añadir una sala o eliminar este grupo.",
   "GroupHasBeenDeleted": "El grupo ha sido eliminado",
   "GroupIcon": "Icono de grupo",
   "GroupIsEmpty": "El grupo está vacío",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "Puede agrupar espacios en carpetas y cambiar fácilmente entre ellos.",
   "RoomRemovedFromGroup": "La sala seleccionada ha sido eliminada de <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Las salas seleccionadas se han añadido a <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Las salas seleccionadas han sido eliminadas de <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Las salas seleccionadas han sido eliminadas de <1>{{groupName}}</1>.",
+  "EmptyGroupRoomsDescription": "No hay salas aquí. Intente añadir una sala o eliminar este grupo."
 }

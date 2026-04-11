@@ -398,7 +398,6 @@
   "DenyAccess": "Girişə icazə vermə",
   "DenyAccessDescription": "Fayl və ya qovluqlara baxmaq, redaktə etmək və ya idarə etmək üçün icazə yoxdur.",
   "DenyAccessDescriptionDocument": "Bu faylı görmək, redaktə etmək və ya idarə etmək üçün icazəniz yoxdur.",
-  "Description": "Təsvir",
   "DeveloperLicense": "Tərtibatçı",
   "DeveloperTools": "Tərtibatçı Alətləri",
   "Diagram": "Diaqram",
@@ -1499,5 +1498,6 @@
   "YourName": "Adınız",
   "YourPrice": "Qiymətiniz",
   "YourTurn": "Sizin növbəniz",
-  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq."
+  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq.",
+  "DescriptionLabel": "Təsvir"
 }

@@ -21,11 +21,11 @@
   "KnowledgeUnavailableDescriptionUser": "Ziņojumu bāze pašlaik ir deaktivizēta. Lai aktivizētu semantisko meklēšanu un dokumentu apstrādes funkciju sabrīdinājumam {{aiAgents}}, lūdzu, sazinācieties ar savu {{productName}} administratoru, lai konfigurētu iekļaušanas nodrošinātāju.",
   "MCP": "MCP rīki šai telpai",
   "MCPDescriptionServers": "Izmantojiet {{mcpServers}}, ko ir pievienojis administratoris, lai uzlabotu čata pieredzi ar AI. {{mcpServers}} var palīdzēt ar datu ekstrakciju, kopsavilkumus, inteligentes ieteikumus utt.",
-  "Model": "{{aiProvider}} un modelis",
   "ModelDescription": "Izvēli par {{aiProvider}} un modeli, kas tiks izmantota šajā istakas sarunās. Šī iestatījums ir obligāts un attiecas uz visiem dalībniekiem.",
   "NoAccessAIAgentTitle": "Atvainojiet, jums nav piekļuves šajam {{aiAgent}}",
   "ResponseQualityNode": "<1>Piezīme:</1> Atbildes kvalitāte var atšķirties atkarībā no modeļa; labākiem rezultātiem ieteicami jaunāki modeļi.",
   "ResultStorage": "Rezultātu glabāšana",
   "UploadFilesDevice": "Augšupielādējiet failus no sava personīgā ierīces",
-  "UploadFilesPortal": "Augšupielādējiet failus no {{sectionNameFirst}} vai {{sectionNameSecond}}."
+  "UploadFilesPortal": "Augšupielādējiet failus no {{sectionNameFirst}} vai {{sectionNameSecond}}.",
+  "AIProviderAndModel": "{{aiProvider}} un modelis"
 }

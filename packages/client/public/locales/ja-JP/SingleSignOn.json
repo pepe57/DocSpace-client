@@ -28,7 +28,6 @@
   "OpenCertificate": "公開証明書",
   "PlaceholderCert": "テキストを貼り付ける、または入力してください",
   "PrivateKey": "プライベートキー",
-  "ProviderURL": "IdPエンティティ ID",
   "ProviderURLTooltip": "ID プロバイダのエンティティID (発行者 URL)",
   "ServiceProviderSettings": "{{organizationName}}のSP設定",
   "ServiceProviderSettingsDescription": "サービスプロバイダ設定を構成し、シングルサインオン用のSP証明書を追加します。",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "SSOサービスからのユーザーを自動的にスペースに追加する場合は、このオプションを有効にしてください。",
   "UploadXML": "XMLからメタデータを読み込み、必要な項目を自動で埋める。",
   "UploadXMLPlaceholder": "IdPメタデータXMLへのURL",
-  "UsedFor": "使用目的"
+  "UsedFor": "使用目的",
+  "IdpEntityId": "IdPエンティティ ID"
 }

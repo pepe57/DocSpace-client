@@ -113,7 +113,7 @@ const ChangePortalOwnerDialog = ({
       productName: getBrandName("ProductName"),
     }),
     t("BackupPortal", { productName: getBrandName("ProductName") }),
-    t("DeactivateOrDeletePortal", { productName: getBrandName("ProductName") }),
+    t("DeactivateOrDeleteSpace", { productName: getBrandName("ProductName") }),
   ];
 
   const filter = React.useMemo(() => {

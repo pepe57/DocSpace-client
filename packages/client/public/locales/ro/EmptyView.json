@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "Bun venit în Sala de colaborare",
   "CollaboratorEmptyTitle": "Această sală este vidă.",
-  "CreateAIAgent": "Creare un agent nou",
   "CreateAIAgentDescription": "Începe să construiești primul tău {{aiAgent}}",
   "CreateDocument": "Crearea unui document nou",
   "CreateDocumentDescription": "Profitați de o gamă vastă de instrumente de procesare de text.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "Configurați un asistent personalizat pentru echipa dumneavoastră adăugând o bază de cunoștințe, selectând modelul ideal și conectând un {{mcpServer}}. Invitați colegii să colaboreze și să maximizeze capacitățile de chat ale agentului.",
   "EmptyAIAgentsTitle": "Creează-ți {{aiAgent}}",
   "EmptyAIAgentsUserTitle": "Nu există încă {{aiAgents}} disponibile",
-  "EmptyDescription": "Începeţi cu acţiuni rapide:",
   "EmptyFavoritesDescription": "Marcați fișiere și foldere cu stea încât acestea să fie ușor accesibile și la îndemână.",
   "EmptyFavoritesTitle": "Lista de favorite este goală",
   "EmptyGroupAddedUserOptionDescription": "Adăugați membrii de grup și desemnați șeful",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Încărcare de pe dispozitivul",
   "UploadFromPortalTitle": "Încărcare de pe {{productName}}",
   "UploadPDFFormOptionDescription": "Selectați un formular PDF existent de pe {{productName}} și încărcați-l în sala.",
-  "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date"
+  "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date",
+  "CreateNewAIAgent": "Creare un agent nou",
+  "EmptyViewDescription": "Începeţi cu acţiuni rapide:"
 }

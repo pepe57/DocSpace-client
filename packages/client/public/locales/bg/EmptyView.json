@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "Добре дошли в Стаята за колаборации",
   "CollaboratorEmptyTitle": "Стаята е празна.",
-  "CreateAIAgent": "Създайте нов агент",
   "CreateAIAgentDescription": "Започнете да изграждате първия си {{aiAgent}}",
   "CreateDocument": "Създайте нов документ",
   "CreateDocumentDescription": "Възползвайте се от обширната функционалност за текстообработка.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "Настройте персонализиран асистент за вашия екип, като добавите база знания, изберете идеалния модел и свържете {{mcpServer}}. Повикайте колегите си да сътрудничат и да извлечете максимум от чат възможностите на агента.",
   "EmptyAIAgentsTitle": "Създайте вашия {{aiAgent}}",
   "EmptyAIAgentsUserTitle": "Няма налични {{aiAgents}}",
-  "EmptyDescription": "Започнете с бързи действия:",
   "EmptyFavoritesDescription": "Задайте звездички на файлове и папки, за да ги направите лесно достъпни и под ръка.",
   "EmptyFavoritesTitle": "Още няма любими",
   "EmptyGroupAddedUserOptionDescription": "Добавете членове на групата и задайте главата",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Качете от устройство",
   "UploadFromPortalTitle": "Качете от {{productName}}",
   "UploadPDFFormOptionDescription": "Изберете готов PDF формуляр, наличен в {{productName}}, и го качете в стаята.",
-  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни"
+  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни",
+  "CreateNewAIAgent": "Създайте нов агент",
+  "EmptyViewDescription": "Започнете с бързи действия:"
 }

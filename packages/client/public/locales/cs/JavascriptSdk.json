@@ -38,7 +38,6 @@
   "Descending": "Sestupně",
   "DestinationFolderId": "ID cílové složky",
   "DisplayColumns": "Zobrazení sloupců v řádku souboru",
-  "EditorDescription": "Vložení editoru, který uživatelům umožní upravovat soubor z příslušné místnosti.",
   "ElementCalledAfterClicking": "Prvek bude vyvolán po kliknutí",
   "ElementItself": "Samotný prvek",
   "EmbedCodeSuccessfullyCopied": "Kód vložení úspěšně zkopírován do schránky",
@@ -48,7 +47,6 @@
   "EnterPage": "Zadejte číslo stránky",
   "EnterWidth": "Zadejte šířku",
   "EventLog": "```\nProtokol událostí\n```",
-  "FeedbackAndSupport": "Zpětná vazba a podpora",
   "FileContentCopy": "Omezení kopírování obsahu souborů",
   "FileFilter": "Filtr souborů",
   "FileId": "ID souboru",
@@ -57,7 +55,6 @@
   "FilesSearchDescription": "Vyhledávání souborů v otevřené složce/pokojích.",
   "FileTypeDisplay": "Zobrazení typu souboru",
   "FrameId": "Id rámu",
-  "GetCode": "Získejte kód pro vložení",
   "Header": "Záhlaví",
   "HeaderDescription": "V mobilní verzi můžete zakázat záhlaví a omezit tak přístup k sekcím {{productName}} (stejně jako při zakázání levého menu v desktopové verzi).",
   "HelperText": "Pomocné texty",
@@ -150,5 +147,8 @@
   "UploadLimits": "Limitní hodnoty nahrávání",
   "UploadMode": "Nahrávací režim",
   "ViewerDescription": "Vložení prohlížeče, který uživatelům umožní otevřít soubor pro prohlížení v příslušné místnosti.",
-  "VoidReturn": "Void"
+  "VoidReturn": "Void",
+  "EditorPresetDescription": "Vložení editoru, který uživatelům umožní upravovat soubor z příslušné místnosti.",
+  "FeedbackAndSupportLink": "Zpětná vazba a podpora",
+  "GetCodeToInsert": "Získejte kód pro vložení"
 }

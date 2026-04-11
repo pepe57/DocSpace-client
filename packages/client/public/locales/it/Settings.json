@@ -77,7 +77,6 @@
   "DataImportComplete": "Importazione dei dati completata",
   "DataImportDescription": "Importa dati da un servizio di terze parti su {{organizationName}} {{productName}}. L'importazione dei dati consente di trasferire dati come tutti gli utenti, i loro documenti personali e condivisi.",
   "DataImportProcessing": "Elaborazione dell'importazione dei dati",
-  "DeactivateOrDeletePortal": "Disattiva o cancella lo spazio.",
   "DefaultSettings": "Impostazioni predefinite",
   "DefaultTemplateApplied": "È stato applicato il nuovo modello predefinito.",
   "DefaultTemplateRestored": "Il modello predefinito è stato ripristinato.",
@@ -181,7 +180,6 @@
   "LoginHistoryTitle": "Cronologia accessi",
   "LoginLatestText": "Solo l'ultima attività viene mostrata in questa pagina. I dati stessi vengono memorizzati durante il periodo che può essere inserito nel campo sottostante (misurato in giorni, massimo 180):",
   "LoginSubheaderTitle": "Questa sottosezione viene utilizzata per monitorare l’attività di accesso dell’utente più recente, compresi gli accessi riusciti e i tentativi falliti con un’indicazione dei motivi.",
-  "LogoLightSmall": "Logo per il portale",
   "ManagementCategoryDataManagement": "Gestione dei dati",
   "ManagementCategoryIntegration": "Integrazione",
   "ManagementCategorySecurity": "Sicurezza",
@@ -286,7 +284,6 @@
   "ThirdPartyBottomDescription": "Ho bisogno di aiuto? Contatta il nostro <2>Team di supporto.</2>",
   "ThirdPartyPropsActivated": "Aggiornato correttamente",
   "ThirdPartyPropsDeactivated": "Disattivato correttamente",
-  "ThirdPartyStorageDescription": "Il backup può essere salvato su un archivio di terze parti. Prima, è necessario connettere il servizio corrispondente nella sezione 'Integrazione'. In caso contrario, le seguenti impostazioni non saranno attive.",
   "TimeLanguageSettingsDescription": "Modifica le impostazioni di lingua e fuso orario per regolare la lingua e l'ora comuni di {{productName}}.",
   "TimeLanguageSettingsSave": "Fai clic su <strong>Salva</strong> in basso per applicare.",
   "TimeZone": "Fuso orario",
@@ -319,8 +316,11 @@
   "UseUpperCase": "Utilizza lettere maiuscole",
   "WantToCancelDataImport": "Vuoi annullare l'importazione dei dati?",
   "WantToCancelUpload": "Vuoi annullare il caricamento?",
-  "WantToContinue": "Vuoi continuare o modificare la quota di archiviazione degli utenti?",
   "WebhooksDescription": "Esegui azioni personalizzate sul lato di qualsiasi applicazione o sito web che stai utilizzando in base a vari eventi in {{organizationName}} {{productName}}.",
-  "WhiteLabelSubtitle": "Carica i loghi con sfondo trasparente (PNG, SVG, JPG) per i temi chiari e scuri, oppure creane uno istantaneamente inserendo il tuo logo qui sotto.",
-  "WithoutEmailHint": "Non hai utenti da importare. Ti preghiamo di procedere al passaggio successivo."
+  "WithoutEmailHint": "Non hai utenti da importare. Ti preghiamo di procedere al passaggio successivo.",
+  "LogoLightSmallPortal": "Logo per il portale",
+  "ThirdPartyBackupStorageDescription": "Il backup può essere salvato su un archivio di terze parti. Prima, è necessario connettere il servizio corrispondente nella sezione 'Integrazione'. In caso contrario, le seguenti impostazioni non saranno attive.",
+  "WantToContinueQuota": "Vuoi continuare o modificare la quota di archiviazione degli utenti?",
+  "WhiteLabelLogoSubtitle": "Carica i loghi con sfondo trasparente (PNG, SVG, JPG) per i temi chiari e scuri, oppure creane uno istantaneamente inserendo il tuo logo qui sotto.",
+  "DeactivateOrDeleteSpace": "Disattiva o cancella lo spazio."
 }

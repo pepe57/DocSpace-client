@@ -1,7 +1,6 @@
 {
   "BackToRoom": "Voltar para a sala",
   "CheckReadyForms": "Verifique os formulários prontos",
-  "Description": "Seu formulário preenchido e salvo",
   "DescriptionForAnonymous": "Seu formulário PDF enviado recebeu um número de formulário exclusivo. Para verificar o status, entre em contato com o proprietário do formulário.",
   "DescriptionForRegisteredUser": "Seu formulário PDF enviado está disponível na pasta Completo.",
   "FillItOutAgain": "Preencha novamente",
@@ -19,5 +18,6 @@
   "LinkToFillOutForm": "Link para preencher o formulário:",
   "LinkToForm": "Link para o formulário:",
   "LinkToViewOnlyForm": "Link para o formulário somente para visualização:",
-  "Title": "O formulário está preenchido"
+  "CompletedFormTitle": "O formulário está preenchido",
+  "CompletedFormDescription": "Seu formulário preenchido e salvo"
 }

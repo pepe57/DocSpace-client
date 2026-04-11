@@ -38,7 +38,6 @@
   "Descending": "Azalan",
   "DestinationFolderId": "Təyinat qovluq ID",
   "DisplayColumns": "Fayl sətirində sütunların göstərilməsi",
-  "EditorDescription": "İstifadəçilərə həmin otaqdan faylı redaktə etmək üçün redaktor əlavə edin.",
   "ElementCalledAfterClicking": "Element kliklədikdən sonra adlandırılacaq",
   "ElementItself": "Elementin özü",
   "EmbedCodeSuccessfullyCopied": "Yerləşdirmə kodu uğurla mübadilə buferinə nüsxələndi",
@@ -48,7 +47,6 @@
   "EnterPage": "Səhifə nömrəsini daxil edin",
   "EnterWidth": "Eni daxil edin",
   "EventLog": "Hadisə Jurnalı",
-  "FeedbackAndSupport": "Əlaqə & Dəstək",
   "FileContentCopy": "Fayl məzmununun nüxsəsinin məhdudlaşdırılması",
   "FileFilter": "Fayl filtri",
   "FileId": "Fay ID",
@@ -57,7 +55,6 @@
   "FilesSearchDescription": "Açılmış qovluqda/otaqda fayllar axtarılır.",
   "FileTypeDisplay": "Fayl növü görüntüsü",
   "FrameId": "Çərçivə ID",
-  "GetCode": "Əlavə etmək üçün kodu əldə edin",
   "Header": "Başlıq",
   "HeaderDescription": "{{productName}} bölmələrinə girişi məhdudlaşdırmaq üçün mobil versiyada başlığı deaktiv edə bilərsiniz (masaüstü versiyada sol menyunu söndürmək kimi).",
   "HelperText": "Yardımçı mətn",
@@ -150,5 +147,8 @@
   "UploadLimits": "Yükləmə limitləri",
   "UploadMode": "Yükləmə rejimi",
   "ViewerDescription": "İstifadəçilərə həmin otaqdan baxmaqla faylı açmağa icazə vermək üçün izləyici əlavə edin.",
-  "VoidReturn": "Boş"
+  "VoidReturn": "Boş",
+  "EditorPresetDescription": "İstifadəçilərə həmin otaqdan faylı redaktə etmək üçün redaktor əlavə edin.",
+  "FeedbackAndSupportLink": "Əlaqə & Dəstək",
+  "GetCodeToInsert": "Əlavə etmək üçün kodu əldə edin"
 }

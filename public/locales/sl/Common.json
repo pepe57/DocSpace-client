@@ -398,7 +398,6 @@
   "DenyAccess": "Zavrni dostop",
   "DenyAccessDescription": "Brez dostopa za ogled, urejanje ali upravljanje datotek ali map.",
   "DenyAccessDescriptionDocument": "Brez dostopa za ogled, urejanje ali upravljanje te datoteke.",
-  "Description": "Opis",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Razvijalska orodja",
   "Diagram": "Diagram",
@@ -1499,5 +1498,6 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vi ste na vrsti",
-  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala."
+  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala.",
+  "DescriptionLabel": "Opis"
 }

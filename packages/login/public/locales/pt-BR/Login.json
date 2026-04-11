@@ -1,6 +1,5 @@
 {
   "ChangePasswordSuccess": "A senha foi alterada com sucesso",
-  "CodeTitle": "O código foi enviado por e-mail para você",
   "ConfirmEmailChange": "Confirme a alteração do seu e-mail",
   "ConfirmEmailChangeText": "Você solicitou a alteração do endereço de e-mail da sua conta {{productName}}. Para prosseguir, faça login com suas credenciais atuais.",
   "ErrorInvalidText": "Em 10 segundos, você será redirecionado para a <1>{{productName}}</1>",
@@ -21,5 +20,6 @@
   "RememberHelper": "A duração padrão da sessão é de 20 minutos. Marque esta opção para defini-la como 1 ano. Para definir seu próprio valor, vá para Configurações",
   "SignInLDAP": "Faça login em: {{ldap_domain}}",
   "SignInLdapHelper": "Use credenciais para o domínio corporativo",
-  "UserIsAlreadyRegistered": "O usuário <1>{{email}}</1> já está cadastrado neste {{productName}}, digite sua senha ou volte para continuar com outro e-mail."
+  "UserIsAlreadyRegistered": "O usuário <1>{{email}}</1> já está cadastrado neste {{productName}}, digite sua senha ou volte para continuar com outro e-mail.",
+  "CodeSentTitle": "O código foi enviado por e-mail para você"
 }

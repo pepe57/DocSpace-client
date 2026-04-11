@@ -1,7 +1,6 @@
 {
   "BackToRoom": "العودة إلى الغرفة",
   "CheckReadyForms": "فحص النماذج الجاهزة",
-  "Description": "تم إكمال وحفظ النموذج الخاص بك",
   "DescriptionForAnonymous": "لقد أرسلت النموذج المملوء الذي تم تخصيص رقم فريد له. للتحقق من الحالة، اتصل بمالك النموذج مع توفير الرقم المخصص.",
   "DescriptionForRegisteredUser": "النموذج المملوء محفوظ ومتوفر لك في مجلد الاكتمال.",
   "FillItOutAgain": "تعبئة مرة أخرى",
@@ -19,5 +18,6 @@
   "LinkToFillOutForm": "رابط تعبئة النموذج:",
   "LinkToForm": "رابط النموذج:",
   "LinkToViewOnlyForm": "رابط النموذج في وضع العرض فقط:",
-  "Title": "النموذج مكتمل"
+  "CompletedFormTitle": "النموذج مكتمل",
+  "CompletedFormDescription": "تم إكمال وحفظ النموذج الخاص بك"
 }

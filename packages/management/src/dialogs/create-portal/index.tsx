@@ -171,7 +171,7 @@ export const CreatePortalDialog = observer(
               onChange={onHandleName}
               value={name}
               hasError={!!registerError}
-              placeholder={t("EnterName")}
+              placeholder={t("EnterSpaceName")}
               isAutoFocussed
               scale
             />

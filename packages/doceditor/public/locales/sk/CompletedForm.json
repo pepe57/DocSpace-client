@@ -1,7 +1,6 @@
 {
   "BackToRoom": "Späť do miestnosti",
   "CheckReadyForms": "Skontrolovať pripravené formuláre",
-  "Description": "Váš formulár je vyplnený a uložený",
   "DescriptionForAnonymous": "Odoslali ste vyplnený formulár PDF, ktorému bolo pridelené jedinečné číslo. Ak chcete skontrolovať jeho stav, obráťte sa na vlastníka formulára.",
   "DescriptionForRegisteredUser": "Vyplnený formulár PDF môžete ho nájsť v priečinku Vyplnené.",
   "FillItOutAgain": "Vyplňte ho znova",
@@ -19,5 +18,6 @@
   "LinkToFillOutForm": "Odkaz na vyplnenie formulára:",
   "LinkToForm": "Odkaz na formulár:",
   "LinkToViewOnlyForm": "Odkaz na prehľad formulára:",
-  "Title": "Formulár je vyplnený"
+  "CompletedFormTitle": "Formulár je vyplnený",
+  "CompletedFormDescription": "Váš formulár je vyplnený a uložený"
 }

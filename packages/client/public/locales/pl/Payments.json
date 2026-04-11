@@ -5,7 +5,6 @@
   "CannotRestoreRoom": "Nie można przywrócić pokoju",
   "ChooseNewPlan": "Czy chcesz wybrać nowy plan cenowy?",
   "GracePeriodActive": "Okres łaski obowiązuje <1>od {{fromDate}} do {{byDate}}</1> (pozostało dni: {{delayDaysCount}}).",
-  "LicenseExpired": "Nie można dodawać nowych użytkowników ani tworzyć nowych pomieszczeń. Licencja wygasła.",
   "LicenseGracePeriodInfo": "W tym czasie administratorzy nie mogą tworzyć nowych pomieszczeń ani dodawać nowych użytkowników. Po zakończeniu okresu łaski, {{productName}} będzie niedostępny do czasu aktywacji nowej licencji.",
   "NewRoomWillExceedLimit": "Utworzenie tego pokoju jest niemożliwe, ponieważ osiągnięto limit liczby pokoi w bieżącym planie.",
   "NewUsersWillExceedMembersLimit": "Dodanie nowych płatnych użytkowników jest niemożliwe, ponieważ osiągnięto limit liczby administratorów w bieżącym planie.",
@@ -14,5 +13,6 @@
   "NumberOfUsersAccordingToTariff": "Liczba administratorów w Twoim planie cenowym: {{currentValue}}/{{maxValue}}",
   "PlanPaymentOverdue": "Nie można dodawać nowych użytkowników, tworzyć nowych pomieszczeń ani agentów AI. Opłata za plan {{planName}} jest zaległa.",
   "RoomsQuotaAlmostExhausted": "Limit pokoi jest prawie wyczerpany.",
-  "UsersQuotaAlmostExhausted": "Limit płatnych użytkowników jest prawie wyczerpany."
+  "UsersQuotaAlmostExhausted": "Limit płatnych użytkowników jest prawie wyczerpany.",
+  "LicenseExpiredRestriction": "Nie można dodawać nowych użytkowników ani tworzyć nowych pomieszczeń. Licencja wygasła."
 }

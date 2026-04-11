@@ -38,7 +38,6 @@
   "Descending": "Dilstoši",
   "DestinationFolderId": "Destinācijas mapes ID",
   "DisplayColumns": "Kolonnu parādīšana faila rindā",
-  "EditorDescription": "Iegult redaktoru, lai ļautu lietotājiem rediģēt failu no attiecīgās telpas.",
   "ElementCalledAfterClicking": "Elements tiks izsaukts pēc noklikšķināšanas",
   "ElementItself": "Pats elements",
   "EmbedCodeSuccessfullyCopied": "Iegulšanas kods ir veiksmīgi kopēts starpliktuvē",
@@ -48,7 +47,6 @@
   "EnterPage": "Ievadiet lapas numuru",
   "EnterWidth": "Ievadiet platumu",
   "EventLog": "Ivadījumu diena",
-  "FeedbackAndSupport": "Atsauksmes un atbalsts",
   "FileContentCopy": "Faila satura kopēšanas ierobežojums",
   "FileFilter": "Jauns filtrs",
   "FileId": "Faila ID",
@@ -57,7 +55,6 @@
   "FilesSearchDescription": "Failu meklēšana atvērtajā mapē/telpā.",
   "FileTypeDisplay": "Faila tipa displejs",
   "FrameId": "Rāmja ID",
-  "GetCode": "Iegūstiet ievietojamo kodu",
   "Header": "Galvene",
   "HeaderDescription": "Varat atspējot galveni mobilajā versijā, lai ierobežotu piekļuvi {{productName}} sadaļām (tāpat kā atspējojot kreiso izvēlni darbvirsmas versijā).",
   "HelperText": "Palīgs teksts",
@@ -150,5 +147,8 @@
   "UploadLimits": "Augšupielādes ierobežojumi",
   "UploadMode": "Augšupielādes režīms",
   "ViewerDescription": "Iegult skatītāju, lai ļautu lietotājiem atvērt failu skatīšanai no attiecīgās telpas.",
-  "VoidReturn": "Tukšs"
+  "VoidReturn": "Tukšs",
+  "EditorPresetDescription": "Iegult redaktoru, lai ļautu lietotājiem rediģēt failu no attiecīgās telpas.",
+  "FeedbackAndSupportLink": "Atsauksmes un atbalsts",
+  "GetCodeToInsert": "Iegūstiet ievietojamo kodu"
 }

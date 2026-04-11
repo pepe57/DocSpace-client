@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "İş birliği odasına hoş geldiniz",
   "CollaboratorEmptyTitle": "Oda boş.",
-  "CreateAIAgent": "Yeni bir ajan oluştur",
   "CreateAIAgentDescription": "İlk {{aiAgent}}'inizi oluşturmaya başlayın",
   "CreateDocument": "Yeni bir belge oluşturun",
   "CreateDocumentDescription": "Geniş kelime işlemci işlevselliğinden yararlanın.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "Ekibiniz için kişiselleştirilmiş bir asistan kurmak üzere bir bilgi tabanı ekleyin, ideal modeli seçin ve bir {{mcpServer}} bağlayın. Meslektaşlarınızı davet ederek işbirliği yapın ve ajanın sohbet özelliklerinden en iyi şekilde yararlanın.",
   "EmptyAIAgentsTitle": "{{aiAgent}}’ınızı oluşturun",
   "EmptyAIAgentsUserTitle": "Henüz {{aiAgents}} mevcut değil",
-  "EmptyDescription": "Hızlı işlemlerle başlayın:",
   "EmptyFavoritesDescription": "Yıldız işaretli dosyaları ve klasörleri, kolayca erişilebilir ve elinizin altında tutmak için kullanın.",
   "EmptyFavoritesTitle": "Henüz favori yok",
   "EmptyGroupAddedUserOptionDescription": "Grup üyelerini ekleyin ve başkan atayın",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükleyin",
   "UploadFromPortalTitle": "{{productName}} kaynağından yükleyin",
   "UploadPDFFormOptionDescription": "{{productName}} içinde bulunan hazır bir PDF formunu seçin ve odaya yükleyin.",
-  "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz"
+  "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz",
+  "CreateNewAIAgent": "Yeni bir ajan oluştur",
+  "EmptyViewDescription": "Hızlı işlemlerle başlayın:"
 }

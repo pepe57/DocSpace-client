@@ -1,6 +1,5 @@
 {
   "AuthViaNTLM": "Аутентификация с помощью NTLM",
-  "EnableSSL": "Использовать SSL",
   "EnterDomain": "Введите домен",
   "EnterLogin": "Введите логин",
   "EnterPort": "Введите порт",
@@ -10,5 +9,6 @@
   "Port": "Порт",
   "SenderDisplayName": "Отображаемое имя отправителя",
   "SenderEmailAddress": "Адрес email отправителя",
-  "SendTestMail": "Отправить тестовое письмо"
+  "SendTestMail": "Отправить тестовое письмо",
+  "EnableSMTPSSL": "Использовать SSL"
 }

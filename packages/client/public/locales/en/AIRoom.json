@@ -21,11 +21,11 @@
   "KnowledgeUnavailableDescriptionUser": "The Knowledge base is currently disabled. To activate semantic search and document processing for {{aiAgents}}, please contact your {{productName}} admin to configure the embeddings provider.",
   "MCP": "MCP tools for this room",
   "MCPDescriptionServers": "Use {{mcpServers}} connected by the administrator to enhance chat experience with AI. {{mcpServers}} can assist with data extraction, summaries, smart suggestions, etc.",
-  "Model": "{{aiProvider}} and model",
   "ModelDescription": "Select the {{aiProvider}} and model to be used in this room’s chats. This setting is mandatory and applies to all participants.",
   "NoAccessAIAgentTitle": "Sorry, you don't have access to this {{aiAgent}}",
   "ResponseQualityNode": "<1>Note:</1> Response quality may vary by model; newer models are recommended for best results.",
   "ResultStorage": "Result Storage",
   "UploadFilesDevice": "Upload files from your personal device",
-  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}"
+  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}",
+  "AIProviderAndModel": "{{aiProvider}} and model"
 }

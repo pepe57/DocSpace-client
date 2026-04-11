@@ -1,6 +1,5 @@
 {
   "ChangePasswordSuccess": "Şifrə uğurla dəyişdirildi",
-  "CodeTitle": "Kod e-poçt vasitəsilə göndərilmişdir",
   "ConfirmEmailChange": "E-poçtunuzu dəyişdiyinizi təsdiqləyin",
   "ConfirmEmailChangeText": "{{productName}} hesabınızdakı e-poçt ünvanını dəyişmək üçün siz bir istəyiniz olub. Davam etmək üçün, mövcud hesab parametrlərinizlə giriş etməlisiniz.",
   "ErrorInvalidText": "10 saniyədə <1>{{productName}}</1> yönləndiriləcəksiniz",
@@ -21,5 +20,6 @@
   "RememberHelper": "Susmaya görə sessiya müddəti 20 dəqiqədir. Müddəti 1 ilə uzatmaq üçün qutunu klikləyin. Digər müddəti təyin etmək üçün, Ayarlar bölməsinə keçin.",
   "SignInLDAP": "Daxil olun: {{ldap_domain}}",
   "SignInLdapHelper": "Korporativ domen üçün etimadnamələrdən istifadə edin",
-  "UserIsAlreadyRegistered": "<1>{{email}}</1> istifadəçisi artıq bu {{productName}}-də qeydiyyatdan keçib, parolunuzu daxil edin və ya başqa e-poçtla davam etmək üçün geri qayıdın."
+  "UserIsAlreadyRegistered": "<1>{{email}}</1> istifadəçisi artıq bu {{productName}}-də qeydiyyatdan keçib, parolunuzu daxil edin və ya başqa e-poçtla davam etmək üçün geri qayıdın.",
+  "CodeSentTitle": "Kod e-poçt vasitəsilə göndərilmişdir"
 }

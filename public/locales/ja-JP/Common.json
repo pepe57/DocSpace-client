@@ -398,7 +398,6 @@
   "DenyAccess": "アクセスの拒否",
   "DenyAccessDescription": "ファイルやフォルダーを閲覧、編集、または管理するアクセス権がありません。",
   "DenyAccessDescriptionDocument": "このファイルを閲覧、編集、または管理するアクセス権がありません。",
-  "Description": "説明",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "開発者ツール",
   "Diagram": "図表",
@@ -1499,5 +1498,6 @@
   "YourName": "お名前",
   "YourPrice": "価格",
   "YourTurn": "あなたの番です",
-  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。"
+  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。",
+  "DescriptionLabel": "説明"
 }

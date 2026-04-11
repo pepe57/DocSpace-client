@@ -77,7 +77,6 @@
   "DataImportComplete": "اكتمل استيراد البيانات",
   "DataImportDescription": "استيراد البيانات من خدمة طرف ثالث إلى {{organizationName}} {{productName}}. يتيح استيراد البيانات نقل البيانات مثل جميع المستخدمين، والمستندات الشخصية والمشتركة.",
   "DataImportProcessing": "معالجة استيراد البيانات",
-  "DeactivateOrDeletePortal": "إلغاء تنشيط المساحة أو حذفها.",
   "DefaultSettings": "الإعدادات الافتراضية",
   "DefaultTemplateApplied": "تم تطبيق القالب الافتراضي الجديد.",
   "DefaultTemplateRestored": "تم استعادة القالب الافتراضي.",
@@ -181,7 +180,6 @@
   "LoginHistoryTitle": "سجل الدخول",
   "LoginLatestText": "يتم عرض أحدث نشاط فقط على هذه الصفحة. يتم تخزين البيانات نفسها خلال الفترة المحددة في الحقل أدناه (بحد أقصى 180 يومًا).",
   "LoginSubheaderTitle": "يستخدم هذا القسم الفرعي لمراقبة آخر نشاط لتسجيل دخول المستخدم بما في ذلك عمليات تسجيل الدخول الناجحة والمحاولات الفاشلة مع توضيح الأسباب.",
-  "LogoLightSmall": "شعار البوابة",
   "ManagementCategoryDataManagement": "إدارة البيانات",
   "ManagementCategoryIntegration": "تكامل",
   "ManagementCategorySecurity": "حماية",
@@ -286,7 +284,6 @@
   "ThirdPartyBottomDescription": "هل لديك أي مشاكل؟ اتصل بـ <2>فريق الدعم.</2>",
   "ThirdPartyPropsActivated": "تم التحديث بنجاح",
   "ThirdPartyPropsDeactivated": "تم الإلغاء بنجاح",
-  "ThirdPartyStorageDescription": "يمكن حفظ النسخ الاحتياطي في وحدة تخزين تابعة لجهة خارجية. قبل ذلك ، تحتاج إلى توصيل الخدمة المقابلة في قسم \"التكامل\". خلاف ذلك ، ستكون الإعدادات التالية غير نشطة.",
   "TimeLanguageSettingsDescription": "قم بتغيير إعدادات اللغة والمنطقة الزمنية لتعديل لغة وتوقيت {{productName}} الشائع",
   "TimeLanguageSettingsSave": "اضغط على <strong>حفظ</strong> في الأسفل لتطبيق الإجراء.",
   "TimeZone": "المنطقة الزمنية",
@@ -319,8 +316,11 @@
   "UseUpperCase": "استخدم الاحرف الكبيرة",
   "WantToCancelDataImport": "هل تريد إلغاء استيراد البيانات؟",
   "WantToCancelUpload": "هل تريد إلغاء التحميل؟",
-  "WantToContinue": "هل تريد المتابعة أو تغيير حصة تخزين المستخدم؟",
   "WebhooksDescription": "تنفيذ إجراءات مخصصة ضمن أي تطبيق أو موقع ويب تستخدمه، بناءً على أحداث متنوعة في {{organizationName}} {{productName}}.",
-  "WhiteLabelSubtitle": "قم بتحميل شعارات بخلفية شفافة (PNG، SVG، JPG) للمظهرين الفاتح والداكن، أو قم بإنشاء شعار فوراً عن طريق إدخال شعارك أدناه.",
-  "WithoutEmailHint": "ليس لديك مستخدمون بدون بريد إلكتروني. يرجى المتابعة إلى الخطوة التالية."
+  "WithoutEmailHint": "ليس لديك مستخدمون بدون بريد إلكتروني. يرجى المتابعة إلى الخطوة التالية.",
+  "LogoLightSmallPortal": "شعار البوابة",
+  "ThirdPartyBackupStorageDescription": "يمكن حفظ النسخ الاحتياطي في وحدة تخزين تابعة لجهة خارجية. قبل ذلك ، تحتاج إلى توصيل الخدمة المقابلة في قسم \"التكامل\". خلاف ذلك ، ستكون الإعدادات التالية غير نشطة.",
+  "WantToContinueQuota": "هل تريد المتابعة أو تغيير حصة تخزين المستخدم؟",
+  "WhiteLabelLogoSubtitle": "قم بتحميل شعارات بخلفية شفافة (PNG، SVG، JPG) للمظهرين الفاتح والداكن، أو قم بإنشاء شعار فوراً عن طريق إدخال شعارك أدناه.",
+  "DeactivateOrDeleteSpace": "إلغاء تنشيط المساحة أو حذفها."
 }

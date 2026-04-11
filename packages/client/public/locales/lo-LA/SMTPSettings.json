@@ -1,6 +1,5 @@
 {
   "AuthViaNTLM": "ກວດສອບ ຜ່ານ NTLM",
-  "EnableSSL": "ເປີດໃຊ້ SSL",
   "EnterDomain": "ໃສ່ໂດເມນ",
   "EnterLogin": "ປ້ອນຊື່ເຂົ້າໃຊ້",
   "EnterPort": "ປ້ອນພອດ",
@@ -10,5 +9,6 @@
   "Port": "ພອດ",
   "SenderDisplayName": "ຊື່ສະແດງຂອງຜູ້ສົ່ງ",
   "SenderEmailAddress": "ທີ່ຢູ່ອີເມວຂອງຜູ້ສົ່ງ",
-  "SendTestMail": "ສົ່ງອີເມວທົດສອບ"
+  "SendTestMail": "ສົ່ງອີເມວທົດສອບ",
+  "EnableSMTPSSL": "ເປີດໃຊ້ SSL"
 }

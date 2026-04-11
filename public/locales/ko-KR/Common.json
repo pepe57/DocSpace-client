@@ -398,7 +398,6 @@
   "DenyAccess": "액세스 거부",
   "DenyAccessDescription": "파일이나 폴더를 보고, 편집하거나, 관리할 수 없습니다.",
   "DenyAccessDescriptionDocument": "이 파일을 보고, 편집하거나, 관리할 수 없습니다.",
-  "Description": "설명",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "개발자 도구",
   "Diagram": "도식",
@@ -1499,5 +1498,6 @@
   "YourName": "내 이름",
   "YourPrice": "내 요금",
   "YourTurn": "고객님의 차례입니다",
-  "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다."
+  "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다.",
+  "DescriptionLabel": "설명"
 }

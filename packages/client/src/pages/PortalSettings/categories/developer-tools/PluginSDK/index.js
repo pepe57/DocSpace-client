@@ -96,7 +96,7 @@ const PluginSDK = ({
           <div className="plugin-info-container">
             <Text>{p.name}</Text>
             <Text className="description">
-              {t("VersionHistory:Version")} {p.version}
+              {t("VersionHistory:VersionShort")} {p.version}
             </Text>
           </div>
         </div>

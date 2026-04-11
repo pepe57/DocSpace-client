@@ -398,7 +398,6 @@
   "DenyAccess": "拒绝访问",
   "DenyAccessDescription": "无权查看、编辑、管理文件或文件夹。",
   "DenyAccessDescriptionDocument": "无权查看、编辑或管理此文件。",
-  "Description": "说明",
   "DeveloperLicense": "开发者",
   "DeveloperTools": "开发者工具",
   "Diagram": "图表",
@@ -1499,5 +1498,6 @@
   "YourName": "您的姓名",
   "YourPrice": "您的价格",
   "YourTurn": "轮到您了",
-  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。"
+  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。",
+  "DescriptionLabel": "说明"
 }

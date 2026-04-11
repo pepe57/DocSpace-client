@@ -8,7 +8,6 @@
   "DisablingRoomGroups": "Wyłączanie grup pomieszczeń",
   "DisablingRoomGroupsDescription": "Grupy zostaną zapisane, ale ukryte. Można je ponownie włączyć w Profilu, w zarządzaniu plikami.",
   "EditRoomGroups": "Edytuj grupy pomieszczeń",
-  "EmptyGroupDescription": "Nie ma tu pokoi. Spróbuj dodać pokój lub usunąć tę grupę.",
   "GroupHasBeenDeleted": "Grupa została usunięta",
   "GroupIcon": "Ikona grupy",
   "GroupIsEmpty": "Grupa jest pusta",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "Możesz grupować pomieszczenia w foldery i łatwo przełączać się między nimi.",
   "RoomRemovedFromGroup": "Wybrany pokój został usunięty z <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Wybrane pomieszczenia dodano do <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Wybrane pomieszczenia zostały usunięte z <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Wybrane pomieszczenia zostały usunięte z <1>{{groupName}}</1>.",
+  "EmptyGroupRoomsDescription": "Nie ma tu pokoi. Spróbuj dodać pokój lub usunąć tę grupę."
 }

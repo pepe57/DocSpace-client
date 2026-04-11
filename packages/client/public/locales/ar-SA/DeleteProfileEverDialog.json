@@ -1,5 +1,4 @@
 {
-  "ActionCannotBeUndone": " سيتم إزالة المستخدمين المُعطلين المحددين من {{productName}}. لا يمكن التراجع عن هذا الإجراء.",
   "ActionCannotBeUndoneGuests": "سيتم إزالة الضيوف المعطلين المحددين من {{productName}}. لا يمكن التراجع عن هذا الإجراء.",
   "CannotReassignFiles": " إذا تم حذف عدة مستخدمين مرة واحدة، لا يمكنك إعادة تعيين ملفاتهم لمستخدمين آخرين.",
   "DeleteGroupGuestsSuccessMessage": "تم حذف الضيوف بنجاح.",
@@ -18,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "تم حذف الضيف بنجاح",
   "SuccessfullyDeleteUserInfoMessage": "تم حذف المستخدم بنجاح",
   "ToBeAbleToReassignData": " لتتمكن من إعادة تعيين البيانات، قم بحذف مستخدم واحد في كل مرة.",
-  "UserFilesRemovalScope": "البيانات الشخصية، جميع الملفات والمجلدات في أقسام {{sectionNameFirst}} و {{sectionNameSecond}} لهذا المستخدم سيتم حذفها نهائيًا."
+  "UserFilesRemovalScope": "البيانات الشخصية، جميع الملفات والمجلدات في أقسام {{sectionNameFirst}} و {{sectionNameSecond}} لهذا المستخدم سيتم حذفها نهائيًا.",
+  "ActionCannotBeUndoneUsers": " سيتم إزالة المستخدمين المُعطلين المحددين من {{productName}}. لا يمكن التراجع عن هذا الإجراء."
 }

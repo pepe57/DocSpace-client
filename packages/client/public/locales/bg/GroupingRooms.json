@@ -8,7 +8,6 @@
   "DisablingRoomGroups": "Изключване на групи на стаи",
   "DisablingRoomGroupsDescription": "Групите ще бъдат запазени, но скрити. Активирайте в Профил, управление на файловете.",
   "EditRoomGroups": "Редактиране на групи на стаи",
-  "EmptyGroupDescription": "Няма стаи тук. Опитайте да добавите стая или премахнете тази група.",
   "GroupHasBeenDeleted": "Групата е изтрита",
   "GroupIcon": "Икона на група",
   "GroupIsEmpty": "Групата е празна",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "Можете да групирате стаи в папки и лесно да превключвате между тях.",
   "RoomRemovedFromGroup": "Избраната стая е премахната от <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Избраните стаи са добавени към <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Избраните стаи са премахнати от <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Избраните стаи са премахнати от <1>{{groupName}}</1>.",
+  "EmptyGroupRoomsDescription": "Няма стаи тук. Опитайте да добавите стая или премахнете тази група."
 }

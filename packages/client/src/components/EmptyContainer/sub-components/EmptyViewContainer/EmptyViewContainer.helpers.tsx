@@ -380,7 +380,7 @@ export const getOptions = (
   };
 
   const createAIAgent = {
-    title: t("EmptyView:CreateAIAgent"),
+    title: t("EmptyView:CreateNewAIAgent"),
     description: t("EmptyView:CreateAIAgentDescription", {
       aiAgent: t("Common:AIAgent"),
     }),

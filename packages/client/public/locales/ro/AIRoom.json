@@ -21,11 +21,11 @@
   "KnowledgeUnavailableDescriptionUser": "Baza de cunoștințe este dezactivată în prezent. Pentru a activa căutarea semantică și procesarea documentelor pentru {{aiAgents}}, vă rugăm să contactați administratorul {{productName}} pentru a configura furnizorul de *embeddings*.",
   "MCP": "Instrumente MCP în această sală",
   "MCPDescriptionServers": "Folosiți {{mcpServers}} conectate de administrator pentru a îmbunătăți experiența de chat cu AI. {{mcpServers}} pot ajuta cu extracția de date, rezumate, sugestii inteligente etc.",
-  "Model": "{{aiProvider}} și model",
   "ModelDescription": "Selectați {{aiProvider}} și modelul de utilizare în chat-urile din această cameră. Această setare este obligatorie și se aplică tuturor participanților.",
   "NoAccessAIAgentTitle": "Îmi pare rău, nu aveți acces la {{aiAgent}}",
   "ResponseQualityNode": "<1>Notă:</1> Calitatea răspunsurilor depinde de model; recomandăm să folosiţi modele cele mai noi pentru rezultate mai performante.",
   "ResultStorage": "Stocare rezultate",
   "UploadFilesDevice": "Încărcați fișierele de pe diapozitivul dvs peronal",
-  "UploadFilesPortal": "Încărcați fișierele din {{sectionNameFirst}} sau {{sectionNameSecond}}"
+  "UploadFilesPortal": "Încărcați fișierele din {{sectionNameFirst}} sau {{sectionNameSecond}}",
+  "AIProviderAndModel": "{{aiProvider}} și model"
 }

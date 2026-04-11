@@ -398,7 +398,6 @@
   "DenyAccess": "Refuză accesul",
   "DenyAccessDescription": "Fără permisiune de vizualizare, de editare sau de gestionare a fișierelor și folderelor.",
   "DenyAccessDescriptionDocument": "Fără permisiune de vizualizare, de editare sau de gestionare a acestui fișier.",
-  "Description": "Descrierea",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Instrumente pentru dezvoltatori",
   "Diagram": "Diagrama",
@@ -1499,5 +1498,6 @@
   "YourName": "Numele dvs.",
   "YourPrice": "Preţul dvs.",
   "YourTurn": "Acum e rândul dvs.",
-  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării."
+  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
+  "DescriptionLabel": "Descrierea"
 }

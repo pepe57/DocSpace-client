@@ -77,7 +77,6 @@
   "DataImportComplete": "Məlumat idxalı tamamlandı",
   "DataImportDescription": "Üçüncü tərəf xidmətindən {{organizationName}} {{productName}}-ə məlumatları idxal edin. Məlumatların idxalı bütün istifadəçilər, şəxsi və paylaşılan sənədlər kimi məlumatların ötürülməsinə imkan verir.",
   "DataImportProcessing": "Məlumatların idxalının emalı",
-  "DeactivateOrDeletePortal": "Sahəni deaktivləşdirin və ya silin",
   "DefaultSettings": "Defolt parametrlər",
   "DefaultTemplateApplied": "Yeni standart şablon tətbiq edildi.",
   "DefaultTemplateRestored": "Əsas şablon bərpa edilmişdir.",
@@ -181,7 +180,6 @@
   "LoginHistoryTitle": "Giriş Tarixçəsi",
   "LoginLatestText": "Bu səhifədə yalnız ən son fəaliyyət göstərilir. Məlumatın özü aşağıdakı sahədə göstərilən müddət ərzində saxlanılır (maksimum 180 gün).",
   "LoginSubheaderTitle": "Bu alt bölmə uğurlu girişlər və uğursuz cəhdlər daxil olmaqla, səbəblərlə son istifadəçi giriş fəaliyyətini izləmək üçün istifadə olunur.",
-  "LogoLightSmall": "Portal üçün loqo",
   "ManagementCategoryDataManagement": "Məlumatların idarə olunması",
   "ManagementCategoryIntegration": "İnteqrasiya",
   "ManagementCategorySecurity": "Təhlükəsizlik",
@@ -286,7 +284,6 @@
   "ThirdPartyBottomDescription": "Kömək lazımdır? <2>Dəstək Komandası</2> ilə əlaqə saxlayın",
   "ThirdPartyPropsActivated": "Uğurla yeniləndi",
   "ThirdPartyPropsDeactivated": "Uğurla deaktiv edildi",
-  "ThirdPartyStorageDescription": "Ehtiyat nüsxələr üçüncü tərəf yaddaşlarında da saxlana bilər. Bunu etmək üçün əvvəlcə 'İnteqrasiya' bölməsində müvafiq xidmətə qoşulmalısınız. Əks halda, aşağıdakı ayarlar aktivləşdirilməyəcək.",
   "TimeLanguageSettingsDescription": "Ümumi {{productName}} dilini və vaxtı təyin etmək üçün Dil və Saat Zonası Parametrlərini dəyişdirin.",
   "TimeLanguageSettingsSave": "Müraciət etmək üçün aşağıdakı <strong>Saxla</strong> klikləyin.",
   "TimeZone": "Saat Qurşağı",
@@ -319,8 +316,11 @@
   "UseUpperCase": "Böyük hərfləri işlət",
   "WantToCancelDataImport": "Məlumat idxalını ləğv etmək istəyirsiniz?",
   "WantToCancelUpload": "Yükləməni ləğv etmək istəyirsiniz?",
-  "WantToContinue": "İstifadəçi yaddaşı kvotasını davam etdirmək və ya dəyişmək istəyirsiniz?",
   "WebhooksDescription": "{{organizationName}} {{productName}} daxilində müxtəlif hadisələrə əsaslanaraq, istifadə etdiyiniz istənilən tətbiq və ya veb saytda xüsusi əməliyyatlar yerinə yetirin.",
-  "WhiteLabelSubtitle": "Açıq fonlu loqoları (PNG, SVG, JPG) açıq və tünd mövzular üçün yükləyin və ya aşağıda loqonuzu daxil edərək dərhal birini yaradın.",
-  "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin."
+  "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin.",
+  "LogoLightSmallPortal": "Portal üçün loqo",
+  "ThirdPartyBackupStorageDescription": "Ehtiyat nüsxələr üçüncü tərəf yaddaşlarında da saxlana bilər. Bunu etmək üçün əvvəlcə 'İnteqrasiya' bölməsində müvafiq xidmətə qoşulmalısınız. Əks halda, aşağıdakı ayarlar aktivləşdirilməyəcək.",
+  "WantToContinueQuota": "İstifadəçi yaddaşı kvotasını davam etdirmək və ya dəyişmək istəyirsiniz?",
+  "WhiteLabelLogoSubtitle": "Açıq fonlu loqoları (PNG, SVG, JPG) açıq və tünd mövzular üçün yükləyin və ya aşağıda loqonuzu daxil edərək dərhal birini yaradın.",
+  "DeactivateOrDeleteSpace": "Sahəni deaktivləşdirin və ya silin"
 }

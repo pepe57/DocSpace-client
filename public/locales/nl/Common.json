@@ -398,7 +398,6 @@
   "DenyAccess": "Toegang weigeren",
   "DenyAccessDescription": "Geen toegang om bestanden of mappen te bekijken, te bewerken of te beheren.",
   "DenyAccessDescriptionDocument": "Geen toegang om dit bestand te bekijken, te bewerken of te beheren.",
-  "Description": "Beschrijving",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Developer Tools",
   "Diagram": "Diagram",
@@ -1499,5 +1498,6 @@
   "YourName": "Uw naam",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
+  "DescriptionLabel": "Beschrijving"
 }

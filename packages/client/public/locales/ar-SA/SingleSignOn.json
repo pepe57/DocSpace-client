@@ -28,7 +28,6 @@
   "OpenCertificate": "شهادة عامة",
   "PlaceholderCert": "لصق أو كتابة نص",
   "PrivateKey": "مفتاح سري",
-  "ProviderURL": "معرف كيان مزود الهوية",
   "ProviderURLTooltip": "معرف كيان مزود الهوية (رابط جهة الإصدار)",
   "ServiceProviderSettings": "{{organizationName}} إعدادات SP",
   "ServiceProviderSettingsDescription": "قم بتهيئة إعدادات مزود الخدمة وإضافة شهادات SP لتسجيل الدخول الموحد.",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "تمكين هذا الخيار إذا كنت تريد إضافة مستخدمين من خدمة المصادقة الموحدة إلى مساحتك تلقائيًا.",
   "UploadXML": "تحميل البيانات الوصفية من ملف XML لملء الحقول المطلوبة تلقائيًا.",
   "UploadXMLPlaceholder": "عنوان رابط للبيانات الوصفية لمزود الهوية بتنسيق لغة التوصيف الموسعة",
-  "UsedFor": "الاستخدام لـ"
+  "UsedFor": "الاستخدام لـ",
+  "IdpEntityId": "معرف كيان مزود الهوية"
 }

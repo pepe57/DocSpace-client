@@ -1,6 +1,5 @@
 {
   "AuthViaNTLM": "NTLM을 통한 인증",
-  "EnableSSL": "SSL을 사용하도록 설정",
   "EnterDomain": "도메인 입력",
   "EnterLogin": "로그인 ID 입력",
   "EnterPort": "포트 입력",
@@ -10,5 +9,6 @@
   "Port": "포트",
   "SenderDisplayName": "발신자 표시 이름",
   "SenderEmailAddress": "보내는 사람 이메일 주소",
-  "SendTestMail": "테스트 메일 전송"
+  "SendTestMail": "테스트 메일 전송",
+  "EnableSMTPSSL": "SSL을 사용하도록 설정"
 }

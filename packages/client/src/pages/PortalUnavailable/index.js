@@ -80,7 +80,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
         visible={isVisible}
         t={t}
         emailPlaceholderText={t("Common:RegistrationEmail")}
-        textBody={t("PortalUnavailable:AccessingProblem", {
+        textBody={t("PortalUnavailable:AccessingProblemContact", {
           productName: getBrandName("ProductName"),
         })}
         onClose={onCloseDialog}
@@ -93,7 +93,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
       >
         <StyledBodyContent>
           <Text textAlign="center" className="portal-unavailable_text">
-            {t("PortalUnavailable:AccessingProblem", {
+            {t("PortalUnavailable:AccessingProblemContact", {
               productName: getBrandName("ProductName"),
             })}
           </Text>

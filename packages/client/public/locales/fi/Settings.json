@@ -77,7 +77,6 @@
   "DataImportComplete": "Tietojen tuonti suoritettu",
   "DataImportDescription": "Tuo tietoja kolmannen osapuolen palvelusta {{organizationName}} {{productName}} -ympäristöön. Tietojen tuonti mahdollistaa tietojen siirron esim. käyttäjien, heidän henkilökohtaisten ja jaettujen asiakirjojensa välillä.",
   "DataImportProcessing": "Tietojen tuonnin prosessointi",
-  "DeactivateOrDeletePortal": "Ota tila pois käytöstä tai poista se.",
   "DefaultSettings": "Oletusasetukset",
   "DefaultTemplateApplied": "Uusi oletustemplate on sovellettu.",
   "DefaultTemplateRestored": "Oletusmalli on palautettu.",
@@ -181,7 +180,6 @@
   "LoginHistoryTitle": "Kirjautumishistoria",
   "LoginLatestText": "Vain viimeisin toiminta näytetään tällä sivulla. Data itsessään on tallennettu alapuolella olevassa kentässä määritetyllä aikavälillä (max.180 päivää).",
   "LoginSubheaderTitle": "Tätä aliosiota käytetään valvomaan viimeisintä käyttäjän sisäänkirjautumistoimintaa sisältäen onnistuneet sisäänkirjautumiset ja epäonnistuneet yritykset sekä niiden syyt.",
-  "LogoLightSmall": "Tilan otsikon logo",
   "ManagementCategoryDataManagement": "Tiedon hallinta",
   "ManagementCategoryIntegration": "Integraatio",
   "ManagementCategorySecurity": "Turvallisuus",
@@ -286,7 +284,6 @@
   "ThirdPartyBottomDescription": "Tarvitsetko apua? Ota yhteyttä <2>tukitiimiimme.</2>",
   "ThirdPartyPropsActivated": "Päivitetty onnistuneesti",
   "ThirdPartyPropsDeactivated": "Otettu pois käytöstä onnistuneesti",
-  "ThirdPartyStorageDescription": "Varmuuskopio voidaan tallentaa kolmannen osapuolen tallennustilaan. Ennen sitä, sinun on kytkettävä vastaava palvelu Integrointi-osiossa. Muussa tapauksessa seuraavat asetukset ovat passiivisia.",
   "TimeLanguageSettingsDescription": "Vaihda Kieli- ja aikavyöhykeasetuksia muokataksesi yleistä  {{productName}}-n kieltä ja aikaa.",
   "TimeLanguageSettingsSave": "Klikkaa alareunasta <strong>Tallenna</strong>-painiketta tallentaaksesi muutokset.",
   "TimeZone": "Aikavyöhyke",
@@ -319,8 +316,11 @@
   "UseUpperCase": "Sisällettävä isoja kirjaimia",
   "WantToCancelDataImport": "Haluatko peruuttaa tietojen tuonnin?",
   "WantToCancelUpload": "Haluatko peruuttaa latauksen?",
-  "WantToContinue": "Haluatko jatkaa vai muuttaa käyttäjien muistin kiintiötä?",
   "WebhooksDescription": "Suorita mukautetut toiminnot minkä tahansa sovelluksen tai verkkosivuston sivulla perustuen erilaisiin tapahtumiin {{organizationName}} {{productName}}.",
-  "WhiteLabelSubtitle": "Lataa läpinäkyvällä taustalla olevia logoja (PNG, SVG, JPG) vaaleaa ja tummaa teemaa varten tai luo logo välittömästi syöttämällä logosi alla.",
-  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen."
+  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen.",
+  "LogoLightSmallPortal": "Tilan otsikon logo",
+  "ThirdPartyBackupStorageDescription": "Varmuuskopio voidaan tallentaa kolmannen osapuolen tallennustilaan. Ennen sitä, sinun on kytkettävä vastaava palvelu Integrointi-osiossa. Muussa tapauksessa seuraavat asetukset ovat passiivisia.",
+  "WantToContinueQuota": "Haluatko jatkaa vai muuttaa käyttäjien muistin kiintiötä?",
+  "WhiteLabelLogoSubtitle": "Lataa läpinäkyvällä taustalla olevia logoja (PNG, SVG, JPG) vaaleaa ja tummaa teemaa varten tai luo logo välittömästi syöttämällä logosi alla.",
+  "DeactivateOrDeleteSpace": "Ota tila pois käytöstä tai poista se."
 }

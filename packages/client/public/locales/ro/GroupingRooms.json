@@ -8,7 +8,6 @@
   "DisablingRoomGroups": "Dezactivarea grupurilor de camere",
   "DisablingRoomGroupsDescription": "Grupurile vor fi salvate, dar ascunse. Reactivați în Profil, Gestionarea fișierelor.",
   "EditRoomGroups": "Editarea grupurilor de camere",
-  "EmptyGroupDescription": "Nu există camere aici. Încercați să adăugați o cameră sau să eliminați acest grup.",
   "GroupHasBeenDeleted": "Grupul a fost șters",
   "GroupIcon": "Iconă de grup",
   "GroupIsEmpty": "Grupul este gol",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "Puteți grupa camerele în foldere și puteți comuta ușor între ele.",
   "RoomRemovedFromGroup": "Camera selectată a fost eliminată din <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Camerele selectate au fost adăugate în <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Cuptrările selectate au fost eliminate din <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Cuptrările selectate au fost eliminate din <1>{{groupName}}</1>.",
+  "EmptyGroupRoomsDescription": "Nu există camere aici. Încercați să adăugați o cameră sau să eliminați acest grup."
 }

@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "Добро пожаловать в Комнату для совместной работы",
   "CollaboratorEmptyTitle": "Комната пуста.",
-  "CreateAIAgent": "Создать нового агента",
   "CreateAIAgentDescription": "Начните создавать свой первый {{aiAgent}}",
   "CreateDocument": "Создать новый документ",
   "CreateDocumentDescription": "Воспользуйтесь широкими функциональными возможностями обработки текста.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "Настройте персонализированного помощника для своей команды: добавьте базу знаний, выберите оптимальную модель и подключите {{mcpServer}}. Пригласите коллег к совместной работе и используйте возможности общения с агентом по максимуму.",
   "EmptyAIAgentsTitle": "Создайте свой {{aiAgent}}",
   "EmptyAIAgentsUserTitle": "Пока нет доступных {{aiAgents}}",
-  "EmptyDescription": "Начните работу с быстрых действий:",
   "EmptyFavoritesDescription": "Отмечайте файлы и папки звездочками, чтобы всегда легко находить их.",
   "EmptyFavoritesTitle": "Избранных пока нет",
   "EmptyGroupAddedUserOptionDescription": "Добавьте участников группы и назначьте руководителя",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Загрузить с устройства",
   "UploadFromPortalTitle": "Загрузить из {{productName}}",
   "UploadPDFFormOptionDescription": "Выберите готовую PDF-форму, доступную в {{productName}}, и загрузите ее в комнату.",
-  "VirtualDataRoomEmptyTitle": "Добро пожаловать в Виртуальную комнату данных"
+  "VirtualDataRoomEmptyTitle": "Добро пожаловать в Виртуальную комнату данных",
+  "CreateNewAIAgent": "Создать нового агента",
+  "EmptyViewDescription": "Начните работу с быстрых действий:"
 }

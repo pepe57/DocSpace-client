@@ -8,7 +8,6 @@
   "DisablingRoomGroups": "ການປິດກຸ່ມຫ້ອງ",
   "DisablingRoomGroupsDescription": "ກຸ່ມຈະຖືກບັນທຶກແຕ່ຖືກເຊື່ອງໄວ້. ກະລຸນາເປີດໃຊ້ງານຄືນໃນ Profile, ການຈັດການໄຟລ໌.",
   "EditRoomGroups": "ແກ້ໄຂກຸ່ມຫ້ອງ",
-  "EmptyGroupDescription": "ບໍ່ມີຫ້ອງຢູ່ທີ່ນີ້. ລອງເພີ່ມຫ້ອງ ຫຼື ຍົກເລີກກຸ່ມນີ້.",
   "GroupHasBeenDeleted": "ກຸ່ມໄດ້ຖືກລຶບແລ້ວ",
   "GroupIcon": "ໄອຄອນກຸ່ມ",
   "GroupIsEmpty": "ກຸ່ມຫວ່າງ",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "ທ່ານສາມາດຈັດກຸ່ມຫ້ອງເປັນໂຟນເດີ ແລະສະຫຼັບລະຫວ່າງພວກມັນໄດ້ງ່າຍ.",
   "RoomRemovedFromGroup": "ຫ້ອງທີ່ເລືອກໄດ້ຖືກລຶບອອກຈາກ <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "ຫ້ອງທີ່ເລືອກໄດ້ຖືກເພີ່ມເຂົ້າໃນ <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "ຫ້ອງທີ່ເລືອກໄດ້ຖືກລຶບອອກຈາກ <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "ຫ້ອງທີ່ເລືອກໄດ້ຖືກລຶບອອກຈາກ <1>{{groupName}}</1>.",
+  "EmptyGroupRoomsDescription": "ບໍ່ມີຫ້ອງຢູ່ທີ່ນີ້. ລອງເພີ່ມຫ້ອງ ຫຼື ຍົກເລີກກຸ່ມນີ້."
 }

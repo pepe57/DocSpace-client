@@ -398,7 +398,6 @@
   "DenyAccess": "يمنع الدخول",
   "DenyAccessDescription": "لا يوجد صلاحية لعرض الملفات أو المجلدات أو تحريرها أو إدارتها. ",
   "DenyAccessDescriptionDocument": "لا يوجد صلاحية لعرض هذا الملف أو تحريره أو إدارته.",
-  "Description": "الوصف",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "ادوات المطورين",
   "Diagram": "مخطط",
@@ -1499,5 +1498,6 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
+  "DescriptionLabel": "الوصف"
 }

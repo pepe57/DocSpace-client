@@ -28,7 +28,6 @@
   "OpenCertificate": "Certifikatë publike",
   "PlaceholderCert": "Ngjitni ose shkruani tekstin",
   "PrivateKey": "Çelësi privat",
-  "ProviderURL": "ID-ja e entitetit IdP",
   "ProviderURLTooltip": "ID-ja e entitetit të ofruesit të identitetit (URL-ja e lëshuesit)",
   "ServiceProviderSettings": "{{organizationName}} Cilësimet e SP",
   "ServiceProviderSettingsDescription": "Konfiguroni cilësimet e Ofruesit të Shërbimit dhe shtoni certifikatat SP për Single Sign-On.",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "Aktivizoni këtë opsion nëse dëshironi të shtoni automatikisht përdorues nga shërbimi SSO në hapësirën tuaj.",
   "UploadXML": "Ngarkoni meta të dhënat nga XML për të plotësuar automatikisht fushat e kërkuara.",
   "UploadXMLPlaceholder": "URL-ja e XML të metadatas së IdP",
-  "UsedFor": "Përdorni për"
+  "UsedFor": "Përdorni për",
+  "IdpEntityId": "ID-ja e entitetit IdP"
 }

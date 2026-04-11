@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "Welkom in de Samenwerkingskamer",
   "CollaboratorEmptyTitle": "De kamer is leeg.",
-  "CreateAIAgent": "Maak een nieuwe agent",
   "CreateAIAgentDescription": "Begin met het bouwen van je eerste {{aiAgent}}",
   "CreateDocument": "Maak een nieuw document",
   "CreateDocumentDescription": "Profiteer van de uitgebreide tekstverwerkingsfuncties.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "Stel een gepersonaliseerde assistent in voor uw team door een kennisbank toe te voegen, het ideale model te selecteren en een {{mcpServer}} te verbinden. Nodig uw collega's uit om samen te werken en de chatmogelijkheden van de agent optimaal te benutten.",
   "EmptyAIAgentsTitle": "Maak je {{aiAgent}} aan",
   "EmptyAIAgentsUserTitle": "Geen {{aiAgents}} beschikbaar",
-  "EmptyDescription": "Aan de slag met snelle acties:",
   "EmptyFavoritesDescription": "Sterren bestanden en mappen om ze gemakkelijk toegankelijk en binnen handbereik te houden.",
   "EmptyFavoritesTitle": "Nog geen favorieten",
   "EmptyGroupAddedUserOptionDescription": "Voeg groepsleden toe en wijs het groepshoofd toe",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Uploaden vanaf apparaat",
   "UploadFromPortalTitle": "Uploaden van {{productName}}",
   "UploadPDFFormOptionDescription": "Selecteer een PDF formulier dat beschikbaar is in {{productName}} en upload het naar de kamer.",
-  "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer"
+  "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer",
+  "CreateNewAIAgent": "Maak een nieuwe agent",
+  "EmptyViewDescription": "Aan de slag met snelle acties:"
 }

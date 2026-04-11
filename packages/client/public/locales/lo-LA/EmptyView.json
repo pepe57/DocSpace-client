@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຮ່ວມມື",
   "CollaboratorEmptyTitle": "ຫ້ອງນັ້ນຫວ່າງເປົ່າ.",
-  "CreateAIAgent": "ສ້າງຕົວແທນໃໝ່",
   "CreateAIAgentDescription": "ເລີ່ມຕົ້ນສ້າງ {{aiAgent}} ທຳອິດຂອງເຈົ້າ",
   "CreateDocument": "ສ້າງເອກະສານໃໝ່",
   "CreateDocumentDescription": "ໃຊ້ປະໂຫຍດຈາກຟັງຊັນການປະສົມສຽງຄໍາທີ່ມີຂອບເຂດວັດຂື້ນ.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "ສ້າງຜູ້ຊ່ວຍສ່ວນຕົວສຳລັບທີມຂອງທ່ານໂດຍການເພີ່ມຖານຄວາມຮູ້, ເລືອກຮູບແບບທີ່ເໝາະສົມ, ແລະເຊື່ອມຕໍ່ກັບ {{mcpServer}}. ເຊີນເພື່ອນຮ່ວມງານຂອງທ່ານມາຮ່ວມມື ແລະໃຊ້ປະໂຫຍດຈາກຄວາມສາມາດການສົນທະນາຂອງຕົວແທນໃຫ້ໄດ້ຫຼາຍທີ່ສຸດ.",
   "EmptyAIAgentsTitle": "ສ້າງ{{aiAgent}}ຂອງເຈົ້າເອງ",
   "EmptyAIAgentsUserTitle": "ຍັງບໍ່ມີ {{aiAgents}} ໃຫ້ໃຊ້ເທື່ອ",
-  "EmptyDescription": "ເລີ່ມຕົ້ນດ້ວຍການກະດຳທີ່ດ່ວນ:",
   "EmptyFavoritesDescription": "ຕິດດາວໄຟລ໌ ແລະໂຟນເດີ້ຕ່າງໆເພື່ອຮັກສາໃຫ້ເຂົາເຈົ້າເຂົ້າເຖິງໄດ້ງ່າຍ ແລະຢູ່ໃນການເຂົ້າເຖິງ.",
   "EmptyFavoritesTitle": "ບໍ່ມີລາຍການທີ່ມັກເທື່ອ",
   "EmptyGroupAddedUserOptionDescription": "ເພີ່ມສະມາຊິກກຸ່ມ ແລະ ແຊ່ງຕັ້ງຫົວໜ້າ",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "ອັບໂຫຼດຈາກເຄື່ອງມື",
   "UploadFromPortalTitle": "ດາວໂຫຼດຈາກ {{productName}}",
   "UploadPDFFormOptionDescription": "ເລືອກແບບຟອມ PDF ທີ່ກະກຽມໄວ້ແລ້ວໃນ {{productName}} ແລະອັບໂຫຼດມັນໃສ່ຫ້ອງ.",
-  "VirtualDataRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຂໍ້ມູນດິຈິຕອນ"
+  "VirtualDataRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຂໍ້ມູນດິຈິຕອນ",
+  "CreateNewAIAgent": "ສ້າງຕົວແທນໃໝ່",
+  "EmptyViewDescription": "ເລີ່ມຕົ້ນດ້ວຍການກະດຳທີ່ດ່ວນ:"
 }

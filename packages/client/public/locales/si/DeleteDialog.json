@@ -13,9 +13,7 @@
   "DeleteGroupDescription": "{{groupName}} කණ්ඩායම මකා දමනු ලැබේ. {{productName}} හි කණ්ඩායමේ සිටින පරිශීලකයින් ඉවත් කරනු නොලැබේ. ඔබට ඉදිරියට යාමට අවශ්‍යද?",
   "DeleteGroupTitle": "ප්‍රජාව ඉවත් කරන්න",
   "DeleteItem": "ඔබ <strong>{{name}}</strong> {{trashSection}} වෙත ගෙන යාමට ආසන්නයි.",
-  "DeleteItemForever": "ඔබ <strong>{{name}}</strong> මකා දැමීමට ආසන්නයි.",
   "DeleteItemsSharedNote": "මෙය යමෙක් සමඟ බෙදාගෙන ඇත්නම්, ඔහුට/ඇයට ද අහිමි වන බව කරුණාවෙන් සලකන්න.",
-  "DeleteRoom": "<strong>\"{{roomName}}\"</strong> කාමරය ස්ථිරවම මකා දැමෙනු ඇත. සියලුම දත්ත සහ පරිශීලක ප්‍රවේශයන් අහිමි වනු ඇත.",
   "DeleteRooms": "තෝරාගත් <strong>කාමර ({{count}})</strong> ස්ථිරවම මකා දැමෙනු ඇත. සියලු දත්ත සහ පරිශීලක ප්‍රවේශය අහිමි වනු ඇත.",
   "DeleteRoomsTitle": "මෙම කාමරය මකන්නද?",
   "DeleteRoomTitle": "මෙම කාමරය මකන්නද?",
@@ -34,5 +32,7 @@
   "ItemsDeletedAfter": "මෙම අයිතම දින 30කින් ස්ථිරවම මකා දැමෙනු ඇත.",
   "ItemsPermanentlyDeleted": "මෙම අයිතම {{trashSection}} වෙතින් ස්ථිරවම ඉවත් කරනු ලැබේ.",
   "removeFromListDescription": "ඔබ ලැයිස්තුවෙන් <1>{{title}}</1> ඉවත් කිරීමට සූදානම්. ඔබට ඉදිරියට යාමට අවශ්‍ය බව විශ්වාසද?",
-  "removeFromListDescriptionPlural": "ඔබ ලැයිස්තුවෙන් <1>අයිතම ({{count}})</1> ඉවත් කිරීමට සූදානම්. ඔබට ඉදිරියට යාමට අවශ්‍ය බව විශ්වාසද?"
+  "removeFromListDescriptionPlural": "ඔබ ලැයිස්තුවෙන් <1>අයිතම ({{count}})</1> ඉවත් කිරීමට සූදානම්. ඔබට ඉදිරියට යාමට අවශ්‍ය බව විශ්වාසද?",
+  "DeleteItemForeverConfirm": "ඔබ <strong>{{name}}</strong> මකා දැමීමට ආසන්නයි.",
+  "DeleteRoomConfirm": "<strong>\"{{roomName}}\"</strong> කාමරය ස්ථිරවම මකා දැමෙනු ඇත. සියලුම දත්ත සහ පරිශීලක ප්‍රවේශයන් අහිමි වනු ඇත."
 }

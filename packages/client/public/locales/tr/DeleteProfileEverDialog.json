@@ -1,5 +1,4 @@
 {
-  "ActionCannotBeUndone": "Seçilen devre dışı kullanıcılar {{productName}}'den kaldırılacak. Bu eylem geri alınamaz.",
   "ActionCannotBeUndoneGuests": "Seçilen devre dışı bırakılmış konuklar {{productName}} üzerinden kaldırılacaktır. Bu işlem geri alınamaz.",
   "CannotReassignFiles": "Birden fazla kullanıcıyı aynı anda silerseniz, onların dosyalarını diğer kullanıcılara yeniden atayamazsınız.",
   "DeleteGroupGuestsSuccessMessage": "Konuklar başarıyla silindi.",
@@ -18,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Konuk başarıyla silindi",
   "SuccessfullyDeleteUserInfoMessage": "Kullanıcı başarıyla silindi",
   "ToBeAbleToReassignData": "Verileri yeniden atayabilmek için her seferinde sadece bir kullanıcıyı silin.",
-  "UserFilesRemovalScope": "Kişisel veriler, bu kullanıcının {{sectionNameFirst}} ve {{sectionNameSecond}} bölümlerindeki tüm dosya ve klasörler kalıcı olarak silinecektir."
+  "UserFilesRemovalScope": "Kişisel veriler, bu kullanıcının {{sectionNameFirst}} ve {{sectionNameSecond}} bölümlerindeki tüm dosya ve klasörler kalıcı olarak silinecektir.",
+  "ActionCannotBeUndoneUsers": "Seçilen devre dışı kullanıcılar {{productName}}'den kaldırılacak. Bu eylem geri alınamaz."
 }

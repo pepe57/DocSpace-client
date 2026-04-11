@@ -1,7 +1,6 @@
 {
   "BackToRoom": "Otağa qayıdın",
   "CheckReadyForms": "Hazır formaları yoxlayın",
-  "Description": "Formanız tamamlandı və saxlanıldı",
   "DescriptionForAnonymous": "Doldurulmuş PDF formasını təqdim etdikdən sonra ona uyğun unikal nömrə verilir. Vəziyyəti yoxlamaq üçün forma sahibi ilə əlaqə saxlayın.",
   "DescriptionForRegisteredUser": "Doldurulmuş PDF forması Tamamlanmış qovluğunda sizə təqdim olunur.",
   "FillItOutAgain": "Yenidən doldurun",
@@ -19,5 +18,6 @@
   "LinkToFillOutForm": "Formanı doldurmaq üçün link:",
   "LinkToForm": "Formaya keçid linki:",
   "LinkToViewOnlyForm": "Yalnız forma baxmaq üçün link:",
-  "Title": "Forma tamamlandı"
+  "CompletedFormTitle": "Forma tamamlandı",
+  "CompletedFormDescription": "Formanız tamamlandı və saxlanıldı"
 }

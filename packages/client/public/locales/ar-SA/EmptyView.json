@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "مرحبًا بك في غرفة التعاون",
   "CollaboratorEmptyTitle": "الغرفة فارغة.",
-  "CreateAIAgent": "إنشاء وكيل جديد",
   "CreateAIAgentDescription": "ابدأ في بناء أول {{aiAgent}} لديك",
   "CreateDocument": "إنشاء مستند جديد",
   "CreateDocumentDescription": "استفد من إمكانيات معالجة النصوص الواسعة.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "قم بإعداد مساعد شخصي لفريقك عن طريق إضافة قاعدة معرفية، واختيار النموذج المثالي، وربط {{mcpServer}}. ادعُ زملائك للتعاون والاستفادة القصوى من قدرات الدردشة الخاصة بالوكيل.",
   "EmptyAIAgentsTitle": "أنشئ {{aiAgent}} الخاص بك",
   "EmptyAIAgentsUserTitle": "لا يتوفر أي {{aiAgents}} بعد",
-  "EmptyDescription": "ابدأ بالإجراءات السريعة:",
   "EmptyFavoritesDescription": "قوموا بتمييز الملفات والمجلدات بنجمة لإبقائها في متناول أيديكم ويسهل الوصول إليها. ",
   "EmptyFavoritesTitle": "لا توجد مفضلات بعد ",
   "EmptyGroupAddedUserOptionDescription": "إضافة أعضاء المجموعة وتعيين رئيس المجموعة",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "تحميل من الجهاز",
   "UploadFromPortalTitle": "تحميل من {{productName}}",
   "UploadPDFFormOptionDescription": "حدد نموذج  PDFجاهزًا متاحًا في {{productName}} وقم بتحميله إلى الغرفة. ",
-  "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية"
+  "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية",
+  "CreateNewAIAgent": "إنشاء وكيل جديد",
+  "EmptyViewDescription": "ابدأ بالإجراءات السريعة:"
 }

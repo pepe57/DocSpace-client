@@ -326,7 +326,7 @@ const TemplateAccessSettingsPanel = ({
 					dataTestId="template_access_settings_back_button"
 				/>
 				<Text fontSize="21px" fontWeight={700} className="header-component">
-					{t("Files:AccessSettings")}
+					{t("Files:AccessSettingsTitle")}
 				</Text>
 				<IconButton
 					size={17}
@@ -432,7 +432,7 @@ const TemplateAccessSettingsPanel = ({
 				) : null}
 			</ModalDialog.Container>
 
-			<ModalDialog.Header>{t("Files:AccessSettings")}</ModalDialog.Header>
+			<ModalDialog.Header>{t("Files:AccessSettingsTitle")}</ModalDialog.Header>
 			<ModalDialog.Body>
 				<>
 					<StyledBlock>

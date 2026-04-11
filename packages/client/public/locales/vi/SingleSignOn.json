@@ -28,7 +28,6 @@
   "OpenCertificate": "Giấy chứng nhận công cộng",
   "PlaceholderCert": "Dán hoặc nhập văn bản",
   "PrivateKey": "Khóa riêng tư",
-  "ProviderURL": "Id thực thể IdP",
   "ProviderURLTooltip": "ID thực thể của nhà cung cấp danh tính (URL nhà phát hành)",
   "ServiceProviderSettings": "Cài đặt Nhà cung cấp dịch vụ {{organizationName}}",
   "ServiceProviderSettingsDescription": "Định cấu hình cài đặt Nhà cung cấp Dịch vụ và thêm chứng chỉ SP cho Đăng Nhập Một Lần.",
@@ -59,5 +58,6 @@
   "TurnOnSSOCaption": "Bật tùy chọn này nếu bạn muốn tự động thêm người dùng từ dịch vụ SSO vào không gian của mình.",
   "UploadXML": "Tải siêu dữ liệu từ XML để tự động điền vào các trường bắt buộc.",
   "UploadXMLPlaceholder": "URL tới Siêu dữ liệu XML IdP",
-  "UsedFor": "Sử dụng cho"
+  "UsedFor": "Sử dụng cho",
+  "IdpEntityId": "Id thực thể IdP"
 }

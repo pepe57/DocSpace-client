@@ -21,11 +21,11 @@
   "KnowledgeUnavailableDescriptionUser": "Bilgi tabanı şu anda devre dışı. {{aiAgents}} için anlamsal aramayı ve belge işlemeyi etkinleştirmek için lütfen {{productName}} yöneticinizle iletişime geçerek gömme sağlayıcısını yapılandırın.",
   "MCP": "Bu oda için MCP araçları",
   "MCPDescriptionServers": "Yönetici tarafından bağlanan {{mcpServers}} ile yapay zeka desteğiyle sohbet deneyiminizi geliştirin. {{mcpServers}} veri çıkarma, özetler, akıllı öneriler vb. konularında yardımcı olabilir.",
-  "Model": "{{aiProvider}} ve model",
   "ModelDescription": "Bu odadaki sohbetlerde kullanılacak {{aiProvider}} ve modeli seçin. Bu ayar zorunludur ve tüm katılımcılar için geçerlidir.",
   "NoAccessAIAgentTitle": "Üzgünüz, bu {{aiAgent}}'a erişiminiz yok.",
   "ResponseQualityNode": "<1>Not:</1> Yanıt kalitesi modele göre değişiklik gösterebilir; en iyi sonuçlar için daha yeni modeller önerilir.",
   "ResultStorage": "Sonuç depolama",
   "UploadFilesDevice": "Kişisel cihazınızdan dosyalar yükleyin",
-  "UploadFilesPortal": "{{sectionNameFirst}} veya {{sectionNameSecond}}'den dosyalar yükleyin"
+  "UploadFilesPortal": "{{sectionNameFirst}} veya {{sectionNameSecond}}'den dosyalar yükleyin",
+  "AIProviderAndModel": "{{aiProvider}} ve model"
 }

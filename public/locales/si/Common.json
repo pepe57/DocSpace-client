@@ -398,7 +398,6 @@
   "DenyAccess": "ප්‍රවේශය ප්‍රතික්ෂේප කරන්න",
   "DenyAccessDescription": "ගොනු හෝ ෆෝල්ඩර බැලීමට, සංස්කරණය කිරීමට හෝ කළමනාකරණය කිරීමට ප්‍රවේශයක් නොමැත.",
   "DenyAccessDescriptionDocument": "මෙම ගොනුව බැලීමට, සංස්කරණය කිරීමට හෝ කළමනාකරණය කිරීමට ප්‍රවේශයක් නොමැත.",
-  "Description": "සවිස්තරය",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "සංවර්ධක මෙවලම්",
   "Diagram": "රූප සටහන",
@@ -1499,5 +1498,6 @@
   "YourName": "ඔබගේ නම",
   "YourPrice": "ඔබගේ මිල",
   "YourTurn": "ඔබේ වාරය.",
-  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත."
+  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත.",
+  "DescriptionLabel": "සවිස්තරය"
 }

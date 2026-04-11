@@ -77,7 +77,6 @@
   "DataImportComplete": "Nhập dữ liệu đã hoàn thành",
   "DataImportDescription": "Nhập dữ liệu từ dịch vụ của bên thứ ba vào {{organizationName}} {{productName}}. Việc nhập dữ liệu cho phép chuyển dữ liệu như tất cả người dùng, tài liệu cá nhân và tài liệu dùng chung của họ.",
   "DataImportProcessing": "Đang xử lý nhập dữ liệu",
-  "DeactivateOrDeletePortal": "Vô hiệu hóa hoặc xóa không gian.",
   "DefaultSettings": "Cài đặt mặc định",
   "DefaultTemplateApplied": "Mẫu mặc định mới đã được áp dụng.",
   "DefaultTemplateRestored": "Mẫu mặc định đã được khôi phục.",
@@ -181,7 +180,6 @@
   "LoginHistoryTitle": "Lịch sử đăng nhập",
   "LoginLatestText": "Chỉ hoạt động mới nhất được hiển thị trên trang này. Bản thân dữ liệu được lưu trữ trong khoảng thời gian được nêu trong trường bên dưới (tối đa 180 ngày).",
   "LoginSubheaderTitle": "Phần phụ này được sử dụng để theo dõi hoạt động đăng nhập mới nhất của người dùng bao gồm đăng nhập thành công và các lần cố đăng nhập không thành công với thông tin nguyên nhân.",
-  "LogoLightSmall": "Logo cho cổng thông tin",
   "ManagementCategoryDataManagement": "Quản lý dữ liệu",
   "ManagementCategoryIntegration": "Tích hợp",
   "ManagementCategorySecurity": "Bảo mật",
@@ -286,7 +284,6 @@
   "ThirdPartyBottomDescription": "Bạn cần trợ giúp? Hãy liên hệ với <2>Nhóm Hỗ Trợ</2> của chúng tôi.",
   "ThirdPartyPropsActivated": "Đã cập nhật thành công",
   "ThirdPartyPropsDeactivated": "Đã tắt thành công",
-  "ThirdPartyStorageDescription": "Bản sao lưu có thể được lưu vào bộ nhớ của bên thứ ba. Trước tiên, bạn cần kết nối dịch vụ tương ứng trong phần 'Tích hợp'. Nếu không, các cài đặt sau sẽ không hoạt động.",
   "TimeLanguageSettingsDescription": "Thay đổi Cài đặt Ngôn ngữ và Múi giờ để điều chỉnh ngôn ngữ và thời gian chung của {{productName}}.",
   "TimeLanguageSettingsSave": "Nhấp vào <strong>Lưu</strong> ở dưới cùng để áp dụng.",
   "TimeZone": "Múi giờ",
@@ -319,8 +316,11 @@
   "UseUpperCase": "Sử dụng chữ viết hoa",
   "WantToCancelDataImport": "Bạn có muốn hủy nhập dữ liệu không?",
   "WantToCancelUpload": "Bạn có muốn hủy tải lên không?",
-  "WantToContinue": "Bạn có muốn tiếp tục hoặc thay đổi hạn mức lưu trữ người dùng không?",
   "WebhooksDescription": "Thực hiện các hành động tùy chỉnh cùng với bất kỳ ứng dụng hoặc trang web nào bạn đang sử dụng dựa trên các sự kiện khác nhau trong {{organizationName}} {{productName}}.",
-  "WhiteLabelSubtitle": "Tải lên logo có nền trong suốt (PNG, SVG, JPG) cho giao diện sáng và tối, hoặc tạo ngay lập tức bằng cách nhập logo của bạn bên dưới.",
-  "WithoutEmailHint": "Bạn chưa có người dùng nào có email. Vui lòng chuyển sang bước tiếp theo."
+  "WithoutEmailHint": "Bạn chưa có người dùng nào có email. Vui lòng chuyển sang bước tiếp theo.",
+  "LogoLightSmallPortal": "Logo cho cổng thông tin",
+  "ThirdPartyBackupStorageDescription": "Bản sao lưu có thể được lưu vào bộ nhớ của bên thứ ba. Trước tiên, bạn cần kết nối dịch vụ tương ứng trong phần 'Tích hợp'. Nếu không, các cài đặt sau sẽ không hoạt động.",
+  "WantToContinueQuota": "Bạn có muốn tiếp tục hoặc thay đổi hạn mức lưu trữ người dùng không?",
+  "WhiteLabelLogoSubtitle": "Tải lên logo có nền trong suốt (PNG, SVG, JPG) cho giao diện sáng và tối, hoặc tạo ngay lập tức bằng cách nhập logo của bạn bên dưới.",
+  "DeactivateOrDeleteSpace": "Vô hiệu hóa hoặc xóa không gian."
 }

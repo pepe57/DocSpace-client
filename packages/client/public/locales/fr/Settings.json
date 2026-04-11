@@ -77,7 +77,6 @@
   "DataImportComplete": "Importation des données s'est terminée",
   "DataImportDescription": "Importer des données depuis un service tiers vers {{organizationName}} {{productName}}. L'importation des données permet de transférer des données telles que tous les utilisateurs, leurs documents personnels et partagés.",
   "DataImportProcessing": "Traitement de l'importation des données",
-  "DeactivateOrDeletePortal": "Désactiver ou supprimer l’espace.",
   "DefaultSettings": "Paramètres par défaut",
   "DefaultTemplateApplied": "Le nouveau modèle par défaut a été appliqué.",
   "DefaultTemplateRestored": "Le modèle par défaut a été restauré.",
@@ -181,7 +180,6 @@
   "LoginHistoryTitle": "Histoire de connexion",
   "LoginLatestText": "Juste l'activité  la plus récente est affichée sur cette page. Les données elles-mêmes sont conservées pendant la période  que vous devez saisir dans le champ ci-dessous (mesurée en jours, 180 maximum)",
   "LoginSubheaderTitle": "Cette sous-section est utilisée pour suivre les dernières activités de connexion des utilisateurs, y compris les connexions réussies et les tentatives échouées, avec indication des raisons.",
-  "LogoLightSmall": "Logo pour le portail",
   "ManagementCategoryDataManagement": "Gestion des données",
   "ManagementCategoryIntegration": "Intégration",
   "ManagementCategorySecurity": "Sécurité",
@@ -286,7 +284,6 @@
   "ThirdPartyBottomDescription": "Besoin d'aide ? Contactez notre <2>équipe de support.</2>",
   "ThirdPartyPropsActivated": "Mis à jour avec succès",
   "ThirdPartyPropsDeactivated": "Désactivé avec succès",
-  "ThirdPartyStorageDescription": "La sauvegarde peut être enregistrée sur un stockage tiers. Au préalable, vous devez connecter le service correspondant dans la section « Intégration ». Sinon, les paramètres suivants seront désactivés.",
   "TimeLanguageSettingsDescription": "Modifiez les paramètres de langue et de fuseau horaire pour ajuster la langue et l'heure du {{productName}}.",
   "TimeLanguageSettingsSave": "Cliquez <strong>Enregistrer</strong> en bas pour appliquer.",
   "TimeZone": "Fuseau horaire",
@@ -319,8 +316,11 @@
   "UseUpperCase": "Utiliser majuscules",
   "WantToCancelDataImport": "Voulez-vous annuler l'importation des données?",
   "WantToCancelUpload": "Voulez-vous annuler le téléversement ?",
-  "WantToContinue": "Voulez-vous continuer ou modifier le quota de stockage de l'utilisateur ?",
   "WebhooksDescription": "Exécuter des actions personnalisées pour toute application ou site web que vous utilisez, en fonction de divers événements dans {{organizationName}} {{productName}}.",
-  "WhiteLabelSubtitle": "Téléchargez des logos avec un fond transparent (PNG, SVG, JPG) pour les thèmes clair et sombre, ou générez-en un instantanément en saisissant votre logo ci-dessous.",
-  "WithoutEmailHint": "Vous n'avez aucun utilisateur sans adresse e-mail. Veuillez passer à l'étape suivante."
+  "WithoutEmailHint": "Vous n'avez aucun utilisateur sans adresse e-mail. Veuillez passer à l'étape suivante.",
+  "LogoLightSmallPortal": "Logo pour le portail",
+  "ThirdPartyBackupStorageDescription": "La sauvegarde peut être enregistrée sur un stockage tiers. Au préalable, vous devez connecter le service correspondant dans la section « Intégration ». Sinon, les paramètres suivants seront désactivés.",
+  "WantToContinueQuota": "Voulez-vous continuer ou modifier le quota de stockage de l'utilisateur ?",
+  "WhiteLabelLogoSubtitle": "Téléchargez des logos avec un fond transparent (PNG, SVG, JPG) pour les thèmes clair et sombre, ou générez-en un instantanément en saisissant votre logo ci-dessous.",
+  "DeactivateOrDeleteSpace": "Désactiver ou supprimer l’espace."
 }

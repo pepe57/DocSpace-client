@@ -8,7 +8,6 @@
   "DisablingRoomGroups": "Отключение групп комнат",
   "DisablingRoomGroupsDescription": "Группы будут сохранены, но скрыты. Включите их снова в разделе «Профиль» — «Управление файлами».",
   "EditRoomGroups": "Редактировать группы комнат",
-  "EmptyGroupDescription": "Здесь нет комнат. Попробуйте добавить комнату или удалить эту группу.",
   "GroupHasBeenDeleted": "Группа была удалена",
   "GroupIcon": "Значок группы",
   "GroupIsEmpty": "Группа пуста",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "Вы можете группировать комнаты по папкам и легко переключаться между ними.",
   "RoomRemovedFromGroup": "Выбранная комната удалена из <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Выбранные комнаты добавлены в <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Выбранные комнаты удалены из <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Выбранные комнаты удалены из <1>{{groupName}}</1>.",
+  "EmptyGroupRoomsDescription": "Здесь нет комнат. Попробуйте добавить комнату или удалить эту группу."
 }

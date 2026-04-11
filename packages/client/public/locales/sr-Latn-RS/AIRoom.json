@@ -21,11 +21,11 @@
   "KnowledgeUnavailableDescriptionUser": "Baza znanja je trenutno onemogućena. Da biste aktivirali semantički pretragu i obradu dokumenata za {{aiAgents}}, molimo vas da kontaktirate administratora vašeg {{productName}} kako biste konfigurisali provajdera ugrađivanja.",
   "MCP": "MCP alati za ovu sobu",
   "MCPDescriptionServers": "Koristite {{mcpServers}} koje je administrator povezao za poboljšanje chat iskustva sa AI. {{mcpServers}} mogu pomoći sa ekstrakcijom podataka, sažecima, pametnim predlozima itd.",
-  "Model": "{{aiProvider}} i model",
   "ModelDescription": "Izaberite {{aiProvider}} i model koji će se koristiti u četovima ovog prostora. Ova podešavanja su obavezna i primenjuju se na sve učesnike.",
   "NoAccessAIAgentTitle": "Žao nam je, nemate pristup ovom {{aiAgent}}",
   "ResponseQualityNode": "<1>Napomena:</1> Kvalitet odgovora može varirati u zavisnosti od modela; noviji modeli se preporučuju za najbolje rezultate.",
   "ResultStorage": "Skladištenje rezultata",
   "UploadFilesDevice": "Otpremite datoteke sa svog ličnog uređaja",
-  "UploadFilesPortal": "Otpremite datoteke sa {{sectionNameFirst}} ili {{sectionNameSecond}}"
+  "UploadFilesPortal": "Otpremite datoteke sa {{sectionNameFirst}} ili {{sectionNameSecond}}",
+  "AIProviderAndModel": "{{aiProvider}} i model"
 }

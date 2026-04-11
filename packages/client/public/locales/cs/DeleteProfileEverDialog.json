@@ -1,5 +1,4 @@
 {
-  "ActionCannotBeUndone": "Vybraní zakázaní uživatelé budou zprostoru {{productName}} odstraněni. Tuto akci nelze vrátit zpět.",
   "ActionCannotBeUndoneGuests": "Vybraní zakázaní hosté budou odstraněni z {{productName}}. Tuto akci nelze vrátit zpět.",
   "CannotReassignFiles": "Pokud odstraníte více uživatelů najednou, nelze jejich soubory znovu přiřadit jiným uživatelům.",
   "DeleteGroupGuestsSuccessMessage": "Hosté byli úspěšně odstraněni.",
@@ -18,5 +17,6 @@
   "SuccessfullyDeleteGuestInfoMessage": "Host byl úspěšně odstraněn",
   "SuccessfullyDeleteUserInfoMessage": "Uživatel byl úspěšně odstraněn",
   "ToBeAbleToReassignData": "Abyste mohli data znovu přiřadit, odstraňte vždy jednoho uživatele.",
-  "UserFilesRemovalScope": "Osobní údaje, všechny soubory a složky v sekcích {{sectionNameFirst}} a {{sectionNameSecond}} tohoto uživatele budou trvale odstraněny."
+  "UserFilesRemovalScope": "Osobní údaje, všechny soubory a složky v sekcích {{sectionNameFirst}} a {{sectionNameSecond}} tohoto uživatele budou trvale odstraněny.",
+  "ActionCannotBeUndoneUsers": "Vybraní zakázaní uživatelé budou zprostoru {{productName}} odstraněni. Tuto akci nelze vrátit zpět."
 }

@@ -1,7 +1,6 @@
 {
   "CollaborationRoomEmptyTitle": "Mirë se vini në dhomën e bashkëpunimit",
   "CollaboratorEmptyTitle": "Dhoma është bosh",
-  "CreateAIAgent": "Krijo një agjent të ri",
   "CreateAIAgentDescription": "Filloni të ndërtoni agentin tuaj të parë {{aiAgent}}",
   "CreateDocument": "Krijoni një dokument të ri",
   "CreateDocumentDescription": "Përfitoni nga funksionaliteti i gjerë i përpunimit të tekstit.",
@@ -25,7 +24,6 @@
   "EmptyAIAgentsDescription": "Krijoni një asistent të personalizuar për ekipin tuaj duke shtuar një bazë të dijeve, duke zgjedhur modelin ideal, dhe duke lidhur një {{mcpServer}}. Ftoni kolegët tuaj për të bashkëpunuar dhe për të përdorur më së miri aftësitë e chat-it të agjentit.",
   "EmptyAIAgentsTitle": "Krijo {{aiAgent}}-n tënd",
   "EmptyAIAgentsUserTitle": "Nuk ka {{aiAgents}} të disponueshëm ende",
-  "EmptyDescription": "Filloni me veprime të shpejta:",
   "EmptyFavoritesDescription": "Yllëzo skedarët dhe dosjet për t’i pasur lehtësisht të arritshme.",
   "EmptyFavoritesTitle": "Nuk ka asnjë të preferuar ende",
   "EmptyGroupAddedUserOptionDescription": "Shtoni anëtarët e grupit dhe caktoni kreun",
@@ -64,5 +62,7 @@
   "UploadDevicePDFFormOptionTitle": "Ngarkoni nga pajisja",
   "UploadFromPortalTitle": "Ngarkoni nga {{productName}}",
   "UploadPDFFormOptionDescription": "Selektoni një formular të gatshëm PDF të disponueshëm në {{productName}} dhe ngarkojeni në dhomë.",
-  "VirtualDataRoomEmptyTitle": "Mirë se vini në dhomën e të dhënave virtuale"
+  "VirtualDataRoomEmptyTitle": "Mirë se vini në dhomën e të dhënave virtuale",
+  "CreateNewAIAgent": "Krijo një agjent të ri",
+  "EmptyViewDescription": "Filloni me veprime të shpejta:"
 }

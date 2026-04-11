@@ -113,7 +113,7 @@ const BodyComponent = ({
             ? t("ActionCannotBeUndoneGuests", {
                 productName: getBrandName("ProductName"),
               })
-            : t("ActionCannotBeUndone", {
+            : t("ActionCannotBeUndoneUsers", {
                 productName: getBrandName("ProductName"),
               })}
         </Text>
@@ -146,7 +146,7 @@ const BodyComponent = ({
             ? t("ActionCannotBeUndoneGuests", {
                 productName: getBrandName("ProductName"),
               })
-            : t("ActionCannotBeUndone", {
+            : t("ActionCannotBeUndoneUsers", {
                 productName: getBrandName("ProductName"),
               })}
         </Text>

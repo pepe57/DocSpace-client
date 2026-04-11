@@ -8,7 +8,6 @@
   "DisablingRoomGroups": "Désactiver les groupes de salles",
   "DisablingRoomGroupsDescription": "Les groupes seront enregistrés mais masqués. Réactiver dans Profil, Gestion des fichiers.",
   "EditRoomGroups": "Modifier les groupes de salles",
-  "EmptyGroupDescription": "Il n'y a aucune salle ici. Essayez d'en ajouter une ou de supprimer ce groupe.",
   "GroupHasBeenDeleted": "Le groupe a été supprimé",
   "GroupIcon": "Icône de groupe",
   "GroupIsEmpty": "Le groupe est vide",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "Vous pouvez regrouper les espaces dans des dossiers et basculer facilement entre eux.",
   "RoomRemovedFromGroup": "La salle sélectionnée a été retirée de <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Les salles sélectionnées ont été ajoutées à <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Les pièces sélectionnées ont été supprimées de <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Les pièces sélectionnées ont été supprimées de <1>{{groupName}}</1>.",
+  "EmptyGroupRoomsDescription": "Il n'y a aucune salle ici. Essayez d'en ajouter une ou de supprimer ce groupe."
 }

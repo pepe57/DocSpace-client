@@ -8,7 +8,6 @@
   "DisablingRoomGroups": "Tắt nhóm phòng",
   "DisablingRoomGroupsDescription": "Các nhóm sẽ được lưu nhưng bị ẩn. Vui lòng bật lại trong Hồ sơ, Quản lý tệp.",
   "EditRoomGroups": "Chỉnh sửa nhóm phòng",
-  "EmptyGroupDescription": "Không có phòng nào ở đây. Hãy thử thêm một phòng hoặc xóa nhóm này.",
   "GroupHasBeenDeleted": "Nhóm đã bị xóa",
   "GroupIcon": "Biểu tượng nhóm",
   "GroupIsEmpty": "Nhóm trống",
@@ -25,5 +24,6 @@
   "RoomGroupingSettingDescription": "Bạn có thể nhóm các phòng thành thư mục và dễ dàng chuyển đổi giữa chúng.",
   "RoomRemovedFromGroup": "Phòng đã chọn đã được xóa khỏi <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Các phòng đã chọn đã được thêm vào <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Các phòng đã chọn đã được xóa khỏi <1>{{groupName}}</1>."
+  "RoomsRemovedFromGroup": "Các phòng đã chọn đã được xóa khỏi <1>{{groupName}}</1>.",
+  "EmptyGroupRoomsDescription": "Không có phòng nào ở đây. Hãy thử thêm một phòng hoặc xóa nhóm này."
 }

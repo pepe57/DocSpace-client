@@ -398,7 +398,6 @@
   "DenyAccess": "Заборонити доступ",
   "DenyAccessDescription": "Немає доступу для перегляду, редагування або керування файлами або папками.",
   "DenyAccessDescriptionDocument": "Немає доступу для перегляду, редагування або керування цим файлом.",
-  "Description": "Опис",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Інструменти розробника",
   "Diagram": "Діаграма",
@@ -1499,5 +1498,6 @@
   "YourName": "Ваше ім’я",
   "YourPrice": "Ваша ціна",
   "YourTurn": "Ваша черга",
-  "YouWillBeContacted": "Після створення запиту з вами зв’яжеться відділ продажів."
+  "YouWillBeContacted": "Після створення запиту з вами зв’яжеться відділ продажів.",
+  "DescriptionLabel": "Опис"
 }
