@@ -21,6 +21,5 @@
   "UserAgentMaxAvailableRoleWarning": "Los Invitados y Usuarios no pueden ser asignados como Administradores de agentes. Solo los Administradores de sala y de {{productName}} son aptos para el rol especificado.",
   "UserMaxAvailableRoleWarning": "Los invitados y los usuarios no pueden ser asignados como gestores de sala. Solo los administradores de sala y administradores de {{productName}} son adecuados para el rol especificado.",
   "UsersAlreadyAdded": "Algunos usuarios ya se han añadido",
-  "UsersCannotBeAdded": "Los contactos deshabilitados no se pueden agregar a una sala.",
-  "InviteLinkCopySuccess": "El enlace se ha copiado"
+  "UsersCannotBeAdded": "Los contactos deshabilitados no se pueden agregar a una sala."
 }

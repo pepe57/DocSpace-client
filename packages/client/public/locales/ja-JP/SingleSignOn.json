@@ -17,6 +17,7 @@
   "idpAuthRequest": "認証レスポンス署名の確認",
   "idpCertificates": "IdP公開証明書",
   "idpCertificatesTooltip": "IdP からのリクエストとレスポンスの検証または復号（またはその両方）に使用される ID プロバイダの公開証明書。",
+  "IdpEntityId": "IdPエンティティ ID",
   "idpSignExitRequest": "ログアウトリクエスト署名の確認",
   "idpSigningAlgorithm": "デフォルトの署名検証アルゴリズム",
   "idpSignResponseRequest": "ログアウトレスポンス署名の確認",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "SSOサービスからのユーザーを自動的にスペースに追加する場合は、このオプションを有効にしてください。",
   "UploadXML": "XMLからメタデータを読み込み、必要な項目を自動で埋める。",
   "UploadXMLPlaceholder": "IdPメタデータXMLへのURL",
-  "UsedFor": "使用目的",
-  "IdpEntityId": "IdPエンティティ ID"
+  "UsedFor": "使用目的"
 }

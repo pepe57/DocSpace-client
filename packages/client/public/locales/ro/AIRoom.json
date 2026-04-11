@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "Veți fi redirecționat automat către secțiunea {{sectionName}} în 5 secunde.",
   "AIChat": "Chat cu IA",
   "AIInstructions": "Instrucțiuni pentru IA",
+  "AIProviderAndModel": "{{aiProvider}} și model",
   "CreateChat": "Creare chat",
   "CreateChatDescription": "Accesați fila {{aiChat}} pentru a începe.",
   "EmptyKnowledgeDescription": "Fișierele încărcate aici vor fi indexate și folosite ca context în fila {{aiChat}}. Adăugați fișiere (până la 10 MB fiecare) pentru a pune întrebări AI, a genera conținut sau a colabora la informații.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Notă:</1> Calitatea răspunsurilor depinde de model; recomandăm să folosiţi modele cele mai noi pentru rezultate mai performante.",
   "ResultStorage": "Stocare rezultate",
   "UploadFilesDevice": "Încărcați fișierele de pe diapozitivul dvs peronal",
-  "UploadFilesPortal": "Încărcați fișierele din {{sectionNameFirst}} sau {{sectionNameSecond}}",
-  "AIProviderAndModel": "{{aiProvider}} și model"
+  "UploadFilesPortal": "Încărcați fișierele din {{sectionNameFirst}} sau {{sectionNameSecond}}"
 }

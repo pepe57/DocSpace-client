@@ -38,6 +38,7 @@
   "Descending": "Discendente",
   "DestinationFolderId": "ID della cartella di destinazione",
   "DisplayColumns": "Visualizzazione delle colonne in una riga di file",
+  "EditorPresetDescription": "Incorpora un editor per consentire agli utenti di modificare un file dalla stanza corrispondente.",
   "ElementCalledAfterClicking": "L'elemento verrà attivato dopo aver fatto clic",
   "ElementItself": "L'elemento stesso",
   "EmbedCodeSuccessfullyCopied": "Codice di incorporamento copiato con successo negli appunti",
@@ -47,6 +48,7 @@
   "EnterPage": "Inserisci il numero di pagina",
   "EnterWidth": "Inserisci la larghezza",
   "EventLog": "Registro eventi",
+  "FeedbackAndSupportLink": "Feedback e supporto",
   "FileContentCopy": "Limitazione della copia del contenuto del file",
   "FileFilter": "Filtro dei file",
   "FileId": "ID del file",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "Ricerca di file all'interno della cartella/stanza aperta.",
   "FileTypeDisplay": "Visualizzazione del tipo di file",
   "FrameId": "ID del telaio",
+  "GetCodeToInsert": "Ottieni il codice da inserire",
   "Header": "Intestazione",
   "HeaderDescription": "Puoi disabilitare l'intestazione nella versione mobile per limitare l'accesso alle sezioni {{productName}} (proprio come disabilitare il menu a sinistra nella versione desktop).",
   "HelperText": "Testo di aiuto",
@@ -147,8 +150,5 @@
   "UploadLimits": "Limiti di caricamento",
   "UploadMode": "Modalità di caricamento",
   "ViewerDescription": "Incorpora un visualizzatore per consentire agli utenti di aprire un file per visualizzarlo dalla stanza corrispondente.",
-  "VoidReturn": "Vuoto",
-  "EditorPresetDescription": "Incorpora un editor per consentire agli utenti di modificare un file dalla stanza corrispondente.",
-  "FeedbackAndSupportLink": "Feedback e supporto",
-  "GetCodeToInsert": "Ottieni il codice da inserire"
+  "VoidReturn": "Vuoto"
 }

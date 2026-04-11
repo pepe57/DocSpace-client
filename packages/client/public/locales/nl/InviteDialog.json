@@ -21,6 +21,5 @@
   "UserAgentMaxAvailableRoleWarning": "Gasten en gebruikers kunnen niet worden toegewezen als agentmanagers. Alleen kamer- en {{productName}}-beheerders komen in aanmerking voor de opgegeven rol.",
   "UserMaxAvailableRoleWarning": "Gasten en Gebruikers kunnen niet worden toegewezen als Kamerbeheerders. Alleen Kamer en {{productName}} beheerders kunnen de opgegeven rol vervullen.",
   "UsersAlreadyAdded": "Sommige gebruikers zijn al toegevoegd",
-  "UsersCannotBeAdded": "Uitgeschakelde contacten kunnen niet aan een kamer worden toegevoegd.",
-  "InviteLinkCopySuccess": "Link is gekopieerd"
+  "UsersCannotBeAdded": "Uitgeschakelde contacten kunnen niet aan een kamer worden toegevoegd."
 }

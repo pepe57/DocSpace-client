@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "5 saniyədən sonra siz {{sectionName}} bölməsinə avtomatik olaraq yönləndiriləcəksiniz.",
   "AIChat": "Süni İntellekt-Çat",
   "AIInstructions": "Süni İntellekt Təlimatları",
+  "AIProviderAndModel": "{{aiProvider}} və model",
   "CreateChat": "Söhbət yarat",
   "CreateChatDescription": "Başlamaq üçün {{aiChat}} tabına keçin.",
   "EmptyKnowledgeDescription": "Buraya yüklənən fayllar indekslənəcək və {{aiChat}} tabında kontekst kimi istifadə ediləcək. AI sualları vermək, məzmun yaratmaq və ya məlumat üzərində əməkdaşlıq etmək üçün fayllar əlavə edin (hər biri 10 MB-a qədər).",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Qeyd:</1> Müxbirə görə cavabın keyfiyyəti dəyişə bilər; daha yaxşı nəticələr üçün daha yeni modellər tövsiyə edilir.",
   "ResultStorage": "Nəticə saxlanması",
   "UploadFilesDevice": "Şəxsi cihazınızdan faylları yükləyin",
-  "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin",
-  "AIProviderAndModel": "{{aiProvider}} və model"
+  "UploadFilesPortal": "{{sectionNameFirst}} və ya {{sectionNameSecond}} bölmələrindən faylları yükləyin"
 }

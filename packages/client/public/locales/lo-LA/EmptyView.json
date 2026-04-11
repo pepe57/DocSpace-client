@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "ໃຊ້ປະໂຫຍດຈາກຟັງຊັນການປະສົມສຽງຄໍາທີ່ມີຂອບເຂດວັດຂື້ນ.",
   "CreateForm": "ສ້າງແບບຟອມ PDF ໃໝ່",
   "CreateFormDescription": "ເຕົ້າໂຮນສຽງ, ຮັບເອົາຄວາມຄິດເຫັນ ແລະ ເກັບຮັກສາຂໍ້ມູນໂດຍໃຊ້ແບບຟອມ PDF",
+  "CreateNewAIAgent": "ສ້າງຕົວແທນໃໝ່",
   "CreateNewFileDescription": "ເລີ່ມຕົ້ນເຮັດວຽກຢູ່ໃນຫ້ອງໂດຍການສ້າງເອກະສານຫຼືໂຟນເດີ",
   "CreateNewFileTitle": "ສ້າງເອກະສານໃໝ່",
   "CreatePresentation": "ສ້າງສະລ້າຍການນຳສະເໜີໃໝ່",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "ຍັງບໍ່ມີລາຍການທີ່ແບ່ງປັນເທື່ອ",
   "EmptyTemplatesDescription": "ທ່ານສາມາດສ້າງແມ່ແບບຈາກຫ້ອງໃນພື້ນທີ່ຫ້ອງໄດ້",
   "EmptyTemplatesTitle": "ບໍ່ມີແມ່ແບບຢູ່ບ່ອນນີ້ເທື່ອ",
+  "EmptyViewDescription": "ເລີ່ມຕົ້ນດ້ວຍການກະດຳທີ່ດ່ວນ:",
   "FormFolderDefaultDescription": "ວາງແບບຟອມ PDF ຢູ່ທີ່ນີ້ ຫຼື ອັບໂຫຼດຈາກ {{productName}} ຫຼື ອຸປະກອນ.",
   "FormFolderDefaultTitle": "ຫາກໍ່ເທົ່ານີ້ເທົ່ານັ້ນ",
   "FormFolderDefaultUserDescription": "ແບບຟອມທີ່ບັນຊາກອນອັບໂຫຼດໄວ້ ຈະປະກົດຢູ່ທີ່ນີ້.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "ອັບໂຫຼດຈາກເຄື່ອງມື",
   "UploadFromPortalTitle": "ດາວໂຫຼດຈາກ {{productName}}",
   "UploadPDFFormOptionDescription": "ເລືອກແບບຟອມ PDF ທີ່ກະກຽມໄວ້ແລ້ວໃນ {{productName}} ແລະອັບໂຫຼດມັນໃສ່ຫ້ອງ.",
-  "VirtualDataRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຂໍ້ມູນດິຈິຕອນ",
-  "CreateNewAIAgent": "ສ້າງຕົວແທນໃໝ່",
-  "EmptyViewDescription": "ເລີ່ມຕົ້ນດ້ວຍການກະດຳທີ່ດ່ວນ:"
+  "VirtualDataRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຂໍ້ມູນດິຈິຕອນ"
 }

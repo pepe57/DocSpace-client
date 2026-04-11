@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "豊富なワープロ機能を活用しましょう。",
   "CreateForm": "新規PDFフォームを作成する",
   "CreateFormDescription": "PDFフォームを使用して、投票を集め、意見を収集し、データを保存する",
+  "CreateNewAIAgent": "新規エージェントを作成",
   "CreateNewFileDescription": "ファイルやフォルダを作成して、ルームで作業を開始する",
   "CreateNewFileTitle": "新しいファイルを作成",
   "CreatePresentation": "新規プレゼンテーションを作成する",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "まだ共有アイテムはありません",
   "EmptyTemplatesDescription": "ルームセクションのルームからテンプレートを作成できます",
   "EmptyTemplatesTitle": "ここにはまだテンプレートがありません",
+  "EmptyViewDescription": "クイックアクションで始めましょう：",
   "FormFolderDefaultDescription": "PDF フォームをここにドロップするか、{{productName}} またはデバイスからアップロードしてください。",
   "FormFolderDefaultTitle": "フォームはまだありません",
   "FormFolderDefaultUserDescription": "管理者がアップロードしたフォームは、ここに表示されます。",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "デバイスからのアップロード",
   "UploadFromPortalTitle": "{{productName}}からアップロード",
   "UploadPDFFormOptionDescription": "{{productName}}で利用可能なPDFフォームを選択し、ルームにアップロードする。",
-  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ",
-  "CreateNewAIAgent": "新規エージェントを作成",
-  "EmptyViewDescription": "クイックアクションで始めましょう："
+  "VirtualDataRoomEmptyTitle": "バーチャルデータルームへようこそ"
 }

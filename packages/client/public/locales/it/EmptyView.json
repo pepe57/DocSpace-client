@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Sfrutta le numerose funzionalità dell’elaborazione testi.",
   "CreateForm": "Crea un nuovo modulo PDF",
   "CreateFormDescription": "Raccogli voti, opinioni e archivia dati con i moduli PDF.",
+  "CreateNewAIAgent": "Crea un nuovo agente",
   "CreateNewFileDescription": "Inizia a lavorare nella stanza creando file o cartelle",
   "CreateNewFileTitle": "Crea un nuovo file",
   "CreatePresentation": "Crea una nuova presentazione",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Non ci sono elementi condivisi",
   "EmptyTemplatesDescription": "Puoi creare un modello da una stanza nella sezione Stanza.",
   "EmptyTemplatesTitle": "Nessun modello presente",
+  "EmptyViewDescription": "Inizia con azioni rapide:",
   "FormFolderDefaultDescription": "Trascina qui i moduli PDF o caricali da {{productName}} o dal dispositivo.",
   "FormFolderDefaultTitle": "Nessun modulo qui ancora",
   "FormFolderDefaultUserDescription": "I moduli caricati dagli amministratori verranno visualizzati qui.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Carica dal dispositivo",
   "UploadFromPortalTitle": "Carica da {{productName}}",
   "UploadPDFFormOptionDescription": "Seleziona un modulo PDF pronto disponibile in {{productName}} e caricalo nella stanza.",
-  "VirtualDataRoomEmptyTitle": "Benvenuto nella Virtual Data Room",
-  "CreateNewAIAgent": "Crea un nuovo agente",
-  "EmptyViewDescription": "Inizia con azioni rapide:"
+  "VirtualDataRoomEmptyTitle": "Benvenuto nella Virtual Data Room"
 }

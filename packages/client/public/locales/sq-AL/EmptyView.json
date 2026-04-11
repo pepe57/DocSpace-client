@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Përfitoni nga funksionaliteti i gjerë i përpunimit të tekstit.",
   "CreateForm": "Krijoni një format të ri PDF",
   "CreateFormDescription": "Mblidhni vota, merrni opinione dhe ruani të dhëna duke përdorur formularët PDF",
+  "CreateNewAIAgent": "Krijo një agjent të ri",
   "CreateNewFileDescription": "Filloni të punoni në dhomë duke krijuar skedarë ose dosje",
   "CreateNewFileTitle": "Krijoni një skedarë të ri",
   "CreatePresentation": "Krijoni një prezantim të ri",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Nuk ka artikuj të ndarë ende.",
   "EmptyTemplatesDescription": "Ju mund të krijoni një model nga një dhomë në seksionin Dhoma.",
   "EmptyTemplatesTitle": "Nuk ka modele këtu ende",
+  "EmptyViewDescription": "Filloni me veprime të shpejta:",
   "FormFolderDefaultDescription": "Hidhni formularët PDF këtu ose ngarkoni nga {{productName}} ose pajisja.",
   "FormFolderDefaultTitle": "Nuk ka ende formularë këtu",
   "FormFolderDefaultUserDescription": "Këtu do të shfaqen formularët e ngarkuar nga administratorët.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Ngarkoni nga pajisja",
   "UploadFromPortalTitle": "Ngarkoni nga {{productName}}",
   "UploadPDFFormOptionDescription": "Selektoni një formular të gatshëm PDF të disponueshëm në {{productName}} dhe ngarkojeni në dhomë.",
-  "VirtualDataRoomEmptyTitle": "Mirë se vini në dhomën e të dhënave virtuale",
-  "CreateNewAIAgent": "Krijo një agjent të ri",
-  "EmptyViewDescription": "Filloni me veprime të shpejta:"
+  "VirtualDataRoomEmptyTitle": "Mirë se vini në dhomën e të dhënave virtuale"
 }

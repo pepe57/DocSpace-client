@@ -1,5 +1,6 @@
 {
   "ActionCannotBeUndoneGuests": "පහත දැක්වුණු ආබාධ සහිත අමුත්තන් {{productName}} වෙතින් ඉවත් කරනු ලැබේ. මෙම ක්‍රියාව අහෝසි කළ නොහැකි වනු ඇත.",
+  "ActionCannotBeUndoneUsers": "තෝරාගත් අබල කළ පරිශ්‍රීලකයින් {{productName}} වෙතින් ඉවත් කරනු ලැබේ. මෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි.",
   "CannotReassignFiles": "ඔබ එකවර පරිශ්‍රීලකයින් කිහිප දෙනෙක් මකා දැමුවහොත්, ඔබට ඔවුන්ගේ ගොනු වෙනත් පරිශ්‍රීලකයින්ට යළි පැවරීමට නොහැකිය.",
   "DeleteGroupGuestsSuccessMessage": "අමුත්තන් සාර්ථකව මකා දමා ඇත.",
   "DeleteGroupUsersSuccessMessage": "පරිශ්‍රීලකයින් සාර්ථකව මැකිණි.",
@@ -17,6 +18,5 @@
   "SuccessfullyDeleteGuestInfoMessage": "ආගන්තුකයෙකු සාර්ථකව මකා දමා ඇත",
   "SuccessfullyDeleteUserInfoMessage": "පරිශ්‍රීලකයා සාර්ථකව මකන ලදි",
   "ToBeAbleToReassignData": "වරකට එක් පරිශ්‍රීලකයෙක් බැගින් මැකීමෙන් දත්ත යළි පැවරීමට හැකි වේ.",
-  "UserFilesRemovalScope": "මෙම පරිශීලකයාගේ {{sectionNameFirst}} සහ {{sectionNameSecond}} කොටස් වල ඇති සියලු පුද්ගලික දත්ත, සියලු ගොනු සහ ෆෝල්ඩර් ස්ථිරවම මකා දැමෙනු ඇත.",
-  "ActionCannotBeUndoneUsers": "තෝරාගත් අබල කළ පරිශ්‍රීලකයින් {{productName}} වෙතින් ඉවත් කරනු ලැබේ. මෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි."
+  "UserFilesRemovalScope": "මෙම පරිශීලකයාගේ {{sectionNameFirst}} සහ {{sectionNameSecond}} කොටස් වල ඇති සියලු පුද්ගලික දත්ත, සියලු ගොනු සහ ෆෝල්ඩර් ස්ථිරවම මකා දැමෙනු ඇත."
 }

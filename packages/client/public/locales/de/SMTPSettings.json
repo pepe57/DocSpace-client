@@ -1,5 +1,6 @@
 {
   "AuthViaNTLM": "Authentifizierung über NTLM",
+  "EnableSMTPSSL": "SSL aktivieren",
   "EnterDomain": "Geben Sie die Domain ein",
   "EnterLogin": "Geben Sie Login ein",
   "EnterPort": "Geben Sie Port ein",
@@ -9,6 +10,5 @@
   "Port": "Port",
   "SenderDisplayName": "Angezeigter Name des Absenders",
   "SenderEmailAddress": "E-Mail-Adresse des Absenders",
-  "SendTestMail": "Test-E-Mail senden",
-  "EnableSMTPSSL": "SSL aktivieren"
+  "SendTestMail": "Test-E-Mail senden"
 }

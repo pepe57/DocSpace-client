@@ -398,6 +398,7 @@
   "DenyAccess": "액세스 거부",
   "DenyAccessDescription": "파일이나 폴더를 보고, 편집하거나, 관리할 수 없습니다.",
   "DenyAccessDescriptionDocument": "이 파일을 보고, 편집하거나, 관리할 수 없습니다.",
+  "DescriptionLabel": "설명",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "개발자 도구",
   "Diagram": "도식",
@@ -1460,7 +1461,6 @@
   "WebSearch": "웹 검색",
   "WebSearchAI": "웹 검색",
   "Website": "웹사이트",
-  "WelcomeDescription": "AI Forms를 사용하면 양식 생성, 배포 및 제출물 수집을 한 곳에서 모두 처리할 수 있습니다.",
   "WelcomeFeature1": "템플릿 또는 처음부터 PDF 양식 만들기",
   "WelcomeFeature1Title": "스마트 양식 생성",
   "WelcomeFeature2": "진행 상황과 제출 현황을 실시간으로 모니터링하세요",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "잔액이 {{min}}에 도달하면 지갑은 자동으로 {{max}}까지 충전됩니다.",
   "WhenBalanceGoesBellow": "잔액이 아래로 내려갈 때",
   "WhiteLabel": "로고 설정",
-  "WhiteLabelSubtitle": "회사 이름을 입력하고 로고를 업로드하고 브랜딩에 맞게 스타일을 사용자 정의하세요.",
   "WhiteLabelTooltip": "크기는 Retina 디스플레이용으로 표시됩니다. 표준 해상도를 사용하는 디스플레이의 경우 로고 너비와 높이는 업로드 시 그에 따라 크기가 조정됩니다.",
   "WhoFilledItOut": "누가 작성했나요",
   "WhoFilledItOutPrompt": "양식 \"{{formName}}\"을 작성한 모든 사용자 목록 보기",
@@ -1498,6 +1497,5 @@
   "YourName": "내 이름",
   "YourPrice": "내 요금",
   "YourTurn": "고객님의 차례입니다",
-  "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다.",
-  "DescriptionLabel": "설명"
+  "YouWillBeContacted": "요청을 생성하면 영업팀에서 연락을 드릴 것입니다."
 }

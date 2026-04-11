@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "U wordt automatisch doorgestuurd naar de {{sectionName}} sectie in 5 seconden.",
   "AIChat": "AI-Chat",
   "AIInstructions": "AI Instructies",
+  "AIProviderAndModel": "{{aiProvider}} en model",
   "CreateChat": "Maak chat",
   "CreateChatDescription": "Ga naar de {{aiChat}} tab om te beginnen.",
   "EmptyKnowledgeDescription": "Bestanden die hier worden geüpload, worden geïndexeerd en gebruikt als context in de {{aiChat}}-tab. Voeg bestanden toe (tot 10 MB elk) om vragen aan de AI te stellen, inhoud te genereren of samen te werken aan informatie.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Let op:</1> De kwaliteit van de antwoorden kan variëren per model; nieuwere modellen worden aanbevolen voor de beste resultaten.",
   "ResultStorage": "Resultaatopslag",
   "UploadFilesDevice": "Upload bestanden vanaf uw persoonlijke apparaat",
-  "UploadFilesPortal": "Upload bestanden vanuit {{sectionNameFirst}} of {{sectionNameSecond}}",
-  "AIProviderAndModel": "{{aiProvider}} en model"
+  "UploadFilesPortal": "Upload bestanden vanuit {{sectionNameFirst}} of {{sectionNameSecond}}"
 }

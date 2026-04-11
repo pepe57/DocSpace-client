@@ -398,6 +398,7 @@
   "DenyAccess": "Deny access",
   "DenyAccessDescription": "No access to view, edit, or manage files or folders.",
   "DenyAccessDescriptionDocument": "No access to view, edit, or manage this file.",
+  "DescriptionLabel": "Description",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Developer Tools",
   "Diagram": "Diagram",
@@ -1460,7 +1461,6 @@
   "WebSearch": "Web search",
   "WebSearchAI": "Web search",
   "Website": "Website",
-  "WelcomeDescription": "AI Forms helps you create, distribute, and collect form submissions — all in one place.",
   "WelcomeFeature1": "Create PDF forms from templates or scratch",
   "WelcomeFeature1Title": "Smart Form Creation",
   "WelcomeFeature2": "Monitor progress and submissions instantly",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "When the balance drops to {{min}}, the wallet will be automatically topped up to {{max}}.",
   "WhenBalanceGoesBellow": "When balance goes below",
   "WhiteLabel": "Logo settings",
-  "WhiteLabelSubtitle": "Enter your company name, upload the logo, and customize the styling to match your branding.",
   "WhiteLabelTooltip": "The sizes are shown for the Retina displays. For the displays with standard resolutions the logo width and height will be resized accordingly upon upload.",
   "WhoFilledItOut": "Who filled it out",
   "WhoFilledItOutPrompt": "List all people who have filled out the form \"{{formName}}\"",
@@ -1498,6 +1497,5 @@
   "YourName": "Your name",
   "YourPrice": "Your price",
   "YourTurn": "Your turn",
-  "YouWillBeContacted": "The sales team will contact you after creating the request.",
-  "DescriptionLabel": "Description"
+  "YouWillBeContacted": "The sales team will contact you after creating the request."
 }

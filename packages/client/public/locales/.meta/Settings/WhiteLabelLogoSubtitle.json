@@ -3,13 +3,20 @@
   "content": "Upload logos with a transparent background (PNG, SVG, JPG) for light and dark themes, or generate one instantly by entering your Your logo below.",
   "content_en_sha1_hash": "e61d8428cf859d3858fc88a9afffb78e6116a9dd",
   "created_at": "2025-08-04T07:29:48.337Z",
-  "updated_at": "2026-04-10T15:22:27.327Z",
+  "updated_at": "2026-04-11T19:53:45.295Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
+      "line_number": 94,
+      "context": "styles.wlHelperLabel,\n \"wl-helper-label\",\n )}\n fontSize=\"13px\"\n >\n {t(\"WhiteLabelLogoSubtitle\")}\n <HelpButton\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:WhiteLabelTooltip\")}</Text>\n }\n place=\"right\"",
+      "module": "/packages/shared"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

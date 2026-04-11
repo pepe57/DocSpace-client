@@ -13,7 +13,9 @@
   "DeleteGroupDescription": "Die Gruppe {{groupName}} wird gelöscht. Benutzer in der Gruppe werden nicht aus {{productName}} entfernt. Sind Sie sicher, dass Sie fortfahren möchten?",
   "DeleteGroupTitle": "Gruppe löschen",
   "DeleteItem": "Sie sind dabei, <strong>{{name}}</strong> in den {{trashSection}} zu verschieben.",
+  "DeleteItemForeverConfirm": "Sie werden <strong>{{name}}</strong> löschen.",
   "DeleteItemsSharedNote": "Bitte beachten Sie, dass die Daten nicht mehr verfügbar sind, wenn Sie diese mit jemandem geteilt haben.",
+  "DeleteRoomConfirm": "Der Raum <strong>\"{{roomName}}\"</strong> wird dauerhaft gelöscht. Alle Daten und Benutzerzugriffe gehen verloren.",
   "DeleteRooms": "Die ausgewählten <strong>Räume ({{count}})</strong> werden dauerhaft gelöscht. Alle Daten und Benutzerzugriffe gehen verloren.",
   "DeleteRoomsTitle": "Diesen Raum löschen?",
   "DeleteRoomTitle": "Raum löschen?",
@@ -32,7 +34,5 @@
   "ItemsDeletedAfter": "Diese Elemente werden innerhalb von 30 Tagen dauerhaft gelöscht.",
   "ItemsPermanentlyDeleted": "Diese Elemente werden dauerhaft aus dem {{trashSection}} entfernt.",
   "removeFromListDescription": "Sie werden <1>{{title}}</1> aus der Liste entfernen. Sind Sie sicher, dass Sie fortfahren möchten?",
-  "removeFromListDescriptionPlural": "Sie werden <1>({{count}}) Elemente</1> aus der Liste entfernen. Sind Sie sicher, dass Sie fortfahren möchten?",
-  "DeleteItemForeverConfirm": "Sie werden <strong>{{name}}</strong> löschen.",
-  "DeleteRoomConfirm": "Der Raum <strong>\"{{roomName}}\"</strong> wird dauerhaft gelöscht. Alle Daten und Benutzerzugriffe gehen verloren."
+  "removeFromListDescriptionPlural": "Sie werden <1>({{count}}) Elemente</1> aus der Liste entfernen. Sind Sie sicher, dass Sie fortfahren möchten?"
 }

@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Profitați de o gamă vastă de instrumente de procesare de text.",
   "CreateForm": "Crearea unui formular PDF nou",
   "CreateFormDescription": "Adunați voturi, obțineți opinii și stocați date utilizând formulare PDF",
+  "CreateNewAIAgent": "Creare un agent nou",
   "CreateNewFileDescription": "Creaţi fişiere şi foldere pentru a începe lucrul în sala",
   "CreateNewFileTitle": "Crearea unui fişier nou",
   "CreatePresentation": "Crearea unei prezentări noi",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Niciun element partajat deocamdată aici",
   "EmptyTemplatesDescription": "Puteți crea șablonul de sală în secțiunea Sală",
   "EmptyTemplatesTitle": "Niciun șablon deocamdată aici",
+  "EmptyViewDescription": "Începeţi cu acţiuni rapide:",
   "FormFolderDefaultDescription": "Glisați și fixați formulare PDF aici sau încărcați  de pe {{productName}} sau de pe dispozitivul. ",
   "FormFolderDefaultTitle": "Niciun formular deocamdată aici",
   "FormFolderDefaultUserDescription": "Formularele încărcate de administratorul vor fi afișate aici.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Încărcare de pe dispozitivul",
   "UploadFromPortalTitle": "Încărcare de pe {{productName}}",
   "UploadPDFFormOptionDescription": "Selectați un formular PDF existent de pe {{productName}} și încărcați-l în sala.",
-  "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date",
-  "CreateNewAIAgent": "Creare un agent nou",
-  "EmptyViewDescription": "Începeţi cu acţiuni rapide:"
+  "VirtualDataRoomEmptyTitle": "Bun venit în Sală virtuală de date"
 }

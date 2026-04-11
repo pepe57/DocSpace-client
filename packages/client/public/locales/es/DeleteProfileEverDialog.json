@@ -1,5 +1,6 @@
 {
   "ActionCannotBeUndoneGuests": "Los invitados desactivados seleccionados se eliminarán de {{productName}}. Esta acción no se puede deshacer.",
+  "ActionCannotBeUndoneUsers": "Los usuarios desactivados seleccionados se eliminarán de {{productName}}. Esta acción no se puede deshacer.",
   "CannotReassignFiles": "Si elimina varios usuarios a la vez, no podrá reasignar sus archivos a otros usuarios.",
   "DeleteGroupGuestsSuccessMessage": "Los invitados se han eliminado correctamente.",
   "DeleteGroupUsersSuccessMessage": "Los usuarios se han eliminado correctamente.",
@@ -17,6 +18,5 @@
   "SuccessfullyDeleteGuestInfoMessage": "El invitado se ha eliminado correctamente",
   "SuccessfullyDeleteUserInfoMessage": "El usuario se ha eliminado correctamente",
   "ToBeAbleToReassignData": "Para poder reasignar datos, elimine un usuario cada vez.",
-  "UserFilesRemovalScope": "Los datos personales, todos los archivos y carpetas en las secciones {{sectionNameFirst}} y {{sectionNameSecond}} de este usuario se eliminarán de forma permanente.",
-  "ActionCannotBeUndoneUsers": "Los usuarios desactivados seleccionados se eliminarán de {{productName}}. Esta acción no se puede deshacer."
+  "UserFilesRemovalScope": "Los datos personales, todos los archivos y carpetas en las secciones {{sectionNameFirst}} y {{sectionNameSecond}} de este usuario se eliminarán de forma permanente."
 }

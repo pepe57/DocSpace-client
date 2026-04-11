@@ -13,7 +13,9 @@
   "DeleteGroupDescription": "Ryhmä {{groupName}} poistetaan. Ryhmän käyttäjiä ei poisteta {{productName}}-sta. Haluatko varmasti jatkaa?",
   "DeleteGroupTitle": "Poista ryhmä",
   "DeleteItem": "Olet siirtämässä <strong>{{name}}</strong>-kohtaa {{trashSection}}-osioon.",
+  "DeleteItemForeverConfirm": "Olet aikeissa poistaa <strong>{{name}}</strong>.",
   "DeleteItemsSharedNote": "Ole hyvä ja huomioi, että jos olet jakanut tiedot jonkun kanssa, ne tiedot eivät ole enää saatavilla.",
+  "DeleteRoomConfirm": "Huone <strong>\"{{roomName}}\"</strong> poistetaan pysyvästi. Kaikki tiedot ja käyttäjäoikeudet menetetään.",
   "DeleteRooms": "Valitut <strong>huoneet ({{count}})</strong> poistetaan pysyvästi. Kaikki data ja käyttäjien pääsy menetetään.",
   "DeleteRoomsTitle": "Poistetaanko tämä huone?",
   "DeleteRoomTitle": "Poistetaanko tämä huone?",
@@ -32,7 +34,5 @@
   "ItemsDeletedAfter": "Nämä kohteet poistetaan pysyvästi 30 päivän kuluttua.",
   "ItemsPermanentlyDeleted": "Nämä kohteet poistetaan pysyvästi {{trashSection}}-osiosta.",
   "removeFromListDescription": "Olet aikeissa poistaa <1>{{title}}</1> luettelosta. Oletko varma, että haluat jatkaa?",
-  "removeFromListDescriptionPlural": "Olet poistamassa <1>kohteita ({{count}})</1> luettelosta. Oletko varma, että haluat jatkaa?",
-  "DeleteItemForeverConfirm": "Olet aikeissa poistaa <strong>{{name}}</strong>.",
-  "DeleteRoomConfirm": "Huone <strong>\"{{roomName}}\"</strong> poistetaan pysyvästi. Kaikki tiedot ja käyttäjäoikeudet menetetään."
+  "removeFromListDescriptionPlural": "Olet poistamassa <1>kohteita ({{count}})</1> luettelosta. Oletko varma, että haluat jatkaa?"
 }

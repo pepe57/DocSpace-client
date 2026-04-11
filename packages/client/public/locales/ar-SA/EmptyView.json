@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "استفد من إمكانيات معالجة النصوص الواسعة.",
   "CreateForm": "إنشاء نموذج PDF جديد",
   "CreateFormDescription": "جمع الأصوات، الحصول على الآراء وتخزين البيانات باستخدام نماذج PDF",
+  "CreateNewAIAgent": "إنشاء وكيل جديد",
   "CreateNewFileDescription": "ابدأ العمل في الغرفة عن طريق إنشاء الملفات أو المجلدات",
   "CreateNewFileTitle": "إنشاء ملف جديد",
   "CreatePresentation": "إنشاء عرض تقديمي جديد",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "لا توجد عناصر مشتركة بعد ",
   "EmptyTemplatesDescription": "يمكنكم إنشاء قالب من غرفة موجودة ضمن قسم الغرف.",
   "EmptyTemplatesTitle": "لا توجد قوالب هنا بعد.",
+  "EmptyViewDescription": "ابدأ بالإجراءات السريعة:",
   "FormFolderDefaultDescription": "أسقط نماذج PDF هنا أو قم بتحميلها من {{productName}} أو من الجهاز.",
   "FormFolderDefaultTitle": "لا توجد نماذج هنا حتى الآن",
   "FormFolderDefaultUserDescription": "ستظهر هنا النماذج التي تم تحميلها من قبل المسؤولين.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "تحميل من الجهاز",
   "UploadFromPortalTitle": "تحميل من {{productName}}",
   "UploadPDFFormOptionDescription": "حدد نموذج  PDFجاهزًا متاحًا في {{productName}} وقم بتحميله إلى الغرفة. ",
-  "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية",
-  "CreateNewAIAgent": "إنشاء وكيل جديد",
-  "EmptyViewDescription": "ابدأ بالإجراءات السريعة:"
+  "VirtualDataRoomEmptyTitle": "مرحبًا بك في غرفة البيانات الافتراضية"
 }

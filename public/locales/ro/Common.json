@@ -398,6 +398,7 @@
   "DenyAccess": "Refuză accesul",
   "DenyAccessDescription": "Fără permisiune de vizualizare, de editare sau de gestionare a fișierelor și folderelor.",
   "DenyAccessDescriptionDocument": "Fără permisiune de vizualizare, de editare sau de gestionare a acestui fișier.",
+  "DescriptionLabel": "Descrierea",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Instrumente pentru dezvoltatori",
   "Diagram": "Diagrama",
@@ -1460,7 +1461,6 @@
   "WebSearch": "Căutare pe web",
   "WebSearchAI": "Căutare web",
   "Website": "Pagină web",
-  "WelcomeDescription": "AI Forms vă ajută să creați, distribuiți și colectați trimișările de formulare — totul într-un singur loc.",
   "WelcomeFeature1": "Creați formulare PDF din șabloane sau de la zero",
   "WelcomeFeature1Title": "Creare Formular Inteligent",
   "WelcomeFeature2": "Monitorizați progresul și trimișările instantaneu",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "Dacă soldul contului scade până la {{min}}, portofelul va fi alimentat automat cu suma maximă de {{max}}.",
   "WhenBalanceGoesBellow": "Dacă soldul scade sub",
   "WhiteLabel": "Setări siglă",
-  "WhiteLabelSubtitle": "Introduceţi numele companiei dvs, încărcați sigla şi particularizați stilul pentru a se potrivi cu brandingul dvs.",
   "WhiteLabelTooltip": "Dimensiunile sunt specificate pentru ecranele Retina. Pentru rezoluţie de ecran standard, lăţimea şi înălţimea siglei se scalează corespunzător la încărcare.",
   "WhoFilledItOut": "Cine a completat",
   "WhoFilledItOutPrompt": "Listă toate persoanele care au completat formularul \"{{formName}}\"",
@@ -1498,6 +1497,5 @@
   "YourName": "Numele dvs.",
   "YourPrice": "Preţul dvs.",
   "YourTurn": "Acum e rândul dvs.",
-  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
-  "DescriptionLabel": "Descrierea"
+  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării."
 }

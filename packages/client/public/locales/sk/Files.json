@@ -1,5 +1,6 @@
 {
   "AccessLevel": "Úroveň prístupu",
+  "AccessSettingsTitle": "Nastavenia prístupu",
   "AccessToTemplate": "Prístup k šablóne",
   "ActionCannotUndone": "Tento krok sa nedá vrátiť späť. Ste si istí, že chcete pokračovať?",
   "AddAdminByNameOrEmail": "Pridať administrátora podľa mena alebo e-mailu",
@@ -8,6 +9,7 @@
   "AddUsersOrGroupsDescription": "Pridaní administrátori budú môcť vytvárať miestnosti pomocou tejto šablóny.",
   "AddUsersOrGroupsInfo": "Zobrazujú sa tu len <1>{{productName}}</1> a <1> Administrátori miestnosti </1>",
   "AddUsersOrGroupsInfoGroups": "Iba <1>{{productName}}</1> a <1> Administrátori miestnosti </1> z vybraných skupín budú môcť vytvárať miestnosti pomocou tejto šablóny.",
+  "AddUsersOrGroupsTitle": "Pridať Používateľov alebo Skupiny",
   "AfterFilesWillBeDeletedPermanently": "Po tom, ako budú súbory natrvalo vymazané.",
   "AgentRemoved": "Agent odstránený",
   "AgentsRemoved": "Odstránení agenti",
@@ -52,6 +54,7 @@
   "DeleteLink": "Vymazať odkaz",
   "DeleteSharedCustomPublic": "Odkaz bude natrvalo odstránený. Tento krok nebude možné vrátiť späť.",
   "DeleteSharedLink": "Predchádzajúci odkaz sa stane nedostupným. Vytvorí sa nový zdieľaný odkaz.",
+  "DeleteTemplateAction": "Odstrániť šablónu",
   "DeletingPermanently": "Odstránenie natrvalo",
   "DeletingVersion": "Odstránenie verzie",
   "DisableNotifications": "Vypnúť upozornenia",
@@ -168,6 +171,7 @@
   "RoomsPinned": "Pripnuté miestnosti: {{count}}",
   "RoomsRemoved": "Miestnosti boli odstránené",
   "RoomsUnpinned": "Nepripnuté miestnosti: {{count}}",
+  "RoomTagsLabel": "Štítky miestnosti",
   "RoomTagsTooltip": "Štítky sa použijú na miestnosť, ktorá bude vytvorená na základe tejto šablóny.",
   "RoomTemplate": "Šablóna miestnosti",
   "RoomTemplateDescription": "Pomocou tejto šablóny môžete rýchlo vytvoriť novú miestnosť.",
@@ -177,6 +181,8 @@
   "ScheduledTrashMove": "{{date}} bude presunuté do {{sectionName}}",
   "SendByEmail": "Poslať e-mailom",
   "SharedBy": "Zdieľané od",
+  "ShareFolderAction": "Zdieľať priečinok",
+  "ShareFolderRoomDescription": "Bude vytvorená nová miestnosť a skopíruje sa do nej celý obsah vybraného priečinka. Následne môžete pozvať ďalších používateľov na spoluprácu na súboroch v danej miestnosti.",
   "SharePDFFormModalDescription": "Vytvorí sa nová miestnosť a PDF formulár sa do nej skopíruje. Potom môžete pozvať ďalších používateľov, aby vyplnili formulár v miestnosti.",
   "SharePDFFormModalTitle": "Zdieľať formulár PDF",
   "ShareRoom": "Zdieľať miestnosť",
@@ -217,11 +223,5 @@
   "WillBeDeletedPermanently": "{{date}} bude natrvalo odstránený",
   "YouLeftTheAgent": "Opustili ste agenta.",
   "YouLeftTheRoom": "Opustili ste miestnosť",
-  "YourUserTypeHasChanged": "Váš typ používateľa bol zmenený na <1>„{{userType}}“</1> správcom {{productName}} <1>{{adminName}}</1>.",
-  "AccessSettingsTitle": "Nastavenia prístupu",
-  "AddUsersOrGroupsTitle": "Pridať Používateľov alebo Skupiny",
-  "RoomTagsLabel": "Štítky miestnosti",
-  "ShareFolderAction": "Zdieľať priečinok",
-  "ShareFolderRoomDescription": "Bude vytvorená nová miestnosť a skopíruje sa do nej celý obsah vybraného priečinka. Následne môžete pozvať ďalších používateľov na spoluprácu na súboroch v danej miestnosti.",
-  "DeleteTemplateAction": "Odstrániť šablónu"
+  "YourUserTypeHasChanged": "Váš typ používateľa bol zmenený na <1>„{{userType}}“</1> správcom {{productName}} <1>{{adminName}}</1>."
 }

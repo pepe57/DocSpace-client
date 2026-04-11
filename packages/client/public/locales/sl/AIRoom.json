@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "Samodejno boste preusmerjeni v razdelek {{sectionName}} v 5 sekundah.",
   "AIChat": "AI-Klep",
   "AIInstructions": "Navodila za umetno inteligenco",
+  "AIProviderAndModel": "{{aiProvider}} in model",
   "CreateChat": "Ustvari klepetal",
   "CreateChatDescription": "Pojdite na {{aiChat}} zavihek, da začnete.",
   "EmptyKnowledgeDescription": "Izgrajeni datoteke bodo indeksirane in uporabljene kot kontekst v zavihku {{aiChat}}. Dodajte datoteke (do 10 MB vsako) za postavljanje vprašanja AI, generiranje vsebine ali sodelovanje z informacijami.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Opomba:</1> Kakovost odgovorov se lahko razlikuje glede na model; za najboljše rezultate priporočamo novejše modele.",
   "ResultStorage": "Shranjevanje rezultatov",
   "UploadFilesDevice": "Naložite datoteke iz vaše osebne naprave.",
-  "UploadFilesPortal": "Naložite datoteke iz  {{sectionNameFirst}} ali {{sectionNameSecond}}",
-  "AIProviderAndModel": "{{aiProvider}} in model"
+  "UploadFilesPortal": "Naložite datoteke iz  {{sectionNameFirst}} ali {{sectionNameSecond}}"
 }

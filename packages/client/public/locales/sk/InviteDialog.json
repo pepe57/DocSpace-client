@@ -21,6 +21,5 @@
   "UserAgentMaxAvailableRoleWarning": "Hostia a používatelia nemôžu byť priradení ako manažéri agentov. Na danú úlohu sú vhodní len administrátori izieb a {{productName}}.",
   "UserMaxAvailableRoleWarning": "Hostia a používatelia nemôžu byť označení ako manažéri miestnosti. Iba administrátorom miestnosti a administrátorom {{productName}} môže byť pridelená táto rola.",
   "UsersAlreadyAdded": "Niektorí používatelia už boli pridaní",
-  "UsersCannotBeAdded": "Zakázaní kontakty je možné pridať do miestnosti.",
-  "InviteLinkCopySuccess": "Odkaz bol skopírovaný"
+  "UsersCannotBeAdded": "Zakázaní kontakty je možné pridať do miestnosti."
 }

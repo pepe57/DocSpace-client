@@ -398,6 +398,7 @@
   "DenyAccess": "Girişə icazə vermə",
   "DenyAccessDescription": "Fayl və ya qovluqlara baxmaq, redaktə etmək və ya idarə etmək üçün icazə yoxdur.",
   "DenyAccessDescriptionDocument": "Bu faylı görmək, redaktə etmək və ya idarə etmək üçün icazəniz yoxdur.",
+  "DescriptionLabel": "Təsvir",
   "DeveloperLicense": "Tərtibatçı",
   "DeveloperTools": "Tərtibatçı Alətləri",
   "Diagram": "Diaqram",
@@ -1460,7 +1461,6 @@
   "WebSearch": "Veb axtarışı",
   "WebSearchAI": "Veb axtarış",
   "Website": "Veb-sayt",
-  "WelcomeDescription": "AI Forms sizə forma göndərişlərini yaratmağa, yaymağa və toplamağa kömək edir — hər şey bir yerdə.",
   "WelcomeFeature1": "Şablonlardan və ya sıfırdan PDF formları yaradın",
   "WelcomeFeature1Title": "Ağıllı Forma Yaratılması",
   "WelcomeFeature2": "İrəliləyişi və təqdimatları anında izləyin",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "Balans {{min}} həddinə düşəndə, pul kisəsi avtomatik olaraq {{max}} həddinə qədər doldurulacaq.",
   "WhenBalanceGoesBellow": "Çəhrə aşağı düşəndə",
   "WhiteLabel": "Loqo Parametrləri",
-  "WhiteLabelSubtitle": "Şirkətinizin adını daxil edin, loqonu yükləyin və stili brendinizə uyğunlaşdırın.",
   "WhiteLabelTooltip": "Retina displeylər üçün göstərilən ölçülər. Standart ekranlar üçün loqonun eni və hündürlüyü yükləmə zamanı müvafiq olaraq dəyişdiriləcək.",
   "WhoFilledItOut": "Kim doldurdu",
   "WhoFilledItOutPrompt": "Bütün {{formName}} formunu dolduran şəxsləri siyahılayın",
@@ -1498,6 +1497,5 @@
   "YourName": "Adınız",
   "YourPrice": "Qiymətiniz",
   "YourTurn": "Sizin növbəniz",
-  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq.",
-  "DescriptionLabel": "Təsvir"
+  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq."
 }

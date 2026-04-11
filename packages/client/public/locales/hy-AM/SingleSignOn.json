@@ -17,6 +17,7 @@
   "idpAuthRequest": "Ստուգեք Auth Responses Sign-ը",
   "idpCertificates": "IdP հանրային վկայագրեր",
   "idpCertificatesTooltip": "Ինքնության մատակարարի հանրային հավաստագրերը, որոնք օգտագործվում են IdP-ից ստացված հարցումների և պատասխանների ստուգման կամ վերծանման համար (կամ երկուսն էլ):",
+  "IdpEntityId": "IdP Entity Id",
   "idpSignExitRequest": "Ստուգեք Դուրս գալու խնդրանքի նշանը",
   "idpSigningAlgorithm": "Նախնական նշանի ստուգման ալգորիթմ",
   "idpSignResponseRequest": "Ստուգեք «Ելք»-ի պատասխանների նշանը",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "Միացրեք այս տարբերակը, եթե ցանկանում եք SSO ծառայության օգտվողներին ավտոմատ կերպով ավելացնել ձեր տարածք:",
   "UploadXML": "Բեռնեք մետատվյալները XML-ից՝ պահանջվող դաշտերը ավտոմատ կերպով լրացնելու համար:",
   "UploadXMLPlaceholder": "URL դեպի IdP Մետատվյալների XML",
-  "UsedFor": "օգտագործել",
-  "IdpEntityId": "IdP Entity Id"
+  "UsedFor": "օգտագործել"
 }

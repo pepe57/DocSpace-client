@@ -8,6 +8,7 @@
   "DisablingRoomGroups": "Disabilitare i gruppi di stanze",
   "DisablingRoomGroupsDescription": "I gruppi verranno salvati ma nascosti. Riabilitare in Profilo, gestione file.",
   "EditRoomGroups": "Modifica gruppi di stanze",
+  "EmptyGroupRoomsDescription": "Non ci sono stanze qui. Prova ad aggiungere una stanza o a rimuovere questo gruppo.",
   "GroupHasBeenDeleted": "Il gruppo è stato eliminato",
   "GroupIcon": "Icona gruppo",
   "GroupIsEmpty": "Gruppo vuoto",
@@ -24,6 +25,5 @@
   "RoomGroupingSettingDescription": "È possibile raggruppare le stanze in cartelle e passare facilmente tra di esse.",
   "RoomRemovedFromGroup": "La stanza selezionata è stata rimossa da <1>{{groupName}}</1>.",
   "RoomsAddedToGroup": "Le stanze selezionate sono state aggiunte a <1>{{groupName}}</1>.",
-  "RoomsRemovedFromGroup": "Le stanze selezionate sono state rimosse da <1>{{groupName}}</1>.",
-  "EmptyGroupRoomsDescription": "Non ci sono stanze qui. Prova ad aggiungere una stanza o a rimuovere questo gruppo."
+  "RoomsRemovedFromGroup": "Le stanze selezionate sono state rimosse da <1>{{groupName}}</1>."
 }

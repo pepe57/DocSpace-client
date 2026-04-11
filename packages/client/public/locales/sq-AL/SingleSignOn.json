@@ -17,6 +17,7 @@
   "idpAuthRequest": "Verifikoni shenjën e përgjigjeve të vërtetimit",
   "idpCertificates": "Certifikatat Publike IdP",
   "idpCertificatesTooltip": "Certifikatat publike të ofruesit të identitetit përdoren për verifikimin ose deshifrimin (ose të dyja) e kërkesave dhe përgjigjeve nga IdP.",
+  "IdpEntityId": "ID-ja e entitetit IdP",
   "idpSignExitRequest": "Verifikoni nënshkrimin e kërkesave për dalje",
   "idpSigningAlgorithm": "Algoritmi i parazgjedhur i verifikimit të shenjës",
   "idpSignResponseRequest": "Verifikoni kërkesën për nënshkrimin e përgjigjeve të daljes",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "Aktivizoni këtë opsion nëse dëshironi të shtoni automatikisht përdorues nga shërbimi SSO në hapësirën tuaj.",
   "UploadXML": "Ngarkoni meta të dhënat nga XML për të plotësuar automatikisht fushat e kërkuara.",
   "UploadXMLPlaceholder": "URL-ja e XML të metadatas së IdP",
-  "UsedFor": "Përdorni për",
-  "IdpEntityId": "ID-ja e entitetit IdP"
+  "UsedFor": "Përdorni për"
 }

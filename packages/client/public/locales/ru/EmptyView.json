@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Воспользуйтесь широкими функциональными возможностями обработки текста.",
   "CreateForm": "Создать новую PDF-форму",
   "CreateFormDescription": "Собирайте голоса и мнения, храните данные с помощью PDF-форм",
+  "CreateNewAIAgent": "Создать нового агента",
   "CreateNewFileDescription": "Начните работать в комнате, создавая файлы или папки",
   "CreateNewFileTitle": "Создать новый файл",
   "CreatePresentation": "Создать новую презентацию",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Пока нет общих элементов",
   "EmptyTemplatesDescription": "Вы можете создать шаблон из комнаты в разделе Комнаты",
   "EmptyTemplatesTitle": "Здесь пока нет шаблонов",
+  "EmptyViewDescription": "Начните работу с быстрых действий:",
   "FormFolderDefaultDescription": "Перетащите PDF-формы сюда или загрузите их с {{productName}} или устройства.",
   "FormFolderDefaultTitle": "Здесь пока нет форм",
   "FormFolderDefaultUserDescription": "Здесь будут находиться формы, загруженные администраторами.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Загрузить с устройства",
   "UploadFromPortalTitle": "Загрузить из {{productName}}",
   "UploadPDFFormOptionDescription": "Выберите готовую PDF-форму, доступную в {{productName}}, и загрузите ее в комнату.",
-  "VirtualDataRoomEmptyTitle": "Добро пожаловать в Виртуальную комнату данных",
-  "CreateNewAIAgent": "Создать нового агента",
-  "EmptyViewDescription": "Начните работу с быстрых действий:"
+  "VirtualDataRoomEmptyTitle": "Добро пожаловать в Виртуальную комнату данных"
 }

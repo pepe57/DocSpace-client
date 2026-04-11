@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Hyödynnä laaja tekstinkäsittelytoiminto.",
   "CreateForm": "Luo uusi PDF-lomake",
   "CreateFormDescription": "Kerää ääniä, saa arvosteluja ja varastoi tietoa käyttäen PDF-lomakkeita",
+  "CreateNewAIAgent": "Luo uusi agentti",
   "CreateNewFileDescription": "Aloita huoneessa työskentely luomalla tiedostoja tai kansioita.",
   "CreateNewFileTitle": "Luo uusi tiedosto",
   "CreatePresentation": "Luo uusi esitys",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Yhteisiä kohteita ei ole vielä.",
   "EmptyTemplatesDescription": "Voit luoda mallin huoneesta Huone-osiossa",
   "EmptyTemplatesTitle": "Täällä ei ole vielä malleja",
+  "EmptyViewDescription": "Aloita nopeilla toimilla:",
   "FormFolderDefaultDescription": "Pudota PDF-lomakkeet tähän tai lataa {{productName}}:sta tai laitteelta.",
   "FormFolderDefaultTitle": "Täällä ei ole vielä lomakkeita",
   "FormFolderDefaultUserDescription": "Pääkäyttäjien lataamat lomakkeet ilmestyvät tänne.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Lataa laitteesta",
   "UploadFromPortalTitle": "Lataa {{productName}}:sta",
   "UploadPDFFormOptionDescription": "Valitse valmis PDF-lomake, joka on {{productName}}:ssa ja lataa se huoneeseen.",
-  "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen.",
-  "CreateNewAIAgent": "Luo uusi agentti",
-  "EmptyViewDescription": "Aloita nopeilla toimilla:"
+  "VirtualDataRoomEmptyTitle": "Tervetuloa Virtuaalisen datan huoneeseen."
 }

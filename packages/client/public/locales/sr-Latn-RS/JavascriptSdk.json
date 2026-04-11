@@ -38,6 +38,7 @@
   "Descending": "Silazno",
   "DestinationFolderId": "ID odredišne foldere",
   "DisplayColumns": "Prikazivanje kolona u redu datoteke",
+  "EditorPresetDescription": "Ugradite uređivač da biste omogućili korisnicima da uređuju datoteku iz odgovarajuće sobe.",
   "ElementCalledAfterClicking": "Element će biti pozvan nakon klika",
   "ElementItself": "Sam element",
   "EmbedCodeSuccessfullyCopied": "Ugrađeni kod uspešno kopiran na privremenu memoriju",
@@ -47,6 +48,7 @@
   "EnterPage": "Unesi broj stranice",
   "EnterWidth": "Unesi širinu",
   "EventLog": "Dnevnik događaja",
+  "FeedbackAndSupportLink": "Povratne informacije i Podrška",
   "FileContentCopy": "Restrikcija kopije sadržaja datoteke",
   "FileFilter": "Filter Datoteke",
   "FileId": "ID datoteke",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "Pretraga datoteke unutar otvorenog foldera/sobe.",
   "FileTypeDisplay": "Prikaz tipa datoteke",
   "FrameId": "ID okvira",
+  "GetCodeToInsert": "Uzmi kod za umetanje",
   "Header": "Zaglavlje",
   "HeaderDescription": "Možete da onemogućite zaglavlje u mobilnoj verziji da biste ograničili pristup odeljcima {{productName}}-a (baš kao da onemogućite levi meni u verziji za desktop).",
   "HelperText": "Pomoćni tekst",
@@ -147,8 +150,5 @@
   "UploadLimits": "Ograničenja za otpremanje",
   "UploadMode": "Način postavljanja",
   "ViewerDescription": "Ugradite pregledač da biste omogućili korisnicima da otvore datoteku za gledanje iz odgovarajuće sobe.",
-  "VoidReturn": "Praznina",
-  "EditorPresetDescription": "Ugradite uređivač da biste omogućili korisnicima da uređuju datoteku iz odgovarajuće sobe.",
-  "FeedbackAndSupportLink": "Povratne informacije i Podrška",
-  "GetCodeToInsert": "Uzmi kod za umetanje"
+  "VoidReturn": "Praznina"
 }

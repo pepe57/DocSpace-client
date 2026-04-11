@@ -77,6 +77,7 @@
   "DataImportComplete": "Datu importēšana ir pabeigta",
   "DataImportDescription": "Importējiet datus no trešās puses pakalpojuma {{organizationName}} {{productName}}. Datu importēšana ļauj pārsūtīt datus, piemēram, visus lietotājus, viņu personīgos un kopīgotos dokumentus.",
   "DataImportProcessing": "Datu importēšanas apstrāde",
+  "DeactivateOrDeleteSpace": "Deaktivizēt vai dzēst telpu.",
   "DefaultSettings": "Noklusējuma uzstādījumi",
   "DefaultTemplateApplied": "Iemprogrammētais defaulta šablons ir piemērots.",
   "DefaultTemplateRestored": "Standarta šablons ir atjaunots.",
@@ -316,11 +317,8 @@
   "UseUpperCase": "Izmantojiet lielos burtus",
   "WantToCancelDataImport": "Vai vēlaties atcelt datu importēšanu?",
   "WantToCancelUpload": "Vai vēlaties atcelt augšupielādi?",
-  "WebhooksDescription": "Veiciet pielāgotas darbības jebkurā lietotājprogrammā vai vietnē, ko jūs izmantojat, pamatojoties uz dažādiem notikumiem {{organizationName}} {{productName}}.",
-  "WithoutEmailHint": "Jums nav lietotāju bez e-pasta adresēm. Lūdzu, turpiniet ar nākamo soli.",
-  "LogoLightSmallPortal": "Logotips portālam",
-  "ThirdPartyBackupStorageDescription": "Dublējumu var saglabāt trešās puses krātuvē. Pirms tam sadaļā Integrācija ir jāpieslēdz attiecīgais pakalpojums. Pretējā gadījumā tālāk norādītie iestatījumi būs neaktīvi.",
   "WantToContinueQuota": "Vai vēlaties turpināt vai mainīt lietotāja krātuves kvotu?",
+  "WebhooksDescription": "Veiciet pielāgotas darbības jebkurā lietotājprogrammā vai vietnē, ko jūs izmantojat, pamatojoties uz dažādiem notikumiem {{organizationName}} {{productName}}.",
   "WhiteLabelLogoSubtitle": "Augšupielādējiet logotipus ar caurspīdīgu fona krāsu (PNG, SVG, JPG) gaišai un tumšai tēmām vai izveidojiet vienu tūlītēji, ievietojot savu logotipu zemāk.",
-  "DeactivateOrDeleteSpace": "Deaktivizēt vai dzēst telpu."
+  "WithoutEmailHint": "Jums nav lietotāju bez e-pasta adresēm. Lūdzu, turpiniet ar nākamo soli."
 }

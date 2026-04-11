@@ -21,6 +21,5 @@
   "UserAgentMaxAvailableRoleWarning": "Ospiti e Utenti non possono essere assegnati come gestori dell’agente. Solo gli amministratori della stanza e di {{productName}} sono idonei per il ruolo specificato.",
   "UserMaxAvailableRoleWarning": "Gli ospiti e gli utenti non possono essere assegnati come gestori di stanze. Solo gli amministratori della Stanza e di {{productName}} sono adatti al ruolo specificato.",
   "UsersAlreadyAdded": "Sono già stati aggiunti alcuni utenti",
-  "UsersCannotBeAdded": "I contatti disabilitati non possono essere aggiunti a una stanza.",
-  "InviteLinkCopySuccess": "Il link di collegamento è stato copiato"
+  "UsersCannotBeAdded": "I contatti disabilitati non possono essere aggiunti a una stanza."
 }

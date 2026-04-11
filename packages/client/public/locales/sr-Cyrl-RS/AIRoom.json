@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "Аутоматски ћете бити враћени на {{sectionName}} одељак за 5 секунди.",
   "AIChat": "ВИ разговор",
   "AIInstructions": "AI инструкције",
+  "AIProviderAndModel": "{{aiProvider}} и модел",
   "CreateChat": "Креирајте ћаскање",
   "CreateChatDescription": "Посетите таб {{aiChat}} да започнете.",
   "EmptyKnowledgeDescription": "Документи који се овде предају ће бити индексирани и коришћени као контекст у табу {{aiChat}}. Додајте документе (до 10 МБ сваки) како бисте поставили питања вештачкој интелигенцији, генерисали садржај или сарађивали о информацијама.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Напомена:</1> Квалитет одговора може варирати у зависности од модела; новији модели се препоручују за најбоље резултате.",
   "ResultStorage": "Складиштење резултата",
   "UploadFilesDevice": "Отпремите датотеке са свог личног уређаја",
-  "UploadFilesPortal": "Отпремите датотеке са {{sectionNameFirst}} или {{sectionNameSecond}}",
-  "AIProviderAndModel": "{{aiProvider}} и модел"
+  "UploadFilesPortal": "Отпремите датотеке са {{sectionNameFirst}} или {{sectionNameSecond}}"
 }

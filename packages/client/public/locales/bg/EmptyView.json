@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Възползвайте се от обширната функционалност за текстообработка.",
   "CreateForm": "Създайте нов PDF формуляр",
   "CreateFormDescription": "Събирайте гласове, получавайте мнения и съхранявайте данни с помощта на PDF формуляри",
+  "CreateNewAIAgent": "Създайте нов агент",
   "CreateNewFileDescription": "Започнете да работите в стаята, като създадете файлове или папки",
   "CreateNewFileTitle": "Създай нов файл",
   "CreatePresentation": "Създайте нова презентация",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Още няма споделени артикули.",
   "EmptyTemplatesDescription": "Можете да създадете шаблон от стая в раздел Стая",
   "EmptyTemplatesTitle": "Тук още няма шаблони",
+  "EmptyViewDescription": "Започнете с бързи действия:",
   "FormFolderDefaultDescription": "Пуснете PDF формуляри тук или качете от {{productName}} или устройство.",
   "FormFolderDefaultTitle": "Тук все още няма формуляри",
   "FormFolderDefaultUserDescription": "Тук ще се показват формуляри, качени от администраторите.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Качете от устройство",
   "UploadFromPortalTitle": "Качете от {{productName}}",
   "UploadPDFFormOptionDescription": "Изберете готов PDF формуляр, наличен в {{productName}}, и го качете в стаята.",
-  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни",
-  "CreateNewAIAgent": "Създайте нов агент",
-  "EmptyViewDescription": "Започнете с бързи действия:"
+  "VirtualDataRoomEmptyTitle": "Добре дошли във Виртуалната стая за данни"
 }

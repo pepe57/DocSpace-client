@@ -1,5 +1,6 @@
 {
   "AccessLevel": "Təqdim olunan səviyyə",
+  "AccessSettingsTitle": "Giriş parametrləri",
   "AccessToTemplate": "Şablona giriş",
   "ActionCannotUndone": "Bu əməliyyat geri qaytarıla bilməz. Davam etmək istədiyinizə əminsiniz?",
   "AddAdminByNameOrEmail": "Ad və ya e-poçt ünvanı ilə administrator əlavə edin",
@@ -8,6 +9,7 @@
   "AddUsersOrGroupsDescription": "Əlavə edilmiş administratorlar bu şablondan istifadə edərək otaqlar yarada biləcəklər.",
   "AddUsersOrGroupsInfo": "Burada yalnız <1>{{productName}}</1> və <1>Otaq adminləri</1> görünür",
   "AddUsersOrGroupsInfoGroups": "Bu şablondan istifadə etməklə seçilmiş qruplardan yalnız <1>{{productName}}</1> və <1>Otaq adminləri</1> otaqlar yarada biləcəklər.",
+  "AddUsersOrGroupsTitle": "İstifadəçilər və ya Qruplar əlavə edin",
   "AfterFilesWillBeDeletedPermanently": "Sonra fayllar həmişəlik silinəcək.",
   "AgentRemoved": "Agent silinləşdirilib",
   "AgentsRemoved": "Agentlər silinib",
@@ -52,6 +54,7 @@
   "DeleteLink": "Keçidi silin",
   "DeleteSharedCustomPublic": "Link həmişəlik silinəcək. Bu əməliyyatı geri qaytara bilməzsiniz.",
   "DeleteSharedLink": "Əvvəlki link əlçatan olmayacaq. Yeni paylaşılan link yaradılacaq.",
+  "DeleteTemplateAction": "Şablonu silin",
   "DeletingPermanently": "Həmişəlik silinir",
   "DeletingVersion": "Versiya silinir",
   "DisableNotifications": "Bildirişləri söndürün",
@@ -168,6 +171,7 @@
   "RoomsPinned": "Otaqlar sabitləndi: {{count}}",
   "RoomsRemoved": "Otaqlar silindi",
   "RoomsUnpinned": "Otaqlar sabitlənmədən çıxarıldı: {{count}}",
+  "RoomTagsLabel": "Otaq Teqləri",
   "RoomTagsTooltip": "Bu şablona uyğun olaraq yaradılmış otağa teqlər tətbiq olunacaq.",
   "RoomTemplate": "Otaq şablonu",
   "RoomTemplateDescription": "Sürətli yeni otaq yaratmaq üçün bu şablondan istifadə edin.",
@@ -177,6 +181,8 @@
   "ScheduledTrashMove": "{{date}} {{sectionName}} bölməsinə köçürüləcəkdir.",
   "SendByEmail": "Elektron poçt vasitəsi ilə göndər",
   "SharedBy": "Paylaşılmışdır",
+  "ShareFolderAction": "Qovluğu paylaşın",
+  "ShareFolderRoomDescription": "Yeni otaq yaradılacaq və seçilmiş qovluğun bütün məzmunu oraya nüsxələnəcək. Daha sonra digər istifadəçiləri otaqdakı fayllar üzərində əməkdaşlığa dəvət edə bilərsiniz.",
   "SharePDFFormModalDescription": "Yeni otaq yaradılacaq və PDF forması oraya köçürüləcək. Daha sonra digər istifadəçiləri otaqdakı formanı doldurmağa dəvət edə bilərsiniz.",
   "SharePDFFormModalTitle": "PDF formasını paylaşın",
   "ShareRoom": "Otağı paylaşın",
@@ -217,11 +223,5 @@
   "WillBeDeletedPermanently": "{{date}} həmişəlik silinəcək",
   "YouLeftTheAgent": "Siz agentdən ayrılıbsınız.",
   "YouLeftTheRoom": "Otağı tərk etdiniz",
-  "YourUserTypeHasChanged": "İstifadəçi tipiniz {{productName}} administratoru <1>{{adminName}}</1> tərəfindən <1>“{{userType}}”</1> olaraq dəyişdirilib.",
-  "AccessSettingsTitle": "Giriş parametrləri",
-  "AddUsersOrGroupsTitle": "İstifadəçilər və ya Qruplar əlavə edin",
-  "RoomTagsLabel": "Otaq Teqləri",
-  "ShareFolderAction": "Qovluğu paylaşın",
-  "ShareFolderRoomDescription": "Yeni otaq yaradılacaq və seçilmiş qovluğun bütün məzmunu oraya nüsxələnəcək. Daha sonra digər istifadəçiləri otaqdakı fayllar üzərində əməkdaşlığa dəvət edə bilərsiniz.",
-  "DeleteTemplateAction": "Şablonu silin"
+  "YourUserTypeHasChanged": "İstifadəçi tipiniz {{productName}} administratoru <1>{{adminName}}</1> tərəfindən <1>“{{userType}}”</1> olaraq dəyişdirilib."
 }

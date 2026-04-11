@@ -3,13 +3,20 @@
   "content": "File deleted",
   "content_en_sha1_hash": "80bb638b8b9d2b50c437a89c6f74323269298583",
   "created_at": "2025-05-19T21:30:49.726Z",
-  "updated_at": "2026-04-08T20:08:46.180Z",
+  "updated_at": "2026-04-11T19:53:45.262Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 54,
+      "context": "return t(\"FileUploaded\");\n case WebhookTriggers.FileUpdated:\n return t(\"FileUpdated\");\n case WebhookTriggers.FileTrashed:\n return t(\"FileTrashed\");\n case WebhookTriggers.FileDeleted:\n return t(\"FileDeleted\");\n case WebhookTriggers.FileRestored:\n return t(\"FileRestored\");\n case WebhookTriggers.FileCopied:\n return t(\"FileCopied\");",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

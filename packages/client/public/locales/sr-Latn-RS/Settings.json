@@ -77,6 +77,7 @@
   "DataImportComplete": "Uvoz podataka završen",
   "DataImportDescription": "Uvezite podatke iz usluge treće strane u {{organizationName}} {{productName}}. Uvoz podataka omogućava prenos podataka kao što su svi korisnici, njihovi lični i zajednički dokumenti.",
   "DataImportProcessing": "Obrada uvoza podataka",
+  "DeactivateOrDeleteSpace": "Deaktiviraj ili obriši prostor.",
   "DefaultSettings": "Podrazumevana podešavanja",
   "DefaultTemplateApplied": "Novi podrazumevani šablon je primenjen.",
   "DefaultTemplateRestored": "Podrazumevani predložak je vraćen.",
@@ -316,11 +317,8 @@
   "UseUpperCase": "Koristi velika slova",
   "WantToCancelDataImport": "Da li želite da otkažete uvoz podataka?",
   "WantToCancelUpload": "Da li želite da otkažete otpremanje?",
-  "WebhooksDescription": "Izvršite prilagođene akcije sa strane bilo koje aplikacije ili veb-sajta koji koristite na osnovu različitih događaja u {{organizationName}} {{productName}}.",
-  "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak.",
-  "LogoLightSmallPortal": "Logotip za portal",
-  "ThirdPartyBackupStorageDescription": "Rezervna kopija se može sačuvati na skladište treće strane. Pre toga, morate povezati odgovarajuću uslugu u odeljku 'Integracija'. U suprotnom, sledeća podešavanja će biti neaktivna.",
   "WantToContinueQuota": "Da li želite da nastavite ili da promenite korisničku kvotu za skladište?",
+  "WebhooksDescription": "Izvršite prilagođene akcije sa strane bilo koje aplikacije ili veb-sajta koji koristite na osnovu različitih događaja u {{organizationName}} {{productName}}.",
   "WhiteLabelLogoSubtitle": "Otpremite logotipe sa providnom pozadinom (PNG, SVG, JPG) za svetlu i tamnu temu ili ih trenutno generišite tako što ćete uneti svoj logo ispod.",
-  "DeactivateOrDeleteSpace": "Deaktiviraj ili obriši prostor."
+  "WithoutEmailHint": "Nemate korisnike bez email-ova. Molimo pređite na sledeći korak."
 }

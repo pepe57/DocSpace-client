@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "You will be automatically redirected to the {{sectionName}} section in 5 seconds.",
   "AIChat": "AI Chat",
   "AIInstructions": "AI Instructions",
+  "AIProviderAndModel": "{{aiProvider}} and model",
   "CreateChat": "Create chat",
   "CreateChatDescription": "Go to the {{aiChat}} tab to get started.",
   "EmptyKnowledgeDescription": "Files uploaded here will be indexed and used as context in the {{aiChat}} tab. Add files (up to 10 MB each) to ask AI questions, generate content, or collaborate on information.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Note:</1> Response quality may vary by model; newer models are recommended for best results.",
   "ResultStorage": "Result Storage",
   "UploadFilesDevice": "Upload files from your personal device",
-  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}",
-  "AIProviderAndModel": "{{aiProvider}} and model"
+  "UploadFilesPortal": "Upload files from  {{sectionNameFirst}} or {{sectionNameSecond}}"
 }

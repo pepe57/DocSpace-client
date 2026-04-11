@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Tận dụng chức năng xử lý văn bản lớn.",
   "CreateForm": "Tạo một form PDF mới",
   "CreateFormDescription": "Thu thập bình chọn, lấy ý kiến và lưu trữ dữ liệu bằng các biểu mẫu PDF",
+  "CreateNewAIAgent": "Tạo một tác nhân mới",
   "CreateNewFileDescription": "Bắt đầu làm việc trong phòng bằng cách tạo tập tin hoặc thư mục",
   "CreateNewFileTitle": "Tạo một tập tin mới",
   "CreatePresentation": "Tạo bản trình bày mới",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Hiện tại chưa có mục nào được chia sẻ.",
   "EmptyTemplatesDescription": "Bạn có thể tạo mẫu từ một phòng trong phần Phòng",
   "EmptyTemplatesTitle": "Chưa có mẫu nào ở đây",
+  "EmptyViewDescription": "Bắt đầu với các hành động nhanh:",
   "FormFolderDefaultDescription": "Thả biểu mẫu PDF ở đây hoặc tải lên từ {{productName}} hoặc thiết bị.",
   "FormFolderDefaultTitle": "Chưa có biểu mẫu nào ở đây",
   "FormFolderDefaultUserDescription": "Các biểu mẫu do quản trị viên tải lên sẽ xuất hiện ở đây.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Tải lên từ thiết bị",
   "UploadFromPortalTitle": "Tải lên từ {{productName}}",
   "UploadPDFFormOptionDescription": "Chọn một biểu mẫu PDF sẵn có trong {{productName}} và tải nó lên phòng.",
-  "VirtualDataRoomEmptyTitle": "Chào mừng bạn đến với Phòng Dữ liệu Ảo",
-  "CreateNewAIAgent": "Tạo một tác nhân mới",
-  "EmptyViewDescription": "Bắt đầu với các hành động nhanh:"
+  "VirtualDataRoomEmptyTitle": "Chào mừng bạn đến với Phòng Dữ liệu Ảo"
 }

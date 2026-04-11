@@ -1,5 +1,6 @@
 {
   "ActionCannotBeUndoneGuests": "Gli ospiti disabilitati selezionati saranno rimossi da {{productName}}. Questa azione non può essere annullata.",
+  "ActionCannotBeUndoneUsers": "Gli utenti disattivati selezionati verranno rimossi da {{productName}}. Questa azione non può essere annullata.",
   "CannotReassignFiles": "Se elimini più utenti contemporaneamente, non potrai riassegnare i loro file ad altri utenti.",
   "DeleteGroupGuestsSuccessMessage": "Gli ospiti sono stati eliminati con successo.",
   "DeleteGroupUsersSuccessMessage": "Gli utenti sono stati eliminati con successo.",
@@ -17,6 +18,5 @@
   "SuccessfullyDeleteGuestInfoMessage": "L'ospite è stato eliminato con successo",
   "SuccessfullyDeleteUserInfoMessage": "L'utente è stato cancellato con successo",
   "ToBeAbleToReassignData": "Per poter riassegnare i dati, elimina un utente alla volta.",
-  "UserFilesRemovalScope": "I dati personali, tutti i file e le cartelle nelle sezioni {{sectionNameFirst}} e {{sectionNameSecond}} di questo utente verranno eliminati definitivamente.",
-  "ActionCannotBeUndoneUsers": "Gli utenti disattivati selezionati verranno rimossi da {{productName}}. Questa azione non può essere annullata."
+  "UserFilesRemovalScope": "I dati personali, tutti i file e le cartelle nelle sezioni {{sectionNameFirst}} e {{sectionNameSecond}} di questo utente verranno eliminati definitivamente."
 }

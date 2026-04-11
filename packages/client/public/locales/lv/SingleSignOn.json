@@ -17,6 +17,7 @@
   "idpAuthRequest": "Verificēt autentifikācijas atbilžu parakstus",
   "idpCertificates": "IdP publiskie sertifikāti",
   "idpCertificatesTooltip": "Identitātes nodrošinātāja publiskie sertifikāti, kas tiek izmantoti IDP pieprasījumu un atbilžu pārbaudei vai atšifrēšanai (vai abiem).",
+  "IdpEntityId": "IdP entītijas ID",
   "idpSignExitRequest": "Verificēt atteikšanās pieprasījumu parakstīšanos",
   "idpSigningAlgorithm": "Noklusais parakstīšanas verifikācijas algoritms",
   "idpSignResponseRequest": "Pārbaudīt iziešanas parakstīto atbildi",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "Iespējot šo opciju, ja vēlaties automātiski pievienot lietotājus no SSO pakalpojuma jūsu telpai.",
   "UploadXML": "Ielādēt metadatus no XML, lai automātiski aizpildītu nepieciešamos laukus.",
   "UploadXMLPlaceholder": "IdP metadatu XML URL",
-  "UsedFor": "Izmanto priekšmetam",
-  "IdpEntityId": "IdP entītijas ID"
+  "UsedFor": "Izmanto priekšmetam"
 }

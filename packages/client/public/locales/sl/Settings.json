@@ -77,6 +77,7 @@
   "DataImportComplete": "Uvoz podatkov zaključen",
   "DataImportDescription": "Uvozite podatke iz storitve tretjih oseb v {{organizationName}} {{productName}}. Uvoz podatkov omogoča prenos podatkov, kot so vsi uporabniki, njihovi osebni in skupni dokumenti.",
   "DataImportProcessing": "Obdelava uvoza podatkov",
+  "DeactivateOrDeleteSpace": "Deaktivirajte ali izbrišite prostor.",
   "DefaultSettings": "Privzete nastavitve",
   "DefaultTemplateApplied": "Nova privzeta predloga je bila uporabljena.",
   "DefaultTemplateRestored": "Privzeto predlogo je bilo obnovljeno.",
@@ -316,11 +317,8 @@
   "UseUpperCase": "Uporabi velike črke",
   "WantToCancelDataImport": "Ali želite preklicati uvoz podatkov?",
   "WantToCancelUpload": "Ali želite preklicati nalaganje?",
-  "WebhooksDescription": "Izvedite prilagojene akcije na strani vsake aplikacije ali spletne strani, ki jo uporabljate, na podlagi različnih dogodkov v {{organizationName}} {{productName}}.",
-  "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom.",
-  "LogoLightSmallPortal": "Logotip za portal",
-  "ThirdPartyBackupStorageDescription": "Varnostno kopijo lahko shranite pri zunanjem ponudniku. Pred tem morate v razdelku «Integracija» povezati ustrezno storitev. V nasprotnem primeru bodo naslednje nastavitve neaktivne.",
   "WantToContinueQuota": "Ali želite nadaljevati ali spremeniti uporabniško kvoto prostora za shranjevanje?",
+  "WebhooksDescription": "Izvedite prilagojene akcije na strani vsake aplikacije ali spletne strani, ki jo uporabljate, na podlagi različnih dogodkov v {{organizationName}} {{productName}}.",
   "WhiteLabelLogoSubtitle": "Naložite logotipe s transparentno ozadjem (PNG, SVG, JPG) za svetlo in temno temo ali pa hitro ustvarite enega z vnosom vašega logotipa spodaj.",
-  "DeactivateOrDeleteSpace": "Deaktivirajte ali izbrišite prostor."
+  "WithoutEmailHint": "Nimate uporabnikov brez e-maila. Nadaljujte z naslednjim korakom."
 }

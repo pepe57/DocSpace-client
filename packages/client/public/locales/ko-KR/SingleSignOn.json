@@ -17,6 +17,7 @@
   "idpAuthRequest": "인증 응답 서명 확인",
   "idpCertificates": "IdP 공인 인증서",
   "idpCertificatesTooltip": "IdP의 요청 및 응답의 확인 또는 암호 해독(또는 둘 다)에 사용되는 ID 공급자 공용 인증서.",
+  "IdpEntityId": "IdP 엔터티 Id",
   "idpSignExitRequest": "로그아웃 요청 서명 확인",
   "idpSigningAlgorithm": "기본 서명 확인 알고리즘",
   "idpSignResponseRequest": "로그아웃 응답 서명 확인",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "SSO 서비스의 사용자를 스페이스에 자동으로 추가하려면 이 옵션을 활성화하세요.",
   "UploadXML": "필수 필드를 자동으로 입력하기 위해 XML에서 메타데이터를 로드하세요.",
   "UploadXMLPlaceholder": "IdP 메타데이터 XML에 대한 URL",
-  "UsedFor": "사용",
-  "IdpEntityId": "IdP 엔터티 Id"
+  "UsedFor": "사용"
 }

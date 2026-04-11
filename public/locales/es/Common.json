@@ -398,6 +398,7 @@
   "DenyAccess": "Denegar acceso",
   "DenyAccessDescription": "No hay acceso para ver, editar o gestionar archivos o carpetas.",
   "DenyAccessDescriptionDocument": "No hay acceso para ver, editar o gestionar este archivo.",
+  "DescriptionLabel": "Descripción",
   "DeveloperLicense": "Developer ",
   "DeveloperTools": "Herramientas de desarrollo",
   "Diagram": "Diagrama",
@@ -1460,7 +1461,6 @@
   "WebSearch": "Búsqueda web",
   "WebSearchAI": "Búsqueda web",
   "Website": "Sitio web",
-  "WelcomeDescription": "AI Forms le ayuda a crear, distribuir y recopilar envíos de formularios, todo en un solo lugar.",
   "WelcomeFeature1": "Crear formularios PDF a partir de plantillas o desde cero",
   "WelcomeFeature1Title": "Creación de Formularios Inteligentes",
   "WelcomeFeature2": "Monitorear el progreso y los envíos al instante",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "Cuando el saldo descienda a {{min}}, el monedero se cargará automáticamente hasta {{max}}.",
   "WhenBalanceGoesBellow": "Cuando el saldo es inferior",
   "WhiteLabel": "Ajustes de logo",
-  "WhiteLabelSubtitle": "Introduzca el nombre de su empresa, cargue el logotipo y personalice el estilo para que coincida con su marca.",
   "WhiteLabelTooltip": "Los tamaños se muestran para las pantallas Retina. Para las pantallas con resoluciones estándar, la anchura y la altura del logotipo se redimensionarán en consecuencia al cargarlo.",
   "WhoFilledItOut": "Quién lo completó",
   "WhoFilledItOutPrompt": "Listar todas las personas que han completado el formulario \"{{formName}}\"",
@@ -1498,6 +1497,5 @@
   "YourName": "Su nombre",
   "YourPrice": "Su precio",
   "YourTurn": "Su turno",
-  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud.",
-  "DescriptionLabel": "Descripción"
+  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud."
 }

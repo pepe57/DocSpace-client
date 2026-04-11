@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Využijte rozsáhlé funkce pro zpracování textu.",
   "CreateForm": "Vytvoření nového formuláře PDF",
   "CreateFormDescription": "Sběr hlasů, zjišťování názorů a ukládání dat pomocí formulářů PDF",
+  "CreateNewAIAgent": "Vytvořit nového agenta",
   "CreateNewFileDescription": "Začněte pracovat v místnosti vytvářením souborů nebo složek.",
   "CreateNewFileTitle": "Vytvoření nového souboru",
   "CreatePresentation": "Vytvoření nové prezentace",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Zatím zde nejsou sdílené položky.",
   "EmptyTemplatesDescription": "Šablonu můžete vytvořit z místnosti v části Místnost.",
   "EmptyTemplatesTitle": "Zatím zde nejsou žádné šablony",
+  "EmptyViewDescription": "Začněte s rychlými akcemi:",
   "FormFolderDefaultDescription": "Vložte sem formuláře PDF nebo je nahrajte z {{productName}} nebo zařízení.",
   "FormFolderDefaultTitle": "Zatím zde nejsou žádné formuláře",
   "FormFolderDefaultUserDescription": "Zde se objeví formuláře nahrané správci.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Nahrávání ze zařízení",
   "UploadFromPortalTitle": "Nahrát z {{productName}}",
   "UploadPDFFormOptionDescription": "Vyberte připravený PDF formulář dostupný v {{productName}} a nahrajte jej do místnosti.",
-  "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti",
-  "CreateNewAIAgent": "Vytvořit nového agenta",
-  "EmptyViewDescription": "Začněte s rychlými akcemi:"
+  "VirtualDataRoomEmptyTitle": "Vítejte ve virtuální datové místnosti"
 }

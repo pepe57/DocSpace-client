@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Aproveite a vasta funcionalidade de processamento de texto.",
   "CreateForm": "Crie um novo formulário em PDF",
   "CreateFormDescription": "Colete votos, obtenha opiniões e armazene dados usando formulários PDF",
+  "CreateNewAIAgent": "Criar um novo agente",
   "CreateNewFileDescription": "Comece a trabalhar na sala criando arquivos ou pastas",
   "CreateNewFileTitle": "Crie um novo arquivo",
   "CreatePresentation": "Crie uma nova apresentação",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Ainda não há itens compartilhados",
   "EmptyTemplatesDescription": "Você pode criar um modelo de uma sala na seção Sala",
   "EmptyTemplatesTitle": "Nenhum modelo aqui ainda",
+  "EmptyViewDescription": "Comece com ações rápidas:",
   "FormFolderDefaultDescription": "Solte os formulários em PDF aqui ou faça upload do {{productName}} ou do dispositivo.",
   "FormFolderDefaultTitle": "Ainda não há formulários aqui",
   "FormFolderDefaultUserDescription": "Os formulários carregados pelos administradores aparecerão aqui.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Carregar do dispositivo",
   "UploadFromPortalTitle": "Fazer upload de {{productName}}",
   "UploadPDFFormOptionDescription": "Selecione um formulário PDF pronto disponível em {{productName}} e carregue-o na sala.",
-  "VirtualDataRoomEmptyTitle": "Bem-vindo à Sala de Dados Virtual",
-  "CreateNewAIAgent": "Criar um novo agente",
-  "EmptyViewDescription": "Comece com ações rápidas:"
+  "VirtualDataRoomEmptyTitle": "Bem-vindo à Sala de Dados Virtual"
 }

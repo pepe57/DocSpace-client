@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Nutzen Sie die umfangreiche Textverarbeitungsfunktionalität.",
   "CreateForm": "Ein neues PDF-Formular erstellen",
   "CreateFormDescription": "Sammeln Sie Stimmen, erhalten Sie Meinungen und speichern Sie Daten mit PDF-Formularen",
+  "CreateNewAIAgent": "Neuen Agenten erstellen",
   "CreateNewFileDescription": "Beginnen Sie Ihre Arbeit im Raum, indem Sie Dateien oder Ordner anlegen",
   "CreateNewFileTitle": "Eine neue Datei erstellen",
   "CreatePresentation": "Eine neue Präsentation erstellen",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Es sind noch keine freigegebenen Elemente vorhanden",
   "EmptyTemplatesDescription": "Sie können eine Vorlage aus einem Raum im Bereich \"Räume\" erstellen",
   "EmptyTemplatesTitle": "Noch keine Vorlagen vorhanden",
+  "EmptyViewDescription": "Beginnen Sie mit schnellen Aktionen:",
   "FormFolderDefaultDescription": "Legen Sie PDF-Formulare hier ab oder laden Sie sie von {{productName}} oder einem Gerät hoch.",
   "FormFolderDefaultTitle": "Noch keine Formulare vorhanden",
   "FormFolderDefaultUserDescription": "Die von den Administratoren hochgeladenen Formulare werden hier angezeigt.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Hochladen vom Gerät",
   "UploadFromPortalTitle": "Von {{productName}} hochladen",
   "UploadPDFFormOptionDescription": "Wählen Sie ein fertiges PDF-Formular, das in {{productName}} verfügbar ist, und laden Sie es in den Raum hoch.",
-  "VirtualDataRoomEmptyTitle": "Willkommen im virtuellen Datenraum",
-  "CreateNewAIAgent": "Neuen Agenten erstellen",
-  "EmptyViewDescription": "Beginnen Sie mit schnellen Aktionen:"
+  "VirtualDataRoomEmptyTitle": "Willkommen im virtuellen Datenraum"
 }

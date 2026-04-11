@@ -77,6 +77,7 @@
   "DataImportComplete": "データのインポート完了",
   "DataImportDescription": "サードパーティサービスから{{organizationName}} {{productName}}にデータをインポートします。データのインポートでは、すべてのユーザー、およびユーザーの個人用および共有ドキュメントなどのデータを転送できます。",
   "DataImportProcessing": "データのインポート処理中",
+  "DeactivateOrDeleteSpace": "スペースを無効にする、または削除する。",
   "DefaultSettings": "デフォルトの設定",
   "DefaultTemplateApplied": "新しいデフォルトテンプレートが適用されました。",
   "DefaultTemplateRestored": "デフォルトのテンプレートが復元されました。",
@@ -316,11 +317,8 @@
   "UseUpperCase": "大文字を使用",
   "WantToCancelDataImport": "データのインポートをキャンセルしますか？",
   "WantToCancelUpload": "アップロードをキャンセルしますか？",
-  "WebhooksDescription": "{{organizationName}} {{productName}} の様々なイベントに基づいて、使用している任意のアプリケーションやウェブサイトのサイドでカスタムアクションを実行します。",
-  "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。",
-  "LogoLightSmallPortal": "ポータルのロゴ",
-  "ThirdPartyBackupStorageDescription": "バックアップはサードパーティストレージに保存することができます。事前に、「統合」セクションで対応するサービスを接続する必要があります。そうでない場合は、以下の設定は無効となります。",
   "WantToContinueQuota": "ユーザーストレージ容量制限を継続または変更しますか？",
+  "WebhooksDescription": "{{organizationName}} {{productName}} の様々なイベントに基づいて、使用している任意のアプリケーションやウェブサイトのサイドでカスタムアクションを実行します。",
   "WhiteLabelLogoSubtitle": "ライトテーマおよびダークテーマ用に、背景が透明なロゴ（PNG、SVG、JPG）をアップロードするか、下の欄にロゴ名を入力してすぐに作成してください。",
-  "DeactivateOrDeleteSpace": "スペースを無効にする、または削除する。"
+  "WithoutEmailHint": "メールのないユーザーはいません。次のステップに進んでください。"
 }

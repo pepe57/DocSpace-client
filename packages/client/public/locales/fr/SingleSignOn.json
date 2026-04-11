@@ -17,6 +17,7 @@
   "idpAuthRequest": "Vérifier la signature des réponses d’authentification",
   "idpCertificates": "Certificats publics IdP",
   "idpCertificatesTooltip": "Les certificats publics du fournisseur d’identité utilisés pour la vérification ou le déchiffrement (ou les deux) des demandes et des réponses de l’IdP.",
+  "IdpEntityId": "ID de l’entité IdP",
   "idpSignExitRequest": "Vérifier la signature des demandes de déconnexion",
   "idpSigningAlgorithm": "Algorithme de vérification de la signature par défaut",
   "idpSignResponseRequest": "Vérifier la signature des réponses à la déconnexion",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "Activez cette option si vous souhaitez ajouter automatiquement des utilisateurs du service SSO à votre espace.",
   "UploadXML": "Charger des métadonnées à partir de XML pour remplir automatiquement les champs obligatoires.",
   "UploadXMLPlaceholder": "URL vers les métadonnées XML de l’IdP",
-  "UsedFor": "Utiliser pour",
-  "IdpEntityId": "ID de l’entité IdP"
+  "UsedFor": "Utiliser pour"
 }

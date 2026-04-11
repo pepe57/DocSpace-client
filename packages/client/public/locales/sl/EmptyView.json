@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Izkoristite obsežno funkcionalnost obdelave besedila.",
   "CreateForm": "Ustvari nov PDF obrazec",
   "CreateFormDescription": "Zbirajte glasove, pridobite mnenja in shranjujte podatke z uporabo obrazcev PDF",
+  "CreateNewAIAgent": "Ustvarite novega agenta",
   "CreateNewFileDescription": "Začni delati v sobi z ustvarjanjem datotek ali map",
   "CreateNewFileTitle": "Ustvari novo datoteko",
   "CreatePresentation": "Ustvari novo predstavitev",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Še ni skupnih elementov.",
   "EmptyTemplatesDescription": "Predlogo lahko ustvarite iz sobe v razdelku Soba",
   "EmptyTemplatesTitle": "Tu še ni predlog",
+  "EmptyViewDescription": "Začni s hitrimi dejanji:",
   "FormFolderDefaultDescription": "Obrazce PDF spusti sem ali jih naloži iz {{productName}} ali naprave.",
   "FormFolderDefaultTitle": "Tukaj še ni obrazcev",
   "FormFolderDefaultUserDescription": "Tukaj bodo prikazani obrazci, ki so jih naložili skrbniki.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Naloži iz naprave",
   "UploadFromPortalTitle": "Naloži iz {{productName}}",
   "UploadPDFFormOptionDescription": "Izberi pripravljen PDF obrazec, ki je na voljo v {{productName}} in ga naloži v sobo.",
-  "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi",
-  "CreateNewAIAgent": "Ustvarite novega agenta",
-  "EmptyViewDescription": "Začni s hitrimi dejanji:"
+  "VirtualDataRoomEmptyTitle": "Dobrodošli v virtualni podatkovni sobi"
 }

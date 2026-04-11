@@ -77,6 +77,7 @@
   "DataImportComplete": "Importação de dados concluída",
   "DataImportDescription": "Importe dados de um serviço de terceiros para o {{organizationName}} {{productName}}. A importação de dados permite a transferência de dados como todos os usuários, seus documentos pessoais e compartilhados.",
   "DataImportProcessing": "Processamento de importação de dados",
+  "DeactivateOrDeleteSpace": "Desative ou exclua o espaço.",
   "DefaultSettings": "Configurações padrão",
   "DefaultTemplateApplied": "Um novo modelo padrão foi aplicado.",
   "DefaultTemplateRestored": "O modelo padrão foi restaurado.",
@@ -316,11 +317,8 @@
   "UseUpperCase": "Utilizar letras maiúsculas",
   "WantToCancelDataImport": "Deseja cancelar a importação de dados?",
   "WantToCancelUpload": "Deseja cancelar o upload?",
-  "WebhooksDescription": "Execute ações personalizadas no lado de qualquer aplicativo ou site que você esteja usando com base em vários eventos em {{organizationName}} {{productName}}.",
-  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa.",
-  "LogoLightSmallPortal": "Logo para o portal",
-  "ThirdPartyBackupStorageDescription": "O backup pode ser salvo em um armazenamento de terceiros. Primeiro, você precisa conectar o serviço correspondente na seção 'Integração'. Caso contrário, as configurações a seguir ficarão inativas.",
   "WantToContinueQuota": "Você quer continuar ou alterar a cota de armazenamento do usuário?",
+  "WebhooksDescription": "Execute ações personalizadas no lado de qualquer aplicativo ou site que você esteja usando com base em vários eventos em {{organizationName}} {{productName}}.",
   "WhiteLabelLogoSubtitle": "Faça o upload de logotipos com fundo transparente (PNG, SVG, JPG) para temas claros e escuros, ou gere um instantaneamente inserindo o seu logotipo abaixo.",
-  "DeactivateOrDeleteSpace": "Desative ou exclua o espaço."
+  "WithoutEmailHint": "Você não tem usuários sem e-mails. Por favor, prossiga para a próxima etapa."
 }

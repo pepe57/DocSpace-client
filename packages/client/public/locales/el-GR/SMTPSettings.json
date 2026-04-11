@@ -1,5 +1,6 @@
 {
   "AuthViaNTLM": "Αυθεντικοποίηση μέσω NTLM",
+  "EnableSMTPSSL": "Ενεργοποίηση SSL",
   "EnterDomain": "Εισάγετε τομέα",
   "EnterLogin": "Εισάγετε σύνδεση",
   "EnterPort": "Εισάγετε θύρα",
@@ -9,6 +10,5 @@
   "Port": "Θύρα",
   "SenderDisplayName": "Όνομα απεικόνισης αποστολέα",
   "SenderEmailAddress": "Διεύθυνση Email Αποστολέα",
-  "SendTestMail": "Αποστολή δοκιμαστικού email",
-  "EnableSMTPSSL": "Ενεργοποίηση SSL"
+  "SendTestMail": "Αποστολή δοκιμαστικού email"
 }

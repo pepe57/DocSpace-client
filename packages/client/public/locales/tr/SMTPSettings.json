@@ -1,5 +1,6 @@
 {
   "AuthViaNTLM": "NTLM aracılığıyla kimlik doğrulama",
+  "EnableSMTPSSL": "SSL'yi etkinleştir",
   "EnterDomain": "Alan adını girin",
   "EnterLogin": "Login girin",
   "EnterPort": "Bağlantı noktasını girin",
@@ -9,6 +10,5 @@
   "Port": "Bağlantı noktası",
   "SenderDisplayName": "Gönderici Ekran İsmi",
   "SenderEmailAddress": "Gönderici Eposta Adresi",
-  "SendTestMail": "Test Postası Gönder",
-  "EnableSMTPSSL": "SSL'yi etkinleştir"
+  "SendTestMail": "Test Postası Gönder"
 }

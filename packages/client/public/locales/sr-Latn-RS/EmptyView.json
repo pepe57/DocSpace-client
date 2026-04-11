@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Iskoristite široke mogućnosti za obradu teksta.",
   "CreateForm": "Kreirajte novi PDF obrazac",
   "CreateFormDescription": "Prikupljajte glasove, dobijajte mišljenja i čuvajte podatke koristeći PDF obrasce.",
+  "CreateNewAIAgent": "Kreirajte novog agenta",
   "CreateNewFileDescription": "Započni rad u prostoriji kreiranjem datoteka ili foldera",
   "CreateNewFileTitle": "Kreiraj novu datoteku",
   "CreatePresentation": "Kreirajte novu prezentaciju",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Još nema deljenih stavki",
   "EmptyTemplatesDescription": "Možete kreirati šablon iz sobe u odeljku Sobe.",
   "EmptyTemplatesTitle": "Ovde još uvek nema šablona",
+  "EmptyViewDescription": "Započni sa brzim radnjama:",
   "FormFolderDefaultDescription": "Ubacite PDF formulare ovde ili otpremite sa {{productName}} ili uređaja.",
   "FormFolderDefaultTitle": "Još uvek nema formulara ovde",
   "FormFolderDefaultUserDescription": "Formulari otpremljeni od strane administratora će se pojaviti ovde.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Otpremi sa uređaja",
   "UploadFromPortalTitle": "Otpremi iz {{productName}}",
   "UploadPDFFormOptionDescription": "Odaberite spreman PDF formular dostupan u {{productName}} i otpremite ga u prostoriju.",
-  "VirtualDataRoomEmptyTitle": "Dobrodošli u Virtuelnu sobu za podatke",
-  "CreateNewAIAgent": "Kreirajte novog agenta",
-  "EmptyViewDescription": "Započni sa brzim radnjama:"
+  "VirtualDataRoomEmptyTitle": "Dobrodošli u Virtuelnu sobu za podatke"
 }

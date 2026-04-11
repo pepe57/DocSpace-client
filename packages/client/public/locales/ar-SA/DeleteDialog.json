@@ -13,7 +13,9 @@
   "DeleteGroupDescription": "سيتم حذف المجموعة {{groupName}}. لن تتم إزالة المستخدمين في المجموعة من {{productName}}. هل أنت متأكد أنك تريد المتابعة؟",
   "DeleteGroupTitle": "حذف المجموعة",
   "DeleteItem": "أنتم على وشك نقل <strong>{{name}}</strong> إلى {{trashSection}}. ",
+  "DeleteItemForeverConfirm": "أنتم على وشك حذف <strong>{{name}}</strong>.",
   "DeleteItemsSharedNote": "يرجى العلم أنه إذا قمت بمشاركتهم مع أحدهم؛ فسيصبحوا غير متاحين.",
+  "DeleteRoomConfirm": "سيتم حذف الغرفة <strong>\"\"{{roomName}}\"\"</strong> نهائيًا. ستفقدون جميع البيانات وصلاحيات وصول المستخدم. ",
   "DeleteRooms": "سيتم حذف <strong>الغرف المحددة ({{count}})</strong> بشكل دائم. سيتم فقدان جميع البيانات وإمكانية وصول المستخدمين.",
   "DeleteRoomsTitle": "هل تحذف هذه الغرفة؟",
   "DeleteRoomTitle": "هل تريدون حذف هذه الغرفة؟ ",
@@ -32,7 +34,5 @@
   "ItemsDeletedAfter": "سيتم حذف هذه العناصر نهائيًا في غضون 30 يومًا. ",
   "ItemsPermanentlyDeleted": "سيتم حذف هذه العناصر نهائيًا من {{trashSection}}.",
   "removeFromListDescription": "أنتم على وشك إزالة <1>{{title}}</1> من القائمة. هل أنتم متأكدون من رغبتكم في المتابعة؟",
-  "removeFromListDescriptionPlural": "أنتم على وشك إزالة <1>عناصر ({{count}})</1> من القائمة. هل أنتم متأكدون من رغبتكم في المتابعة؟",
-  "DeleteItemForeverConfirm": "أنتم على وشك حذف <strong>{{name}}</strong>.",
-  "DeleteRoomConfirm": "سيتم حذف الغرفة <strong>\"\"{{roomName}}\"\"</strong> نهائيًا. ستفقدون جميع البيانات وصلاحيات وصول المستخدم. "
+  "removeFromListDescriptionPlural": "أنتم على وشك إزالة <1>عناصر ({{count}})</1> من القائمة. هل أنتم متأكدون من رغبتكم في المتابعة؟"
 }

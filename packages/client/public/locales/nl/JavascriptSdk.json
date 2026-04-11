@@ -38,6 +38,7 @@
   "Descending": "Aflopend",
   "DestinationFolderId": "Bestemmingsmap ID",
   "DisplayColumns": "Kolommen weergeven in een bestandsrij",
+  "EditorPresetDescription": "Integreer een editor zodat gebruikers een bestand vanuit de bijbehorende kamer kunnen bewerken.",
   "ElementCalledAfterClicking": "Het element wordt aangeroepen nadat u er op klikt",
   "ElementItself": "Het element zelf",
   "EmbedCodeSuccessfullyCopied": "Insluitcode succesvol gekopieerd naar klembord",
@@ -47,6 +48,7 @@
   "EnterPage": "Voor nummer pagina in",
   "EnterWidth": "Voor breedte",
   "EventLog": "Gebeurtenislogboek",
+  "FeedbackAndSupportLink": "Feedback&Ondersteuning",
   "FileContentCopy": "Beperking op kopiëren van inhoud van bestanden",
   "FileFilter": "Bestandsfilter",
   "FileId": "Bestands-ID",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "Bestanden zoeken binnen de geopende map/kamer.",
   "FileTypeDisplay": "Weergave bestandstype",
   "FrameId": "Frame ID",
+  "GetCodeToInsert": "Haal code om in te voegen",
   "Header": "Koptekst",
   "HeaderDescription": "U kunt de koptekst uitschakelen in de mobiele versie om de toegang tot de {{productName}} secties te beperken (net zoals u het linkermenu uitschakelt in de desktopversie).",
   "HelperText": "Helppagina",
@@ -147,8 +150,5 @@
   "UploadLimits": "Uploadlimieten",
   "UploadMode": "Uploadmodus",
   "ViewerDescription": "Sluit een viewer in zodat gebruikers een bestand kunnen openen om het vanuit de bijbehorende kamer te bekijken.",
-  "VoidReturn": "Leeg",
-  "EditorPresetDescription": "Integreer een editor zodat gebruikers een bestand vanuit de bijbehorende kamer kunnen bewerken.",
-  "FeedbackAndSupportLink": "Feedback&Ondersteuning",
-  "GetCodeToInsert": "Haal code om in te voegen"
+  "VoidReturn": "Leeg"
 }

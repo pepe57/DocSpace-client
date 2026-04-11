@@ -1,5 +1,6 @@
 {
   "AuthViaNTLM": "Autentificēšana, izmantojot NTLM",
+  "EnableSMTPSSL": "Izmantot SSL",
   "EnterDomain": "Ievadiet domēnu",
   "EnterLogin": "Ievadiet pieteikšanās vārdu",
   "EnterPort": "Ievadiet portu",
@@ -9,6 +10,5 @@
   "Port": "Ports",
   "SenderDisplayName": "Sūtītāja parādāmais vārds",
   "SenderEmailAddress": "Sūtītāja e-pasta adrese",
-  "SendTestMail": "Nosūtiet testa pastu",
-  "EnableSMTPSSL": "Izmantot SSL"
+  "SendTestMail": "Nosūtiet testa pastu"
 }

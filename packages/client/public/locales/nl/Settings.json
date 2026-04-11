@@ -77,6 +77,7 @@
   "DataImportComplete": "Gegevens importeren voltooid",
   "DataImportDescription": "Importeer gegevens van een externe service naar {{organizationName}} {{productName}}. Gegevensimport maakt het mogelijk om gegevens over te zetten, zoals alle gebruikers, hun persoonlijke en gedeelde documenten.",
   "DataImportProcessing": "Verwerking van geïmporteerde gegevens",
+  "DeactivateOrDeleteSpace": "Ruimte deactiveren of verwijderen.",
   "DefaultSettings": "Standaardinstellingen",
   "DefaultTemplateApplied": "Er is een nieuwe standaardtemplate toegepast.",
   "DefaultTemplateRestored": "Het standaard sjabloon is hersteld.",
@@ -316,11 +317,8 @@
   "UseUpperCase": "Hoofdletters gebruiken",
   "WantToCancelDataImport": "Wilt u het importeren van gegevens annuleren?",
   "WantToCancelUpload": "Wilt u het uploaden annuleren?",
-  "WebhooksDescription": "Voer aangepaste acties uit aan de zijkant van elke applicatie of website die u gebruikt, op basis van verschillende gebeurtenissen in {{organizationName}} {{productName}}.",
-  "WithoutEmailHint": "U heeft geen gebruikers om e-mailadressen aan toe te voegen. Ga door naar de volgende stap.",
-  "LogoLightSmallPortal": "Logo voor de portal",
-  "ThirdPartyBackupStorageDescription": "Back-up kan worden opgeslagen in een opslagruimte van derden. Eerst moet u de overeenkomstige dienst verbinden in het 'Integratie' gedeelte. Anders zijn de volgende instellingen inactief.",
   "WantToContinueQuota": "Wilt u doorgaan of de opslagquota voor gebruikers wijzigen?",
+  "WebhooksDescription": "Voer aangepaste acties uit aan de zijkant van elke applicatie of website die u gebruikt, op basis van verschillende gebeurtenissen in {{organizationName}} {{productName}}.",
   "WhiteLabelLogoSubtitle": "Upload logo's met een transparante achtergrond (PNG, SVG, JPG) voor lichte en donkere thema's, of genereer er direct een door uw logo hieronder in te voeren.",
-  "DeactivateOrDeleteSpace": "Ruimte deactiveren of verwijderen."
+  "WithoutEmailHint": "U heeft geen gebruikers om e-mailadressen aan toe te voegen. Ga door naar de volgende stap."
 }

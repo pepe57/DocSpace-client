@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Aproveche las amplias funciones de procesamiento de textos.",
   "CreateForm": "Crear un nuevo formulario PDF",
   "CreateFormDescription": "Recopile votos, obtenga opiniones y almacene datos mediante formularios PDF",
+  "CreateNewAIAgent": "Crear un nuevo agente",
   "CreateNewFileDescription": "Empiece a trabajar en la sala creando archivos o carpetas",
   "CreateNewFileTitle": "Crear un nuevo archivo",
   "CreatePresentation": "Crear una nueva presentación",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Aún no hay elementos compartidos",
   "EmptyTemplatesDescription": "Puede crear una plantilla a partir de una sala en la sección Salas",
   "EmptyTemplatesTitle": "Aún no hay plantillas aquí",
+  "EmptyViewDescription": "Empiece con acciones rápidas:",
   "FormFolderDefaultDescription": "Coloque formularios PDF aquí o cárguelos desde {{productName}} o dispositivo.",
   "FormFolderDefaultTitle": "Todavía no hay formularios aquí",
   "FormFolderDefaultUserDescription": "Los formularios cargados por los administradores aparecerán aquí.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Subir desde el dispositivo",
   "UploadFromPortalTitle": "Subir desde {{productName}}",
   "UploadPDFFormOptionDescription": "Seleccione un formulario PDF listo disponible en {{productName}} y cárguelo en la sala.",
-  "VirtualDataRoomEmptyTitle": "Bienvenido/a a la Sala de datos virtuales",
-  "CreateNewAIAgent": "Crear un nuevo agente",
-  "EmptyViewDescription": "Empiece con acciones rápidas:"
+  "VirtualDataRoomEmptyTitle": "Bienvenido/a a la Sala de datos virtuales"
 }

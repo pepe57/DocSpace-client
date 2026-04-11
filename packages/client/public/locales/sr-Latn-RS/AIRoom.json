@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "Automatski ćete biti vraćeni na {{sectionName}} odeljak za 5 sekundi.",
   "AIChat": "AI razgovor",
   "AIInstructions": "AI instrukcije",
+  "AIProviderAndModel": "{{aiProvider}} i model",
   "CreateChat": "Kreirajte ćaskanje",
   "CreateChatDescription": "Idite na karticu {{aiChat}} da započnete.",
   "EmptyKnowledgeDescription": "Datoteke koje se ovde učitaju biće indeksirane i korišćene kao kontekst u kartici {{aiChat}}. Dodajte datoteke (do 10 MB svaka) kako biste postavili pitanja AI-u, generisali sadržaj ili sarađivali na informacijama.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Napomena:</1> Kvalitet odgovora može varirati u zavisnosti od modela; noviji modeli se preporučuju za najbolje rezultate.",
   "ResultStorage": "Skladištenje rezultata",
   "UploadFilesDevice": "Otpremite datoteke sa svog ličnog uređaja",
-  "UploadFilesPortal": "Otpremite datoteke sa {{sectionNameFirst}} ili {{sectionNameSecond}}",
-  "AIProviderAndModel": "{{aiProvider}} i model"
+  "UploadFilesPortal": "Otpremite datoteke sa {{sectionNameFirst}} ili {{sectionNameSecond}}"
 }

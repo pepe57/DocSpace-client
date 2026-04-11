@@ -398,6 +398,7 @@
   "DenyAccess": "拒绝访问",
   "DenyAccessDescription": "无权查看、编辑、管理文件或文件夹。",
   "DenyAccessDescriptionDocument": "无权查看、编辑或管理此文件。",
+  "DescriptionLabel": "说明",
   "DeveloperLicense": "开发者",
   "DeveloperTools": "开发者工具",
   "Diagram": "图表",
@@ -1460,7 +1461,6 @@
   "WebSearch": "网络搜索",
   "WebSearchAI": "网络搜索",
   "Website": "网站",
-  "WelcomeDescription": "AI Forms 帮助您在一个地方创建、分发和收集表单提交。",
   "WelcomeFeature1": "从模板或空白处创建 PDF 表单",
   "WelcomeFeature1Title": "智能表单创建",
   "WelcomeFeature2": "实时监控进度和提交情况",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "当余额降至{{min}}时，钱包将自动充值至{{max}}。",
   "WhenBalanceGoesBellow": "当余额低于",
   "WhiteLabel": "标志设置",
-  "WhiteLabelSubtitle": "输入公司名称、上传徽标并自定义其风格以匹配您的品牌风格。",
   "WhiteLabelTooltip": "该尺寸将针对 Retina 屏幕进行显示。对于标准分辨率的显示器，徽标宽度和高度将在上传时相应调整。",
   "WhoFilledItOut": "谁填写了它",
   "WhoFilledItOutPrompt": "查看所有填写了表单 \"{{formName}}\" 的人员",
@@ -1498,6 +1497,5 @@
   "YourName": "您的姓名",
   "YourPrice": "您的价格",
   "YourTurn": "轮到您了",
-  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。",
-  "DescriptionLabel": "说明"
+  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。"
 }

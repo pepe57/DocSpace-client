@@ -13,7 +13,9 @@
   "DeleteGroupDescription": "{{groupName}} խումբը կջնջվի: Խմբի օգտատերերը չեն հեռացվի {{productName}}-ից: Վստա՞հ եք, որ ցանկանում եք շարունակել:",
   "DeleteGroupTitle": "Ջնջել խմբերը",
   "DeleteItem": "Դուք պատրաստվում եք տեղափոխել <strong>{{name}}</strong> {{trashSection}}։",
+  "DeleteItemForeverConfirm": "Դուք պատրաստվում եք ջնջել <strong>{{name}}</strong>-ը։",
   "DeleteItemsSharedNote": "Խնդրում ենք նկատի ունենալ, որ եթե դրանք ինչ-որ մեկի հետ կիսվել եք,նրանք անհասանելի կդառնան:",
+  "DeleteRoomConfirm": "Սենյակը <strong>\"{{roomName}}\"</strong> կջնջվի անդառնալիորեն։ Բոլոր տվյալները և օգտատերերի մուտքի իրավունքները կկորչեն։",
   "DeleteRooms": "Ընտրված <strong>սենյակները ({{count}})</strong> կջնջվեն մշտապես։ Բոլոր տվյալները և օգտատերերի հասանելիությունը կկորչեն։",
   "DeleteRoomsTitle": "Սենյակը ջնջե՞լ:",
   "DeleteRoomTitle": "Ջնջե՞լ այս սենյակը։",
@@ -32,7 +34,5 @@
   "ItemsDeletedAfter": "Այս տարրերը վերջնականապես կհեռացվեն 30 օրից։",
   "ItemsPermanentlyDeleted": "Այս տարրերը վերջնականապես կհեռացվեն {{trashSection}}։",
   "removeFromListDescription": "Դուք պատրաստվում եք հեռացնել <1>{{title}}</1>-ը ցանկից։ Վստա՞հ եք, որ ցանկանում եք շարունակել։",
-  "removeFromListDescriptionPlural": "Դուք պատրաստվում եք հեռացնել <1>տարրերը ({{count}})</1> ցանկից։ Վստա՞հ եք, որ ցանկանում եք շարունակել։",
-  "DeleteItemForeverConfirm": "Դուք պատրաստվում եք ջնջել <strong>{{name}}</strong>-ը։",
-  "DeleteRoomConfirm": "Սենյակը <strong>\"{{roomName}}\"</strong> կջնջվի անդառնալիորեն։ Բոլոր տվյալները և օգտատերերի մուտքի իրավունքները կկորչեն։"
+  "removeFromListDescriptionPlural": "Դուք պատրաստվում եք հեռացնել <1>տարրերը ({{count}})</1> ցանկից։ Վստա՞հ եք, որ ցանկանում եք շարունակել։"
 }

@@ -17,6 +17,7 @@
   "idpAuthRequest": "Kontrola podpisu overovacích odpovedí",
   "idpCertificates": "Verejné certifikáty IdP",
   "idpCertificatesTooltip": "Verejné certifikáty poskytovateľa identity používané buď na overenie alebo dešifrovanie (alebo oboje) žiadostí a odpovedí od IdP.",
+  "IdpEntityId": "IdP Entity Id",
   "idpSignExitRequest": "Kontrola podpisu žiadostí o odhlásenie",
   "idpSigningAlgorithm": "Predvolený algoritmus na overenie podpisu",
   "idpSignResponseRequest": "Kontrola podpisu odpovedí na odhlásenie",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "Povoľte túto možnosť, ak chcete automaticky pridávať používateľov zo služby SSO do vášho priestoru.",
   "UploadXML": "Načítajte metadáta z XML a automaticky vyplňte požadované polia.",
   "UploadXMLPlaceholder": "URL do IdP Metadáta XML",
-  "UsedFor": "Použiť pre",
-  "IdpEntityId": "IdP Entity Id"
+  "UsedFor": "Použiť pre"
 }

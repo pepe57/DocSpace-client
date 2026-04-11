@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "Zostaniesz automatycznie przekierowany do sekcji {{sectionName}} za 5 sekund.",
   "AIChat": "AI-Chat",
   "AIInstructions": "Instrukcje AI",
+  "AIProviderAndModel": "{{aiProvider}} i model",
   "CreateChat": "Utwórz czat",
   "CreateChatDescription": "Przejdź do zakładki {{aiChat}}, aby rozpocząć.",
   "EmptyKnowledgeDescription": "Pliki przesłane tutaj zostaną indeksowane i użyte jako kontekst w zakładce {{aiChat}}. Dodaj pliki (do 10 MB każdy), aby zadawać pytania AI, generować treści lub współpracować nad informacjami.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Uwaga:</1> Jakość odpowiedzi może się różnić w zależności od modelu; zaleca się używanie nowszych modeli, aby uzyskać najlepsze wyniki.",
   "ResultStorage": "Przechowywanie wyników",
   "UploadFilesDevice": "Wgraj pliki z urządzenia osobistego.",
-  "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}",
-  "AIProviderAndModel": "{{aiProvider}} i model"
+  "UploadFilesPortal": "Wgraj pliki z {{sectionNameFirst}} lub {{sectionNameSecond}}"
 }

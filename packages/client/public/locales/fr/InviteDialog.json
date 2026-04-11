@@ -21,6 +21,5 @@
   "UserAgentMaxAvailableRoleWarning": "Les invités et les utilisateurs ne peuvent pas être désignés comme gestionnaires d'agents. Seuls les administrateurs de salle et de {{productName}} peuvent occuper ce rôle.",
   "UserMaxAvailableRoleWarning": "Les invités et les utilisateurs ne peuvent pas être désignés comme gestionnaires de salle. Seuls les administrateurs de salle et de {{productName}} peuvent jouer le rôle spécifié.",
   "UsersAlreadyAdded": "Certains utilisateurs ont déjà été ajoutés",
-  "UsersCannotBeAdded": "Les contacts désactivés ne peuvent pas être ajoutés à une salle.",
-  "InviteLinkCopySuccess": "Le lien a été copié"
+  "UsersCannotBeAdded": "Les contacts désactivés ne peuvent pas être ajoutés à une salle."
 }

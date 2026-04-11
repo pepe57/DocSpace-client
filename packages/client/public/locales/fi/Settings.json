@@ -77,6 +77,7 @@
   "DataImportComplete": "Tietojen tuonti suoritettu",
   "DataImportDescription": "Tuo tietoja kolmannen osapuolen palvelusta {{organizationName}} {{productName}} -ympäristöön. Tietojen tuonti mahdollistaa tietojen siirron esim. käyttäjien, heidän henkilökohtaisten ja jaettujen asiakirjojensa välillä.",
   "DataImportProcessing": "Tietojen tuonnin prosessointi",
+  "DeactivateOrDeleteSpace": "Ota tila pois käytöstä tai poista se.",
   "DefaultSettings": "Oletusasetukset",
   "DefaultTemplateApplied": "Uusi oletustemplate on sovellettu.",
   "DefaultTemplateRestored": "Oletusmalli on palautettu.",
@@ -316,11 +317,8 @@
   "UseUpperCase": "Sisällettävä isoja kirjaimia",
   "WantToCancelDataImport": "Haluatko peruuttaa tietojen tuonnin?",
   "WantToCancelUpload": "Haluatko peruuttaa latauksen?",
-  "WebhooksDescription": "Suorita mukautetut toiminnot minkä tahansa sovelluksen tai verkkosivuston sivulla perustuen erilaisiin tapahtumiin {{organizationName}} {{productName}}.",
-  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen.",
-  "LogoLightSmallPortal": "Tilan otsikon logo",
-  "ThirdPartyBackupStorageDescription": "Varmuuskopio voidaan tallentaa kolmannen osapuolen tallennustilaan. Ennen sitä, sinun on kytkettävä vastaava palvelu Integrointi-osiossa. Muussa tapauksessa seuraavat asetukset ovat passiivisia.",
   "WantToContinueQuota": "Haluatko jatkaa vai muuttaa käyttäjien muistin kiintiötä?",
+  "WebhooksDescription": "Suorita mukautetut toiminnot minkä tahansa sovelluksen tai verkkosivuston sivulla perustuen erilaisiin tapahtumiin {{organizationName}} {{productName}}.",
   "WhiteLabelLogoSubtitle": "Lataa läpinäkyvällä taustalla olevia logoja (PNG, SVG, JPG) vaaleaa ja tummaa teemaa varten tai luo logo välittömästi syöttämällä logosi alla.",
-  "DeactivateOrDeleteSpace": "Ota tila pois käytöstä tai poista se."
+  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen."
 }

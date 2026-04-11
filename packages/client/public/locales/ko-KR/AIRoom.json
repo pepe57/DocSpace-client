@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "5초 후에 {{sectionName}} 섹션으로 자동 리디렉션됩니다.",
   "AIChat": "AI-채팅",
   "AIInstructions": "AI 지침",
+  "AIProviderAndModel": "{{aiProvider}} 및 모델",
   "CreateChat": "채팅 만들기",
   "CreateChatDescription": "{{aiChat}} 탭으로 이동하여 시작하세요.",
   "EmptyKnowledgeDescription": "여기에 업로드된 파일은 인덱싱되어 {{aiChat}} 탭에서 컨텍스트로 사용됩니다. AI 질문, 콘텐츠 생성 또는 정보 협업을 위해 파일을 추가하세요(각 파일 최대 10MB).",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>참고:</1> 응답 품질은 모델에 따라 다를 수 있습니다. 최상의 결과를 얻으려면 최신 모델을 사용하는 것이 좋습니다.",
   "ResultStorage": "결과 저장",
   "UploadFilesDevice": "개인 기기에서 파일 업로드",
-  "UploadFilesPortal": "{{sectionNameFirst}} 또는 {{sectionNameSecond}}에서 파일을 업로드하세요.",
-  "AIProviderAndModel": "{{aiProvider}} 및 모델"
+  "UploadFilesPortal": "{{sectionNameFirst}} 또는 {{sectionNameSecond}}에서 파일을 업로드하세요."
 }

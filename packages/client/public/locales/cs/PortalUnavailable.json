@@ -1,4 +1,4 @@
 {
-  "ContactAdministrator": "Kontaktujte správce {{productName}}",
-  "AccessingProblemContact": "Pokud máte problémy s přístupem do tohoto prostoru {{productName}}, obraťte se na správce."
+  "AccessingProblemContact": "Pokud máte problémy s přístupem do tohoto prostoru {{productName}}, obraťte se na správce.",
+  "ContactAdministrator": "Kontaktujte správce {{productName}}"
 }

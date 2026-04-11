@@ -17,6 +17,7 @@
   "idpAuthRequest": "Signatur der Authentifizierungsantworten prüfen",
   "idpCertificates": "Öffentliche IdP-Zertifikate",
   "idpCertificatesTooltip": "Die öffentlichen Zertifikate des Identitätsanbieters, die entweder für die Überprüfung oder die Entschlüsselung (oder beides) der Anfragen und Antworten des IdP verwendet werden.",
+  "IdpEntityId": "ID des Identitätsanbieters (IdP)",
   "idpSignExitRequest": "Signatur von Logout-Anfragen prüfen",
   "idpSigningAlgorithm": "Standardmäßiger Algorithmus zur Überprüfung der Unterschrift",
   "idpSignResponseRequest": "Signatur von Logout-Antworten prüfen",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "Aktivieren Sie diese Option, wenn Sie Benutzer vom SSO-Dienst automatisch zu Ihrem Bereich hinzufügen möchten.",
   "UploadXML": "Laden von Metadaten aus XML zum automatischen Ausfüllen der erforderlichen Felder.",
   "UploadXMLPlaceholder": "URL zu IdP-Metadaten-XML",
-  "UsedFor": "Verwenden für",
-  "IdpEntityId": "ID des Identitätsanbieters (IdP)"
+  "UsedFor": "Verwenden für"
 }

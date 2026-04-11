@@ -38,6 +38,7 @@
   "Descending": "Azalan",
   "DestinationFolderId": "Hedef klasör kimliği",
   "DisplayColumns": "Bir dosya satırındaki sütunları görüntüleme",
+  "EditorPresetDescription": "Kullanıcıların ilgili odadan bir dosyayı düzenlemelerine izin vermek için bir düzenleyici yerleştirin.",
   "ElementCalledAfterClicking": "Öğe şu öğeye tıklandıktan sonra çağrılacaktır",
   "ElementItself": "Öğenin kendisi",
   "EmbedCodeSuccessfullyCopied": "Ekleme kodu başarıyla panoya kopyalandı",
@@ -47,6 +48,7 @@
   "EnterPage": "Numara sayfasını girin",
   "EnterWidth": "Genişliği girin",
   "EventLog": "Olay Günlüğü",
+  "FeedbackAndSupportLink": "Geri Bildirim ve Destek",
   "FileContentCopy": "Dosya içeriği kopyalama kısıtlaması",
   "FileFilter": "Dosya Filtresi",
   "FileId": "Dosya Kimliği",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "Açılan klasör/oda içinde dosya arama.",
   "FileTypeDisplay": "Dosya türü ekranı",
   "FrameId": "Çerçeve kimliği",
+  "GetCodeToInsert": "Eklenecek kodu alın",
   "Header": "Üst Bilgi",
   "HeaderDescription": "{{productName}} bölümlerine erişimi sınırlamak için mobil sürümde başlığı devre dışı bırakabilirsiniz (masaüstü sürümünde sol menüyü devre dışı bırakmak gibi).",
   "HelperText": "Yardım metni",
@@ -147,8 +150,5 @@
   "UploadLimits": "Yükleme limitleri",
   "UploadMode": "Yükleme modu",
   "ViewerDescription": "Kullanıcıların ilgili odadan görüntülemek üzere bir dosya açmasına izin vermek için bir görüntüleyici yerleştirin.",
-  "VoidReturn": "Boşluk",
-  "EditorPresetDescription": "Kullanıcıların ilgili odadan bir dosyayı düzenlemelerine izin vermek için bir düzenleyici yerleştirin.",
-  "FeedbackAndSupportLink": "Geri Bildirim ve Destek",
-  "GetCodeToInsert": "Eklenecek kodu alın"
+  "VoidReturn": "Boşluk"
 }

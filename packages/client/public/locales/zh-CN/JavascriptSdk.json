@@ -38,6 +38,7 @@
   "Descending": "降序",
   "DestinationFolderId": "目标文件夹 ID",
   "DisplayColumns": "显示文件行中的列",
+  "EditorPresetDescription": "嵌入编辑器，让用户能够从对应的房间编辑文件。",
   "ElementCalledAfterClicking": "点击后元素会被调用",
   "ElementItself": "元素本身",
   "EmbedCodeSuccessfullyCopied": "获取要插入的代码",
@@ -47,6 +48,7 @@
   "EnterPage": "输入页码",
   "EnterWidth": "输入宽度",
   "EventLog": "活动日志",
+  "FeedbackAndSupportLink": "反馈与支持",
   "FileContentCopy": "文件内容复制限制",
   "FileFilter": "文件过滤器",
   "FileId": "文件 ID",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "在打开的文件夹/房间内搜索文件。",
   "FileTypeDisplay": "文件类型显示",
   "FrameId": "帧 ID",
+  "GetCodeToInsert": "获取要插入的代码",
   "Header": "页眉",
   "HeaderDescription": "您可以在移动版本中禁用标题以限制对{{productName}}部分的访问（就像在桌面版本中禁用左侧菜单一样）。",
   "HelperText": "帮助文本",
@@ -147,8 +150,5 @@
   "UploadLimits": "上传限制",
   "UploadMode": "上传模式",
   "ViewerDescription": "嵌入查看器，让用户能够从对应的房间打开文件并进行查看。",
-  "VoidReturn": "空",
-  "EditorPresetDescription": "嵌入编辑器，让用户能够从对应的房间编辑文件。",
-  "FeedbackAndSupportLink": "反馈与支持",
-  "GetCodeToInsert": "获取要插入的代码"
+  "VoidReturn": "空"
 }

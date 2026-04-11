@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "Ju do të ridrehtoheni automatikisht në seksionin {{sectionName}} në 5 sekonda.",
   "AIChat": "Bisedë - IA",
   "AIInstructions": "Udhëzimet e AI",
+  "AIProviderAndModel": "{{aiProvider}} dhe modeli",
   "CreateChat": "Krijoni bisedë",
   "CreateChatDescription": "Shkoni te tab-i {{aiChat}} për të filluar.",
   "EmptyKnowledgeDescription": "Skedarët e ngarkuar këtu do të indeksohen dhe do të përdoren si kontekst në tab-in {{aiChat}}. Shtoni skedarë (deri në 10 MB secili) për të bërë pyetje me AI, për të gjeneruar përmbajtje, ose për të bashkëpunuar mbi informacion.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Shënim:</1> Cilësia e përgjigjeve mund të ndryshojë sipas modelit; modelet më të reja rekomandohen për rezultate më të mira.",
   "ResultStorage": "Ruajtja e rezultateve",
   "UploadFilesDevice": "Ngarko skedarë nga pajisja jote personale",
-  "UploadFilesPortal": "Ngarko skedarë nga {{sectionNameFirst}} ose {{sectionNameSecond}}",
-  "AIProviderAndModel": "{{aiProvider}} dhe modeli"
+  "UploadFilesPortal": "Ngarko skedarë nga {{sectionNameFirst}} ose {{sectionNameSecond}}"
 }

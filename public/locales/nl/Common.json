@@ -398,6 +398,7 @@
   "DenyAccess": "Toegang weigeren",
   "DenyAccessDescription": "Geen toegang om bestanden of mappen te bekijken, te bewerken of te beheren.",
   "DenyAccessDescriptionDocument": "Geen toegang om dit bestand te bekijken, te bewerken of te beheren.",
+  "DescriptionLabel": "Beschrijving",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Developer Tools",
   "Diagram": "Diagram",
@@ -1460,7 +1461,6 @@
   "WebSearch": "Web zoeken",
   "WebSearchAI": "Webzoekactie",
   "Website": "Website",
-  "WelcomeDescription": "AI Forms stelt u in staat om formulieren te creëren, te distribueren en de inzendingen te verzamelen — allemaal op één plek.",
   "WelcomeFeature1": "Creëer PDF-formulieren uit sjablonen of vanaf nul",
   "WelcomeFeature1Title": "Slimme Formuliercreatie",
   "WelcomeFeature2": "Bemonitor direct de voortgang en inzendingen",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "Wanneer het saldo daalt tot {{min}}, wordt de portemonnee automatisch aangevuld tot {{max}}.",
   "WhenBalanceGoesBellow": "Als het saldo onder",
   "WhiteLabel": "Logo instellingen",
-  "WhiteLabelSubtitle": "Voer uw bedrijfsnaam in, upload het logo en pas de styling aan aan uw huisstijl.",
   "WhiteLabelTooltip": "De afmetingen zijn weergegeven voor de Retina schermen. Voor beeldschermen met standaardresoluties worden de breedte en hoogte van het logo bij het uploaden dienovereenkomstig aangepast.",
   "WhoFilledItOut": "Wie heeft het ingevuld",
   "WhoFilledItOutPrompt": "Toon alle personen die het formulier \"{{formName}}\" hebben ingevuld",
@@ -1498,6 +1497,5 @@
   "YourName": "Uw naam",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
-  "DescriptionLabel": "Beschrijving"
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
 }

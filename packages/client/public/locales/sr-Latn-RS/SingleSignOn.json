@@ -17,6 +17,7 @@
   "idpAuthRequest": "Proveri potpis autentifikacionih odgovora",
   "idpCertificates": "Javni sertifikati IdP-a",
   "idpCertificatesTooltip": "Javni sertifikati Identitetskog pružaoca koji se koriste za verifikaciju ili dekripciju (ili oboje) zahteva i odgovora od IdP-a.",
+  "IdpEntityId": "IdP Entity Id",
   "idpSignExitRequest": "Provera potpisa zahteva za odjavljivanje",
   "idpSigningAlgorithm": "Podrazumevani algoritam za proveru potpisa",
   "idpSignResponseRequest": "Provera potpisa odgovora na odjavljivanje",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "Omogućite ovu opciju ako želite da automatski dodate korisnike iz SSO servisa u vaš prostor.",
   "UploadXML": "Učitajte metapodatke iz XML-a da biste automatski popunili potrebna polja.",
   "UploadXMLPlaceholder": "URL za IdP metapodatke XML",
-  "UsedFor": "Koristi za",
-  "IdpEntityId": "IdP Entity Id"
+  "UsedFor": "Koristi za"
 }

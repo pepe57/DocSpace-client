@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "Вы будете автоматически перенаправлены в раздел {{sectionName}} через 5 секунд.",
   "AIChat": "ИИ-чат",
   "AIInstructions": "Инструкции ИИ",
+  "AIProviderAndModel": "{{aiProvider}} и модель",
   "CreateChat": "Создать чат",
   "CreateChatDescription": "Чтобы начать, перейдите на вкладку {{aiChat}}.",
   "EmptyKnowledgeDescription": "Файлы, загруженные сюда, будут проиндексированы и использованы в качестве контекста на вкладке {{aiChat}}. Добавьте файлы (размером до 10 МБ каждый), чтобы задавать вопросы ИИ, генерировать контент или совместно работать с информацией.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Примечание:</1> Качество ответа может различаться в зависимости от модели; для достижения наилучших результатов рекомендуется использовать более новые модели.",
   "ResultStorage": "Хранилище результатов",
   "UploadFilesDevice": "Загрузите файлы с персонального устройства",
-  "UploadFilesPortal": "Загрузите файлы из {{sectionNameFirst}} или {{sectionNameSecond}}",
-  "AIProviderAndModel": "{{aiProvider}} и модель"
+  "UploadFilesPortal": "Загрузите файлы из {{sectionNameFirst}} или {{sectionNameSecond}}"
 }

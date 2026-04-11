@@ -21,6 +21,5 @@
   "UserAgentMaxAvailableRoleWarning": "Konuklar ve Kullanıcılar, Ajan yöneticisi olarak atanemez. Sadece Oda ve {{productName}} yöneticileri belirtilen rol için uygundur.",
   "UserMaxAvailableRoleWarning": "Konuklar ve Kullanıcılar Oda yöneticisi olarak atanamaz. Belirtilen rol için yalnızca Oda ve {{productName}} yöneticileri uygundur.",
   "UsersAlreadyAdded": "Bazı kullanıcılar zaten eklenmiş",
-  "UsersCannotBeAdded": "Devre dışı bırakılmış kişiler bir odaya eklenemez.",
-  "InviteLinkCopySuccess": "Bağlantı kopyalandı"
+  "UsersCannotBeAdded": "Devre dışı bırakılmış kişiler bir odaya eklenemez."
 }

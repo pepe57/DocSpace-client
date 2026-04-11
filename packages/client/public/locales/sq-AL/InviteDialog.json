@@ -21,6 +21,5 @@
   "UserAgentMaxAvailableRoleWarning": "Vizitorët dhe Përdoruesit nuk mund të caktohen si menaxherë të Agjentëve. Vetëm administratorët e Dhomës dhe {{productName}} janë të përshtatshëm për rolin e specifikuar.",
   "UserMaxAvailableRoleWarning": "Vizitorët dhe përdoruesit nuk mund të caktohen si menaxherë të dhomës. Vetëm administratorët e dhomës dhe {{productName}} janë të përshtatshëm për rolin e specifikuar.",
   "UsersAlreadyAdded": "Disa përdorues janë shtuar tashmë",
-  "UsersCannotBeAdded": "Kontaktet e çaktivizuara nuk mund të shtohen në një dhomë",
-  "InviteLinkCopySuccess": "Lidhja është kopjuar"
+  "UsersCannotBeAdded": "Kontaktet e çaktivizuara nuk mund të shtohen në një dhomë"
 }

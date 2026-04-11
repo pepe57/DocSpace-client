@@ -398,6 +398,7 @@
   "DenyAccess": "Odbij pristup",
   "DenyAccessDescription": "Nema pristupa za pregled, uređivanje ili upravljanje fajlovima ili fasciklama.",
   "DenyAccessDescriptionDocument": "Nema pristupa za pregled, uređivanje ili upravljanje ovim fajlom.",
+  "DescriptionLabel": "Opis",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Alati programera",
   "Diagram": "Dijagram",
@@ -1460,7 +1461,6 @@
   "WebSearch": "Veb pretraga",
   "WebSearchAI": "Pretraga na webu",
   "Website": "Vebsajt",
-  "WelcomeDescription": "AI Forms vam pomaže da kreirate, distribuirate i prikupite podneske formulara — sve na jednom mestu.",
   "WelcomeFeature1": "Kreirajte PDF forme iz predložaka ili od nule",
   "WelcomeFeature1Title": "Kreiranje pametnih formulara",
   "WelcomeFeature2": "Pratite napredak i podneske trenutno",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "Kada stanje računa padne na {{min}}, novčanik će biti automatski dopunjen do {{max}}.",
   "WhenBalanceGoesBellow": "Kada stanje računa padne ispod",
   "WhiteLabel": "Podešavanja logotipa",
-  "WhiteLabelSubtitle": "Unesite naziv svoje kompanije, otpremite logotip i prilagodite stil da odgovara vašem brendu.",
   "WhiteLabelTooltip": "Veličine su prikazane za Retina ekrane. Za ekrane sa standardnim rezolucijama, širina i visina logotipa će biti automatski prilagođene prilikom otpremanja.",
   "WhoFilledItOut": "Ko je to popunio",
   "WhoFilledItOutPrompt": "Prikažite sve osobe koje su popunile formular \"{{formName}}\"",
@@ -1498,6 +1497,5 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vaš red",
-  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva.",
-  "DescriptionLabel": "Opis"
+  "YouWillBeContacted": "Prodajni tim će vas kontaktirati nakon kreiranja zahteva."
 }

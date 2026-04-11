@@ -1,5 +1,6 @@
 {
   "ActionCannotBeUndoneGuests": "Seçilmiş deaktiv qonaqlar {{productName}} məhsulundan silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
+  "ActionCannotBeUndoneUsers": "Seçilmiş deaktiv istifadəçilər {{productName}}-dən silinəcək. Bu əməliyyat geri qaytarıla bilməz.",
   "CannotReassignFiles": "Eyni anda birdən çox istifadəçini silsəniz, onların fayllarını başqa istifadəçilərə təyin edə bilməzsiniz.",
   "DeleteGroupGuestsSuccessMessage": "Qonaqlar uğurla silindi.",
   "DeleteGroupUsersSuccessMessage": "İstifadəçilər müvəffəqiyyətlə silinmişdir.",
@@ -17,6 +18,5 @@
   "SuccessfullyDeleteGuestInfoMessage": "Qonaq uğurla silindi",
   "SuccessfullyDeleteUserInfoMessage": "İstifadəçi müvəffəqiyyətlə silinmişdir",
   "ToBeAbleToReassignData": "Məlumatı yenidən təyin etmək üçün bir istifadəçini silin.",
-  "UserFilesRemovalScope": "Şəxsi məlumatlar, bu istifadəçinin {{sectionNameFirst}} və {{sectionNameSecond}} bölmələrindəki bütün fayl və qovluqlar həmişəlik silinəcək.",
-  "ActionCannotBeUndoneUsers": "Seçilmiş deaktiv istifadəçilər {{productName}}-dən silinəcək. Bu əməliyyat geri qaytarıla bilməz."
+  "UserFilesRemovalScope": "Şəxsi məlumatlar, bu istifadəçinin {{sectionNameFirst}} və {{sectionNameSecond}} bölmələrindəki bütün fayl və qovluqlar həmişəlik silinəcək."
 }

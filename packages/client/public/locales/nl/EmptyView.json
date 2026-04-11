@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Profiteer van de uitgebreide tekstverwerkingsfuncties.",
   "CreateForm": "Maak een nieuw PDF formulier",
   "CreateFormDescription": "Verzamel stemmen, vraag meningen en sla gegevens op met behulp van PDF formulieren",
+  "CreateNewAIAgent": "Maak een nieuwe agent",
   "CreateNewFileDescription": "Begin te werken in de kamer door bestanden of mappen aan te maken",
   "CreateNewFileTitle": "Maak een nieuw bestand",
   "CreatePresentation": "Maak een nieuwe presentatie",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Er zijn nog geen gedeelde items.",
   "EmptyTemplatesDescription": "U kunt een sjabloon maken van een kamer in de Kamer sectie",
   "EmptyTemplatesTitle": "Hier zijn nog geen sjablonen",
+  "EmptyViewDescription": "Aan de slag met snelle acties:",
   "FormFolderDefaultDescription": "Plaats hier PDF formulieren of upload ze vanaf {{productName}} of apparaat.",
   "FormFolderDefaultTitle": "Hier zijn nog geen formulieren ",
   "FormFolderDefaultUserDescription": "De formulieren die door de beheerders zijn geüpload, worden hier weergegeven.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Uploaden vanaf apparaat",
   "UploadFromPortalTitle": "Uploaden van {{productName}}",
   "UploadPDFFormOptionDescription": "Selecteer een PDF formulier dat beschikbaar is in {{productName}} en upload het naar de kamer.",
-  "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer",
-  "CreateNewAIAgent": "Maak een nieuwe agent",
-  "EmptyViewDescription": "Aan de slag met snelle acties:"
+  "VirtualDataRoomEmptyTitle": "Welkom bij de Virtuele Data Kamer"
 }

@@ -23,7 +23,8 @@
       "Bash(grep -rn \"FileSizeExceedsLimit\\\\|FilesRejectedDueToFormat\\\\|FilesSizeExceedsLimit\\\\|FolderSizeExceedsLimit\\\\|FoldersSizeExceedsLimit\\\\|WelcomeDescription\" /Users/alexeysafronov/Git/Gitea/DocSpace/client/packages/*/src /Users/alexeysafronov/Git/Gitea/DocSpace/client/libs --include=\"*.ts\" --include=\"*.tsx\" --include=\"*.js\" --include=\"*.jsx\")",
       "Bash(grep -l \"WelcomeDescription\" /Users/alexeysafronov/Git/Gitea/DocSpace/client/public/locales/en/*.json /Users/alexeysafronov/Git/Gitea/DocSpace/client/packages/client/public/locales/en/*.json)",
       "Bash(grep -rn '\"Description\"' /Users/alexeysafronov/Git/Gitea/DocSpace/client/packages/*/src /Users/alexeysafronov/Git/Gitea/DocSpace/client/libs --include=\"*.ts\" --include=\"*.tsx\" --include=\"*.js\")",
-      "Bash(sed -i '' 's/t\\(\"GetCode\"\\)/t\\(\"GetCodeToInsert\"\\)/g' /Users/alexeysafronov/Git/Gitea/DocSpace/client/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/GetCodeBlock.js)"
+      "Bash(sed -i '' 's/t\\(\"GetCode\"\\)/t\\(\"GetCodeToInsert\"\\)/g' /Users/alexeysafronov/Git/Gitea/DocSpace/client/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/sub-components/GetCodeBlock.js)",
+      "Bash(awk '{print $1}')"
     ],
     "additionalDirectories": [
       "/Users/alexeysafronov/Documents/Obsidian Vault/DocSpace/Translations"

@@ -77,6 +77,7 @@
   "DataImportComplete": "Nhập dữ liệu đã hoàn thành",
   "DataImportDescription": "Nhập dữ liệu từ dịch vụ của bên thứ ba vào {{organizationName}} {{productName}}. Việc nhập dữ liệu cho phép chuyển dữ liệu như tất cả người dùng, tài liệu cá nhân và tài liệu dùng chung của họ.",
   "DataImportProcessing": "Đang xử lý nhập dữ liệu",
+  "DeactivateOrDeleteSpace": "Vô hiệu hóa hoặc xóa không gian.",
   "DefaultSettings": "Cài đặt mặc định",
   "DefaultTemplateApplied": "Mẫu mặc định mới đã được áp dụng.",
   "DefaultTemplateRestored": "Mẫu mặc định đã được khôi phục.",
@@ -316,11 +317,8 @@
   "UseUpperCase": "Sử dụng chữ viết hoa",
   "WantToCancelDataImport": "Bạn có muốn hủy nhập dữ liệu không?",
   "WantToCancelUpload": "Bạn có muốn hủy tải lên không?",
-  "WebhooksDescription": "Thực hiện các hành động tùy chỉnh cùng với bất kỳ ứng dụng hoặc trang web nào bạn đang sử dụng dựa trên các sự kiện khác nhau trong {{organizationName}} {{productName}}.",
-  "WithoutEmailHint": "Bạn chưa có người dùng nào có email. Vui lòng chuyển sang bước tiếp theo.",
-  "LogoLightSmallPortal": "Logo cho cổng thông tin",
-  "ThirdPartyBackupStorageDescription": "Bản sao lưu có thể được lưu vào bộ nhớ của bên thứ ba. Trước tiên, bạn cần kết nối dịch vụ tương ứng trong phần 'Tích hợp'. Nếu không, các cài đặt sau sẽ không hoạt động.",
   "WantToContinueQuota": "Bạn có muốn tiếp tục hoặc thay đổi hạn mức lưu trữ người dùng không?",
+  "WebhooksDescription": "Thực hiện các hành động tùy chỉnh cùng với bất kỳ ứng dụng hoặc trang web nào bạn đang sử dụng dựa trên các sự kiện khác nhau trong {{organizationName}} {{productName}}.",
   "WhiteLabelLogoSubtitle": "Tải lên logo có nền trong suốt (PNG, SVG, JPG) cho giao diện sáng và tối, hoặc tạo ngay lập tức bằng cách nhập logo của bạn bên dưới.",
-  "DeactivateOrDeleteSpace": "Vô hiệu hóa hoặc xóa không gian."
+  "WithoutEmailHint": "Bạn chưa có người dùng nào có email. Vui lòng chuyển sang bước tiếp theo."
 }

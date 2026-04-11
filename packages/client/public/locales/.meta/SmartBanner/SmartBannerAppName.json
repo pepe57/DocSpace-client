@@ -3,7 +3,7 @@
   "content": "{{organizationName}} Documents",
   "content_en_sha1_hash": "db01b8765ec0bbda9628a90d2f7c09d5e66f8c63",
   "created_at": "2025-05-19T21:30:50.041Z",
-  "updated_at": "2026-04-08T22:07:15.408Z",
+  "updated_at": "2026-04-11T19:53:45.166Z",
   "comment": {
     "text": "This translation key is used to display the title of a smart banner component on mobile devices. It will be translated as \"{{organizationName}} Documents\" and appears in the banner's title field when displayed on touch-enabled devices.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/SmartBanner/index.js",
       "line_number": 94,
-      "context": "navigator.msMaxTouchPoints > 0;\n \n return isMobile && isBannerVisible && ready && isTouchDevice ? (\n <div id=\"smart-banner\" style={{ paddingBottom: \"80px\" }}>\n <SmartBanner\n title={t(\"SmartBanner:AppName\", {\n organizationName: logoText,\n })}\n author=\"Ascensio System SIA\"\n button={t(\"Common:View\")}\n force={force}",
+      "context": "navigator.msMaxTouchPoints > 0;\n \n return isMobile && isBannerVisible && ready && isTouchDevice ? (\n <div id=\"smart-banner\" style={{ paddingBottom: \"80px\" }}>\n <SmartBanner\n title={t(\"SmartBanner:SmartBannerAppName\", {\n organizationName: logoText,\n })}\n author=\"Ascensio System SIA\"\n button={t(\"Common:View\")}\n force={force}",
       "module": "/packages/client"
     }
   ],

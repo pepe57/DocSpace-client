@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "විශාල වචන සැකසීමේ හැකියාවන් උපයෝගි කර ගන්න.",
   "CreateForm": "නව PDF ආකෘතියක් සාදන්න",
   "CreateFormDescription": "PDF පෝරම භාවිතයෙන් ඡන්ද එකතු කරන්න, අදහස් ලබා ගන්න සහ දත්ත ගබඩා කරන්න",
+  "CreateNewAIAgent": "නව නියෝජිතයෙකු සාදන්න",
   "CreateNewFileDescription": "කාමරයේ වැඩ ආරම්භ කිරීමට, ෆයිල් හෝ ෆෝල්ඩර් සාදන්න.",
   "CreateNewFileTitle": "නව ගොනුවක් සාදන්න",
   "CreatePresentation": "නව ඉදිරිපත් කිරීමක් සාදන්න",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "බෙදාගත් අයිතම තවමත් නොමැත",
   "EmptyTemplatesDescription": "ඔබ Room කොටසෙහි කාමරයකින් අච්චුවක් නිර්මාණය කළ හැකිය.",
   "EmptyTemplatesTitle": "මේ වන විට සැකිලි නොමැත.",
+  "EmptyViewDescription": "ඉක්මන් ක්‍රියාකාරකම් සමඟ ආරම්භ කරන්න:",
   "FormFolderDefaultDescription": "PDF ආකෘති මෙහි පහත දැමූවන් හෝ {{productName}} හෝ ඔබේ උපකරණයෙන් උඩුගත කරන්න.",
   "FormFolderDefaultTitle": "කිසිදු පෝරමයක් මෙහි තවමත් නැත.",
   "FormFolderDefaultUserDescription": "පරිපාලකවරු විසින් උඩුගත කරන ලද ආකෘතීන් මෙහි දිස්වනු ඇත.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "උපාංගයෙන් උඩුගත කරන්න",
   "UploadFromPortalTitle": "{{productName}} වෙතින් උඩුගත කරන්න",
   "UploadPDFFormOptionDescription": "{{productName}} හි ඇති පෙරනිර්මාණය කරන ලද PDF ආකෘතියක් තෝරාගෙන එය කාමරයට උඩුගත කරන්න.",
-  "VirtualDataRoomEmptyTitle": "ආදරයෙන් පිළිගන්නවා, අන්තර්ජාල දත්ත කාමරයට!",
-  "CreateNewAIAgent": "නව නියෝජිතයෙකු සාදන්න",
-  "EmptyViewDescription": "ඉක්මන් ක්‍රියාකාරකම් සමඟ ආරම්භ කරන්න:"
+  "VirtualDataRoomEmptyTitle": "ආදරයෙන් පිළිගන්නවා, අන්තර්ජාල දත්ත කාමරයට!"
 }

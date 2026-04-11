@@ -1,5 +1,6 @@
 {
   "ActionCannotBeUndoneGuests": "Избраните деактивирани гости ще бъдат премахнати от {{productName}}. Това действие не може да бъде отменено.",
+  "ActionCannotBeUndoneUsers": "Избраните деактивирани потребители ще бъдат премахнати от {{productName}}. Това действие не може да бъде отменено.",
   "CannotReassignFiles": "Ако изтриете няколко потребителя наведнъж, не можете да преназначите техните файлове на други потребители.",
   "DeleteGroupGuestsSuccessMessage": "Гостите бяха изтрити успешно.",
   "DeleteGroupUsersSuccessMessage": "Потребителите бяха изтрити успешно.",
@@ -17,6 +18,5 @@
   "SuccessfullyDeleteGuestInfoMessage": "Гостът беше успешно изтрит",
   "SuccessfullyDeleteUserInfoMessage": "Потребителят беше изтрит успешно",
   "ToBeAbleToReassignData": "За да можете да преназначавате данни, изтривайте потребителите един по един.",
-  "UserFilesRemovalScope": "Лични данни, всички файлове и папки в раздели {{sectionNameFirst}} и {{sectionNameSecond}} на този потребител ще бъдат изтрити за постоянно.",
-  "ActionCannotBeUndoneUsers": "Избраните деактивирани потребители ще бъдат премахнати от {{productName}}. Това действие не може да бъде отменено."
+  "UserFilesRemovalScope": "Лични данни, всички файлове и папки в раздели {{sectionNameFirst}} и {{sectionNameSecond}} на този потребител ще бъдат изтрити за постоянно."
 }

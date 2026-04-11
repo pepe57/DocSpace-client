@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "Դուք կվերահուշվեք {{sectionName}} բաժնում 5 վայրկյանում։",
   "AIChat": "ԱԲ-Չատ",
   "AIInstructions": "ԱԲ հրահանգներ",
+  "AIProviderAndModel": "{{aiProvider}} և մոդել",
   "CreateChat": "Ստեղծել չատ",
   "CreateChatDescription": "«{{aiChat}}» ներդիրը ստանալու համար։",
   "EmptyKnowledgeDescription": "Այստեղ վերբեռնված ֆայլերը ինդեքսավորվելու են և կօգտագործվեն որպես համատեքստ {{aiChat}} ներդիրում։ Ավելացրեք ֆայլեր (յուրաքանչյուրը մինչև 10 ՄԲ)՝ AI հարցեր հարցնելու, բովանդակություն գեներացնելու կամ տեղեկատվության վրա համագործակցելու համար։",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Նշում.</1> Պատասխանի որակը կարող է տարբեր լինել մոդելից կախված, լավագույն արդյունքների համար խորհուրդ է տրվում ավելի նոր մոդելներ։",
   "ResultStorage": "Արդյունքների պահպանում",
   "UploadFilesDevice": "Վերբեռնեք ֆայլեր ձեր անձնական սարքից",
-  "UploadFilesPortal": "Բեռնեք ֆայլեր {{sectionNameFirst}} կամ {{sectionNameSecond}} կայքերից",
-  "AIProviderAndModel": "{{aiProvider}} և մոդել"
+  "UploadFilesPortal": "Բեռնեք ֆայլեր {{sectionNameFirst}} կամ {{sectionNameSecond}} կայքերից"
 }

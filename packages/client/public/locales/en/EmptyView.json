@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Take advantage of vast word processing functionality.",
   "CreateForm": "Create a new PDF form",
   "CreateFormDescription": "Collect votes, get opinions and store data using PDF forms",
+  "CreateNewAIAgent": "Create a new agent",
   "CreateNewFileDescription": "Start working in the room by creating files or folders",
   "CreateNewFileTitle": "Create a new file",
   "CreatePresentation": "Create a new presentation",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "There are no shared items yet",
   "EmptyTemplatesDescription": "You can create a template from a room in the Room section",
   "EmptyTemplatesTitle": "No templates here yet",
+  "EmptyViewDescription": "Get started with quick actions:",
   "FormFolderDefaultDescription": "Drop PDF forms here or upload from {{productName}} or device.",
   "FormFolderDefaultTitle": "No forms here yet",
   "FormFolderDefaultUserDescription": "The forms uploaded by the administrators will be appeared here.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Upload from device",
   "UploadFromPortalTitle": "Upload from {{productName}}",
   "UploadPDFFormOptionDescription": "Select a ready PDF form available in {{productName}} and upload it to the room.",
-  "VirtualDataRoomEmptyTitle": "Welcome to the Virtual Data Room",
-  "CreateNewAIAgent": "Create a new agent",
-  "EmptyViewDescription": "Get started with quick actions:"
+  "VirtualDataRoomEmptyTitle": "Welcome to the Virtual Data Room"
 }

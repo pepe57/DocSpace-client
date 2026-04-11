@@ -398,6 +398,7 @@
   "DenyAccess": "Zamítnout přístup",
   "DenyAccessDescription": "Nemáte přístup ke zobrazení, úpravě nebo správě souborů nebo složek.",
   "DenyAccessDescriptionDocument": "Nemáte přístup ke zobrazení, úpravě nebo správě tohoto souboru.",
+  "DescriptionLabel": "Popis",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Nástroje pro vývojáře",
   "Diagram": "Diagram",
@@ -1460,7 +1461,6 @@
   "WebSearch": "Webové vyhledávání",
   "WebSearchAI": "Vyhledávání webu",
   "Website": "Webová stránka",
-  "WelcomeDescription": "AI Forms vám pomáhá vytvářet, distribuovat a sbírat odevzdání formulářů — vše na jednom místě.",
   "WelcomeFeature1": "Vytvořit PDF formuláře z šablon nebo od nuly",
   "WelcomeFeature1Title": "Vytváření chytrých formulářů",
   "WelcomeFeature2": "Sledujte pokrok a odeslání okamžitě",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "Když zůstatek klesne na {{min}}, peněženka bude automaticky doplněna na {{max}}.",
   "WhenBalanceGoesBellow": "Když zůstatek klesne pod",
   "WhiteLabel": "Nastavení Loga",
-  "WhiteLabelSubtitle": "Zadejte název společnosti, nahrajte logo a přizpůsobte styl tak, aby odpovídal vaší značce.",
   "WhiteLabelTooltip": "Velikosti jsou uvedeny pro displeje Retina. U displejů se standardním rozlišením se šířka a výška loga při nahrávání odpovídajícím způsobem změní.",
   "WhoFilledItOut": "Kdo to vyplnil",
   "WhoFilledItOutPrompt": "Seznam všech osob, které vyplnily formulář \"{{formName}}\"",
@@ -1498,6 +1497,5 @@
   "YourName": "Vaše jméno",
   "YourPrice": "Vaše cena",
   "YourTurn": "Jste na řadě",
-  "YouWillBeContacted": "Po vytvoření požadavku vás bude kontaktovat prodejní tým.",
-  "DescriptionLabel": "Popis"
+  "YouWillBeContacted": "Po vytvoření požadavku vás bude kontaktovat prodejní tým."
 }

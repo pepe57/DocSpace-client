@@ -38,6 +38,7 @@
   "Descending": "下降",
   "DestinationFolderId": "宛先フォルダーID",
   "DisplayColumns": "ファイル行の列の表示",
+  "EditorPresetDescription": "対応するルームからファイルを編集できるようにエディタを埋め込みます。",
   "ElementCalledAfterClicking": "クリックした後に要素が呼び出されます",
   "ElementItself": "要素自体",
   "EmbedCodeSuccessfullyCopied": "挿入するコードを取得する",
@@ -47,6 +48,7 @@
   "EnterPage": "ページ数を入力",
   "EnterWidth": "幅を入力",
   "EventLog": "イベントログ",
+  "FeedbackAndSupportLink": "フィードバック＆サポート",
   "FileContentCopy": "ファイル内容のコピー制限 ",
   "FileFilter": "ファイルフィルター",
   "FileId": "ファイルID",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "開いたフォルダ/ルーム内のファイル検索。",
   "FileTypeDisplay": "ファイルタイプの表示",
   "FrameId": "フレームID",
+  "GetCodeToInsert": "挿入するコードを取得する",
   "Header": "ヘッダー",
   "HeaderDescription": "モバイル版でヘッダーを無効にして、{{productName}}セクションへのアクセスを制限することができます。デスクトップ版で左メニューを無効にするのと同じです。",
   "HelperText": "ヘルプテキスト",
@@ -147,8 +150,5 @@
   "UploadLimits": "アップロード制限",
   "UploadMode": "アップロードモード",
   "ViewerDescription": "ビューアを埋め込み、対応するルームからファイルを開いて閲覧できるようにします。",
-  "VoidReturn": "空白",
-  "EditorPresetDescription": "対応するルームからファイルを編集できるようにエディタを埋め込みます。",
-  "FeedbackAndSupportLink": "フィードバック＆サポート",
-  "GetCodeToInsert": "挿入するコードを取得する"
+  "VoidReturn": "空白"
 }

@@ -1,5 +1,6 @@
 {
   "AuthViaNTLM": "NTLMによる認証",
+  "EnableSMTPSSL": "SSLを有効に",
   "EnterDomain": "ドメインを入力",
   "EnterLogin": "ログイン名",
   "EnterPort": "ポートを入力",
@@ -9,6 +10,5 @@
   "Port": "ポート",
   "SenderDisplayName": "送信者の表示名",
   "SenderEmailAddress": "送信者の電子メールアドレス",
-  "SendTestMail": "テスト　メールを送信する",
-  "EnableSMTPSSL": "SSLを有効に"
+  "SendTestMail": "テスト　メールを送信する"
 }

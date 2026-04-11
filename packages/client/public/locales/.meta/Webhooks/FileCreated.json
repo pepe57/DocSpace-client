@@ -3,13 +3,20 @@
   "content": "File created",
   "content_en_sha1_hash": "c31110d4975b0bad1ea1e2be1bc41fb9a13d5680",
   "created_at": "2025-05-19T21:30:49.723Z",
-  "updated_at": "2026-04-10T15:22:27.297Z",
+  "updated_at": "2026-04-11T19:53:45.262Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/Webhooks.helpers.ts",
+      "line_number": 46,
+      "context": "return t(\"GroupCreated\");\n case WebhookTriggers.GroupUpdated:\n return t(\"GroupUpdated\");\n case WebhookTriggers.GroupDeleted:\n return t(\"GroupDeleted\");\n case WebhookTriggers.FileCreated:\n return t(\"FileCreated\");\n case WebhookTriggers.FileUploaded:\n return t(\"FileUploaded\");\n case WebhookTriggers.FileUpdated:\n return t(\"FileUpdated\");",
+      "module": "/packages/client"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

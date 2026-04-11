@@ -398,6 +398,7 @@
   "DenyAccess": "Estä pääsy",
   "DenyAccessDescription": "Ei käyttöoikeutta tarkastella, muokata tai hallita tiedostoja tai kansioita.",
   "DenyAccessDescriptionDocument": "Ei käyttöoikeutta tarkastella, muokata tai hallita tätä tiedostoa.",
+  "DescriptionLabel": "Kuvaus",
   "DeveloperLicense": "Kehittäjä",
   "DeveloperTools": "Kehittäjän työkalut",
   "Diagram": "Kaavio",
@@ -1460,7 +1461,6 @@
   "WebSearch": "Verkkohaku",
   "WebSearchAI": "Hakukonehaku",
   "Website": "Sivusto",
-  "WelcomeDescription": "AI Forms mahdollistaa lomakkeiden luomisen, jakelun ja lähetysten keräämisen — kaiken yhdessä paikassa.",
   "WelcomeFeature1": "Luo PDF-lomakkeita malleista tai alusta alkaen",
   "WelcomeFeature1Title": "Älylomakkeen luominen",
   "WelcomeFeature2": "Seuraa edistymistä ja lähetyksiä välittömästi",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "Kun saldo laskee {{min}} tasolle, lompakko täydennetään automaattisesti {{max}} tasolle.",
   "WhenBalanceGoesBellow": "Kun saldo laskee alle",
   "WhiteLabel": "Logo Asetukset",
-  "WhiteLabelSubtitle": "Syötä yrityksesi nimi, lataa logo ja muokkaa tyyli brändäykseesi sopivaksi. ",
   "WhiteLabelTooltip": "Koot näytetään Retinanäytöille. Logon leveys ja korkeus vakioresoluution näytöille muutetaan vastaavasti latauksen yhteydessä.",
   "WhoFilledItOut": "Kuka täytti sen",
   "WhoFilledItOutPrompt": "Listaa kaikki henkilöt, jotka ovat täyttäneet lomakkeen \"{{formName}}\"",
@@ -1498,6 +1497,5 @@
   "YourName": "Nimesi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
-  "DescriptionLabel": "Kuvaus"
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
 }

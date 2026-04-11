@@ -1,5 +1,6 @@
 {
   "ActionCannotBeUndoneGuests": "Mysafirët e selektuar me aftësi të kufizuara do të hiqen nga {{productName}}. Ky veprim nuk mund të zhbëhet.",
+  "ActionCannotBeUndoneUsers": "Përdoruesit e selektuar me aftësi të kufizuara do të hiqen nga {{productName}}. Ky veprim nuk mund të zhbëhet.",
   "CannotReassignFiles": "Në qoftë se fshini disa përdorues njëherësh, nuk mund t'i ricaktoni skedarët e tyre përdoruesve të tjerë.",
   "DeleteGroupGuestsSuccessMessage": "Mysafirët janë fshirë me sukses.",
   "DeleteGroupUsersSuccessMessage": "Përdoruesit janë fshirë me sukses.",
@@ -17,6 +18,5 @@
   "SuccessfullyDeleteGuestInfoMessage": "Mysafiri është fshirë me sukses",
   "SuccessfullyDeleteUserInfoMessage": "Përdoruesi është fshirë me sukses",
   "ToBeAbleToReassignData": "Për të qenë në gjendje të ricaktoni të dhëna, fshini një përdorues në të njëjtën kohë.",
-  "UserFilesRemovalScope": "Të dhënat personale, të gjithë skedarët dhe dosjet në seksionet {{sectionNameFirst}} dhe {{sectionNameSecond}} të këtij përdoruesi do të fshihen përgjithmonë.",
-  "ActionCannotBeUndoneUsers": "Përdoruesit e selektuar me aftësi të kufizuara do të hiqen nga {{productName}}. Ky veprim nuk mund të zhbëhet."
+  "UserFilesRemovalScope": "Të dhënat personale, të gjithë skedarët dhe dosjet në seksionet {{sectionNameFirst}} dhe {{sectionNameSecond}} të këtij përdoruesi do të fshihen përgjithmonë."
 }

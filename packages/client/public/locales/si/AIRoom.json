@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "තත්පර 5 කින් ඔබව ස්වයංක්‍රීයව {{sectionName}} කොටසට හරවා යවනු ලැබේ.",
   "AIChat": "AI-චැට්",
   "AIInstructions": "AI උපදෙස්",
+  "AIProviderAndModel": "{{aiProvider}} සහ මාදිලිය",
   "CreateChat": "කතාබහ සාදන්න",
   "CreateChatDescription": "ආරම්භ කිරීමට, {{aiChat}} ටැබයට යන්න.",
   "EmptyKnowledgeDescription": "මෙහි උඩුගත කරන ගොනු {{aiChat}} ටැබය තුළ දර්ශකගත කරනු ලබන අතර සන්දර්භයක් ලෙස භාවිතා කරනු ඇත. AI ප්‍රශ්න ඇසීමට, අන්තර්ගතය ජනනය කිරීමට හෝ තොරතුරු මත සහයෝගයෙන් කටයුතු කිරීමට ගොනු එකතු කරන්න (එකකට MB 10 දක්වා).",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>සටහන:</1> ප්‍රතිචාර ගුණාත්මකභාවය මාදිලිය අනුව වෙනස් විය හැකිය; හොඳම ප්‍රතිඵල සඳහා නව මාදිලි නිර්දේශ කෙරේ.",
   "ResultStorage": "ප්‍රතිඵල ගබඩාව",
   "UploadFilesDevice": "ඔබගේ පුද්ගලික උපාංගයෙන් ගොනු උඩුගත කරන්න",
-  "UploadFilesPortal": "{{sectionNameFirst}} හෝ {{sectionNameSecond}} වෙතින් ගොනු උඩුගත කරන්න",
-  "AIProviderAndModel": "{{aiProvider}} සහ මාදිලිය"
+  "UploadFilesPortal": "{{sectionNameFirst}} හෝ {{sectionNameSecond}} වෙතින් ගොනු උඩුගත කරන්න"
 }

@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "充分利用强大的文字处理功能。",
   "CreateForm": "新建 PDF 表单",
   "CreateFormDescription": "使用 PDF 表单收集投票、获取意见和存储数据",
+  "CreateNewAIAgent": "创建新智能体",
   "CreateNewFileDescription": "通过创建文件或文件夹开始在房间中工作",
   "CreateNewFileTitle": "创建新文件",
   "CreatePresentation": "新建演示文稿",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "暂无共享内容",
   "EmptyTemplatesDescription": "你可以在“房间”板块中从现有房间创建一个模板",
   "EmptyTemplatesTitle": "这里还没有模板",
+  "EmptyViewDescription": "开始使用快速操作：",
   "FormFolderDefaultDescription": "将 PDF 表单拖放到此处或从{{productName}}或设备上传。",
   "FormFolderDefaultTitle": "此处尚无表单",
   "FormFolderDefaultUserDescription": "管理员上传的表单将显示在此处。",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "从设备上传",
   "UploadFromPortalTitle": "从{{productName}}上传",
   "UploadPDFFormOptionDescription": "选择{{productName}}中可用的现成 PDF 表单并将其上传到房间。",
-  "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间",
-  "CreateNewAIAgent": "创建新智能体",
-  "EmptyViewDescription": "开始使用快速操作："
+  "VirtualDataRoomEmptyTitle": "欢迎来到虚拟数据房间"
 }

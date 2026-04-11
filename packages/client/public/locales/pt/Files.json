@@ -1,5 +1,6 @@
 {
   "AccessLevel": "Nível de acesso",
+  "AccessSettingsTitle": "Definições de acesso",
   "AccessToTemplate": "Acesso ao template",
   "ActionCannotUndone": "Esta ação não pode ser desfeita. Tem certeza de que deseja continuar?",
   "AddAdminByNameOrEmail": "Adicione um administrador por nome ou endereço de correio eletrónico",
@@ -8,6 +9,7 @@
   "AddUsersOrGroupsDescription": "Os administradores adicionados poderão criar salas utilizando este modelo.",
   "AddUsersOrGroupsInfo": "Apenas <1>{{productName}}</1> e <1>Administradores de salas</1> são mostrados aqui",
   "AddUsersOrGroupsInfoGroups": "Apenas <1>{{productName}}</1> e <1>Administradores de salas</1> dos grupos selecionados poderão criar salas utilizando este modelo.",
+  "AddUsersOrGroupsTitle": "Adicionar Utilizadores ou Grupos",
   "AfterFilesWillBeDeletedPermanently": "será eliminado permanentemente.",
   "AgentRemoved": "Agente removido",
   "AgentsRemoved": "Agentes removidos",
@@ -52,6 +54,7 @@
   "DeleteLink": "Excluir link",
   "DeleteSharedCustomPublic": "O link será excluído permanentemente. Você não poderá desfazer essa ação.",
   "DeleteSharedLink": "O link anterior ficará indisponível. Um novo link compartilhado será criado.",
+  "DeleteTemplateAction": "Elimine o template",
   "DeletingPermanently": "Eliminar permanentemente",
   "DeletingVersion": "Eliminação da versão",
   "DisableNotifications": "Desativar notificações",
@@ -168,6 +171,7 @@
   "RoomsPinned": "Salas fixadas: {{count}}",
   "RoomsRemoved": "Salas removidas",
   "RoomsUnpinned": "Salas liberadas: {{count}}",
+  "RoomTagsLabel": "Etiquetas da Sala",
   "RoomTagsTooltip": "As etiquetas aplicar-se-ão à sala que será criada com base neste templates.",
   "RoomTemplate": "Templates de Sala",
   "RoomTemplateDescription": "Utilize este templates para criar rapidamente uma nova sala.",
@@ -177,6 +181,8 @@
   "ScheduledTrashMove": "{{date}} será movida para {{sectionName}}",
   "SendByEmail": "Enviar por e-mail",
   "SharedBy": "Compartilhado por",
+  "ShareFolderAction": "Compartilhar pasta",
+  "ShareFolderRoomDescription": "Uma nova sala será criada e todo o conteúdo da pasta selecionada será copiado para lá. Depois, você pode convidar outros usuários para colaborar nos arquivos de uma sala.",
   "SharePDFFormModalDescription": "Uma nova sala será criada e o formulário PDF será copiado para lá. Você pode então convidar outros usuários para preencher o formulário na sala.",
   "SharePDFFormModalTitle": "Compartilhar formulário PDF",
   "ShareRoom": "Sala compartilhada",
@@ -217,11 +223,5 @@
   "WillBeDeletedPermanently": "{{date}} será eliminado permanentemente",
   "YouLeftTheAgent": "Você saiu do agente",
   "YouLeftTheRoom": "Você saiu da sala",
-  "YourUserTypeHasChanged": "O seu tipo de utilizador foi alterado para <1>“{{userType}}”</1> pelo administrador {{productName}} <1>{{adminName}}</1>.",
-  "AccessSettingsTitle": "Definições de acesso",
-  "AddUsersOrGroupsTitle": "Adicionar Utilizadores ou Grupos",
-  "RoomTagsLabel": "Etiquetas da Sala",
-  "ShareFolderAction": "Compartilhar pasta",
-  "ShareFolderRoomDescription": "Uma nova sala será criada e todo o conteúdo da pasta selecionada será copiado para lá. Depois, você pode convidar outros usuários para colaborar nos arquivos de uma sala.",
-  "DeleteTemplateAction": "Elimine o template"
+  "YourUserTypeHasChanged": "O seu tipo de utilizador foi alterado para <1>“{{userType}}”</1> pelo administrador {{productName}} <1>{{adminName}}</1>."
 }

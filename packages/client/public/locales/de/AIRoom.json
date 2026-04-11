@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "Sie werden in 5 Sekunden automatisch zum Abschnitt {{sectionName}} weitergeleitet.",
   "AIChat": "KI-Chat",
   "AIInstructions": "KI-Anweisungen",
+  "AIProviderAndModel": "{{aiProvider}} und Modell",
   "CreateChat": "Chat erstellen",
   "CreateChatDescription": "Gehen Sie zur Registerkarte {{aiChat}}, um zu beginnen.",
   "EmptyKnowledgeDescription": "Dateien, die hier hochgeladen werden, werden indiziert und als Kontext im {{aiChat}}-Tab verwendet. Fügen Sie Dateien hinzu (jeweils bis zu 10 MB), um Fragen an die KI zu stellen, Inhalte zu generieren oder Informationen zu bearbeiten.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Hinweis:</1> Die Antwortqualität kann je nach Modell variieren; für beste Ergebnisse werden neuere Modelle empfohlen.",
   "ResultStorage": "Ergebnisspeicherung",
   "UploadFilesDevice": "Laden Sie Dateien von Ihrem persönlichen Gerät hoch",
-  "UploadFilesPortal": "Laden Sie Dateien von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch",
-  "AIProviderAndModel": "{{aiProvider}} und Modell"
+  "UploadFilesPortal": "Laden Sie Dateien von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch"
 }

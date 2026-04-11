@@ -1,5 +1,6 @@
 {
   "AccessLevel": "ප්‍රවේශ මට්ටම",
+  "AccessSettingsTitle": "පහතපත් කරවු සැකසුම්",
   "AccessToTemplate": "ප්‍රස්තාරයට ප්‍රවේශය",
   "ActionCannotUndone": "මෙම ක්‍රියාව අහෝසි කළ නොහැකියි. ඔබට ඉදිරියට යාමට අවශ්‍යද?",
   "AddAdminByNameOrEmail": "පරිපාලකයාවුන්ගේ නම හෝ විද්‍යුත් ලිපිනයෙන් එකතු කරන්න",
@@ -8,6 +9,7 @@
   "AddUsersOrGroupsDescription": "මෙම සැකිල්ල භාවිතයෙන් එකතු කරන ලද පරිපාලකවරුන් කාමර නිර්මාණය කිරීමට හැකි වනු ඇත.",
   "AddUsersOrGroupsInfo": "මෙහි දැක්වෙන්නේ <1>{{productName}}</1> සහ <1>කාමර පරිපාලකයින්</1> පමණි. මෙහි දැක්වේ",
   "AddUsersOrGroupsInfoGroups": "පමණක් <1>{{productName}}</1> සහ තෝරාගත් සමූහවල <1>කාමර පරිපාලකයන්</1> මෙම සැකිල්ල භාවිතයෙන් කාමර නිර්මාණය කිරීමට හැකි වනු ඇත.",
+  "AddUsersOrGroupsTitle": "පරිශීලකයින් හෝ කණ්ඩායම් එක් කරන්න",
   "AfterFilesWillBeDeletedPermanently": "ගොනු ස්ථිරවම මකා දැමූ පසු.",
   "AgentRemoved": "නියෝජිතයා ඉවත් කරන ලදී",
   "AgentsRemoved": "නියෝජිතයන් ඉවත් කරන ලදී",
@@ -52,6 +54,7 @@
   "DeleteLink": "සබැඳිය මකන්න",
   "DeleteSharedCustomPublic": "මෙම සම්බන්ධතාවය ස්ථිරවම මකා දමනු ලැබේ. ඔබට මෙම ක්‍රියාව අහෝසි කිරීමට නොහැකි වනු ඇත.",
   "DeleteSharedLink": "කලින් සබැඳිය තවදුරටත් නොතිබෙනු ඇත. නව බෙදාගත් සබැඳියක් සෑදෙනු ඇත.",
+  "DeleteTemplateAction": "ප්‍රස්තාරය මකන්න",
   "DeletingPermanently": "නැවත නොහැකිව මකනය කිරීම",
   "DeletingVersion": "වෙළුම මකවන ලද්දකි",
   "DisableNotifications": "දැනුම්දීම් අබල කරන්න",
@@ -168,6 +171,7 @@
   "RoomsPinned": "මුදුනට ඇමිණු කාමර: {{count}}",
   "RoomsRemoved": "කාමර ඉවත් කෙරිණි",
   "RoomsUnpinned": "ගැළවූ කාමර: {{count}}",
+  "RoomTagsLabel": "රූම් ටැග් (Room Tags)",
   "RoomTagsTooltip": "මෙම සැකිල්ල මත පදනම්ව නිර්මාණය කරනු ලබන කාමරයට ටැග් අදාළ වනු ඇත.",
   "RoomTemplate": "කොටස සැකිල්ල",
   "RoomTemplateDescription": "මෙම සැකිල්ල භාවිතයෙන් නව කාමරයක් ඉක්මණින් නිර්මාණය කරන්න.",
@@ -177,6 +181,8 @@
   "ScheduledTrashMove": "{{date}} {{sectionName}} වෙත ගෙන යනු ලැබේ",
   "SendByEmail": "වි-තැපෑලෙන් යවන්න",
   "SharedBy": "බෙදාගත්තේ",
+  "ShareFolderAction": "කාමරය බෙදාගන්න",
+  "ShareFolderRoomDescription": "නව කාමරයක් සෑදී තේරූ බහාලුමේ සමස්ත අන්තර්ගතය එයට පිටපත් වනු ඇත. පසුව, වෙනත් පරිශ්‍රීලකයින් සමඟ කාමරයේ තිබෙන ගොනුවල සහයෝගයෙන් වැඩ කිරීමට ආරාධනා කිරීමට හැකිය.",
   "SharePDFFormModalDescription": "නව කාමරයක් නිර්මාණය කර PDF ආකෘතිය එහි පිටපත් කරනු ලැබේ. කාමරයේ ඇති ආකෘතිය පිරවීම සඳහා ඔබට වෙනත් පරිශීලකයින්ට ආරාධනා කළ හැකිය.",
   "SharePDFFormModalTitle": "PDF පෝරමය බෙදාගන්න",
   "ShareRoom": "කාමරය බෙදාගන්න",
@@ -217,11 +223,5 @@
   "WillBeDeletedPermanently": "{{date}} ස්ථිරව මකා දැමෙනු ඇත.",
   "YouLeftTheAgent": "ඔබ නියෝජිතයා හැර ගොස් ඇත.",
   "YouLeftTheRoom": "ඔබ කාමරය හැරගියා",
-  "YourUserTypeHasChanged": "ඔබේ පරිශීලක වර්ගය <1>“{{userType}}”</1> ලෙසින් {{productName}} පරිපාලකයෙකු වන <1>{{adminName}}</1> විසින් වෙනස් කර ඇත.",
-  "AccessSettingsTitle": "පහතපත් කරවු සැකසුම්",
-  "AddUsersOrGroupsTitle": "පරිශීලකයින් හෝ කණ්ඩායම් එක් කරන්න",
-  "RoomTagsLabel": "රූම් ටැග් (Room Tags)",
-  "ShareFolderAction": "කාමරය බෙදාගන්න",
-  "ShareFolderRoomDescription": "නව කාමරයක් සෑදී තේරූ බහාලුමේ සමස්ත අන්තර්ගතය එයට පිටපත් වනු ඇත. පසුව, වෙනත් පරිශ්‍රීලකයින් සමඟ කාමරයේ තිබෙන ගොනුවල සහයෝගයෙන් වැඩ කිරීමට ආරාධනා කිරීමට හැකිය.",
-  "DeleteTemplateAction": "ප්‍රස්තාරය මකන්න"
+  "YourUserTypeHasChanged": "ඔබේ පරිශීලක වර්ගය <1>“{{userType}}”</1> ලෙසින් {{productName}} පරිපාලකයෙකු වන <1>{{adminName}}</1> විසින් වෙනස් කර ඇත."
 }

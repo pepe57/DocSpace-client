@@ -398,6 +398,7 @@
   "DenyAccess": "يمنع الدخول",
   "DenyAccessDescription": "لا يوجد صلاحية لعرض الملفات أو المجلدات أو تحريرها أو إدارتها. ",
   "DenyAccessDescriptionDocument": "لا يوجد صلاحية لعرض هذا الملف أو تحريره أو إدارته.",
+  "DescriptionLabel": "الوصف",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "ادوات المطورين",
   "Diagram": "مخطط",
@@ -1460,7 +1461,6 @@
   "WebSearch": "البحث على الويب",
   "WebSearchAI": "بحث الويب",
   "Website": "موقع إلكتروني",
-  "WelcomeDescription": "تساعدك نماذج الذكاء الاصطناعي على إنشاء وتوزيع وجمع إرسالات النماذج — كل ذلك في مكان واحد.",
   "WelcomeFeature1": "إنشاء نماذج PDF من قوالب أو من الصفر",
   "WelcomeFeature1Title": "إنشاء النماذج الذكية",
   "WelcomeFeature2": "متابعة التقدم والتقديمات فوراً",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "عندما ينخفض الرصيد إلى {{min}}، سيتم شحن المحفظة تلقائيًا إلى {{max}}.",
   "WhenBalanceGoesBellow": "عندما ينخفض الرصيد إلى ما دون",
   "WhiteLabel": "إعدادات الشعار",
-  "WhiteLabelSubtitle": "أدخل اسم شركتك وقم بتحميل الشعار وخصص التصميم ليلائم علامتك التجارية.",
   "WhiteLabelTooltip": "يتم عرض الأحجام لشاشات ريتينا. بالنسبة لشاشات العرض ذات الدقة القياسية ، سيتم تغيير حجم عرض الشعار وارتفاعه وفقًا لذلك عند التحميل.",
   "WhoFilledItOut": "من قام بتعبئته",
   "WhoFilledItOutPrompt": "عرض جميع الأشخاص الذين قاموا بتعبئة النموذج \"{{formName}}\"",
@@ -1498,6 +1497,5 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
-  "DescriptionLabel": "الوصف"
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
 }

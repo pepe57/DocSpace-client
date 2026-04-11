@@ -17,6 +17,7 @@
   "idpAuthRequest": "Xác minh chữ ký phản hồi xác thực",
   "idpCertificates": "Chứng chỉ công khai IdP",
   "idpCertificatesTooltip": "Chứng chỉ công khai của nhà cung cấp danh tính được sử dụng để xác minh hoặc giải mã (hoặc cả hai) các yêu cầu và phản hồi từ IdP.",
+  "IdpEntityId": "Id thực thể IdP",
   "idpSignExitRequest": "Xác minh chữ ký yêu cầu đăng xuất",
   "idpSigningAlgorithm": "Thuật toán Xác minh Ký tên Mặc định",
   "idpSignResponseRequest": "Yêu cầu chữ ký phản hồi đăng xuất",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "Bật tùy chọn này nếu bạn muốn tự động thêm người dùng từ dịch vụ SSO vào không gian của mình.",
   "UploadXML": "Tải siêu dữ liệu từ XML để tự động điền vào các trường bắt buộc.",
   "UploadXMLPlaceholder": "URL tới Siêu dữ liệu XML IdP",
-  "UsedFor": "Sử dụng cho",
-  "IdpEntityId": "Id thực thể IdP"
+  "UsedFor": "Sử dụng cho"
 }

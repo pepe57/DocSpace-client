@@ -1,5 +1,6 @@
 {
   "AccessLevel": "Уровень доступа",
+  "AccessSettingsTitle": "Настройки доступа",
   "AccessToTemplate": "Доступ к шаблону",
   "ActionCannotUndone": "Это действие не может быть отменено. Продолжить?",
   "AddAdminByNameOrEmail": "Добавить администратора по имени или по электронной почте",
@@ -8,6 +9,7 @@
   "AddUsersOrGroupsDescription": "Добавленные администраторы смогут создавать комнаты, используя этот шаблон.",
   "AddUsersOrGroupsInfo": "Здесь показаны только <1>{{productName}}</1> и <1>Администраторы комнат</1>",
   "AddUsersOrGroupsInfoGroups": "Только <1>{{productName}}</1> и <1>Администраторы комнат</1> из выбранных групп смогут создавать комнаты, используя этот шаблон.",
+  "AddUsersOrGroupsTitle": "Добавить Пользователей или Группы",
   "AfterFilesWillBeDeletedPermanently": "Затем файлы будут удалены навсегда.",
   "AgentRemoved": "Агент удален",
   "AgentsRemoved": "Агенты удалены",
@@ -52,6 +54,7 @@
   "DeleteLink": "Удалить ссылку",
   "DeleteSharedCustomPublic": "Ссылка будет удалена навсегда. Это действие нельзя отменить.",
   "DeleteSharedLink": "Предыдущая ссылка станет недоступной. Будет создана новая общая ссылка.",
+  "DeleteTemplateAction": "Удалить шаблон",
   "DeletingPermanently": "Удаление навсегда",
   "DeletingVersion": "Удаление версии",
   "DisableNotifications": "Выключить уведомления",
@@ -168,6 +171,7 @@
   "RoomsPinned": "Закреплено комнат: {{count}}",
   "RoomsRemoved": "Комнаты удалены",
   "RoomsUnpinned": "Откреплено комнат: {{count}}",
+  "RoomTagsLabel": "Тэги комнаты",
   "RoomTagsTooltip": "Теги будут применены к комнате, которая будет создана на основе этого шаблона.",
   "RoomTemplate": "Шаблон комнаты",
   "RoomTemplateDescription": "Используйте этот шаблон для быстрого создания новой комнаты.",
@@ -177,6 +181,8 @@
   "ScheduledTrashMove": "{{date}} будет перемещено в {{sectionName}}",
   "SendByEmail": "Отправить по почте",
   "SharedBy": "Предоставил доступ:",
+  "ShareFolderAction": "Предоставить доступ к папке",
+  "ShareFolderRoomDescription": "Будет создана новая комната, и все содержимое выбранной папки будет скопировано в нее. После этого вы сможете пригласить других пользователей для совместной работы над файлами в комнате.",
   "SharePDFFormModalDescription": "Будет создана новая комната, и туда будет скопирована PDF-форма. Затем вы сможете пригласить других пользователей заполнить форму в комнате.",
   "SharePDFFormModalTitle": "Поделиться PDF-формой",
   "ShareRoom": "Предоставить доступ к комнате",
@@ -217,11 +223,5 @@
   "WillBeDeletedPermanently": "{{date}} будет удален навсегда",
   "YouLeftTheAgent": "Вы покинули агента",
   "YouLeftTheRoom": "Вы покинули комнату",
-  "YourUserTypeHasChanged": "Ваш тип пользователя был изменен на <1>«{{userType}}»</1> администратором {{productName}} <1>{{adminName}}</1>.",
-  "AccessSettingsTitle": "Настройки доступа",
-  "AddUsersOrGroupsTitle": "Добавить Пользователей или Группы",
-  "RoomTagsLabel": "Тэги комнаты",
-  "ShareFolderAction": "Предоставить доступ к папке",
-  "ShareFolderRoomDescription": "Будет создана новая комната, и все содержимое выбранной папки будет скопировано в нее. После этого вы сможете пригласить других пользователей для совместной работы над файлами в комнате.",
-  "DeleteTemplateAction": "Удалить шаблон"
+  "YourUserTypeHasChanged": "Ваш тип пользователя был изменен на <1>«{{userType}}»</1> администратором {{productName}} <1>{{adminName}}</1>."
 }

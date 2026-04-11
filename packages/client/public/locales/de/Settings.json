@@ -77,6 +77,7 @@
   "DataImportComplete": "Datenimport abgeschlossen",
   "DataImportDescription": "Importieren Sie Daten von einem Drittanbieterdienst in {{organizationName}} {{productName}}. Der Datenimport ermöglicht die Übertragung von Daten wie allen Benutzern, ihren persönlichen und freigegebenen Dokumenten.",
   "DataImportProcessing": "Verarbeitung des Datenimports",
+  "DeactivateOrDeleteSpace": "Deaktivieren oder entfernen Sie den Bereich.",
   "DefaultSettings": "Standardeinstellungen",
   "DefaultTemplateApplied": "Die neue Standardvorlage wurde angewendet.",
   "DefaultTemplateRestored": "Die Standardvorlage wurde wiederhergestellt.",
@@ -316,11 +317,8 @@
   "UseUpperCase": "Großbuchstaben verwenden",
   "WantToCancelDataImport": "Möchten Sie den Datenimport abbrechen?",
   "WantToCancelUpload": "Möchten Sie den Upload abbrechen?",
-  "WebhooksDescription": "Führen Sie benutzerdefinierte Aktionen für jede Anwendung oder Website durch, die Sie verwenden, basierend auf verschiedenen Ereignissen in {{organizationName}} {{productName}}.",
-  "WithoutEmailHint": "Es gibt keine Benutzer ohne E-Mails. Bitte fahren Sie mit dem nächsten Schritt fort.",
-  "LogoLightSmallPortal": "Logo für das Portal",
-  "ThirdPartyBackupStorageDescription": "Backups können auf einem Speicher eines Drittanbieters gespeichert werden. Zuvor müssen Sie den entsprechenden Dienst im Abschnitt 'Integration' verbinden. Andernfalls sind die folgenden Einstellungen nicht verfügbar",
   "WantToContinueQuota": "Möchten Sie fortfahren oder das Benutzer-Speicherlimit ändern?",
+  "WebhooksDescription": "Führen Sie benutzerdefinierte Aktionen für jede Anwendung oder Website durch, die Sie verwenden, basierend auf verschiedenen Ereignissen in {{organizationName}} {{productName}}.",
   "WhiteLabelLogoSubtitle": "Laden Sie Logos mit transparentem Hintergrund (PNG, SVG, JPG) für helle und dunkle Themes hoch oder erstellen Sie sofort eines, indem Sie unten Ihr Logo eingeben.",
-  "DeactivateOrDeleteSpace": "Deaktivieren oder entfernen Sie den Bereich."
+  "WithoutEmailHint": "Es gibt keine Benutzer ohne E-Mails. Bitte fahren Sie mit dem nächsten Schritt fort."
 }

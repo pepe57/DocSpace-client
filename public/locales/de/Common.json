@@ -398,6 +398,7 @@
   "DenyAccess": "Zugriff verweigern",
   "DenyAccessDescription": "Kein Zugriff zum Anzeigen, Bearbeiten oder Verwalten von Dateien oder Ordnern.",
   "DenyAccessDescriptionDocument": "Kein Zugriff zum Anzeigen, Bearbeiten oder Verwalten dieser Datei.",
+  "DescriptionLabel": "Beschreibung",
   "DeveloperLicense": "Entwickler",
   "DeveloperTools": "Entwicklungstools",
   "Diagram": "Diagramm",
@@ -1460,7 +1461,6 @@
   "WebSearch": "Websuche",
   "WebSearchAI": "Websuche",
   "Website": "Webseite",
-  "WelcomeDescription": "AI Forms ermöglicht Ihnen die Erstellung, Verteilung und Sammlung von Formularantworten – alles an einem Ort.",
   "WelcomeFeature1": "PDF-Formulare aus Vorlagen oder von Grund auf erstellen",
   "WelcomeFeature1Title": "Erstellung von Smart Forms",
   "WelcomeFeature2": "Fortschritt und Einreichungen in Echtzeit überwachen",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "Wenn der Kontostand auf {{min}} sinkt, wird das Wallet automatisch auf {{max}} aufgeladen.",
   "WhenBalanceGoesBellow": "Wenn der Kontostand fällt unter",
   "WhiteLabel": "Logo Einstellungen",
-  "WhiteLabelSubtitle": "Geben Sie Ihren Firmennamen ein, laden Sie das Logo hoch, und passen Sie das Design an Ihr Branding an.",
   "WhiteLabelTooltip": "Die Größen sind für Retina-Displays angegeben. Für Displays mit Standardauflösungen werden die Breite und Höhe des Logos beim Hochladen entsprechend angepasst.",
   "WhoFilledItOut": "Wer hat es ausgefüllt",
   "WhoFilledItOutPrompt": "Liste alle Personen, die das Formular \"{{formName}}\" ausgefüllt haben",
@@ -1498,6 +1497,5 @@
   "YourName": "Ihr Name",
   "YourPrice": "Ihr Preis",
   "YourTurn": "Jetzt sind Sie dran",
-  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren.",
-  "DescriptionLabel": "Beschreibung"
+  "YouWillBeContacted": "Das Verkaufsteam wird Sie nach der Erstellung der Anfrage kontaktieren."
 }

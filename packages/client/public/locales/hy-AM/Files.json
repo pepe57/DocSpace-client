@@ -1,5 +1,6 @@
 {
   "AccessLevel": "Մուտքի մակարդակ",
+  "AccessSettingsTitle": "Մուտքի կարգավորումներ",
   "AccessToTemplate": "Մուտք կաղապար",
   "ActionCannotUndone": "Այս գործողությունը հնարավոր չէ հետարկել: Վստա՞հ եք, որ ցանկանում եք շարունակել:",
   "AddAdminByNameOrEmail": "Ավելացնել ադմին անունով կամ էլ. հասցեով",
@@ -8,6 +9,7 @@
   "AddUsersOrGroupsDescription": "Ավելացված ադմինիստրատորները կկարողանան ստեղծել սենյակներ այս թեմփլեյտով։",
   "AddUsersOrGroupsInfo": "Միայն <1>{{productName}}</1> և <1>Room admins</1>",
   "AddUsersOrGroupsInfoGroups": "Միայն <1>{{productName}}</1>-ը և <1>սենյակների ադմինները</1> ընտրված խմբերից կկարողանան ստեղծել սենյակներ այս թեմփլեյտով։",
+  "AddUsersOrGroupsTitle": "Ավելացնել օգտատերեր կամ խմբեր",
   "AfterFilesWillBeDeletedPermanently": "Հետո ֆայլերն ընդմիշտ կջնջվեն:",
   "AgentRemoved": "Գործակալը հեռացվել է",
   "AgentsRemoved": "Գործակալները հեռացվել են",
@@ -52,6 +54,7 @@
   "DeleteLink": "Ջնջել հղումը",
   "DeleteSharedCustomPublic": "Հղումը ընդմիշտ կջնջվի: Դուք չեք կարողանա հետարկել այս գործողությունը:",
   "DeleteSharedLink": "Նախորդ հղումն անհասանելի կդառնա։ Նոր համօգտագործվող հղում կստեղծվի։",
+  "DeleteTemplateAction": "Ջնջել կաղապար",
   "DeletingPermanently": "Ընդմիշտ ջնջել",
   "DeletingVersion": "Ջնջել տարբերակը",
   "DisableNotifications": "Անջատել ծանուցումները",
@@ -168,6 +171,7 @@
   "RoomsPinned": "Ամրացված սենյակներ՝{{count}}",
   "RoomsRemoved": "Սենյակները հեռացվեցին",
   "RoomsUnpinned": "Սենյակներն ապաամրացված են՝{{count}}",
+  "RoomTagsLabel": "Սենյակի պիտակներ",
   "RoomTagsTooltip": "Պիտակները կկիրառվեն այս կաղապարի հիման վրա ստեղծվելիք սենյակի համար:",
   "RoomTemplate": "Սենյակի կաղապար",
   "RoomTemplateDescription": "Օգտագործեք այս կաղապարը նոր սենյակ արագ ստեղծելու համար",
@@ -177,6 +181,8 @@
   "ScheduledTrashMove": "{{date}} կտեղափոխվի {{sectionName}}։",
   "SendByEmail": "Ուղարկել էլփոստով",
   "SharedBy": "Կիսվել է`",
+  "ShareFolderAction": "Համօգտագործել թղթապանակը",
+  "ShareFolderRoomDescription": "Կստեղծվի նոր սենյակ, և ընտրված թղթապանակի ամբողջ բովանդակությունը կպատճենվի այնտեղ: Այնուհետև կարող եք հրավիրել այլ օգտատերերի՝ համագործակցելու սենյակում գտնվող ֆայլերի շուրջ:",
   "SharePDFFormModalDescription": "Կստեղծվի նոր սենյակ, և PDF ձևը կպատճենվի այնտեղ: Այնուհետև կարող եք հրավիրել այլ օգտատերերի՝ սենյակում ձևը լրացնելու համար:",
   "SharePDFFormModalTitle": "Կիսվել PDF ձևով",
   "ShareRoom": "Կիսվեք սենյակով",
@@ -217,11 +223,5 @@
   "WillBeDeletedPermanently": "{{date}}-ն ընդմիշտ կջնջվի",
   "YouLeftTheAgent": "Դուք լքել եք գործակալին",
   "YouLeftTheRoom": "Դուք դուրս եք եկել սենյակից",
-  "YourUserTypeHasChanged": "Օգտատիրոջ տեսակը փոխվել է <1>«{{userType}}»</1> by the {{productName}} ադմին <1>{{adminName}}</1>",
-  "AccessSettingsTitle": "Մուտքի կարգավորումներ",
-  "AddUsersOrGroupsTitle": "Ավելացնել օգտատերեր կամ խմբեր",
-  "RoomTagsLabel": "Սենյակի պիտակներ",
-  "ShareFolderAction": "Համօգտագործել թղթապանակը",
-  "ShareFolderRoomDescription": "Կստեղծվի նոր սենյակ, և ընտրված թղթապանակի ամբողջ բովանդակությունը կպատճենվի այնտեղ: Այնուհետև կարող եք հրավիրել այլ օգտատերերի՝ համագործակցելու սենյակում գտնվող ֆայլերի շուրջ:",
-  "DeleteTemplateAction": "Ջնջել կաղապար"
+  "YourUserTypeHasChanged": "Օգտատիրոջ տեսակը փոխվել է <1>«{{userType}}»</1> by the {{productName}} ադմին <1>{{adminName}}</1>"
 }

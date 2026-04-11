@@ -8,6 +8,7 @@
   "DisablingRoomGroups": "Poistetaan huoneryhmät",
   "DisablingRoomGroupsDescription": "Ryhmät tallennetaan, mutta ne ovat piilotettuina. Aktivoi ne uudelleen Profiilissa, Tiedostojen hallinnassa.",
   "EditRoomGroups": "Muokkaa huoneryhmiä",
+  "EmptyGroupRoomsDescription": "Täällä ei ole huoneita. Kokeile lisätä huone tai poistaa tämä ryhmä.",
   "GroupHasBeenDeleted": "Ryhmä on poistettu",
   "GroupIcon": "Ryhmäkuvake",
   "GroupIsEmpty": "Ryhmä on tyhjä",
@@ -24,6 +25,5 @@
   "RoomGroupingSettingDescription": "Voit ryhmitellä huoneet kansioihin ja vaihtaa niiden välillä helposti.",
   "RoomRemovedFromGroup": "Valittu huone on poistettu <1>{{groupName}}</1>:sta.",
   "RoomsAddedToGroup": "Valitut huoneet on lisätty <1>{{groupName}}</1>:een.",
-  "RoomsRemovedFromGroup": "Valitut huoneet on poistettu <1>{{groupName}}</1>:sta.",
-  "EmptyGroupRoomsDescription": "Täällä ei ole huoneita. Kokeile lisätä huone tai poistaa tämä ryhmä."
+  "RoomsRemovedFromGroup": "Valitut huoneet on poistettu <1>{{groupName}}</1>:sta."
 }

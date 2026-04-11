@@ -1,5 +1,6 @@
 {
   "AuthViaNTLM": "NTLM හරහා සත්‍යාපනය",
+  "EnableSMTPSSL": "SSL සක්‍රිය කරන්න",
   "EnterDomain": "ඩොමේන් එක ඇතුළත් කරන්න",
   "EnterLogin": "ලොගින් නම ඇතුළත් කරන්න",
   "EnterPort": "පෝට් එක ඇතුළත් කරන්න",
@@ -9,6 +10,5 @@
   "Port": "පෝට්",
   "SenderDisplayName": "යවන්නාගේ ප්‍රදර්ශන නාමය",
   "SenderEmailAddress": "යවන්නාගේ වි-තැපැල් ලිපිනය",
-  "SendTestMail": "අත්හදා බැලීමේ තැපෑලක් යවන්න",
-  "EnableSMTPSSL": "SSL සක්‍රිය කරන්න"
+  "SendTestMail": "අත්හදා බැලීමේ තැපෑලක් යවන්න"
 }

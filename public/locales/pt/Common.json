@@ -398,6 +398,7 @@
   "DenyAccess": "Negar acesso",
   "DenyAccessDescription": "Sem acesso para visualizar, editar ou gerenciar arquivos ou pastas.",
   "DenyAccessDescriptionDocument": "Sem acesso para visualizar, editar ou gerenciar este arquivo.",
+  "DescriptionLabel": "Descrição",
   "DeveloperLicense": "Desenvolvedor",
   "DeveloperTools": "Ferramentas de Desenvolvedor",
   "Diagram": "Diagrama",
@@ -1460,7 +1461,6 @@
   "WebSearch": "Pesquisa na web",
   "WebSearchAI": "Busca na Web",
   "Website": "Website",
-  "WelcomeDescription": "AI Forms permite que você crie, distribua e colete submissões de formulário — tudo em um só lugar.",
   "WelcomeFeature1": "Criar formulários PDF a partir de modelos ou do zero",
   "WelcomeFeature1Title": "Criação de Formulário Inteligente",
   "WelcomeFeature2": "Acompanhe o progresso e as submissões instantaneamente",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "Quando o saldo cair para {{min}}, a carteira será automaticamente recarregada para {{max}}.",
   "WhenBalanceGoesBellow": "Quando o saldo fica abaixo",
   "WhiteLabel": "Definições de logótipo",
-  "WhiteLabelSubtitle": "Introduza o nome da sua empresa, carregue o logótipo, e personalize o estilo para combinar com a sua imagem de marca.",
   "WhiteLabelTooltip": "Os tamanhos são mostrados para os ecrãs Retina. Para os ecrãs com resoluções padrão, a largura e altura do logótipo serão redimensionadas em conformidade no momento do carregamento.",
   "WhoFilledItOut": "Quem preencheu",
   "WhoFilledItOutPrompt": "Listar todas as pessoas que preencheram o formulário \"{{formName}}\"",
@@ -1498,6 +1497,5 @@
   "YourName": "O seu nome",
   "YourPrice": "O seu preço",
   "YourTurn": "A sua vez",
-  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido.",
-  "DescriptionLabel": "Descrição"
+  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido."
 }

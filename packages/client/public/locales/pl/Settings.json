@@ -77,6 +77,7 @@
   "DataImportComplete": "Import danych został zakończony",
   "DataImportDescription": "Importuj dane z usługi podmiotu trzeciego do {{organizationName}} {{productName}}. Import danych umożliwia transfer danych, takich jak wszyscy użytkownicy oraz ich prywatne i współdzielone dokumenty.",
   "DataImportProcessing": "Przetwarzanie importu danych",
+  "DeactivateOrDeleteSpace": "Dezaktywuj lub usuń przestrzeń.",
   "DefaultSettings": "Ustawienia domyślne",
   "DefaultTemplateApplied": "Zastosowano nowy szablon domyślny.",
   "DefaultTemplateRestored": "Szablon domyślny został przywrócony.",
@@ -316,11 +317,8 @@
   "UseUpperCase": "Użyj wielkich liter",
   "WantToCancelDataImport": "Czy chcesz anulować import danych?",
   "WantToCancelUpload": "Czy chcesz anulować przesyłanie?",
-  "WebhooksDescription": "Wykonuj niestandardowe akcje po stronie dowolnej aplikacji lub witryny, której używasz, na podstawie różnych zdarzeń w {{organizationName}} {{productName}}.",
-  "WithoutEmailHint": "Nie masz użytkowników bez adresu e-mail. Przejdź do kolejnego kroku.",
-  "LogoLightSmallPortal": "Logo portalu",
-  "ThirdPartyBackupStorageDescription": "Kopia zapasowa może być przechowywana przez strony trzecie. Najpierw musisz jednak podłączyć odpowiednią usługę w sekcji 'Integracja'. W przeciwnym razie niniejsze ustawienia będą nieaktywne.",
   "WantToContinueQuota": "Chcesz kontynuować czy zmienić limit pamięci użytkownika?",
+  "WebhooksDescription": "Wykonuj niestandardowe akcje po stronie dowolnej aplikacji lub witryny, której używasz, na podstawie różnych zdarzeń w {{organizationName}} {{productName}}.",
   "WhiteLabelLogoSubtitle": "Prześlij logotypy z przezroczystym tłem (PNG, SVG, JPG) dla jasnych i ciemnych motywów lub wygeneruj jeden natychmiast, wpisując nazwę swojego logo poniżej.",
-  "DeactivateOrDeleteSpace": "Dezaktywuj lub usuń przestrzeń."
+  "WithoutEmailHint": "Nie masz użytkowników bez adresu e-mail. Przejdź do kolejnego kroku."
 }

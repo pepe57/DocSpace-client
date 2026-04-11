@@ -1,5 +1,6 @@
 {
   "AccessLevel": "Raven dostopa",
+  "AccessSettingsTitle": "Nastavitve dostopa",
   "AccessToTemplate": "Dostop do predloge",
   "ActionCannotUndone": "Tega dejanja ni mogoče razveljaviti. Ste prepričani, da želite nadaljevati?",
   "AddAdminByNameOrEmail": "Dodajte skrbnika z imenom ali e-pošto",
@@ -8,6 +9,7 @@
   "AddUsersOrGroupsDescription": "Dodani skrbniki bodo lahko ustvarili sobe s to predlogo.",
   "AddUsersOrGroupsInfo": "Tukaj je prikazani samo <1>{{productName}}</1> in <1>skrbniki sobe</1>",
   "AddUsersOrGroupsInfoGroups": "Samo <1>{{productName}}</1> in <1>skrbniki sob</1> iz izbranih skupin bodo lahko ustvarili sobe s to predlogo.",
+  "AddUsersOrGroupsTitle": "Dodaj uporabnike ali skupine",
   "AfterFilesWillBeDeletedPermanently": "Po tem bodo datoteke trajno izbrisane.",
   "AgentRemoved": "Agent odstranjen",
   "AgentsRemoved": "Agenti odstranjeni",
@@ -52,6 +54,7 @@
   "DeleteLink": "Izbriši povezavo",
   "DeleteSharedCustomPublic": "Povezava bo trajno izbrisana. Tega dejanja ne boste mogli razveljaviti.",
   "DeleteSharedLink": "Prejšnja povezava bo postala nedosegljiva. Ustvarila se bo nova skupna povezava.",
+  "DeleteTemplateAction": "Izbriši predlogo",
   "DeletingPermanently": "Trajno brisanje",
   "DeletingVersion": "Brisanje verzije",
   "DisableNotifications": "Onemogoči obvestila",
@@ -168,6 +171,7 @@
   "RoomsPinned": "Pripetih sob: {{count}}",
   "RoomsRemoved": "Sobe odstranjene",
   "RoomsUnpinned": "Odpetih sob: {{count}}",
+  "RoomTagsLabel": "Oznake sob",
   "RoomTagsTooltip": "Oznake bodo veljale za sobo, ki bo ustvarjena na podlagi te predloge.",
   "RoomTemplate": "Predloga sobe",
   "RoomTemplateDescription": "Uporabite to predlogo in hitro ustvarite novo sobo.",
@@ -177,6 +181,8 @@
   "ScheduledTrashMove": "{{date}} bo prestavljeno v {{sectionName}}",
   "SendByEmail": "Pošlji po email",
   "SharedBy": "Javno deljeno s",
+  "ShareFolderAction": "Deljena mapa",
+  "ShareFolderRoomDescription": "Ustvarila se bo nova soba in vanjo bo kopirana vsa vsebina izbrane mape. Nato lahko druge uporabnike povabite k sodelovanju pri datotekah v sobi.",
   "SharePDFFormModalDescription": "Ustvarila se bo nova soba in vanjo bo kopiran obrazec PDF. Nato lahko povabiš druge uporabnike, da izpolnijo obrazec v sobi.",
   "SharePDFFormModalTitle": "Deli PDF obrazec",
   "ShareRoom": "Deli sobo",
@@ -217,11 +223,5 @@
   "WillBeDeletedPermanently": "{{date}} bo trajno izbrisan",
   "YouLeftTheAgent": "Zapustili ste agenta.",
   "YouLeftTheRoom": "Zapustili ste sobo",
-  "YourUserTypeHasChanged": "Vaš tip uporabnika je spremenil v <1>“{{userType}}”</1> skrbnik za {{productName}} <1>{{adminName}}</1>.",
-  "AccessSettingsTitle": "Nastavitve dostopa",
-  "AddUsersOrGroupsTitle": "Dodaj uporabnike ali skupine",
-  "RoomTagsLabel": "Oznake sob",
-  "ShareFolderAction": "Deljena mapa",
-  "ShareFolderRoomDescription": "Ustvarila se bo nova soba in vanjo bo kopirana vsa vsebina izbrane mape. Nato lahko druge uporabnike povabite k sodelovanju pri datotekah v sobi.",
-  "DeleteTemplateAction": "Izbriši predlogo"
+  "YourUserTypeHasChanged": "Vaš tip uporabnika je spremenil v <1>“{{userType}}”</1> skrbnik za {{productName}} <1>{{adminName}}</1>."
 }

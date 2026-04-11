@@ -1,5 +1,6 @@
 {
   "AuthViaNTLM": "NTLM vasitəsilə identifikasiya",
+  "EnableSMTPSSL": "SSL-i aktivləşdirin",
   "EnterDomain": "Domeni daxil edin",
   "EnterLogin": "Giriş adını daxil edin",
   "EnterPort": "Port daxil edin",
@@ -9,6 +10,5 @@
   "Port": "Port",
   "SenderDisplayName": "Göndərənin Göstərilən Adı",
   "SenderEmailAddress": "Göndərənin Elektron Poçt Ünvanı",
-  "SendTestMail": "Test Poçtu Göndər",
-  "EnableSMTPSSL": "SSL-i aktivləşdirin"
+  "SendTestMail": "Test Poçtu Göndər"
 }

@@ -38,6 +38,7 @@
   "Descending": "Giảm dần",
   "DestinationFolderId": "ID thư mục đích",
   "DisplayColumns": "Hiển thị các cột trong một hàng tập tin",
+  "EditorPresetDescription": "Nhúng trình chỉnh sửa để cho phép người dùng chỉnh sửa tập tin từ phòng tương ứng.",
   "ElementCalledAfterClicking": "Phần tử sẽ được gọi sau khi nhấp vào",
   "ElementItself": "Bản thân yếu tố",
   "EmbedCodeSuccessfullyCopied": "Đã sao chép mã nhúng thành công vào bộ nhớ tạm",
@@ -47,6 +48,7 @@
   "EnterPage": "Nhập số trang",
   "EnterWidth": "Nhập chiều rộng",
   "EventLog": "Nhật ký sự kiện",
+  "FeedbackAndSupportLink": "Phản hồi & Hỗ trợ",
   "FileContentCopy": "Hạn chế sao chép nội dung tập tin",
   "FileFilter": "Bộ lọc Tập Tin",
   "FileId": "ID tập tin",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "Tìm kiếm tập tin trong thư mục/phòng đã mở.",
   "FileTypeDisplay": "Hiển thị kiểu tập tin",
   "FrameId": "Id khung",
+  "GetCodeToInsert": "Nhận mã để chèn",
   "Header": "Tiêu đề",
   "HeaderDescription": "Bạn có thể tắt tiêu đề trong phiên bản dành cho thiết bị di động để hạn chế quyền truy cập vào các phần {{productName}} (giống như tắt menu bên trái trong phiên bản dành cho máy tính để bàn).",
   "HelperText": "Văn bản trợ giúp",
@@ -147,8 +150,5 @@
   "UploadLimits": "Giới hạn tải lên",
   "UploadMode": "Chế độ tải lên",
   "ViewerDescription": "Nhúng trình xem để cho phép người dùng mở tập tin để xem từ phòng tương ứng.",
-  "VoidReturn": "Trống",
-  "EditorPresetDescription": "Nhúng trình chỉnh sửa để cho phép người dùng chỉnh sửa tập tin từ phòng tương ứng.",
-  "FeedbackAndSupportLink": "Phản hồi & Hỗ trợ",
-  "GetCodeToInsert": "Nhận mã để chèn"
+  "VoidReturn": "Trống"
 }

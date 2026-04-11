@@ -13,7 +13,9 @@
   "DeleteGroupDescription": "Nhóm {{groupName}} sẽ bị xóa. Người dùng trong nhóm sẽ không bị xóa khỏi {{productName}}. Bạn có chắc muốn tiếp tục?",
   "DeleteGroupTitle": "Xoá nhóm",
   "DeleteItem": "Bạn sắp di chuyển <strong>{{name}}</strong> đến {{trashSection}}.",
+  "DeleteItemForeverConfirm": "Bạn sắp xóa <strong>{{name}}</strong>.",
   "DeleteItemsSharedNote": "Xin lưu ý rằng nếu bạn đã chia sẻ chúng với ai đó, chúng sẽ không khả dụng. ",
+  "DeleteRoomConfirm": "Phòng <strong>\"{{roomName}}\"</strong> sẽ bị xóa vĩnh viễn. Tất cả dữ liệu và quyền truy cập của người dùng sẽ bị mất.",
   "DeleteRooms": "Các <strong>phòng đã chọn ({{count}})</strong> sẽ bị xóa vĩnh viễn. Tất cả dữ liệu và quyền truy cập của người dùng sẽ bị mất.",
   "DeleteRoomsTitle": "Xóa phòng này chứ?",
   "DeleteRoomTitle": "Xóa phòng này?",
@@ -32,7 +34,5 @@
   "ItemsDeletedAfter": "Những mục này sẽ bị xóa vĩnh viễn trong 30 ngày.",
   "ItemsPermanentlyDeleted": "Những mục này sẽ bị xóa vĩnh viễn khỏi {{trashSection}}.",
   "removeFromListDescription": "Bạn sắp xóa <1>{{title}}</1> khỏi danh sách. Bạn có chắc chắn muốn tiếp tục không?",
-  "removeFromListDescriptionPlural": "Bạn sắp xóa <1>items ({{count}})</1> khỏi danh sách. Bạn có chắc chắn muốn tiếp tục không?",
-  "DeleteItemForeverConfirm": "Bạn sắp xóa <strong>{{name}}</strong>.",
-  "DeleteRoomConfirm": "Phòng <strong>\"{{roomName}}\"</strong> sẽ bị xóa vĩnh viễn. Tất cả dữ liệu và quyền truy cập của người dùng sẽ bị mất."
+  "removeFromListDescriptionPlural": "Bạn sắp xóa <1>items ({{count}})</1> khỏi danh sách. Bạn có chắc chắn muốn tiếp tục không?"
 }

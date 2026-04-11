@@ -3,7 +3,7 @@
   "content": "Change {{productName}} owner",
   "content_en_sha1_hash": "b3bac1aca6a46d00f19fb61e5298c3e7a5b510ac",
   "created_at": "2025-05-19T21:30:56.985Z",
-  "updated_at": "2026-04-11T18:34:21.361Z",
+  "updated_at": "2026-04-11T19:53:45.171Z",
   "comment": {
     "text": "\"Change the owner of a portal. This message is used in the 'ChangePortalOwner' dialog to prompt users to update the owner of a specific portal.\"",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ChangePortalOwnerDialog/index.js",
       "line_number": 112,
-      "context": "t(\"DoTheSame\"),\n t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\", { productName: getBrandName(\"ProductName\") }),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"BackupPortal\", { productName: getBrandName(\"ProductName\") }),\n t(\"DeactivateOrDeletePortal\", { productName: getBrandName(\"ProductName\") }),\n ];",
+      "context": "t(\"DoTheSame\"),\n t(\"AppointAdmin\"),\n t(\"SetAccessRights\"),\n t(\"ManagePortal\", { productName: getBrandName(\"ProductName\") }),\n t(\"ManageUser\"),\n t(\"ChangePortalOwner:ChangeOwner\", {\n productName: getBrandName(\"ProductName\"),\n }),\n t(\"BackupPortal\", { productName: getBrandName(\"ProductName\") }),\n t(\"DeactivateOrDeleteSpace\", { productName: getBrandName(\"ProductName\") }),\n ];",
       "module": "/packages/client"
     }
   ],

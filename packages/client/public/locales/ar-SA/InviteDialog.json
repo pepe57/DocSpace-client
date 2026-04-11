@@ -21,6 +21,5 @@
   "UserAgentMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف والمستخدمين كمديرين للوكيل. مسؤولو الغرفة ومسؤولو {{productName}} فقط هم المناسبون للدور المحدد.",
   "UserMaxAvailableRoleWarning": "لا يمكن تعيين الضيوف والمستخدمين كمديري غرف. فقط مسؤولو الغرف وإدارة {{productName}} مناسبون لهذا الدور المحدد.",
   "UsersAlreadyAdded": "تمت إضافة بعض المستخدمين بالفعل",
-  "UsersCannotBeAdded": "لا يمكن إضافة جهات الاتصال المعطلة إلى الغرفة",
-  "InviteLinkCopySuccess": "تم نسخ الرابط"
+  "UsersCannotBeAdded": "لا يمكن إضافة جهات الاتصال المعطلة إلى الغرفة"
 }

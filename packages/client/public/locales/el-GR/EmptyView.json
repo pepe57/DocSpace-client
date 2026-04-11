@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Επωφεληθείτε από τις απεριόριστες λειτουργίες επεξεργασίας κειμένου.",
   "CreateForm": "Δημιουργήστε μια νέα φόρμα PDF",
   "CreateFormDescription": "Συλλέξτε ψήφους, λάβετε γνώμες και αποθηκεύστε δεδομένα χρησιμοποιώντας φόρμες PDF",
+  "CreateNewAIAgent": "Δημιουργία νέου πράκτορα",
   "CreateNewFileDescription": "Ξεκινήστε να εργάζεστε στο δωμάτιο δημιουργώντας αρχεία ή φακέλους",
   "CreateNewFileTitle": "Δημιουργία νέου αρχείου",
   "CreatePresentation": "Δημιουργήστε μια νέα παρουσίαση",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Δεν υπάρχουν κοινά αντικείμενα ακόμα",
   "EmptyTemplatesDescription": "Μπορείτε να δημιουργήσετε ένα πρότυπο από ένα δωμάτιο στην ενότητα Δωμάτιο",
   "EmptyTemplatesTitle": "Δεν υπάρχουν ακόμη πρότυπα εδώ",
+  "EmptyViewDescription": "Ξεκινήστε με γρήγορες ενέργειες:",
   "FormFolderDefaultDescription": "Αποθέστε φόρμες PDF εδώ ή μεταφορτώστε από {{productName}} ή τη συσκευή.",
   "FormFolderDefaultTitle": "Δεν υπάρχουν ακόμα φόρμες εδώ",
   "FormFolderDefaultUserDescription": "Οι φόρμες που έχουν ανεβάσει οι διαχειριστές θα εμφανιστούν εδώ.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Μεταφόρτωση από τη συσκευή",
   "UploadFromPortalTitle": "Μεταφόρτωση από {{productName}}",
   "UploadPDFFormOptionDescription": "Επιλέξτε μια έτοιμη φόρμα PDF που είναι διαθέσιμη στο {{productName}} και μεταφορτώστε την στο δωμάτιο.",
-  "VirtualDataRoomEmptyTitle": "Καλώς ήρθατε στο Εικονικό Δωμάτιο Δεδομένων",
-  "CreateNewAIAgent": "Δημιουργία νέου πράκτορα",
-  "EmptyViewDescription": "Ξεκινήστε με γρήγορες ενέργειες:"
+  "VirtualDataRoomEmptyTitle": "Καλώς ήρθατε στο Εικονικό Δωμάτιο Δεδομένων"
 }

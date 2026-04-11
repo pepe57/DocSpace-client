@@ -77,6 +77,7 @@
   "DataImportComplete": "Importimi i të dhënave përfundoi",
   "DataImportDescription": "Importoni të dhëna nga një shërbim i palës së tretë në {{organizationName}} {{productName}}. Importi i të dhënave lejon transferimin e të dhënave si të gjithë përdoruesit, dokumentet e tyre personale dhe të përbashkëta.",
   "DataImportProcessing": "Përpunimi i importit të të dhënave",
+  "DeactivateOrDeleteSpace": "Çaktivizoni ose fshini hapësirën.",
   "DefaultSettings": "Cilësimet e parazgjedhura",
   "DefaultTemplateApplied": "Template-i i paracaktuar i ri është aplikuar.",
   "DefaultTemplateRestored": "Shablloni i paracaktuar u rikuperua.",
@@ -316,11 +317,8 @@
   "UseUpperCase": "Përdorni shkronja të mëdha",
   "WantToCancelDataImport": "Dëshironi të anuloni importimin e të dhënave?",
   "WantToCancelUpload": "Dëshironi ta anuloni ngarkimin?",
-  "WebhooksDescription": "Kryeni veprime të personalizuara në anën e çdo aplikacioni ose webfaqe që po përdorni bazuar në ngjarje të ndryshme në {{organizationName}} {{productName}}.",
-  "WithoutEmailHint": "Ju nuk keni përdorues pa email. Ju lutemi vazhdoni në hapin tjetër.",
-  "LogoLightSmallPortal": "Logo për portalin",
-  "ThirdPartyBackupStorageDescription": "Ruajtja mund të ruhet në një ruajtje të palëve të treta. Para kësaj, duhet të lidhni shërbimin përkatës në seksionin 'Integrimi'. Përndryshe, cilësimet e mëposhtme do të jenë joaktive.",
   "WantToContinueQuota": "Dëshironi të vazhdoni apo të ndryshoni kuotën e ruajtjes së përdoruesit?",
+  "WebhooksDescription": "Kryeni veprime të personalizuara në anën e çdo aplikacioni ose webfaqe që po përdorni bazuar në ngjarje të ndryshme në {{organizationName}} {{productName}}.",
   "WhiteLabelLogoSubtitle": "Ngarkoni logove me sfond transparent (PNG, SVG, JPG) për tema të lehta dhe të errëta, ose gjeneroni një menjëherë duke futur logon tuaj më poshtë.",
-  "DeactivateOrDeleteSpace": "Çaktivizoni ose fshini hapësirën."
+  "WithoutEmailHint": "Ju nuk keni përdorues pa email. Ju lutemi vazhdoni në hapin tjetër."
 }

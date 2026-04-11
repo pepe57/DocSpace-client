@@ -1,5 +1,6 @@
 {
   "AuthViaNTLM": "Auth via NTLM",
+  "EnableSMTPSSL": "Activeer SSL",
   "EnterDomain": "Voer domein in",
   "EnterLogin": "Voer login in",
   "EnterPort": "Voer poort in",
@@ -9,6 +10,5 @@
   "Port": "Poort",
   "SenderDisplayName": "Zender Weergave Naam",
   "SenderEmailAddress": "E-mailadres Zender",
-  "SendTestMail": "Testmail Sturen",
-  "EnableSMTPSSL": "Activeer SSL"
+  "SendTestMail": "Testmail Sturen"
 }

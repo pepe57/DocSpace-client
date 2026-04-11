@@ -1,5 +1,6 @@
 {
   "AccessLevel": "Pääsyasoikeus",
+  "AccessSettingsTitle": "Oikeusasetukset",
   "AccessToTemplate": "Pääsy malliin",
   "ActionCannotUndone": "Tätä toimintoa ei voi perua. Haluatko varmasti jatkaa?",
   "AddAdminByNameOrEmail": "Lisää pääkäyttäjän nimen tai sähköpostin perusteella",
@@ -8,6 +9,7 @@
   "AddUsersOrGroupsDescription": "Lisätyt pääkäyttäjät voivat luoda ryhmiä käyttäen tätä mallia.",
   "AddUsersOrGroupsInfo": "Vain <1>{{productName}}</1> ja  <1>Huoneen pääkäyttäjät </1> näytetään täällä",
   "AddUsersOrGroupsInfoGroups": "Vain <1>{{productName}}</1> and <1>Huoneen pääkäyttäjät</1> valituista ryhmistä voivat luoda huoneita käyttäen tätä mallia.",
+  "AddUsersOrGroupsTitle": "Lisää Käyttäjiä tai Ryhmiä",
   "AfterFilesWillBeDeletedPermanently": " Sen jälkeen, kun tiedostot poistetaan lopullisesti.",
   "AgentRemoved": "Agentti poistettu",
   "AgentsRemoved": "Agentit poistettu",
@@ -52,6 +54,7 @@
   "DeleteLink": "Poista linkki",
   "DeleteSharedCustomPublic": "Linkki poistetaan lopullisesti. Et voi peruuttaa tätä toimintoa.",
   "DeleteSharedLink": "Edellistä linkkiä ei voi enää käyttää. Luodaan uusi jaettu linkki.",
+  "DeleteTemplateAction": "Poista malli",
   "DeletingPermanently": "Poistetaan lopullisesti",
   "DeletingVersion": "Poistetaan versiota",
   "DisableNotifications": "Poista ilmoitukset käytöstä",
@@ -168,6 +171,7 @@
   "RoomsPinned": "Huoneet kiinnitetty: {{count}}",
   "RoomsRemoved": "Huoneet poistettu",
   "RoomsUnpinned": "Huoneita ei ole enää kiinnitetty: {{count}}",
+  "RoomTagsLabel": "Huonetunnisteet",
   "RoomTagsTooltip": "Tunnisteet koskevat huonetta, joka luodaan tämän mallin perusteella.",
   "RoomTemplate": "Huonemalli",
   "RoomTemplateDescription": "Käytä tätä mallia luodaksesi nopeasti uuden huoneen.",
@@ -177,6 +181,8 @@
   "ScheduledTrashMove": "{{date}} siirretään {{sectionName}}-kohtaan",
   "SendByEmail": "Lähetä sähköpostitse",
   "SharedBy": "Jakanut",
+  "ShareFolderAction": "Jaa kansio",
+  "ShareFolderRoomDescription": "Uusi huone luodaan ja koko valitun kansion sisältö kopioidaan tähän. Sen jälkeen voit kutsua käyttäjiä huoneeseen tekemään yhteistyötä tiedostoilla.",
   "SharePDFFormModalDescription": "Uusi huone luodaan ja PDF-lomake kopioidaan sinne. Sen jälkeen voit kutsua huoneeseen muita käyttäjiä täyttämään lomakkeen.",
   "SharePDFFormModalTitle": "Jaa PDF-lomake",
   "ShareRoom": "Jaa huone",
@@ -217,11 +223,5 @@
   "WillBeDeletedPermanently": "{{date}} poistetaan lopullisesti",
   "YouLeftTheAgent": "Olet jättänyt agentin.",
   "YouLeftTheRoom": "Olet poistunut huoneesta",
-  "YourUserTypeHasChanged": "{{productName}} :n pääkäyttäjä <1>{{adminName}}</1> on vaihtanut käyttäjätyypiksesi <1>“{{userType}}”</1>.",
-  "AccessSettingsTitle": "Oikeusasetukset",
-  "AddUsersOrGroupsTitle": "Lisää Käyttäjiä tai Ryhmiä",
-  "RoomTagsLabel": "Huonetunnisteet",
-  "ShareFolderAction": "Jaa kansio",
-  "ShareFolderRoomDescription": "Uusi huone luodaan ja koko valitun kansion sisältö kopioidaan tähän. Sen jälkeen voit kutsua käyttäjiä huoneeseen tekemään yhteistyötä tiedostoilla.",
-  "DeleteTemplateAction": "Poista malli"
+  "YourUserTypeHasChanged": "{{productName}} :n pääkäyttäjä <1>{{adminName}}</1> on vaihtanut käyttäjätyypiksesi <1>“{{userType}}”</1>."
 }

@@ -38,6 +38,7 @@
   "Descending": "تنازلي",
   "DestinationFolderId": "معرّف مجلد الوجهة",
   "DisplayColumns": "عرض الأعمدة في صف الملف",
+  "EditorPresetDescription": "قم بتضمين محرر للسماح للمستخدمين بتحرير ملف من الغرفة المشابهة.",
   "ElementCalledAfterClicking": "سيتم استدعاء العنصر بعد النقر",
   "ElementItself": "العنصر نفسه",
   "EmbedCodeSuccessfullyCopied": "تم نسخ رمز التضمين إلى الحافظة بنجاح",
@@ -47,6 +48,7 @@
   "EnterPage": "أدخل رقم الصفحة",
   "EnterWidth": "أدخل العرض",
   "EventLog": "سجل الأحداث",
+  "FeedbackAndSupportLink": "التقييم والدعم",
   "FileContentCopy": "تقييد نسخ محتوى الملف",
   "FileFilter": "تصفية الملف",
   "FileId": "معرف الملف",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "البحث عن الملفات داخل المجلد/الغرفة المفتوحة.",
   "FileTypeDisplay": "عرض نوع الملف",
   "FrameId": "رقم المعرف للإطار",
+  "GetCodeToInsert": "احصل على رمز لإدخاله",
   "Header": "العنوان الرئيسي",
   "HeaderDescription": "يمكنك تعطيل الترويسة في إصدار الجوال لتقييد الوصول إلى أقسام {{productName}} (تماما مثل تعطيل القائمة اليسرى في إصدار سطح المكتب).",
   "HelperText": "النص المساعد",
@@ -147,8 +150,5 @@
   "UploadLimits": "حدود الرفع",
   "UploadMode": "وضع التحميل",
   "ViewerDescription": "قم بتضمين عارض للسماح للمستخدمين بفتح ملف للعرض من الغرفة المناسبة.",
-  "VoidReturn": "فارغ",
-  "EditorPresetDescription": "قم بتضمين محرر للسماح للمستخدمين بتحرير ملف من الغرفة المشابهة.",
-  "FeedbackAndSupportLink": "التقييم والدعم",
-  "GetCodeToInsert": "احصل على رمز لإدخاله"
+  "VoidReturn": "فارغ"
 }

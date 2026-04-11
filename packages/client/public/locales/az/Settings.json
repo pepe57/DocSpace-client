@@ -77,6 +77,7 @@
   "DataImportComplete": "Məlumat idxalı tamamlandı",
   "DataImportDescription": "Üçüncü tərəf xidmətindən {{organizationName}} {{productName}}-ə məlumatları idxal edin. Məlumatların idxalı bütün istifadəçilər, şəxsi və paylaşılan sənədlər kimi məlumatların ötürülməsinə imkan verir.",
   "DataImportProcessing": "Məlumatların idxalının emalı",
+  "DeactivateOrDeleteSpace": "Sahəni deaktivləşdirin və ya silin",
   "DefaultSettings": "Defolt parametrlər",
   "DefaultTemplateApplied": "Yeni standart şablon tətbiq edildi.",
   "DefaultTemplateRestored": "Əsas şablon bərpa edilmişdir.",
@@ -316,11 +317,8 @@
   "UseUpperCase": "Böyük hərfləri işlət",
   "WantToCancelDataImport": "Məlumat idxalını ləğv etmək istəyirsiniz?",
   "WantToCancelUpload": "Yükləməni ləğv etmək istəyirsiniz?",
-  "WebhooksDescription": "{{organizationName}} {{productName}} daxilində müxtəlif hadisələrə əsaslanaraq, istifadə etdiyiniz istənilən tətbiq və ya veb saytda xüsusi əməliyyatlar yerinə yetirin.",
-  "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin.",
-  "LogoLightSmallPortal": "Portal üçün loqo",
-  "ThirdPartyBackupStorageDescription": "Ehtiyat nüsxələr üçüncü tərəf yaddaşlarında da saxlana bilər. Bunu etmək üçün əvvəlcə 'İnteqrasiya' bölməsində müvafiq xidmətə qoşulmalısınız. Əks halda, aşağıdakı ayarlar aktivləşdirilməyəcək.",
   "WantToContinueQuota": "İstifadəçi yaddaşı kvotasını davam etdirmək və ya dəyişmək istəyirsiniz?",
+  "WebhooksDescription": "{{organizationName}} {{productName}} daxilində müxtəlif hadisələrə əsaslanaraq, istifadə etdiyiniz istənilən tətbiq və ya veb saytda xüsusi əməliyyatlar yerinə yetirin.",
   "WhiteLabelLogoSubtitle": "Açıq fonlu loqoları (PNG, SVG, JPG) açıq və tünd mövzular üçün yükləyin və ya aşağıda loqonuzu daxil edərək dərhal birini yaradın.",
-  "DeactivateOrDeleteSpace": "Sahəni deaktivləşdirin və ya silin"
+  "WithoutEmailHint": "E-poçtu olmayan istifadəçiləriniz yoxdur. Növbəti addıma keçin."
 }

@@ -1,5 +1,6 @@
 {
   "AuthViaNTLM": "Autenticação via NTLM",
+  "EnableSMTPSSL": "Habilitar SSL",
   "EnterDomain": "Digite o domínio",
   "EnterLogin": "Digite login",
   "EnterPort": "Digite a porta",
@@ -9,6 +10,5 @@
   "Port": "Porta",
   "SenderDisplayName": "Nome de exibição do remetente",
   "SenderEmailAddress": "E-mail do remetente",
-  "SendTestMail": "Enviar e-mail de teste",
-  "EnableSMTPSSL": "Habilitar SSL"
+  "SendTestMail": "Enviar e-mail de teste"
 }

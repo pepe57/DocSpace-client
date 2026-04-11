@@ -38,6 +38,7 @@
   "Descending": "Laskeva",
   "DestinationFolderId": "Kohakansion tunniste",
   "DisplayColumns": "Tiedostorivin sarakkeiden näyttäminen",
+  "EditorPresetDescription": "Upota editori salliaksesi käyttäjien muokata tiedostoa vastaavasta huoneesta.",
   "ElementCalledAfterClicking": "Elementti kutsutaan klikkauksen jälkeen",
   "ElementItself": "Elementti itse",
   "EmbedCodeSuccessfullyCopied": "Upotuskoodi onnistuneesti kopioitu leikepöydälle",
@@ -47,6 +48,7 @@
   "EnterPage": "Syötä numerosivu",
   "EnterWidth": "Syötä leveys",
   "EventLog": "Tapahtumaloki",
+  "FeedbackAndSupportLink": "Palaute&Tuki",
   "FileContentCopy": "Tiedoston sisällön kopiointirajoitus",
   "FileFilter": "Tiedostosuodatin",
   "FileId": "Tiedoston ID",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "Tiedoston etsintä avatusta kansiosta/huoneesta.",
   "FileTypeDisplay": "Tiedostotyypin näyttäminen",
   "FrameId": "Kehyksen tunnus",
+  "GetCodeToInsert": "Hanki koodi lisättäväksi",
   "Header": "Ylätunniste",
   "HeaderDescription": "Voit poistaa ylätunnisteen käytöstä mobiiliversiossa rajoittaaksesi pääsyä {{productName}}-osioihin (samoin kuin vasemman valikon poistaminen työpöytäversiossa).",
   "HelperText": "Apua teksti",
@@ -147,8 +150,5 @@
   "UploadLimits": "Latausrajoitukset",
   "UploadMode": "Latausmalli",
   "ViewerDescription": "Upota esikatselu salliaksesi käyttäjien avata tiedosto katseltavaksi vastaavasta huoneesta.",
-  "VoidReturn": "Tyhjä",
-  "EditorPresetDescription": "Upota editori salliaksesi käyttäjien muokata tiedostoa vastaavasta huoneesta.",
-  "FeedbackAndSupportLink": "Palaute&Tuki",
-  "GetCodeToInsert": "Hanki koodi lisättäväksi"
+  "VoidReturn": "Tyhjä"
 }

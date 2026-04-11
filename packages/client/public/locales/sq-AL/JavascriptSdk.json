@@ -38,6 +38,7 @@
   "Descending": "Duke zbritur",
   "DestinationFolderId": "ID e dosjes destinacioni",
   "DisplayColumns": "Shfaqja e kolonave në një rresht skedari",
+  "EditorPresetDescription": "Vendosni një redaktues për t'i lejuar përdoruesit të modifikojnë një skedar nga dhoma përkatëse.",
   "ElementCalledAfterClicking": "Elementi do të thirret pasi të klikohet",
   "ElementItself": "Vetë elementi",
   "EmbedCodeSuccessfullyCopied": "Kodi i futjes u kopjua me sukses në kujtesën e fragmenteve",
@@ -47,6 +48,7 @@
   "EnterPage": "Futni numrin e faqes",
   "EnterWidth": "Futni gjerësinë",
   "EventLog": "Regjistri i Ngjarjeve",
+  "FeedbackAndSupportLink": "Mendim&Mbështetje",
   "FileContentCopy": "Kopje e kufizuar e përmbajtjes së fajllit",
   "FileFilter": "Filtri i skedarit",
   "FileId": "ID e skedarit",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "Kërkimi i skedarit brenda dosjes/dhomës së hapur.",
   "FileTypeDisplay": "Shfaqja e llojit të skedarit",
   "FrameId": "ID e kornizës",
+  "GetCodeToInsert": "Merrni kodin për të futur",
   "Header": "Kreu",
   "HeaderDescription": "Mund të çaktivizoni kokën në versionin celular për të kufizuar aksesin në seksionet {{productName}} (ashtu si çaktivizimi i menysë së majtë në versionin e desktopit).",
   "HelperText": "Tekst për ndihmë",
@@ -147,8 +150,5 @@
   "UploadLimits": "Kufizimet e ngarkimit",
   "UploadMode": "Modaliteti i ngarkimit",
   "ViewerDescription": "Vendosni një shikues për t'i lejuar përdoruesit të hapin një skedar për ta parë nga dhoma përkatëse.",
-  "VoidReturn": "Zbrazët",
-  "EditorPresetDescription": "Vendosni një redaktues për t'i lejuar përdoruesit të modifikojnë një skedar nga dhoma përkatëse.",
-  "FeedbackAndSupportLink": "Mendim&Mbështetje",
-  "GetCodeToInsert": "Merrni kodin për të futur"
+  "VoidReturn": "Zbrazët"
 }

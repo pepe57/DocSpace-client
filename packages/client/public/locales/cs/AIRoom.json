@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "Budete automaticky přesměrováni do sekce {{sectionName}} za 5 sekund.",
   "AIChat": "AI-Chat",
   "AIInstructions": "Pokyny pro AI",
+  "AIProviderAndModel": "{{aiProvider}} a model",
   "CreateChat": "Vytvořit chat",
   "CreateChatDescription": "Přejděte na záložku {{aiChat}}, abyste zahájili.",
   "EmptyKnowledgeDescription": "Soubory nahrané sem budou indexovány a použity jako kontext ve záložce {{aiChat}}. Přidejte soubory (do 10 MB každý) k zadání otázek AI, generování obsahu nebo k spolupráci na informacích.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Poznámka:</1> Kvalita odpovědí se může lišit v závislosti na modelu; pro nejlepší výsledky se doporučují novější modely.",
   "ResultStorage": "Úložiště výsledků",
   "UploadFilesDevice": "Nahrajte soubory z vašeho osobního zařízení.",
-  "UploadFilesPortal": "Nahrajte soubory z {{sectionNameFirst}} nebo {{sectionNameSecond}}",
-  "AIProviderAndModel": "{{aiProvider}} a model"
+  "UploadFilesPortal": "Nahrajte soubory z {{sectionNameFirst}} nebo {{sectionNameSecond}}"
 }

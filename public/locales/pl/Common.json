@@ -398,6 +398,7 @@
   "DenyAccess": "Odmów dostępu",
   "DenyAccessDescription": "Brak możliwości przeglądania, edycji lub zarządzania plikami lub folderami.",
   "DenyAccessDescriptionDocument": "Brak możliwości wyświetlania, edycji lub zarządzania tym plikiem.",
+  "DescriptionLabel": "Opis",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Narzędzia programistyczne",
   "Diagram": "Schemat",
@@ -1460,7 +1461,6 @@
   "WebSearch": "Wyszukiwarka internetowa",
   "WebSearchAI": "Wyszukiwanie w sieci",
   "Website": "Strona internetowa",
-  "WelcomeDescription": "AI Forms umożliwia tworzenie, dystrybuowanie i zbieranie zgłoszeń z formularzy — wszystko w jednym miejscu.",
   "WelcomeFeature1": "Twórz formularze PDF z szablonów lub od podstaw",
   "WelcomeFeature1Title": "Tworzenie inteligentnych formularzy",
   "WelcomeFeature2": "Monitoruj postępy i zgłoszenia natychmiast",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "Kiedy saldo spadnie do {{min}}, portfel zostanie automatycznie doładowany do {{max}}.",
   "WhenBalanceGoesBellow": "Kiedy saldo spada poniżej",
   "WhiteLabel": "Ustawienia Logo",
-  "WhiteLabelSubtitle": "Wpisz nazwę swojej firmy, wgraj logo i dostosuj stylizację, aby lepiej pasowała do Twojego brandingu.",
   "WhiteLabelTooltip": "Rozmiary są wyświetlane dla wyświetlaczy Retina. W przypadku wyświetlaczy o standardowych rozdzielczościach szerokość i wysokość logo zostaną dostosowane po wgraniu.",
   "WhoFilledItOut": "Kto to wypełnił",
   "WhoFilledItOutPrompt": "Wyświetl wszystkich użytkowników, którzy wypełnili formularz \"{{formName}}\"",
@@ -1498,6 +1497,5 @@
   "YourName": "Jak się nazywasz",
   "YourPrice": "Twoja cena",
   "YourTurn": "Twoja kolej",
-  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby.",
-  "DescriptionLabel": "Opis"
+  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby."
 }

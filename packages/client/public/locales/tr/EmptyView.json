@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Geniş kelime işlemci işlevselliğinden yararlanın.",
   "CreateForm": "Yeni bir PDF formu oluşturma",
   "CreateFormDescription": "PDF formlarını kullanarak oy toplayın, görüş alın ve veri depolayın",
+  "CreateNewAIAgent": "Yeni bir ajan oluştur",
   "CreateNewFileDescription": "Dosya veya klasör oluşturarak odada çalışmaya başlayın",
   "CreateNewFileTitle": "Yeni bir dosya oluştur",
   "CreatePresentation": "Yeni bir sunum oluşturma",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Henüz paylaşılan öğe yok",
   "EmptyTemplatesDescription": "Oda bölümünde bir odadan şablon oluşturabilirsiniz",
   "EmptyTemplatesTitle": "Burada henüz şablon yok",
+  "EmptyViewDescription": "Hızlı işlemlerle başlayın:",
   "FormFolderDefaultDescription": "PDF formlarını buraya bırakın veya {{productName}} veya cihazdan yükleyin.",
   "FormFolderDefaultTitle": "Burada henüz form yok",
   "FormFolderDefaultUserDescription": "Yöneticiler tarafından yüklenen formlar burada görünecektir.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Cihazdan yükleyin",
   "UploadFromPortalTitle": "{{productName}} kaynağından yükleyin",
   "UploadPDFFormOptionDescription": "{{productName}} içinde bulunan hazır bir PDF formunu seçin ve odaya yükleyin.",
-  "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz",
-  "CreateNewAIAgent": "Yeni bir ajan oluştur",
-  "EmptyViewDescription": "Hızlı işlemlerle başlayın:"
+  "VirtualDataRoomEmptyTitle": "Sanal Veri Odasına Hoş Geldiniz"
 }

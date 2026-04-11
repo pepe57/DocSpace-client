@@ -3,7 +3,7 @@
   "content": "Your form completed and saved",
   "content_en_sha1_hash": "5bd6d599c7b5c53ab929687e0395e747e496d12c",
   "created_at": "2025-05-19T21:30:57.157Z",
-  "updated_at": "2026-04-07T19:35:05.238Z",
+  "updated_at": "2026-04-11T19:53:45.284Z",
   "comment": {
     "text": "This translation key is used for a completion message displayed on a form that has been successfully submitted. It appears on an empty form container when the form data cannot be saved, providing users with a reassuring notification.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/doceditor/src/components/completed-form/CompletedForm.empty.tsx",
       "line_number": 89,
-      "context": "/>\n <section\n className={classNames(styles.textWrapper, \"completed-form__empty\")}\n >\n <Heading level={HeadingLevel.h1}>{t(\"CompletedForm:Title\")}</Heading>\n <Text>{t(\"CompletedForm:Description\")}</Text>\n </section>\n </div>\n </section>\n );\n };",
+      "context": "/>\n <section\n className={classNames(styles.textWrapper, \"completed-form__empty\")}\n >\n <Heading level={HeadingLevel.h1}>{t(\"CompletedForm:CompletedFormTitle\")}</Heading>\n <Text>{t(\"CompletedForm:CompletedFormDescription\")}</Text>\n </section>\n </div>\n </section>\n );\n };",
       "module": "/packages/doceditor"
     }
   ],

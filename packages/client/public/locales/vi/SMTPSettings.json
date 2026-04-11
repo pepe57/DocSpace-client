@@ -1,5 +1,6 @@
 {
   "AuthViaNTLM": "Xác thực qua NTLM",
+  "EnableSMTPSSL": "Bật SSL",
   "EnterDomain": "Nhập tên miền",
   "EnterLogin": "Nhập thông tin đăng nhập",
   "EnterPort": "Nhập cổng",
@@ -9,6 +10,5 @@
   "Port": "Cổng",
   "SenderDisplayName": "Tên hiển thị của người gửi",
   "SenderEmailAddress": "Địa chỉ email của người gửi",
-  "SendTestMail": "Gửi thư thử nghiệm",
-  "EnableSMTPSSL": "Bật SSL"
+  "SendTestMail": "Gửi thư thử nghiệm"
 }

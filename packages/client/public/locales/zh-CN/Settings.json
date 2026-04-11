@@ -77,6 +77,7 @@
   "DataImportComplete": "数据导入完成",
   "DataImportDescription": "支持从第三方服务迁移数据至 {{organizationName}} {{productName}}，包括完整的用户账户信息、个人文档及团队共享文件，确保数据资产无缝衔接。",
   "DataImportProcessing": "数据导入处理",
+  "DeactivateOrDeleteSpace": "停用或删除空间。",
   "DefaultSettings": "默认设置",
   "DefaultTemplateApplied": "已应用新的默认模板。",
   "DefaultTemplateRestored": "默认模板已恢复。",
@@ -316,11 +317,8 @@
   "UseUpperCase": "必须包含大写字母",
   "WantToCancelDataImport": "您是否要取消数据导入？",
   "WantToCancelUpload": "您是否要取消上传？",
-  "WebhooksDescription": "根据 {{organizationName}} {{productName}} 中的各种事件，在您使用的任何应用程序或网站的侧边栏执行自定义操作。",
-  "WithoutEmailHint": "您没有未绑定电子邮件的用户。请继续下一步。",
-  "LogoLightSmallPortal": "门户 Logo",
-  "ThirdPartyBackupStorageDescription": "备份文件可以保存在第三方存储中。保存之前，您需要在‘集成’板块连接相应的服务。否则该设置将无法激活。",
   "WantToContinueQuota": "您希望继续还是更改用户存储配额？",
+  "WebhooksDescription": "根据 {{organizationName}} {{productName}} 中的各种事件，在您使用的任何应用程序或网站的侧边栏执行自定义操作。",
   "WhiteLabelLogoSubtitle": "上传适用于浅色和深色主题的透明背景徽标 (PNG, SVG, JPG)，或者在下方输入您的徽标以立即生成一个。",
-  "DeactivateOrDeleteSpace": "停用或删除空间。"
+  "WithoutEmailHint": "您没有未绑定电子邮件的用户。请继续下一步。"
 }

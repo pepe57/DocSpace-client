@@ -17,6 +17,7 @@
   "idpAuthRequest": "Verify Auth Responses Sign",
   "idpCertificates": "IdP Public Certificates",
   "idpCertificatesTooltip": "The Identity provider public certificates used for either verification or decryption (or both) of the requests and responses from the IdP.",
+  "IdpEntityId": "IdP Entity Id",
   "idpSignExitRequest": "Verify Logout Requests Sign",
   "idpSigningAlgorithm": "Default Sign Verifying Algorithm",
   "idpSignResponseRequest": "Verify Logout Responses Sign",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "Enable this option if you want to add users from SSO service to your space automatically.",
   "UploadXML": "Load metadata from XML to fill the required fields automatically.",
   "UploadXMLPlaceholder": "URL to IdP Metadata XML",
-  "UsedFor": "Use for",
-  "IdpEntityId": "IdP Entity Id"
+  "UsedFor": "Use for"
 }

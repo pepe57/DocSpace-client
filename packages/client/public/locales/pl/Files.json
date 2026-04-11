@@ -1,5 +1,6 @@
 {
   "AccessLevel": "Poziom dostępu",
+  "AccessSettingsTitle": "Ustawienia dostępu",
   "AccessToTemplate": "Dostęp do szablonu",
   "ActionCannotUndone": "Nie można cofnąć tej czynności. Czy na pewno chcesz kontynuować?",
   "AddAdminByNameOrEmail": "Dodaj administratora wg nazwy użytkownika lub adresu e-mail",
@@ -8,6 +9,7 @@
   "AddUsersOrGroupsDescription": "Dodani administratorzy będą mogli tworzyć pokoje za pomocą tego szablonu.",
   "AddUsersOrGroupsInfo": "Widać tu tylko <1>{{productName}}</1> i <1>administratorów pokoi</1>",
   "AddUsersOrGroupsInfoGroups": "Tylko <1>administratorzy pokoi</1> i <1>{{productName}}</1> z wybranych grup będą w stanie tworzyć pokoje za pomocą tego szablonu.",
+  "AddUsersOrGroupsTitle": "Dodaj użytkowników lub grupy",
   "AfterFilesWillBeDeletedPermanently": "Następnie pliki zostaną trwale usunięte.",
   "AgentRemoved": "Agent usunięty",
   "AgentsRemoved": "Agenci usunięci",
@@ -52,6 +54,7 @@
   "DeleteLink": "Usuń link",
   "DeleteSharedCustomPublic": "Link zostanie trwale usunięty. Nie będziesz w stanie cofnąć tego działania.",
   "DeleteSharedLink": "Poprzedni link stanie się niedostępny. Zostanie utworzony nowy link udostępniania.",
+  "DeleteTemplateAction": "Usuń szablon",
   "DeletingPermanently": "Trwałe usuwanie",
   "DeletingVersion": "Usuwanie wersji",
   "DisableNotifications": "Wyłącz powiadomienia",
@@ -168,6 +171,7 @@
   "RoomsPinned": "Przypięte pokoje: {{count}}",
   "RoomsRemoved": "Pokoje zostały usunięte",
   "RoomsUnpinned": "Nieprzypięte pokoje: {{count}}",
+  "RoomTagsLabel": "Tagi pokoju",
   "RoomTagsTooltip": "Tagi będą dotyczyły pokoju, który zostanie utworzony na podstawie tego szablonu.",
   "RoomTemplate": "Szablon pokoju",
   "RoomTemplateDescription": "Użyj tego szablonu, aby szybko utworzyć nowy pokój.",
@@ -177,6 +181,8 @@
   "ScheduledTrashMove": "{{date}} zostanie przeniesione do {{sectionName}}",
   "SendByEmail": "Wyślij e-mailem",
   "SharedBy": "Udostępnił",
+  "ShareFolderAction": "Udostępnij katalog",
+  "ShareFolderRoomDescription": "Zostanie utworzony nowy pokój, a cała zawartość wybranego katalogu zostanie do niego skopiowana. Następnie możesz zaprosić innych użytkowników do współpracy nad plikami w pokoju.",
   "SharePDFFormModalDescription": "Zostanie utworzony nowy pokój i formularz PDF zostanie do niego skopiowany. Następnie możesz zaprosić innych użytkowników do wypełnienia formularza w pokoju.",
   "SharePDFFormModalTitle": "Udostępnij formularz PDF",
   "ShareRoom": "Udostępnij pokój",
@@ -217,11 +223,5 @@
   "WillBeDeletedPermanently": "{{date}} nastąpi trwałe usunięcie",
   "YouLeftTheAgent": "Zostawiłeś agenta.",
   "YouLeftTheRoom": "Opuszczono pokój",
-  "YourUserTypeHasChanged": "Twój rodzaj użytkownika został zmieniony na <1>“{{userType}}”</1> przez administratora {{productName}} <1>{{adminName}}</1>.",
-  "AccessSettingsTitle": "Ustawienia dostępu",
-  "AddUsersOrGroupsTitle": "Dodaj użytkowników lub grupy",
-  "RoomTagsLabel": "Tagi pokoju",
-  "ShareFolderAction": "Udostępnij katalog",
-  "ShareFolderRoomDescription": "Zostanie utworzony nowy pokój, a cała zawartość wybranego katalogu zostanie do niego skopiowana. Następnie możesz zaprosić innych użytkowników do współpracy nad plikami w pokoju.",
-  "DeleteTemplateAction": "Usuń szablon"
+  "YourUserTypeHasChanged": "Twój rodzaj użytkownika został zmieniony na <1>“{{userType}}”</1> przez administratora {{productName}} <1>{{adminName}}</1>."
 }

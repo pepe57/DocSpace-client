@@ -77,6 +77,7 @@
   "DataImportComplete": "اكتمل استيراد البيانات",
   "DataImportDescription": "استيراد البيانات من خدمة طرف ثالث إلى {{organizationName}} {{productName}}. يتيح استيراد البيانات نقل البيانات مثل جميع المستخدمين، والمستندات الشخصية والمشتركة.",
   "DataImportProcessing": "معالجة استيراد البيانات",
+  "DeactivateOrDeleteSpace": "إلغاء تنشيط المساحة أو حذفها.",
   "DefaultSettings": "الإعدادات الافتراضية",
   "DefaultTemplateApplied": "تم تطبيق القالب الافتراضي الجديد.",
   "DefaultTemplateRestored": "تم استعادة القالب الافتراضي.",
@@ -316,11 +317,8 @@
   "UseUpperCase": "استخدم الاحرف الكبيرة",
   "WantToCancelDataImport": "هل تريد إلغاء استيراد البيانات؟",
   "WantToCancelUpload": "هل تريد إلغاء التحميل؟",
-  "WebhooksDescription": "تنفيذ إجراءات مخصصة ضمن أي تطبيق أو موقع ويب تستخدمه، بناءً على أحداث متنوعة في {{organizationName}} {{productName}}.",
-  "WithoutEmailHint": "ليس لديك مستخدمون بدون بريد إلكتروني. يرجى المتابعة إلى الخطوة التالية.",
-  "LogoLightSmallPortal": "شعار البوابة",
-  "ThirdPartyBackupStorageDescription": "يمكن حفظ النسخ الاحتياطي في وحدة تخزين تابعة لجهة خارجية. قبل ذلك ، تحتاج إلى توصيل الخدمة المقابلة في قسم \"التكامل\". خلاف ذلك ، ستكون الإعدادات التالية غير نشطة.",
   "WantToContinueQuota": "هل تريد المتابعة أو تغيير حصة تخزين المستخدم؟",
+  "WebhooksDescription": "تنفيذ إجراءات مخصصة ضمن أي تطبيق أو موقع ويب تستخدمه، بناءً على أحداث متنوعة في {{organizationName}} {{productName}}.",
   "WhiteLabelLogoSubtitle": "قم بتحميل شعارات بخلفية شفافة (PNG، SVG، JPG) للمظهرين الفاتح والداكن، أو قم بإنشاء شعار فوراً عن طريق إدخال شعارك أدناه.",
-  "DeactivateOrDeleteSpace": "إلغاء تنشيط المساحة أو حذفها."
+  "WithoutEmailHint": "ليس لديك مستخدمون بدون بريد إلكتروني. يرجى المتابعة إلى الخطوة التالية."
 }

@@ -17,6 +17,7 @@
   "idpAuthRequest": "Autentifikasiya cavablarının imzasını yoxlayın",
   "idpCertificates": "IdP İctimai Sertifikatlar",
   "idpCertificatesTooltip": "IdP-dən sorğuların və cavabların doğrulanması və ya şifrəsinin açılması (və ya hər ikisi) üçün istifadə edilən identifikasiya provayderinin ictimai sertifikatları.",
+  "IdpEntityId": "IdP Entiti ID",
   "idpSignExitRequest": "Çıxış İstəkləri İşarəsini Təsdiqləyin",
   "idpSigningAlgorithm": "Defolt İşarə Təsdiqləmə Alqoritmi",
   "idpSignResponseRequest": "Çıxış Cavabları İşarəsini Təsdiqləyin",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "SSO xidmətindən istifadəçiləri avtomatik olaraq space-nizə əlavə etmək istəyirsinizsə, bu seçimi aktiv edin.",
   "UploadXML": "Tələb olunan sahələri avtomatik doldurmaq üçün XML-dən metadata yükləyin.",
   "UploadXMLPlaceholder": "IdP Metadata XML üçün URL",
-  "UsedFor": "İstifadə etmək üçün",
-  "IdpEntityId": "IdP Entiti ID"
+  "UsedFor": "İstifadə etmək üçün"
 }

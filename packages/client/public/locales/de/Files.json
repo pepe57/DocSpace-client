@@ -1,5 +1,6 @@
 {
   "AccessLevel": "Zugriffsebene",
+  "AccessSettingsTitle": "Zugriffseinstellungen",
   "AccessToTemplate": "Zugriff auf die Vorlage",
   "ActionCannotUndone": "Diese Aktion kann nicht rückgängig gemacht werden. Möchten Sie wirklich fortfahren?",
   "AddAdminByNameOrEmail": "Administrator per Name oder E-Mail hinzufügen",
@@ -8,6 +9,7 @@
   "AddUsersOrGroupsDescription": "Die hinzugefügten Administratoren können mithilfe dieser Vorlage Räume erstellen.",
   "AddUsersOrGroupsInfo": "Hier werden nur <1>{{productName}}</1> und <1>Raumadministratoren</1> angezeigt",
   "AddUsersOrGroupsInfoGroups": "Nur <1>{{productName}}</1> und <1>Raumadministratoren</1> aus den ausgewählten Gruppen können mit dieser Vorlage Räume erstellen.",
+  "AddUsersOrGroupsTitle": "Benutzer oder Gruppen hinzufügen",
   "AfterFilesWillBeDeletedPermanently": "Danach werden die Dateien dauerhaft gelöscht.",
   "AgentRemoved": "Agent entfernt",
   "AgentsRemoved": "Agenten entfernt",
@@ -52,6 +54,7 @@
   "DeleteLink": "Link löschen",
   "DeleteSharedCustomPublic": "Der Link wird dauerhaft gelöscht. Sie können diese Aktion nicht rückgängig machen.",
   "DeleteSharedLink": "Der vorherige Link ist nicht mehr verfügbar. Ein neuer freigegebener Link wird erstellt.",
+  "DeleteTemplateAction": "Vorlage löschen",
   "DeletingPermanently": "Dauerhaftes Löschen",
   "DeletingVersion": "Version löschen",
   "DisableNotifications": "Benachrichtigungen deaktivieren",
@@ -168,6 +171,7 @@
   "RoomsPinned": "Angepinnte Räume: {{count}}",
   "RoomsRemoved": "Räume entfernt",
   "RoomsUnpinned": "Nicht angepinnte Räume: {{count}}",
+  "RoomTagsLabel": "Raum-Tags",
   "RoomTagsTooltip": "Auf den Raum, der auf Grundlage dieser Vorlage erstellt wird, werden Tags angewendet.",
   "RoomTemplate": "Raumvorlage",
   "RoomTemplateDescription": "Verwenden Sie diese Vorlage, um schnell einen neuen Raum zu erstellen.",
@@ -177,6 +181,8 @@
   "ScheduledTrashMove": "{{date}} wird nach {{sectionName}} verschoben",
   "SendByEmail": "Per E-Mail senden",
   "SharedBy": "Geteilt von",
+  "ShareFolderAction": "Ordner freigeben",
+  "ShareFolderRoomDescription": "Es wird ein neuer Raum erstellt und alle Inhalte des ausgewählten Ordners werden dorthin kopiert. Anschließend können Sie andere Benutzer zur Zusammenarbeit an den Dateien in einem Raum einladen.",
   "SharePDFFormModalDescription": "Es wird ein neuer Raum erstellt und das PDF-Formular wird dorthin kopiert. Sie können dann andere Benutzer einladen, das Formular in dem Raum auszufüllen.",
   "SharePDFFormModalTitle": "PDF-Formular freigeben",
   "ShareRoom": "Raum freigeben",
@@ -217,11 +223,5 @@
   "WillBeDeletedPermanently": "{{date}} wird dauerhaft gelöscht",
   "YouLeftTheAgent": "Sie haben den Agenten verlassen",
   "YouLeftTheRoom": "Sie haben den Raum verlassen",
-  "YourUserTypeHasChanged": "Ihr Benutzertyp wurde vom {{productName}}-Administrator <1>{{adminName}}</1> auf <1>„{{userType}}“</1> geändert.",
-  "AccessSettingsTitle": "Zugriffseinstellungen",
-  "AddUsersOrGroupsTitle": "Benutzer oder Gruppen hinzufügen",
-  "RoomTagsLabel": "Raum-Tags",
-  "ShareFolderAction": "Ordner freigeben",
-  "ShareFolderRoomDescription": "Es wird ein neuer Raum erstellt und alle Inhalte des ausgewählten Ordners werden dorthin kopiert. Anschließend können Sie andere Benutzer zur Zusammenarbeit an den Dateien in einem Raum einladen.",
-  "DeleteTemplateAction": "Vorlage löschen"
+  "YourUserTypeHasChanged": "Ihr Benutzertyp wurde vom {{productName}}-Administrator <1>{{adminName}}</1> auf <1>„{{userType}}“</1> geändert."
 }

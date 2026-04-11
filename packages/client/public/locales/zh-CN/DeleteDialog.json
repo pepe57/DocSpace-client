@@ -13,7 +13,9 @@
   "DeleteGroupDescription": "组{{groupName}} 将被删除。组中的用户不会从{{productName}}中删除。您确定要继续吗？",
   "DeleteGroupTitle": "删除群组",
   "DeleteItem": "您即将把<strong>{{name}}</strong>移至{{trashSection}}。",
+  "DeleteItemForeverConfirm": "您将要删除<strong>{{name}}</strong>。",
   "DeleteItemsSharedNote": "请注意，如果您已将它们分享给他人，它们将不可用。",
+  "DeleteRoomConfirm": "房间<strong>“{{roomName}}”</strong>将被永久删除，所有数据及用户访问权限都将丢失。",
   "DeleteRooms": "所选的 <strong>房间 ({{count}})</strong> 将被永久删除。所有数据和用户访问权限都将丢失。",
   "DeleteRoomsTitle": "删除此房间？",
   "DeleteRoomTitle": "确定删除此房间吗？",
@@ -32,7 +34,5 @@
   "ItemsDeletedAfter": "这些项目将在30天后永久删除。",
   "ItemsPermanentlyDeleted": "这些项目将从{{trashSection}}中永久删除。",
   "removeFromListDescription": "您将要从列表中移除 <1>{{title}}</1>。您确定要继续吗？",
-  "removeFromListDescriptionPlural": "您即将从列表中移除 <1>{{count}} 个项目</1>。确定要继续吗？",
-  "DeleteItemForeverConfirm": "您将要删除<strong>{{name}}</strong>。",
-  "DeleteRoomConfirm": "房间<strong>“{{roomName}}”</strong>将被永久删除，所有数据及用户访问权限都将丢失。"
+  "removeFromListDescriptionPlural": "您即将从列表中移除 <1>{{count}} 个项目</1>。确定要继续吗？"
 }

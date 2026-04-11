@@ -17,6 +17,7 @@
   "idpAuthRequest": "ຢືນຢັນລາຍເຊັນຂອງການຕອບຮັບການກວດສອບສິດ",
   "idpCertificates": "ໃບຢັ້ງຢືນສາທາລະນະ IdP",
   "idpCertificatesTooltip": "ໃບຢັ້ງຢືນສາທາລະນະຂອງຜູ້ໃຫ້ບໍລິການລະບຸຕົວຕົນທີ່ໃຊ້ສໍາລັບການຢັ້ງຢືນຫຼືການຖອດລະຫັດ (ຫຼືທັງສອງ) ຂອງການຮ້ອງຂໍແລະການຕອບສະຫນອງຈາກ IdP.",
+  "IdpEntityId": "IdP Entity ID",
   "idpSignExitRequest": "ຢືນຢັນ ແລະ ເຊັນການຮ້ອງຂໍອອກຈາກລະບົບ",
   "idpSigningAlgorithm": "ອັນກໍຣິທຶມການຢືນຢັນການເຊັນເລີ່ມຕົ້ນ",
   "idpSignResponseRequest": "ຢືນ​ຢັນ​ການ​ຕອບ​ສະ​ຫນອງ​ສັນຍາ​ລັກ​ການ​ອອກ​ຈາກ​ລະ​ບົບ",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "ເປີດໃຊ້ຕົວເລືອກນີ້ຖ້າທ່ານຕ້ອງການເພີ່ມຜູ້ໃຊ້ຈາກ ບໍລິການ SSO ໃສ່ພື້ນທີ່ຂອງທ່ານໂດຍອັດຕະໂນມັດ.",
   "UploadXML": "ໂຫຼດ metadata ຈາກ XML ເພື່ອຕື່ມຂໍ້ມູນໃສ່ຊ່ອງຂໍ້ມູນທີ່ຕ້ອງການໂດຍອັດຕະໂນມັດ.",
   "UploadXMLPlaceholder": "URL ໄປຫາ IdP Metadata XML",
-  "UsedFor": "ໃຊ້ສໍາລັບ",
-  "IdpEntityId": "IdP Entity ID"
+  "UsedFor": "ໃຊ້ສໍາລັບ"
 }

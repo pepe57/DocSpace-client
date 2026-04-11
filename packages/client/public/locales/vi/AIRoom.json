@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "Bạn sẽ tự động chuyển đến phần {{sectionName}} trong 5 giây.",
   "AIChat": "Trò chuyện AI",
   "AIInstructions": "Hướng dẫn AI",
+  "AIProviderAndModel": "{{aiProvider}} và mô hình",
   "CreateChat": "Tạo cuộc trò chuyện",
   "CreateChatDescription": "Truy cập tab {{aiChat}} để bắt đầu.",
   "EmptyKnowledgeDescription": "Các tệp tải lên tại đây sẽ được lập chỉ mục và sử dụng làm ngữ cảnh trong tab {{aiChat}}. Thêm tệp (tối đa 10 MB mỗi tệp) để hỏi AI, tạo nội dung hoặc cộng tác về thông tin.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Lưu ý:</1> Chất lượng phản hồi có thể khác nhau tùy theo mô hình; nên sử dụng các mô hình mới hơn để có kết quả tốt nhất.",
   "ResultStorage": "Lưu trữ kết quả",
   "UploadFilesDevice": "Tải lên tệp từ thiết bị cá nhân của bạn.",
-  "UploadFilesPortal": "Tải lên tệp từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}",
-  "AIProviderAndModel": "{{aiProvider}} và mô hình"
+  "UploadFilesPortal": "Tải lên tệp từ {{sectionNameFirst}} hoặc {{sectionNameSecond}}"
 }

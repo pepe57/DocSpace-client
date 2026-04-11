@@ -1,5 +1,6 @@
 {
   "AccessLevel": "Nivel de permisiune",
+  "AccessSettingsTitle": "Setări de acces",
   "AccessToTemplate": "Acces la șablon",
   "ActionCannotUndone": "Această acţiune nu poate fi anulată. Sigur doriţi să continuați?",
   "AddAdminByNameOrEmail": "Adăugare administrator după nume sau email",
@@ -8,6 +9,7 @@
   "AddUsersOrGroupsDescription": "Administratorii adăugați vor putea crea săli cu ajutorul acestui șablon.",
   "AddUsersOrGroupsInfo": "Numai Administratorul <1>{{productName}}</1> și <1>Administratori de sală</1> sunt afișate aici.",
   "AddUsersOrGroupsInfoGroups": "Numai Administratorul <1>{{productName}}</1> și <1>Administratori de sală</1> din grupuri selectate pot crea săli cu ajutorul acestui șablon.",
+  "AddUsersOrGroupsTitle": "Adăugare Utilizatori sau Grrupuri",
   "AfterFilesWillBeDeletedPermanently": "Fișierele vor fi şterse definitiv.",
   "AgentRemoved": "Agentul a fost șters",
   "AgentsRemoved": "Agenții au fost șterse",
@@ -52,6 +54,7 @@
   "DeleteLink": "Ștergere link",
   "DeleteSharedCustomPublic": "Link-ul va fi şters definitiv. Această acţiune nu poate fi anulată.",
   "DeleteSharedLink": "Link-ul anterior va deveni indisponibil. Un nou link partajat va fi creat.",
+  "DeleteTemplateAction": "Ștergere șablon",
   "DeletingPermanently": "Ștergere definitivă",
   "DeletingVersion": "Ștergere versiune",
   "DisableNotifications": "Dezactivare notificări",
@@ -168,6 +171,7 @@
   "RoomsPinned": "Sălile fixate: {{count}}",
   "RoomsRemoved": "Sălile eliminate",
   "RoomsUnpinned": "Fixarea sălilor anulată: {{count}}",
+  "RoomTagsLabel": "Etichete sală",
   "RoomTagsTooltip": "Etichete sunt aplicate la sala care va fi creată cu ajutorul acestui șablon.",
   "RoomTemplate": "Șablon sală",
   "RoomTemplateDescription": "Folosiți acest șablon pentru crearea rapidă a sălii noi.",
@@ -177,6 +181,8 @@
   "ScheduledTrashMove": "La data de {{date}} va fi mutat în {{sectionName}}",
   "SendByEmail": "Trimite prin email",
   "SharedBy": "Partajat de",
+  "ShareFolderAction": "Partajare folder",
+  "ShareFolderRoomDescription": "O sală nouă va fi creată și tot conținutul folderului selectat va fi copiat acolo. Ulterior, puteți invita alți utilizatori să colaboreze la fișiere în cadrul unei săli.",
   "SharePDFFormModalDescription": "O sală nouă va fi creată și formularul PDF va fi copiat acolo. Apoi puteți invita alți utilizatori să completeze formularul în sală.",
   "SharePDFFormModalTitle": "Partajare formular PDF",
   "ShareRoom": "Partajare sală",
@@ -217,11 +223,5 @@
   "WillBeDeletedPermanently": "{{date}} va fi şters definitiv",
   "YouLeftTheAgent": "Dvs ați părăsit agentul",
   "YouLeftTheRoom": "Ați părăsit sala",
-  "YourUserTypeHasChanged": "Tipul de utilizator a fost schimbat în <1>“{{userType}}”</1> de către administratorul  <1>{{adminName}}</1> al {{productName}}.",
-  "AccessSettingsTitle": "Setări de acces",
-  "AddUsersOrGroupsTitle": "Adăugare Utilizatori sau Grrupuri",
-  "RoomTagsLabel": "Etichete sală",
-  "ShareFolderAction": "Partajare folder",
-  "ShareFolderRoomDescription": "O sală nouă va fi creată și tot conținutul folderului selectat va fi copiat acolo. Ulterior, puteți invita alți utilizatori să colaboreze la fișiere în cadrul unei săli.",
-  "DeleteTemplateAction": "Ștergere șablon"
+  "YourUserTypeHasChanged": "Tipul de utilizator a fost schimbat în <1>“{{userType}}”</1> de către administratorul  <1>{{adminName}}</1> al {{productName}}."
 }

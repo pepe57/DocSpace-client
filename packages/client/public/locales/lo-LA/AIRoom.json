@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "ທ່ານຈະຖືກປ່ຽນເສັ້ນທາງໄປຫາພາກສ່ວນ {{sectionName}} ໂດຍອັດຕະໂນມັດພາຍໃນ 5 ວິນາທີ.",
   "AIChat": "AI-Chat",
   "AIInstructions": "ຄຳແນະນຳກ່ຽວກັບ AI",
+  "AIProviderAndModel": "{{aiProvider}} ແລະ model",
   "CreateChat": "ສ້າງການສົນທະນາ",
   "CreateChatDescription": "ໄປທີ່ແຖບ {{aiChat}} ເພື່ອເລີ່ມຕົ້ນ.",
   "EmptyKnowledgeDescription": "ເອກະສານທີ່ອັບໂຫຼດຢູ່ທີ່ນີ້ຈະຖືກຈັດດັດຊະນີ ແລະ ນຳໃຊ້ເປັນບໍລິບົດໃນແຖບ {{aiChat}}. ເພີ່ມເອກະສານ (ບໍ່ເກີນ 10 MB ແຕ່ລະອັນ) ເພື່ອຖາມຄຳຖາມ AI, ສ້າງເນື້ອຫາ, ຫຼື ຮ່ວມມືກັນໃນຂໍ້ມູນ.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>ໝາຍເຫດ:</1> ຄຸນນະພາບການຕອບສະໜອງອາດແຕກຕ່າງກັນໄປຕາມຮຸ່ນ; ແນະນຳໃຫ້ໃຊ້ຮຸ່ນໃໝ່ກວ່າເພື່ອໃຫ້ໄດ້ຜົນດີທີ່ສຸດ.",
   "ResultStorage": "ການເກັບຮັກສາຜົນໄດ້ຮັບ",
   "UploadFilesDevice": "ອັບໂຫຼດໄຟລ໌ຈາກອຸປະກອນສ່ວນຕົວຂອງທ່ານ",
-  "UploadFilesPortal": "ອັບໂຫຼດໄຟລ໌ຈາກ {{sectionNameFirst}} ຫຼື {{sectionNameSecond}}",
-  "AIProviderAndModel": "{{aiProvider}} ແລະ model"
+  "UploadFilesPortal": "ອັບໂຫຼດໄຟລ໌ຈາກ {{sectionNameFirst}} ຫຼື {{sectionNameSecond}}"
 }

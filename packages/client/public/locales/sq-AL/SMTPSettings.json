@@ -1,5 +1,6 @@
 {
   "AuthViaNTLM": "Auth përmes NTLM",
+  "EnableSMTPSSL": "Aktivizoni SSL",
   "EnterDomain": "Futni domenin",
   "EnterLogin": "Futni hyrjen",
   "EnterPort": "Futni portin",
@@ -9,6 +10,5 @@
   "Port": "Port",
   "SenderDisplayName": "Emri i shfaqur i dërguesit",
   "SenderEmailAddress": "Adresa e emailit të dërguesit",
-  "SendTestMail": "Dërgoni Mail Test",
-  "EnableSMTPSSL": "Aktivizoni SSL"
+  "SendTestMail": "Dërgoni Mail Test"
 }

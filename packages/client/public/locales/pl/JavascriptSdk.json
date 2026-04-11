@@ -38,6 +38,7 @@
   "Descending": "Malejąco",
   "DestinationFolderId": "ID folder docelowego",
   "DisplayColumns": "Wyświetlanie kolumn w wierszu pliku",
+  "EditorPresetDescription": "Osadź edytor, aby umożliwić użytkownikom edytowanie pliku z poziomu odpowiedniego pokoju.",
   "ElementCalledAfterClicking": "Element zostanie wywołany po kliknięciu",
   "ElementItself": "Sam element",
   "EmbedCodeSuccessfullyCopied": "Kod osadzania został pomyślnie skopiowany do schowka",
@@ -47,6 +48,7 @@
   "EnterPage": "Wpisz numer strony",
   "EnterWidth": "Wpisz szerokość",
   "EventLog": "Dziennik zdarzeń",
+  "FeedbackAndSupportLink": "Opinie i wsparcie",
   "FileContentCopy": "Ograniczenie kopiowania zawartości pliku",
   "FileFilter": "Filtr plików",
   "FileId": "ID pliku",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "Wyszukiwanie plików w otwartym katalogu/pokoju.",
   "FileTypeDisplay": "Wyświetlanie typu plików",
   "FrameId": "ID ramki",
+  "GetCodeToInsert": "Uzyskaj kod do wstawienia",
   "Header": "Nagłówek",
   "HeaderDescription": "Możesz wyłączyć nagłówek w wersji mobilnej, aby ograniczyć dostęp do sekcji {{productName}} (analogicznie do wyłączenia menu po lewej stronie w wersji na komputery stacjonarne).",
   "HelperText": "Tekst pomocniczy",
@@ -147,8 +150,5 @@
   "UploadLimits": "Limity przesyłania",
   "UploadMode": "Tryb przesyłania",
   "ViewerDescription": "Osadź przeglądarkę, aby umożliwić użytkownikom otwarcie pliku do przeglądania z odpowiedniego pokoju.",
-  "VoidReturn": "Pustka",
-  "EditorPresetDescription": "Osadź edytor, aby umożliwić użytkownikom edytowanie pliku z poziomu odpowiedniego pokoju.",
-  "FeedbackAndSupportLink": "Opinie i wsparcie",
-  "GetCodeToInsert": "Uzyskaj kod do wstawienia"
+  "VoidReturn": "Pustka"
 }

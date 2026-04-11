@@ -17,6 +17,7 @@
   "idpAuthRequest": "校验认证响应签名",
   "idpCertificates": "IdP 公共证书",
   "idpCertificatesTooltip": "用于对来自 IdP 的请求与信息进行验证或解密（或两者皆有）的身份供应商公共证书。",
+  "IdpEntityId": "IdP 实体 ID",
   "idpSignExitRequest": "校验登出请求签名",
   "idpSigningAlgorithm": "默认签名校验算法",
   "idpSignResponseRequest": "校验登出响应签名",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "如果您想将 SSO 服务中的用户自动添加至空间中，请使用此选项。",
   "UploadXML": "从 XML 中加载元数据以自动填充所需字段。",
   "UploadXMLPlaceholder": "IdP 元数据 XML URL",
-  "UsedFor": "用于",
-  "IdpEntityId": "IdP 实体 ID"
+  "UsedFor": "用于"
 }

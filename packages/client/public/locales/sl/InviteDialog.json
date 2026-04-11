@@ -21,6 +21,5 @@
   "UserAgentMaxAvailableRoleWarning": "Gostje in uporabniki ne morejo biti dodeljeni kot skrbniki agentov. Samo skrbniki sob in {{productName}} so primerni za to vlogo.",
   "UserMaxAvailableRoleWarning": "Gostov in uporabnikov ni mogoče določiti za upravitelje sob. Samo skrbniki sobe in {{productName}} so primerni za to vlogo.",
   "UsersAlreadyAdded": "Nekateri uporabniki so že dodani",
-  "UsersCannotBeAdded": "Onemogočeni kontakti se ne morejo dodati v sobo.",
-  "InviteLinkCopySuccess": "Povezava je bila kopirana"
+  "UsersCannotBeAdded": "Onemogočeni kontakti se ne morejo dodati v sobo."
 }

@@ -3,7 +3,7 @@
   "content": "Enter new email",
   "content_en_sha1_hash": "53e3a4b69f71fbdd1c88e8baacaee0bd1e035822",
   "created_at": "2025-05-19T21:30:57.026Z",
-  "updated_at": "2026-04-11T18:34:21.358Z",
+  "updated_at": "2026-04-11T19:53:45.170Z",
   "comment": {
     "text": "This translation key is used for the placeholder text \"Enter new email\" in various input fields within the application, typically in forms or dialogs where users are required to enter a new email address.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeEmailDialog/index.js",
       "line_number": 193,
-      "context": "{t(\"EmailActivationDescription\")}\n </Text>\n <FieldContainer\n isVertical\n style={{ margin: \"0\" }}\n // labelText={t(\"EnterEmail\")}\n errorMessage={errorMessage}\n hasError={hasError}\n labelVisible={false}\n dataTestId=\"change_email_field\"\n >",
+      "context": "{t(\"EmailActivationDescription\")}\n </Text>\n <FieldContainer\n isVertical\n style={{ margin: \"0\" }}\n // labelText={t(\"EnterNewEmail\")}\n errorMessage={errorMessage}\n hasError={hasError}\n labelVisible={false}\n dataTestId=\"change_email_field\"\n >",
       "module": "/packages/client"
     }
   ],

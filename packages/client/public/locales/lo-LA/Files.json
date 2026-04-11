@@ -1,5 +1,6 @@
 {
   "AccessLevel": "ລະດັບການເຂົ້າເຖິງ",
+  "AccessSettingsTitle": "ການຕັ້ງຄ່າການເຂົ້າໃຊ້",
   "AccessToTemplate": "ການເຂົ້າເຖິງແມ່ແບບ",
   "ActionCannotUndone": "ການກະທຳນີ້ບໍ່ສາມາດຍົກເລີກໄດ້ ແນ່ໃຈບໍວ່າທ່ານຕ້ອງການດຳເນີນຕໍ່ໄປ?",
   "AddAdminByNameOrEmail": "ເພີ່ມຜູ້ປົກຄອງດ້ວຍຊື່ຫຼືອີເມລ໌",
@@ -8,6 +9,7 @@
   "AddUsersOrGroupsDescription": "ບັນດາຜູ້ປົກຄອງທີ່ເພີ່ມເຂົ້າມາຈະສາມາດສ້າງຫ້ອງໂດຍໃຊ້ແມ່ແບບນີ້ໄດ້.",
   "AddUsersOrGroupsInfo": "ພຽງແຕ່ <1>{{productName}}</1> ພ້ອມກັບ <1>ຜູ້ປົກຄອງຫ້ອງ</1> ທີ່ຖືກສະແດງຢູ່ທີ່ນີ້",
   "AddUsersOrGroupsInfoGroups": "ພຽງແຕ່ <1>{{productName}}</1> ພ້ອມດ້ວຍ <1>ຜູ້ປົກຄອງຫ້ອງ</1> ຈາກກຸ່ມທີ່ເລືອກເທົ່ານັ້ນທີ່ຈະສາມາດສ້າງຫ້ອງໂດຍໃຊ້ແມ່ແບບນີ້ໄດ້.",
+  "AddUsersOrGroupsTitle": "ເພີ່ມຜູ້ໃຊ້ຫຼືກຸ່ມ",
   "AfterFilesWillBeDeletedPermanently": "ຫຼັງຈາກ​ໄຟລ໌​ຖືກ​ລົບ​ອອກ​ຢ່າງ​ຖາວອນ.",
   "AgentRemoved": "ຕົວແທນຖືກລຶບອອກແລ້ວ",
   "AgentsRemoved": "ຕົວແທນຖືກລຶບອອກແລ້ວ",
@@ -52,6 +54,7 @@
   "DeleteLink": "ລົບລິ້ງ",
   "DeleteSharedCustomPublic": "ລິ້ງຈະຖືກລຶບອອກຢ່າງຖາວອນ. ທ່ານຈະບໍ່ສາມາດຍົກເລີກການດຳເນີນການນີ້ໄດ້.",
   "DeleteSharedLink": "ລິ້ງກ່ອນໜ້າຈະບໍ່ສາມາດໃຊ້ໄດ້. ລິ້ງທີ່ແບ່ງປັນໃໝ່ຈະຖືກສ້າງ.",
+  "DeleteTemplateAction": "ລົບແມ່ແບບ",
   "DeletingPermanently": "ລົບລ້າງຖາວອນ",
   "DeletingVersion": "ລົບລ້າງເວີຊັນ",
   "DisableNotifications": "ປິດການແຈ້ງເຕືອນ",
@@ -168,6 +171,7 @@
   "RoomsPinned": "ປັກໝຸດຫ້ອງ: {{count}}",
   "RoomsRemoved": "ລຶບຫ້ອງອອກແລ້ວ",
   "RoomsUnpinned": "ຖອດປັກໝຸດຫ້ອງແລ້ວ: {{count}}",
+  "RoomTagsLabel": "ປ້າຍຫ້ອງ",
   "RoomTagsTooltip": "ປ້າຍກຳກັບຈະນຳໃຊ້ກັບຫ້ອງທີ່ຈະສ້າງຂຶ້ນໂດຍອ້າງອີງຈາກແມ່ແບບນີ້.",
   "RoomTemplate": "ແມ່ແບບຫ້ອງ",
   "RoomTemplateDescription": "ໃຊ້ແມ່ແບບນີ້ເພື່ອສ້າງຫ້ອງໃໝ່ຢ່າງໄວວາ.",
@@ -177,6 +181,8 @@
   "ScheduledTrashMove": "{{date}} ຈະຖືກຍ້າຍໄປ {{sectionName}}",
   "SendByEmail": "ສົ່ງຜ່ານອີເມວ",
   "SharedBy": "ແບ່ງປັນໂດຍ",
+  "ShareFolderAction": "ແບ່ງປັນໂຟນເດີ",
+  "ShareFolderRoomDescription": "ຫ້ອງໃຫມ່ຈະຖືກສ້າງຂື້ນແລະເນື້ອຫາທັງຫມົດຂອງໂຟນເດີທີ່ເລືອກຈະຖືກຄັດລອກຢູ່ທີ່ນັ້ນ. ຫຼັງຈາກນັ້ນ, ທ່ານສາມາດເຊື້ອເຊີນຜູ້ໃຊ້ອື່ນໆໃຫ້ຮ່ວມມືກັບໄຟລ໌ພາຍໃນຫ້ອງ.",
   "SharePDFFormModalDescription": "ຫ້ອງໃບ່ຈະຖືກສ້າງຂຶ້ນ ແລະແບບຟອມ PDF ຈະຖືກສໍາເນົາໄປນໍາ. ຫຼັງຈາກນັ້ນ, ທ່ານສາມາດເຊີນຜູ້ໃຊ້ອື່ນໆ ມາຕື່ມຂໍ້ມູນໃສ່ແບບຟອມໃນຫ້ອງໄດ້.",
   "SharePDFFormModalTitle": "ແບ່ງປັນແບບຟອມ PDF",
   "ShareRoom": "ແບ່ງປັນຫ້ອງ",
@@ -217,11 +223,5 @@
   "WillBeDeletedPermanently": "{{date}} ຈະຖືກລົບອອກຢ່າງຖາວອນ",
   "YouLeftTheAgent": "ທ່ານໄດ້ອອກຈາກຕົວແທນແລ້ວ",
   "YouLeftTheRoom": "ທ່ານໄດ້ອອກຈາກຫ້ອງ",
-  "YourUserTypeHasChanged": "ປະເພດຜູ້ໃຊ້ຂອງທ່ານໄດ້ຖືກປ່ຽນເປັນ <1>“{{userType}}”</1> ໂດຍຜູ້ບໍລິຫານ {{productName}} <1>{{adminName}}</1>.",
-  "AccessSettingsTitle": "ການຕັ້ງຄ່າການເຂົ້າໃຊ້",
-  "AddUsersOrGroupsTitle": "ເພີ່ມຜູ້ໃຊ້ຫຼືກຸ່ມ",
-  "RoomTagsLabel": "ປ້າຍຫ້ອງ",
-  "ShareFolderAction": "ແບ່ງປັນໂຟນເດີ",
-  "ShareFolderRoomDescription": "ຫ້ອງໃຫມ່ຈະຖືກສ້າງຂື້ນແລະເນື້ອຫາທັງຫມົດຂອງໂຟນເດີທີ່ເລືອກຈະຖືກຄັດລອກຢູ່ທີ່ນັ້ນ. ຫຼັງຈາກນັ້ນ, ທ່ານສາມາດເຊື້ອເຊີນຜູ້ໃຊ້ອື່ນໆໃຫ້ຮ່ວມມືກັບໄຟລ໌ພາຍໃນຫ້ອງ.",
-  "DeleteTemplateAction": "ລົບແມ່ແບບ"
+  "YourUserTypeHasChanged": "ປະເພດຜູ້ໃຊ້ຂອງທ່ານໄດ້ຖືກປ່ຽນເປັນ <1>“{{userType}}”</1> ໂດຍຜູ້ບໍລິຫານ {{productName}} <1>{{adminName}}</1>."
 }

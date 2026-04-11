@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "Ви будете автоматично перенаправлені до розділу {{sectionName}} через 5 секунд.",
   "AIChat": "ШІ-чат",
   "AIInstructions": "Інструкції щодо ШІ",
+  "AIProviderAndModel": "{{aiProvider}} та модель",
   "CreateChat": "Створити чат",
   "CreateChatDescription": "Перейдіть на вкладку {{aiChat}}, щоб розпочати.",
   "EmptyKnowledgeDescription": "Файли, завантажені тут, будуть проіндексовані та використані як контекст у вкладці {{aiChat}}. Додайте файли (до 10 МБ кожен), щоб ставити запитання ШІ, генерувати контент або співпрацювати з інформацією.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Примітка:</1> Якість відповідей може відрізнятися залежно від моделі; для найкращих результатів рекомендуються новіші моделі.",
   "ResultStorage": "Збереження результатів",
   "UploadFilesDevice": "Завантажте файли з вашого особистого пристрою.",
-  "UploadFilesPortal": "Завантажте файли з {{sectionNameFirst}} або {{sectionNameSecond}}",
-  "AIProviderAndModel": "{{aiProvider}} та модель"
+  "UploadFilesPortal": "Завантажте файли з {{sectionNameFirst}} або {{sectionNameSecond}}"
 }

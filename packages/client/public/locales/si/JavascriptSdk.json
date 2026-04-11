@@ -38,6 +38,7 @@
   "Descending": "අවරෝහණ",
   "DestinationFolderId": "ගමනාන්ත ෆෝල්ඩර ID",
   "DisplayColumns": "ගොනු පේළියක තීරු‌ පෙන්වීම",
+  "EditorPresetDescription": "පරිශ්‍රීලකයින්ට නිශ්චිත කාමරයක ගොනුවක් සංස්කරණය සඳහා ඉඩ දීමට සංස්කරකයක් කාවද්දන්න.",
   "ElementCalledAfterClicking": "එබීමෙන් පසුව අංගය ගෙන්වයි",
   "ElementItself": "අංගයම",
   "EmbedCodeSuccessfullyCopied": "කාවද්දන කේතය පසුරුපුවරුවට පිටපත් විය",
@@ -47,6 +48,7 @@
   "EnterPage": "පිටුවේ අංකය යොදන්න",
   "EnterWidth": "පළල යොදන්න",
   "EventLog": "සිදුවීම් ලොගය",
+  "FeedbackAndSupportLink": "ප්‍රතිපෝෂණ හා සහාය",
   "FileContentCopy": "ගොනු අන්තර්ගත පිටපත් තහනම",
   "FileFilter": "ගොනු පෙරහන",
   "FileId": "ගොනුවේ හැඳු.",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "විවෘත කරන ලද බහාලුමේ/කාමරයේ ගොනු සෙවීම.",
   "FileTypeDisplay": "ගොනු වර්ගය පෙන්වීම",
   "FrameId": "රාමුවේ හැඳු.",
+  "GetCodeToInsert": "කේතයක් ගන්න",
   "Header": "ශ්‍රීර්ෂය",
   "HeaderDescription": "ඔබට {{productName}} කොටස් වෙත ප්‍රවේශය සීමා කිරීමට ජංගම අනුවාදයේ ශ්‍රීර්ෂකය අබල කිරීමට හැකිය (වැඩතල අනුවාදයේ වම්පස වට්ටෝරුව අබල කිරීම වැනිය).",
   "HelperText": "උදව් පාඨය",
@@ -147,8 +150,5 @@
   "UploadLimits": "අඩු සීමාවන්",
   "UploadMode": "අඩුගත කිරීමේ මාදිලිය",
   "ViewerDescription": "නිශ්චිත කාමරයක ගොනුවක් බැලීම සඳහා විවෘත කිරීමට ඉඩ දීමට නරඹනයක් කාවද්දන්න.",
-  "VoidReturn": "ශුන්‍ය",
-  "EditorPresetDescription": "පරිශ්‍රීලකයින්ට නිශ්චිත කාමරයක ගොනුවක් සංස්කරණය සඳහා ඉඩ දීමට සංස්කරකයක් කාවද්දන්න.",
-  "FeedbackAndSupportLink": "ප්‍රතිපෝෂණ හා සහාය",
-  "GetCodeToInsert": "කේතයක් ගන්න"
+  "VoidReturn": "ශුන්‍ය"
 }

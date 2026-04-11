@@ -1,5 +1,6 @@
 {
   "AuthViaNTLM": "المصادقة عبر NTLM",
+  "EnableSMTPSSL": "تمكين SSL",
   "EnterDomain": "أدخل النطاق",
   "EnterLogin": "أدخل اسم المستخدم",
   "EnterPort": "أدخل المنفذ",
@@ -9,6 +10,5 @@
   "Port": "المنفذ",
   "SenderDisplayName": "اسم عرض المرسل",
   "SenderEmailAddress": "عنوان البريد الإلكتروني للمرسل",
-  "SendTestMail": "إرسال بريد تجريبي",
-  "EnableSMTPSSL": "تمكين SSL"
+  "SendTestMail": "إرسال بريد تجريبي"
 }

@@ -38,6 +38,7 @@
   "Descending": "Descendent",
   "DestinationFolderId": "ID-ul folderului de destinație",
   "DisplayColumns": "Afișare coloane din rândul de fișier",
+  "EditorPresetDescription": "Incorporează editor pentru a permite utilizatorilor să editeze fișierul dintr-o anumită sală.",
   "ElementCalledAfterClicking": "Elementul va fi chemat după ce faceți clic ",
   "ElementItself": "Elementul propriu-zis",
   "EmbedCodeSuccessfullyCopied": "Obține codul pentru inserare",
@@ -47,6 +48,7 @@
   "EnterPage": "Introduceți numărul de pagină",
   "EnterWidth": "Introduceți lățimea",
   "EventLog": "Jurnal de evenimente",
+  "FeedbackAndSupportLink": "Feedback și asistență",
   "FileContentCopy": "Restricție de copiere a conținutului fișierului",
   "FileFilter": "Filtru fișiere",
   "FileId": "ID fișier",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "Căutarea fișierelor în folderul/sala deschisă.",
   "FileTypeDisplay": "Afișare tip fișier",
   "FrameId": "ID cadru",
+  "GetCodeToInsert": "Obține codul pentru inserare",
   "Header": "Antet",
   "HeaderDescription": "Puteți dezactiva antetul în versiunea mobilă pentru a limita accesul la secțiunile {{productName}} (la fel ca dezactivarea meniului din stânga în versiunea desktop).",
   "HelperText": "Text ajutător",
@@ -147,8 +150,5 @@
   "UploadLimits": "Limite de încărcare",
   "UploadMode": "Mod de încărcare",
   "ViewerDescription": "Incorporează vizualizator pentru a permite utilizatorilor să deschide fișierul în vizualizare dintr-o anumită sală.",
-  "VoidReturn": "Vid",
-  "EditorPresetDescription": "Incorporează editor pentru a permite utilizatorilor să editeze fișierul dintr-o anumită sală.",
-  "FeedbackAndSupportLink": "Feedback și asistență",
-  "GetCodeToInsert": "Obține codul pentru inserare"
+  "VoidReturn": "Vid"
 }

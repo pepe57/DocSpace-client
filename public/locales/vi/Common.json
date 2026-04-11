@@ -398,6 +398,7 @@
   "DenyAccess": "Từ chối quyền truy cập",
   "DenyAccessDescription": "Không có quyền xem, chỉnh sửa hoặc quản lý tệp hoặc thư mục.",
   "DenyAccessDescriptionDocument": "Không có quyền xem, chỉnh sửa hoặc quản lý tệp này.",
+  "DescriptionLabel": "Mô tả",
   "DeveloperLicense": "Developer",
   "DeveloperTools": "Công cụ nhà phát triển",
   "Diagram": "Sơ đồ",
@@ -1460,7 +1461,6 @@
   "WebSearch": "Tìm kiếm trên web",
   "WebSearchAI": "Tìm kiếm web",
   "Website": "Website",
-  "WelcomeDescription": "AI Forms giúp bạn tạo, phân phối và thu thập các bài nộp biểu mẫu — tất cả tại một nơi.",
   "WelcomeFeature1": "Tạo biểu mẫu PDF từ mẫu hoặc từ đầu",
   "WelcomeFeature1Title": "Tạo Biểu mẫu Thông minh",
   "WelcomeFeature2": "Theo dõi tiến độ và các bài nộp ngay lập tức",
@@ -1475,7 +1475,6 @@
   "WhenBalanceDropsTo": "Khi số dư giảm xuống {{min}}, ví dụ điện tử sẽ tự động được nạp lại lên {{max}}.",
   "WhenBalanceGoesBellow": "Khi số dư xuống",
   "WhiteLabel": "Cài đặt Logo",
-  "WhiteLabelSubtitle": "Nhập tên công ty của bạn, tải logo lên và tùy chỉnh phong cách để phù hợp với thương hiệu của bạn.",
   "WhiteLabelTooltip": "Các kích thước được hiển thị cho màn hình Retina. Đối với màn hình có độ phân giải tiêu chuẩn, chiều rộng và chiều cao logo sẽ được thay đổi kích thước tương ứng khi tải lên.",
   "WhoFilledItOut": "Ai đã điền vào",
   "WhoFilledItOutPrompt": "Liệt kê tất cả những người đã điền vào biểu mẫu \"{{formName}}\"",
@@ -1498,6 +1497,5 @@
   "YourName": "Tên của bạn",
   "YourPrice": "Phí thanh toán của bạn",
   "YourTurn": "Phiên của bạn",
-  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi bạn gửi yêu cầu.",
-  "DescriptionLabel": "Mô tả"
+  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi bạn gửi yêu cầu."
 }

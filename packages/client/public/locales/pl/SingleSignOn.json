@@ -17,6 +17,7 @@
   "idpAuthRequest": "Zweryfikuj podpis odpowiedzi autoryzacji",
   "idpCertificates": "Certyfikaty publiczne IdP",
   "idpCertificatesTooltip": "Publiczne certyfikaty dostawcy tożsamości używane do weryfikacji bądź odszyfrowania (lub obu) żądań i odpowiedzi od IdP.",
+  "IdpEntityId": "ID podmiotu IdP",
   "idpSignExitRequest": "Zweryfikuj podpis żądań wylogowania",
   "idpSigningAlgorithm": "Domyślny algorytm weryfikacji podpisów",
   "idpSignResponseRequest": "Zweryfikuj podpis odpowiedzi wylogowania",
@@ -58,6 +59,5 @@
   "TurnOnSSOCaption": "Włącz tę opcję, jeśli chcesz automatycznie dodawać użytkowników z usługi pojedynczego logowania do swojego obszaru roboczego.",
   "UploadXML": "Wczytaj metadane z XML, aby automatycznie wypełnić wymagane pola.",
   "UploadXMLPlaceholder": "Adres URL do XML z metadanymi IdP",
-  "UsedFor": "Użyj do",
-  "IdpEntityId": "ID podmiotu IdP"
+  "UsedFor": "Użyj do"
 }

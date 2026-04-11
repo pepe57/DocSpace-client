@@ -38,6 +38,7 @@
   "Descending": "Descendente",
   "DestinationFolderId": "ID da pasta de destino",
   "DisplayColumns": "Exibindo colunas em uma linha de arquivo",
+  "EditorPresetDescription": "Incorpore um editor para permitir que os usuários editem um arquivo da sala correspondente.",
   "ElementCalledAfterClicking": "O elemento será chamado após clicar",
   "ElementItself": "O elemento em si",
   "EmbedCodeSuccessfullyCopied": "Código incorporado copiado com sucesso para a área de transferência",
@@ -47,6 +48,7 @@
   "EnterPage": "Introduzir o número de página",
   "EnterWidth": "Introduzir largura",
   "EventLog": "Registro de Eventos",
+  "FeedbackAndSupportLink": "Feedback e suporte",
   "FileContentCopy": "Restrição de cópia de conteúdo de arquivo",
   "FileFilter": "Filtro de arquivo",
   "FileId": "ID do arquivo",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "Pesquisa de arquivos na pasta/sala aberta.",
   "FileTypeDisplay": "Exibição do tipo de arquivo",
   "FrameId": "Id do frame",
+  "GetCodeToInsert": "Obtenha o código para inserir",
   "Header": "Cabeçalho",
   "HeaderDescription": "Você pode desabilitar o cabeçalho na versão móvel para limitar o acesso às seções do {{productName}} (assim como desabilitar o menu esquerdo na versão desktop).",
   "HelperText": "Texto de ajuda",
@@ -147,8 +150,5 @@
   "UploadLimits": "Limites de upload",
   "UploadMode": "Modo de upload",
   "ViewerDescription": "Incorpore um visualizador para permitir que os usuários abram um arquivo para visualização na sala correspondente.",
-  "VoidReturn": "Vazio",
-  "EditorPresetDescription": "Incorpore um editor para permitir que os usuários editem um arquivo da sala correspondente.",
-  "FeedbackAndSupportLink": "Feedback e suporte",
-  "GetCodeToInsert": "Obtenha o código para inserir"
+  "VoidReturn": "Vazio"
 }

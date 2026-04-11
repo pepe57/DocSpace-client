@@ -1,5 +1,6 @@
 {
   "AuthViaNTLM": "Todennus NTLM:n kautta",
+  "EnableSMTPSSL": "Ota käyttöön SSL",
   "EnterDomain": "Syötä verkkotunnus",
   "EnterLogin": "Syötä käyttäjätunnus",
   "EnterPort": "Syötä portti",
@@ -9,6 +10,5 @@
   "Port": "Portti",
   "SenderDisplayName": "Lähettäjän nimi",
   "SenderEmailAddress": "Lähettäjän sähköpostiosoite",
-  "SendTestMail": "Lähetä testiviesti",
-  "EnableSMTPSSL": "Ota käyttöön SSL"
+  "SendTestMail": "Lähetä testiviesti"
 }

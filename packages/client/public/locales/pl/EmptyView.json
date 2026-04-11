@@ -6,6 +6,7 @@
   "CreateDocumentDescription": "Wykorzystaj rozbudowaną funkcjonalność edytora tekstów.",
   "CreateForm": "Utwórz nowy formularz PDF",
   "CreateFormDescription": "Zbieraj głosy, pozyskuj opinie i przechowuj dane za pomocą formularzy PDF.",
+  "CreateNewAIAgent": "Utwórz nowego agenta",
   "CreateNewFileDescription": "Rozpocznij pracę w pokoju, tworząc pliki lub katalogi",
   "CreateNewFileTitle": "Utwórz nowy plik",
   "CreatePresentation": "Utwórz nową prezentację",
@@ -36,6 +37,7 @@
   "EmptyShareTitle": "Nie ma jeszcze żadnych współdzielonych elementów.",
   "EmptyTemplatesDescription": "Możesz utworzyć szablon z pokoju w sekcji Pokój",
   "EmptyTemplatesTitle": "Brak szablonów",
+  "EmptyViewDescription": "Rozpocznij od szybkich działań:",
   "FormFolderDefaultDescription": "Upuść formularze PDF tutaj lub prześlij je z {{productName}} bądź urządzenia.",
   "FormFolderDefaultTitle": "Brak formularzy",
   "FormFolderDefaultUserDescription": "Tutaj pojawią się formularze przesłane przez administratorów.",
@@ -62,7 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Prześlij z urządzenia",
   "UploadFromPortalTitle": "Prześlij z {{productName}}",
   "UploadPDFFormOptionDescription": "Wybierz gotowy formularz PDF dostępny w {{productName}} i prześlij go do pokoju.",
-  "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych",
-  "CreateNewAIAgent": "Utwórz nowego agenta",
-  "EmptyViewDescription": "Rozpocznij od szybkich działań:"
+  "VirtualDataRoomEmptyTitle": "Witaj w Wirtualnym pokoju danych"
 }

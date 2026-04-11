@@ -1,5 +1,6 @@
 {
   "AccessLevel": "Ниво приступа",
+  "AccessSettingsTitle": "Подешавања приступа",
   "AccessToTemplate": "Приступ шаблону",
   "ActionCannotUndone": "Ова акција не може бити опозвана. Да ли сте сигурни да желите да наставите?",
   "AddAdminByNameOrEmail": "Додајте администратора по имену или е-маилу.",
@@ -8,6 +9,7 @@
   "AddUsersOrGroupsDescription": "Додати администратори моћи ће да креирају собе користећи овај шаблон.",
   "AddUsersOrGroupsInfo": "Овде су приказани само <1>{{productName}}</1> и <1> администратори соба </1>.",
   "AddUsersOrGroupsInfoGroups": "Само <1>{{productName}}</1> и <1>администратори соба</1> из изабраних група моћи ће да креирају собе користећи овај шаблон.",
+  "AddUsersOrGroupsTitle": "Додајте кориснике или групе.",
   "AfterFilesWillBeDeletedPermanently": "Након што се датотеке трајно обришу.",
   "AgentRemoved": "Агент уклоњен",
   "AgentsRemoved": "Агенти уклоњени",
@@ -52,6 +54,7 @@
   "DeleteLink": "Обриши линк",
   "DeleteSharedCustomPublic": "Линк ће бити трајно избрисан. Нећете моћи да поништите ову радњу.",
   "DeleteSharedLink": "Претходни линк ће постати недоступан. Нови дељени линк ће бити креиран.",
+  "DeleteTemplateAction": "Обриши шаблон",
   "DeletingPermanently": "Трајно брисање",
   "DeletingVersion": "Брисање верзије",
   "DisableNotifications": "Онемогући нотификације",
@@ -168,6 +171,7 @@
   "RoomsPinned": "Закачене собе: {{count}}",
   "RoomsRemoved": "Собе уклоњене",
   "RoomsUnpinned": "Собе откачене: {{count}}",
+  "RoomTagsLabel": "Ознаке собе",
   "RoomTagsTooltip": "Ознаке ће се применити на собу која ће бити креирана на основу овог шаблона.",
   "RoomTemplate": "Шаблон собе",
   "RoomTemplateDescription": "Користите овај шаблон за брзо креирање нове собе.",
@@ -177,6 +181,8 @@
   "ScheduledTrashMove": "{{date}} ће бити премештен у {{sectionName}}",
   "SendByEmail": "Пошаљи путем емаил-а",
   "SharedBy": "Дељено од",
+  "ShareFolderAction": "Дели фолдер",
+  "ShareFolderRoomDescription": "Нова соба ц́е бити креирана и сав садржај изабраног фолдера ц́е бити копиран тамо. Након тога, можете позвати друге кориснике да сарађују на датотекама у соби.",
   "SharePDFFormModalDescription": "Нова просторија ће бити креирана и PDF формулар ће бити тамо копиран. Затим можете позвати друге кориснике да попуне формулар у просторији.",
   "SharePDFFormModalTitle": "Подели PDF формулар",
   "ShareRoom": "Дели собу",
@@ -217,11 +223,5 @@
   "WillBeDeletedPermanently": "{{date }} ће бити трајно обрисан",
   "YouLeftTheAgent": "Оставили сте агента",
   "YouLeftTheRoom": "Напустили сте собу",
-  "YourUserTypeHasChanged": "Ваш тип корисника је промењен на <1>“{{userType}}”</1> од стране администратора {{productName}}<1>{{adminName}}</1>.",
-  "AccessSettingsTitle": "Подешавања приступа",
-  "AddUsersOrGroupsTitle": "Додајте кориснике или групе.",
-  "RoomTagsLabel": "Ознаке собе",
-  "ShareFolderAction": "Дели фолдер",
-  "ShareFolderRoomDescription": "Нова соба ц́е бити креирана и сав садржај изабраног фолдера ц́е бити копиран тамо. Након тога, можете позвати друге кориснике да сарађују на датотекама у соби.",
-  "DeleteTemplateAction": "Обриши шаблон"
+  "YourUserTypeHasChanged": "Ваш тип корисника је промењен на <1>“{{userType}}”</1> од стране администратора {{productName}}<1>{{adminName}}</1>."
 }

@@ -1,5 +1,6 @@
 {
   "ActionCannotBeUndoneGuests": "Atlasītie viesi ar īpašām vajadzībām tiks noņemti no {{productName}}. Šo darbību nevarēs atsaukt.",
+  "ActionCannotBeUndoneUsers": "Atlasītie atspējotie lietotāji tiks noņemti no {{productName}}. Šo darbību nevarēs atsaukt.",
   "CannotReassignFiles": "Ja vienlaikus izdzēšat vairākus lietotājus, jūs nevarat atkārtoti piešķirt viņu failus citiem lietotājiem.",
   "DeleteGroupGuestsSuccessMessage": "Viesi ir veiksmīgi izdzēsti.",
   "DeleteGroupUsersSuccessMessage": "Lietotāji ir veiksmīgi izdzēsti.",
@@ -17,6 +18,5 @@
   "SuccessfullyDeleteGuestInfoMessage": "Viesis ir veiksmīgi izdzēsts",
   "SuccessfullyDeleteUserInfoMessage": "Lietotājs ir veiksmīgi izdzēsts",
   "ToBeAbleToReassignData": "Lai varētu atkārtoti piešķirt datus, vienlaikus izdzēsiet vienu lietotāju.",
-  "UserFilesRemovalScope": "Personas dati, visi faili un mapes šī lietotāja sadaļās {{sectionNameFirst}} un {{sectionNameSecond}} tiks neatgriezeniski dzēsti.",
-  "ActionCannotBeUndoneUsers": "Atlasītie atspējotie lietotāji tiks noņemti no {{productName}}. Šo darbību nevarēs atsaukt."
+  "UserFilesRemovalScope": "Personas dati, visi faili un mapes šī lietotāja sadaļās {{sectionNameFirst}} un {{sectionNameSecond}} tiks neatgriezeniski dzēsti."
 }

@@ -3,7 +3,7 @@
   "content": "Feedback&Support",
   "content_en_sha1_hash": "05454b4c029ec2178d01fa798a4b80592499c29e",
   "created_at": "2025-05-19T21:30:54.484Z",
-  "updated_at": "2026-04-07T19:35:05.131Z",
+  "updated_at": "2026-04-11T19:53:45.253Z",
   "comment": {
     "text": "This translation key is used to display a category label in a UI component, specifically in a row container within a settings page, allowing users to toggle the \"Feedback and Support\" feature on or off.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor.js",
       "line_number": 294,
-      "context": "<RowContainer>\n <Checkbox label={t(\"Chat\")} onChange={() => {}} isChecked />\n <Text color=\"gray\">({t(\"InLeftPanel\")})</Text>\n </RowContainer>\n <RowContainer>\n <Checkbox label={t(\"FeedbackAndSupport\")} onChange={() => {}} isChecked />\n <Text color=\"gray\">({t(\"InLeftPanel\")})</Text>\n </RowContainer>\n </InterfaceElements>\n <CategorySubHeader>{t(\"AddWatermarks\")}</CategorySubHeader>\n <ControlsGroup>",
+      "context": "<RowContainer>\n <Checkbox label={t(\"Chat\")} onChange={() => {}} isChecked />\n <Text color=\"gray\">({t(\"InLeftPanel\")})</Text>\n </RowContainer>\n <RowContainer>\n <Checkbox label={t(\"FeedbackAndSupportLink\")} onChange={() => {}} isChecked />\n <Text color=\"gray\">({t(\"InLeftPanel\")})</Text>\n </RowContainer>\n </InterfaceElements>\n <CategorySubHeader>{t(\"AddWatermarks\")}</CategorySubHeader>\n <ControlsGroup>",
       "module": "/packages/client"
     }
   ],

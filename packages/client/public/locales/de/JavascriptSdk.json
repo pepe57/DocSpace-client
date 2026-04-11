@@ -38,6 +38,7 @@
   "Descending": "Absteigend",
   "DestinationFolderId": "Zielordner-ID",
   "DisplayColumns": "Spalten in einer Dateizeile anzeigen",
+  "EditorPresetDescription": "Betten Sie einen Editor ein, damit Benutzer eine Datei im entsprechenden Raum bearbeiten können.",
   "ElementCalledAfterClicking": "Das Element wird nach dem Anklicken aufgerufen",
   "ElementItself": "Das Element selbst",
   "EmbedCodeSuccessfullyCopied": "Einbettungscode erfolgreich in die Zwischenablage kopiert",
@@ -47,6 +48,7 @@
   "EnterPage": "Seitenzahl eingeben",
   "EnterWidth": "Breite eingeben",
   "EventLog": "Ereignisprotokoll",
+  "FeedbackAndSupportLink": "Feedback und Unterstützung",
   "FileContentCopy": "Beschränkung für das Kopieren von Dateiinhalten",
   "FileFilter": "Dateifilter",
   "FileId": "Datei-ID",
@@ -55,6 +57,7 @@
   "FilesSearchDescription": "Dateisuche im geöffneten Ordner/Raum.",
   "FileTypeDisplay": "Dateitypanzeige",
   "FrameId": "Frame-ID",
+  "GetCodeToInsert": "Code zum Einfügen erhalten",
   "Header": "Kopfzeile",
   "HeaderDescription": "Sie können die Kopfzeile in der mobilen Version deaktivieren, um den Zugriff auf die {{productName}}-Abschnitte einzuschränken (genau wie das Deaktivieren des linken Menüs in der Desktop-Version).",
   "HelperText": "Hilfetext",
@@ -147,8 +150,5 @@
   "UploadLimits": "Upload-Limits",
   "UploadMode": "Upload-Modus",
   "ViewerDescription": "Betten Sie einen Viewer ein, um Benutzern das Öffnen einer Datei zum Anzeigen im entsprechenden Raum zu ermöglichen.",
-  "VoidReturn": "Leer",
-  "EditorPresetDescription": "Betten Sie einen Editor ein, damit Benutzer eine Datei im entsprechenden Raum bearbeiten können.",
-  "FeedbackAndSupportLink": "Feedback und Unterstützung",
-  "GetCodeToInsert": "Code zum Einfügen erhalten"
+  "VoidReturn": "Leer"
 }

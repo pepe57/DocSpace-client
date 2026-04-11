@@ -21,6 +21,5 @@
   "UserAgentMaxAvailableRoleWarning": "ゲストおよびユーザーはエージェント管理者として割り当てられません。指定された役割には、ルーム管理者および{{productName}}管理者のみが適任です。",
   "UserMaxAvailableRoleWarning": "ゲストおよびユーザーはルーム管理者に指定できません。ルーム管理者および{{productName}}管理者だけが、その役割に適しています。",
   "UsersAlreadyAdded": "一部のユーザーはすでに追加されています",
-  "UsersCannotBeAdded": "無効な連絡先はルームに追加できません。",
-  "InviteLinkCopySuccess": "リンクがコピーされました"
+  "UsersCannotBeAdded": "無効な連絡先はルームに追加できません。"
 }

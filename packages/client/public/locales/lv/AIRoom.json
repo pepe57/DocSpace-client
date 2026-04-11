@@ -3,6 +3,7 @@
   "AIAgentAccessRedirectNote": "Jūs tiksiet automātiski novirzīts uz {{sectionName}} sadaļu 5 sekundēs.",
   "AIChat": "MI-Čats",
   "AIInstructions": "MI instrukcijas",
+  "AIProviderAndModel": "{{aiProvider}} un modelis",
   "CreateChat": "Izveidot tērzēšanu",
   "CreateChatDescription": "Atraugot uz {{aiChat}} lapu, lai sāktu.",
   "EmptyKnowledgeDescription": "Augšupielādētās failu vietā tiks indeksētas un izmantotas kā konteksts {{aiChat}} tabā. Pievienojiet failus (līdz 10 MB katrs), lai uzdotu jautājumus AI, radītu saturu vai sadarītos ar informāciju.",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Piezīme:</1> Atbildes kvalitāte var atšķirties atkarībā no modeļa; labākiem rezultātiem ieteicami jaunāki modeļi.",
   "ResultStorage": "Rezultātu glabāšana",
   "UploadFilesDevice": "Augšupielādējiet failus no sava personīgā ierīces",
-  "UploadFilesPortal": "Augšupielādējiet failus no {{sectionNameFirst}} vai {{sectionNameSecond}}.",
-  "AIProviderAndModel": "{{aiProvider}} un modelis"
+  "UploadFilesPortal": "Augšupielādējiet failus no {{sectionNameFirst}} vai {{sectionNameSecond}}."
 }
