@@ -97,7 +97,7 @@ const PaymentsPage = (props) => {
     },
     {
       id: "wallet",
-      name: t("Wallet"),
+      name: t("Common:Wallet"),
       content: <Wallet />,
       onClick: () => {
         clearAbortControllerArr();
