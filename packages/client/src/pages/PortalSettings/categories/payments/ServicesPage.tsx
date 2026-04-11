@@ -39,6 +39,7 @@ interface ServicesPageProps {
   language?: string;
   logoText?: string;
   user?: TPaymentUser;
+  openOnNewPage?: boolean;
   getAIConfig?: () => Promise<void>;
   fetchPayerInfo?: () => Promise<void>;
 }
@@ -48,6 +49,7 @@ const ServicesPage = (props: ServicesPageProps) => {
     language = "en",
     logoText,
     user,
+    openOnNewPage,
     getAIConfig,
     fetchPayerInfo,
   } = props;
@@ -61,9 +63,10 @@ const ServicesPage = (props: ServicesPageProps) => {
       language,
       logoText,
       user,
+      openOnNewPage,
       routes: PAYMENT_ROUTES,
     }),
-    [language, logoText, user],
+    [language, logoText, user, openOnNewPage],
   );
 
   const pathname = location.pathname;
@@ -85,17 +88,20 @@ export const Component = inject(
     authStore,
     userStore,
     currentTariffStatusStore,
+    filesSettingsStore,
   }: TStore) => {
     const { language } = authStore;
     const { user } = userStore;
     const { logoText, getAIConfig } = settingsStore;
     const { fetchPayerInfo } = currentTariffStatusStore;
+    const { openOnNewPage } = filesSettingsStore;
 
     return {
       language,
       logoText,
       getAIConfig,
       fetchPayerInfo,
+      openOnNewPage,
       user: user
         ? {
             id: user.id,
