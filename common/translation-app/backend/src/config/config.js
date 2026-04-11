@@ -50,7 +50,7 @@ const ollamaConfig = {
 const openRouterConfig = {
   apiKey: process.env.OPENROUTER_API_KEY || "",
   apiUrl: process.env.OPENROUTER_API_URL || "https://openrouter.ai/api/v1",
-  model: process.env.OPENROUTER_MODEL || "google/gemma-4-26b-a4b-it",
+  model: process.env.OPENROUTER_MODEL || "google/gemini-2.5-flash",
   // Per-task model overrides (fall back to generic model above)
   spellCheckModel: process.env.OPENROUTER_SPELLCHECK_MODEL || "",
   commentModel: process.env.OPENROUTER_COMMENT_MODEL || "",
