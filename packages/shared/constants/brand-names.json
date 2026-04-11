@@ -3,10 +3,32 @@
   "ProductName": "DocSpace",
   "ProductEditorsName": "Docs",
   "OnlyofficeDesktopEditors": "ONLYOFFICE Desktop Editors",
+
+  "BetaLabel": "BETA",
+  "PDF": "PDF",
+  "OCR": "OCR",
+  "SSO": "SSO",
+  "UTC": "UTC",
   "LDAP": "LDAP",
-  "Nextcloud": "Nextcloud",
   "PM": "PM",
+
+  "ProviderApple": "Apple",
+  "ProviderFacebook": "Facebook",
+  "ProviderGoogle": "Google",
+  "ProviderLinkedIn": "LinkedIn",
+  "ProviderMicrosoft": "Microsoft",
+  "ProviderTelegram": "Telegram",
   "ProviderTwitter": "X",
+  "ProviderWechat": "WeChat",
+  "ProviderZoom": "Zoom",
+
+  "Nextcloud": "Nextcloud",
+  "TypeTitleDocuSign": "DocuSign",
+  "TypeTitleDropBox": "Dropbox",
+  "TypeTitleGoogle": "Google Drive",
+  "TypeTitleSharePoint": "SharePoint",
+  "TypeTitleSkyDrive": "OneDrive",
   "TypeTitleWebDav": "WebDAV",
+  "TypeTitleYandex": "Yandex.Disk",
   "TypeTitlekDrive": "kDrive"
 }
