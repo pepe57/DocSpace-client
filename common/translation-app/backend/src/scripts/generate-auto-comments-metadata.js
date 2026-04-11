@@ -4,6 +4,10 @@
  *
  * This script scans the locales directories and generates metadata files
  * for all translation keys, preserving existing metadata where available.
+ *
+ * Options:
+ *   --model=MODEL       Override LLM model (e.g. --model=anthropic/claude-sonnet-4)
+ *   --regenerate        Regenerate ALL comments (including existing ones)
  */
 const fs = require("fs-extra");
 const { writeJsonWithConsistentEol } = require("../utils/fsUtils");
@@ -27,6 +31,7 @@ const { autoComment: autoCommentPrompt } = require("../prompts/auto-comment");
 
 const cliArgs = process.argv.slice(2);
 const modelArg = cliArgs.find((a) => a.startsWith("--model="));
+const REGENERATE = cliArgs.includes("--regenerate");
 
 // Auto-detect model: explicit --model, or env, or OpenRouter default if key set, or Ollama default
 const MODEL = modelArg
@@ -271,7 +276,7 @@ async function generateAutoComment(projectName) {
             `Processing key: ${keyPath} (${processedCount}/${keyFiles.length} in ${namespace})`,
           );
 
-          if (!keyMeta.comment || keyMeta.comment.text === "") {
+          if (REGENERATE || !keyMeta.comment || keyMeta.comment.text === "") {
             const comment = await generateBasicComment(
               keyPath,
               keyMeta.content,
@@ -309,7 +314,7 @@ async function generateAutoComment(projectName) {
           } else {
             stats.namespaces[namespace].skippedKeys++;
             stats.skippedKeys++;
-            console.log(`  ↷ Skipped ${keyPath}: already has a comment`);
+            console.log(`  ↷ Skipped ${keyPath}: already has a comment (use --regenerate to overwrite)`);
           }
         } catch (error) {
           console.error(`Error reading metadata file ${keyFile}:`, error);
