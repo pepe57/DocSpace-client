@@ -206,13 +206,18 @@ async function loadMetaIssues(localesDir) {
   return result;
 }
 
-/** Count .meta files with and without usage entries */
+/** Count .meta files with/without usage and with/without auto-comments */
 async function loadMetaUsageStats(localesDir) {
   const metaDir = path.join(localesDir, ".meta");
-  let total = 0;
-  let withUsage = 0;
-  let withoutUsage = 0;
-  const missingUsageKeys = [];
+  const stats = {
+    total: 0,
+    withUsage: 0,
+    withoutUsage: 0,
+    missingUsageKeys: [],
+    withComment: 0,
+    withoutComment: 0,
+    missingCommentKeys: [],
+  };
 
   let namespaceDirs;
   try {
@@ -220,7 +225,7 @@ async function loadMetaUsageStats(localesDir) {
       .filter((e) => e.isDirectory())
       .map((e) => e.name);
   } catch {
-    return { total, withUsage, withoutUsage, missingUsageKeys };
+    return stats;
   }
 
   await Promise.all(
@@ -237,13 +242,22 @@ async function loadMetaUsageStats(localesDir) {
           try {
             const raw = await readFile(path.join(nsDir, f), "utf8");
             const meta = JSON.parse(raw);
-            total++;
-            const usages = meta.usage;
-            if (Array.isArray(usages) && usages.length > 0) {
-              withUsage++;
+            const keyId = `${ns}:${meta.key_path || f.replace(".json", "")}`;
+
+            stats.total++;
+
+            if (Array.isArray(meta.usage) && meta.usage.length > 0) {
+              stats.withUsage++;
             } else {
-              withoutUsage++;
-              missingUsageKeys.push(`${ns}:${meta.key_path || f.replace(".json", "")}`);
+              stats.withoutUsage++;
+              stats.missingUsageKeys.push(keyId);
+            }
+
+            if (meta.comment && meta.comment.text && meta.comment.text.trim()) {
+              stats.withComment++;
+            } else {
+              stats.withoutComment++;
+              stats.missingCommentKeys.push(keyId);
             }
           } catch {
             // skip
@@ -253,7 +267,7 @@ async function loadMetaUsageStats(localesDir) {
     })
   );
 
-  return { total, withUsage, withoutUsage, missingUsageKeys };
+  return stats;
 }
 
 // ─── Package analysis ─────────────────────────────────────────────────────────
@@ -652,22 +666,41 @@ async function main() {
     const grandMetaWithUsage = results.reduce((s, r) => s + r.metaUsage.withUsage, 0);
     const grandMetaWithout = results.reduce((s, r) => s + r.metaUsage.withoutUsage, 0);
 
-    console.log(`\n  ${colorize("METADATA USAGE COVERAGE", "bold")}`);
+    const grandMetaWithComment = results.reduce((s, r) => s + r.metaUsage.withComment, 0);
+    const grandMetaWithoutComment = results.reduce((s, r) => s + r.metaUsage.withoutComment, 0);
+
+    console.log(`\n  ${colorize("METADATA COVERAGE", "bold")}`);
     console.log("  " + colorize("─".repeat(50), "dim"));
-    console.log(`  .meta files total: ${grandMetaTotal}`);
-    console.log(`  With code usage:   ${colorize(String(grandMetaWithUsage), "green")} (${pct(grandMetaWithUsage, grandMetaTotal)}%)`);
-    console.log(`  Without usage:     ${grandMetaWithout > 0 ? colorize(String(grandMetaWithout), "yellow") : "0"}`);
+    console.log(`  .meta files total:  ${grandMetaTotal}`);
+    console.log(`  With code usage:    ${colorize(String(grandMetaWithUsage), "green")} (${pct(grandMetaWithUsage, grandMetaTotal)}%)`);
+    console.log(`  Without usage:      ${grandMetaWithout > 0 ? colorize(String(grandMetaWithout), "yellow") : "0"}`);
+    console.log(`  With AI comment:    ${colorize(String(grandMetaWithComment), "green")} (${pct(grandMetaWithComment, grandMetaTotal)}%)`);
+    console.log(`  Without comment:    ${grandMetaWithoutComment > 0 ? colorize(String(grandMetaWithoutComment), "yellow") : "0"}`);
 
     if (grandMetaWithout > 0) {
-      // Show per-package breakdown
+      console.log(`\n  ${colorize("Keys without usage:", "bold")}`);
       for (const r of results) {
         if (r.metaUsage.withoutUsage === 0) continue;
-        console.log(`\n  ${colorize(r.name, "cyan")}: ${r.metaUsage.withoutUsage} keys without usage`);
+        console.log(`  ${colorize(r.name, "cyan")}: ${r.metaUsage.withoutUsage}`);
         for (const key of r.metaUsage.missingUsageKeys.slice(0, 10)) {
           console.log(`    ${key}`);
         }
         if (r.metaUsage.missingUsageKeys.length > 10) {
           console.log(`    ... and ${r.metaUsage.missingUsageKeys.length - 10} more`);
+        }
+      }
+    }
+
+    if (grandMetaWithoutComment > 0) {
+      console.log(`\n  ${colorize("Keys without AI comment:", "bold")}`);
+      for (const r of results) {
+        if (r.metaUsage.withoutComment === 0) continue;
+        console.log(`  ${colorize(r.name, "cyan")}: ${r.metaUsage.withoutComment}`);
+        for (const key of r.metaUsage.missingCommentKeys.slice(0, 10)) {
+          console.log(`    ${key}`);
+        }
+        if (r.metaUsage.missingCommentKeys.length > 10) {
+          console.log(`    ... and ${r.metaUsage.missingCommentKeys.length - 10} more`);
         }
       }
     }
