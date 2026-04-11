@@ -33,11 +33,13 @@ const cliArgs = process.argv.slice(2);
 const modelArg = cliArgs.find((a) => a.startsWith("--model="));
 const REGENERATE = cliArgs.includes("--regenerate");
 
-// Auto-detect model: explicit --model, or env, or OpenRouter default if key set, or Ollama default
+// Auto-detect model: explicit --model, or task-specific config, or generic, or Ollama default
 const MODEL = modelArg
   ? modelArg.split("=").slice(1).join("=")
-  : process.env.OLLAMA_MODEL
-    || (openRouterConfig.apiKey ? openRouterConfig.model : null)
+  : (openRouterConfig.apiKey
+      ? (openRouterConfig.commentModel || openRouterConfig.model)
+      : null)
+    || process.env.OLLAMA_MODEL
     || "gemma4:latest";
 
 /**

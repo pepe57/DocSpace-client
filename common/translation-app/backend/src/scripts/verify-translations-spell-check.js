@@ -62,7 +62,7 @@ const PROVIDER = NO_LLM
       : "ollama";
 
 const OLLAMA_MODEL = process.env.OLLAMA_SPELLCHECK_MODEL || "gemma4:latest";
-const OPENROUTER_MODEL = process.env.OPENROUTER_SPELLCHECK_MODEL || openRouterConfig.model;
+const OPENROUTER_MODEL = openRouterConfig.spellCheckModel || openRouterConfig.model;
 const MODEL = PROVIDER === "openrouter" ? OPENROUTER_MODEL : OLLAMA_MODEL;
 
 const LANGUAGES_TO_CHECK = positionalArgs[0] ? positionalArgs[0].split(",") : null;
