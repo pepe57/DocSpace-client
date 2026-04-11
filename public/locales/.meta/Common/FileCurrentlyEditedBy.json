@@ -3,7 +3,7 @@
   "content": "File is currently edited by:",
   "content_en_sha1_hash": "92b2cc7ef909ac1b88cb53e3754ac541b1861a48",
   "created_at": "2026-02-18T14:55:55.967Z",
-  "updated_at": "2026-04-10T16:02:43.099Z",
+  "updated_at": "2026-04-11T18:46:16.758Z",
   "comment": {
     "text": "This text labels a list of users currently editing a file, displayed in a tooltip. It appears as a header within the tooltip, which is used to show who is actively working on the selected file. Translators should ensure the text accurately conveys the meaning of \"who is editing this file.\"",
     "is_auto": true,
@@ -91,7 +91,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"՝\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:16.756Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "+ 1-year subscription for functionality and security updates.",
   "content_en_sha1_hash": "bf909f01efdd41c4e5073f4e8f004d859d3df47c",
   "created_at": "2025-05-26T07:15:49.243Z",
-  "updated_at": "2026-04-10T16:02:42.942Z",
+  "updated_at": "2026-04-11T18:46:16.658Z",
   "comment": {
     "text": "This translation key is used for a one-year subscription license description, indicating the duration and benefits of the upgraded plan. It will appear in a banner or similar UI element, likely on a payment page or benefits container. The translation should convey a sense of time-based duration.",
     "is_auto": true,
@@ -145,7 +145,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"i\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:16.657Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null

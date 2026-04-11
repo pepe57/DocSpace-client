@@ -3,7 +3,7 @@
   "content": "Can't find your language? Contact us at <1>{{supportEmail}}</1> to take part in the translation program and get rewards.",
   "content_en_sha1_hash": "d9fc9ee07a76cc5a6bc5a5eeaad93f29138ddd5e",
   "created_at": "2025-05-19T21:30:46.900Z",
-  "updated_at": "2026-04-11T18:34:21.557Z",
+  "updated_at": "2026-04-11T18:46:16.719Z",
   "comment": {
     "text": "This translation key is used to display a message when the user cannot find their preferred language in the available options. It appears as a tooltip in the profile settings section, inviting users to contact support for further assistance. Translators should aim to preserve the friendly and encouraging tone of this text.",
     "is_auto": true,
@@ -115,7 +115,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"u\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:16.718Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null

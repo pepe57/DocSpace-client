@@ -1306,6 +1306,17 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
             const uniqueDeterministic = deterministicIssues.filter(
               (i) => !llmTypes.has(i.type),
             );
+            // Stamp each issue with when and how it was found
+            const now = new Date().toISOString();
+            for (const issue of uniqueDeterministic) {
+              issue.checked_at = now;
+              issue.checked_by = "deterministic";
+            }
+            for (const issue of llmIssues) {
+              issue.checked_at = now;
+              issue.checked_by = `${PROVIDER}/${MODEL}`;
+            }
+
             const issues = [...uniqueDeterministic, ...llmIssues];
 
             if (!metadata.languages) metadata.languages = {};

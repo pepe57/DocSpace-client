@@ -3,7 +3,7 @@
   "content": "Scalability and clustering.",
   "content_en_sha1_hash": "6cc8e719d41e0d79ee36d84a4938186906c5e5a8",
   "created_at": "2025-05-26T07:15:49.299Z",
-  "updated_at": "2026-04-10T16:02:42.937Z",
+  "updated_at": "2026-04-11T18:46:16.651Z",
   "comment": {
     "text": "This translation key is used to display a header that explains the benefits of scalability and clustering. It appears in a UI component likely used to promote or describe the upgrade to Pro features. Translators should focus on conveying the concept of improving system performance and adaptability.",
     "is_auto": true,
@@ -37,7 +37,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"ə\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:16.649Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -85,7 +87,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"s\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:16.650Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null

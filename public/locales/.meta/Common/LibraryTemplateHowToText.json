@@ -3,7 +3,7 @@
   "content": "Click \"Use Template\" to add a copy to My Forms. From there you can edit the form fields, set up the filling flow, and share it with recipients. Once filled, the results are collected automatically.",
   "content_en_sha1_hash": "f0990df8a4218f8a375ff12af06ec90ff3c9f876",
   "created_at": "2026-03-31T15:18:15.194Z",
-  "updated_at": "2026-04-10T16:02:43.068Z",
+  "updated_at": "2026-04-11T18:46:16.735Z",
   "comment": {
     "text": "",
     "is_auto": false,
@@ -186,7 +186,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"\"\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:16.735Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Use this option to back up the space data.",
   "content_en_sha1_hash": "5de5a960f26ee047ca6bba10e1c75d82b9e47c85",
   "created_at": "2025-05-26T07:15:43.062Z",
-  "updated_at": "2026-04-11T18:34:21.640Z",
+  "updated_at": "2026-04-11T18:46:16.768Z",
   "comment": {
     "text": "This translation key is used to describe the option to enable automatic backups for space data. It provides context for users when this option is toggled or enabled in a UI component.",
     "is_auto": true,
@@ -57,13 +57,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "extra_variable",
-          "description": "Extra variable(s) not in English: {{productName}}",
-          "suggestion": ""
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
