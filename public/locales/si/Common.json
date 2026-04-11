@@ -1557,5 +1557,11 @@
   "WalletBalance": "පොට්ෆෝලියෝ ශේෂය",
   "WalletTopUpRequired": "අවශ්‍ය අලුත් කිරීම: {{currency}}",
   "DownloadReportBtnText": "වාර්තාව බාගන්න",
-  "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}"
+  "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}",
+  "SalesDepartmentRequest": "අලෙවි ක්‍රියාංශයට ඉල්ලීමකි",
+  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත.",
+  "YourName": "ඔබගේ නම",
+  "RequestDetails": "ඔබගේ ඉල්ලීම මෙහි විස්තර කරන්න.",
+  "EnterEmail": "වි-තැපෑල යොදන්න",
+  "SuccessfullySentMessage": "ඔබගේ පණිවිඩය සාර්ථකව යවා ඇත. අලෙවි ක්‍රියාංශය ඔබව සම්බන්ධ කර ගනු ඇත."
 }

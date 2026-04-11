@@ -1557,5 +1557,11 @@
   "WalletBalance": "Portemonnee saldo",
   "WalletTopUpRequired": "Bijvullen vereist: {{currency}}",
   "DownloadReportBtnText": "Download verslag",
-  "ReportSaveLocation": "Het rapport wordt opgeslagen in {{sectionName}}"
+  "ReportSaveLocation": "Het rapport wordt opgeslagen in {{sectionName}}",
+  "SalesDepartmentRequest": "Aanvraag verkoopafdeling",
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
+  "YourName": "Uw naam",
+  "RequestDetails": "Beschrijf hier de details van uw aanvraag.",
+  "EnterEmail": "Voer e-mail in",
+  "SuccessfullySentMessage": "Uw bericht is succesvol verzonden. De verkoopafdeling neemt contact met u op."
 }

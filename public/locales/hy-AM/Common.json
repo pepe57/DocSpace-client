@@ -1557,5 +1557,11 @@
   "WalletBalance": "Հաշվի մնացորդ",
   "WalletTopUpRequired": "Պահանջվում է լիցքավորում՝ {{currency}}",
   "DownloadReportBtnText": "Ներբեռնել զեկույցը",
-  "ReportSaveLocation": "Հաշվետվությունը կպահվի {{sectionName}}-ում"
+  "ReportSaveLocation": "Հաշվետվությունը կպահվի {{sectionName}}-ում",
+  "SalesDepartmentRequest": "Վաճառքի բաժնի հարցում",
+  "YouWillBeContacted": "Վաճառքի թիմը կկապվի ձեզ հետ հարցումը ստեղծելուց հետո:",
+  "YourName": "Ձեր անունը",
+  "RequestDetails": "Խնդրում ենք նկարագրել ձեր հարցման մանրամասները այստեղ:",
+  "EnterEmail": "Մուտքագրեք էլ",
+  "SuccessfullySentMessage": "Ձեր հաղորդագրությունը հաջողությամբ ուղարկվեց: Ձեզ հետ կկապվեն Վաճառքի բաժինը:"
 }

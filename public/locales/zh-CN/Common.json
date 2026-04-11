@@ -1557,5 +1557,11 @@
   "WalletBalance": "钱包余额",
   "WalletTopUpRequired": "充值所需：{{currency}}",
   "DownloadReportBtnText": "下载报告",
-  "ReportSaveLocation": "报告将保存至{{sectionName}}"
+  "ReportSaveLocation": "报告将保存至{{sectionName}}",
+  "SalesDepartmentRequest": "销售部门请求",
+  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。",
+  "YourName": "您的姓名",
+  "RequestDetails": "请在此详细描述您的需求。",
+  "EnterEmail": "输入电子邮件",
+  "SuccessfullySentMessage": "您的消息已成功发送。销售部门将与您联系。"
 }

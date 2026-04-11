@@ -1557,5 +1557,11 @@
   "WalletBalance": "Solde du portefeuille",
   "WalletTopUpRequired": "Top up required: {{currency}}",
   "DownloadReportBtnText": "Télécharger le rapport",
-  "ReportSaveLocation": "Le rapport sera enregistré dans {{sectionName}}"
+  "ReportSaveLocation": "Le rapport sera enregistré dans {{sectionName}}",
+  "SalesDepartmentRequest": "Demande du service commercial",
+  "YouWillBeContacted": "L’équipe de vente vous contactera après avoir créé la demande.",
+  "YourName": "Votre nom",
+  "RequestDetails": "Veuillez décrire ici les détails de votre demande.",
+  "EnterEmail": "Saisir l'adresse e-mail",
+  "SuccessfullySentMessage": "Votre message a été envoyé avec succès. Vous serez contacté par le service commercial."
 }

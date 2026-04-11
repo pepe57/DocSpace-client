@@ -1557,5 +1557,11 @@
   "WalletBalance": "Lompakon saldo",
   "WalletTopUpRequired": "Täydennys vaaditaan: {{currency}}",
   "DownloadReportBtnText": "Lataa raportti",
-  "ReportSaveLocation": "Raportti tallennetaan {{sectionName}}-osioon"
+  "ReportSaveLocation": "Raportti tallennetaan {{sectionName}}-osioon",
+  "SalesDepartmentRequest": "Pyyntö myyntiosastolle",
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
+  "YourName": "Nimesi",
+  "RequestDetails": "Ole hyvä ja kuvaile pyyntösi yksityiskohdat tässä.",
+  "EnterEmail": "Syötä sähköposti",
+  "SuccessfullySentMessage": "Viestisi lähetettiin onnistuneesti. Sinuun otetaan yhteyttä Myyntiosastolta."
 }

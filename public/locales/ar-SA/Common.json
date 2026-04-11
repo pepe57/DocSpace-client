@@ -1557,5 +1557,11 @@
   "WalletBalance": "رصيد المحفظة",
   "WalletTopUpRequired": "يتطلب شحنًا: {{currency}}",
   "DownloadReportBtnText": "تنزيل التقرير",
-  "ReportSaveLocation": "سيتم حفظ التقرير في {{sectionName}}"
+  "ReportSaveLocation": "سيتم حفظ التقرير في {{sectionName}}",
+  "SalesDepartmentRequest": "طلب قسم المبيعات",
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
+  "YourName": "اسمك",
+  "RequestDetails": "يرجى وصف تفاصيل طلبك هنا.",
+  "EnterEmail": "أدخل البريد الإلكتروني",
+  "SuccessfullySentMessage": "تم إرسال رسالتك بنجاح. سيتم الاتصال بك من قبل قسم المبيعات."
 }

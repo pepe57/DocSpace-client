@@ -1557,5 +1557,11 @@
   "WalletBalance": "Saldo del portafoglio",
   "WalletTopUpRequired": "Ricarica richiesta: {{currency}}",
   "DownloadReportBtnText": "Scarica il report",
-  "ReportSaveLocation": "Il report verrà salvato in {{sectionName}}"
+  "ReportSaveLocation": "Il report verrà salvato in {{sectionName}}",
+  "SalesDepartmentRequest": "Richiesta ufficio vendite",
+  "YouWillBeContacted": "Il team di vendita ti contatterà dopo aver creato la richiesta.",
+  "YourName": "Il tuo nome",
+  "RequestDetails": "Ti preghiamo di descrivere i dettagli della richiesta qui.",
+  "EnterEmail": "Inserisci l'email",
+  "SuccessfullySentMessage": "Il tuo messaggio è stato inviato con successo. Verrai ricontattato dall’Ufficio Commerciale."
 }

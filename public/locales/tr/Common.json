@@ -1557,5 +1557,11 @@
   "WalletBalance": "Cüzdan bakiyesi",
   "WalletTopUpRequired": "Yükleme gerekiyor: {{currency}}",
   "DownloadReportBtnText": "Raporu indir",
-  "ReportSaveLocation": "Rapor {{sectionName}} bölümüne kaydedilecektir"
+  "ReportSaveLocation": "Rapor {{sectionName}} bölümüne kaydedilecektir",
+  "SalesDepartmentRequest": "Satış departmanı talebi",
+  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir.",
+  "YourName": "Adınız",
+  "RequestDetails": "Lütfen talebinizin detaylarını burada açıklayın.",
+  "EnterEmail": "E-posta girin",
+  "SuccessfullySentMessage": "Mesajınız başarıyla gönderildi. Satış Departmanı sizinle iletişime geçecektir."
 }

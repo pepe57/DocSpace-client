@@ -1557,5 +1557,11 @@
   "WalletBalance": "Равношештаљ у портфељу",
   "WalletTopUpRequired": "Неопходно допунивање: {{currency}}",
   "DownloadReportBtnText": "Преузми извештај",
-  "ReportSaveLocation": "Извештај ће бити сачуван у {{sectionName}}"
+  "ReportSaveLocation": "Извештај ће бити сачуван у {{sectionName}}",
+  "SalesDepartmentRequest": "Захтев одељења продаје",
+  "YouWillBeContacted": "Продајни тим ће вас контактирати након креирања захтева.",
+  "YourName": "Ваше име",
+  "RequestDetails": "Молимо опишите детаље вашег захтева овде.",
+  "EnterEmail": "Унеси емаил",
+  "SuccessfullySentMessage": "Ваша порука је успешно послата. Бићете контактирани од стране Одељења продаје."
 }

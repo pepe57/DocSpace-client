@@ -1557,5 +1557,11 @@
   "WalletBalance": "Saldo de la billetera",
   "WalletTopUpRequired": "Recarga requerida: {{currency}}",
   "DownloadReportBtnText": "Descargar informe",
-  "ReportSaveLocation": "El informe se guardará en {{sectionName}}"
+  "ReportSaveLocation": "El informe se guardará en {{sectionName}}",
+  "SalesDepartmentRequest": "Solicitud al departamento de ventas",
+  "YouWillBeContacted": "El equipo de ventas se pondrá en contacto con usted después de crear la solicitud.",
+  "YourName": "Su nombre",
+  "RequestDetails": "Por favor, describa aquí los detalles de su solicitud.",
+  "EnterEmail": "Introduzca correo electrónico",
+  "SuccessfullySentMessage": "Su mensaje se ha enviado correctamente. El Departamento de ventas se pondrá en contacto con usted."
 }
