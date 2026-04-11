@@ -66,6 +66,7 @@ const skipForbiddenKeys = [
   "OrganizationName",
   "ProductName",
   "ProductEditorsName",
+  "OnlyofficeDesktopEditors",
 ];
 
 // Brand/product keys that exist only in English (identical across all languages,
@@ -80,6 +81,7 @@ const brandNameKeys = new Set([
   "ProviderTwitter",
   "TypeTitleWebDav",
   "TypeTitlekDrive",
+  "OnlyofficeDesktopEditors",
 ]);
 
 /**
@@ -893,11 +895,11 @@ describe("Locales Tests", () => {
       module.availableLanguages.forEach((lng) => {
         const translationItems = lng.translations
           .filter((elem) => !skipForbiddenKeys.includes(elem.key))
-          .filter((f) =>
-            forbiddenElements.some((elem) =>
-              f.value.toUpperCase().includes(elem),
-            ),
-          );
+          .filter((f) => {
+            // Strip {{variables}} before checking — variable names may contain brand words
+            const stripped = f.value.replace(/\{\{[^}]+\}\}/g, "").toUpperCase();
+            return forbiddenElements.some((elem) => stripped.includes(elem));
+          });
 
         if (!translationItems.length) return;
 
@@ -935,9 +937,13 @@ describe("Locales Tests", () => {
       if (!module.availableLanguages) return;
 
       module.availableLanguages.forEach((lng) => {
-        const translationItems = lng.translations.filter((f) =>
-          forbiddenElements.some((elem) => f.key.toUpperCase().includes(elem)),
-        );
+        const translationItems = lng.translations
+          .filter((elem) => !skipForbiddenKeys.includes(elem.key))
+          .filter((f) =>
+            forbiddenElements.some((elem) =>
+              f.key.toUpperCase().includes(elem),
+            ),
+          );
 
         if (!translationItems.length) return;
 

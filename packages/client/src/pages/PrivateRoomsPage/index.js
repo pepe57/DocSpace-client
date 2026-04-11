@@ -134,7 +134,7 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
         setIsDisabled(false);
         toastr.info(
           t("PrivacyEditors", {
-            organizationName: logoText,
+            OnlyofficeDesktopEditors: t("Common:OnlyofficeDesktopEditors"),
           }),
         );
       });
@@ -171,7 +171,7 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
             i18nKey="PrivacyClick"
             ns="PrivacyPage"
             values={{
-              organizationName: logoText,
+              OnlyofficeDesktopEditors: t("Common:OnlyofficeDesktopEditors"),
             }}
             components={{
               1: <strong />,
@@ -193,7 +193,7 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
           primary
           isDisabled={isDisabled}
           label={t("PrivacyButton", {
-            organizationName: logoText,
+            OnlyofficeDesktopEditors: t("Common:OnlyofficeDesktopEditors"),
           })}
         />
 
@@ -206,9 +206,8 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
             fontWeight={300}
           >
             {t("PrivacyEditors", {
-              organizationName: logoText,
+              OnlyofficeDesktopEditors: t("Common:OnlyofficeDesktopEditors"),
             })}
-            ?
           </Text>
           <Link
             className="privacy-rooms-link privacy-rooms-install-text"
@@ -228,7 +227,7 @@ const PrivacyPageComponent = ({ t, tReady, logoText, desktopUrl }) => {
         >
           <p>
             {t("PrivacyDescriptionEditors", {
-              organizationName: logoText,
+              OnlyofficeDesktopEditors: t("Common:OnlyofficeDesktopEditors"),
             })}
             .
           </p>
