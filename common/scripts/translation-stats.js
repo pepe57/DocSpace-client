@@ -206,6 +206,56 @@ async function loadMetaIssues(localesDir) {
   return result;
 }
 
+/** Count .meta files with and without usage entries */
+async function loadMetaUsageStats(localesDir) {
+  const metaDir = path.join(localesDir, ".meta");
+  let total = 0;
+  let withUsage = 0;
+  let withoutUsage = 0;
+  const missingUsageKeys = [];
+
+  let namespaceDirs;
+  try {
+    namespaceDirs = (await readdir(metaDir, { withFileTypes: true }))
+      .filter((e) => e.isDirectory())
+      .map((e) => e.name);
+  } catch {
+    return { total, withUsage, withoutUsage, missingUsageKeys };
+  }
+
+  await Promise.all(
+    namespaceDirs.map(async (ns) => {
+      const nsDir = path.join(metaDir, ns);
+      let metaFiles;
+      try {
+        metaFiles = (await readdir(nsDir)).filter((f) => f.endsWith(".json"));
+      } catch {
+        return;
+      }
+      await Promise.all(
+        metaFiles.map(async (f) => {
+          try {
+            const raw = await readFile(path.join(nsDir, f), "utf8");
+            const meta = JSON.parse(raw);
+            total++;
+            const usages = meta.usage;
+            if (Array.isArray(usages) && usages.length > 0) {
+              withUsage++;
+            } else {
+              withoutUsage++;
+              missingUsageKeys.push(`${ns}:${meta.key_path || f.replace(".json", "")}`);
+            }
+          } catch {
+            // skip
+          }
+        })
+      );
+    })
+  );
+
+  return { total, withUsage, withoutUsage, missingUsageKeys };
+}
+
 // ─── Package analysis ─────────────────────────────────────────────────────────
 
 async function analyzePackage(pkg) {
@@ -232,6 +282,7 @@ async function analyzePackage(pkg) {
 
   // Load metadata if requested
   const metaIssues = skipMeta ? {} : await loadMetaIssues(localesDir);
+  const metaUsage = skipMeta ? { total: 0, withUsage: 0, withoutUsage: 0, missingUsageKeys: [] } : await loadMetaUsageStats(localesDir);
 
   // Per-language stats
   const langStats = await Promise.all(
@@ -280,6 +331,7 @@ async function analyzePackage(pkg) {
     totalKeys,
     langs: allLangs,
     langStats,
+    metaUsage,
   };
 }
 
@@ -591,6 +643,33 @@ async function main() {
       }
     } else {
       console.log(`\n  ${colorize("No spell-check issues found in .meta files.", "green")}`);
+    }
+  }
+
+  // ─── Meta usage summary ──────────────────────────────────────────────
+  if (!skipMeta) {
+    const grandMetaTotal = results.reduce((s, r) => s + r.metaUsage.total, 0);
+    const grandMetaWithUsage = results.reduce((s, r) => s + r.metaUsage.withUsage, 0);
+    const grandMetaWithout = results.reduce((s, r) => s + r.metaUsage.withoutUsage, 0);
+
+    console.log(`\n  ${colorize("METADATA USAGE COVERAGE", "bold")}`);
+    console.log("  " + colorize("─".repeat(50), "dim"));
+    console.log(`  .meta files total: ${grandMetaTotal}`);
+    console.log(`  With code usage:   ${colorize(String(grandMetaWithUsage), "green")} (${pct(grandMetaWithUsage, grandMetaTotal)}%)`);
+    console.log(`  Without usage:     ${grandMetaWithout > 0 ? colorize(String(grandMetaWithout), "yellow") : "0"}`);
+
+    if (grandMetaWithout > 0) {
+      // Show per-package breakdown
+      for (const r of results) {
+        if (r.metaUsage.withoutUsage === 0) continue;
+        console.log(`\n  ${colorize(r.name, "cyan")}: ${r.metaUsage.withoutUsage} keys without usage`);
+        for (const key of r.metaUsage.missingUsageKeys.slice(0, 10)) {
+          console.log(`    ${key}`);
+        }
+        if (r.metaUsage.missingUsageKeys.length > 10) {
+          console.log(`    ... and ${r.metaUsage.missingUsageKeys.length - 10} more`);
+        }
+      }
     }
   }
 
