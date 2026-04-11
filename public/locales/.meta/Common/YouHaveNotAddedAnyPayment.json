@@ -3,11 +3,12 @@
   "content": "You have not added any payment",
   "content_en_sha1_hash": "4fb29167e163f23123e64c8fb677cce0b14f19d0",
   "created_at": "2026-04-10T13:53:44.003Z",
-  "updated_at": "2026-04-11T18:58:55.474Z",
+  "updated_at": "2026-04-11T19:05:10.901Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays an informational message to the user when no payment method has been linked or added to their account. It appears within the PaymentMethod component, likely in the billing or top-up balance section, prompting the user to set up payment details.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T19:05:10.901Z",
+    "model": "gemma4:latest"
   },
   "usage": [
     {

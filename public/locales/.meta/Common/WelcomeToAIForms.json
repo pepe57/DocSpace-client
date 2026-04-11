@@ -3,11 +3,12 @@
   "content": "Welcome to AI Forms",
   "content_en_sha1_hash": "95eb3b6747dc6041c4fd79f6249bcb37c4e79d19",
   "created_at": "2026-03-31T15:18:27.070Z",
-  "updated_at": "2026-04-11T19:02:12.332Z",
+  "updated_at": "2026-04-11T19:07:27.552Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key provides the main title for the welcome modal dialog. It is displayed prominently in the header of the onboarding tour, greeting the user upon their first visit to the AI Forms section.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T19:07:27.552Z",
+    "model": "gemma4:latest"
   },
   "usage": [
     {

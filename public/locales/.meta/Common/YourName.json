@@ -3,11 +3,12 @@
   "content": "Your name",
   "content_en_sha1_hash": "ab42293e29e1ffb306c1403dd95144d664853a60",
   "created_at": "2026-04-11T18:34:14.938Z",
-  "updated_at": "2026-04-11T18:58:55.451Z",
+  "updated_at": "2026-04-11T19:04:22.180Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This text serves as the placeholder prompt for the name input field within the Sales Department Request Dialog. It guides the user on what information should be entered into the field.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T19:04:22.180Z",
+    "model": "gemma4:latest"
   },
   "usage": [
     {

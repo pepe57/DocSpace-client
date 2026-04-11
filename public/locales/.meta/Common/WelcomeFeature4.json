@@ -3,11 +3,12 @@
   "content": "Export results directly to your systems",
   "content_en_sha1_hash": "ccfcf22c11b14776638fdcabfe057a097e748b35",
   "created_at": "2026-03-31T15:18:26.996Z",
-  "updated_at": "2026-04-11T19:02:12.332Z",
+  "updated_at": "2026-04-11T19:08:55.221Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key displays the description for a feature within a welcome tour dialog. It informs the user that they can export results directly to their existing systems, highlighting data integration capabilities. Use this text to describe the benefit of seamless data export.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T19:08:55.221Z",
+    "model": "gemma4:latest"
   },
   "usage": [
     {

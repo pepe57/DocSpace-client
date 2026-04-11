@@ -3,11 +3,12 @@
   "content": "List all people who have filled out the form \"{{formName}}\"",
   "content_en_sha1_hash": "0029dfe278d7fe7afd154f2eb51145608dfd299a",
   "created_at": "2026-03-31T15:18:26.289Z",
-  "updated_at": "2026-04-11T19:02:12.326Z",
+  "updated_at": "2026-04-11T19:05:50.746Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key provides a prompt asking the user to list all people who have completed a specific form. It is used within the AI chat panel component when referencing form data. The placeholder `{{formName}}` will be dynamically replaced by the title of the form.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T19:05:50.746Z",
+    "model": "gemma4:latest"
   },
   "usage": [
     {

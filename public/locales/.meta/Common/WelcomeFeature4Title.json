@@ -3,11 +3,12 @@
   "content": "Data Integration",
   "content_en_sha1_hash": "b03aaec668144d8105116c1baab1b172933cbe5c",
   "created_at": "2026-03-31T15:18:27.015Z",
-  "updated_at": "2026-04-11T19:02:12.332Z",
+  "updated_at": "2026-04-11T19:08:33.976Z",
   "comment": {
-    "text": "",
-    "is_auto": false,
-    "updated_at": null
+    "text": "This key provides the title for a feature card within the welcome tour dialog. It is used to label the \"Data Integration\" feature, helping users understand the purpose of this section.",
+    "is_auto": true,
+    "updated_at": "2026-04-11T19:08:33.976Z",
+    "model": "gemma4:latest"
   },
   "usage": [
     {
