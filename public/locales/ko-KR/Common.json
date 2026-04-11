@@ -1130,7 +1130,6 @@
   "TryBusiness": "비즈니스를 이용해 보세요",
   "TurnOffDiskSpaceLimit": "이 {{productName}}에 대한 디스크 공간 제한을 해제합니다.",
   "Type": "유형",
-  "TypeTitleBoxNet": "Box",
   "UnblockFile": "차단 해제",
   "UnexpectedError": "예상치 못한 오류가 발생했습니다. 나중에 다시 시도하거나 지원팀에 문의하세요.",
   "Unknown": "알 수 없음",
@@ -1494,7 +1493,5 @@
   "WalletBalance": "지갑 잔액",
   "WalletTopUpRequired": "충전 필요: {{currency}}",
   "DownloadReportBtnText": "보고서 다운로드",
-  "ReportSaveLocation": "보고서가 {{sectionName}}(으)로 저장됩니다",
-  "ProviderTelegram": "텔레그램",
-  "ProviderWechat": "위챗"
+  "ReportSaveLocation": "보고서가 {{sectionName}}(으)로 저장됩니다"
 }

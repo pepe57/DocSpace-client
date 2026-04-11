@@ -1121,7 +1121,6 @@
   "TryBusiness": "ව්‍යාපාරික පැකේජය උත්සාහ කරන්න",
   "TurnOffDiskSpaceLimit": "මෙම {{productName}} සඳහා තැටියේ ඉඩ සීමාව අක්‍රිය කරන්න.",
   "Type": "වර්ගය",
-  "TypeTitleBoxNet": "බොක්ස්",
   "UnblockFile": "අගුළු හරින්න",
   "UnexpectedError": "අනපේක්‍ෂිත දෝෂයක් සිදු විය. නැවත උත්සාහ කරන්න හෝ සහාය අමතන්න.",
   "Unknown": "නොදන්නා",
@@ -1494,18 +1493,5 @@
   "WalletBalance": "පොට්ෆෝලියෝ ශේෂය",
   "WalletTopUpRequired": "අවශ්‍ය අලුත් කිරීම: {{currency}}",
   "DownloadReportBtnText": "වාර්තාව බාගන්න",
-  "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}",
-  "BetaLabel": "බීටා",
-  "ProviderApple": "ඇපල්",
-  "ProviderFacebook": "ෆේස්බුක්",
-  "ProviderGoogle": "ගූගල්",
-  "ProviderLinkedIn": "ලින්ක්ඩින්",
-  "ProviderMicrosoft": "මයික්‍රොසොෆ්ට්",
-  "ProviderZoom": "සූම්",
-  "TypeTitleDocuSign": "ඩොකුසයින්",
-  "TypeTitleDropBox": "ඩ්‍රොප්බොක්ස්",
-  "TypeTitleGoogle": "ගූගල් ඩ්‍රයිව්",
-  "TypeTitleSharePoint": "ෂෙයාර්පොයින්ට්",
-  "TypeTitleSkyDrive": "වන්ඩ්‍රයිව්",
-  "TypeTitleYandex": "යාන්ඩෙක්ස්.ඩිස්ක්"
+  "ReportSaveLocation": "Poročilo bo shranjeno v {{sectionName}}"
 }

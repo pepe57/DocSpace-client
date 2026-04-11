@@ -1129,7 +1129,6 @@
   "TryBusiness": "جرب حساب الأعمال",
   "TurnOffDiskSpaceLimit": "قم بإيقاف تشغيل حد مساحة القرص لـ {{productName}}.",
   "Type": "النوع",
-  "TypeTitleBoxNet": "Box",
   "UnblockFile": "إلغاء القفل",
   "UnexpectedError": "حدث خطأ غير متوقع. حاول مرة أخرى لاحقًا أو اتصل بالدعم.",
   "Unknown": "غير معروف.",
@@ -1494,12 +1493,5 @@
   "WalletBalance": "رصيد المحفظة",
   "WalletTopUpRequired": "يتطلب شحنًا: {{currency}}",
   "DownloadReportBtnText": "تنزيل التقرير",
-  "ReportSaveLocation": "سيتم حفظ التقرير في {{sectionName}}",
-  "OCR": "التعرف الضوئي على الحروف (OCR)",
-  "PDF": "ملف PDF",
-  "ProviderFacebook": "فيسبوك",
-  "ProviderGoogle": "جوجل",
-  "ProviderLinkedIn": "لينكدان",
-  "ProviderMicrosoft": "مايكروسوفت",
-  "ProviderZoom": "زووم"
+  "ReportSaveLocation": "سيتم حفظ التقرير في {{sectionName}}"
 }

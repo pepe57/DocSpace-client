@@ -1129,7 +1129,6 @@
   "TryBusiness": "Prova il piano Business",
   "TurnOffDiskSpaceLimit": "Disattiva il limite dello spazio su disco per questo {{productName}}.",
   "Type": "Tipo",
-  "TypeTitleBoxNet": "Box",
   "UnblockFile": "Sblocca",
   "UnexpectedError": "Si è verificato un errore imprevisto. Riprova più tardi o contatta l'assistenza.",
   "Unknown": "Sconosciuto",
@@ -1494,6 +1493,5 @@
   "WalletBalance": "Saldo del portafoglio",
   "WalletTopUpRequired": "Ricarica richiesta: {{currency}}",
   "DownloadReportBtnText": "Scarica il report",
-  "ReportSaveLocation": "Il report verrà salvato in {{sectionName}}",
-  "TypeTitleDocuSign": "Docusign"
+  "ReportSaveLocation": "Il report verrà salvato in {{sectionName}}"
 }

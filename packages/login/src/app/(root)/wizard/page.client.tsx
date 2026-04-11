@@ -85,6 +85,7 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 import { TError, TTimeZoneOption } from "@/types";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import styles from "./wizard.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type WizardFormProps = {
   passwordSettings?: TPasswordSettings;
@@ -324,7 +325,7 @@ function WizardForm(props: WizardFormProps) {
   return (
     <div className={styles.wizardContainer}>
       <Text fontWeight={600} fontSize="16px" className={styles.formHeader}>
-        {t("Wizard:Desc", { productName: t("Common:ProductName") })}
+        {t("Wizard:Desc", { productName: getBrandName("ProductName") })}
       </Text>
       <FieldContainer
         className={styles.wizardField}

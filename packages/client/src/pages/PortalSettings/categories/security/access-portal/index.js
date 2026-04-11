@@ -46,6 +46,7 @@ import { BruteForceProtectionSection } from "./bruteForceProtection";
 import { DevToolsAccessSection } from "./devToolsAccess";
 
 import MobileView from "./mobileView";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const HEADER_HEIGHT_DESKTOP = 69;
 const HEADER_HEIGHT_TABLET = 61;
@@ -86,7 +87,7 @@ const AccessPortal = (props) => {
 
 	useEffect(() => {
 		setDocumentTitle(
-			t("PortalAccess", { productName: t("Common:ProductName") }),
+			t("PortalAccess", { productName: getBrandName("ProductName") }),
 		);
 
 		return () => {
@@ -173,7 +174,7 @@ const AccessPortal = (props) => {
 			<div className="category-item-description">
 				<Text fontSize="13px" fontWeight="400">
 					{t("TwoFactorAuthEnableDescription", {
-						productName: t("Common:ProductName"),
+						productName: getBrandName("ProductName"),
 					})}
 				</Text>
 				<Text fontSize="13px" fontWeight="400">
@@ -229,7 +230,7 @@ const AccessPortal = (props) => {
 			<div className="category-item-description">
 				<Text fontSize="13px" fontWeight="400">
 					{t("DeveloperToolsAccessDescription", {
-						productName: t("Common:ProductName"),
+						productName: getBrandName("ProductName"),
 					})}
 				</Text>
 				{limitedDevToolsBlockHelpUrl ? (
@@ -254,7 +255,7 @@ const AccessPortal = (props) => {
 			<div className="category-item-description">
 				<Text fontSize="13px" fontWeight="400">
 					{t("InvitationSettingsDescription", {
-						productName: t("Common:ProductName"),
+						productName: getBrandName("ProductName"),
 					})}
 				</Text>
 
@@ -316,7 +317,7 @@ const AccessPortal = (props) => {
 			<div className="category-item-description">
 				<Text fontSize="13px" fontWeight="400">
 					{t("AdminsMessageSettingDescription", {
-						productName: t("Common:ProductName"),
+						productName: getBrandName("ProductName"),
 					})}
 				</Text>
 				<Text fontSize="13px" fontWeight="400">

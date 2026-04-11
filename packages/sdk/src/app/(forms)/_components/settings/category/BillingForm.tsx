@@ -42,6 +42,7 @@ import AiIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
 import CardIcon from "@docspace/ui-kit/assets/icons/16/card.react.svg";
 
 import styles from "./SettingsPanel.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const PAYMENTS_PATH = "/portal-settings/payments/portal-payments";
 
@@ -150,8 +151,8 @@ const BillingForm = () => {
             <div className={styles.billingCardText}>
               <Text fontSize="13px" fontWeight={600} truncate>
                 {t(tab.titleKey, {
-                  productName: t("ProductName"),
-                  organizationName: t("OrganizationName"),
+                  productName: getBrandName("ProductName"),
+                  organizationName: getBrandName("OrganizationName"),
                 })}
               </Text>
               <Text fontSize="11px" className={styles.billingCardDesc}>

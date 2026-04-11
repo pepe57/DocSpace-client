@@ -1107,7 +1107,6 @@
   "TryBusiness": "ລອງທຸລະກິດ (Business)",
   "TurnOffDiskSpaceLimit": "ປິດການຈໍາກັດເນື້ອທີ່ຈັດເກັບຂໍ້ມູນສໍາລັບ {{productName}} ນີ້.",
   "Type": "ປະເພດ",
-  "TypeTitleBoxNet": "ກ່ອງ",
   "UnblockFile": "ປົດລອກ",
   "UnexpectedError": "ເກີດຄວາມຜິດພາດທີ່ບໍ່ຄາດຄິດຂຶ້ນ. ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ ຫຼືຕິດຕໍ່ຝ່າຍຊ່ວຍເຫຼືອ.",
   "Unknown": "ບໍ່ຊາບ",
@@ -1494,6 +1493,5 @@
   "WalletBalance": "ດຸນເງິນກະເປົ໋າ",
   "WalletTopUpRequired": "ຕ້ອງການເຕີມ: {{currency}}",
   "DownloadReportBtnText": "ດາວໂຫລດບົດລາຍງານ",
-  "ReportSaveLocation": "ບົດລາຍງານຈະຖືກບັນທຶກໄວ້ໃນ {{sectionName}}",
-  "ProviderZoom": "ຊູມ"
+  "ReportSaveLocation": "ບົດລາຍງານຈະຖືກບັນທຶກໄວ້ໃນ {{sectionName}}"
 }

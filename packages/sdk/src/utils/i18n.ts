@@ -56,6 +56,7 @@ export const getI18NInstance = (lng: string) => {
     });
   });
 
+
   if (typeof window !== "undefined") {
     if (!window.i18n) {
       window.i18n = { inLoad: [], loaded: {} };

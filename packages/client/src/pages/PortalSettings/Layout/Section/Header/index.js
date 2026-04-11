@@ -54,6 +54,7 @@ import {
   checkPropertyByLink,
 } from "../../../utils";
 import LoaderSectionHeader from "../loaderSectionHeader";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export const HeaderContainer = styled.div`
   position: relative;
@@ -376,7 +377,7 @@ const SectionHeaderContent = (props) => {
         : t(header, {
             organizationName: logoText,
             license: t("Common:EnterpriseLicense"),
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
             aiServices: t("Common:AIServices"),
           });
 

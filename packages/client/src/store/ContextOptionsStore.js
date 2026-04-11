@@ -162,6 +162,7 @@ import {
 } from "SRC_DIR/helpers/info-panel";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -2402,7 +2403,7 @@ class ContextOptionsStore {
         id: "option_link-for-portal-users",
         key: "link-for-portal-users",
         label: t("LinkForPortalUsers", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
         }),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onClickLinkForPortal(item, t),
@@ -3437,7 +3438,7 @@ class ContextOptionsStore {
           className: "main-button_drop-down",
           icon: ActionsUploadReactSvgUrl,
           label: t("Common:FromPortal", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           }),
           key: "personal_upload-from-docspace",
           onClick: () =>
@@ -3606,7 +3607,7 @@ class ContextOptionsStore {
           className: "main-button_drop-down",
           icon: MoveReactSvgUrl,
           label: t("EmptyView:UploadFromPortalTitle", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           }),
           onClick: this.onShowAiKnowledgeSelectFileDialog,
           key: "upload-files-product",

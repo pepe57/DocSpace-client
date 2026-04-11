@@ -66,6 +66,7 @@ import {
 import TemplateAccessSelector from "../../TemplateAccessSelector";
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type TemplateAccessSettingsContainer =
 	| {
@@ -352,7 +353,7 @@ const TemplateAccessSettingsPanel = ({
 						</StyledSubHeader>
 						<StyledDescription>
 							{t("Files:TemplateAvailableDescription", {
-								productName: t("Common:ProductName"),
+								productName: getBrandName("ProductName"),
 							})}
 						</StyledDescription>
 					</StyledBlock>
@@ -447,7 +448,7 @@ const TemplateAccessSettingsPanel = ({
 						</StyledSubHeader>
 						<StyledDescription>
 							{t("Files:TemplateAvailableDescription", {
-								productName: t("Common:ProductName"),
+								productName: getBrandName("ProductName"),
 							})}
 						</StyledDescription>
 					</StyledBlock>

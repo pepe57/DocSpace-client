@@ -32,6 +32,7 @@ import styled from "styled-components";
 import { Heading } from "@docspace/ui-kit/components/heading";
 import { IconButton } from "@docspace/ui-kit/components/icon-button";
 
+import { getBrandName } from "@docspace/shared/constants/brands";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 
 const StyledHeader = styled.div`
@@ -51,7 +52,6 @@ const StyledHeader = styled.div`
 `;
 
 const sdkPresetTitles: Record<string, string> = {
-  docspace: "Common:ProductName",
   "public-room": "Common:PublicRoom",
   editor: "Common:Editor",
   viewer: "JavascriptSdk:Viewer",
@@ -65,6 +65,7 @@ const getTitle = (pathname: string, t: (key: string) => string): string => {
   if (pathname.includes("/developer-tools/api-keys")) return t("Settings:ApiKeys");
   if (pathname.includes("/developer-tools/javascript-sdk/")) {
     const slug = pathname.split("/developer-tools/javascript-sdk/")[1]?.replace(/\/$/, "");
+    if (slug === "docspace") return getBrandName("ProductName");
     const key = sdkPresetTitles[slug];
     if (key) return t(key);
   }

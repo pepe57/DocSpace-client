@@ -1130,7 +1130,6 @@
   "TryBusiness": "Попробуйте Business",
   "TurnOffDiskSpaceLimit": "Отключить ограничение дискового пространства для этого {{productName}}.",
   "Type": "Тип",
-  "TypeTitleBoxNet": "Box",
   "UnblockFile": "Разблокировать",
   "UnexpectedError": "Произошла непредвиденная ошибка. Попробуйте еще раз позднее или обратитесь в поддержку.",
   "Unknown": "Неизвестный",
@@ -1494,7 +1493,5 @@
   "WalletBalance": "Баланс кошелька",
   "WalletTopUpRequired": "Требуется пополнение: {{currency}}",
   "DownloadReportBtnText": "Скачать отчет",
-  "ReportSaveLocation": "Отчет будет сохранен в {{sectionName}}",
-  "OCR": "Распознавание текста",
-  "TypeTitleYandex": "Яндекс.Диск"
+  "ReportSaveLocation": "Отчет будет сохранен в {{sectionName}}"
 }

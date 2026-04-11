@@ -69,39 +69,11 @@ const skipForbiddenKeys = [
   "OnlyofficeDesktopEditors",
 ];
 
-// Brand/product keys that exist only in English (identical across all languages,
-// served via i18next fallback). Skip these in per-language completeness checks.
-const brandNameKeys = new Set([
-  "OrganizationName",
-  "ProductName",
-  "ProductEditorsName",
-  "LDAP",
-  "Nextcloud",
-  "PM",
-  "ProviderTwitter",
-  "TypeTitleWebDav",
-  "TypeTitlekDrive",
-  "TypeTitleYandex",
-  "OnlyofficeDesktopEditors",
-  "BetaLabel",
-  "PDF",
-  "OCR",
-  "SSO",
-  "UTC",
-  "ProviderApple",
-  "ProviderFacebook",
-  "ProviderGoogle",
-  "ProviderLinkedIn",
-  "ProviderMicrosoft",
-  "ProviderTelegram",
-  "ProviderWechat",
-  "ProviderZoom",
-  "TypeTitleDocuSign",
-  "TypeTitleDropBox",
-  "TypeTitleGoogle",
-  "TypeTitleSharePoint",
-  "TypeTitleSkyDrive",
-]);
+// Brand/product keys and constants — injected at runtime, not in JSON locale files.
+// Skip these in per-language completeness and forbidden-elements checks.
+import { brandKeys } from "../../../packages/shared/constants/brands.ts";
+import { constKeys } from "../../../packages/shared/constants/consts.ts";
+const brandNameKeys = new Set([...brandKeys, ...constKeys]);
 
 /**
  * Delete translation keys from JSON files when CLEAR_WRONG_VALUES=true.
@@ -190,7 +162,9 @@ beforeAll(() => {
       (filePath) =>
         filePath &&
         filePath.endsWith(".json") &&
-        filePath.includes(convertPathToOS("public/locales")),
+        filePath.includes(convertPathToOS("public/locales")) &&
+        // Exclude .constants/ directory (brand names, cultures — not per-language translations)
+        !filePath.includes(convertPathToOS("locales/.constants/")),
     );
   });
 
@@ -476,7 +450,7 @@ describe("Locales Tests", () => {
 
   it("FullEnDublicatesTest: Verify that there are no duplicate key-value pairs in the English translation files.", () => {
     const fullEnDuplicates = translationFiles
-      .filter((file) => file.language === "en")
+      .filter((file) => file.language === "en" && file.namespace !== "BrandNames")
       .flatMap((item) => item.translations)
       .reduce((acc, t) => {
         const key = `${t.key}-${t.value}`;
@@ -524,7 +498,7 @@ describe("Locales Tests", () => {
     const allJsTranslationKeys = Object.keys(jsKeyToFiles);
 
     const notFoundJsKeys = allJsTranslationKeys.filter(
-      (k) => !allEnKeys.includes(k),
+      (k) => !allEnKeys.includes(k) && !brandNameKeys.has(k),
     );
 
     let message =
@@ -1280,6 +1254,9 @@ describe("Locales Tests", () => {
 
         // Skip if the key doesn't follow namespace:key format
         if (!translationKey) return;
+
+        // Brand name keys are injected at runtime, not in JSON files
+        if (brandNameKeys.has(translationKey)) return;
 
         // Check if the key exists in the specified namespace
         const namespaceKeySet = namespaceKeys[namespace];
@@ -2476,6 +2453,41 @@ describe("Locales Tests", () => {
       resolveTranslationEntries(brokenKeys),
       "triple brace keys",
     );
+
+    expect(errorsCount, message).toBe(0);
+  });
+
+  it("ConstantsViaI18nTest: Verify that brand names, constants, and culture labels are not accessed via i18n t() calls.", () => {
+    // Brand names (getBrandName), constants (getConstName), and culture labels
+    // (getCultureLabel) must be imported directly — NOT via t("Common:ProductName").
+    // This prevents race conditions, removes i18n dependency for static data,
+    // and keeps a single source of truth in public/locales/.constants/.
+
+    // Exact match for brand/const keys, prefix match for Culture_*
+    const forbiddenExact = new Set(
+      Array.from(brandNameKeys).map((k) => `Common:${k}`),
+    );
+
+    let message =
+      "The following files use brand/constant/culture keys via t() instead of direct imports:\r\n\r\n" +
+      "Use getBrandName(), getConstName(), or getCultureLabel() instead of t().\r\n\r\n";
+    let errorsCount = 0;
+    let i = 0;
+
+    javascriptFiles.forEach((jsFile) => {
+      const violations = jsFile.translationKeys.filter(
+        (key) => forbiddenExact.has(key) || key.startsWith("Common:Culture_"),
+      );
+
+      if (violations.length === 0) return;
+
+      violations.forEach((key) => {
+        message +=
+          `${++i}. File: ${jsFile.path}\r\n` +
+          `   Key: "${key}"\r\n\r\n`;
+        errorsCount++;
+      });
+    });
 
     expect(errorsCount, message).toBe(0);
   });

@@ -1127,7 +1127,6 @@
   "TryBusiness": "Опитайте Бизнес",
   "TurnOffDiskSpaceLimit": "Изключете ограничението на дисковото пространство за този {{productName}}.",
   "Type": "Тип",
-  "TypeTitleBoxNet": "Box",
   "UnblockFile": "Разблокирай",
   "UnexpectedError": "Възникна неочаквана грешка. Опитайте отново по-късно или се свържете с поддръжката.",
   "Unknown": "Неизвестен",
@@ -1494,6 +1493,5 @@
   "WalletBalance": "Баланс на портфейла",
   "WalletTopUpRequired": "Изисква се попълване: {{currency}}",
   "DownloadReportBtnText": "Изтегляне на доклад",
-  "ReportSaveLocation": "Отчетът ще бъде запазен в {{sectionName}}",
-  "ProviderTelegram": "Телеграм"
+  "ReportSaveLocation": "Отчетът ще бъде запазен в {{sectionName}}"
 }
