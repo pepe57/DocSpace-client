@@ -3,7 +3,7 @@
   "content": "Please take a moment to review your account details:",
   "content_en_sha1_hash": "f9bcd9e44c5ea626e9028da56100bd8e43de65b8",
   "created_at": "2025-05-19T21:30:50.036Z",
-  "updated_at": "2026-04-11T18:34:21.407Z",
+  "updated_at": "2026-04-11T18:46:16.977Z",
   "comment": {
     "text": "This translation key is used to display a prompt asking users to review their account details. It appears on a social authentication welcome dialog as a heading, indicating the next step in the process. Translators should provide a clear and concise message that guides the user through the authentication flow.",
     "is_auto": true,
@@ -91,7 +91,9 @@
         {
           "type": "wrong_script",
           "description": "Translation for hy-AM contains only Latin/ASCII characters — likely untranslated",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:16.975Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -109,7 +111,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"。\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:16.976Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Top 5 {{aiAgents}} by storage usage:",
   "content_en_sha1_hash": "f894125e6f7ba1b77b3fd973e99246a656bfa020",
   "created_at": "2025-12-19T13:03:38.088Z",
-  "updated_at": "2026-04-10T16:02:43.527Z",
+  "updated_at": "2026-04-11T18:46:16.997Z",
   "comment": {
     "text": "Displays a header indicating the top 5 AI agents sorted by storage usage. This text appears within a statistics section in the Portal Settings, specifically within the storage management area. Translators should ensure the pluralization and formatting align with the target language.",
     "is_auto": true,
@@ -85,7 +85,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"։\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:16.996Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null

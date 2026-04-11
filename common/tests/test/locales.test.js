@@ -2491,5 +2491,39 @@ describe("Locales Tests", () => {
 
     expect(errorsCount, message).toBe(0);
   });
+
+  // TODO: Fix 47 duplicate keys across namespaces, then remove .skip
+  it.skip("DuplicateKeysAcrossNamespacesTest: Verify that the same translation key does not appear in multiple namespaces.", () => {
+    // Duplicate keys across namespaces cause confusion: it's unclear which
+    // translation is actually used, and changes to one copy may not propagate
+    // to the other. Each key should exist in exactly one namespace.
+
+    const keyLocations = {};
+
+    translationFiles
+      .filter((file) => file.language === "en")
+      .forEach((file) => {
+        file.translations.forEach((t) => {
+          if (!keyLocations[t.key]) {
+            keyLocations[t.key] = [];
+          }
+          keyLocations[t.key].push(file.namespace);
+        });
+      });
+
+    const duplicates = Object.entries(keyLocations)
+      .filter(([, namespaces]) => namespaces.length > 1)
+      .sort((a, b) => b[1].length - a[1].length);
+
+    let message =
+      "The following translation keys exist in multiple namespaces.\r\n" +
+      "Each key should live in exactly one namespace to avoid confusion.\r\n\r\n";
+
+    duplicates.forEach(([key, namespaces]) => {
+      message += `  ${key}: ${namespaces.join(", ")}\r\n`;
+    });
+
+    expect(duplicates.length, message).toBe(0);
+  });
 });
 

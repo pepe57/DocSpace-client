@@ -14,7 +14,14 @@
       "Bash(node common/scripts/translation-stats.js)",
       "Bash(pnpm tsc:*)",
       "Bash(npx tsc:*)",
-      "Bash(echo \"EXIT: $?\")"
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(node src/scripts/verify-translations-spell-check.js --recheck --no-llm)",
+      "Bash(grep -rn \"ActionCannotBeUndone\" /Users/alexeysafronov/Git/Gitea/DocSpace/client/packages/*/src /Users/alexeysafronov/Git/Gitea/DocSpace/client/libs --include=\"*.ts\" --include=\"*.tsx\" --include=\"*.js\" --include=\"*.jsx\")",
+      "Bash(node src/scripts/save-meta-keys-usage.js)",
+      "Bash(grep -rn \"FileSizeExceedsLimit\\\\|FilesRejectedDueToFormat\\\\|FilesSizeExceedsLimit\\\\|FolderSizeExceedsLimit\\\\|FoldersSizeExceedsLimit\\\\|WelcomeDescription\" /Users/alexeysafronov/Git/Gitea/DocSpace/client/packages/*/src /Users/alexeysafronov/Git/Gitea/DocSpace/client/libs --include=\"*.ts\" --include=\"*.tsx\" --include=\"*.js\" --include=\"*.jsx\")",
+      "Bash(grep -l \"WelcomeDescription\" /Users/alexeysafronov/Git/Gitea/DocSpace/client/public/locales/en/*.json /Users/alexeysafronov/Git/Gitea/DocSpace/client/packages/client/public/locales/en/*.json)"
     ],
     "additionalDirectories": [
       "/Users/alexeysafronov/Documents/Obsidian Vault/DocSpace/Translations"

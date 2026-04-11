@@ -3,7 +3,7 @@
   "content": "License limit Admins:",
   "content_en_sha1_hash": "1c1e914844eff8d3f3c5049d1d0c96c41a4de0ab",
   "created_at": "2025-05-19T21:30:51.790Z",
-  "updated_at": "2026-04-11T18:34:21.485Z",
+  "updated_at": "2026-04-11T18:46:17.018Z",
   "comment": {
     "text": "The \"LicenseLimitCounter\" translation key is used to display the remaining license quota for admins. It appears in a UI component showing user information and provides context about the available licenses.",
     "is_auto": true,
@@ -85,7 +85,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"s\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:17.016Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -97,7 +99,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \".\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:17.016Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -193,7 +197,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"е\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:17.017Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -205,7 +211,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"e\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:17.017Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null

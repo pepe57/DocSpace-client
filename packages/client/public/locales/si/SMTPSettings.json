@@ -2,7 +2,6 @@
   "AuthViaNTLM": "NTLM හරහා සත්‍යාපනය",
   "EnableSSL": "SSL සක්‍රිය කරන්න",
   "EnterDomain": "ඩොමේන් එක ඇතුළත් කරන්න",
-  "EnterEmail": "ඊමේල් ඇතුළත් කරන්න",
   "EnterLogin": "ලොගින් නම ඇතුළත් කරන්න",
   "EnterPort": "පෝට් එක ඇතුළත් කරන්න",
   "Host": "සර්වර් හෝස්ට්",

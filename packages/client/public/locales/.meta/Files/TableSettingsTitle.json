@@ -3,7 +3,7 @@
   "content": "Manage displayed columns",
   "content_en_sha1_hash": "edef33d6c30b6b2dbcd0652de4bbdd3b72cfe10e",
   "created_at": "2025-05-19T21:30:56.214Z",
-  "updated_at": "2026-04-07T19:35:05.096Z",
+  "updated_at": "2026-04-11T19:02:12.264Z",
   "comment": {
     "text": "This translation key is used for the title of a settings panel or modal that allows users to manage displayed table columns. It appears in a UI component, possibly as a button or title, and provides context for users to understand its purpose.",
     "is_auto": true,
@@ -15,6 +15,12 @@
       "line_number": 1036,
       "context": "isIndexEditingMode={isIndexEditingMode}\n infoPanelVisible={infoPanelVisible}\n useReactWindow\n tagRef={tagRef}\n setHideColumns={setHideColumns}\n settingsTitle={t(\"Files:TableSettingsTitle\")}\n showSettings={isFrame ? showSettings : true}\n />\n );\n }\n }",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/index.tsx",
+      "line_number": 166,
+      "context": "useReactWindow={!isSSR}\n sortBy={filterSortBy ?? undefined}\n sorted={filterSortOrder === \"descending\"}\n sortingVisible\n showSettings\n settingsTitle={t(\"Files:TableSettingsTitle\")}\n />\n <TableBody\n columnStorageName={COLUMN_STORAGE_NAME}\n columnInfoPanelStorageName={COLUMN_INFO_PANEL_STORAGE_NAME}\n fetchMoreFiles={fetchMoreFiles}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

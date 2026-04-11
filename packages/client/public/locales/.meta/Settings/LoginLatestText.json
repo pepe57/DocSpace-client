@@ -3,7 +3,7 @@
   "content": "Only the latest activity is shown on this page. The data itself is stored during the period specified in the field below (max 180 days).",
   "content_en_sha1_hash": "22d2d2fe430d24da6673ccd96d307465d5dd1671",
   "created_at": "2025-05-19T21:30:51.835Z",
-  "updated_at": "2026-04-11T18:34:21.548Z",
+  "updated_at": "2026-04-11T18:46:17.015Z",
   "comment": {
     "text": "This translation key is used for a text that describes the functionality and limitations of an audit trail or login history feature in a portal settings page. It explains what data is displayed (latest activity) and how it is stored (for up to 180 days).",
     "is_auto": true,
@@ -85,7 +85,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \")\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:17.013Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null
@@ -103,7 +105,9 @@
         {
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \":\"",
-          "suggestion": ""
+          "suggestion": "",
+          "checked_at": "2026-04-11T18:46:17.014Z",
+          "checked_by": "deterministic"
         }
       ],
       "approved_at": null

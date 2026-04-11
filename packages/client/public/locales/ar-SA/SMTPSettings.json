@@ -2,7 +2,6 @@
   "AuthViaNTLM": "المصادقة عبر NTLM",
   "EnableSSL": "تمكين SSL",
   "EnterDomain": "أدخل النطاق",
-  "EnterEmail": "أدخل البريد الإلكتروني",
   "EnterLogin": "أدخل اسم المستخدم",
   "EnterPort": "أدخل المنفذ",
   "Host": "المستضيف",
