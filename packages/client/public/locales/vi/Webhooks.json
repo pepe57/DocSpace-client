@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "Đã tạo tác nhân AI",
+  "AgentDeleted": "Tác nhân AI đã bị xóa",
+  "AgentUpdated": "Tác nhân AI đã được cập nhật",
   "Before": "Trước",
   "CreateWebhook": "Tạo webhook",
   "DeleteHint": "Webhook sẽ bị xóa vĩnh viễn.\nBạn sẽ không thể hoàn tác thao tác này.",
@@ -33,6 +36,9 @@
   "FolderRestored": "Đã khôi phục thư mục",
   "FolderTrashed": "Đã chuyển thư mục vào thùng rác",
   "FolderUpdated": "Đã cập nhật thư mục",
+  "FormFilledOut": "Đã điền biểu mẫu",
+  "FormStopped": "Biểu mẫu đã dừng",
+  "FormSubmit": "Đã gửi biểu mẫu",
   "From": "Từ",
   "Generate": "Tạo ",
   "GroupCreated": "Đã tạo nhóm",
@@ -89,11 +95,5 @@
   "WebhookRemoved": "Webhook đã được xóa",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Hướng dẫn Webhook",
-  "WebhooksInfo": "Sử dụng webhook để thực hiện các hành động tùy chỉnh trên bất kỳ ứng dụng hoặc trang web nào bạn đang sử dụng dựa trên các sự kiện khác nhau trong {{organizationName}} {{productName}}.\nTại đây, bạn có thể tạo và quản lý tất cả các webhook của mình, cấu hình chúng và xem lịch sử của mọi webhook để kiểm tra hiệu suất của chúng.",
-  "AgentCreated": "Đã tạo tác nhân AI",
-  "AgentDeleted": "Tác nhân AI đã bị xóa",
-  "AgentUpdated": "Tác nhân AI đã được cập nhật",
-  "FormFilledOut": "Đã điền biểu mẫu",
-  "FormStopped": "Biểu mẫu đã dừng",
-  "FormSubmit": "Đã gửi biểu mẫu"
+  "WebhooksInfo": "Sử dụng webhook để thực hiện các hành động tùy chỉnh trên bất kỳ ứng dụng hoặc trang web nào bạn đang sử dụng dựa trên các sự kiện khác nhau trong {{organizationName}} {{productName}}.\nTại đây, bạn có thể tạo và quản lý tất cả các webhook của mình, cấu hình chúng và xem lịch sử của mọi webhook để kiểm tra hiệu suất của chúng."
 }

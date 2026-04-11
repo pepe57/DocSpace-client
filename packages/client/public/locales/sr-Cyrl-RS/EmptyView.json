@@ -20,7 +20,11 @@
   "EmptyAIAgentsAIDisabledDescription": "Ова секција омогућава корисницима да раде са {{aiAgents}} — паметним асистентима за обраду докумената и других задатака. \nДа бисте почели да их користите, сервис за ВИ функције мора бити омогућен од стране {{productName}} администратора.",
   "EmptyAIAgentsAIDisabledSaasAdminDescription": "Да бисте креирали и користили {{aiAgents}}, повежите свој новчаник и укључите ВИ функције у подешавањима {{productName}}. Када то завршите, моћи ћете да радите са {{aiAgents}} и сарађујете са својим тимом.",
   "EmptyAIAgentsAIDisabledSaasAdminTitle": "Повежите свој новчаник и омогућите ВИ функције",
+  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} још нису доступни",
+  "EmptyAIAgentsAIEnabledUserDescription": "Када вас ваш тим позове да сарађујете, {{aiAgents}} ће се овде појавити, спремни да помогну са документима, управљањем знањем и свакодневним задацима.",
+  "EmptyAIAgentsDescription": "Поустановите персонализираног асистента за ваш тим путем додавања базе знања, избора идеалног модела и повезивања {{mcpServer}}. Позовите своје колеге да сарађују и највише искористе чат могућности агента.",
   "EmptyAIAgentsTitle": "Креирајте свог {{aiAgent}}",
+  "EmptyAIAgentsUserTitle": "Није још доступно ни {{aiAgents}}",
   "EmptyDescription": "Започни са брзим радњама:",
   "EmptyFavoritesDescription": "Означи фајлове и фолдере звездицом да их задржиш лако доступним и при руци.",
   "EmptyFavoritesTitle": "Још нема омиљених",
@@ -60,9 +64,5 @@
   "UploadDevicePDFFormOptionTitle": "Отпреми са уређаја",
   "UploadFromPortalTitle": "Отпреми из {{productName}}",
   "UploadPDFFormOptionDescription": "Одаберите спреман PDF формулар доступан у {{productName}} и отпремите га у просторију.",
-  "VirtualDataRoomEmptyTitle": "Добродошли у Виртуелну собу за податке",
-  "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} још нису доступни",
-  "EmptyAIAgentsAIEnabledUserDescription": "Када вас ваш тим позове да сарађујете, {{aiAgents}} ће се овде појавити, спремни да помогну са документима, управљањем знањем и свакодневним задацима.",
-  "EmptyAIAgentsDescription": "Поустановите персонализираног асистента за ваш тим путем додавања базе знања, избора идеалног модела и повезивања {{mcpServer}}. Позовите своје колеге да сарађују и највише искористе чат могућности агента.",
-  "EmptyAIAgentsUserTitle": "Није још доступно ни {{aiAgents}}"
+  "VirtualDataRoomEmptyTitle": "Добродошли у Виртуелну собу за податке"
 }

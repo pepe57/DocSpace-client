@@ -88,6 +88,7 @@
   "RoomLifeTimeSet": "Stel levensduur in van <1>{{data}}</1> voor alle bestanden in kamer",
   "RoomLogoChanged": "Icoon aangepast",
   "RoomRemoveUser": "Gebruiker verwijderd",
+  "RoomRenamed": "Kamer <1>«{{oldRoomTitle}}»</1> hernoemd naar <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Bekijk hier de details van de kamers",
   "RoomToArchiveMove": "Room verplaatst naar {{sectionName}}",
   "RoomUpdateAccess": "heeft toegewezen gekregen",
@@ -101,6 +102,5 @@
   "SubmenuHistory": "Geschiedenis",
   "UserFileUpdated": "Bestand bijgewerkt.",
   "Users": "Gebruikers",
-  "Versions": "Versies",
-  "RoomRenamed": "Kamer <1>«{{oldRoomTitle}}»</1> hernoemd naar <2>«{{roomTitle}}»</2>"
+  "Versions": "Versies"
 }

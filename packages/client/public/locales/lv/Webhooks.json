@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "AI Agent izveidots",
+  "AgentDeleted": "AI aģents izdzēsts",
+  "AgentUpdated": "AI Agent atjaunināts",
   "Before": "Pirms",
   "CreateWebhook": "Izveidojiet tīmekļa aizķeri",
   "DeleteHint": "Tīmekļa aizķere tiks neatgriezeniski izdzēsta.\nŠo darbību nevarēs atsaukt.",
@@ -33,6 +36,9 @@
   "FolderRestored": "Mape atjaunota",
   "FolderTrashed": "Mape pārvietota uz atkritni",
   "FolderUpdated": "Mape atjaunināta",
+  "FormFilledOut": "Forma aizpildīta",
+  "FormStopped": "Forma pārtraukta",
+  "FormSubmit": "Forma iesniegta",
   "From": "No",
   "Generate": "Ģenerēt",
   "GroupCreated": "Grupa izveidota",
@@ -89,11 +95,5 @@
   "WebhookRemoved": "Tīmekļa aizķere ir noņemta",
   "Webhooks": "Tīmekļa aizķeres",
   "WebhooksGuide": "Tīmekļa aizķeru rokasgrāmata",
-  "WebhooksInfo": "Izmantojiet tīmekļa aizķeres, lai veiktu pielāgotas darbības jebkurā izmantotajā lietojumprogrammā vai tīmekļa vietnē, pamatojoties uz dažādiem notikumiem {{organizationName}} {{productName}}.\nŠeit varat izveidot un pārvaldīt visas savas tīmekļa aizķeres, konfigurēt tās un pārlūkot katras tīmekļa aizķeres vēsturi, lai pārbaudītu to veiktspēju.",
-  "AgentCreated": "AI Agent izveidots",
-  "AgentDeleted": "AI aģents izdzēsts",
-  "AgentUpdated": "AI Agent atjaunināts",
-  "FormFilledOut": "Forma aizpildīta",
-  "FormStopped": "Forma pārtraukta",
-  "FormSubmit": "Forma iesniegta"
+  "WebhooksInfo": "Izmantojiet tīmekļa aizķeres, lai veiktu pielāgotas darbības jebkurā izmantotajā lietojumprogrammā vai tīmekļa vietnē, pamatojoties uz dažādiem notikumiem {{organizationName}} {{productName}}.\nŠeit varat izveidot un pārvaldīt visas savas tīmekļa aizķeres, konfigurēt tās un pārlūkot katras tīmekļa aizķeres vēsturi, lai pārbaudītu to veiktspēju."
 }

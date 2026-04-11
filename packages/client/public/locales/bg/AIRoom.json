@@ -1,4 +1,5 @@
 {
+  "AgentInViewModeWarning": "Вие сте в режим <strong>само за преглед</strong> за този {{aiAgent}}. Можете да виждате резултатите от активността в {{aiChat}} на други потребители.",
   "AIAgentAccessRedirectNote": "Ще бъдете автоматично пренасочени към секция {{sectionName}} след 5 секунди.",
   "AIChat": "AI-Чат",
   "AIInstructions": "Инструкции за изкуствен интелект",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Забележка:</1> Качеството на отговорите може да варира в зависимост от модела; препоръчват се по-новите модели за най-добри резултати.",
   "ResultStorage": "Резултатно съхранение",
   "UploadFilesDevice": "Качете файлове от вашето лично устройство.",
-  "UploadFilesPortal": "Качете файлове от {{sectionNameFirst}} или {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "Вие сте в режим <strong>само за преглед</strong> за този {{aiAgent}}. Можете да виждате резултатите от активността в {{aiChat}} на други потребители."
+  "UploadFilesPortal": "Качете файлове от {{sectionNameFirst}} или {{sectionNameSecond}}"
 }

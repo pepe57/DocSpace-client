@@ -68,6 +68,20 @@ const skipForbiddenKeys = [
   "ProductEditorsName",
 ];
 
+// Brand/product keys that exist only in English (identical across all languages,
+// served via i18next fallback). Skip these in per-language completeness checks.
+const brandNameKeys = new Set([
+  "OrganizationName",
+  "ProductName",
+  "ProductEditorsName",
+  "LDAP",
+  "Nextcloud",
+  "PM",
+  "ProviderTwitter",
+  "TypeTitleWebDav",
+  "TypeTitlekDrive",
+]);
+
 /**
  * Delete translation keys from JSON files when CLEAR_WRONG_VALUES=true.
  * Accepts entries already resolved to { filePath, key }.
@@ -1174,9 +1188,11 @@ describe("Locales Tests", () => {
 
       const allEnKeys = enKeys
         .flatMap((item) =>
-          item.translations.map((t) => {
-            return `${item.namespace}:${t.key}`;
-          }),
+          item.translations
+            .filter((t) => !brandNameKeys.has(t.key))
+            .map((t) => {
+              return `${item.namespace}:${t.key}`;
+            }),
         )
         .sort();
 

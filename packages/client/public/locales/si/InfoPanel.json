@@ -25,6 +25,7 @@
   "FileDeletedCount": "ගොනු ඉවත් කරණ ලදි ({{count}}).",
   "FileExtension": "ගොනුවේ දිගුව",
   "FileMoved": "ගොනු ගෙන යන ලදී.",
+  "FileMovedCount": "ගොනු ගෙන ගොස් ඇත ({{count}}).",
   "FileMovedTo": "ගොනුව «{{folderTitle}}» වෙත ගෙන යන ලදී",
   "FileRenamed": "ගොනුව නැවත නම් කරන ලදී.",
   "FilesEmptyScreenText": "ගොනු සහ බහාලුම්වල විස්තර මෙතැන බලන්න",
@@ -78,6 +79,7 @@
   "RoomFromArchiveRestore": "කාමරය {{sectionName}} වෙතින් ලබා ගන්නා ලදී",
   "RoomGroupAdded": "කණ්ඩායම් එකතු කරන ලදි.",
   "RoomGroupAddedCount": "කණ්ඩායම් එකතු කරන ලදි ({{count}}).",
+  "RoomGroupRemove": "කණ්ඩායම ඉවත් කරන ලදී",
   "RoomIndexExportLocation": "අංශයේ කාමර දර්ශකය සුරක්ෂිතව අපනයනය කරනු ලැබුවේ {{sectionName}} වෙත.",
   "RoomIndexingDisabled": "කාමරයේ ස්වයංක්‍රීය ගොනු දර්ශනය අක්‍රිය කර ඇත",
   "RoomIndexingEnabled": "කාමරයේ ස්වයංක්‍රීය ගොනු දර්ශනය සක්‍රීය කරන ලදී.",
@@ -100,7 +102,5 @@
   "SubmenuHistory": "ඉතිහාසය",
   "UserFileUpdated": "ප්‍රමාදයට පත්වුණි.",
   "Users": "පරිශ්‍රීලකයින්",
-  "Versions": "අනුවාද",
-  "FileMovedCount": "ගොනු ගෙන ගොස් ඇත ({{count}}).",
-  "RoomGroupRemove": "කණ්ඩායම ඉවත් කරන ලදී"
+  "Versions": "අනුවාද"
 }

@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "Agent AI creat",
+  "AgentDeleted": "Agentul AI a fost șters",
+  "AgentUpdated": "Agentul AI Actualizat",
   "Before": "Înainte",
   "CreateWebhook": "Creează un webhook",
   "DeleteHint": "Webhook-ul va fi șters definitiv.\nAceastă acțiune nu poate fi anulată.",
@@ -33,6 +36,9 @@
   "FolderRestored": "Folderul a fost restaurat",
   "FolderTrashed": "Folderul a fost mutat în Coșul de gunoi",
   "FolderUpdated": "Folderul a fost actualizat",
+  "FormFilledOut": "Formular completat",
+  "FormStopped": "Formularul a fost oprit",
+  "FormSubmit": "Formularul a fost trimis",
   "From": "De la",
   "Generate": "Generare",
   "GroupCreated": "Grupul a fost creat",
@@ -89,11 +95,5 @@
   "WebhookRemoved": "Webhook eliminat",
   "Webhooks": "Webhook-uri",
   "WebhooksGuide": "Ghid Webhooks",
-  "WebhooksInfo": "Utilizați webhook-uri pentru a efectua acțiuni personalizate pe partea oricărei aplicații sau site web pe care o utilizați, pe baza diverselor evenimente din {{organizationName}} {{productName}}.\nAici puteți crea și gestiona toate webhook-urile, să le configurați și să parcurgeți istoricul fiecărui webhook pentru a le audita performanța.",
-  "AgentCreated": "Agent AI creat",
-  "AgentDeleted": "Agentul AI a fost șters",
-  "AgentUpdated": "Agentul AI Actualizat",
-  "FormFilledOut": "Formular completat",
-  "FormStopped": "Formularul a fost oprit",
-  "FormSubmit": "Formularul a fost trimis"
+  "WebhooksInfo": "Utilizați webhook-uri pentru a efectua acțiuni personalizate pe partea oricărei aplicații sau site web pe care o utilizați, pe baza diverselor evenimente din {{organizationName}} {{productName}}.\nAici puteți crea și gestiona toate webhook-urile, să le configurați și să parcurgeți istoricul fiecărui webhook pentru a le audita performanța."
 }

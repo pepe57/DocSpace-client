@@ -1,4 +1,5 @@
 {
+  "AgentInViewModeWarning": "Sie befinden sich im <strong>nur-Lesen</strong>-Modus für diesen {{aiAgent}}. Sie können die Ergebnisse der {{aiChat}}-Aktivitäten anderer Benutzer sehen.",
   "AIAgentAccessRedirectNote": "Sie werden in 5 Sekunden automatisch zum Abschnitt {{sectionName}} weitergeleitet.",
   "AIChat": "KI-Chat",
   "AIInstructions": "KI-Anweisungen",
@@ -11,6 +12,7 @@
   "EmptyResultsTitle": "Noch keine Ergebnisse",
   "EmptyResultsViewerDescription": "Sie sehen die Ergebnisse der {{aiChat}}-Aktivität anderer Benutzer hier, sobald diese verfügbar sind.",
   "InstructionsDescriptionAgent": "Beschreiben Sie, wie das {{aiAgent}} sich verhalten und antworten soll. Definieren Sie seine Rolle, seinen Ton und seine Hauptaufgaben.",
+  "InstructionsDescriptionAgentExample": "Beispiel: „Sie sind ein KI-PR-Assistent, der beim Schreiben und Bearbeiten von Pressemitteilungen hilft. Behalten Sie einen professionellen, selbstbewus und medienfreundlichen Ton bei. Heben Sie Kernbotschaften klar hervor, vermeiden Sie Fachjargon und halten Sie den Text prägnant und ansprechend.“",
   "Knowledge": "Wissensdatenbank",
   "KnowledgeDescription": "Laden Sie Dateien von Ihrem Computer oder {{productName}} hoch, um den Chat mit mehr Kontext zu versehen. Hinweis: Einige oder alle hochgeladenen Inhalte können während des Gesprächs sichtbar sein.",
   "KnowledgeSelectIn": "In {{productName}} wählen",
@@ -25,7 +27,5 @@
   "ResponseQualityNode": "<1>Hinweis:</1> Die Antwortqualität kann je nach Modell variieren; für beste Ergebnisse werden neuere Modelle empfohlen.",
   "ResultStorage": "Ergebnisspeicherung",
   "UploadFilesDevice": "Laden Sie Dateien von Ihrem persönlichen Gerät hoch",
-  "UploadFilesPortal": "Laden Sie Dateien von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch",
-  "AgentInViewModeWarning": "Sie befinden sich im <strong>nur-Lesen</strong>-Modus für diesen {{aiAgent}}. Sie können die Ergebnisse der {{aiChat}}-Aktivitäten anderer Benutzer sehen.",
-  "InstructionsDescriptionAgentExample": "Beispiel: „Sie sind ein KI-PR-Assistent, der beim Schreiben und Bearbeiten von Pressemitteilungen hilft. Behalten Sie einen professionellen, selbstbewus und medienfreundlichen Ton bei. Heben Sie Kernbotschaften klar hervor, vermeiden Sie Fachjargon und halten Sie den Text prägnant und ansprechend.“"
+  "UploadFilesPortal": "Laden Sie Dateien von {{sectionNameFirst}} oder {{sectionNameSecond}} hoch"
 }

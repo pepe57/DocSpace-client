@@ -17,6 +17,7 @@
   "RemoveFromGroup": "그룹에서 제거",
   "RemoveGroup": "그룹 제거",
   "RemoveGroupConfirmation": "방 그룹을 삭제하려고 합니다. 계속 진행하시겠습니까?",
+  "RemoveGroupInfo": "그룹에 포함된 방은 <strong>모든 방</strong> 섹션에 표시됩니다.",
   "RoomAddedToGroup": "선택한 방이 <1>{{groupName}}</1>에 추가되었습니다.",
   "RoomGrouping": "룸 그룹화",
   "RoomGroupingDisabled": "룸 그룹화가 비활성화되었습니다",
@@ -24,6 +25,5 @@
   "RoomGroupingSettingDescription": "룸들을 폴더로 그룹화하고 쉽게 전환할 수 있습니다.",
   "RoomRemovedFromGroup": "선택한 방이 <1>{{groupName}}</1>에서 제거되었습니다.",
   "RoomsAddedToGroup": "선택한 객실이 <1>{{groupName}}</1>에 추가되었습니다.",
-  "RoomsRemovedFromGroup": "선택한 객실이 <1>{{groupName}}</1>에서 제거되었습니다.",
-  "RemoveGroupInfo": "그룹에 포함된 방은 <strong>모든 방</strong> 섹션에 표시됩니다."
+  "RoomsRemovedFromGroup": "선택한 객실이 <1>{{groupName}}</1>에서 제거되었습니다."
 }

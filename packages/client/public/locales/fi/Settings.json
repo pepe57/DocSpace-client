@@ -209,6 +209,7 @@
   "PortalDeactivationHelper": "Jos haluat deaktivoida tämän {{productName}}-n, tilasi ja kaiken siihen liittyvän tiedon, siihen pääsy estetään kaikilta tietyksi ajaksi. Tehdäksesi sen, klikkaa Deaktivoi-painiketta. Vahvistuslinkki lähetetään tilan omistajan sähköpostiosoitteeseen.\nJos haluat tulla takaisin tilaan ja jatkaa sen käyttämistä, sinun täytyy käyttää vahvistussähköpostissa olevaa toista linkkiä. Joten, säilytä tämä sähköposti turvallisessa paikassa.",
   "PortalDeletion": "{{productName}}-n poisto",
   "PortalDeletionDescription": "Käytä tätä vaihtoehtoa poistaaksesi tilasi lopullisesti.",
+  "PortalDeletionEmailSended": "Linkki toiminnon vahvistamiseksi on lähetetty osoitteeseen {{ownerEmail}} (tilan omistajan sähköpostiosoite).",
   "PortalDeletionHelper": "Jos et usko käyttäväsi tilaa ja haluaisit poistaa tilasi lopullisesti, lähetä pyyntösi käyttäen Poista-painiketta. Pidä mielessä, ettet voi aktivoida tilaasi enää uudelleen tai palauttaa mitään siihen liittyviä tietoja.",
   "PortalRenaming": "{{productName}}-n uudelleennimeäminen",
   "PortalRenamingDescriptionText": "Muuta tilan osoite, joka näkyy {{ domain }} vieressä. ",
@@ -301,6 +302,7 @@
   "TwoFactorAuthMobileDescription": "Kaksivaiheinen varmentaminen on käyttäjille turvallisempi tapa kirjautua portaaliin. Kun kirjautumistiedot on syötetty, käyttäjän tulee syöttää tekstiviestillä saatu koodi puhelinnumeroon, joka määritettiin ensimmäisen kirjautumisen yhteydessä, tai koodi todennussovelluksesta.",
   "TwoFactorAuthSave": "Klikkaa alapuolella olevaa <strong>Tallenna</strong>-painiketta tallentaaksesi muutokset.",
   "TypesAndPrivileges": "<1>Järjestelmänvalvojatilityypit ja niiden edut</1> <br> <br> <2>{{productName}} järjestelmänvalvoja</2> <br>{{productName}} kokoonpano, huoneiden luonti ja hallinto, oikeus kutsua ja hallita käyttäjiä {{productName}}-ssa ja virtuaalisissa huoneissa, oikeus hallita oikeuksia. <br> <br> <3>Huoneen pääkäyttäjä</3> <br>Huoneen hallinto ja arkistointi, käyttäjien kutsuminen ja hallinta. Huoneessa voi olla useita pääkäyttäjiä.<br> <br> <4>Käyttäjä</4> <br> Käyttäjät voivat luoda ja muokata huoneen tiedostoja, mutta eivät voi luoda huoneita, hallita käyttäjiä tai asetuksia.",
+  "UnsupportedFilesDescription": "Jotkut varmuuskopiointitiedostot eivät ole tuettuja. Napsauta \"Tarkista tuettomat tiedostot\" ladataksesi luettelon tuettomista kohteista",
   "UpdatingStatistics": "Tilastojen päivittäminen voi kestää kauan",
   "UploadBackupData": "Lataa varmuuskopio alla olevasta halutusta palvelusta aloittaaksesi siirron.",
   "UploadToServer": "Lataa palvelimelle",
@@ -320,7 +322,5 @@
   "WantToContinue": "Haluatko jatkaa vai muuttaa käyttäjien muistin kiintiötä?",
   "WebhooksDescription": "Suorita mukautetut toiminnot minkä tahansa sovelluksen tai verkkosivuston sivulla perustuen erilaisiin tapahtumiin {{organizationName}} {{productName}}.",
   "WhiteLabelSubtitle": "Lataa läpinäkyvällä taustalla olevia logoja (PNG, SVG, JPG) vaaleaa ja tummaa teemaa varten tai luo logo välittömästi syöttämällä logosi alla.",
-  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen.",
-  "PortalDeletionEmailSended": "Linkki toiminnon vahvistamiseksi on lähetetty osoitteeseen {{ownerEmail}} (tilan omistajan sähköpostiosoite).",
-  "UnsupportedFilesDescription": "Jotkut varmuuskopiointitiedostot eivät ole tuettuja. Napsauta \"Tarkista tuettomat tiedostot\" ladataksesi luettelon tuettomista kohteista"
+  "WithoutEmailHint": "Sinulla ei ole käyttäjiä ilman sähköposteja. Ole hyvä ja jatka seuraavaan vaiheeseen."
 }

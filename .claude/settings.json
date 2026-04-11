@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/alexeysafronov/Documents/Obsidian Vault/DocSpace/Translations/**)",
+      "Bash(node -e ':*)",
+      "Bash(python3)",
+      "Bash(grep -l '\"UnitCount\"' /Users/alexeysafronov/Git/Gitea/DocSpace/client/public/locales/*/Common.json)",
+      "Bash(python3 -c ':*)",
+      "Bash(npx vitest:*)"
+    ],
+    "additionalDirectories": [
+      "/Users/alexeysafronov/Documents/Obsidian Vault/DocSpace/Translations"
+    ]
+  }
+}

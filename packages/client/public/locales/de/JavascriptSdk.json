@@ -1,5 +1,6 @@
 {
   "ActionButton": "Aktionsschaltfläche",
+  "ActionButtonDescription": "Sie können die Schaltflächen „Aktion“ und „+“ im aktuellen Abschnittskopf deaktivieren, um das Erstellen von Dateien, Ordnern und Räumen einzuschränken.",
   "AddWatermarks": "Wasserzeichen zu Dokumenten hinzufügen",
   "AdvancedDisplay": "Erweiterte Anzeigeeinstellungen",
   "AllowedFileTypes": "Wählen Sie aus, welche Dateitypen Benutzer hochladen dürfen.",
@@ -61,6 +62,7 @@
   "HeaderDescription": "Sie können die Kopfzeile in der mobilen Version deaktivieren, um den Zugriff auf die {{productName}}-Abschnitte einzuschränken (genau wie das Deaktivieren des linken Menüs in der Desktop-Version).",
   "HelperText": "Hilfetext",
   "HtmlCodeDescription": "Einbetten von {{productName}} oder einem Teil davon mithilfe des <script>-Tags. Kopieren Sie den folgenden HTML-Code und fügen Sie ihn in Ihre HTML-Datei ein.",
+  "InitializeSDK": "Wählen Sie einen der vorgeschlagenen Modi aus oder verwenden Sie „Benutzerdefiniert“, um alle Parameter manuell zu konfigurieren.",
   "InLeftPanel": "in der linken Leiste",
   "IntegrationDescription": "Fertige {{productName}}-Integrationen überprüfen",
   "IntegrationExamples": "Integrationsbeispiele",
@@ -148,7 +150,5 @@
   "UploadLimits": "Upload-Limits",
   "UploadMode": "Upload-Modus",
   "ViewerDescription": "Betten Sie einen Viewer ein, um Benutzern das Öffnen einer Datei zum Anzeigen im entsprechenden Raum zu ermöglichen.",
-  "VoidReturn": "Leer",
-  "ActionButtonDescription": "Sie können die Schaltflächen „Aktion“ und „+“ im aktuellen Abschnittskopf deaktivieren, um das Erstellen von Dateien, Ordnern und Räumen einzuschränken.",
-  "InitializeSDK": "Wählen Sie einen der vorgeschlagenen Modi aus oder verwenden Sie „Benutzerdefiniert“, um alle Parameter manuell zu konfigurieren."
+  "VoidReturn": "Leer"
 }

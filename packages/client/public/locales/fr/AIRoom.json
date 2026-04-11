@@ -1,4 +1,5 @@
 {
+  "AgentInViewModeWarning": "Vous êtes en mode <strong>lecture seule</strong> pour cet {{aiAgent}}. Vous pouvez voir les résultats de l'activité de {{aiChat}} d'autres utilisateurs.",
   "AIAgentAccessRedirectNote": "Vous serez automatiquement redirigé vers la section {{sectionName}} dans 5 secondes.",
   "AIChat": "Chat IA",
   "AIInstructions": "Instructions IA",
@@ -26,6 +27,5 @@
   "ResponseQualityNode": "<1>Remarque :</1> La qualité des réponses peut varier selon le modèle ; les modèles plus récents sont recommandés pour de meilleurs résultats.",
   "ResultStorage": "Stockage des résultats",
   "UploadFilesDevice": "élécharger des fichiers depuis votre appareil personnel",
-  "UploadFilesPortal": "Télécharger des fichiers depuis {{sectionNameFirst}} ou {{sectionNameSecond}}",
-  "AgentInViewModeWarning": "Vous êtes en mode <strong>lecture seule</strong> pour cet {{aiAgent}}. Vous pouvez voir les résultats de l'activité de {{aiChat}} d'autres utilisateurs."
+  "UploadFilesPortal": "Télécharger des fichiers depuis {{sectionNameFirst}} ou {{sectionNameSecond}}"
 }

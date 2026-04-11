@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "AI Agent ໄດ້ຖືກສ້າງຂຶ້ນ",
+  "AgentDeleted": "AI Agent ຖືກລຶບ",
+  "AgentUpdated": "ຕົວແທນ AI ໄດ້ຮັບການອັບເດດແລ້ວ",
   "Before": "ກ່ອນ",
   "CreateWebhook": "ສ້າງ webhook",
   "DeleteHint": "webhook ຈະຖືກລຶບຢ່າງຖາວອນ.\nທ່ານຈະບໍ່ສາມາດຍົກເລີກຄຳສັ່ງນີ້ໄດ້.",
@@ -33,6 +36,9 @@
   "FolderRestored": "ໂຟນເດີຟື້ນຟູແລ້ວ",
   "FolderTrashed": "ໂຟນເດີຖືກຖິ້ມຂີ້ເຫຍື້ອ",
   "FolderUpdated": "ໂຟນເດີຖືກປັບປຸງແລ້ວ",
+  "FormFilledOut": "ແບບຟອມໄດ້ຖືກຕື່ມແລ້ວ",
+  "FormStopped": "ແບບຟອມຢຸດ",
+  "FormSubmit": "ໄດ້ສົ່ງແບບຟອມແລ້ວ",
   "From": "ຈາກ",
   "Generate": "ສ້າງ",
   "GroupCreated": "ກຸ່ມຖືກສ້າງຂຶ້ນ",
@@ -89,11 +95,5 @@
   "WebhookRemoved": "Webhook ເອົາອອກ",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "ຄູ່ມື Webhooks",
-  "WebhooksInfo": "ຊ້ webhooks ເພື່ອປະຕິບັດການກໍານົດເອງຢູ່ຂ້າງຂອງແອັບພລິເຄຊັນຫຼືເວັບໄຊທ໌ທີ່ທ່ານກໍາລັງໃຊ້ໂດຍອີງໃສ່ເຫດການຕ່າງໆໃນ {{organizationName}} {{productName}}.\nທີ່ນີ້, ທ່ານສາມາດສ້າງແລະຈັດການ webhooks ທັງຫມົດຂອງທ່ານ, ຕັ້ງຄ່າພວກມັນ, ແລະທ່ອງປະຫວັດສາດຂອງ webhook ທັງຫມົດເພື່ອກວດສອບປະສິດທິພາບຂອງພວກມັນ.",
-  "AgentCreated": "AI Agent ໄດ້ຖືກສ້າງຂຶ້ນ",
-  "AgentDeleted": "AI Agent ຖືກລຶບ",
-  "AgentUpdated": "ຕົວແທນ AI ໄດ້ຮັບການອັບເດດແລ້ວ",
-  "FormFilledOut": "ແບບຟອມໄດ້ຖືກຕື່ມແລ້ວ",
-  "FormStopped": "ແບບຟອມຢຸດ",
-  "FormSubmit": "ໄດ້ສົ່ງແບບຟອມແລ້ວ"
+  "WebhooksInfo": "ຊ້ webhooks ເພື່ອປະຕິບັດການກໍານົດເອງຢູ່ຂ້າງຂອງແອັບພລິເຄຊັນຫຼືເວັບໄຊທ໌ທີ່ທ່ານກໍາລັງໃຊ້ໂດຍອີງໃສ່ເຫດການຕ່າງໆໃນ {{organizationName}} {{productName}}.\nທີ່ນີ້, ທ່ານສາມາດສ້າງແລະຈັດການ webhooks ທັງຫມົດຂອງທ່ານ, ຕັ້ງຄ່າພວກມັນ, ແລະທ່ອງປະຫວັດສາດຂອງ webhook ທັງຫມົດເພື່ອກວດສອບປະສິດທິພາບຂອງພວກມັນ."
 }

@@ -1,4 +1,7 @@
 {
+  "AgentCreated": "AI නියෝජිතයෙකු නිර්මාණය කරන ලදී",
+  "AgentDeleted": "AI Agent මකා ඇත",
+  "AgentUpdated": "AI Agent යාවත්කාලීන කරන ලදී",
   "Before": "පෙර",
   "CreateWebhook": "webhook සාදන්න",
   "DeleteHint": "webhook සදහටම මැකෙනු ඇත.\nමෙම ක්‍රියාමාර්ගය අප්‍රතිවර්ත්‍යයි.",
@@ -33,8 +36,12 @@
   "FolderRestored": "ෆෝල්ඩරය ප්‍රතිෂ්ඨාපනය කරන ලදී.",
   "FolderTrashed": "ෆෝල්ඩරය කුණු කූඩයට දමන ලදී",
   "FolderUpdated": "ෆෝල්ඩරය යාවත්කාලීන කරන ලදී.",
+  "FormFilledOut": "සම්පූර්ණ කරන ලදී",
+  "FormStopped": "පෝරමය නැවැත්වීය",
+  "FormSubmit": "පෝරමය ඉදිරිපත් කරන ලදී",
   "From": "වෙතින්",
   "Generate": "උත්පාදනය",
+  "GroupCreated": "කණ්ඩායම නිර්මාණය කරන ලදී",
   "GroupDeleted": "සමූහය මකා දමා ඇත",
   "GroupUpdated": "සමූහය යාවත්කාලීන කරන ලදී",
   "IndividualEvents": "තනි සිදුවීම්",
@@ -88,12 +95,5 @@
   "WebhookRemoved": "Webhook ඉවත් කෙරිණි",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Webhooks මාර්ගෝපදේශය",
-  "WebhooksInfo": "{{organizationName}} {{productName}} හි විවිධ සිදුවීම් මත පදනම්ව ඔබ භාවිතා කරන ඕනෑම යෙදුමක හෝ වෙබ් අඩවියක පැත්තේ අභිරුචි ක්‍රියා සිදු කිරීමට webhooks භාවිතා කරන්න.\nමෙහිදී, ඔබට ඔබගේ සියලුම webhooks නිර්මාණය කර කළමනාකරණය කළ හැකිය, ඒවා වින්‍යාස කළ හැකිය, සහ සෑම webhook එකකම ඉතිහාසය පිරික්සීමෙන් ඒවායේ ක්‍රියාකාරිත්වය විගණනය කළ හැකිය.",
-  "AgentCreated": "AI නියෝජිතයෙකු නිර්මාණය කරන ලදී",
-  "AgentDeleted": "AI Agent මකා ඇත",
-  "AgentUpdated": "AI Agent යාවත්කාලීන කරන ලදී",
-  "FormFilledOut": "සම්පූර්ණ කරන ලදී",
-  "FormStopped": "පෝරමය නැවැත්වීය",
-  "FormSubmit": "පෝරමය ඉදිරිපත් කරන ලදී",
-  "GroupCreated": "කණ්ඩායම නිර්මාණය කරන ලදී"
+  "WebhooksInfo": "{{organizationName}} {{productName}} හි විවිධ සිදුවීම් මත පදනම්ව ඔබ භාවිතා කරන ඕනෑම යෙදුමක හෝ වෙබ් අඩවියක පැත්තේ අභිරුචි ක්‍රියා සිදු කිරීමට webhooks භාවිතා කරන්න.\nමෙහිදී, ඔබට ඔබගේ සියලුම webhooks නිර්මාණය කර කළමනාකරණය කළ හැකිය, ඒවා වින්‍යාස කළ හැකිය, සහ සෑම webhook එකකම ඉතිහාසය පිරික්සීමෙන් ඒවායේ ක්‍රියාකාරිත්වය විගණනය කළ හැකිය."
 }

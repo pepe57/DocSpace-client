@@ -1,0 +1,11 @@
+{
+  "OrganizationName": "ONLYOFFICE",
+  "ProductName": "DocSpace",
+  "ProductEditorsName": "Docs",
+  "LDAP": "LDAP",
+  "Nextcloud": "Nextcloud",
+  "PM": "PM",
+  "ProviderTwitter": "X",
+  "TypeTitleWebDav": "WebDAV",
+  "TypeTitlekDrive": "kDrive"
+}
