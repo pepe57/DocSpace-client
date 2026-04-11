@@ -3,7 +3,7 @@
   "content": "Presentations",
   "content_en_sha1_hash": "25c4116b66b152694c7300d8d3f73ff01eb60a35",
   "created_at": "2025-05-19T21:30:47.458Z",
-  "updated_at": "2026-04-10T15:22:27.131Z",
+  "updated_at": "2026-04-11T19:02:12.231Z",
   "comment": {
     "text": "This translation key is used to display a label for a filter option in a UI component, specifically in a file management system or media library. It indicates which type of files are being filtered (e.g., presentations), and its purpose is to provide context for users navigating the file selection process.",
     "is_auto": true,
@@ -39,6 +39,18 @@
       "line_number": 163,
       "context": "label: t(\"Common:Spreadsheets\"),\n typeKey: FilterType.SpreadsheetsOnly,\n },\n {\n key: \"filter-type-presentations\",\n label: t(\"Common:Presentations\"),\n typeKey: FilterType.PresentationsOnly,\n },\n {\n key: \"filter-type-pdf\",\n label: getManyPDFTitle(t, false),",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 191,
+      "context": "},\n {\n id: \"filter_type-presentations\",\n key: FilterType.PresentationsOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Presentations\"),\n },\n {\n id: \"filter_type-forms\",\n key: FilterType.PDFForm.toString(),\n group: FilterGroups.filterType,",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 191,
+      "context": "},\n {\n id: \"filter_type-presentations\",\n key: FilterType.PresentationsOnly.toString(),\n group: FilterGroups.filterType,\n label: t(\"Common:Presentations\"),\n },\n {\n id: \"filter_type-forms\",\n key: FilterType.PDFForm.toString(),\n group: FilterGroups.filterType,",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",

@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2026-04-11T18:58:55.349Z",
+  "updated_at": "2026-04-11T19:02:12.230Z",
   "comment": {
     "text": "This translation key is used to display the label \"Search\" in various UI elements. It appears on a search input field and an icon button, inviting users to find specific items or content. The text should be translated as \"Search\" in English.",
     "is_auto": true,
@@ -99,6 +99,18 @@
       "line_number": 68,
       "context": "<Label className=\"label\" text={t(\"SearchTerm\")} />\n <ColumnContainer>\n <TextInput\n scale\n onChange={onChangeSearch}\n placeholder={t(\"Common:Search\")}\n value={value}\n tabIndex={5}\n testId=\"search_term_text_input\"\n />\n <Checkbox",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/index.tsx",
+      "line_number": 103,
+      "context": "getFilterData={getFilterData}\n userId=\"\"\n isRecentFolder\n currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n filterTitle={t(\"Files:Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n selectorLabel=\"\"\n isIndexing={false}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/library-landing/HeroSearchBar.tsx",
+      "line_number": 197,
+      "context": "return (\n <div className={styles.heroSearchWrapper} ref={wrapperRef}>\n <SearchInput\n size={InputSize.large}\n scale\n placeholder={t(\"Common:Search\")}\n value={inputValue}\n onChange={handleChange}\n onClearSearch={handleClear}\n refreshTimeout={400}\n />",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

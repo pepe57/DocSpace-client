@@ -3,7 +3,7 @@
   "content": "Sort by",
   "content_en_sha1_hash": "a2a5bdeca9391be1e0cdff1c19895bae7fadc2c2",
   "created_at": "2025-05-19T21:30:48.943Z",
-  "updated_at": "2026-04-11T18:34:21.351Z",
+  "updated_at": "2026-04-11T19:02:12.230Z",
   "comment": {
     "text": "The translation key \"SortBy\" is used to display the text \"Sort by\", which serves as a button title in a combobox or dropdown menu, allowing users to sort gallery items or filtered results. This text appears on buttons and labels within various UI components, including filters and sorting options. Its primary purpose is to provide clear instructions for user interaction.",
     "is_auto": true,
@@ -27,6 +27,12 @@
       "line_number": 689,
       "context": "</ColumnContainer>\n <ControlsGroup>\n <SearchTerm t={t} config={config} setConfig={setConfig} />\n </ControlsGroup>\n <ControlsGroup>\n <Label className=\"label\" text={t(\"Common:SortBy\")} />\n <ComboBox\n onSelect={onChangeSortBy}\n options={dataSortBy}\n scaled\n selectedOption={sortBy}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/index.tsx",
+      "line_number": 106,
+      "context": "currentDeviceType={currentDeviceType}\n filterHeader={t(\"Common:AdvancedFilter\")}\n placeholder={t(\"Common:Search\")}\n view={t(\"Common:View\")}\n filterTitle={t(\"Files:Filter\")}\n sortByTitle={t(\"Common:SortBy\")}\n selectorLabel=\"\"\n isIndexing={false}\n initSearchValue={initSearchValue}\n initSelectedFilterData={initSelectedFilterData}\n renderSelector={renderFilterSelector}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

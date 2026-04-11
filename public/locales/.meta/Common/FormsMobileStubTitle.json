@@ -3,13 +3,20 @@
   "content": "Screen size too small",
   "content_en_sha1_hash": "675f88a767ab483f9a8075f8a9928ec30a6fe448",
   "created_at": "2026-03-26T08:26:35.506Z",
-  "updated_at": "2026-04-10T15:22:27.179Z",
+  "updated_at": "2026-04-11T19:02:12.329Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/mobile-stub/index.tsx",
+      "line_number": 55,
+      "context": "return (\n <div className={styles.mobileStub}>\n <div className={styles.icon}>\n {mounted ? <Icon /> : <div style={{ width: 200, height: 147 }} />}\n </div>\n <div className={styles.title}>{t(\"Common:FormsMobileStubTitle\")}</div>\n <div className={styles.description}>\n {t(\"Common:FormsMobileStubDescription\")}\n </div>\n </div>\n );",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

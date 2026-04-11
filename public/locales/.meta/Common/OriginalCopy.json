@@ -3,7 +3,7 @@
   "content": "Save the file copy in the original format as well",
   "content_en_sha1_hash": "590aa54a4acb697b9b402769bb231a09e8ad806a",
   "created_at": "2026-04-03T21:51:34.700Z",
-  "updated_at": "2026-04-10T16:02:43.037Z",
+  "updated_at": "2026-04-11T19:02:12.297Z",
   "comment": {
     "text": "This text serves as a label for a toggle button in the file management section, indicating whether a copy of the file should also be saved in its original format.",
     "is_auto": true,
@@ -15,6 +15,12 @@
       "line_number": 141,
       "context": "className={classNames(\"save-copy-original \", styles.toggleBtn)}\n onChange={onChangeOriginalCopy}\n isChecked={storeOriginalFiles}\n dataTestId=\"save_copy_original_toggle_button\"\n />\n <Text>{t(\"Common:OriginalCopy\")}</Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>\n <ToggleButton\n className={classNames(\"display-notification\", styles.toggleBtn)}",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/FileManagement.tsx",
+      "line_number": 67,
+      "context": "} catch (error) {\n toastr.error(error as string);\n }\n }, [settings, docsSettingsStore]);\n \n const onChangeOriginalCopy = useCallback(async () => {\n const newVal = !settings?.storeOriginalFiles;\n try {\n await storeOriginal(newVal);\n if (settings) {\n docsSettingsStore.setFilesSettings({",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

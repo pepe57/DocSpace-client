@@ -3,7 +3,7 @@
   "content": "AI provider",
   "content_en_sha1_hash": "f81714b57309b6c32065a1d1c2804f1c4658bb33",
   "created_at": "2025-11-21T08:21:51.316Z",
-  "updated_at": "2026-04-11T18:58:55.341Z",
+  "updated_at": "2026-04-11T19:02:12.222Z",
   "comment": {
     "text": "This key displays the label \"AI provider\" within the Model section of the Create/Edit Agent dialog and in empty state messages related to AI agents. It indicates the source or vendor providing the AI models being used. Translators should ensure the term accurately reflects the type of AI provider being referenced.",
     "is_auto": true,
@@ -123,6 +123,12 @@
       "line_number": 110,
       "context": "}\n tooltipText={\n disableActions\n ? t(\"AISettings:ToUseAddProvider\", {\n value: t(\"Common:MCPServer\"),\n aiProvider: t(\"Common:AIProvider\"),\n })\n : undefined\n }\n dataTestId=\"mcp-tile\"\n >",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/AIAgentForm.tsx",
+      "line_number": 303,
+      "context": "</div>\n )}\n {!isCheckingProviders && !aiProvidersAvailable && (\n <div className={styles.statusRow}>\n <Text fontSize=\"12px\" fontWeight={400} color={globalColors.gray}>\n {t(\"Common:AIProvidersNotAvailable\")}\n </Text>\n <Button\n label={t(\"Common:TryAgain\")}\n size={ButtonSize.extraSmall}\n onClick={() => store.checkAiAvailability()}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

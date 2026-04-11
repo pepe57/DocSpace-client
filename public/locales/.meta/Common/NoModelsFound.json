@@ -3,7 +3,7 @@
   "content": "No models found",
   "content_en_sha1_hash": "3d02178b7a78aaa935e174c3b52e143f4d548b07",
   "created_at": "2026-02-18T14:56:04.517Z",
-  "updated_at": "2026-04-11T18:34:21.374Z",
+  "updated_at": "2026-04-11T19:02:12.239Z",
   "comment": {
     "text": "This key displays a message when no models are available to be selected. It appears as a label in a dropdown/selection component, likely within a dialog or settings panel, to inform the user that no models are present. Translators should ensure the message clearly conveys the absence of models.",
     "is_auto": true,
@@ -21,6 +21,12 @@
       "line_number": 95,
       "context": "t: TTranslation,\n models?: TModel[] | null,\n selectedModelId?: string | null,\n ): TOption => {\n if (!models || !selectedModelId)\n return { key: \"-2\", label: t(\"Common:NoModelsFound\") };\n \n const model =\n models.find((m) => m.modelId === selectedModelId) || models[0];\n \n return {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/AIAgentForm.tsx",
+      "line_number": 155,
+      "context": "const selectedModelOption: TOption = models.length\n ? (modelOptions.find((o) => o.key === selectedModelId) ?? modelOptions[0])\n : {\n key: defaultProvider?.defaultModel ?? \"-1\",\n label: defaultProvider?.defaultModel ?? t(\"Common:NoModelsFound\"),\n };\n \n const onSelectProvider = async (option: TOption) => {\n if (option.key === selectedProviderId) return;",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

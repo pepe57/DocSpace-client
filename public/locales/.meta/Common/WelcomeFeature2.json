@@ -3,13 +3,20 @@
   "content": "Monitor progress and submissions instantly",
   "content_en_sha1_hash": "677a209dd0b24ee5f78ffea7d28f2549dd265a98",
   "created_at": "2026-03-31T15:18:26.923Z",
-  "updated_at": "2026-04-10T15:22:27.078Z",
+  "updated_at": "2026-04-11T19:02:12.332Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/welcome-tour-dialog/index.tsx",
+      "line_number": 101,
+      "context": "<div className={styles.featureCard}>\n <div className={styles.featureIcon}>\n <ReactSVG src={featureIcons[1]} />\n </div>\n <div className={styles.featureText}>\n <Text fontWeight={600} fontSize=\"13px\">{t(\"Common:WelcomeFeature2Title\", \"Real-time Tracking\")}</Text>\n <Text fontSize=\"12px\" className={styles.featureDesc}>{t(\"Common:WelcomeFeature2\", \"Monitor progress and submissions instantly\")}</Text>\n </div>\n </div>\n <div className={styles.featureCard}>\n <div className={styles.featureIcon}>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

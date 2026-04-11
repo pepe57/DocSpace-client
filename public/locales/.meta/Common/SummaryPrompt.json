@@ -3,13 +3,20 @@
   "content": "Give me a brief summary of all collected data from \"{{formName}}\"",
   "content_en_sha1_hash": "96482520f78e714238c33b115b1d3b0a79b68c95",
   "created_at": "2026-03-31T15:18:23.908Z",
-  "updated_at": "2026-04-10T15:22:27.094Z",
+  "updated_at": "2026-04-11T19:02:12.326Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/ai-chat-panel/index.tsx",
+      "line_number": 137,
+      "context": "formName: pendingAttachmentFile.title,\n }),\n },\n {\n title: t(\"Common:Summary\"),\n prompt: t(\"Common:SummaryPrompt\", {\n formName: pendingAttachmentFile.title,\n }),\n },\n ]\n : undefined,",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

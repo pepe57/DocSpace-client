@@ -3,13 +3,20 @@
   "content": "Open billing",
   "content_en_sha1_hash": "db8b94c487b16e37e8769f93ad3c0cb93c0c7fbf",
   "created_at": "2026-03-20T09:07:38.481Z",
-  "updated_at": "2026-04-10T15:22:27.138Z",
+  "updated_at": "2026-04-11T19:02:12.336Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/BillingForm.tsx",
+      "line_number": 54,
+      "context": "Work in progress\n </Text>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:OpenBilling\")}\n onClick={onOpenBilling}\n />\n </div>\n );\n };",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

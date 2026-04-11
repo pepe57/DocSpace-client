@@ -3,7 +3,7 @@
   "content": "Back",
   "content_en_sha1_hash": "b52b36b7269fbfc58ec24bb724691951a3decbe8",
   "created_at": "2025-05-19T21:30:43.167Z",
-  "updated_at": "2026-04-11T18:58:55.392Z",
+  "updated_at": "2026-04-11T19:02:12.274Z",
   "comment": {
     "text": "The translation key \"Back\" is used to display a label that navigates users back to a previous step or screen in a data import process. It appears as the label of a cancel button on forms such as the \"Add Emails Step\", allowing users to exit and return to their previous step.",
     "is_auto": true,
@@ -69,6 +69,12 @@
       "line_number": 98,
       "context": "<Text\n fontWeight={600}\n onClick={onClickBack}\n dataTestId=\"email_invitation_back_text\"\n >\n {t(\"Common:Back\")}\n </Text>\n </div>\n <Text fontWeight={600} fontSize=\"16px\">\n {t(\"Common:LoginButton\")}\n </Text>",
       "module": "/packages/login"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsTour.ts",
+      "line_number": 125,
+      "context": "overlayClickAction: \"close\",\n blockTargetInteraction: true,\n zIndex: 10000,\n },\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/guidance/sub-components/Guid.tsx",

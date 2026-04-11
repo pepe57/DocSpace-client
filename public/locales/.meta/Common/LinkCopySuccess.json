@@ -3,7 +3,7 @@
   "content": "Link has been copied to the clipboard",
   "content_en_sha1_hash": "2254c41229de93951969596ba422451fa0eff387",
   "created_at": "2025-05-19T21:30:46.142Z",
-  "updated_at": "2026-04-11T18:34:21.371Z",
+  "updated_at": "2026-04-11T19:02:12.236Z",
   "comment": {
     "text": "This translation key is used to display a success message when a link is successfully copied to the clipboard, typically in a button or link copy action. It appears as an alert or notification in UI components such as ExternalLinks and MetadataUrlField, and is used to provide a positive feedback to users after they have copied a link.",
     "is_auto": true,
@@ -87,6 +87,18 @@
       "line_number": 176,
       "context": "window.location.assign(fileURL);\n };\n \n const copyLinkFile = async () => {\n await copyShareLink(fileURL);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n };\n \n const handleClickFile = () => {\n if (isYournTurn) handleFillForm();\n else handleViewForm();",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useFilesActions.ts",
+      "line_number": 96,
+      "context": "const copyFileLink = React.useCallback(\n async (itemId: number) => {\n try {\n const itemLink = await api.files.getFileLink(itemId);\n copyShareLink(itemLink.sharedTo.shareLink);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n } catch (error) {\n toastr.error(\n error instanceof Error ? error.message : String(error),\n );\n }",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useFolderActions.ts",
+      "line_number": 55,
+      "context": "const copyFolderLink = React.useCallback(\n async (itemId: number) => {\n const itemLink = await api.files.getFolderLink(itemId);\n copyShareLink(itemLink.sharedTo.shareLink);\n toastr.success(t(\"Common:LinkCopySuccess\"));\n },\n [t],\n );\n \n return { openFolder, copyFolderLink };",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

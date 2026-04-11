@@ -3,13 +3,20 @@
   "content": "Manage your subscription plan and payment details for this forms room.",
   "content_en_sha1_hash": "cbc6fb39dca4bcd7cfa52dc11480ea857dd5a945",
   "created_at": "2026-03-31T15:18:26.646Z",
-  "updated_at": "2026-04-10T15:22:27.089Z",
+  "updated_at": "2026-04-11T19:02:12.334Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 247,
+      "context": "},\n // Settings — Billing — only for Owner/Admin\n showSettings && {\n target: '[data-tour=\"settings-billing\"]',\n content: t(\n \"Common:TourBilling\",\n \"Manage your subscription plan and payment details for this forms room.\",\n ),\n title: t(\"Common:Billing\", \"Billing\"),\n data: { page: \"/forms/settings/billing\" } satisfies TourStepData,\n skipBeacon: true,",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

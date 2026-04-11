@@ -3,7 +3,7 @@
   "content": "Interface theme",
   "content_en_sha1_hash": "f47f8ed32464b7b3aa479c8638758420470a60e9",
   "created_at": "2026-04-03T21:51:34.678Z",
-  "updated_at": "2026-04-10T15:22:27.172Z",
+  "updated_at": "2026-04-11T19:02:12.297Z",
   "comment": {
     "text": "This key serves as the label for the interface theme setting option. It appears as a name within a list of configuration items in the user's profile section.",
     "is_auto": true,
@@ -15,6 +15,12 @@
       "line_number": 184,
       "context": "await getFileManagementData();\n },\n },\n {\n id: \"interface-theme\",\n name: t?.(\"Common:InterfaceTheme\"),\n content: <InterfaceTheme />,\n onClick: () => {},\n },\n ];",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/index.tsx",
+      "line_number": 56,
+      "context": "name: t(\"Common:FileManagement\"),\n content: <FileManagement />,\n },\n {\n id: \"interface-theme\",\n name: t(\"Common:InterfaceTheme\"),\n content: <InterfaceTheme />,\n },\n ],\n [t],\n );",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

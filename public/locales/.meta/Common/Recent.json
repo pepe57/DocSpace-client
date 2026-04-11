@@ -3,7 +3,7 @@
   "content": "Recent",
   "content_en_sha1_hash": "76eec760c9b6e63eda7e9834fa40bc26d6f58eef",
   "created_at": "2025-08-27T10:14:14.891Z",
-  "updated_at": "2026-04-11T18:58:55.416Z",
+  "updated_at": "2026-04-11T19:02:12.298Z",
   "comment": {
     "text": "This key displays the label for the \"Recent\" folder in the file explorer. It's used to name a folder that contains recently accessed files, providing users with quick access to their recent work. Translators should ensure the translation accurately conveys the meaning of \"recently accessed.\"",
     "is_auto": true,
@@ -27,6 +27,12 @@
       "line_number": 88,
       "context": "break;\n case FolderType.Favorites:\n folder.title = i18n.t(\"Common:Favorites\");\n break;\n case FolderType.Recent:\n folder.title = i18n.t(\"Common:Recent\");\n break;\n default:\n break;\n }\n });",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/sidebar/index.tsx",
+      "line_number": 129,
+      "context": "label: t(\"Common:Favorites\"),\n icon: CatalogFavoritesReactSvgUrl,\n },\n {\n key: DocsSection.Recent,\n label: t(\"Common:Recent\"),\n icon: CatalogSettingsRestoreReactSvgUrl,\n },\n {\n key: DocsSection.Trash,\n label: t(\"Common:TrashSection\"),",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

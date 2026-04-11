@@ -3,13 +3,20 @@
   "content": "Set up automatic data collection from completed forms. Export results to XLSX or connect a MySQL database.",
   "content_en_sha1_hash": "b829bdb220fa78520dc122d2113a8f3afb399600",
   "created_at": "2026-03-31T15:18:26.666Z",
-  "updated_at": "2026-04-10T15:22:27.089Z",
+  "updated_at": "2026-04-11T19:02:12.334Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 292,
+      "context": "},\n // Settings — Collect Data — only for Owner/Admin\n showSettings && {\n target: '[data-tour=\"settings-collect-data\"]',\n content: t(\n \"Common:TourCollectData\",\n \"Set up automatic data collection from completed forms. Export results to XLSX or connect a MySQL database.\",\n ),\n title: t(\"Common:CollectData\"),\n data: { page: \"/forms/settings/collect-data\" } satisfies TourStepData,\n skipBeacon: true,",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

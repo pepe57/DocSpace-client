@@ -3,7 +3,7 @@
   "content": "Share",
   "content_en_sha1_hash": "09ca55ca52d207f2cc1d9339e0226a88e9e96e2f",
   "created_at": "2025-05-19T21:30:48.615Z",
-  "updated_at": "2026-04-11T18:34:21.346Z",
+  "updated_at": "2026-04-11T19:02:12.229Z",
   "comment": {
     "text": "The translation key \"Share\" is used to display a button label in the user interface. It appears on a shared form panel and is linked to an icon representing sharing. The purpose of this text is to enable users to share content.",
     "is_auto": true,
@@ -57,6 +57,18 @@
       "line_number": 173,
       "context": "const cards = [\n {\n id: \"quick-sharing\",\n title: t(\"Common:QuickSharing\"),\n description: t(\"Common:ShareTheOriginalFormForFillingOut\"),\n buttonLabel: t(\"Common:Share\"),\n onClick: onClickShareFile,\n icon: <ShareSvg />,\n disabled: !file.canShare,\n },",
       "module": "/packages/doceditor"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 268,
+      "context": "const getShareItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_share\",\n key: \"share\",\n label: t(\"Common:Share\"),\n icon: ShareSvgUrl,\n onClick: () => onShareClick?.(i),\n disabled: !onShareClick,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/info-panel/index.tsx",
+      "line_number": 130,
+      "context": "onClose={onClose}\n />\n ) : null}\n </ModalDialog.Container>\n \n <ModalDialog.Header>{t(\"Common:Share\")}</ModalDialog.Header>\n <ModalDialog.Body>\n {selection ? (\n <Share\n infoPanelSelection={selection}\n fileLinkProps={filesLink}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

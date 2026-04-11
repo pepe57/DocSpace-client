@@ -3,7 +3,7 @@
   "content": "Use system theme",
   "content_en_sha1_hash": "b416b727b7b81cc355879b99623709aaf02f49bb",
   "created_at": "2026-04-03T21:51:34.685Z",
-  "updated_at": "2026-04-10T15:22:27.093Z",
+  "updated_at": "2026-04-11T19:02:12.298Z",
   "comment": {
     "text": "This text is an option in the interface theme settings, appearing as a selectable choice in a radio button group or checkbox. It allows users to set the application theme to automatically match their operating system's light or dark mode settings.",
     "is_auto": true,
@@ -15,6 +15,12 @@
       "line_number": 36,
       "context": "import { Text } from \"@docspace/ui-kit/components/text\";\n import { Checkbox } from \"@docspace/ui-kit/components/checkbox\";\n import { RadioButtonGroup } from \"@docspace/ui-kit/components/radio-button-group\";\n import { toastr } from \"@docspace/ui-kit/components/toast\";\n import { ThemeKeys } from \"@docspace/shared/enums\";\n import { getSystemTheme } from \"@docspace/ui-kit/utils/get-system-theme\";\n import { getEditorTheme } from \"@docspace/shared/utils/common\";\n import { hideLoader, showLoader } from \"@docspace/shared/utils/common\";\n import { TColorScheme } from \"@docspace/ui-kit/providers/theme/themes\";\n \n import ThemePreview from \"./ThemePreview\";",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/InterfaceTheme.tsx",
+      "line_number": 111,
+      "context": "<div className={styles.interfaceTheme}>\n <div>\n <Checkbox\n className={styles.systemThemeCheckbox}\n value={ThemeKeys.SystemStr}\n label={t(\"Common:SystemTheme\")}\n isChecked={isSystemTheme}\n onChange={onChangeSystemTheme}\n />\n <Text as=\"div\" className={styles.systemThemeDescription}>\n {t(\"Common:SystemThemeDescription\")}",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

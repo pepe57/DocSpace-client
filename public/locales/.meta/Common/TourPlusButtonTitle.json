@@ -3,13 +3,20 @@
   "content": "Add forms",
   "content_en_sha1_hash": "618d61c52ca4f7bfbad26c6f0f99aaae94c1982d",
   "created_at": "2026-03-31T15:18:26.853Z",
-  "updated_at": "2026-04-10T15:22:27.088Z",
+  "updated_at": "2026-04-11T19:02:12.333Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 146,
+      "context": "target: '[data-testid=\"plus-button\"]',\n content: t(\n \"Common:TourPlusButton\",\n \"Use this button to upload existing PDF forms or create new ones from scratch.\",\n ),\n title: t(\"Common:TourPlusButtonTitle\", \"Add forms\"),\n data: { page: \"/forms/my-forms\" } satisfies TourStepData,\n skipBeacon: true,\n },\n // Context menu — Ask from DB — only with Create permission\n canCreate &&",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

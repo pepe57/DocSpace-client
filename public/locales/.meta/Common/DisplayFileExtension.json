@@ -3,7 +3,7 @@
   "content": "Display file extension next to file name",
   "content_en_sha1_hash": "5aca0949443f945850e45a5d1a5def5c80406042",
   "created_at": "2026-04-03T21:51:34.715Z",
-  "updated_at": "2026-04-10T15:22:27.211Z",
+  "updated_at": "2026-04-11T19:02:12.297Z",
   "comment": {
     "text": "This is a label for a toggle switch in the file management settings. It describes the option to show or hide file extensions next to the file names.",
     "is_auto": true,
@@ -15,6 +15,12 @@
       "line_number": 179,
       "context": "className={classNames(\"display-file-extension\", styles.toggleBtn)}\n onChange={onChangeDisplayFileExtension}\n isChecked={displayFileExtension}\n dataTestId=\"display_file_extension_toggle_button\"\n />\n <Text>{t(\"Common:DisplayFileExtension\")}</Text>\n </div>\n <div className={styles.toggleBtnWrapper}>\n <ToggleButton\n className={classNames(\n \"cancelletion-notification\",",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/FileManagement.tsx",
+      "line_number": 40,
+      "context": "import { toastr } from \"@docspace/ui-kit/components/toast\";\n import {\n storeOriginal,\n changeDeleteConfirm,\n changeKeepNewFileName,\n enableDisplayFileExtension,\n } from \"@docspace/shared/api/files\";\n \n import { useDocsSettingsStore } from \"../../../_store/DocsSettingsStore\";\n \n import styles from \"./FileManagement.module.scss\";",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

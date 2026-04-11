@@ -3,7 +3,7 @@
   "content": "Last modified date",
   "content_en_sha1_hash": "db142287f88a07da18a28455cfab95c90749ca33",
   "created_at": "2025-05-19T21:30:46.056Z",
-  "updated_at": "2026-04-11T18:34:21.351Z",
+  "updated_at": "2026-04-11T19:02:12.230Z",
   "comment": {
     "text": "The translation key \"LastModifiedDate\" refers to a date field that displays the last modified date of a file or item. It is used in sorting and filtering contexts to allow users to sort results by this field. This label appears in various UI elements such as filters, sorting menus, and data tables.",
     "is_auto": true,
@@ -27,6 +27,18 @@
       "line_number": 121,
       "context": "const navigate = useNavigate();\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },\n { key: \"Size\", label: t(\"Common:Size\") },\n { key: \"DateAndTimeCreation\", label: t(\"Files:ByCreation\") },\n { key: \"Author\", label: t(\"Files:ByAuthor\") },",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_components/filter/useFilesFilter.tsx",
+      "line_number": 115,
+      "context": "default: true,\n };\n const modifiedDate = {\n id: \"sort-by_modified\",\n key: SortByFieldName.ModifiedDate,\n label: t(\"Common:LastModifiedDate\"),\n default: true,\n };\n \n const size = {\n id: \"sort-by_size\",",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/(files)/_components/table-view/index.tsx",
+      "line_number": 120,
+      "context": "minWidth: 210,\n onClick: onColumnSort,\n },\n {\n key: \"Modified\",\n title: t(\"Common:LastModifiedDate\"),\n sortBy: SortByFieldName.ModifiedDate,\n enable: columnState.Modified !== false,\n resizable: true,\n onClick: onColumnSort,\n onChange: onColumnChange,",
+      "module": "/packages/sdk"
     }
   ],
   "languages": {

@@ -3,13 +3,20 @@
   "content": "Browse ready-made form templates. Pick a template to quickly create a new form without starting from scratch.",
   "content_en_sha1_hash": "df9fd1d4ad5d94192e9157b922ee24c897722f3e",
   "created_at": "2026-03-31T15:18:26.797Z",
-  "updated_at": "2026-04-10T15:22:27.088Z",
+  "updated_at": "2026-04-11T19:02:12.334Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_utils/tourSteps.ts",
+      "line_number": 228,
+      "context": "showLibrary && {\n target: showMenu\n ? \"#forms-nav-library\"\n : '[data-tour=\"section-library\"]',\n content: t(\n \"Common:TourLibrary\",\n \"Browse ready-made form templates. Pick a template to quickly create a new form without starting from scratch.\",\n ),\n title: t(\"Common:Library\"),\n data: { page: \"/forms/library\" } satisfies TourStepData,\n skipBeacon: true,",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,

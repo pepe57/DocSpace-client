@@ -3,13 +3,20 @@
   "content": "Welcome to AI Forms",
   "content_en_sha1_hash": "95eb3b6747dc6041c4fd79f6249bcb37c4e79d19",
   "created_at": "2026-03-31T15:18:27.070Z",
-  "updated_at": "2026-04-10T15:22:27.078Z",
+  "updated_at": "2026-04-11T19:02:12.332Z",
   "comment": {
     "text": "",
     "is_auto": false,
     "updated_at": null
   },
-  "usage": [],
+  "usage": [
+    {
+      "file_path": "/packages/sdk/src/app/(forms)/_components/welcome-tour-dialog/index.tsx",
+      "line_number": 67,
+      "context": "const { t } = useTranslation([\"Common\"]);\n \n return (\n <ModalDialog visible={visible} onClose={onSkip} autoMaxHeight autoMaxWidth isLarge isHuge>\n <ModalDialog.Header>\n {t(\"Common:WelcomeToAIForms\", \"Welcome to AI Forms\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.body}>\n <div className={styles.content}>\n <div className={styles.videoContainer}>",
+      "module": "/packages/sdk"
+    }
+  ],
   "languages": {
     "en": {
       "ai_translated": false,
