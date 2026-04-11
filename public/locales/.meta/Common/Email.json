@@ -3,7 +3,7 @@
   "content": "Email",
   "content_en_sha1_hash": "84add5b2952787581cb9a8851eef63d1ec75d22b",
   "created_at": "2025-05-19T21:30:44.776Z",
-  "updated_at": "2026-04-10T16:02:43.124Z",
+  "updated_at": "2026-04-11T18:34:21.409Z",
   "comment": {
     "text": "This translation key represents the label for displaying a user's email address, typically shown alongside their name in a welcome message or profile section. It appears in various UI elements, such as social authentication dialogs and contact filtering interfaces, where users' email addresses need to be displayed. The translated text should correspond to the English content \"Email\".",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
-      "line_number": 164,
+      "line_number": 165,
       "context": "className=\"welcome-text\"\n >{`${user?.firstName} ${user?.lastName}`}</Text>\n </StyledInfoRow>\n \n <StyledInfoRow>\n <Text className=\"welcome-text\">{t(\"Common:Email\")}</Text>\n <Text fontWeight=\"600\" truncate className=\"welcome-text\">\n {user?.email}\n </Text>\n </StyledInfoRow>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/Filter/useContacts.tsx",
-      "line_number": 779,
+      "line_number": 780,
       "context": "};\n \n const email = {\n id: \"sort-by_email\",\n key: \"email\",\n label: t(\"Common:Email\"),\n default: true,\n };\n \n const storage = {\n id: \"sort-quota\",",
       "module": "/packages/client"
     },
@@ -48,26 +48,26 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 482,
+      "line_number": 483,
       "context": "/>\n ) : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Email\")}\n </Text>\n <div className={styles.emailContainer}>\n <div className={styles.emailEditContainer}>\n <Text\n data-tooltip-id=\"emailTooltip\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 482,
+      "line_number": 483,
       "context": "/>\n ) : null}\n </div>\n \n <Text as=\"div\" className={styles.label}>\n {t(\"Common:Email\")}\n </Text>\n <div className={styles.emailContainer}>\n <div className={styles.emailEditContainer}>\n <Text\n data-tooltip-id=\"emailTooltip\"",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/Channel.tsx",
-      "line_number": 76,
-      "context": "isNotValid?: boolean,\n isNeedConfig?: boolean,\n ) => {\n switch (type) {\n case \"email\":\n return `${t(\"Common:Email\")}${isNotValid ? ` (${t(\"IsNotValid\")})` : \"\"}`;\n case \"telegram\":\n return `${t(\"Common:ProviderTelegram\")}${isNeedConfig ? ` (${t(\"NotConfigured\")})` : \"\"}`;\n default:\n return t(\"Common:Email\");\n }",
+      "line_number": 77,
+      "context": "isNotValid?: boolean,\n isNeedConfig?: boolean,\n ) => {\n switch (type) {\n case \"email\":\n return `${t(\"Common:Email\")}${isNotValid ? ` (${t(\"IsNotValid\")})` : \"\"}`;\n case \"telegram\":\n return `${getBrandName(\"ProviderTelegram\")}${isNeedConfig ? ` (${t(\"NotConfigured\")})` : \"\"}`;\n default:\n return t(\"Common:Email\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/Channel.tsx",
-      "line_number": 76,
-      "context": "isNotValid?: boolean,\n isNeedConfig?: boolean,\n ) => {\n switch (type) {\n case \"email\":\n return `${t(\"Common:Email\")}${isNotValid ? ` (${t(\"IsNotValid\")})` : \"\"}`;\n case \"telegram\":\n return `${t(\"Common:ProviderTelegram\")}${isNeedConfig ? ` (${t(\"NotConfigured\")})` : \"\"}`;\n default:\n return t(\"Common:Email\");\n }",
+      "line_number": 77,
+      "context": "isNotValid?: boolean,\n isNeedConfig?: boolean,\n ) => {\n switch (type) {\n case \"email\":\n return `${t(\"Common:Email\")}${isNotValid ? ` (${t(\"IsNotValid\")})` : \"\"}`;\n case \"telegram\":\n return `${getBrandName(\"ProviderTelegram\")}${isNeedConfig ? ` (${t(\"NotConfigured\")})` : \"\"}`;\n default:\n return t(\"Common:Email\");\n }",
       "module": "/packages/client"
     },
     {
@@ -78,13 +78,13 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/wizard/page.client.tsx",
-      "line_number": 343,
+      "line_number": 344,
       "context": "name=\"wizard-email\"\n tabIndex={1}\n size={InputSize.large}\n scale\n value={email}\n placeholder={t(\"Common:Email\")}\n emailSettings={emailSettings}\n hasError={hasErrorEmail}\n onValidateInput={onEmailChangeHandler}\n isAutoFocussed\n onChange={onChangeEmail}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 220,
+      "line_number": 221,
       "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerEmail\"\n className=\"field-container-width\"\n labelText={t(\"Common:Email\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerEmail\"\n testId=\"company_info_settings_email_input\"",
       "module": "/packages/shared"
     }

@@ -3,7 +3,7 @@
   "content": "Quick sharing",
   "content_en_sha1_hash": "660b23a00ba73a3e08d794e2f110b7cb5498b3c5",
   "created_at": "2025-05-19T21:30:55.137Z",
-  "updated_at": "2026-04-07T19:35:05.101Z",
+  "updated_at": "2026-04-11T18:34:21.602Z",
   "comment": {
     "text": "This translation key is used for a button label that enables quick sharing, likely appearing in a file guidance component. The text \"Quick sharing\" will be displayed as the label when translated, allowing users to easily access this feature within the UI.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/guidance/configs/form-filling.ts",
-      "line_number": 29,
-      "context": "},\n ],\n },\n {\n id: 2,\n header: t(\"FormFillingTipsDialog:HeaderSharing\"),\n description: t(\"FormFillingTipsDialog:TitleSharing\", {\n productName: t(\"Common:ProductName\"),\n }),\n key: \"form-filling-sharing\",\n placement: \"bottom\",",
+      "line_number": 30,
+      "context": "},\n ],\n },\n {\n id: 2,\n header: t(\"FormFillingTipsDialog:HeaderSharing\"),\n description: t(\"FormFillingTipsDialog:TitleSharing\", {\n productName: getBrandName(\"ProductName\"),\n }),\n key: \"form-filling-sharing\",\n placement: \"bottom\",",
       "module": "/packages/shared"
     }
   ],

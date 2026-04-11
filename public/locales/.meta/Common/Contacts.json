@@ -3,7 +3,7 @@
   "content": "Contacts",
   "content_en_sha1_hash": "b0dd615cbbdcbf21ffb72115599ca915634fcb85",
   "created_at": "2025-05-19T21:30:43.662Z",
-  "updated_at": "2026-04-10T15:22:27.228Z",
+  "updated_at": "2026-04-11T18:34:21.350Z",
   "comment": {
     "text": "The translation key \"Contacts\" is used to display a title for a list or directory of contacts, appearing as a header in various UI elements such as articles, template access selectors, and invite panels. This text provides context and helps distinguish this section from others, guiding the user's understanding of what they are viewing.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/components/TemplateAccessSelector/index.tsx",
-      "line_number": 109,
+      "line_number": 110,
       "context": "disableInvitedUsers={disableInvitedUsers}\n checkIfUserInvited={checkIfUserInvited}\n withHeader\n filter={filter as unknown as PeopleFilter}\n headerProps={{\n headerLabel: t(\"Common:Contacts\"),\n withoutBackButton: false,\n withoutBorder: true,\n isCloseable: true,\n onBackClick,\n onCloseClick,",
       "module": "/packages/client"
     },
@@ -48,32 +48,32 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/ImportStep.tsx",
-      "line_number": 153,
+      "line_number": 154,
       "context": "t={t}\n i18nKey=\"GroupsSectionDescription\"\n ns=\"Settings\"\n values={{\n serviceName,\n sectionName: t(\"Common:Contacts\"),\n }}\n components={{\n 1: <span />,\n }}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/index.js",
-      "line_number": 96,
-      "context": "t={t}\n i18nKey=\"LdapIntegrationDescription\"\n ns=\"Ldap\"\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n link,\n }}\n components={{\n 1: (\n <Link",
+      "line_number": 97,
+      "context": "t={t}\n i18nKey=\"LdapIntegrationDescription\"\n ns=\"Ldap\"\n values={{\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n link,\n }}\n components={{\n 1: (\n <Link",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/LDAP/sub-components/AttributeMapping.js",
-      "line_number": 224,
+      "line_number": 225,
       "context": "isVertical\n labelVisible\n hasError={errors.userQuotaLimit}\n labelText={t(\"LdapQuota\")}\n tooltipContent={t(\"LdapUserQuotaTooltip\", {\n contactsName: t(\"Common:Contacts\"),\n })}\n inlineHelpButton\n dataTestId=\"quota_field_container\"\n >\n <TextInput",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 290,
-      "context": "onClick={onChangeContacts}\n noSelect\n >\n {t(\"InviteViaContacts\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>\n \n <Text",
+      "line_number": 291,
+      "context": "onClick={onChangeContacts}\n noSelect\n >\n {t(\"InviteViaContacts\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>\n \n <Text",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/invitationSettings.tsx",
-      "line_number": 290,
-      "context": "onClick={onChangeContacts}\n noSelect\n >\n {t(\"InviteViaContacts\", {\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>\n \n <Text",
+      "line_number": 291,
+      "context": "onClick={onChangeContacts}\n noSelect\n >\n {t(\"InviteViaContacts\", {\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Contacts\"),\n })}\n </Text>\n </div>\n \n <Text",
       "module": "/packages/client"
     },
     {

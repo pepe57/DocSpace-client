@@ -3,7 +3,7 @@
   "content": "You can open this file from the desktop app's interface once your cloud is connected",
   "content_en_sha1_hash": "a56cf9923ee70342d9e2669ee3ab4de8d039979a",
   "created_at": "2025-05-19T21:30:53.425Z",
-  "updated_at": "2026-04-10T15:22:27.403Z",
+  "updated_at": "2026-04-11T18:34:21.554Z",
   "comment": {
     "text": "This translation key is used to display a message explaining that users can access files from the desktop app's interface once their cloud connection is established. The text appears in a UI element related to private rooms or file sharing, providing context for users.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/pages/PrivateRoomsPage/index.js",
       "line_number": 235,
-      "context": "{t(\"PrivacyDescriptionEditors\", {\n organizationName: logoText,\n })}\n .\n </p>\n <p>{t(\"PrivacyDescriptionConnect\")}.</p>\n </Text>\n </div>\n </StyledPrivacyPage>\n );\n };",
+      "context": "{t(\"PrivacyDescriptionEditors\", {\n OnlyofficeDesktopEditors: getBrandName(\"OnlyofficeDesktopEditors\"),\n })}\n .\n </p>\n <p>{t(\"PrivacyDescriptionConnect\")}.</p>\n </Text>\n </div>\n </StyledPrivacyPage>\n );\n };",
       "module": "/packages/client"
     }
   ],

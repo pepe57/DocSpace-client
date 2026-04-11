@@ -3,7 +3,7 @@
   "content": "Removed from favorites",
   "content_en_sha1_hash": "c259d9197c21c066bff3db7e0f183ec9c293053c",
   "created_at": "2026-04-03T21:51:34.662Z",
-  "updated_at": "2026-04-10T15:22:27.124Z",
+  "updated_at": "2026-04-11T18:34:21.263Z",
   "comment": {
     "text": "A success message displayed in a toast notification when an item is successfully removed from the user's favorites. It appears after performing a removal action via buttons or hotkeys.",
     "is_auto": true,
@@ -30,7 +30,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 470,
+      "line_number": 471,
       "context": "this.filesActionsStore\n .setFavoriteAction(action, items)\n .then(() =>\n action === \"mark\"\n ? toastr.success(t(\"Common:MarkedAsFavorite\"))\n : toastr.success(t(\"Common:RemovedFromFavorites\")),\n )\n .catch((err) => toastr.error(err));\n };\n \n lockFile = (item, t) => {",
       "module": "/packages/client"
     },

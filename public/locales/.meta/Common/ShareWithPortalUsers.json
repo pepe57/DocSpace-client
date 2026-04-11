@@ -3,7 +3,7 @@
   "content": "Sharing with {{productName}} users",
   "content_en_sha1_hash": "fa06dae4b65dd82f0df19959cee1423e63f3cf26",
   "created_at": "2025-09-23T07:24:16.874Z",
-  "updated_at": "2026-04-10T15:56:17.560Z",
+  "updated_at": "2026-04-11T18:34:21.580Z",
   "comment": {
     "text": "This key displays text for a sharing option, indicating that the file will be shared with users of the {{productName}} product. It appears as part of a sharing dialog or form, likely as a button or option label. Translators should ensure the wording accurately conveys sharing access to the product's user base.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/doceditor/src/components/ShareFormDialog.tsx",
-      "line_number": 180,
-      "context": "icon: <ShareSvg />,\n disabled: !file.canShare,\n },\n {\n id: \"share-with-users\",\n title: t(\"Common:ShareWithPortalUsers\", {\n productName: t(\"Common:ProductName\"),\n }),\n description: t(\"Common:ShareWithPortalUsersDescription\", {\n productName: t(\"Common:ProductName\"),\n }),",
+      "line_number": 181,
+      "context": "icon: <ShareSvg />,\n disabled: !file.canShare,\n },\n {\n id: \"share-with-users\",\n title: t(\"Common:ShareWithPortalUsers\", {\n productName: getBrandName(\"ProductName\"),\n }),\n description: t(\"Common:ShareWithPortalUsersDescription\", {\n productName: getBrandName(\"ProductName\"),\n }),",
       "module": "/packages/doceditor"
     }
   ],

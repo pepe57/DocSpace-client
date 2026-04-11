@@ -1,22 +1,15 @@
 {
-  "key_path": "YourName",
-  "content": "Your name",
-  "content_en_sha1_hash": "ab42293e29e1ffb306c1403dd95144d664853a60",
-  "created_at": "2025-05-19T21:30:53.285Z",
-  "updated_at": "2026-04-10T15:22:27.393Z",
+  "key_path": "SuccessfullySentMessage",
+  "content": "Your message was successfully sent. You will be contacted by the Sales Department.",
+  "content_en_sha1_hash": "98daa82292b84195ac631968a95bf10cadaf23da",
+  "created_at": "2026-04-11T18:34:14.971Z",
+  "updated_at": "2026-04-11T18:34:14.971Z",
   "comment": {
-    "text": "The translation key \"YourName\" is used to display a placeholder text for a user's name input field in a sales department request dialog. The text appears as a prompt when the input field is empty and is displayed on a text input element.",
-    "is_auto": true,
-    "updated_at": "2025-05-20T09:44:02.813Z"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
-      "line_number": 187,
-      "context": "name=\"name\"\n type=\"text\"\n size=\"base\"\n scale\n tabIndex={1}\n placeholder={t(\"YourName\")}\n isAutoFocussed\n isDisabled={isLoading}\n value={name}\n onChange={onChangeName}\n testId=\"request_name_input\"",
-      "module": "/packages/client"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -168,6 +161,12 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
@@ -199,12 +198,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

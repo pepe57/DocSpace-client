@@ -3,7 +3,7 @@
   "content": "Connect",
   "content_en_sha1_hash": "b65463cb6a42a17de514acc4659f7fd331e0876a",
   "created_at": "2025-05-19T21:30:43.652Z",
-  "updated_at": "2026-04-10T15:22:27.230Z",
+  "updated_at": "2026-04-11T18:34:21.371Z",
   "comment": {
     "text": "This translation key is used for a \"Connect\" button that appears in various UI elements, such as buttons and dialog components. Its purpose is to provide a consistent label for this action across different applications and languages, allowing users to understand what happens when they click on the button.",
     "is_auto": true,
@@ -18,19 +18,19 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/ThirdPartyStorage/ThirdPartyComboBox.tsx",
-      "line_number": 372,
+      "line_number": 373,
       "context": "!!storageLocation?.thirdpartyAccount ||\n isDisabled\n }\n className=\"set_room_params-thirdparty-connect\"\n size={ButtonSize.small}\n label={t(\"Common:Connect\")}\n onClick={onShowService}\n testId=\"create_edit_room_thirdparty_connect\"\n />\n </div>\n </StyledStorageLocation>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/notifications/sub-components/Channel.tsx",
-      "line_number": 150,
+      "line_number": 151,
       "context": "fontWeight={600}\n isHovered\n type={LinkType.action}\n onClick={onConnect}\n >\n {t(\"Common:Connect\")}\n </Link>\n );\n };\n \n const Channel = ({",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/management/src/app/spaces/configuration/body.tsx",
-      "line_number": 178,
+      "line_number": 179,
       "context": "size={\n currentDeviceType === DeviceType.desktop\n ? ButtonSize.small\n : ButtonSize.normal\n }\n label={t(\"Common:Connect\")}\n onClick={onConnectClick}\n primary\n tabIndex={3}\n isLoading={isLoading}\n // scale={false}",
       "module": "/packages/management"
     },

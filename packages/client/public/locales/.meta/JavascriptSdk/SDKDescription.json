@@ -3,7 +3,7 @@
   "content": "Embed SDK allows you to embed the whole {{productName}} or its part into your web interface. Select ready-to-use modes with the pre-defined parameters or a custom one to configure it manually. To learn more about SDK, refer to the ",
   "content_en_sha1_hash": "f68b6c2c4b3bf6eb423cc56c815aa49f6a90fc88",
   "created_at": "2026-04-03T21:51:38.222Z",
-  "updated_at": "2026-04-10T08:21:04.348Z",
+  "updated_at": "2026-04-11T18:34:21.494Z",
   "comment": {
     "text": "This text serves as a descriptive introduction for the Javascript SDK section within the Portal Settings' Developer Tools. It explains how the Embed SDK can be integrated into a web interface using pre-defined or custom parameters and concludes by directing the user to further documentation.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 160,
-      "context": "return (\n <SDKContainer>\n <CategoryDescription theme={theme}>\n <Text className=\"sdk-description\">\n {t(\"SDKDescription\", { productName: t(\"Common:ProductName\") })}\n </Text>\n <Link\n color={currentColorScheme?.main?.accent}\n fontSize=\"13px\"\n fontWeight=\"400\"",
+      "line_number": 161,
+      "context": "return (\n <SDKContainer>\n <CategoryDescription theme={theme}>\n <Text className=\"sdk-description\">\n {t(\"SDKDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>\n <Link\n color={currentColorScheme?.main?.accent}\n fontSize=\"13px\"\n fontWeight=\"400\"",
       "module": "/packages/client"
     }
   ],

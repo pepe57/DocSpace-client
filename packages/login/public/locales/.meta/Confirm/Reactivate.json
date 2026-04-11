@@ -3,7 +3,7 @@
   "content": "Reactivate",
   "content_en_sha1_hash": "cd28a172590d6deb9c3e1d656864b9d7abbc7ba5",
   "created_at": "2025-05-19T21:30:57.384Z",
-  "updated_at": "2026-04-07T19:35:05.245Z",
+  "updated_at": "2026-04-11T18:34:21.584Z",
   "comment": {
     "text": "This translation key \"Reactivate\" is used to display a button or action label that allows users to restore or re-activate a feature or functionality. It appears in a confirmation dialog or form (e.g., /packages/login/src/app/(root)/confirm/PortalContinue/page.client.tsx) where the user has the option to reactivate something, typically after a period of inactivity or deletion.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalContinue/page.client.tsx",
-      "line_number": 46,
+      "line_number": 47,
       "context": "const ContinuePortalForm = () => {\n const { t } = useTranslation([\"Confirm\", \"Common\"]);\n const { linkData } = useContext(ConfirmRouteContext);\n \n const [isReactivate, setIsReactivate] = useState(false);\n \n const onRestoreClick = async () => {\n try {\n await continuePortal(linkData.confirmHeader);\n setIsReactivate(true);",
       "module": "/packages/login"
     }

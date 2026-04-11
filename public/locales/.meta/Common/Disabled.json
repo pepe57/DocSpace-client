@@ -3,7 +3,7 @@
   "content": "Disabled",
   "content_en_sha1_hash": "f4f4473df8cb59f0a369aebee3d1509adc0151c6",
   "created_at": "2025-05-19T21:30:44.535Z",
-  "updated_at": "2026-04-10T15:22:27.211Z",
+  "updated_at": "2026-04-11T18:34:21.420Z",
   "comment": {
     "text": "This translation key is used to display the text \"Disabled\" when a feature or setting is disabled in the UI. It appears as part of dropdown menus and options lists in various admin settings and configuration pages.",
     "is_auto": true,
@@ -12,19 +12,19 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/panels/InvitePanel/sub-components/InviteInput.js",
-      "line_number": 436,
+      "line_number": 437,
       "context": "<Text\n className={classNames(styles.searchItemText, {\n [styles.isInfo]: true,\n })}\n >\n {t(\"Common:Disabled\")}\n </Text>\n ) : null}\n </DropDownItem>\n );\n };",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
-      "line_number": 189,
+      "line_number": 190,
       "context": "spacing=\"8px\"\n dataTestId=\"administrator_message_radio_button_group\"\n options={[\n {\n id: \"admin-message-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"disabled\",\n dataTestId: \"administrator_message_disabled\",\n },\n {\n id: \"admin-message-enable\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/devToolsAccess.tsx",
-      "line_number": 224,
+      "line_number": 225,
       "context": "spacing=\"8px\"\n dataTestId=\"developer_tools_access_radio_button\"\n options={[\n {\n id: \"dev-tools-access-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"true\",\n dataTestId: \"developer_tools_access_disabled\",\n },\n {\n id: \"dev-tools-access-enable\",",
       "module": "/packages/client"
     },
@@ -42,7 +42,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/tfa.js",
-      "line_number": 267,
+      "line_number": 268,
       "context": "spacing=\"8px\"\n dataTestId=\"tfa_radio_button_group\"\n options={[\n {\n id: \"tfa-disabled\",\n label: t(\"Common:Disabled\"),\n value: \"none\",\n dataTestId: \"tfa_radio_button_disabled\",\n },\n // TODO: hide while 2fa by sms is not working\n /* {",
       "module": "/packages/client"
     },

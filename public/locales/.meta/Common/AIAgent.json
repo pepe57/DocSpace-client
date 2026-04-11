@@ -3,7 +3,7 @@
   "content": "AI agent",
   "content_en_sha1_hash": "ab15eb3d82fcf6e76a2ede7896d22471a681f18e",
   "created_at": "2025-12-19T10:16:17.398Z",
-  "updated_at": "2026-04-10T15:22:27.279Z",
+  "updated_at": "2026-04-11T18:34:21.278Z",
   "comment": {
     "text": "This key refers to the term \"AI agent\" and is used to label or describe AI agents within the UI. It appears in instructions for creating or editing agents, empty container views (specifically when access is restricted), and in titles related to AI agent availability. Translators should ensure the term is accurately conveyed in the target language, considering its technical context.",
     "is_auto": true,
@@ -24,13 +24,13 @@
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.helpers.tsx",
-      "line_number": 384,
+      "line_number": 385,
       "context": "};\n \n const createAIAgent = {\n title: t(\"EmptyView:CreateAIAgent\"),\n description: t(\"EmptyView:CreateAIAgentDescription\", {\n aiAgent: t(\"Common:AIAgent\"),\n }),\n icon: <CreateAIAgentIcon />,\n key: \"create-ai-agent\",\n onClick: actions.onCreateAIAgent,\n disabled: !security?.Create,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/EmptyContainer/sub-components/EmptyViewContainer/EmptyViewContainer.utils.tsx",
-      "line_number": 185,
+      "line_number": 186,
       "context": "};\n \n const getAIAgentsAIEnabledTitle = (t: TTranslation, access: AccessType) => {\n return isUser(access)\n ? t(\"EmptyView:EmptyAIAgentsUserTitle\", {\n aiAgents: t(\"Common:AIAgents\"),\n })\n : t(\"EmptyView:EmptyAIAgentsTitle\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n };",
       "module": "/packages/client"
     },
@@ -54,31 +54,31 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 67,
-      "context": "})}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),",
+      "line_number": 68,
+      "context": "})}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/MobileQuotas.js",
-      "line_number": 67,
-      "context": "})}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: t(\"Common:ProductName\"),",
+      "line_number": 68,
+      "context": "})}\n isDisabled={isDisabled}\n />\n <CategoryItem\n title={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n onClickLink={onClickLink}\n url=\"/portal-settings/management/disk-space/quota-per-ai-agent\"\n subtitle={t(\"SetDefaultAIAgentQuota\", {\n productName: getBrandName(\"ProductName\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 54,
+      "line_number": 55,
       "context": "return (\n <QuotaPerItemComponent\n type=\"agent\"\n formLabel={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n toggleLabel={t(\"DefineQuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n disableQuota={disableQuota}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 54,
+      "line_number": 55,
       "context": "return (\n <QuotaPerItemComponent\n type=\"agent\"\n formLabel={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n toggleLabel={t(\"DefineQuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n disableQuota={disableQuota}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerAIAgent.tsx",
-      "line_number": 54,
+      "line_number": 55,
       "context": "return (\n <QuotaPerItemComponent\n type=\"agent\"\n formLabel={t(\"QuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n toggleLabel={t(\"DefineQuotaPerAIAgent\", {\n aiAgent: t(\"Common:AIAgent\"),\n })}\n disableQuota={disableQuota}",
       "module": "/packages/client"
     },
@@ -114,7 +114,7 @@
     },
     {
       "file_path": "/packages/login/src/components/GreetingContainer/GreetingCreateUserContainer/index.tsx",
-      "line_number": 80,
+      "line_number": 81,
       "context": "i18nKey=\"InvitationToAgent\"\n defaults={DEFAULT_AGENT_TEXT}\n values={{\n displayName,\n agentName: roomData.title,\n aiAgent: t(\"Common:AIAgent\"),\n }}\n />\n );\n }",
       "module": "/packages/login"
     },
@@ -132,20 +132,20 @@
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 58,
+      "line_number": 59,
       "context": "switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:RoleAIAgentManagerDescription\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n case None:\n return (\n <Trans\n t={t as TFunction}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 58,
+      "line_number": 59,
       "context": "switch (roomType) {\n case RoomsType.FormRoom:\n return t(\"Common:RoleRoomAdminFormRoomDescription\");\n case RoomsType.AIRoom:\n return t(\"Common:RoleAIAgentManagerDescription\", {\n aiAgent: t(\"Common:AIAgent\"),\n });\n case None:\n return (\n <Trans\n t={t as TFunction}",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getUserTypeDescription.tsx",
-      "line_number": 52,
-      "context": "1: <strong></strong>,\n }}\n values={{\n productName: t(\"Common:ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n );\n \n if (isRoomAdmin)",
+      "line_number": 53,
+      "context": "1: <strong></strong>,\n }}\n values={{\n productName: getBrandName(\"ProductName\"),\n sectionName: t(\"Common:Documents\"),\n agentSection: t(\"Common:AIAgents\"),\n }}\n />\n );\n \n if (isRoomAdmin)",
       "module": "/packages/shared"
     }
   ],

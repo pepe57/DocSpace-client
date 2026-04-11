@@ -3,7 +3,7 @@
   "content": "License limit Admins:",
   "content_en_sha1_hash": "1c1e914844eff8d3f3c5049d1d0c96c41a4de0ab",
   "created_at": "2025-05-19T21:30:51.790Z",
-  "updated_at": "2026-04-10T16:02:43.559Z",
+  "updated_at": "2026-04-11T18:34:21.485Z",
   "comment": {
     "text": "The \"LicenseLimitCounter\" translation key is used to display the remaining license quota for admins. It appears in a UI component showing user information and provides context about the available licenses.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AdminsInfoBlock.tsx",
-      "line_number": 53,
+      "line_number": 54,
       "context": ") : null}\n <div className=\"info-block-wrapper\">\n <Text\n as=\"div\"\n className=\"selected-admins-count\"\n title={`${t(\"LicenseLimitCounter\")} ${limitText}`}\n truncate\n >\n {t(\"LicenseLimitCounter\")}\n <Text as=\"span\">{limitText}</Text>\n </Text>",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/sub-components/AdminsInfoBlock.tsx",
-      "line_number": 53,
+      "line_number": 54,
       "context": ") : null}\n <div className=\"info-block-wrapper\">\n <Text\n as=\"div\"\n className=\"selected-admins-count\"\n title={`${t(\"LicenseLimitCounter\")} ${limitText}`}\n truncate\n >\n {t(\"LicenseLimitCounter\")}\n <Text as=\"span\">{limitText}</Text>\n </Text>",
       "module": "/packages/client"
     }

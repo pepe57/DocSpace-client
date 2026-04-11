@@ -1,19 +1,19 @@
 {
   "key_path": "PrivacyButton",
-  "content": "Open {{organizationName}} Desktop Editors",
-  "content_en_sha1_hash": "dda3d5876529ea8bd3db3b35f56dd4b353fd26b2",
-  "created_at": "2025-05-19T21:30:53.411Z",
-  "updated_at": "2026-04-10T15:22:27.403Z",
+  "content": "Open {{OnlyofficeDesktopEditors}}",
+  "content_en_sha1_hash": "a2915ecbfe5ccb5180bc2267623eca4283dd2200",
+  "created_at": "2026-04-11T18:34:17.077Z",
+  "updated_at": "2026-04-11T18:35:59.541Z",
   "comment": {
-    "text": "This translation key contains a button label that opens desktop editors for an organization. The text includes a placeholder {{organizationName}} to be replaced with the actual organization name.",
+    "text": "This key provides the label text for a button on the Private Rooms Page. The button, when clicked, opens the OnlyOffice desktop editors. The text includes a dynamic placeholder for the brand name, which must be correctly translated and formatted.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:43:47.754Z"
+    "updated_at": "2026-04-11T18:35:59.541Z"
   },
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PrivateRoomsPage/index.js",
-      "line_number": 195,
-      "context": "<Button\n onClick={onOpenEditorsPopup}\n size=\"medium\"\n primary\n isDisabled={isDisabled}\n label={t(\"PrivacyButton\", {\n organizationName: logoText,\n })}\n />\n \n <label className=\"privacy-rooms-text-separator\" />",
+      "line_number": 196,
+      "context": "<Button\n onClick={onOpenEditorsPopup}\n size=\"medium\"\n primary\n isDisabled={isDisabled}\n label={t(\"PrivacyButton\", {\n OnlyofficeDesktopEditors: getBrandName(\"OnlyofficeDesktopEditors\"),\n })}\n />\n \n <label className=\"privacy-rooms-text-separator\" />",
       "module": "/packages/client"
     }
   ],
@@ -168,6 +168,12 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
@@ -199,12 +205,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

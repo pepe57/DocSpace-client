@@ -3,7 +3,7 @@
   "content": "Add e-mail",
   "content_en_sha1_hash": "9d0252e4575b8f94ead7b517531c8aa8ee1729f2",
   "created_at": "2025-05-19T21:30:50.318Z",
-  "updated_at": "2026-04-09T04:31:17.369Z",
+  "updated_at": "2026-04-11T18:34:21.395Z",
   "comment": {
     "text": "This translation key \"AddEmail\" is used to display the text \"Add e-mail\" in a modal dialog that prompts users to enter their email address. The text appears as the header of the dialog and helps to indicate its purpose to the user.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/EmailChangeDialog/index.tsx",
       "line_number": 71,
-      "context": "<ModalDialog\n visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"AddEmail\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.wrapper}>\n <Text>{displayName}</Text>\n <EmailInput\n placeholder={t(\"SMTPSettings:EnterEmail\")}",
+      "context": "<ModalDialog\n visible={visible}\n onClose={onClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"AddEmail\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <div className={styles.wrapper}>\n <Text>{displayName}</Text>\n <EmailInput\n placeholder={t(\"Common:EnterEmail\")}",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "External link",
   "content_en_sha1_hash": "66305476ff6932547d4b8aa6c41b8e0c5f410286",
   "created_at": "2026-02-18T14:55:55.624Z",
-  "updated_at": "2026-04-08T09:55:40.289Z",
+  "updated_at": "2026-04-11T18:34:21.495Z",
   "comment": {
     "text": "This key displays the label \"External link\" next to a help button within controls groups in various file selection components (FileSelector.js, Manager.js, SimpleRoom.js). It indicates that a link is publicly accessible and provides information about public room details via the associated tooltip. Translators should ensure the translated text accurately conveys the meaning of a publicly shared link.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 648,
+      "line_number": 649,
       "context": "</FilesSelectorInputWrapper>\n </ControlsGroup>\n {sharedLinks ? (\n <ControlsGroup>\n <LabelGroup>\n <Label className=\"label\" text={t(\"Common:ExternalLink\")} />\n <HelpButton\n offsetRight={0}\n size={12}\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:PublicRoomInfo\")}</Text>",
       "module": "/packages/client"
     },

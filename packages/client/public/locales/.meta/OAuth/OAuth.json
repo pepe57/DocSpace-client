@@ -3,7 +3,7 @@
   "content": "OAuth 2.0",
   "content_en_sha1_hash": "11ff1c5f1bf611e663f09de411b0c9a4d410b907",
   "created_at": "2025-05-19T21:30:53.924Z",
-  "updated_at": "2026-04-10T08:21:04.346Z",
+  "updated_at": "2026-04-11T18:34:21.492Z",
   "comment": {
     "text": "OAuth 2.0 is a translation key used to display the English content \"OAuth 2.0\" in various UI contexts throughout the application, primarily for title settings and button labels, such as on create and edit pages of OAuth-related settings.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
-      "line_number": 76,
+      "line_number": 77,
       "context": "if (pathname.includes(\"/developer-tools/javascript-sdk\"))\n return t(\"Settings:EmbedSDK\");\n if (pathname.includes(\"/developer-tools/plugin-sdk\"))\n return t(\"WebPlugins:PluginSDK\");\n if (pathname.includes(\"/developer-tools/webhooks\")) return t(\"Webhooks:Webhooks\");\n if (pathname.includes(\"/developer-tools/oauth\")) return t(\"OAuth:OAuth\");\n return t(\"Common:DeveloperTools\");\n };\n \n const isSubPage = (pathname: string): boolean => {\n const path = pathname.replace(/\\/$/, \"\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 111,
-      "context": "color={globalColors.mainRed}\n linkTitle={t(\"Webhooks:CreateWebhook\")}\n />\n <Card\n icon={<OAuthSvg />}\n title={t(\"OAuth:OAuth\")}\n description={t(\"Settings:OAuthDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/oauth/create\"\n color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />",
+      "line_number": 112,
+      "context": "color={globalColors.mainRed}\n linkTitle={t(\"Webhooks:CreateWebhook\")}\n />\n <Card\n icon={<OAuthSvg />}\n title={t(\"OAuth:OAuth\")}\n description={t(\"Settings:OAuthDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/oauth/create\"\n color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />",
       "module": "/packages/client"
     },
     {
@@ -42,13 +42,13 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/EmptyScreen.tsx",
-      "line_number": 93,
+      "line_number": 94,
       "context": "tag=\"a\"\n style={{ marginBottom: \"20px\" }}\n color=\"accent\"\n dataTestId=\"oauth_guide_link\"\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </Link>\n ) : null}\n </p>\n \n <RegisterNewButton />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/List/index.tsx",
-      "line_number": 101,
+      "line_number": 102,
       "context": "tag=\"a\"\n style={isError ? undefined : { marginBottom: \"20px\" }}\n color=\"accent\"\n dataTestId=\"oauth_guide_link\"\n >\n {t(\"OAuth:OAuth\")} {t(\"Common:Guide\")}\n </Link>\n ) : null}\n \n {isError ? (\n <EmptyServerErrorContainer />",
       "module": "/packages/client"
     }

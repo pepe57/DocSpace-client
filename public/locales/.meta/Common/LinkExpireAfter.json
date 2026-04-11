@@ -3,7 +3,7 @@
   "content": "The link will expire <1>{{date}}</1>",
   "content_en_sha1_hash": "63d96a2e07ed56dd44d5d336a0581f8168e94aad",
   "created_at": "2026-02-18T14:56:01.209Z",
-  "updated_at": "2026-04-10T15:22:27.161Z",
+  "updated_at": "2026-04-11T18:34:21.417Z",
   "comment": {
     "text": "This key displays a message indicating when a shareable link will expire. It appears in various components like Invite Panels, Share helpers, and Expired ComboBoxes to inform users about the link's expiration date. The `<date>` variable should be replaced with the specific expiration date value.",
     "is_auto": true,
@@ -18,7 +18,7 @@
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 378,
+      "line_number": 379,
       "context": "return (\n <Trans\n t={t}\n ns=\"Common\"\n values={{ date }}\n i18nKey=\"LinkExpireAfter\"\n components={{ 1: <strong key=\"strong-expire-after\" /> }}\n />\n );\n }",
       "module": "/packages/shared"
     },

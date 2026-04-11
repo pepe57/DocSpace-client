@@ -3,7 +3,7 @@
   "content": "Once you revoke the consent to use the {{organizationName}} {{productName}} auth data in the services, {{organizationName}} {{productName}} will automatically stop logging. Your accounts will not be deleted.",
   "content_en_sha1_hash": "151a3ff33cf21b977abeb11b5aecd278537ac65a",
   "created_at": "2025-05-19T21:30:54.013Z",
-  "updated_at": "2026-04-07T19:35:05.166Z",
+  "updated_at": "2026-04-11T18:34:21.555Z",
   "comment": {
     "text": "This translation key is used for the description displayed when revoking consent to use {{organizationName}} {{productName}} auth data. It informs users that their accounts will not be deleted after revocation and explains what happens next. This appears in a dialog related to revoking OAuth permissions.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/authorized-apps/sub-components/RevokeDialog.tsx",
-      "line_number": 33,
-      "context": "const name = bufferSelection?.name;\n \n const firstDesc = isGroup ? (\n <Trans\n t={t}\n i18nKey=\"RevokeConsentDescriptionGroup\"\n ns=\"OAuth\"\n values={{\n productName: t(\"Common:ProductName\"),\n organizationName: logoText,\n }}",
+      "line_number": 34,
+      "context": "const name = bufferSelection?.name;\n \n const firstDesc = isGroup ? (\n <Trans\n t={t}\n i18nKey=\"RevokeConsentDescriptionGroup\"\n ns=\"OAuth\"\n values={{\n productName: getBrandName(\"ProductName\"),\n organizationName: logoText,\n }}",
       "module": "/packages/client"
     }
   ],

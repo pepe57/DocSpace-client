@@ -3,7 +3,7 @@
   "content": "Collaboration",
   "content_en_sha1_hash": "0a4d7a1ab7027fe1ecc947122932b427b1c9e59b",
   "created_at": "2025-05-19T21:30:43.503Z",
-  "updated_at": "2026-04-10T15:22:27.234Z",
+  "updated_at": "2026-04-11T18:34:21.427Z",
   "comment": {
     "text": "This translation key is used to display the label for a room filter type in the UI. It appears in a filter dropdown menu on the Home page, specifically under the \"Editing Room\" and \"Custom Room\" filters, and provides a clear indication of what rooms are being filtered by collaboration capabilities.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/helpers/filesUtils.js",
-      "line_number": 54,
+      "line_number": 55,
       "context": "case RoomsType.FillingFormsRoom:\n return t(\"Common:FillingFormRooms\");\n \n case RoomsType.EditingRoom:\n return t(\"Common:CollaborationRooms\");\n \n case RoomsType.ReviewRoom:\n return t(\"Common:Review\");\n \n case RoomsType.ReadOnlyRoom:",
       "module": "/packages/client"
     },

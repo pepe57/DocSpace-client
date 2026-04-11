@@ -3,7 +3,7 @@
   "content": "Document management",
   "content_en_sha1_hash": "24950bb532a5d93538689a3039a5e3b8266d0a27",
   "created_at": "2025-05-26T07:15:42.596Z",
-  "updated_at": "2026-04-10T15:22:27.211Z",
+  "updated_at": "2026-04-11T18:34:21.594Z",
   "comment": {
     "text": "The \"DocumentManagement\" translation key is used to display the content of a document management system. It appears in an About dialog as part of a component's title and is likely used to provide a brief description or name for the document management feature.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/shared/components/about-dialog/About.content.tsx",
-      "line_number": 93,
+      "line_number": 94,
       "context": ")}\n />\n </div>\n <div className={classNames(styles.row, \"row\")}>\n <Text className={classNames(styles.rowEl, \"row-el\")} fontSize=\"13px\">\n {t(\"DocumentManagement\")}:\n </Text>\n <div\n className={classNames(\n styles.programWithVersion,\n \"program-with-version\",",
       "module": "/packages/shared"
     }

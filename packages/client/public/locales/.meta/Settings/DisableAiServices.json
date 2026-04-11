@@ -3,7 +3,7 @@
   "content": "Disable {{aiServices}}",
   "content_en_sha1_hash": "ff9221e8d16c8a8a5865acce6a73670a6019e447",
   "created_at": "2026-03-26T08:26:46.833Z",
-  "updated_at": "2026-04-10T15:22:27.373Z",
+  "updated_at": "2026-04-11T18:34:21.393Z",
   "comment": {
     "text": "This key is used for a dialog component that allows users to disable AI services. The text, \"Disable {{aiServices}}\", appears within a button or other element in the dialog, likely prompting the user to disable specified AI services. Translators should ensure the text accurately conveys the action of disabling AI features.",
     "is_auto": true,
@@ -13,7 +13,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/DisableAiServicesDialog/index.js",
       "line_number": 36,
-      "context": "import { Button } from \"@docspace/ui-kit/components/button\";\n import { ModalDialog } from \"@docspace/ui-kit/components/modal-dialog\";\n import { Text } from \"@docspace/ui-kit/components/text\";\n \n import styles from \"./DisableAiServicesDialog.module.scss\";\n \n const DisableAiServicesDialogComponent = ({\n visible,\n onClose,\n onContinue,",
+      "context": "import { Button } from \"@docspace/ui-kit/components/button\";\n import { ModalDialog } from \"@docspace/ui-kit/components/modal-dialog\";\n import { Text } from \"@docspace/ui-kit/components/text\";\n \n import styles from \"./DisableAiServicesDialog.module.scss\";\n import { getBrandName } from \"@docspace/shared/constants/brands\";\n \n const DisableAiServicesDialogComponent = ({\n visible,\n onClose,",
       "module": "/packages/client"
     }
   ],

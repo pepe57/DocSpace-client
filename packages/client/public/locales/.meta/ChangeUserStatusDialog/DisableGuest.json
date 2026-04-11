@@ -3,7 +3,7 @@
   "content": "Disable guest",
   "content_en_sha1_hash": "124e79fd05fa2de6f6c5a8945bc1696537b6b7a1",
   "created_at": "2025-05-19T21:30:56.947Z",
-  "updated_at": "2026-04-07T19:35:05.047Z",
+  "updated_at": "2026-04-11T18:34:21.363Z",
   "comment": {
     "text": "This translation key is used to display the text \"Disable guest\" in a user interface. It appears as a label on a button in a dialog that allows users to change their status, specifically disabling guest privileges.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/dialogs/ChangeUserStatusDialog/index.tsx",
-      "line_number": 163,
+      "line_number": 164,
       "context": "let buttonLabelSave = \"\";\n \n if (needDisabled) {\n header = onlyOneUser\n ? isGuests\n ? t(\"DisableGuest\")\n : t(\"DisableUser\")\n : isGuests\n ? t(\"DisableGuests\")\n : t(\"DisableUsers\");",
       "module": "/packages/client"
     }

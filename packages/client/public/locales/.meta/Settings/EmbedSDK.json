@@ -3,7 +3,7 @@
   "content": "Embed SDK",
   "content_en_sha1_hash": "a9ccf1a96c44b79062482e5c0b3db74a1df2a6dd",
   "created_at": "2026-04-03T21:51:36.584Z",
-  "updated_at": "2026-04-10T15:22:27.367Z",
+  "updated_at": "2026-04-11T18:34:21.491Z",
   "comment": {
     "text": "Used as the title for the Embed SDK feature card and header within the Developer Tools section of the Portal Settings. It identifies the JavaScript SDK integration option for developers.",
     "is_auto": true,
@@ -12,14 +12,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/DeveloperToolsHeader.tsx",
-      "line_number": 72,
-      "context": "const slug = pathname.split(\"/developer-tools/javascript-sdk/\")[1]?.replace(/\\/$/, \"\");\n const key = sdkPresetTitles[slug];\n if (key) return t(key);\n }\n if (pathname.includes(\"/developer-tools/javascript-sdk\"))\n return t(\"Settings:EmbedSDK\");\n if (pathname.includes(\"/developer-tools/plugin-sdk\"))\n return t(\"WebPlugins:PluginSDK\");\n if (pathname.includes(\"/developer-tools/webhooks\")) return t(\"Webhooks:Webhooks\");\n if (pathname.includes(\"/developer-tools/oauth\")) return t(\"OAuth:OAuth\");\n return t(\"Common:DeveloperTools\");",
+      "line_number": 73,
+      "context": "if (slug === \"docspace\") return getBrandName(\"ProductName\");\n const key = sdkPresetTitles[slug];\n if (key) return t(key);\n }\n if (pathname.includes(\"/developer-tools/javascript-sdk\"))\n return t(\"Settings:EmbedSDK\");\n if (pathname.includes(\"/developer-tools/plugin-sdk\"))\n return t(\"WebPlugins:PluginSDK\");\n if (pathname.includes(\"/developer-tools/webhooks\")) return t(\"Webhooks:Webhooks\");\n if (pathname.includes(\"/developer-tools/oauth\")) return t(\"OAuth:OAuth\");\n return t(\"Common:DeveloperTools\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 87,
-      "context": "linkTitle={t(\"Common:LearnMore\")}\n isBlank\n />\n <Card\n icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}\n description={t(\"Settings:EmbedSDKDescription\", { productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/javascript-sdk\"\n color={globalColors.mainOrange}\n linkTitle={t(\"Settings:StartEmbedding\")}\n />",
+      "line_number": 88,
+      "context": "linkTitle={t(\"Common:LearnMore\")}\n isBlank\n />\n <Card\n icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}\n description={t(\"Settings:EmbedSDKDescription\", { productName: getBrandName(\"ProductName\") })}\n url=\"/developer-tools/javascript-sdk\"\n color={globalColors.mainOrange}\n linkTitle={t(\"Settings:StartEmbedding\")}\n />",
       "module": "/packages/client"
     }
   ],

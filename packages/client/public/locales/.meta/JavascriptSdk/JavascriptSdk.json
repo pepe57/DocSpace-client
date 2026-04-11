@@ -3,7 +3,7 @@
   "content": "Javascript SDK",
   "content_en_sha1_hash": "e6c94f16090ac34b87010e6e2af5e5e55d93af88",
   "created_at": "2025-05-19T21:30:54.548Z",
-  "updated_at": "2026-04-10T08:21:04.348Z",
+  "updated_at": "2026-04-11T18:34:21.494Z",
   "comment": {
     "text": "\"Javascript SDK\" is a label used to describe presets or settings related to the JavaScript SDK, likely found in developer tools or settings pages, guiding users through configuration options.",
     "is_auto": true,
@@ -12,13 +12,13 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 93,
+      "line_number": 94,
       "context": "image: theme.isBase ? PortalImg : PortalImgDark,\n handleOnClick: navigateToPortal,\n },\n {\n title: t(\"Common:PublicRoom\"),\n description: t(\"JavascriptSdk:PublicRoomPresetInfo\"),\n image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,\n handleOnClick: navigateToPublicRoom,\n },\n {\n title: t(\"Common:Editor\"),",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace.js",
-      "line_number": 79,
+      "line_number": 80,
       "context": "];\n \n const DocSpace = (props) => {\n const { t, theme, currentColorScheme } = props;\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const [version, onSetVersion] = useState(sdkVersion[220]);\n \n const [source, onSetSource] = useState(sdkSource.Package);",
       "module": "/packages/client"
     },
@@ -36,7 +36,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager.js",
-      "line_number": 117,
+      "line_number": 118,
       "context": "const Manager = (props) => {\n const { t, fetchExternalLinks, theme, currentColorScheme } = props;\n const navigate = useNavigate();\n \n setDocumentTitle(t(\"JavascriptSdk\"));\n \n const dataSortBy = [\n { key: \"DateAndTime\", label: t(\"Common:LastModifiedDate\"), default: true },\n { key: \"AZ\", label: t(\"Common:Title\") },\n { key: \"Type\", label: t(\"Common:Type\") },",
       "module": "/packages/client"
     },

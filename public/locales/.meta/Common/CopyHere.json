@@ -3,7 +3,7 @@
   "content": "Copy here",
   "content_en_sha1_hash": "92816e8a2d8cd79faa7d9b23fa0080284e21fef3",
   "created_at": "2025-05-19T21:30:43.763Z",
-  "updated_at": "2026-04-10T15:22:27.226Z",
+  "updated_at": "2026-04-11T18:34:21.335Z",
   "comment": {
     "text": "This translation key is used as a default label for a \"Copy\" button in various UI components, including files selectors and share collectors. The text is meant to encourage users to select or copy content from an interface. It appears on buttons and labels where users interact with shared documents or folders.",
     "is_auto": true,
@@ -12,7 +12,7 @@
   "usage": [
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 85,
+      "line_number": 86,
       "context": "isFormRoom?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreHere\");\n if (isMove) return t(\"Common:MoveHere\");\n if (isCopy && !isEditorDialog) return t(\"Common:CopyHere\");\n if (isRestoreAll) return t(\"Common:RestoreHere\");\n if (isSelect || isFormRoom || isSelectFolder) return t(\"Common:SelectAction\");\n \n if (filterParam === FilesSelectorFilterTypes.DOCX) return t(\"Common:Create\");\n // if (filterParam === FilesSelectorFilterTypes.DOCXF) return t(\"Common:SubmitToGallery\");",
       "module": "/packages/client"
     },

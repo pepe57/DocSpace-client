@@ -1,22 +1,15 @@
 {
-  "key_path": "RequestDetails",
-  "content": "Please describe your request details here.",
-  "content_en_sha1_hash": "e3d8ba02396cc0208836153dd6559764b59673bd",
-  "created_at": "2025-05-19T21:30:53.276Z",
-  "updated_at": "2026-04-09T06:46:35.107Z",
+  "key_path": "YouWillBeContacted",
+  "content": "The sales team will contact you after creating the request.",
+  "content_en_sha1_hash": "4268b91ebf92921eaa139f9b54281c0a0b68f201",
+  "created_at": "2026-04-11T18:34:14.926Z",
+  "updated_at": "2026-04-11T18:34:14.926Z",
   "comment": {
-    "text": "This translation key is used to display a placeholder message in a textarea field within a sales department request dialog, prompting users to enter their request details. The text will be visible when the \"request details\" input is empty or disabled due to an error check.",
-    "is_auto": true,
-    "updated_at": "2025-05-20T09:44:03.820Z"
+    "text": "",
+    "is_auto": false,
+    "updated_at": null
   },
-  "usage": [
-    {
-      "file_path": "/packages/client/src/components/dialogs/SalesDepartmentRequestDialog/index.js",
-      "line_number": 231,
-      "context": ">\n <Textarea\n id=\"request-details\"\n heightScale={false}\n hasError={!isValidDescription}\n placeholder={t(\"RequestDetails\")}\n tabIndex={3}\n value={description}\n onChange={onChangeDescription}\n isDisabled={isLoading}\n heightTextArea={100}",
-      "module": "/packages/client"
-    }
-  ],
+  "usage": [],
   "languages": {
     "en": {
       "ai_translated": false,
@@ -168,6 +161,12 @@
       "ai_spell_check_issues": [],
       "approved_at": null
     },
+    "sq-AL": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
@@ -199,12 +198,6 @@
       "approved_at": null
     },
     "zh-CN": {
-      "ai_translated": false,
-      "ai_model": null,
-      "ai_spell_check_issues": [],
-      "approved_at": null
-    },
-    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

@@ -3,7 +3,7 @@
   "content": "Phone",
   "content_en_sha1_hash": "77064d5265236e0ac252f3fc4a5ba7b274b6a583",
   "created_at": "2025-05-19T21:30:47.371Z",
-  "updated_at": "2026-04-10T15:22:27.134Z",
+  "updated_at": "2026-04-11T18:34:21.534Z",
   "comment": {
     "text": "This translation key is used to display the phrase \"Phone\" in various UI elements. It is commonly seen as a label or prompt in forms and fields, typically asking users to input their phone number. This key appears in multiple places across the application, including contact information pages and profile settings.",
     "is_auto": true,
@@ -18,13 +18,13 @@
     },
     {
       "file_path": "/packages/shared/components/about-dialog/About.content.tsx",
-      "line_number": 230,
+      "line_number": 231,
       "context": "<div className={classNames(styles.row, \"row\")}>\n <Text\n className={classNames(styles.telTitle, \"tel-title\")}\n fontSize=\"13px\"\n >\n {t(\"Common:Phone\")}:{\" \"}\n </Text>\n <Text\n className={classNames(\n styles.telTitle,\n styles.selectEl,",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/Branding/CompanyInfo/index.tsx",
-      "line_number": 239,
+      "line_number": 240,
       "context": "/>\n </FieldContainer>\n <FieldContainer\n id=\"fieldContainerPhone\"\n className=\"field-container-width\"\n labelText={t(\"Common:Phone\")}\n isVertical\n >\n <TextInput\n id=\"textInputContainerPhone\"\n testId=\"company_info_settings_phone_input\"",
       "module": "/packages/shared"
     }

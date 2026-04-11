@@ -3,7 +3,7 @@
   "content": "Delete",
   "content_en_sha1_hash": "f6fdbe48dc54dd86f63097a03bd24094dedd713a",
   "created_at": "2025-05-19T21:30:44.452Z",
-  "updated_at": "2026-04-10T15:22:27.214Z",
+  "updated_at": "2026-04-11T18:34:21.354Z",
   "comment": {
     "text": "This translation key is used to display the text \"Delete\" on a button in a file editor component, specifically within an avatar cropper. It appears as a button's text and title, allowing users to confirm deletion of an image.",
     "is_auto": true,
@@ -30,14 +30,14 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeleteGroupDialog/index.js",
-      "line_number": 99,
+      "line_number": 100,
       "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n id=\"group-modal_delete\"\n key=\"Delete\"\n label={t(\"Common:Delete\")}\n size=\"normal\"\n primary\n scale\n onClick={onDeleteAction}\n isLoading={isLoading}",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/DeletePortalDialog/index.js",
-      "line_number": 58,
-      "context": "visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>\n {t(\"Common:DeletePortal\", { productName: t(\"Common:ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Trans t={t} i18nKey=\"DeletePortalInfo\" ns=\"Settings\">\n Before you delete the portal, please make sure that automatic billing\n is turned off. You may check the status of automatic billing in",
+      "line_number": 59,
+      "context": "visible={visible}\n onClose={onClose}\n displayType=\"modal\"\n >\n <ModalDialog.Header>\n {t(\"Common:DeletePortal\", { productName: getBrandName(\"ProductName\") })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Trans t={t} i18nKey=\"DeletePortalInfo\" ns=\"Settings\">\n Before you delete the portal, please make sure that automatic billing\n is turned off. You may check the status of automatic billing in",
       "module": "/packages/client"
     },
     {
@@ -78,7 +78,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/servers/mcp-tile/index.tsx",
-      "line_number": 79,
+      "line_number": 80,
       "context": "icon: SettingsIcon,\n onClick: () => onSettingsClick?.(item),\n },\n {\n key: \"delete\",\n label: t(\"Common:Delete\"),\n onClick: () => onDeleteClick?.(item.id),\n icon: CatalogTrashReactSvgUrl,\n },\n ];\n };",
       "module": "/packages/client"
     },
@@ -90,8 +90,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeletion.js",
-      "line_number": 62,
-      "context": "else setIsDesktopView(false);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"Common:DeletePortal\", { productName: t(\"Common:ProductName\") }),\n );\n onCheckView();\n window.addEventListener(\"resize\", onCheckView);\n return () => window.removeEventListener(\"resize\", onCheckView);\n }, []);",
+      "line_number": 63,
+      "context": "else setIsDesktopView(false);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"Common:DeletePortal\", { productName: getBrandName(\"ProductName\") }),\n );\n onCheckView();\n window.addEventListener(\"resize\", onCheckView);\n return () => window.removeEventListener(\"resize\", onCheckView);\n }, []);",
       "module": "/packages/client"
     },
     {
@@ -114,7 +114,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Section/Header/index.js",
-      "line_number": 352,
+      "line_number": 353,
       "context": "const headerMenu = isOAuth\n ? getHeaderMenuItems(t, true)\n : [\n {\n label: t(\"Common:Delete\"),\n disabled: !selection || !selection.length > 0,\n onClick,\n iconUrl: DeleteReactSvgUrl,\n },\n ];",
       "module": "/packages/client"
     },
@@ -126,7 +126,7 @@
     },
     {
       "file_path": "/packages/client/src/store/contacts/ContactsContextOptionsStore.ts",
-      "line_number": 489,
+      "line_number": 490,
       "context": "onClick: () => onChangeStatus(EmployeeStatus.Disabled),\n icon: DisableReactSvgUrl,\n },\n {\n key: \"cm-delete\",\n label: t(\"Common:Delete\"),\n disabled: !hasOnlyOneUserToRemove || (isRoomAdmin && isGuests),\n onClick: () => setDeleteProfileDialogVisible(true),\n icon: DeleteReactSvgUrl,\n },\n {",
       "module": "/packages/client"
     },
@@ -174,19 +174,19 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2625,
+      "line_number": 2626,
       "context": ": isAIAgent\n ? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplate\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon:\n item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2625,
+      "line_number": 2626,
       "context": ": isAIAgent\n ? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplate\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon:\n item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2625,
+      "line_number": 2626,
       "context": ": isAIAgent\n ? t(\"DeleteAgent\")\n : item.isTemplate\n ? t(\"Files:DeleteTemplate\")\n : item.isRoom\n ? t(\"Common:DeleteRoom\")\n : t(\"Common:Delete\"),\n icon:\n item.isRoom && !isAIAgent ? RemoveOutlineSvgUrl : TrashReactSvgUrl,\n onClick: () => this.onDelete(item, t),\n disabled: item.isTemplate ? !isTemplateOwner : false,",
       "module": "/packages/client"
     },
@@ -228,7 +228,7 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/PortalRemove/page.client.tsx",
-      "line_number": 112,
+      "line_number": 113,
       "context": "<div className={styles.buttonsWrapper}>\n <Button\n primary\n scale\n size={ButtonSize.medium}\n label={t(\"Common:Delete\")}\n tabIndex={1}\n onClick={onDeleteClick}\n testId=\"delete_portal_button\"\n />\n <Button",
       "module": "/packages/login"
     },
@@ -240,8 +240,8 @@
     },
     {
       "file_path": "/packages/management/src/dialogs/delete-portal/index.tsx",
-      "line_number": 109,
-      "context": "autoMaxHeight\n >\n <ModalDialog.Header>\n {isWizardCompleted\n ? t(\"SubmitDelete\")\n : t(\"Common:DeletePortal\", {\n productName: t(\"Common:ProductName\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n {isWizardCompleted ? (",
+      "line_number": 110,
+      "context": "autoMaxHeight\n >\n <ModalDialog.Header>\n {isWizardCompleted\n ? t(\"SubmitDelete\")\n : t(\"Common:DeletePortal\", {\n productName: getBrandName(\"ProductName\"),\n })}\n </ModalDialog.Header>\n <ModalDialog.Body>\n {isWizardCompleted ? (",
       "module": "/packages/management"
     },
     {

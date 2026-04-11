@@ -3,7 +3,7 @@
   "content": "{{productName}} tariff plan",
   "content_en_sha1_hash": "26d32fef10833b2cf24fe588886314ddbc5cd6cd",
   "created_at": "2026-04-10T13:53:43.045Z",
-  "updated_at": "2026-04-10T13:55:46.799Z",
+  "updated_at": "2026-04-11T18:34:21.540Z",
   "comment": {
     "text": "This key is used as a label for a payment settings category within the Portal settings menu. It displays the name of the specific product followed by the text \"tariff plan\" to identify the section where users manage their subscription or pricing plan.",
     "is_auto": true,
@@ -12,8 +12,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/index.js",
-      "line_number": 80,
-      "context": ");\n \n const data = [\n {\n id: \"portal-payments\",\n name: t(\"Common:PortalTariffPlan\", {\n productName: t(\"Common:ProductName\"),\n }),\n content: <MainTariff />,\n onClick: () => {\n clearAbortControllerArr();",
+      "line_number": 83,
+      "context": ");\n \n const data = [\n {\n id: \"portal-payments\",\n name: t(\"Common:PortalTariffPlan\", {\n productName: getBrandName(\"ProductName\"),\n }),\n content: <MainTariff />,\n onClick: () => {\n clearAbortControllerArr();",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Editor",
   "content_en_sha1_hash": "c7e9fb2ea6c3b8c3ce97645eb902c348d859f36d",
   "created_at": "2025-05-19T21:30:44.767Z",
-  "updated_at": "2026-04-10T15:22:27.204Z",
+  "updated_at": "2026-04-11T18:34:21.443Z",
   "comment": {
     "text": "The translation key \"Editor\" is used to display the label for an editing feature within a user interface, likely in a settings or configuration panel. It appears as a title and is linked to navigate to an editor view or functionality. The translated term should describe this editing capability in a neutral and descriptive manner.",
     "is_auto": true,
@@ -12,31 +12,31 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/Home/InfoPanel/Body/views/Members/Members.utils.ts",
-      "line_number": 80,
+      "line_number": 81,
       "context": "access: ShareAccessRights.ReadOnly,\n type: \"user\",\n },\n editor: {\n key: \"editor\",\n label: this.t(\"Common:Editor\"),\n access: ShareAccessRights.Editing,\n type: \"user\",\n },\n formFiller: {\n key: \"formFiller\",",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/JavascriptSDK/index.js",
-      "line_number": 98,
+      "line_number": 99,
       "context": "description: t(\"JavascriptSdk:PublicRoomPresetInfo\"),\n image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,\n handleOnClick: navigateToPublicRoom,\n },\n {\n title: t(\"Common:Editor\"),\n description: t(\"EditorDescription\"),\n image: theme.isBase ? EditorImg : EditorImgDark,\n handleOnClick: navigateToEditor,\n },\n {",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PublicRoom/PublicRoomPage.js",
-      "line_number": 97,
+      "line_number": 98,
       "context": "case ShareAccessRights.Comment:\n return t(\"Common:Commenting\");\n case ShareAccessRights.Review:\n return t(\"Common:Reviewing\");\n case ShareAccessRights.Editing:\n return t(\"Common:Editor\");\n case ShareAccessRights.FormFilling:\n return t(\"Common:FillingOnly\");\n default:\n return t(\"Common:ViewOnly\");\n }",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/shared/components/share/Share.helpers.tsx",
-      "line_number": 177,
+      "line_number": 178,
       "context": "> = {\n [ShareRights.Editing]: {\n access: ShareAccessRights.Editing,\n description: t(\"Common:RoleEditorDescription\"),\n key: \"editing\",\n label: t(\"Common:Editor\"),\n icon: AccessEditReactSvgUrl,\n },\n [ShareRights.Review]: {\n access: ShareAccessRights.Review,\n description: t(\"Common:RoleReviewerDescription\"),",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/utils/getAccessOptions.tsx",
-      "line_number": 206,
+      "line_number": 207,
       "context": "access: isNone ? EmployeeType.User : ShareAccessRights.Collaborator,\n type: EmployeeType.User,\n },\n editor: {\n key: \"editor\",\n label: t(\"Common:Editor\"),\n description: t(\"Common:RoleEditorDescription\"),\n access: ShareAccessRights.Editing,\n type: EmployeeType.User,\n },\n formFiller: {",
       "module": "/packages/shared"
     },
