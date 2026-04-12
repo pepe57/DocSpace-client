@@ -37,6 +37,7 @@
  *   --package=client,login      Show only specific packages
  *   --by-package                Show per-package breakdown instead of summary
  *   --json                      Output raw JSON
+ *   --md[=file.md]              Write Markdown report (default: translation-stats.md)
  *   --no-meta                   Skip metadata analysis (faster)
  */
 
@@ -72,6 +73,7 @@ const filterLangs = getArg("lang") ? getArg("lang").split(",").map((s) => s.trim
 const filterPkgs = getArg("package") ? getArg("package").split(",").map((s) => s.trim()) : null;
 const byPackage = hasFlag("by-package");
 const jsonOutput = hasFlag("json");
+const mdOutput = getArg("md") || (hasFlag("md") ? "translation-stats.md" : null);
 const skipMeta = hasFlag("no-meta");
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -706,7 +708,132 @@ async function main() {
     }
   }
 
+  // ─── Markdown output ───────────────────────────────────────────────────
+  if (mdOutput) {
+    const { writeFileSync } = require("fs");
+    const mdPath = path.resolve(mdOutput);
+    const md = generateMarkdown(results, sortedAgg, grandTotalKeys, grandTotalSize, grandNamespaces, filteredLangs);
+    writeFileSync(mdPath, md, "utf8");
+    console.log(`\n  Markdown report written to: ${colorize(mdPath, "cyan")}`);
+  }
+
   printLegend(true);
+}
+
+function generateMarkdown(results, aggRows, grandTotalKeys, grandTotalSize, grandNamespaces, filteredLangs) {
+  const lines = [];
+  const now = new Date().toISOString().split("T")[0];
+
+  lines.push(`# Translation Statistics`);
+  lines.push(`> Generated: ${now}\n`);
+
+  // Package overview
+  lines.push(`## Packages\n`);
+  lines.push(`| Package | Namespaces | Keys | Languages | Size |`);
+  lines.push(`|---------|-----------|------|-----------|------|`);
+  for (const r of results) {
+    const pkgSize = r.langStats.reduce((s, ls) => s + ls.fileSizeBytes, 0);
+    lines.push(`| ${r.name} | ${r.namespaces} | ${r.totalKeys} | ${r.langs.length} | ${formatBytes(pkgSize)} |`);
+  }
+  lines.push(`| **Total** | **${grandNamespaces}** | **${grandTotalKeys}** | **${filteredLangs.length}** | **${formatBytes(grandTotalSize)}** |`);
+
+  // Summary
+  const avgPct = Math.round(aggRows.reduce((s, r) => s + r.translatedPct, 0) / aggRows.length);
+  const fullyTranslated = aggRows.filter((r) => r.translatedPct === 100).length;
+
+  lines.push(`\n## Summary\n`);
+  lines.push(`- **Reference language:** en`);
+  lines.push(`- **Fully translated:** ${fullyTranslated} / ${filteredLangs.length}`);
+  lines.push(`- **Average coverage:** ${avgPct}%`);
+
+  // Language table
+  lines.push(`\n## Languages\n`);
+  const hasSpell = aggRows.some((r) => r.spellIssues > 0);
+  let header = `| Language | Keys | Pct | Same | Miss | Size |`;
+  let sep = `|----------|------|-----|------|------|------|`;
+  if (hasSpell) {
+    header += ` Issues |`;
+    sep += `--------|`;
+  }
+  lines.push(header);
+  lines.push(sep);
+
+  for (const r of aggRows) {
+    const isRef = r.lang === "en";
+    let row = `| ${isRef ? "**" + r.lang + "** ★" : r.lang} | ${r.translatedKeys}/${grandTotalKeys} | ${r.translatedPct}% | ${isRef ? "-" : r.sameAsEn} | ${r.missingKeys} | ${formatBytes(r.fileSizeBytes)} |`;
+    if (hasSpell) {
+      row += ` ${r.spellIssues || 0} |`;
+    }
+    lines.push(row);
+  }
+
+  // Spell-check issues
+  if (!skipMeta) {
+    const totalIssues = aggRows.reduce((s, r) => s + r.spellIssues, 0);
+    if (totalIssues > 0) {
+      const globalByType = {};
+      for (const r of aggRows) {
+        for (const [t, c] of Object.entries(r.spellByType || {})) {
+          globalByType[t] = (globalByType[t] || 0) + c;
+        }
+      }
+
+      lines.push(`\n## Spell-Check Issues\n`);
+      lines.push(`**Total: ${totalIssues}**\n`);
+      lines.push(`| Issue Type | Count |`);
+      lines.push(`|------------|-------|`);
+      for (const [type, count] of Object.entries(globalByType).sort((a, b) => b[1] - a[1])) {
+        lines.push(`| ${type} | ${count} |`);
+      }
+
+      lines.push(`\n### By Language\n`);
+      lines.push(`| Language | Issues | Breakdown |`);
+      lines.push(`|----------|--------|-----------|`);
+      const langsWithIssues = aggRows
+        .filter((r) => r.spellIssues > 0)
+        .sort((a, b) => b.spellIssues - a.spellIssues);
+      for (const r of langsWithIssues) {
+        const types = Object.entries(r.spellByType || {})
+          .sort((a, b) => b[1] - a[1])
+          .map(([t, c]) => `${t}:${c}`)
+          .join(", ");
+        lines.push(`| ${r.lang} | ${r.spellIssues} | ${types} |`);
+      }
+    } else {
+      lines.push(`\n## Spell-Check Issues\n`);
+      lines.push(`No issues found.`);
+    }
+
+    // Metadata coverage
+    const grandMetaTotal = results.reduce((s, r) => s + r.metaUsage.total, 0);
+    const grandMetaWithUsage = results.reduce((s, r) => s + r.metaUsage.withUsage, 0);
+    const grandMetaWithout = results.reduce((s, r) => s + r.metaUsage.withoutUsage, 0);
+    const grandMetaWithComment = results.reduce((s, r) => s + r.metaUsage.withComment, 0);
+    const grandMetaWithoutComment = results.reduce((s, r) => s + r.metaUsage.withoutComment, 0);
+
+    lines.push(`\n## Metadata Coverage\n`);
+    lines.push(`| Metric | Count | % |`);
+    lines.push(`|--------|-------|---|`);
+    lines.push(`| .meta files | ${grandMetaTotal} | — |`);
+    lines.push(`| With code usage | ${grandMetaWithUsage} | ${pct(grandMetaWithUsage, grandMetaTotal)}% |`);
+    lines.push(`| Without usage | ${grandMetaWithout} | ${pct(grandMetaWithout, grandMetaTotal)}% |`);
+    lines.push(`| With AI comment | ${grandMetaWithComment} | ${pct(grandMetaWithComment, grandMetaTotal)}% |`);
+    lines.push(`| Without comment | ${grandMetaWithoutComment} | ${pct(grandMetaWithoutComment, grandMetaTotal)}% |`);
+
+    if (grandMetaWithout > 0) {
+      lines.push(`\n### Keys Without Usage\n`);
+      for (const r of results) {
+        if (r.metaUsage.withoutUsage === 0) continue;
+        lines.push(`**${r.name}** (${r.metaUsage.withoutUsage}):`);
+        for (const key of r.metaUsage.missingUsageKeys) {
+          lines.push(`- \`${key}\``);
+        }
+      }
+    }
+  }
+
+  lines.push("");
+  return lines.join("\n");
 }
 
 function printLegend(showByPackage) {
@@ -729,6 +856,7 @@ function printLegend(showByPackage) {
     console.log(colorize("    --by-package                show per-package tables", "dim"));
   }
   console.log(colorize("    --json                      machine-readable output", "dim"));
+  console.log(colorize("    --md[=file.md]              write Markdown report (default: translation-stats.md)", "dim"));
   console.log(colorize("    --no-meta                   skip metadata (faster)", "dim"));
   console.log("");
 }
