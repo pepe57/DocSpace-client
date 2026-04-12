@@ -1329,6 +1329,17 @@
       }
     },
     {
+      "label": "Translation App | translation stats (Markdown)",
+      "type": "shell",
+      "command": "node '${workspaceFolder}/common/scripts/translation-stats.js' --md='${workspaceFolder}/translation-stats.md'",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
       "label": "Translation App | verify translations (no LLM)",
       "type": "shell",
       "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && node src/scripts/verify-translations-spell-check.js --no-llm",

@@ -499,6 +499,11 @@
             "tooltip": "📊 Show translation statistics (keys, coverage, size per language)"
           },
           {
+            "label": "Translation Stats (Markdown)",
+            "task": "Translation App | translation stats (Markdown)",
+            "tooltip": "📄 Generate translation-stats.md report"
+          },
+          {
             "label": "Translation App : Start (with metadata)",
             "task": "Translation App | start",
             "tooltip": "🌐 Start translation app (backend + frontend + generate metadata)"
