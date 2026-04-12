@@ -447,11 +447,10 @@ async function generateClaudeCode(prompt) {
   const { promisify } = require("util");
   const execFileAsync = promisify(execFile);
 
-  const args = ["-p", "--model", CLAUDE_CODE_MODEL];
+  const args = ["-p", "--model", CLAUDE_CODE_MODEL, prompt];
 
   try {
     const { stdout } = await execFileAsync("claude", args, {
-      input: prompt,
       maxBuffer: 1024 * 1024,
       timeout: 120000, // 2 min per call
       env: { ...process.env, LANG: "en_US.UTF-8" },
@@ -1057,7 +1056,7 @@ async function getAvailableLanguages(projectPath) {
 
   return items.filter((item) => {
     const itemPath = path.join(projectPath, item);
-    return fs.statSync(itemPath).isDirectory() && item !== ".meta";
+    return fs.statSync(itemPath).isDirectory() && !item.startsWith(".");
   });
 }
 

@@ -69,8 +69,7 @@ async function generateViaClaudeCode(keyPath, prompt) {
       console.log(
         `Generating comment for ${keyPath} (attempt ${attempt}/${maxRetries}) [claude-code]`,
       );
-      const { stdout } = await execFileAsync("claude", ["-p", "--model", MODEL], {
-        input: prompt,
+      const { stdout } = await execFileAsync("claude", ["-p", "--model", MODEL, prompt], {
         maxBuffer: 1024 * 1024,
         timeout: 120000,
         env: { ...process.env, LANG: "en_US.UTF-8" },
