@@ -65,7 +65,7 @@ const PROVIDER = NO_LLM
 
 const OLLAMA_MODEL = process.env.OLLAMA_SPELLCHECK_MODEL || "gemma4:latest";
 const OPENROUTER_MODEL = openRouterConfig.spellCheckModel || openRouterConfig.model;
-const CLAUDE_CODE_MODEL = process.env.CLAUDE_CODE_MODEL || "claude-sonnet-4";
+const CLAUDE_CODE_MODEL = process.env.CLAUDE_CODE_MODEL || "sonnet";
 const MODEL = PROVIDER === "openrouter"
   ? OPENROUTER_MODEL
   : PROVIDER === "claude-code"
@@ -472,8 +472,9 @@ async function generateClaudeCode(prompt) {
         resolve(stdout.trim());
       } else {
         const msg = stderr || stdout || `exit code ${code}`;
-        if (msg.includes("rate limit") || msg.includes("quota") || msg.includes("limit exceeded") || msg.includes("overloaded")) {
-          reject(new FatalProviderError(`Claude Code limit reached: ${msg.substring(0, 200)}`));
+        if (msg.includes("rate limit") || msg.includes("quota") || msg.includes("limit exceeded") || msg.includes("overloaded")
+            || msg.includes("not exist") || msg.includes("not have access")) {
+          reject(new FatalProviderError(`Claude Code fatal: ${msg.substring(0, 200)}`));
         } else {
           reject(new Error(`Claude Code error: ${msg.substring(0, 300)}`));
         }

@@ -38,7 +38,7 @@ const USE_CLAUDE_CODE = cliArgs.includes("--provider=claude-code");
 const MODEL = modelArg
   ? modelArg.split("=").slice(1).join("=")
   : USE_CLAUDE_CODE
-    ? (process.env.CLAUDE_CODE_MODEL || "claude-sonnet-4")
+    ? (process.env.CLAUDE_CODE_MODEL || "sonnet")
     : (openRouterConfig.apiKey
         ? (openRouterConfig.commentModel || openRouterConfig.model)
         : null)
