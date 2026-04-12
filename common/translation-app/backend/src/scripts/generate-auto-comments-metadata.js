@@ -58,22 +58,52 @@ if (!openRouterConfig.apiKey && !modelArg && !USE_CLAUDE_CODE) {
  * @param {string} prompt - The prompt text
  * @returns {Promise<string|null>} Generated comment or null
  */
-async function generateViaClaudeCode(keyPath, prompt) {
-  const { execFile } = require("child_process");
-  const { promisify } = require("util");
-  const execFileAsync = promisify(execFile);
+function runClaudeCode(prompt) {
+  const { spawn } = require("child_process");
+  return new Promise((resolve, reject) => {
+    const child = spawn("claude", ["-p", "--model", MODEL], {
+      env: { ...process.env, LANG: "en_US.UTF-8" },
+      stdio: ["pipe", "pipe", "pipe"],
+    });
 
+    let stdout = "";
+    let stderr = "";
+
+    child.stdout.on("data", (data) => { stdout += data; });
+    child.stderr.on("data", (data) => { stderr += data; });
+
+    child.stdin.write(prompt);
+    child.stdin.end();
+
+    const timer = setTimeout(() => {
+      child.kill();
+      reject(new Error("Claude Code timed out after 120s"));
+    }, 120000);
+
+    child.on("close", (code) => {
+      clearTimeout(timer);
+      if (code === 0) {
+        resolve(stdout.trim());
+      } else {
+        reject(new Error(`Claude Code error: ${(stderr || stdout || "").substring(0, 300)}`));
+      }
+    });
+
+    child.on("error", (err) => {
+      clearTimeout(timer);
+      reject(new Error(`Claude Code spawn error: ${err.message}`));
+    });
+  });
+}
+
+async function generateViaClaudeCode(keyPath, prompt) {
   const maxRetries = 3;
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       console.log(
         `Generating comment for ${keyPath} (attempt ${attempt}/${maxRetries}) [claude-code]`,
       );
-      const { stdout } = await execFileAsync("claude", ["-p", "--model", MODEL, prompt], {
-        maxBuffer: 1024 * 1024,
-        timeout: 120000,
-        env: { ...process.env, LANG: "en_US.UTF-8" },
-      });
+      const stdout = await runClaudeCode(prompt);
 
       const cleaned = stdout
         .replace(/<think>[\s\S]*?<\/think>/gi, "")

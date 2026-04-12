@@ -443,30 +443,48 @@ async function generateOpenRouter(prompt) {
  * @returns {Promise<string>} The response text
  */
 async function generateClaudeCode(prompt) {
-  const { execFile } = require("child_process");
-  const { promisify } = require("util");
-  const execFileAsync = promisify(execFile);
+  const { spawn } = require("child_process");
 
-  const args = ["-p", "--model", CLAUDE_CODE_MODEL, prompt];
-
-  try {
-    const { stdout } = await execFileAsync("claude", args, {
-      maxBuffer: 1024 * 1024,
-      timeout: 120000, // 2 min per call
+  return new Promise((resolve, reject) => {
+    const child = spawn("claude", ["-p", "--model", CLAUDE_CODE_MODEL], {
       env: { ...process.env, LANG: "en_US.UTF-8" },
+      stdio: ["pipe", "pipe", "pipe"],
     });
-    return stdout.trim();
-  } catch (error) {
-    if (error.killed) {
-      throw new Error("Claude Code timed out after 120s");
-    }
-    const msg = error.stderr || error.message || "";
-    // Detect quota/rate limit errors from Claude Code
-    if (msg.includes("rate limit") || msg.includes("quota") || msg.includes("limit exceeded") || msg.includes("overloaded")) {
-      throw new FatalProviderError(`Claude Code limit reached: ${msg.substring(0, 200)}`);
-    }
-    throw new Error(`Claude Code error: ${msg.substring(0, 300)}`);
-  }
+
+    let stdout = "";
+    let stderr = "";
+
+    child.stdout.on("data", (data) => { stdout += data; });
+    child.stderr.on("data", (data) => { stderr += data; });
+
+    // Write prompt to stdin and close it
+    child.stdin.write(prompt);
+    child.stdin.end();
+
+    const timer = setTimeout(() => {
+      child.kill();
+      reject(new Error("Claude Code timed out after 120s"));
+    }, 120000);
+
+    child.on("close", (code) => {
+      clearTimeout(timer);
+      if (code === 0) {
+        resolve(stdout.trim());
+      } else {
+        const msg = stderr || stdout || `exit code ${code}`;
+        if (msg.includes("rate limit") || msg.includes("quota") || msg.includes("limit exceeded") || msg.includes("overloaded")) {
+          reject(new FatalProviderError(`Claude Code limit reached: ${msg.substring(0, 200)}`));
+        } else {
+          reject(new Error(`Claude Code error: ${msg.substring(0, 300)}`));
+        }
+      }
+    });
+
+    child.on("error", (err) => {
+      clearTimeout(timer);
+      reject(new Error(`Claude Code spawn error: ${err.message}`));
+    });
+  });
 }
 
 /**
