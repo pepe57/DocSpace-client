@@ -1149,11 +1149,12 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
     totalFiles: 0,
     totalKeys: 0,
     processedKeys: 0,
+    llmCalls: 0,
     updatedIssues: 0,
     skippedKeys: 0,
     errors: [],
     languages: {},
-    startTime: new Date(),
+    startTime: Date.now(),
   };
 
   try {
@@ -1425,7 +1426,25 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
             metadataUpdated = true;
 
             stats.processedKeys++;
+            stats.llmCalls++;
             stats.languages[language].processed++;
+
+            // Log speed & ETA every 10 LLM calls
+            if (!NO_LLM && stats.llmCalls % 10 === 0) {
+              const elapsed = (Date.now() - stats.startTime) / 1000;
+              const avgSec = elapsed / stats.llmCalls;
+              const totalPairs = metadataFiles.length * languages.length;
+              const remaining = totalPairs - stats.llmCalls;
+              const etaSec = remaining * avgSec;
+              const etaMin = Math.floor(etaSec / 60);
+              const etaHrs = Math.floor(etaMin / 60);
+              const etaStr = etaHrs > 0
+                ? `${etaHrs}h ${etaMin % 60}m`
+                : `${etaMin}m ${Math.floor(etaSec % 60)}s`;
+              console.log(
+                `  ⏱ ${stats.llmCalls} checked | ${avgSec.toFixed(1)}s/call | ETA: ~${etaStr}`,
+              );
+            }
 
             if (issues.length > 0) {
               stats.updatedIssues++;
@@ -1491,7 +1510,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
       }
     }
 
-    stats.endTime = new Date();
+    stats.endTime = Date.now();
     stats.duration = (stats.endTime - stats.startTime) / 1000;
 
     return stats;
@@ -1500,7 +1519,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
       `Error verifying translations for project ${project}: ${error.message}`,
     );
     stats.errors.push({ project: project, error: error.message });
-    stats.endTime = new Date();
+    stats.endTime = Date.now();
     stats.duration = (stats.endTime - stats.startTime) / 1000;
     return stats;
   }
