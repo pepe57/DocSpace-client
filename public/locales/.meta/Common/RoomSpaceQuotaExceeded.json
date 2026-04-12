@@ -3,7 +3,7 @@
   "content": "Room space quota exceeded ({{size}}).",
   "content_en_sha1_hash": "606136070a50ade8aee4b2dfd310061b4b615d61",
   "created_at": "2025-05-19T21:30:48.282Z",
-  "updated_at": "2026-04-12T01:39:49.183Z",
+  "updated_at": "2026-04-12T07:14:23.215Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts to upload files or create content in a room, but the room's storage limit has been reached. The `{{size}}` variable indicates the current size of the room.",
     "is_auto": true,
@@ -41,13 +41,6 @@
           "suggestion": "",
           "checked_at": "2026-04-12T01:39:04.497Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "missing_content",
-          "description": "The period at the end of the sentence is missing in the Azerbaijani translation",
-          "suggestion": "Otaq sahəsi kvota limitini keçib ({{size}}).",
-          "checked_at": "2026-04-12T01:39:04.497Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null
@@ -68,13 +61,6 @@
           "suggestion": "",
           "checked_at": "2026-04-12T01:39:07.150Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "missing_content",
-          "description": "The Czech translation is missing the period at the end of the sentence that is present in the English version",
-          "suggestion": "Překročení kvóty místa v místnosti ({{size}}).",
-          "checked_at": "2026-04-12T01:39:07.150Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null
@@ -89,13 +75,6 @@
           "suggestion": "",
           "checked_at": "2026-04-12T01:39:09.199Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "missing_content",
-          "description": "The German translation is missing the period at the end of the sentence that is present in the English version",
-          "suggestion": "Raumkontingent überschritten ({{size}}).",
-          "checked_at": "2026-04-12T01:39:09.199Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null
@@ -103,15 +82,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Greek translation is missing the period at the end of the sentence",
-          "suggestion": "Υπέρβαση της ποσόστωσης χώρου δωματίου ({{size}}).",
-          "checked_at": "2026-04-12T01:39:11.724Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -138,13 +109,6 @@
           "suggestion": "",
           "checked_at": "2026-04-12T01:39:14.905Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "missing_content",
-          "description": "Missing period at the end of the sentence",
-          "suggestion": "Huonetilakiintiö ylitetty ({{size}}).",
-          "checked_at": "2026-04-12T01:39:14.905Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null
@@ -159,13 +123,6 @@
           "suggestion": "",
           "checked_at": "2026-04-12T01:39:17.105Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "missing_content",
-          "description": "The French translation is missing the period at the end of the sentence that is present in the English version",
-          "suggestion": "Le quota de stockage pour la salle est dépassé ({{size}}).",
-          "checked_at": "2026-04-12T01:39:17.105Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null
@@ -173,15 +130,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The period at the end of the sentence is missing in the Armenian translation",
-          "suggestion": "Սենյակի տարածքի չափաբաժինը գերազանցվել է ({{size}}):",
-          "checked_at": "2026-04-12T01:39:19.054Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -194,13 +143,6 @@
           "suggestion": "",
           "checked_at": "2026-04-12T01:39:20.561Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "missing_content",
-          "description": "Missing period at the end of the sentence",
-          "suggestion": "È stata superata la quota di spazio delle stanza ({{size}}).",
-          "checked_at": "2026-04-12T01:39:20.561Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null
@@ -247,13 +189,6 @@
           "suggestion": "",
           "checked_at": "2026-04-12T01:39:27.456Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "missing_content",
-          "description": "Missing period at the end of the sentence",
-          "suggestion": "Kamer ruimte quota overschreden ({{size}}).",
-          "checked_at": "2026-04-12T01:39:27.456Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null
@@ -268,13 +203,6 @@
           "suggestion": "",
           "checked_at": "2026-04-12T01:39:29.753Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "missing_content",
-          "description": "Missing period at the end of the sentence",
-          "suggestion": "Przekroczono limit pamięci pokoju ({{size}}).",
-          "checked_at": "2026-04-12T01:39:29.753Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null
@@ -317,13 +245,6 @@
           "suggestion": "",
           "checked_at": "2026-04-12T01:39:34.604Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "missing_content",
-          "description": "The Romanian translation is missing the period at the end of the sentence that is present in the English version",
-          "suggestion": "Spațiu de stocare pentru sala a fost depășit ({{size}}).",
-          "checked_at": "2026-04-12T01:39:34.604Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null
@@ -371,15 +292,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The period at the end of the sentence is missing in the Serbian translation",
-          "suggestion": "Квота простора за собу прекорачена ({{size}}).",
-          "checked_at": "2026-04-12T01:39:42.281Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -413,15 +326,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "Missing period at the end of the sentence",
-          "suggestion": "Перевищено квоту простору кімнати ({{size}}).",
-          "checked_at": "2026-04-12T01:39:47.153Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

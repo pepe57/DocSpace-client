@@ -3,7 +3,7 @@
   "content": "To",
   "content_en_sha1_hash": "ae79ea1e9c6391a9ed83a2e18a031b835feec0c9",
   "created_at": "2026-04-10T13:53:43.629Z",
-  "updated_at": "2026-04-11T23:27:30.619Z",
+  "updated_at": "2026-04-12T07:14:23.195Z",
   "comment": {
     "text": "This is a short label indicating the destination of a top-up transaction, typically appearing in billing interfaces to specify where funds are being added.",
     "is_auto": true,
@@ -40,15 +40,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation 'ə' is just a single letter and does not convey the meaning of 'To' as a destination indicator",
-          "suggestion": "üçün",
-          "checked_at": "2026-04-11T23:26:56.501Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -96,15 +88,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian word 'Որ' means 'which/that' (a relative pronoun) rather than 'To' (indicating direction/destination)",
-          "suggestion": "Դեպի",
-          "checked_at": "2026-04-11T23:27:05.403Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -212,15 +196,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation '—e/a' appears to be a grammatical notation or placeholder rather than a proper translation of the English word 'To'",
-          "suggestion": "için",
-          "checked_at": "2026-04-11T23:27:27.188Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

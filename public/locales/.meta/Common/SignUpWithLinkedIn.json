@@ -3,7 +3,7 @@
   "content": "Sign up with LinkedIn",
   "content_en_sha1_hash": "cafda06fad6c2d6b9cfd279731174dd21f604a9b",
   "created_at": "2025-05-19T21:30:48.844Z",
-  "updated_at": "2026-04-12T00:39:37.980Z",
+  "updated_at": "2026-04-12T07:14:23.207Z",
   "comment": {
     "text": "This is a button label for signing up using a LinkedIn account. It appears on the sign-up page.",
     "is_auto": true,
@@ -52,15 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation uses 'Anmeldung' (sign in/log in) instead of conveying 'sign up' (registration/account creation)",
-          "suggestion": "Registrierung mit LinkedIn",
-          "checked_at": "2026-04-12T00:39:09.402Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -138,15 +130,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Inscreva-se no LinkedIn' means 'Sign up on LinkedIn' (creating a LinkedIn account), but the English 'Sign up with LinkedIn' means using an existing LinkedIn account to register for the service",
-          "suggestion": "Inscreva-se com LinkedIn",
-          "checked_at": "2026-04-12T00:39:23.354Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {

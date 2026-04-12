@@ -3,7 +3,7 @@
   "content": "Who filled it out",
   "content_en_sha1_hash": "c51f4dbf88247627ead979617e981ea807c6a6eb",
   "created_at": "2026-03-31T15:18:26.270Z",
-  "updated_at": "2026-04-11T22:05:16.451Z",
+  "updated_at": "2026-04-12T07:14:23.180Z",
   "comment": {
     "text": "This is a button label within an AI chat panel. It suggests a prompt to the AI about who completed a specific form.",
     "is_auto": true,
@@ -94,15 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation '誰が記入しましたか' is a question asking 'Who filled it out?' but the English 'Who filled it out' is a statement/button label, not a question",
-          "suggestion": "誰が記入したか",
-          "checked_at": "2026-04-11T22:04:50.952Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -120,15 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Kā tas tika aizpildīts' means 'How it was filled out' instead of 'Who filled it out'. This changes the question from asking about the person to asking about the method.",
-          "suggestion": "Kas to aizpildīja",
-          "checked_at": "2026-04-11T22:04:55.361Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -152,15 +136,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Portuguese translation is missing the equivalent of 'it out' - the complete action should be 'filled it out' not just 'filled'",
-          "suggestion": "Quem preencheu isso",
-          "checked_at": "2026-04-11T22:05:00.893Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {

@@ -3,7 +3,7 @@
   "content": "The top-up might take some time to complete",
   "content_en_sha1_hash": "879c71750a4b87b47a412c63d6e1558334cfb3a8",
   "created_at": "2026-04-10T13:53:43.643Z",
-  "updated_at": "2026-04-11T23:28:08.485Z",
+  "updated_at": "2026-04-12T07:14:23.195Z",
   "comment": {
     "text": "This is a message displayed to the user while a top-up transaction is processing, indicating that it may not be instantaneous.",
     "is_auto": true,
@@ -70,15 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation 'valmistua' (to complete/finish) is grammatically incorrect. It should be 'valmistuakseen' (to complete) or the sentence should be restructured.",
-          "suggestion": "Lisäys voi kestää jonkin aikaa",
-          "checked_at": "2026-04-11T23:27:40.397Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -138,15 +130,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Gender agreement error: 'recarga' (feminine noun) is incorrectly modified by masculine article 'O' instead of feminine 'A'",
-          "suggestion": "A recarga pode demorar um pouco para ser concluída.",
-          "checked_at": "2026-04-11T23:27:51.435Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
@@ -182,15 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation uses 'podaljša' (extends/prolongs) which suggests the top-up process itself is being extended, rather than conveying that the completion takes time",
-          "suggestion": "Naknadno polnjenje se lahko nekaj časa zaključuje.",
-          "checked_at": "2026-04-11T23:27:59.367Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -214,15 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation 'Üst yükleme' (top loading/upload) does not correctly convey the meaning of 'top-up' which refers to adding credit/money to an account",
-          "suggestion": "Bakiye yükleme işlemi tamamlanması biraz zaman alabilir",
-          "checked_at": "2026-04-11T23:28:05.603Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

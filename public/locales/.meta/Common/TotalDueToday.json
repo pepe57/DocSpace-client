@@ -3,7 +3,7 @@
   "content": "Total due today",
   "content_en_sha1_hash": "a8e7f31661fc97cbee8c84a92261648af84764ac",
   "created_at": "2026-04-10T13:53:45.823Z",
-  "updated_at": "2026-04-11T23:25:30.112Z",
+  "updated_at": "2026-04-12T07:14:23.194Z",
   "comment": {
     "text": "This is a label indicating the total amount of money owed for the current day. It appears in the order summary section of the billing panel.",
     "is_auto": true,
@@ -100,15 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Korean translation is missing the word 'due' which is critical for indicating that this is money owed/payable, not just any total amount",
-          "suggestion": "오늘 지불해야 할 총액",
-          "checked_at": "2026-04-11T23:25:06.773Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -120,15 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Today parādītais summa' is grammatically incorrect and uses English word 'Today' instead of Latvian. The phrase structure is also wrong.",
-          "suggestion": "Šodien maksājamā summa",
-          "checked_at": "2026-04-11T23:25:10.077Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -176,29 +160,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Celková suma dnes' means 'Total amount today' but lacks the critical concept of 'due' (owed/payable), which is essential for billing context",
-          "suggestion": "Celková suma splatná dnes",
-          "checked_at": "2026-04-11T23:25:20.092Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Skupno dolžnost danes' is grammatically incorrect and unclear. 'Dolžnost' means 'duty/obligation' rather than 'amount due', and the phrase structure is awkward.",
-          "suggestion": "Skupaj dolgujete danes",
-          "checked_at": "2026-04-11T23:25:22.434Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

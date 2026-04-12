@@ -3,7 +3,7 @@
   "content": "Wallet balance",
   "content_en_sha1_hash": "f6c5a5f1b0992e37616dc3006177189990143c8a",
   "created_at": "2026-04-10T13:53:45.872Z",
-  "updated_at": "2026-04-11T22:23:55.560Z",
+  "updated_at": "2026-04-12T07:14:23.184Z",
   "comment": {
     "text": "This is a label indicating the current amount of money in the user's account, displayed as part of a billing information panel.",
     "is_auto": true,
@@ -112,15 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Mānekļa' means 'purse' or 'wallet' as a physical object, but in the context of digital billing/account balance, the correct term should be 'Maka' which refers to a digital wallet or account balance",
-          "suggestion": "Makas saldo",
-          "checked_at": "2026-04-11T22:23:31.432Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -162,29 +154,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation uses 'පොට්ෆෝලියෝ ශේෂය' (portfolio balance) instead of 'wallet balance'. Portfolio refers to investment holdings while wallet refers to account money balance.",
-          "suggestion": "පසුම්බිය ශේෂය",
-          "checked_at": "2026-04-11T22:23:41.534Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'Vyvážený stav portfelya' means 'Balanced state of portfolio' which is incorrect. 'Vyvážený' means 'balanced/equilibrated' rather than referring to a wallet balance (amount of money), and 'portfeľa' should be 'peňaženky' for wallet in this financial context.",
-          "suggestion": "Zostatok v peňaženke",
-          "checked_at": "2026-04-11T22:23:44.769Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
@@ -202,15 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation 'Равношештаљ у портфељу' means 'Balance sheet in portfolio' which is incorrect. 'Равношештаљ' refers to an accounting balance sheet, not a wallet balance/amount of money.",
-          "suggestion": "Стање новчаника",
-          "checked_at": "2026-04-11T22:23:49.561Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {

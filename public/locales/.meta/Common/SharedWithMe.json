@@ -3,7 +3,7 @@
   "content": "Shared with me",
   "content_en_sha1_hash": "f40ca84f04474455cba711b1643a006b59aa1210",
   "created_at": "2025-05-19T21:30:48.661Z",
-  "updated_at": "2026-04-12T00:58:44.686Z",
+  "updated_at": "2026-04-12T07:14:23.208Z",
   "comment": {
     "text": "A label for a section or category in the UI, referring to files and folders that have been shared with the current user. It appears as a short label, often within settings or import/export options.",
     "is_auto": true,
@@ -184,15 +184,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Sinhala translation is incomplete - it ends abruptly with 'බෙදාගත්' (shared) without completing the phrase",
-          "suggestion": "මා සමඟ බෙදාගත්තා",
-          "checked_at": "2026-04-12T00:58:35.878Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

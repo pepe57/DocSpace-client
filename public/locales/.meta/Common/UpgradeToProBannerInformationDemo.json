@@ -3,7 +3,7 @@
   "content": "Request demonstration <1>here</1>",
   "content_en_sha1_hash": "5a17e37a14adcdf587aa798979c9909eed1f5cd0",
   "created_at": "2025-05-26T07:15:49.130Z",
-  "updated_at": "2026-04-11T22:56:09.654Z",
+  "updated_at": "2026-04-12T07:14:23.188Z",
   "comment": {
     "text": "This is a clickable text link within a banner, prompting users to request a demonstration of the Pro version. The `<1>here</1>` tag indicates a clickable link.",
     "is_auto": true,
@@ -94,15 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Japanese translation adds 'をクリック' (click) which is not present in the English text and changes the meaning from a simple instruction to request demonstration to a specific instruction to click",
-          "suggestion": "デモを依頼するには<1>こちら</1>",
-          "checked_at": "2026-04-11T22:55:46.946Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

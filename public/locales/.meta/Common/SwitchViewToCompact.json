@@ -3,7 +3,7 @@
   "content": "Switch to compact view",
   "content_en_sha1_hash": "00089d46aa530f8ca9b4dd1cc4f17fed0a89d0bf",
   "created_at": "2025-05-19T21:30:49.242Z",
-  "updated_at": "2026-04-11T23:50:51.618Z",
+  "updated_at": "2026-04-12T07:14:23.199Z",
   "comment": {
     "text": "This is a tooltip for an icon button. It appears when the user hovers over the button to switch the display of items to a compact, list-like view.",
     "is_auto": true,
@@ -88,15 +88,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Armenian translation is missing the preposition 'to' - it says 'switch compact view' instead of 'switch to compact view'",
-          "suggestion": "Անցնել կոմպակտ տեսքին",
-          "checked_at": "2026-04-11T23:50:26.205Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

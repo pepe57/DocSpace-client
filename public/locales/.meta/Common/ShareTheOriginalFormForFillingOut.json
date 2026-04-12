@@ -3,7 +3,7 @@
   "content": "Share the original form for filling out.",
   "content_en_sha1_hash": "d89e20141550449ea8d0537fbc588e697483a8fe",
   "created_at": "2025-05-19T21:30:48.698Z",
-  "updated_at": "2026-04-12T00:53:50.970Z",
+  "updated_at": "2026-04-12T07:14:23.209Z",
   "comment": {
     "text": "This is a description for a card in a sharing panel, explaining that the option allows sharing the original form for others to fill out.",
     "is_auto": true,
@@ -108,15 +108,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation changes the meaning from 'share the form for others to fill out' to 'share in order to fill out the form yourself'",
-          "suggestion": "記入してもらうために元のフォームを共有します。",
-          "checked_at": "2026-04-12T00:53:27.073Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -164,15 +156,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "Missing definite article 'the' - Romanian translation says 'Share original form' instead of 'Share the original form'",
-          "suggestion": "Partajează formularul original pentru completare.",
-          "checked_at": "2026-04-12T00:53:37.641Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -214,15 +198,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation changes the meaning by making 'form' the object being filled rather than the object being shared for filling",
-          "suggestion": "Doldurulması için orijinal formu paylaşın.",
-          "checked_at": "2026-04-12T00:53:48.104Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

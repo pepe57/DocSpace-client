@@ -3,7 +3,7 @@
   "content": "SP Single Logout URL (support POST and Redirect binding):",
   "content_en_sha1_hash": "bbcacaf910ad331ef2d63b42e6cbc9b2fcf51fe8",
   "created_at": "2025-05-19T21:30:50.180Z",
-  "updated_at": "2026-04-11T21:48:35.909Z",
+  "updated_at": "2026-04-12T07:14:23.218Z",
   "comment": {
     "text": "This is a label for an input field where the user enters the URL for Single Logout (SLO) for a Service Provider (SP), supporting both POST and Redirect bindings.",
     "is_auto": true,
@@ -41,13 +41,6 @@
           "suggestion": "",
           "checked_at": "2026-04-11T21:48:32.654Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "missing_content",
-          "description": "The colon (:) at the end of the English text is missing in the Azerbaijani translation",
-          "suggestion": "SP Birdəfəlik çıxış URL (POST və Dolaylı bağlamasını dəstəkləyir):",
-          "checked_at": "2026-04-11T21:48:32.654Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null

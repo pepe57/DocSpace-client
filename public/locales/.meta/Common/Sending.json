@@ -3,7 +3,7 @@
   "content": "Sending...",
   "content_en_sha1_hash": "c338c191ab1e9319ba354d56467b938e0ba4e119",
   "created_at": "2025-05-19T21:30:48.541Z",
-  "updated_at": "2026-04-12T01:12:22.405Z",
+  "updated_at": "2026-04-12T07:14:23.211Z",
   "comment": {
     "text": "This is the label for a button that appears while an action, such as sending a request or enabling a service, is in progress.",
     "is_auto": true,
@@ -130,15 +130,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation 'Sūtpšana...' contains a typo - it should be 'Sūtīšana...' (the correct form of 'sending' in Latvian)",
-          "suggestion": "Sūtīšana...",
-          "checked_at": "2026-04-12T01:12:02.256Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

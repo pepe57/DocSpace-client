@@ -3,7 +3,7 @@
   "content": "Storage",
   "content_en_sha1_hash": "9e092dda4f0e27d0c7686ddd00272079e678b6e6",
   "created_at": "2025-05-19T21:30:49.092Z",
-  "updated_at": "2026-04-12T00:17:41.223Z",
+  "updated_at": "2026-04-12T07:14:23.203Z",
   "comment": {
     "text": "This is a label or title referring to data storage. It appears in various contexts, such as displaying storage information for users or as part of a larger phrase like \"Storage and Quota.\"",
     "is_auto": true,
@@ -178,15 +178,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish word 'Miejsce' means 'place' or 'location' which does not accurately convey the technical concept of data storage",
-          "suggestion": "Pamięć masowa",
-          "checked_at": "2026-04-12T00:17:22.571Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -228,15 +220,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation 'Shkratišče' appears to be incorrect or corrupted. The correct Slovenian word for 'Storage' should be 'Shramba' or 'Shranjevanje'.",
-          "suggestion": "Shramba",
-          "checked_at": "2026-04-12T00:17:32.740Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

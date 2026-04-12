@@ -3,7 +3,7 @@
   "content": "Top up credits",
   "content_en_sha1_hash": "d1af034cd110e9c741c358564c4c9e120bca1364",
   "created_at": "2026-04-10T13:53:45.807Z",
-  "updated_at": "2026-04-11T23:29:25.747Z",
+  "updated_at": "2026-04-12T07:14:23.195Z",
   "comment": {
     "text": "This is a button label. It allows users to add more credits to their account for AI tools.",
     "is_auto": true,
@@ -112,15 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation uses incorrect grammar - 'kredīti' should be in accusative case 'kredītus' when being topped up, and the verb form is incorrect",
-          "suggestion": "Papildināt kredītus",
-          "checked_at": "2026-04-11T23:29:06.377Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -162,15 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation 'ණය නැවත පිරවීම' means 'debt repayment' or 'refilling debt', which is the opposite meaning of adding credits to an account",
-          "suggestion": "ක්‍රෙඩිට් එකතු කරන්න",
-          "checked_at": "2026-04-11T23:29:16.371Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

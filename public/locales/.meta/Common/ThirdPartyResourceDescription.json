@@ -3,7 +3,7 @@
   "content": "Backup can be saved to your third-party account (Dropbox, Box.com, OneDrive or Google Drive). You need to connect your third-party account (Dropbox, Box.com, OneDrive or Google Drive) before you will be able to save your backup there.",
   "content_en_sha1_hash": "c0e812cbda982e696e4ea4d91c8c7d55b6033146",
   "created_at": "2025-05-26T07:15:48.804Z",
-  "updated_at": "2026-04-11T23:40:01.109Z",
+  "updated_at": "2026-04-12T07:14:23.196Z",
   "comment": {
     "text": "This is a descriptive text that explains how to save a backup to a third-party cloud storage service. It appears below the option to select a third-party account for backup.",
     "is_auto": true,
@@ -100,29 +100,13 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The timing/sequence is incorrectly translated. The English says 'before you will be able to save' (future condition), but the Japanese says 'バックアップを保存する前' which means 'before saving the backup', implying the connection happens before each save rather than as a prerequisite setup.",
-          "suggestion": "バックアップは、サードパーティーアカウント（Dropbox、Box.com、OneDrive、Google Drive）に保存できます。バックアップを保存できるようになる前に、サードパーティーアカウント（Dropbox、Box.com、OneDrive、Google Drive）に接続する必要があります。",
-          "checked_at": "2026-04-11T23:39:36.348Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Korean translation is missing 'or' between the cloud service names in both instances, which changes the meaning from listing alternatives to listing a sequence",
-          "suggestion": "타사 계정(Dropbox, Box.com, OneDrive 또는 Google Drive)에 백업을 저장할 수 있습니다. 그 곳에 백업을 저장하기 전에 타사 계정(Dropbox, Box.com, OneDrive 또는 Google Drive)을 연결해야 합니다.",
-          "checked_at": "2026-04-11T23:39:39.422Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -164,15 +148,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Romanian translation is missing 'prin intermediu' (missing 'l' at the end) - should be 'prin intermediul'",
-          "suggestion": "Puteți salva o copie de rezervă prin intermediul contului de stocare de la terți (Dropbox, Box.com, OneDrive sau Google Drive). Trebuie să vă conectați cu contul de stocare de la terți (Dropbox, Box.com, OneDrive sau Google Drive) înainte de a crea o copie de rezervă acolo.",
-          "checked_at": "2026-04-11T23:39:48.658Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

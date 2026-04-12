@@ -3,7 +3,7 @@
   "content": "<1>{{accessType}}</1> will be able to <3>{{accessRights}}</3> {{shareContents}} of {{shareParent}}.",
   "content_en_sha1_hash": "d60c21d40db2e8ae5b6226321b0b0a4a461a4f2e",
   "created_at": "2025-08-26T11:15:00.768Z",
-  "updated_at": "2026-04-12T00:55:06.504Z",
+  "updated_at": "2026-04-12T07:14:23.209Z",
   "comment": {
     "text": "This is a sentence displayed in the sharing permissions dialog, indicating what a specific user or group ({{accessType}}) can do ({{accessRights}}) with the shared content ({{shareContents}}) within its parent folder or project ({{shareParent}}).",
     "is_auto": true,
@@ -40,15 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Bulgarian translation is missing the equivalent of 'to be able to' - it says 'ще може' (will be able) but omits the infinitive 'to' before the action verb, making the sentence grammatically incomplete",
-          "suggestion": "<1>{{accessType}}</1> ще може да <3>{{accessRights}}</3> {{shareContents}} на {{shareParent}}.",
-          "checked_at": "2026-04-12T00:54:33.312Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -108,15 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Korean translation changes the sentence structure and meaning. The English says the user 'will be able to [do action] [content] of [parent]' but Korean says the user 'can use [content] of [parent]' which doesn't properly convey the access rights relationship.",
-          "suggestion": "<1>{{accessType}}</1>은 {{shareParent}}의 {{shareContents}}을 <3>{{accessRights}}</3> 할 수 있습니다.",
-          "checked_at": "2026-04-12T00:54:45.704Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -140,15 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Polish translation is missing the preposition 'of' before {{shareParent}}, which changes the grammatical relationship and meaning",
-          "suggestion": "<1>{{accessType}}</1> będzie mógł/mogła <3>{{accessRights}}</3> {{shareContents}} z {{shareParent}}.",
-          "checked_at": "2026-04-12T00:54:50.726Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -190,15 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The preposition 'of' before {{shareParent}} is missing in the Slovenian translation",
-          "suggestion": "<1>{{accessType}}</1> bo lahko <3>{{accessRights}}</3> {{shareContents}} od {{shareParent}}.",
-          "checked_at": "2026-04-12T00:54:58.402Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

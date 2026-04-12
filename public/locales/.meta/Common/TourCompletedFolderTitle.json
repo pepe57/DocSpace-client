@@ -3,7 +3,7 @@
   "content": "Completed submissions",
   "content_en_sha1_hash": "1fd53940677c024b1bb98327953b52df8c3ec2c8",
   "created_at": "2026-03-31T15:18:26.702Z",
-  "updated_at": "2026-04-11T23:19:20.799Z",
+  "updated_at": "2026-04-12T07:14:23.192Z",
   "comment": {
     "text": "This is the title for a tour step explaining the \"Completed submissions\" folder. It appears as a short label.",
     "is_auto": true,
@@ -112,15 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error in Latvian - 'iesniegumi' (masculine) doesn't agree with 'pabeigtās' (feminine plural)",
-          "suggestion": "Pabeigti iesniegumi",
-          "checked_at": "2026-04-11T23:19:00.739Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -174,15 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Završenih' is Croatian/Serbian, not Slovenian. In Slovenian, 'completed' should be 'Dokončanih' or 'Zaključenih'.",
-          "suggestion": "Dokončanih oddajanj",
-          "checked_at": "2026-04-11T23:19:12.975Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

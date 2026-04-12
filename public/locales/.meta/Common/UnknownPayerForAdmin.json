@@ -3,7 +3,7 @@
   "content": "We couldn’t find a contact matching the Stripe email. Billing and services will continue to work, but we recommend contacting the {{productName}} owner to assign a new Payer.",
   "content_en_sha1_hash": "fc41ef37a720cd1e3c3ec6ec5ad2ab4962d51a9b",
   "created_at": "2026-04-10T13:53:43.783Z",
-  "updated_at": "2026-04-11T23:03:57.463Z",
+  "updated_at": "2026-04-12T07:14:23.190Z",
   "comment": {
     "text": "This is an error message displayed to an administrator when the system cannot find a Stripe contact for the current payer. It informs them that billing will continue but advises contacting the product owner to assign a new payer. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
@@ -34,57 +34,25 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Vergi' means 'tax' in Azerbaijani, but the English text refers to 'Billing' which should be translated as 'Ödəniş' or 'Fakturalama'",
-          "suggestion": "Stripe e-poçtuna uyğun gələn bir əlaqə tapılmadı. Ödəniş və xidmətlər işləməyə davam edəcək, lakin yeni Payer təyin etmək üçün {{productName}} sahibinə müraciət etməyi tövsiyə edirik.",
-          "checked_at": "2026-04-11T23:03:03.615Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Billing' is incorrectly translated as 'Бизинг' which appears to be a transliteration rather than proper Bulgarian translation",
-          "suggestion": "Не успяхме да намерим контакт, съответстващ на Stripe имейла. Фактурирането и услугите ще продължат да работят, но препоръчваме да се свържете с собственика на {{productName}}, за да назначите нов Payer.",
-          "checked_at": "2026-04-11T23:03:06.357Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The phrase 'to assign a new Payer' is missing the preposition 'to' before 'assign', making the instruction unclear",
-          "suggestion": "Nepodařilo se nám najít kontakt odpovídající e-mailu Stripe. Fakturace a služby budou nadále fungovat, ale doporučujeme kontaktovat majitele {{productName}}, aby přiřadil nového Payer.",
-          "checked_at": "2026-04-11T23:03:09.218Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The term 'Payer' is not translated in German, which may cause confusion for German users as it's a technical role that should be localized",
-          "suggestion": "Wir konnten keinen Kontakt finden, der mit der Stripe-E-Mail übereinstimmt. Die Abrechnung und die Dienste werden weiter funktionieren, aber wir empfehlen, den Eigentümer von {{productName}} zu kontaktieren, um einen neuen Zahlungspflichtigen zuzuweisen.",
-          "checked_at": "2026-04-11T23:03:12.556Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -102,15 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Laskutus- ja palvelut jatkuvat toimimistaan' is grammatically incorrect and unclear. It should be 'Laskutus ja palvelut jatkavat toimimista' to properly convey that billing and services will continue to work.",
-          "suggestion": "Emme löytäneet yhteystiedotetta, joka vastaa Stripe-sähköpostia. Laskutus ja palvelut jatkavat toimimista, mutta suosittelemme ottamaan yhteyttä {{productName}}-omistajaan määrittääkseen uuden Payerin.",
-          "checked_at": "2026-04-11T23:03:17.534Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -152,15 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'apdraudzītu' means 'to befriend' which is completely wrong in this context. The correct meaning should be 'to assign' or 'to designate'",
-          "suggestion": "Mums nevar atrast kontaktu, kas atbilst Stripe e-pochai. Fakturācija un pakalpojumi turpinās darboties, bet mēs iesaka piekontaktēt ar {{productName}} īpašnieku, lai nozīmētu jaunu maksātāju.",
-          "checked_at": "2026-04-11T23:03:26.567Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -190,15 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Noul Plătitor' (The New Payer) is incorrect - it should be 'un nou plătitor' (a new payer) as the English refers to assigning 'a new Payer', not 'the New Payer'",
-          "suggestion": "Nu am reușit să găsim un contact care să corespundă emailului Stripe. Facturarea și serviciile vor continua să funcționeze, dar vă recomandăm să contactați proprietarul {{productName}} pentru a atribui un nou plătitor.",
-          "checked_at": "2026-04-11T23:03:34.250Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -216,36 +160,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation begins with 'Nepodľa našich záznamov' (Not according to our records) which adds meaning not present in the English original and changes the tone from a simple statement to one that references records/documentation",
-          "suggestion": "Nemohli sme nájsť kontakt zodpovedajúci e-mailu Stripe. Faktúrovanie a služby budú fungovať ďalej, ale odporúčame kontaktovať vlastníka {{productName}} na pridelenie nového platiteľa.",
-          "checked_at": "2026-04-11T23:03:40.297Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ki bi se zgodil s e-poštom Stripe' incorrectly translates 'matching the Stripe email' as 'that would happen with Stripe email', which changes the meaning from finding a contact that matches/corresponds to the email to something that would occur with the email",
-          "suggestion": "Nisem lahko našli stika, ki bi se ujemal s e-poštom Stripe. Naplačilo in storitve bodo nadalje delovali, vendar priporočamo, da se obrnete na lastnika {{productName}} in mu dodelite novega plačilnika.",
-          "checked_at": "2026-04-11T23:03:45.247Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        },
-        {
-          "type": "missing_content",
-          "description": "The translation uses 'obrnete lastniku' (turn to the owner) instead of 'obrnete na lastnika' (contact the owner), missing the preposition 'na' which is needed for the correct meaning of contacting someone",
-          "suggestion": "Nisem lahko našli stika, ki bi se ujemal s e-poštom Stripe. Naplačilo in storitve bodo nadalje delovali, vendar priporočamo, da se obrnete na lastnika {{productName}} in mu dodelite novega plačilnika.",
-          "checked_at": "2026-04-11T23:03:45.247Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -257,15 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Double negative 'Нисмо смо' creates grammatical error and unclear meaning",
-          "suggestion": "Нисмо нашли контакт који одговара Stripe е-пошти. Рачуноводство и услуге ће наставити да раде, али препоручујемо да контактирате власника {{productName}} како бисте доделили новог платиоца.",
-          "checked_at": "2026-04-11T23:03:49.140Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -283,15 +196,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Billing and services' is translated as 'Облікові та сервісні функції' (accounting and service functions) which changes the meaning. 'Billing' refers to payment/invoicing processes, not general accounting functions.",
-          "suggestion": "Ми не змогли знайти контакт, що відповідає електронній пошті Stripe. Виставлення рахунків та сервіси продовжуватимуть працювати, але ми рекомендуємо звернутися до власника {{productName}}, щоб призначити нового платника.",
-          "checked_at": "2026-04-11T23:03:54.936Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

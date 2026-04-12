@@ -3,7 +3,7 @@
   "content": "Viewer",
   "content_en_sha1_hash": "dbad9f126b33570e09839a2d60720898de1a512d",
   "created_at": "2025-08-26T11:15:03.444Z",
-  "updated_at": "2026-04-11T22:27:41.889Z",
+  "updated_at": "2026-04-12T07:14:23.184Z",
   "comment": {
     "text": "This is a label for a user role or permission level, indicating that the user has read-only access. It appears in sharing settings and other access control interfaces.",
     "is_auto": true,
@@ -64,15 +64,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek word 'Δήμιος' means 'executioner' or 'public hangman', which is completely wrong for a user role indicating read-only access",
-          "suggestion": "Θεατής",
-          "checked_at": "2026-04-11T22:27:11.712Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {

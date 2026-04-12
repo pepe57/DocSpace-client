@@ -3,7 +3,7 @@
   "content": "List all people who have filled out the form \"{{formName}}\"",
   "content_en_sha1_hash": "0029dfe278d7fe7afd154f2eb51145608dfd299a",
   "created_at": "2026-03-31T15:18:26.289Z",
-  "updated_at": "2026-04-11T22:04:33.384Z",
+  "updated_at": "2026-04-12T07:14:23.180Z",
   "comment": {
     "text": "This is a prompt for an AI assistant, asking it to list users who completed a specific form. The `{{formName}}` variable will be replaced by the title of the form.",
     "is_auto": true,
@@ -40,15 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation uses 'Избройте' (enumerate/count) which is an imperative command, while the English 'List' in this context means to display/show all people, not to count them",
-          "suggestion": "Покажете всички хора, които са попълнили формата \"{{formName}}\"",
-          "checked_at": "2026-04-11T22:03:59.160Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -150,15 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation uses 'Listă' (noun) instead of the imperative verb form 'Listează' which matches the English command 'List'",
-          "suggestion": "Listează toate persoanele care au completat formularul \"{{formName}}\"",
-          "checked_at": "2026-04-11T22:04:21.305Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

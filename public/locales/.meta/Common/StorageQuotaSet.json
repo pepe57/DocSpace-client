@@ -3,7 +3,7 @@
   "content": "Storage quota successfully set.",
   "content_en_sha1_hash": "55290c0a938000153f80653dfca4cadaa72f7658",
   "created_at": "2025-05-19T21:30:49.137Z",
-  "updated_at": "2026-04-12T00:12:56.962Z",
+  "updated_at": "2026-04-12T07:14:23.203Z",
   "comment": {
     "text": "Toast message. Appears after a storage quota has been successfully updated.",
     "is_auto": true,
@@ -82,15 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Armenian translation ends with a colon (:) instead of a period, which changes the meaning from a complete statement to an incomplete one that expects additional information",
-          "suggestion": "Պահպանման սահմանաչափը հաջողությամբ սահմանվեց:",
-          "checked_at": "2026-04-12T00:12:31.800Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {

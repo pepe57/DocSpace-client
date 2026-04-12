@@ -3,7 +3,7 @@
   "content": "Windows instruction.",
   "content_en_sha1_hash": "deb54dea949d2be02af8b22d87c61f6454d31396",
   "created_at": "2025-05-26T07:15:49.209Z",
-  "updated_at": "2026-04-11T22:51:51.123Z",
+  "updated_at": "2026-04-12T07:14:23.187Z",
   "comment": {
     "text": "This is a label for an instruction item, appearing as a clickable link within a banner promoting a Pro plan upgrade. It directs users to Windows-specific installation instructions.",
     "is_auto": true,
@@ -82,15 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'instruction' is missing from the Armenian translation. Only 'Windows հրահանգ' is provided, but 'հրահանգ' alone doesn't convey the complete meaning of 'instruction'",
-          "suggestion": "Windows հրահանգներ:",
-          "checked_at": "2026-04-11T22:51:26.845Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -108,15 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "Missing space between 'Windows' and '설명서' which affects readability and proper word separation",
-          "suggestion": "Windows 설명서.",
-          "checked_at": "2026-04-11T22:51:30.737Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {

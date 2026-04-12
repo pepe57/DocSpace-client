@@ -3,7 +3,7 @@
   "content": "To reactivate your subscription, please top up your wallet via Services. Once the payment is complete, your additional storage will become available again.",
   "content_en_sha1_hash": "2d9ad56d38fc068fdd379c4b00bda381ccb4e355",
   "created_at": "2026-04-10T13:53:43.659Z",
-  "updated_at": "2026-04-11T23:26:53.096Z",
+  "updated_at": "2026-04-12T07:14:23.195Z",
   "comment": {
     "text": "This is a message in a dialog box that informs the user how to reactivate their subscription and regain access to additional storage after it has been deactivated.",
     "is_auto": true,
@@ -34,15 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation says 'əlçatmaz olacaq' (will become unavailable) instead of 'əlçatan olacaq' (will become available), which is the opposite meaning",
-          "suggestion": "Abunəçiliyinizi yenidən aktivləşdirmək üçün, xidmətlər vasitəsilə ərzənizi doldurun. Ödəniş tamamlandıqdan sonra, əlavə saxlama yeriniz yenidən əlçatan olacaq.",
-          "checked_at": "2026-04-11T23:26:16.446Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -174,22 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Services' is incorrectly translated as 'Zvez' which means 'connections' or 'links' in Slovenian, rather than 'services'",
-          "suggestion": "Za ponovno aktivacijo naročnine, prosim, napolnite denarnico preko Storitev. Ko bo plačilo končano, bo dodatna shramba spet na voljo.",
-          "checked_at": "2026-04-11T23:26:44.903Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        },
-        {
-          "type": "missing_content",
-          "description": "The translation uses 'plačila' (payments, plural) instead of 'plačilo' (payment, singular), changing the meaning from 'the payment' to 'payments'",
-          "suggestion": "Za ponovno aktivacijo naročnine, prosim, napolnite denarnico preko Storitev. Ko bo plačilo končano, bo dodatna shramba spet na voljo.",
-          "checked_at": "2026-04-11T23:26:44.903Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

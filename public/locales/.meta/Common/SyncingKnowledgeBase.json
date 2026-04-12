@@ -3,7 +3,7 @@
   "content": "Syncing form data to knowledge base...",
   "content_en_sha1_hash": "1cd0f68a7543087af9bdc3447f7cdd3edb7e9f33",
   "created_at": "2026-03-20T09:07:36.950Z",
-  "updated_at": "2026-04-11T23:50:11.795Z",
+  "updated_at": "2026-04-12T07:14:23.198Z",
   "comment": {
     "text": "This is a tooltip that appears when form data is being synchronized with the knowledge base.",
     "is_auto": true,
@@ -154,15 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation uses present tense 'කරයි' (does/performs) instead of present continuous tense to indicate ongoing synchronization action",
-          "suggestion": "පෝරම දත්ත දැනුම පදනමට සමමුහුර්ත කරමින්...",
-          "checked_at": "2026-04-11T23:50:00.138Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

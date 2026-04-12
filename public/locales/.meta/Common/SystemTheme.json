@@ -3,7 +3,7 @@
   "content": "Use system theme",
   "content_en_sha1_hash": "b416b727b7b81cc355879b99623709aaf02f49bb",
   "created_at": "2026-04-03T21:51:34.685Z",
-  "updated_at": "2026-04-11T23:49:31.002Z",
+  "updated_at": "2026-04-12T07:14:23.198Z",
   "comment": {
     "text": "This is a checkbox label in the user's profile settings. When checked, the application's theme will automatically match the operating system's theme.",
     "is_auto": true,
@@ -94,15 +94,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Italian translation uses infinitive form 'Usare' (to use) instead of imperative form, making it sound like an instruction rather than a setting option",
-          "suggestion": "Usa tema di sistema",
-          "checked_at": "2026-04-11T23:49:08.532Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {

@@ -3,7 +3,7 @@
   "content": "Without action, uploading, creating, and editing files and folders will be restricted until you free up space.",
   "content_en_sha1_hash": "ce05667055adced540e554d2692374783ad62225",
   "created_at": "2026-04-10T13:53:43.359Z",
-  "updated_at": "2026-04-12T00:12:19.206Z",
+  "updated_at": "2026-04-12T07:14:23.203Z",
   "comment": {
     "text": "This is a sentence displayed in a modal dialog. It informs the user about storage restrictions when their storage tariff is deactivated or full.",
     "is_auto": true,
@@ -34,15 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'yerə çəkiləcək' means 'will be pulled to the ground/will be withdrawn' which doesn't accurately convey that the actions will be 'restricted'. Also 'çünki yer azdır' means 'because space is little' which changes the conditional meaning of 'without action' to a causal relationship.",
-          "suggestion": "Hərəkət etmədən, fayl və qovluqların yüklənməsi, yaradılması və redaktəsi məhdudlaşdırılacaq, ta ki siz yer boşaldana qədər.",
-          "checked_at": "2026-04-12T00:11:44.110Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -114,15 +106,7 @@
     "lo-LA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Lao translation says 'ເພີ່ມພື້ນທີ່ຫວ່າງ' (add space) instead of 'free up space' which should be about clearing/removing files to create space",
-          "suggestion": "ຖ້າບໍ່ມີການດຳເນີນການ, ການອັບໂຫລດ, ການສ້າງ ແລະການແກ້ໄຂໄຟລ໌ ແລະໂຟນເດີຈະຖືກຈຳກັດຈົນກວ່າທ່ານຈະເຮັດໃຫ້ພື້ນທີ່ຫວ່າງ.",
-          "checked_at": "2026-04-12T00:12:01.708Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lv": {

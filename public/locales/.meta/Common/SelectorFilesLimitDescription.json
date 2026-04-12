@@ -3,7 +3,7 @@
   "content": "When uploading a large amount of data, the context may be partially truncated, which can reduce the accuracy of responses. It’s recommended to limit the number of files and their total size.",
   "content_en_sha1_hash": "dce1181ee7a007698739a58027258d8d7383988c",
   "created_at": "2025-11-13T07:57:55.565Z",
-  "updated_at": "2026-04-12T01:19:20.940Z",
+  "updated_at": "2026-04-12T07:14:23.212Z",
   "comment": {
     "text": "This is a tooltip description that appears when a user attempts to attach a large number of files to an AI chat, warning about potential truncation and reduced response accuracy.",
     "is_auto": true,
@@ -142,22 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation uses 'deformarea sau fragmentarea' (deformation or fragmentation) instead of 'truncated' (trunchiat/tăiat), which changes the technical meaning of what happens to the context",
-          "suggestion": "Atunci când se încarcă o cantitate mare de date, contextul poate fi parțial trunchiat, ceea ce poate reduce acuratețea răspunsurilor. Vă recomandăm să limitați numărul de fișiere și dimensiunea lor totală.",
-          "checked_at": "2026-04-12T01:19:07.756Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        },
-        {
-          "type": "missing_content",
-          "description": "The Romanian translation is missing 'total size' (dimensiunea lor totală) - it only mentions 'their size' (dimensiunea lor)",
-          "suggestion": "Atunci când se încarcă o cantitate mare de date, contextul poate fi parțial trunchiat, ceea ce poate reduce acuratețea răspunsurilor. Vă recomandăm să limitați numărul de fișiere și dimensiunea lor totală.",
-          "checked_at": "2026-04-12T01:19:07.756Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

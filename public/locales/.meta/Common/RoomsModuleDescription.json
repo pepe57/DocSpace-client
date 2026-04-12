@@ -3,7 +3,7 @@
   "content": "You may create a new room specifically for the backup, choose one of the existing rooms, or save the copy in their {{roomName}} room.",
   "content_en_sha1_hash": "2f37d9051c90dfc970642bac71d6899484e612bd",
   "created_at": "2025-05-26T07:15:47.398Z",
-  "updated_at": "2026-04-12T01:40:46.440Z",
+  "updated_at": "2026-04-12T07:14:23.215Z",
   "comment": {
     "text": "This is a descriptive text explaining options for saving a backup. It appears in the auto-backup and manual-backup dialogs. The `{{roomName}}` variable will be replaced with the name of a specific room, such as \"My Documents\".",
     "is_auto": true,
@@ -34,15 +34,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Arabic translation uses 'الخاصة بك' (your) instead of 'الخاصة بهم' (their), changing the meaning from 'their room' to 'your room'",
-          "suggestion": "يمكنك إنشاء غرفة جديدة خصيصًا للنسخ الاحتياطي، أو اختيار إحدى الغرف الموجودة، أو حفظ النسخة في غرفة {{roomName}} الخاصة بهم.",
-          "checked_at": "2026-04-12T01:39:51.899Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -66,15 +58,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation uses 'ihrem' (their/his/her) instead of 'deren' (their) when referring to multiple room options, creating ambiguity about whose room is being referenced",
-          "suggestion": "Sie können einen neuen Raum speziell für die Sicherung erstellen, einen der vorhandenen Räume wählen oder die Kopie in deren {{roomName}}-Raum speichern.",
-          "checked_at": "2026-04-12T01:39:57.846Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -116,15 +100,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation says 'save the copy in {{roomName}}' but the English says 'save the copy in their {{roomName}} room' - the possessive 'their' and the word 'room' are missing, which changes the meaning",
-          "suggestion": "バックアップのために新しいルームを特別に作成するか、既存のルームのいずれかを選択するか、それらの{{roomName}}ルームにコピーを保存することができます。",
-          "checked_at": "2026-04-12T01:40:08.004Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -142,29 +118,13 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'their {{roomName}} room' is incorrectly translated as 'savā {{roomName}} telpā' (your room) instead of 'viņu {{roomName}} telpā' (their room). This changes the meaning from referring to someone else's room to the user's own room.",
-          "suggestion": "Jūs varat izveidot jaunu telpu tieši dublēšanai, izvēlēties vienu no esošajām telpām vai saglabāt kopiju viņu {{roomName}} telpā.",
-          "checked_at": "2026-04-12T01:40:14.589Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Dutch translation uses 'uw' (your) instead of 'hun' (their) when referring to the {{roomName}} room, changing the meaning from third person to second person",
-          "suggestion": "U kunt een nieuwe kamer aanmaken speciaal voor de back-up, een van de bestaande kamers kiezen, of de kopie opslaan in hun {{roomName}} kamer.",
-          "checked_at": "2026-04-12T01:40:17.550Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
@@ -182,15 +142,7 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The pronoun 'their' (referring to third person) is incorrectly translated as 'sua' (your/second person), changing the meaning from saving in someone else's room to saving in the user's own room",
-          "suggestion": "Você pode criar uma nova sala especificamente para o backup, escolher uma das salas existentes ou salvar a cópia na sala {{roomName}} deles.",
-          "checked_at": "2026-04-12T01:40:22.869Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -202,15 +154,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The pronoun reference is incorrect - 'their {{roomName}} room' refers to someone else's room, but 'вашей комнате {{roomName}}' means 'your {{roomName}} room'",
-          "suggestion": "Вы можете создать новую комнату специально для резервного копирования, выбрать одну из существующих комнат или сохранить копию в их комнате {{roomName}}.",
-          "checked_at": "2026-04-12T01:40:27.110Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -240,15 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The pronoun 'their' referring to a third party is incorrectly translated as 'vašoj' (your), changing the meaning from someone else's room to the user's own room",
-          "suggestion": "Možete kreirati novu sobu posebno za rezervnu kopiju, izabrati jednu od postojećih soba ili sačuvati kopiju u njihovoj {{roomName}} sobi.",
-          "checked_at": "2026-04-12T01:40:36.783Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -266,29 +202,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The pronoun reference is incorrect. The English 'their {{roomName}} room' refers to a third party's room, but the Vietnamese 'phòng {{roomName}} của bạn' translates to 'your {{roomName}} room', changing the meaning from third-person to second-person possession.",
-          "suggestion": "Bạn có thể tạo một phòng mới chuyên dùng để sao lưu, chọn một trong các phòng hiện có hoặc lưu bản sao trong phòng {{roomName}} của họ.",
-          "checked_at": "2026-04-12T01:40:42.763Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Chinese translation says '为一个备份' (for one backup) instead of '为备份' (for the backup), and '他们的{{roomName}}房间' should be '其{{roomName}}房间' since 'their' refers back to the subject (you/您) in this context",
-          "suggestion": "您可以专门为备份创建一个新房间，选择现有的一个房间，或将副本保存在其{{roomName}}房间中。",
-          "checked_at": "2026-04-12T01:40:46.438Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

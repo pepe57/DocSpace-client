@@ -3,7 +3,7 @@
   "content": "Subscription will be automatically renewed on {{finalDate}} with updated pricing and specifications.",
   "content_en_sha1_hash": "8307de2dd47b43d6e83883bbbf81a6111a782a4a",
   "created_at": "2026-04-10T13:53:43.467Z",
-  "updated_at": "2026-04-12T00:05:17.509Z",
+  "updated_at": "2026-04-12T07:14:23.201Z",
   "comment": {
     "text": "This is a text string displayed to the user, informing them that their subscription will automatically renew on a specific date. The `{{finalDate}}` variable will be replaced with the renewal date.",
     "is_auto": true,
@@ -124,15 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "Missing preposition 'on' before the date variable - Polish translation lacks the equivalent preposition 'w dniu' or 'dnia'",
-          "suggestion": "Subskrypcja zostanie automatycznie odnowiona w dniu {{finalDate}} z zaktualizowanymi cenami i specyfikacjami.",
-          "checked_at": "2026-04-12T00:04:57.183Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -150,15 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation has awkward and unclear phrasing that distorts the meaning. 'la preţuri şi cu specificaţii aplicabile după actualizarea' is grammatically incorrect and unclear.",
-          "suggestion": "Abonamentul va fi reînnoit automat pe {{finalDate}} cu preţuri şi specificaţii actualizate.",
-          "checked_at": "2026-04-12T00:05:02.729Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -194,15 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "Missing preposition 'на' (on) before the date variable, which changes the meaning from 'renewed on [date]' to 'renewed [date]'",
-          "suggestion": "Преуплата ће бити аутоматски обновљена на {{finalDate}} са ажурираним ценама и спецификацијама.",
-          "checked_at": "2026-04-12T00:05:10.995Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -220,15 +196,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "Missing preposition 'on' before the date variable - the Ukrainian translation lacks the equivalent preposition that indicates when the renewal will occur",
-          "suggestion": "Підписка буде автоматично продовжена {{finalDate}} з оновленими цінами та специфікаціями.",
-          "checked_at": "2026-04-12T00:05:15.602Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

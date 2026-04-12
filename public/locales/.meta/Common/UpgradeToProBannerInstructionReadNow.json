@@ -3,7 +3,7 @@
   "content": "Read now",
   "content_en_sha1_hash": "9f762253688c402f7f083fe41a6f024509cb2b8b",
   "created_at": "2025-05-26T07:15:49.231Z",
-  "updated_at": "2026-04-11T22:50:34.927Z",
+  "updated_at": "2026-04-12T07:14:23.187Z",
   "comment": {
     "text": "This is a link label that, when clicked, directs the user to the official documentation for installing ONLYOFFICE DocSpace. It appears within a section providing instructions related to upgrading to a Pro plan.",
     "is_auto": true,
@@ -202,15 +202,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Ukrainian translation uses imperative mood 'Прочитайте' (you read/please read) instead of the simple action 'Read now', making it sound like a command rather than a clickable link label",
-          "suggestion": "Читати зараз",
-          "checked_at": "2026-04-11T22:50:32.514Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

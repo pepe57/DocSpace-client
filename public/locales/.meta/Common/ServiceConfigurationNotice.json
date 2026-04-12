@@ -3,7 +3,7 @@
   "content": "This section is used to connect and configure the services. Please note, only the payer can make changes. Reach out to them for any updates.",
   "content_en_sha1_hash": "afbac527ba0e58b3aed659e738780b7409f7c636",
   "created_at": "2026-04-10T13:53:43.213Z",
-  "updated_at": "2026-04-12T01:09:08.371Z",
+  "updated_at": "2026-04-12T07:14:23.211Z",
   "comment": {
     "text": "This is a notice displayed in the services configuration section. It informs non-payers that only the account payer can make changes to service connections and configurations.",
     "is_auto": true,
@@ -28,15 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'الدفع' (payment/paying) is used instead of 'الدافع' (payer/the one who pays), which changes the meaning from 'the payer' to 'the payment'",
-          "suggestion": "يُستخدم هذا القسم للاتصال والتهيئة للخدمات. يرجى ملاحظة، فقط الدافع يمكنه إجراء تغييرات. تواصل معهم للحصول على أي تحديثات.",
-          "checked_at": "2026-04-12T01:08:31.739Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -120,15 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'attāls' (remote/distant) is incorrect for 'section' in this context",
-          "suggestion": "Šī sadaļa ir paredzēta pakalpojumu savienošanai un konfigurēšanai. Lūdzu, ņemiet vērā, ka izmaiņas var veikt tikai maksātājs. Sazinieties ar viņiem, lai saņemtu jaunumus.",
-          "checked_at": "2026-04-12T01:08:49.211Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -158,15 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The final sentence 'Reach out to them for any updates' is incorrectly translated as 'Accesați această secțiune pentru a găsi actualizări' (Access this section to find updates) instead of instructing to contact the payer",
-          "suggestion": "În această secțiune puteți conecta și configura serviciile. Vă rugăm să rețineți că numai plătitorul poate efectua modificări. Contactați-l pentru orice actualizări.",
-          "checked_at": "2026-04-12T01:08:56.550Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

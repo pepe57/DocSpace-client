@@ -3,7 +3,7 @@
   "content": "Only the latest activity is shown on this page. The data itself is stored during the period specified in the field below (max 180 days).",
   "content_en_sha1_hash": "22d2d2fe430d24da6673ccd96d307465d5dd1671",
   "created_at": "2025-05-19T21:30:51.835Z",
-  "updated_at": "2026-04-11T21:48:49.593Z",
+  "updated_at": "2026-04-12T07:14:23.218Z",
   "comment": {
     "text": "This is a descriptive text displayed on the Audit Trail and Login History settings pages. It informs the user that only recent activity is shown, and the full data retention period is configurable.",
     "is_auto": true,
@@ -89,13 +89,6 @@
           "suggestion": "",
           "checked_at": "2026-04-11T21:48:46.916Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The French translation incorrectly states that users must enter the period in a field below, while the English simply says the period is specified in the field below (implying it's already configured or configurable)",
-          "suggestion": "Juste l'activité la plus récente est affichée sur cette page. Les données elles-mêmes sont conservées pendant la période spécifiée dans le champ ci-dessous (180 jours maximum).",
-          "checked_at": "2026-04-11T21:48:46.916Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null
@@ -116,13 +109,6 @@
           "suggestion": "",
           "checked_at": "2026-04-11T21:48:49.572Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "missing_content",
-          "description": "The Italian translation adds extra information not present in the English original - it specifies that the period is 'measured in days' and changes the punctuation from period to colon, which alters the meaning and structure",
-          "suggestion": "Solo l'ultima attività viene mostrata in questa pagina. I dati stessi vengono memorizzati durante il periodo specificato nel campo sottostante (massimo 180 giorni).",
-          "checked_at": "2026-04-11T21:48:49.572Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null

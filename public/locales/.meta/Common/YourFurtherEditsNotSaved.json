@@ -3,7 +3,7 @@
   "content": "Your further edits may not be saved.",
   "content_en_sha1_hash": "3dbfb8cd57bf68171c29e8fb98b89ce9f2c8182b",
   "created_at": "2026-02-18T14:56:21.766Z",
-  "updated_at": "2026-04-11T21:55:01.570Z",
+  "updated_at": "2026-04-12T07:14:23.179Z",
   "comment": {
     "text": "This is a warning message displayed in a bar at the top of the document editor. It appears when a user's storage quota is exceeded, indicating that subsequent changes might not be saved.",
     "is_auto": true,
@@ -46,29 +46,13 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation says edits 'may not be saved' (bilər - positive possibility) instead of 'may not be saved' (negative possibility/warning). The modal verb conveys the opposite meaning.",
-          "suggestion": "Sizin əlavə redaktələriniz yadda saxlanılmaya bilməz.",
-          "checked_at": "2026-04-11T21:54:23.124Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation changes the meaning from a warning about potential future issues to a statement about user capability/permission",
-          "suggestion": "Вашите допълнителни редакции може да не бъдат запазени.",
-          "checked_at": "2026-04-11T21:54:25.695Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -80,15 +64,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The German translation states that edits 'cannot be saved' (können nicht gespeichert werden) which is definitive, while the English says 'may not be saved' indicating possibility/uncertainty",
-          "suggestion": "Ihre weiteren Bearbeitungen werden möglicherweise nicht gespeichert.",
-          "checked_at": "2026-04-11T21:54:29.189Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -106,15 +82,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation starts with 'Voit olla, että' which means 'You can be that' - this is grammatically incorrect and doesn't convey the intended meaning of a warning about potential data loss",
-          "suggestion": "Myöhemmät muokkauksesi eivät ehkä tallennu.",
-          "checked_at": "2026-04-11T21:54:34.268Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -186,15 +154,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'edițiile' means 'editions' (published versions), not 'edits' (modifications/changes). This completely changes the meaning from warning about unsaved modifications to unsaved editions.",
-          "suggestion": "Modificările ulterioare s-ar putea să nu fie salvate.",
-          "checked_at": "2026-04-11T21:54:49.364Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

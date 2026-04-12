@@ -3,7 +3,7 @@
   "content": "We couldn’t find a contact matching the Stripe email. Your billing and services will continue to work, but we recommend assigning a new Payer to manage billing settings in {{productName}}.",
   "content_en_sha1_hash": "9a8eb302320baca24b98d7e4acfe3462896bff2b",
   "created_at": "2026-04-10T13:53:43.798Z",
-  "updated_at": "2026-04-11T23:02:59.101Z",
+  "updated_at": "2026-04-12T07:14:23.190Z",
   "comment": {
     "text": "This is an error message displayed to the owner of a DocSpace portal when the system cannot find a matching Stripe contact for billing. It informs the owner that services will continue but advises assigning a new Payer. `{{productName}}` is a placeholder for the product's brand name.",
     "is_auto": true,
@@ -46,29 +46,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'přiřadit nového Payerovi' is grammatically incorrect and unclear. It should be 'přiřadit nového Plátce' (assign a new Payer) rather than the current construction which uses incorrect case and mixing of languages.",
-          "suggestion": "Nepodařilo se najít kontakt odpovídající e-mailu Stripe. Vaše fakturace a služby budou nadále fungovat, ale doporučujeme přiřadit nového Plátce ke správě nastavení fakturace v {{productName}}.",
-          "checked_at": "2026-04-11T23:02:12.445Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'Payer' should remain in English as it appears to be a specific technical term/role name in the system, similar to how 'Stripe' is kept in English",
-          "suggestion": "Wir konnten keinen Kontakt finden, der mit der Stripe-E-Mail übereinstimmt. Ihre Abrechnung und Dienste werden weiter funktionieren, aber wir empfehlen, einen neuen Payer zuzuweisen, um die Abrechnungseinstellungen in {{productName}} zu verwalten.",
-          "checked_at": "2026-04-11T23:02:15.802Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -128,15 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "Missing preposition 'in' before {{productName}} - the Latvian text says 'billing settings {{productName}}' instead of 'billing settings in {{productName}}'",
-          "suggestion": "Mums nevar atrast kontaktu, kas atbilst Stripe e-pochai. Jūsu fakturācija un pakalpojumi turpinās darboties, bet mēs iesaka iestatīt jaunu maksātāju, lai pārvaldītu fakturācijas iestatījumus {{productName}}.",
-          "checked_at": "2026-04-11T23:02:29.547Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -184,29 +160,13 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Nepodľa e-mailu Stripe' is grammatically incorrect and unclear. It should be 'Podľa e-mailu Stripe' (according to Stripe email) to properly convey that the system searched based on the Stripe email but couldn't find a match.",
-          "suggestion": "Podľa e-mailu Stripe sme nenašli zodpovedajúci kontakt. Vaše fakturácie a služby budú fungovať ďalej, ale odporúčame priradiť nového platiteľa na správu nastavení fakturácie v {{productName}}.",
-          "checked_at": "2026-04-11T23:02:40.622Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'ki bi se zgodil s e-poštom Stripe' incorrectly translates 'matching the Stripe email' as 'that would happen with Stripe email', which changes the meaning from finding a contact that matches an email to something happening with an email",
-          "suggestion": "Nisem lahko našli stika, ki bi se ujemal s Stripe e-poštnim naslovom. Vaše naplata in storitve bodo nadalje delovale, vendar priporočamo, da v {{productName}} dodelite novega plačnika za upravljanje nastavitev naplati.",
-          "checked_at": "2026-04-11T23:02:44.253Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -218,15 +178,7 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'рачуноводство' (accounting/bookkeeping) is used instead of 'наплата' or 'фактурисање' (billing). This changes the meaning from billing services to accounting services.",
-          "suggestion": "Нисмо нашли контакт који одговара Stripe е-пошти. Ваша наплата и услуге ће наставити да раде, али препоручујемо да доделите новог Плаћања (Payer) за управљање подешавањима наплате у {{productName}}.",
-          "checked_at": "2026-04-11T23:02:50.579Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -244,15 +196,7 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'billing' is incorrectly translated as 'білення' (whitening/bleaching) instead of 'білінг' (billing). This creates confusion about the context.",
-          "suggestion": "Ми не змогли знайти контакт, що відповідає електронній пошті Stripe. Ваш білінг та послуги продовжуватимуть працювати, але ми рекомендуємо призначити нового платника для керування налаштуваннями білінгу в {{productName}}.",
-          "checked_at": "2026-04-11T23:02:56.771Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {

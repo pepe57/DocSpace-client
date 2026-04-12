@@ -3,7 +3,7 @@
   "content": "Would you like to enable automatic top-ups so your balance never runs out?",
   "content_en_sha1_hash": "4e8a95782e3c4f52d937db0d2d9ae74053cc4d62",
   "created_at": "2026-04-10T13:53:43.989Z",
-  "updated_at": "2026-04-11T22:01:27.382Z",
+  "updated_at": "2026-04-12T07:14:23.180Z",
   "comment": {
     "text": "This is a question displayed in a modal dialog, asking the user if they want to enable automatic top-ups for their balance.",
     "is_auto": true,
@@ -46,15 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation uses 'nevystačil' (won't be enough/sufficient) which conveys the opposite meaning of 'never runs out' (never gets depleted/empty)",
-          "suggestion": "Chtěli byste povolit automatické doplňování, aby váš zůstatek nikdy nedošel?",
-          "checked_at": "2026-04-11T22:00:50.602Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -66,15 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Greek translation uses 'αναφορές' (reports) instead of the correct term for 'top-ups' which should be 'επαναφορτίσεις' or 'συμπληρώσεις'",
-          "suggestion": "Θα θέλατε να ενεργοποιήσετε τις αυτόματες επαναφορτίσεις για να μην εξαντλείται ποτέ το υπόλοιπό σας;",
-          "checked_at": "2026-04-11T22:00:54.513Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -128,15 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation says 'so your balance never decreases' instead of 'so your balance never runs out'. There's a significant difference between decreasing and running out completely.",
-          "suggestion": "Vai vēlaties iespējot automātiskus papildinājumus, lai jūsu konta bilance nekad neizbeigtos?",
-          "checked_at": "2026-04-11T22:01:05.579Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -178,15 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation contains a spelling error in 'අවතක්සේදීර' which should be 'අවසන්වීම' or similar, and the overall phrasing is awkward and unclear",
-          "suggestion": "ඔබේ ශේෂය කිසි විටෙකත් අවසන් නොවන පරිදි ස්වයංක්‍රීය නැවත පිරවීම් සක්‍රිය කිරීමට ඔබ කැමතිද?",
-          "checked_at": "2026-04-11T22:01:16.016Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -222,15 +190,7 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Turkish translation splits the single English question into two separate questions, changing the structure and emphasis of the original message",
-          "suggestion": "Bakiyeniz hiç bitmesin diye otomatik dolumları etkinleştirmek ister misiniz?",
-          "checked_at": "2026-04-11T22:01:24.113Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,7 +3,7 @@
   "content": "Room quota limit has been reached.",
   "content_en_sha1_hash": "372dbcfdcccd08f65bcd7061a812994d67627788",
   "created_at": "2026-02-18T14:56:12.084Z",
-  "updated_at": "2026-04-12T01:44:51.732Z",
+  "updated_at": "2026-04-12T07:14:23.216Z",
   "comment": {
     "text": "This is a dialog header that appears when a user attempts to create or edit a document in a room that has reached its storage quota.",
     "is_auto": true,
@@ -46,15 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation uses 'byla dosažena' (was reached) which is grammatically incorrect. The correct form should be 'bylo dosaženo' (has been reached) to match the passive voice and meaning of the English text.",
-          "suggestion": "Dostupná kvóta pro místnost bylo dosaženo.",
-          "checked_at": "2026-04-12T01:44:11.234Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -192,15 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation says 'availability of quota has been reached' instead of 'quota limit has been reached'. This changes the meaning - it should indicate that the limit/maximum has been reached, not that availability has been reached.",
-          "suggestion": "Limit kvote za prostor je dosegnut.",
-          "checked_at": "2026-04-12T01:44:45.435Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {
@@ -218,15 +202,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Vietnamese translation contains redundant words 'giới hạn hạn mức' which creates confusion and doesn't accurately convey the clear meaning of 'quota limit'",
-          "suggestion": "Đã đạt đến hạn mức của phòng.",
-          "checked_at": "2026-04-12T01:44:50.528Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

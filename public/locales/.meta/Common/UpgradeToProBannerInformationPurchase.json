@@ -3,7 +3,7 @@
   "content": "Ask purchase questions at <1>{{email}}</1>",
   "content_en_sha1_hash": "6b8817e13f560fda3a03a1762a7240069b4575df",
   "created_at": "2025-05-26T07:15:49.141Z",
-  "updated_at": "2026-04-11T22:55:32.566Z",
+  "updated_at": "2026-04-12T07:14:23.188Z",
   "comment": {
     "text": "This is a line of text within a contact information section, providing an email address for purchase inquiries. The `{{email}}` variable will be replaced with the actual sales email address.",
     "is_auto": true,
@@ -82,29 +82,13 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation says 'give purchase questions' (տվեք) instead of 'ask purchase questions'",
-          "suggestion": "Գնման հարցեր տալիս <1>{{email}}</1> հասցեով",
-          "checked_at": "2026-04-11T22:55:05.461Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Italian translation is missing the verb 'ask' and changes the sentence structure, making it incomplete. The original instructs to 'ask purchase questions' while the Italian only says 'for purchase questions to'",
-          "suggestion": "Fai domande sull'acquisto a <1>{{email}}</1>",
-          "checked_at": "2026-04-11T22:55:08.089Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {

@@ -3,7 +3,7 @@
   "content": "Sign up with Zoom",
   "content_en_sha1_hash": "2596473d7776e251c5ee2d75c7cf026af02ce2c9",
   "created_at": "2025-05-19T21:30:48.880Z",
-  "updated_at": "2026-04-12T00:36:35.216Z",
+  "updated_at": "2026-04-12T07:14:23.206Z",
   "comment": {
     "text": "This is a button label that allows users to create a new account using their Zoom credentials.",
     "is_auto": true,
@@ -154,15 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation uses 'සූම්' which is an incorrect transliteration of 'Zoom'. The correct Sinhala transliteration should be 'සූම්' or preferably keep 'Zoom' in English as it's a proper brand name.",
-          "suggestion": "Zoom සමඟ ලියාපදිංචිය",
-          "checked_at": "2026-04-12T00:36:24.566Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

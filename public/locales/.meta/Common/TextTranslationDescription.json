@@ -3,7 +3,7 @@
   "content": "Translate text into your desired language instantly, while maintaining meaning and context.",
   "content_en_sha1_hash": "954dda0c7896ff45f12e05ff4d45a0cde79e46dd",
   "created_at": "2026-04-10T13:53:45.790Z",
-  "updated_at": "2026-04-11T23:42:22.220Z",
+  "updated_at": "2026-04-12T07:14:23.197Z",
   "comment": {
     "text": "This is a description for a feature in a list of AI services. It explains that the \"Text Translation\" service instantly translates text while preserving its meaning and context.",
     "is_auto": true,
@@ -166,15 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'jezikovnost' means 'linguisticality' or 'linguistic nature', not 'language'. This changes the meaning from translating into a desired language to translating into a desired linguistic quality.",
-          "suggestion": "Prevajajte besedilo v želeni jezik takoj, pri tem pa ohranjajte pomen in kontekst.",
-          "checked_at": "2026-04-11T23:42:14.826Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

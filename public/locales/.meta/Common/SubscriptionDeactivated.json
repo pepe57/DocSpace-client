@@ -3,7 +3,7 @@
   "content": "Subscription deactivated — non-payment",
   "content_en_sha1_hash": "6244400f48c757281fab42d54dc81d4c61f933c3",
   "created_at": "2026-04-10T13:53:45.694Z",
-  "updated_at": "2026-04-12T00:02:32.605Z",
+  "updated_at": "2026-04-12T07:14:23.200Z",
   "comment": {
     "text": "This is a status message displayed when a subscription has been deactivated due to non-payment, specifically for storage plan changes.",
     "is_auto": true,
@@ -46,15 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Czech translation says 'Subscription activation cancelled' instead of 'Subscription deactivated', which has the opposite meaning",
-          "suggestion": "Předplatné deaktivováno — neplatba",
-          "checked_at": "2026-04-12T00:01:53.347Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -90,15 +82,7 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Armenian translation says 'due to payment' (վճարման պատճառով) instead of 'due to non-payment'. This conveys the opposite meaning.",
-          "suggestion": "Բաժանորդագրությունը դադարեցվեց՝ վճարման բացակայության պատճառով",
-          "checked_at": "2026-04-12T00:02:02.141Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "it": {
@@ -146,29 +130,13 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'não pagamento' is grammatically incorrect in Portuguese and doesn't properly convey 'non-payment'",
-          "suggestion": "Assinatura desativada — falta de pagamento",
-          "checked_at": "2026-04-12T00:02:12.476Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'não pagamento' is grammatically incorrect in Portuguese. It should be 'falta de pagamento' or 'inadimplência'",
-          "suggestion": "Assinatura desativada — falta de pagamento",
-          "checked_at": "2026-04-12T00:02:14.233Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ro": {
@@ -186,15 +154,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Sinhala translation says 'වාර්ෂික ගිණුම' (annual account) instead of 'subscription', which changes the meaning from a general subscription to specifically an annual account",
-          "suggestion": "දායකත්වය අක්‍රිය කර ඇත — ගෙවීම් නොකිරීම නිසා",
-          "checked_at": "2026-04-12T00:02:20.107Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -206,15 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation says 'Aktivacija naročnine preklicana' (subscription activation cancelled) instead of 'Naročnina deaktivirana' (subscription deactivated), which conveys the opposite meaning",
-          "suggestion": "Naročnina deaktivirana – neplačilo",
-          "checked_at": "2026-04-12T00:02:23.792Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {
@@ -232,15 +184,7 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Serbian translation says 'Activation of subscription is disabled' instead of 'Subscription deactivated', which conveys the opposite meaning",
-          "suggestion": "Pretplata je deaktivirana — neplaćanje",
-          "checked_at": "2026-04-12T00:02:28.459Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "tr": {

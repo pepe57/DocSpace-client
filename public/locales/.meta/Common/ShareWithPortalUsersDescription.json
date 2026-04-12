@@ -3,7 +3,7 @@
   "content": "Select specific users from {{productName}} and invite them to fill out the original form.",
   "content_en_sha1_hash": "3be65286af53e08e26a1e63c3c611aff14f48e44",
   "created_at": "2025-09-23T07:24:16.886Z",
-  "updated_at": "2026-04-12T00:51:21.535Z",
+  "updated_at": "2026-04-12T07:14:23.208Z",
   "comment": {
     "text": "This is the description text for the \"Share with users\" option within a sharing dialog. It explains that users can be selected from the portal to share the document with. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
@@ -142,15 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'specific' is missing from the translation, which changes the meaning from selecting specific users to selecting any users",
-          "suggestion": "Selectați utilizatori specifici din {{productName}} și invitați-i să completeze formularul original.",
-          "checked_at": "2026-04-12T00:51:09.317Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {

@@ -3,7 +3,7 @@
   "content": "After users accept the invitation, their status will be changed to 'Active'.",
   "content_en_sha1_hash": "ca00a33b999745953583a0dd0b93a69885f3ca4b",
   "created_at": "2025-05-19T21:30:53.274Z",
-  "updated_at": "2026-04-11T21:49:18.842Z",
+  "updated_at": "2026-04-12T07:14:23.218Z",
   "comment": {
     "text": "This is a message displayed within a dialog box, providing additional information about the invitation process. It clarifies that user status will update to 'Active' once they accept the invitation.",
     "is_auto": true,
@@ -191,13 +191,6 @@
           "suggestion": "",
           "checked_at": "2026-04-11T21:49:18.836Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "missing_tag",
-          "description": "Extra single quote at the end of the Turkish translation that is not present in the English text",
-          "suggestion": "Kullanıcılar daveti kabul ettikten sonra durumları 'Etkin' olarak değiştirilecektir.",
-          "checked_at": "2026-04-11T21:49:18.836Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null

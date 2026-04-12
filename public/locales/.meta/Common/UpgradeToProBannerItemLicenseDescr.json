@@ -3,7 +3,7 @@
   "content": "+ 1-year subscription for functionality and security updates.",
   "content_en_sha1_hash": "bf909f01efdd41c4e5073f4e8f004d859d3df47c",
   "created_at": "2025-05-26T07:15:49.243Z",
-  "updated_at": "2026-04-11T22:49:56.211Z",
+  "updated_at": "2026-04-12T07:14:23.187Z",
   "comment": {
     "text": "This is a description for a banner item, detailing a benefit of upgrading to a Pro plan. It explains that the upgrade includes a one-year subscription for updates.",
     "is_auto": true,
@@ -94,15 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The position of '+ 1年間の' is incorrect - it should come before 'サブスクリプション' not after 'ための'",
-          "suggestion": "機能およびセキュリティアップデートのための1年間のサブスクリプション。",
-          "checked_at": "2026-04-11T22:49:32.049Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -157,13 +149,6 @@
           "suggestion": "",
           "checked_at": "2026-04-11T22:49:42.367Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "missing_content",
-          "description": "The '+' symbol indicating addition/inclusion is missing from the Romanian translation",
-          "suggestion": "+ Abonament de 1 an cu actualizări pentru îmbunătățirea funcționalității și securității",
-          "checked_at": "2026-04-11T22:49:42.367Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null

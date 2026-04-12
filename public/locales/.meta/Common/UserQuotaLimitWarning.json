@@ -3,7 +3,7 @@
   "content": "User quota limit is about to be reached.",
   "content_en_sha1_hash": "c9eda35f6603c4a0a56b66763d35dfae2ea4e802",
   "created_at": "2026-02-18T14:56:20.463Z",
-  "updated_at": "2026-04-11T22:34:03.097Z",
+  "updated_at": "2026-04-12T07:14:23.185Z",
   "comment": {
     "text": "This is a toast message header that appears when a user's storage quota is nearly full, warning them that they are approaching their limit.",
     "is_auto": true,
@@ -40,15 +40,7 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Bulgarian translation uses awkward phrasing 'е наближаващ се' which is grammatically incorrect and unclear",
-          "suggestion": "Лимитът на квотата на потребителя скоро ще бъде достигнат.",
-          "checked_at": "2026-04-11T22:33:25.644Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "cs": {
@@ -120,15 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'sasniegams' (reachable/achievable) is incorrect - it should indicate that the limit is being approached, not that it's reachable",
-          "suggestion": "Lietotāja kvotu limits ir gandrīz sasniegts.",
-          "checked_at": "2026-04-11T22:33:42.389Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -176,15 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovak translation 'na blízku' is grammatically incorrect and unclear. The correct Slovak expression for 'about to be reached' should be 'bude čoskoro dosiahnutý' or 'sa blíži k dosiahnutiu'",
-          "suggestion": "Limit kvóty používateľa bude čoskoro dosiahnutý.",
-          "checked_at": "2026-04-11T22:33:53.926Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

@@ -3,7 +3,7 @@
   "content": "Give me a brief summary of all collected data from \"{{formName}}\"",
   "content_en_sha1_hash": "96482520f78e714238c33b115b1d3b0a79b68c95",
   "created_at": "2026-03-31T15:18:23.908Z",
-  "updated_at": "2026-04-11T23:53:23.782Z",
+  "updated_at": "2026-04-12T07:14:23.199Z",
   "comment": {
     "text": "This is a prompt for an AI chat panel, asking for a summary of data collected from a form. `{{formName}}` will be replaced by the title of the form.",
     "is_auto": true,
@@ -112,15 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The word 'datiem' should be in nominative case 'dati' since it refers to 'all collected data' as the object being summarized",
-          "suggestion": "Sniedz man īsu kopsavilkumu par visiem savāktajiem datiem no \"{{formName}}\"",
-          "checked_at": "2026-04-11T23:53:04.763Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {

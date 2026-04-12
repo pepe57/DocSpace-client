@@ -3,7 +3,7 @@
   "content": "Additional storage exceeding {{amount}} is available upon request.",
   "content_en_sha1_hash": "96d1a8d7da572c73f3ebe1d76840e01702df0791",
   "created_at": "2026-04-10T13:53:43.412Z",
-  "updated_at": "2026-04-12T00:10:19.106Z",
+  "updated_at": "2026-04-12T07:14:23.202Z",
   "comment": {
     "text": "This is a label indicating that more storage can be requested. It appears in an order summary and includes a variable `{{amount}}` representing the current storage limit.",
     "is_auto": true,
@@ -34,15 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Azerbaijani translation incorrectly states that additional storage 'exceeding the amount' is available, rather than additional storage 'exceeding the amount' being available upon request. The meaning is reversed - it suggests the storage already exists rather than being requestable.",
-          "suggestion": "{{amount}} həddini aşan əlavə saxlama tələb əsasında mövcuddur.",
-          "checked_at": "2026-04-12T00:09:40.635Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -120,15 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Latvian translation incorrectly suggests that storage 'exceeding {{amount}}' is available, when it should indicate that 'additional storage beyond {{amount}}' is available upon request",
-          "suggestion": "Papildu krātuve, kas pārsniedz {{amount}}, ir pieejama pēc pieprasījuma.",
-          "checked_at": "2026-04-12T00:09:58.614Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -158,15 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Romanian translation adds 'doar' (only) which is not present in the English text and changes the meaning",
-          "suggestion": "Spațiu de stocare suplimentar care depășește {{amount}} este disponibil la cerere.",
-          "checked_at": "2026-04-12T00:10:04.741Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -226,15 +202,7 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Vietnamese translation says 'storage exceeding the amount' instead of 'additional storage exceeding the amount', which changes the meaning from requesting extra storage beyond a limit to requesting any storage that exceeds the limit",
-          "suggestion": "Dung lượng lưu trữ bổ sung vượt quá {{amount}} có thể được cung cấp theo yêu cầu.",
-          "checked_at": "2026-04-12T00:10:17.894Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "zh-CN": {

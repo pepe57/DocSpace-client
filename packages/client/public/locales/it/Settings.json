@@ -179,7 +179,7 @@
   "LoginHistoryCampaignText": "Proteggi i tuoi dati e difendi te e il tuo team da potenziali minacce di hacking.",
   "LoginHistoryCampaignTitle": "Abilita l’autenticazione a due fattori",
   "LoginHistoryTitle": "Cronologia accessi",
-  "LoginLatestText": "Solo l'ultima attività viene mostrata in questa pagina. I dati stessi vengono memorizzati durante il periodo che può essere inserito nel campo sottostante (misurato in giorni, massimo 180):",
+  "LoginLatestText": "Solo l'ultima attività viene mostrata in questa pagina. I dati stessi vengono memorizzati durante il periodo specificato nel campo sottostante (massimo 180 giorni).",
   "LoginSubheaderTitle": "Questa sottosezione viene utilizzata per monitorare l’attività di accesso dell’utente più recente, compresi gli accessi riusciti e i tentativi falliti con un’indicazione dei motivi.",
   "ManagementCategoryDataManagement": "Gestione dei dati",
   "ManagementCategoryIntegration": "Integrazione",

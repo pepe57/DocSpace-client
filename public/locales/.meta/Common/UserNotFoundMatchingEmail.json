@@ -3,7 +3,7 @@
   "content": "We couldn’t find the user with the matching Stripe e-mail.",
   "content_en_sha1_hash": "60160aa846de84503c5bbb1f1aa6962502abe150",
   "created_at": "2026-04-10T13:53:43.862Z",
-  "updated_at": "2026-04-11T22:34:40.910Z",
+  "updated_at": "2026-04-12T07:14:23.185Z",
   "comment": {
     "text": "This is an error message displayed when a user cannot be found in Stripe using the provided email address. It appears as part of a longer sentence.",
     "is_auto": true,
@@ -28,15 +28,7 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Arabic translation contains redundant words 'الذي يحمل نفس' and 'المطابق' which creates awkward phrasing and doesn't accurately convey the original meaning of 'matching Stripe e-mail'",
-          "suggestion": "لم نتمكن من العثور على المستخدم بعنوان بريد سترايب المطابق.",
-          "checked_at": "2026-04-11T22:34:06.871Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "az": {
@@ -102,15 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The translation is in Chinese, not Japanese as required",
-          "suggestion": "Stripeのメールアドレスと一致するユーザーが見つかりませんでした。",
-          "checked_at": "2026-04-11T22:34:20.348Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {

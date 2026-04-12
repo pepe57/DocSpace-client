@@ -3,7 +3,7 @@
   "content": "Set storage quota to define the maximum disk space for this {{productName}}.",
   "content_en_sha1_hash": "499f7a97f93e9c092c5eca67c5fa8cfdfa381f2e",
   "created_at": "2025-05-19T21:30:48.569Z",
-  "updated_at": "2026-04-12T01:05:45.224Z",
+  "updated_at": "2026-04-12T07:14:23.210Z",
   "comment": {
     "text": "This is a descriptive sentence within a dialog, explaining the purpose of setting a storage quota. It includes the variable `{{productName}}` which will be replaced with the product's brand name.",
     "is_auto": true,
@@ -46,15 +46,7 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Czech translation adds the word 'prostor' (space) before {{productName}} which is not present in the English original and changes the meaning",
-          "suggestion": "Nastavte kvótu úložiště a určete maximální prostor na disku pro tento {{productName}}.",
-          "checked_at": "2026-04-12T01:05:07.627Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
@@ -78,15 +70,7 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Finnish translation uses 'muistikiintiö' (memory quota) instead of 'tallennuskiintiö' or 'levytilakiintiö' (storage quota), which changes the meaning from disk storage to memory",
-          "suggestion": "Aseta tallennuskiintiö määrittääksesi maksimilevytilan tälle {{productName}}.",
-          "checked_at": "2026-04-12T01:05:13.635Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
@@ -128,15 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'šajā {{productName}} diskā' incorrectly suggests the disk space is located 'in this {{productName}} disk' rather than being 'for this {{productName}}' as intended",
-          "suggestion": "Iestatiet krātuves kvotu, lai definētu maksimālo diska vietu šim {{productName}}.",
-          "checked_at": "2026-04-12T01:05:23.691Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -166,15 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Romanian translation adds 'spațiu' (space) before {{productName}} which is not present in the English original and changes the meaning",
-          "suggestion": "Setați cota de stocare pentru a defini spațiul maxim de disc pentru acest {{productName}}.",
-          "checked_at": "2026-04-12T01:05:29.960Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -192,15 +160,7 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The Slovak translation adds the word 'priestor' (space) before {{productName}} which is not present in the English original and changes the meaning",
-          "suggestion": "Nastavte kvótu úložiska, aby ste vymedzili maximálny priestor na disku pre tento {{productName}}.",
-          "checked_at": "2026-04-12T01:05:35.546Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sl": {

@@ -3,7 +3,7 @@
   "content": "Service URL",
   "content_en_sha1_hash": "077225837f3d213b1dc433defc47c2a4e06d2b94",
   "created_at": "2025-05-26T07:15:47.778Z",
-  "updated_at": "2026-04-12T01:07:04.841Z",
+  "updated_at": "2026-04-12T07:14:23.211Z",
   "comment": {
     "text": "This is a placeholder text for an input field where the user enters the URL of a storage service.",
     "is_auto": true,
@@ -100,15 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The capitalization of 'URL' is inconsistent - English uses 'URL' (all caps) while Korean uses 'Url' (mixed case), which may cause technical issues in UI consistency",
-          "suggestion": "서비스 URL",
-          "checked_at": "2026-04-12T01:06:41.799Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -150,15 +142,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Romanian translation 'Url a serverului' means 'Server URL' but the English is 'Service URL' - these refer to different concepts (server vs service)",
-          "suggestion": "URL-ul serviciului",
-          "checked_at": "2026-04-12T01:06:52.015Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -218,15 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "The capitalization of 'URL' is inconsistent - should be 'URL' not 'Url' to match technical convention",
-          "suggestion": "服务URL",
-          "checked_at": "2026-04-12T01:07:04.838Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

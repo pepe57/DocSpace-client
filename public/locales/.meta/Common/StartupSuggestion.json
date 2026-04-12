@@ -3,7 +3,7 @@
   "content": "Do more with {{planName}} plan",
   "content_en_sha1_hash": "e2ed747ebe643fc02022f1f0dfa21047a14d8063",
   "created_at": "2026-04-10T13:53:43.302Z",
-  "updated_at": "2026-04-12T00:21:24.300Z",
+  "updated_at": "2026-04-12T07:14:23.204Z",
   "comment": {
     "text": "This is a suggestion message displayed to users on the payment page. It encourages them to upgrade their plan, with `{{planName}}` being the name of the suggested plan.",
     "is_auto": true,
@@ -52,15 +52,7 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "Missing space between {{planName}} and 'Plan' in German translation",
-          "suggestion": "Mehr Möglichkeiten mit {{planName}} Plan",
-          "checked_at": "2026-04-12T00:20:51.456Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -102,15 +94,7 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation '{{planName}}プランの詳細' means 'Details of {{planName}} plan' which is informational, but the English 'Do more with {{planName}} plan' is encouraging action and upgrading, completely changing the meaning from a call-to-action to a descriptive statement",
-          "suggestion": "{{planName}}プランでもっとできることを",
-          "checked_at": "2026-04-12T00:21:02.438Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ko-KR": {
@@ -224,15 +208,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Chinese translation changes the meaning from 'Do more with [plan]' to 'Upgrade to [plan] to get more permissions', which adds the concept of upgrading that is not present in the original English text",
-          "suggestion": "使用{{planName}}计划做更多事情",
-          "checked_at": "2026-04-12T00:21:24.298Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

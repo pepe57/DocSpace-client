@@ -3,7 +3,7 @@
   "content": "User quota limit has been reached.",
   "content_en_sha1_hash": "6b544004dacc2a403ec5cc12b031fa0dbe0ffd46",
   "created_at": "2026-02-18T14:56:20.494Z",
-  "updated_at": "2026-04-11T22:33:20.140Z",
+  "updated_at": "2026-04-12T07:14:23.184Z",
   "comment": {
     "text": "This is a dialog header that appears when a user has reached their storage or usage limit, indicating that further actions might be restricted.",
     "is_auto": true,
@@ -58,15 +58,7 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The word 'raggiunto' is Italian, not Greek",
-          "suggestion": "Έχει φτάσει το όριο της ποσότας του χρήστη.",
-          "checked_at": "2026-04-11T22:32:44.695Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "es": {
@@ -132,15 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The phrase 'Limit limitu użytkownika' contains redundant use of 'limit' - both the Polish word 'limit' and the borrowed 'limit' are used together, creating awkward and incorrect phrasing",
-          "suggestion": "Limit użytkownika został osiągnięty.",
-          "checked_at": "2026-04-11T22:32:58.538Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -164,15 +148,7 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Russian translation changes the meaning from 'user quota limit' (individual user's limit) to 'users quota limit' (limit on number of users), which is a different concept",
-          "suggestion": "Достигнут лимит квоты пользователя.",
-          "checked_at": "2026-04-11T22:33:05.398Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "si": {
@@ -190,15 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "Grammatical error - 'dosežen' (masculine form) should be 'dosežena' (feminine form) to agree with 'kvota' which is feminine in Slovenian",
-          "suggestion": "Limit kvote uporabnika je dosežena.",
-          "checked_at": "2026-04-11T22:33:11.307Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sq-AL": {

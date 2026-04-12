@@ -3,7 +3,7 @@
   "content": "Buy the full {{license}} version to get:",
   "content_en_sha1_hash": "032d04911b6d8cb5c501683efec920d6481587e1",
   "created_at": "2025-05-26T07:15:40.160Z",
-  "updated_at": "2026-04-11T21:48:23.537Z",
+  "updated_at": "2026-04-12T07:14:23.218Z",
   "comment": {
     "text": "This is a banner header displayed when a user is on a trial version. It prompts them to purchase the full version and lists benefits. The `{{license}}` variable will be replaced with either \"Developer License\" or \"Enterprise License\".",
     "is_auto": true,
@@ -109,13 +109,6 @@
           "suggestion": "",
           "checked_at": "2026-04-11T21:48:23.528Z",
           "checked_by": "deterministic"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The Japanese translation changes the meaning from 'Buy the full version to get:' (implying a list of benefits follows) to 'To use all features, please purchase the full version' (a complete statement without implying additional benefits)",
-          "suggestion": "完全版の{{license}}を購入すると以下が利用できます：",
-          "checked_at": "2026-04-11T21:48:23.528Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],
       "approved_at": null

@@ -3,7 +3,7 @@
   "content": "Sign up with Facebook",
   "content_en_sha1_hash": "9c6f5693773ae10faca829552be51c00d4561dba",
   "created_at": "2025-05-19T21:30:48.826Z",
-  "updated_at": "2026-04-12T00:40:48.426Z",
+  "updated_at": "2026-04-12T07:14:23.207Z",
   "comment": {
     "text": "Button label for creating a new account using Facebook.",
     "is_auto": true,
@@ -130,15 +130,7 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Portuguese translation 'Inscreva-se no Facebook' means 'Sign up on Facebook' (suggesting signing up for a Facebook account), while the English 'Sign up with Facebook' means using Facebook to create an account in the application",
-          "suggestion": "Inscreva-se com Facebook",
-          "checked_at": "2026-04-12T00:40:33.670Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt-BR": {

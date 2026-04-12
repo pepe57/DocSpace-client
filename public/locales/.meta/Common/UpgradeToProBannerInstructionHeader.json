@@ -3,7 +3,7 @@
   "content": "To access pro features, start free 30-day trial of {{organizationName}} {{license}} Edition.",
   "content_en_sha1_hash": "c9c8467806b03bc93d6fcbf359d6ef48678ee2b7",
   "created_at": "2025-05-26T07:15:49.175Z",
-  "updated_at": "2026-04-11T22:53:46.596Z",
+  "updated_at": "2026-04-12T07:14:23.188Z",
   "comment": {
     "text": "This is a header for a banner that encourages users to upgrade to a Pro edition. It appears when a user tries to access a Pro feature and includes variables for the organization's name (`{{organizationName}}`) and the specific license edition (`{{license}}`).",
     "is_auto": true,
@@ -124,15 +124,7 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Polish translation adds 'za darmo' (for free) which changes the meaning - it suggests the pro features themselves are free, rather than the trial being free",
-          "suggestion": "Aby uzyskać dostęp do funkcji pro, rozpocznij bezpłatny 30-dniowy okres próbny {{organizationName}} {{license}} Edition.",
-          "checked_at": "2026-04-11T22:53:26.372Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -174,15 +166,7 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The Slovenian translation says 'try the free 30-day version' instead of 'start free 30-day trial', which changes the meaning from starting a trial to trying a version",
-          "suggestion": "Za dostop do profesionalnih funkcij začnite brezplačno 30-dnevno preizkusno obdobje {{organizationName}} {{license}} Edition.",
-          "checked_at": "2026-04-11T22:53:37.947Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
