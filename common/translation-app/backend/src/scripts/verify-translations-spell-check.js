@@ -72,6 +72,17 @@ const MODEL = PROVIDER === "openrouter"
     ? CLAUDE_CODE_MODEL
     : OLLAMA_MODEL;
 
+/**
+ * Fatal error that should stop the entire script (e.g. quota exceeded, auth failure).
+ * Non-fatal errors (timeout, parse error) are retried or skipped per-key.
+ */
+class FatalProviderError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "FatalProviderError";
+  }
+}
+
 const LANGUAGES_TO_CHECK = positionalArgs[0] ? positionalArgs[0].split(",") : null;
 const CHECKPOINT_FILE = path.join(appRootPath, "verification-checkpoint.json");
 
@@ -351,6 +362,10 @@ async function generateOpenRouter(prompt) {
 
   if (!response.ok) {
     const body = await response.text();
+    // 402 = payment required, 403 = key limit exceeded — fatal, stop immediately
+    if (response.status === 402 || response.status === 403) {
+      throw new FatalProviderError(`OpenRouter API error ${response.status}: ${body}`);
+    }
     throw new Error(`OpenRouter API error ${response.status}: ${body}`);
   }
 
@@ -446,7 +461,12 @@ async function generateClaudeCode(prompt) {
     if (error.killed) {
       throw new Error("Claude Code timed out after 120s");
     }
-    throw new Error(`Claude Code error: ${error.message}`);
+    const msg = error.stderr || error.message || "";
+    // Detect quota/rate limit errors from Claude Code
+    if (msg.includes("rate limit") || msg.includes("quota") || msg.includes("limit exceeded") || msg.includes("overloaded")) {
+      throw new FatalProviderError(`Claude Code limit reached: ${msg.substring(0, 200)}`);
+    }
+    throw new Error(`Claude Code error: ${msg.substring(0, 300)}`);
   }
 }
 
@@ -984,6 +1004,11 @@ async function verifyTranslation(
         throw new Error("Empty response from model");
       }
     } catch (error) {
+      // Fatal errors (quota, auth) — stop the entire script
+      if (error instanceof FatalProviderError) {
+        throw error;
+      }
+
       lastError = error;
       retries++;
 
@@ -1408,6 +1433,18 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
               }
             }
           } catch (langError) {
+            // Fatal errors — save progress and stop
+            if (langError instanceof FatalProviderError) {
+              console.error(`\n⛔ FATAL: ${langError.message}`);
+              console.error("Saving checkpoint and stopping...");
+              saveCheckpoint();
+              if (metadataUpdated) {
+                metadata.updated_at = new Date().toISOString();
+                await writeJsonWithConsistentEol(metadataFile, metadata);
+              }
+              throw langError;
+            }
+
             console.error(
               `Error processing ${keyPath} for ${language}: ${langError.message}`,
             );
