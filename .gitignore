@@ -53,3 +53,4 @@ common/screenshot-comparison-app/.env
 common/screenshot-comparison-app/images/*.png
 common/translation-app/backend/.env
 spell-check-issues.tsv
+translation-stats.md
