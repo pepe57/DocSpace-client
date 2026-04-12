@@ -5,12 +5,13 @@
  * This script scans the locales directories, compares non-English translations with English ones,
  * and updates the ai_spell_check_issues field in the metadata files with issues found by an LLM.
  *
- * Supports two providers:
- *   --provider=ollama      (default) Use local Ollama instance
- *   --provider=openrouter  Use OpenRouter API (requires OPENROUTER_API_KEY in .env)
+ * Supports three providers:
+ *   --provider=ollama       (default) Use local Ollama instance
+ *   --provider=openrouter   Use OpenRouter API (requires OPENROUTER_API_KEY in .env)
+ *   --provider=claude-code  Use Claude Code CLI (uses Claude subscription, no API credits)
  *
  * Usage:
- *   node verify-translations-spell-check.js [languages] [--provider=ollama|openrouter]
+ *   node verify-translations-spell-check.js [languages] [--provider=ollama|openrouter|claude-code]
  *
  * Options:
  *   --no-llm                   Run only deterministic checks (no API calls, very fast)
@@ -23,6 +24,7 @@
  *   node verify-translations-spell-check.js fr,de --provider=openrouter
  *   node verify-translations-spell-check.js --no-llm
  *   node verify-translations-spell-check.js --recheck --provider=openrouter
+ *   node verify-translations-spell-check.js --recheck --provider=claude-code
  *   node verify-translations-spell-check.js --recheck --recheck-types=incorrect_translation,wrong_script
  */
 const fs = require("fs-extra");
@@ -63,7 +65,12 @@ const PROVIDER = NO_LLM
 
 const OLLAMA_MODEL = process.env.OLLAMA_SPELLCHECK_MODEL || "gemma4:latest";
 const OPENROUTER_MODEL = openRouterConfig.spellCheckModel || openRouterConfig.model;
-const MODEL = PROVIDER === "openrouter" ? OPENROUTER_MODEL : OLLAMA_MODEL;
+const CLAUDE_CODE_MODEL = process.env.CLAUDE_CODE_MODEL || "claude-sonnet-4";
+const MODEL = PROVIDER === "openrouter"
+  ? OPENROUTER_MODEL
+  : PROVIDER === "claude-code"
+    ? CLAUDE_CODE_MODEL
+    : OLLAMA_MODEL;
 
 const LANGUAGES_TO_CHECK = positionalArgs[0] ? positionalArgs[0].split(",") : null;
 const CHECKPOINT_FILE = path.join(appRootPath, "verification-checkpoint.json");
@@ -415,6 +422,35 @@ async function generateOpenRouter(prompt) {
 }
 
 /**
+ * Generate completion using Claude Code CLI (uses subscription, not API credits).
+ * Runs `claude -p --model MODEL` as a child process.
+ * @param {string} prompt
+ * @returns {Promise<string>} The response text
+ */
+async function generateClaudeCode(prompt) {
+  const { execFile } = require("child_process");
+  const { promisify } = require("util");
+  const execFileAsync = promisify(execFile);
+
+  const args = ["-p", "--model", CLAUDE_CODE_MODEL];
+
+  try {
+    const { stdout } = await execFileAsync("claude", args, {
+      input: prompt,
+      maxBuffer: 1024 * 1024,
+      timeout: 120000, // 2 min per call
+      env: { ...process.env, LANG: "en_US.UTF-8" },
+    });
+    return stdout.trim();
+  } catch (error) {
+    if (error.killed) {
+      throw new Error("Claude Code timed out after 120s");
+    }
+    throw new Error(`Claude Code error: ${error.message}`);
+  }
+}
+
+/**
  * Generate completion using the active provider
  * @param {string} prompt
  * @returns {Promise<string>} The response text
@@ -422,6 +458,9 @@ async function generateOpenRouter(prompt) {
 async function generateCompletion(prompt) {
   if (PROVIDER === "openrouter") {
     return generateOpenRouter(prompt);
+  }
+  if (PROVIDER === "claude-code") {
+    return generateClaudeCode(prompt);
   }
   return generateOllama(prompt);
 }
@@ -447,6 +486,16 @@ async function verifyProviderConnection() {
       return true;
     } catch (error) {
       console.error(`OpenRouter connection error: ${error.message}`);
+      return false;
+    }
+  }
+  if (PROVIDER === "claude-code") {
+    try {
+      const { execFileSync } = require("child_process");
+      execFileSync("claude", ["--version"], { timeout: 5000 });
+      return true;
+    } catch (error) {
+      console.error("Claude Code CLI not found. Install: npm install -g @anthropic-ai/claude-code");
       return false;
     }
   }

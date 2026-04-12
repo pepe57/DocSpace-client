@@ -32,19 +32,68 @@ const { autoComment: autoCommentPrompt } = require("../prompts/auto-comment");
 const cliArgs = process.argv.slice(2);
 const modelArg = cliArgs.find((a) => a.startsWith("--model="));
 const REGENERATE = cliArgs.includes("--regenerate");
+const USE_CLAUDE_CODE = cliArgs.includes("--provider=claude-code");
 
 // Auto-detect model: explicit --model, or task-specific config, or generic, or Ollama default
 const MODEL = modelArg
   ? modelArg.split("=").slice(1).join("=")
-  : (openRouterConfig.apiKey
-      ? (openRouterConfig.commentModel || openRouterConfig.model)
-      : null)
-    || process.env.OLLAMA_MODEL
-    || "gemma4:latest";
+  : USE_CLAUDE_CODE
+    ? (process.env.CLAUDE_CODE_MODEL || "claude-sonnet-4")
+    : (openRouterConfig.apiKey
+        ? (openRouterConfig.commentModel || openRouterConfig.model)
+        : null)
+      || process.env.OLLAMA_MODEL
+      || "gemma4:latest";
 
+const PROVIDER_NAME = USE_CLAUDE_CODE ? "claude-code" : (isOpenRouterModel(MODEL) ? "openrouter" : "ollama");
+console.log(`Provider: ${PROVIDER_NAME}`);
 console.log(`Model: ${MODEL}`);
-if (!openRouterConfig.apiKey && !modelArg) {
-  console.log("Note: OPENROUTER_API_KEY not set — using Ollama. Set it in .env to use OpenRouter.");
+if (!openRouterConfig.apiKey && !modelArg && !USE_CLAUDE_CODE) {
+  console.log("Note: OPENROUTER_API_KEY not set — using Ollama. Set it in .env or use --provider=claude-code.");
+}
+
+/**
+ * Generate comment via Claude Code CLI (uses subscription, not API credits).
+ * @param {string} keyPath - Key name for logging
+ * @param {string} prompt - The prompt text
+ * @returns {Promise<string|null>} Generated comment or null
+ */
+async function generateViaClaudeCode(keyPath, prompt) {
+  const { execFile } = require("child_process");
+  const { promisify } = require("util");
+  const execFileAsync = promisify(execFile);
+
+  const maxRetries = 3;
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      console.log(
+        `Generating comment for ${keyPath} (attempt ${attempt}/${maxRetries}) [claude-code]`,
+      );
+      const { stdout } = await execFileAsync("claude", ["-p", "--model", MODEL], {
+        input: prompt,
+        maxBuffer: 1024 * 1024,
+        timeout: 120000,
+        env: { ...process.env, LANG: "en_US.UTF-8" },
+      });
+
+      const cleaned = stdout
+        .replace(/<think>[\s\S]*?<\/think>/gi, "")
+        .replace(/<think>[\s\S]*/gi, "")
+        .trim();
+
+      if (cleaned) {
+        process.stdout.write(`  [response] ${cleaned.substring(0, 100)}${cleaned.length > 100 ? "..." : ""}\n`);
+        return cleaned;
+      }
+      throw new Error("Empty response");
+    } catch (error) {
+      console.error(`  Error (attempt ${attempt}/${maxRetries}): ${error.message}`);
+      if (attempt < maxRetries) {
+        await new Promise((r) => setTimeout(r, 2000 * attempt));
+      }
+    }
+  }
+  return null;
 }
 
 /**
@@ -63,14 +112,19 @@ async function generateBasicComment(keyPath, content, usages) {
     return null;
   }
 
+  const prompt = autoCommentPrompt({ keyPath, content, usages });
+
+  // Claude Code provider — use CLI
+  if (USE_CLAUDE_CODE) {
+    return generateViaClaudeCode(keyPath, prompt);
+  }
+
   // Check if provider is available
   const providerReady = await verifyConnection(MODEL);
   if (!providerReady) {
     console.log(`${getProviderName(MODEL)} is not available. Skipping comment generation.`);
     return null;
   }
-
-  const prompt = autoCommentPrompt({ keyPath, content, usages });
 
   const inactivityMs = isOpenRouterModel(MODEL)
     ? (openRouterConfig.inactivityTimeout || 30000)
