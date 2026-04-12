@@ -3,7 +3,7 @@
   "content": "Send notification about space restoring to users",
   "content_en_sha1_hash": "e040fbeb56224222df87a697364fe2553d230591",
   "created_at": "2025-05-26T07:15:47.743Z",
-  "updated_at": "2026-04-11T20:43:21.303Z",
+  "updated_at": "2026-04-12T01:11:45.705Z",
   "comment": {
     "text": "This is a checkbox label. It allows the user to choose whether to send a notification to users when a space is restored from backup.",
     "is_auto": true,
@@ -118,7 +118,15 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Dutch translation is missing the preposition 'over' (about) before 'ruimte herstel', making it grammatically incorrect and unclear",
+          "suggestion": "Stuur notificatie over het herstellen van ruimte aan gebruikers",
+          "checked_at": "2026-04-12T01:11:27.008Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pl": {

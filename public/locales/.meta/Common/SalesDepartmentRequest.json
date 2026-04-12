@@ -3,7 +3,7 @@
   "content": "Sales department request",
   "content_en_sha1_hash": "0e3ac6e1bce337108997dca6f6f3b9a728a8e578",
   "created_at": "2026-04-11T18:34:14.915Z",
-  "updated_at": "2026-04-11T20:43:58.993Z",
+  "updated_at": "2026-04-12T01:37:41.204Z",
   "comment": {
     "text": "This is the title of a dialog box that appears when a user wants to contact the sales department.",
     "is_auto": true,
@@ -154,7 +154,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'අලෙවි ක්‍රියාංශයට ඉල්ලීමකි' means 'It is a request to the sales department' which changes the meaning from a title/label to a statement",
+          "suggestion": "අලෙවි ක්‍රියාංශ ඉල්ලීම",
+          "checked_at": "2026-04-12T01:37:31.858Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

@@ -3,7 +3,7 @@
   "content": "Each completed file is named with a number, the submitter's name, and the submission date. Use the AI Chat button to ask questions or get summaries about submissions.",
   "content_en_sha1_hash": "67322cfe2b2165935ee717df44eb105df580ae8b",
   "created_at": "2026-03-31T15:18:26.684Z",
-  "updated_at": "2026-04-11T20:40:37.494Z",
+  "updated_at": "2026-04-11T23:19:59.890Z",
   "comment": {
     "text": "This is a tooltip message that appears when a user is guided through the \"Completed submissions\" folder in the forms section. It explains the naming convention for completed files and highlights the AI Chat feature for interacting with submissions.",
     "is_auto": true,
@@ -112,7 +112,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'kopsavādes' (plural form meaning 'summaries') is incorrect - it should be 'kopsavilkumus' (accusative plural) to properly convey 'summaries' as the object being received",
+          "suggestion": "Katrs pabeigts fails tiek nosaukts ar numuru, iesniegēja vārdu un iesniegšanas datumu. Izmantojiet AI Chat pogu, lai uzdotu jautājumus vai saņemtu kopsavilkumus par iesniegumiem.",
+          "checked_at": "2026-04-11T23:19:40.401Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -178,7 +186,15 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'резимее' (summaries) contains a spelling error - it should be 'резиме' in Serbian",
+          "suggestion": "Сваки завршени фајл је именован бројем, именом пошаљаоца и датумом слања. Користите дугме AI Chat да поставите питања или добијете резиме о послатим задацима.",
+          "checked_at": "2026-04-11T23:19:53.834Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,7 +3,7 @@
   "content": "Account name is empty",
   "content_en_sha1_hash": "bc7fcc32b6bbe8a24d9fe8f945809e85db12bdce",
   "created_at": "2025-05-26T07:15:46.227Z",
-  "updated_at": "2026-04-11T20:46:17.846Z",
+  "updated_at": "2026-04-12T04:20:39.986Z",
   "comment": {
     "text": "Error text. This message appears when a user attempts to save an empty name for their DocSpace account.",
     "is_auto": true,

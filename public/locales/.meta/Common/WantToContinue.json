@@ -3,7 +3,7 @@
   "content": "Are you sure you want to continue?",
   "content_en_sha1_hash": "8de6e73ba7b7e7a2c5f18e2bc38d0a44a17be1d3",
   "created_at": "2025-05-19T21:30:49.566Z",
-  "updated_at": "2026-04-11T20:39:13.168Z",
+  "updated_at": "2026-04-11T22:19:35.518Z",
   "comment": {
     "text": "This is a confirmation message displayed in a modal dialog, asking the user if they wish to proceed with an action. It appears in various contexts, such as before deleting a chat or when confirming an action related to AI tools or billing.",
     "is_auto": true,
@@ -298,7 +298,15 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation uses 'dëshiron' (you want) which is second person singular, but the subject 'Jeni' is second person plural formal, creating a grammatical mismatch that affects clarity",
+          "suggestion": "Jeni i sigurt që dëshironi të vazhdoni?",
+          "checked_at": "2026-04-11T22:19:28.536Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     }
   }

@@ -3,7 +3,7 @@
   "content": "Browse ready-made form templates. Pick a template to quickly create a new form without starting from scratch.",
   "content_en_sha1_hash": "df9fd1d4ad5d94192e9157b922ee24c897722f3e",
   "created_at": "2026-03-31T15:18:26.797Z",
-  "updated_at": "2026-04-11T20:40:32.300Z",
+  "updated_at": "2026-04-11T23:16:02.598Z",
   "comment": {
     "text": "This is the content of a tooltip that appears during a product tour. It describes the \"Library\" section, which allows users to browse and select pre-made form templates to create new forms quickly.",
     "is_auto": true,
@@ -190,7 +190,15 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The verb 'göz atın' (browse/look at) is missing its preposition. In Turkish, 'göz atmak' requires the dative case marker '-e' when used with an object.",
+          "suggestion": "Hazır form şablonlarına göz atın. Sıfırdan başlamadan yeni bir form oluşturmak için bir şablon seçin.",
+          "checked_at": "2026-04-11T23:15:58.899Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

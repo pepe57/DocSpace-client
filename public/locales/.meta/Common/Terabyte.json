@@ -3,7 +3,7 @@
   "content": "TB",
   "content_en_sha1_hash": "f8a902b067d4344b687920f92c669bffad7b0e0e",
   "created_at": "2025-05-19T21:30:49.270Z",
-  "updated_at": "2026-04-11T20:41:16.384Z",
+  "updated_at": "2026-04-11T23:45:20.457Z",
   "comment": {
     "text": "This is a unit of data storage, \"Terabyte,\" used as a short label in dropdown menus and size displays.",
     "is_auto": true,
@@ -82,7 +82,15 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 'To' is completely incorrect for the data storage unit 'TB' (Terabyte). 'To' appears to be a mistranslation or confusion with another term.",
+          "suggestion": "To",
+          "checked_at": "2026-04-11T23:44:56.719Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {

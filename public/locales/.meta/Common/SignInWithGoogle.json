@@ -3,7 +3,7 @@
   "content": "Sign in with Google",
   "content_en_sha1_hash": "4a0b7281397ff6a6cf1e5d19aad8dd3b71043677",
   "created_at": "2025-05-19T21:30:48.762Z",
-  "updated_at": "2026-04-11T20:42:43.702Z",
+  "updated_at": "2026-04-12T00:45:27.104Z",
   "comment": {
     "text": "This is the label for a button that allows users to log into their account using their Google credentials.",
     "is_auto": true,

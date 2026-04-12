@@ -3,7 +3,7 @@
   "content": "How many times has the form \"{{formName}}\" been submitted?",
   "content_en_sha1_hash": "e0f429db1b42b106eec7f0e62a00cf8810eab3d9",
   "created_at": "2026-03-31T15:18:24.717Z",
-  "updated_at": "2026-04-11T20:40:42.018Z",
+  "updated_at": "2026-04-11T23:23:02.773Z",
   "comment": {
     "text": "This is a prompt for an AI chat panel, asking about the submission count for a specific form. The `{{formName}}` variable will be replaced with the title of the form.",
     "is_auto": true,
@@ -172,7 +172,15 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation asks 'How often' (sa shpeshtë) instead of 'How many times' which changes the meaning from asking for a count to asking for frequency",
+          "suggestion": "Sa herë është dërguar formulari \"{{formName}}\"?",
+          "checked_at": "2026-04-11T23:22:56.144Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

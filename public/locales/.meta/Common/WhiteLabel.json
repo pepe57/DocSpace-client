@@ -3,7 +3,7 @@
   "content": "Logo settings",
   "content_en_sha1_hash": "cde0dbbc94f797482701f082adcc8ce183018e62",
   "created_at": "2025-05-26T07:15:49.607Z",
-  "updated_at": "2026-04-11T20:38:54.161Z",
+  "updated_at": "2026-04-11T22:06:31.719Z",
   "comment": {
     "text": "This is a section title in the portal settings, referring to the \"White Label\" branding options. It appears as a short label in navigation menus and as a page title.",
     "is_auto": true,
@@ -88,7 +88,15 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'settings' is not properly translated - 'Asetukset' should be lowercase to follow Finnish compound word conventions",
+          "suggestion": "Logon asetukset",
+          "checked_at": "2026-04-11T22:06:03.727Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fr": {

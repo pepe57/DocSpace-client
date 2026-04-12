@@ -3,7 +3,7 @@
   "content": "Set quota to define storage limit.",
   "content_en_sha1_hash": "76b938d40e18046c5b737223c4a69f182b330d1c",
   "created_at": "2025-05-19T21:30:48.578Z",
-  "updated_at": "2026-04-11T20:43:12.493Z",
+  "updated_at": "2026-04-12T01:05:02.221Z",
   "comment": {
     "text": "This is a descriptive text within a modal dialog, explaining the purpose of setting a quota to define a storage limit.",
     "is_auto": true,
@@ -70,7 +70,15 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'muistin' (memory) is incorrect - the text should refer to storage/disk space, not computer memory",
+          "suggestion": "Aseta kiintiö määrittääksesi tallennustilan rajan.",
+          "checked_at": "2026-04-12T01:04:38.192Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fr": {

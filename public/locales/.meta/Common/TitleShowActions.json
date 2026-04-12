@@ -3,7 +3,7 @@
   "content": "Show File Actions",
   "content_en_sha1_hash": "5f4d732bf49f42d2b52ab6682a11f986c01135a6",
   "created_at": "2026-02-18T14:56:21.929Z",
-  "updated_at": "2026-04-11T20:41:02.386Z",
+  "updated_at": "2026-04-11T23:36:26.664Z",
   "comment": {
     "text": "This is a tooltip for a button that opens a context menu with actions for a file or folder.",
     "is_auto": true,

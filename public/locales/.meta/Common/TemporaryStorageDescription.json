@@ -3,7 +3,7 @@
   "content": "Backup is stored in the 'Backup' section, you will be able to download it within 24 hours after creating.",
   "content_en_sha1_hash": "88ae5786931a2fc09fc6599fe91ada967589e48d",
   "created_at": "2025-05-26T07:15:48.759Z",
-  "updated_at": "2026-04-11T21:46:34.392Z",
+  "updated_at": "2026-04-11T23:45:57.309Z",
   "comment": {
     "text": "This is a descriptive text that appears below a checkbox related to temporary storage for backups. It informs the user about the backup's storage location and availability period.",
     "is_auto": true,
@@ -70,7 +70,15 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation uses 'Varmuuskopiointi' (backup process/action) instead of 'Varmuuskopio' (backup file/data) when referring to what is stored",
+          "suggestion": "Varmuuskopio tallennetaan 'Varmuuskopiointi' -osioon, voit ladata sen 24 tunnin kuluessa luomisesta.",
+          "checked_at": "2026-04-11T23:45:31.161Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -123,7 +131,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"n\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T21:46:34.383Z",
+          "checked_at": "2026-04-11T23:45:40.197Z",
           "checked_by": "deterministic"
         }
       ],
@@ -150,7 +158,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Romanian translation is missing the word 'it' (referring to the backup) before 'within 24 hours', making the sentence grammatically incomplete and unclear about what can be downloaded",
+          "suggestion": "Copia de rezervă este stocată în secția 'Copiere de rezervă', o puteți descărca în termen de 24 ore de la creare.",
+          "checked_at": "2026-04-11T23:45:46.498Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {

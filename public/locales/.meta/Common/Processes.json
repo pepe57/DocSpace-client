@@ -3,7 +3,7 @@
   "content": "Processes: {{count}}",
   "content_en_sha1_hash": "8639427b5a2102ce300664c4558ef8bc76a91ab0",
   "created_at": "2025-05-26T07:15:46.362Z",
-  "updated_at": "2026-04-11T20:45:54.792Z",
+  "updated_at": "2026-04-12T03:49:31.783Z",
   "comment": {
     "text": "This is a tooltip label for a button that shows the number of ongoing background processes. `{{count}}` is a number representing the total number of processes.",
     "is_auto": true,

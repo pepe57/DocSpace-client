@@ -3,7 +3,7 @@
   "content": "Subscription will be automatically renewed <1>on {{finalDate}}</1> with updated pricing and specifications — <1>{{price}}/month ({{amount}})</1>",
   "content_en_sha1_hash": "970e60c3a629d39134d3e840abb8947cdfd43b05",
   "created_at": "2026-04-10T13:53:43.498Z",
-  "updated_at": "2026-04-11T20:41:43.601Z",
+  "updated_at": "2026-04-12T00:03:55.172Z",
   "comment": {
     "text": "This is a text string displayed to the user, informing them about the automatic renewal of their subscription. It appears when a user's storage plan is downgraded, indicating the new renewal date ({{finalDate}}), the updated monthly price ({{price}}), and the new storage amount ({{amount}}).",
     "is_auto": true,
@@ -28,7 +28,15 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The phrase '/month' should be translated to Arabic instead of being left in English",
+          "suggestion": "سيتم تجديد الاشتراك تلقائيًا <1>في {{finalDate}}</1> بأسعار ومواصفات محدثة — <1>{{price}}/شهر ({{amount}})</1>",
+          "checked_at": "2026-04-12T00:03:14.369Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -70,7 +78,15 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation uses 'on {{finalDate}}' which is incorrect Finnish grammar. The preposition 'on' should be translated or the sentence structure should be adjusted for proper Finnish.",
+          "suggestion": "Tila uusiutuu automaattisesti <1>{{finalDate}}</1> päivitetyeen hinnoitteluun ja teknisiin tietoihin — <1>{{price}}/month ({{amount}})</1>",
+          "checked_at": "2026-04-12T00:03:22.467Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -148,13 +164,29 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Russian translation is missing the preposition 'on' before the date. The English says 'on {{finalDate}}' but Russian only has '{{finalDate}}' without indicating when the renewal occurs.",
+          "suggestion": "Подписка будет автоматически продлена <1>{{finalDate}}</1> в соответствии с обновленными ценами и условиями — <1>{{price}}/мес. ({{amount}})</1>",
+          "checked_at": "2026-04-12T00:03:37.960Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation says 'වාර්ෂික ගාස්තුව' (annual fee) but the English refers to a subscription that renews monthly with '{{price}}/month', not annually",
+          "suggestion": "දායකත්වය <1>{{finalDate}}</1> දිනදී ස්වයංක්‍රීයව අලුත් කරනු ලබන අතර, එහි නව මිල ගණන් සහ පිරිවිතරයන් ඇතුළත් වේ — <1>{{price}}/මාසය ({{amount}})</1>",
+          "checked_at": "2026-04-12T00:03:41.594Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -184,7 +216,15 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The opening <1> tag is missing before the finalDate variable in the Serbian translation",
+          "suggestion": "A pretplata će biti automatski obnovljena <1>{{finalDate}}</1> sa ažuriranim cenama i specifikacijama — <1>{{price}}/mesečno ({{amount}})</1>",
+          "checked_at": "2026-04-12T00:03:48.403Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -196,7 +236,15 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'дата {{finalDate}}' is grammatically incorrect and unclear. It should be 'на дату {{finalDate}}' or similar to properly convey 'on {{finalDate}}'",
+          "suggestion": "Підписка буде автоматично поновлена <1>{{finalDate}}</1> з оновленою ціною та характеристиками — <1>{{price}}/місяць ({{amount}})</1>",
+          "checked_at": "2026-04-12T00:03:52.858Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

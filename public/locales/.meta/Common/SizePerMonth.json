@@ -3,7 +3,7 @@
   "content": "/month <1>({{size}})</1>",
   "content_en_sha1_hash": "f4889cba452c12d5f16d31e43e447835c7b2e924",
   "created_at": "2026-04-10T13:53:43.243Z",
-  "updated_at": "2026-04-11T20:42:25.601Z",
+  "updated_at": "2026-04-12T00:33:33.791Z",
   "comment": {
     "text": "This is a label indicating a monthly cost for a specific storage size. `{{size}}` will be replaced by the storage amount (e.g., \"10 GB\").",
     "is_auto": true,
@@ -52,7 +52,15 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German word 'monat' should be capitalized as 'Monat' and the preposition should be 'pro' instead of the slash to be grammatically correct in German",
+          "suggestion": "pro Monat <1>({{size}})</1>",
+          "checked_at": "2026-04-12T00:32:58.833Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -112,7 +120,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'mēiens' means 'month' as a time period, but in the context of pricing '/month' should be translated as '/mēnesī' (per month)",
+          "suggestion": "/mēnesī <1>({{size}})</1>",
+          "checked_at": "2026-04-12T00:33:11.357Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -172,7 +188,15 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "'/muajt' means 'the months' (plural definite form) instead of '/month' (singular)",
+          "suggestion": "/muaj <1>({{size}})</1>",
+          "checked_at": "2026-04-12T00:33:25.336Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -184,7 +208,15 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Serbian translation is missing the '/month' text which is essential information about the billing period",
+          "suggestion": "/mesečno <1>({{size}})</1>",
+          "checked_at": "2026-04-12T00:33:28.157Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

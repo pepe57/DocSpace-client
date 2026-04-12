@@ -3,7 +3,7 @@
   "content": "File content copy, file downloading and printing restriction activated.",
   "content_en_sha1_hash": "ebb37aa6cdb89eeddede98c5708c63779c37e554",
   "created_at": "2025-05-19T21:30:48.264Z",
-  "updated_at": "2026-04-11T21:47:26.396Z",
+  "updated_at": "2026-04-12T01:42:14.999Z",
   "comment": {
     "text": "This is a short message that appears next to a shared link, indicating that restrictions on copying, downloading, and printing the file content are active. It is appended to an existing sentence.",
     "is_auto": true,
@@ -88,7 +88,15 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Italian translation uses plural agreement 'attivati' which suggests multiple restrictions are activated, but the sentence structure is ambiguous about whether all three restrictions (copy, download, print) are active or just the printing restriction",
+          "suggestion": "Restrizione per la copia del contenuto del file, il download del file e la stampa attivata.",
+          "checked_at": "2026-04-12T01:41:47.678Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -130,7 +138,15 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation changes the meaning by making 'restriction' the subject that is activated, rather than indicating that all three restrictions (copying, downloading, and printing) are activated",
+          "suggestion": "Cópia de conteúdo de arquivo, download de arquivos e restrições de impressão ativadas.",
+          "checked_at": "2026-04-12T01:41:56.961Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -213,14 +229,14 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"\"\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T21:47:26.392Z",
+          "checked_at": "2026-04-12T01:42:08.549Z",
           "checked_by": "deterministic"
         },
         {
           "type": "incorrect_translation",
-          "description": "The Albanian translation changes the meaning from a statement that restrictions 'are activated' to 'activation of restrictions', which is grammatically incomplete and unclear",
+          "description": "The Albanian translation changes the meaning from a statement that restrictions 'are activated' to 'activation of restrictions', which is grammatically incomplete and changes the intended meaning",
           "suggestion": "Kufizimi i kopjimit të përmbajtjes së skedarit, shkarkimit dhe printimit të skedarëve është aktivizuar.",
-          "checked_at": "2026-04-11T21:47:26.392Z",
+          "checked_at": "2026-04-12T01:42:08.549Z",
           "checked_by": "openrouter/anthropic/claude-sonnet-4"
         }
       ],

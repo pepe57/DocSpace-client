@@ -3,7 +3,7 @@
   "content": "You will keep your full {{amount}} access until the end of your paid billing period. If your storage exceeds the new limit at the start of the next period, you’ll be charged for the actual usage, rounded to the nearest {{storageUnit}}.",
   "content_en_sha1_hash": "32799d345243115a080aa782c29618e9a3dc44f4",
   "created_at": "2026-04-10T13:53:44.085Z",
-  "updated_at": "2026-04-11T20:41:50.871Z",
+  "updated_at": "2026-04-12T00:08:56.991Z",
   "comment": {
     "text": "This is a warning message displayed to users about changes to their storage plan. It informs them about continued access until the billing period ends and potential charges if usage exceeds the new limit. `{{amount}}` is a numerical value (e.g., \"10 GB\"), and `{{storageUnit}}` is a unit of storage (e.g., \"GB\").",
     "is_auto": true,
@@ -28,7 +28,15 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'تجاوزت مساحة التخزين حدًا جديدًا' translates to 'storage exceeds a new limit' instead of 'storage exceeds the new limit', which changes the meaning and lacks the definite article",
+          "suggestion": "ستحتفظ بـ {{amount}} وصولك الكامل حتى نهاية فترة الفوترة المدفوعة. إذا تجاوزت مساحة التخزين الحد الجديد في بداية الفترة التالية، فسيتم تحصيل رسوم مقابل الاستخدام الفعلي، مقربًا إلى أقرب {{storageUnit}}.",
+          "checked_at": "2026-04-12T00:07:52.842Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -94,7 +102,15 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation says '切り上げられた' (rounded up) instead of 'rounded to the nearest' which could be either up or down",
+          "suggestion": "有料請求期間が終了するまで、{{amount}} のアクセスはそのまま維持されます。次の期間開始時にストレージが新しい制限を超えた場合、実際の使用量に応じて、最も近い{{storageUnit}}に四捨五入された金額が請求されます。",
+          "checked_at": "2026-04-12T00:08:07.283Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -142,7 +158,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation says 'access to {{amount}} space' instead of 'full {{amount}} access', changing the meaning from complete access to access to a specific amount of space",
+          "suggestion": "Veți păstra accesul complet de {{amount}} până la sfârșitul perioadei active de facturare plătite. Dacă spațiul de stocare depășește noua limită la începutul următoarei perioade, veți fi facturat pentru utilizarea efectivă, rotunjită la cea mai apropiată valoare exprimată în {{storageUnit}}.",
+          "checked_at": "2026-04-12T00:08:18.525Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -160,13 +184,29 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'plateného' (paid) has incorrect grammatical case - should be genitive 'plateného' to agree with 'obdobia', but the form used doesn't properly modify 'fakturačného obdobia'",
+          "suggestion": "Udržíte si plný prístup {{amount}} až do konca svojho plateného fakturačného obdobia. Ak vaše úložisko presiahne nové obmedzenie na začiatku nasledujúceho obdobia, zaplatíte za skutočné využitie, zaokrúhlené na najbližšiu {{storageUnit}}.",
+          "checked_at": "2026-04-12T00:08:24.860Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The phrase 'obračunskega obdobja' (billing period) is missing the word for 'paid' - should be 'plačljivega obračunskega obdobja'",
+          "suggestion": "Ohranili boste polni dostop {{amount}} do konca vašega plačljivega obračunskega obdobja. Če bo vaša shranjena količina na začetku naslednjega obdobja presegla novo omejitev, boste zaračunani za dejansko porabo, zaokroženo na najbližjo {{storageUnit}}.",
+          "checked_at": "2026-04-12T00:08:27.967Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

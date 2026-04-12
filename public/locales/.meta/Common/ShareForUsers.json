@@ -3,7 +3,7 @@
   "content": "Share for users",
   "content_en_sha1_hash": "bf53de1cbc0dfc480132454f260d5d9fc5503d8a",
   "created_at": "2025-09-23T07:24:16.793Z",
-  "updated_at": "2026-04-11T20:42:58.695Z",
+  "updated_at": "2026-04-12T00:56:22.706Z",
   "comment": {
     "text": "This is a section header in a sharing dialog. It introduces the list of users with whom a document or folder is shared.",
     "is_auto": true,
@@ -64,7 +64,15 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Spanish translation changes the meaning from 'Share for users' (action to share with users) to 'Shared with users' (past tense indicating already shared)",
+          "suggestion": "Compartir con usuarios",
+          "checked_at": "2026-04-12T00:55:50.405Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -76,7 +84,15 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 'Partagé avec les utilisateurs' (Shared with users) changes the meaning from an action/instruction to describe sharing TO users, to a past state describing something already shared WITH users",
+          "suggestion": "Partager avec les utilisateurs",
+          "checked_at": "2026-04-12T00:55:53.939Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -136,7 +152,15 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation changes the meaning from 'Share for users' (action to share with users) to 'Users to share' (users who will share), which is the opposite meaning for a section header in a sharing dialog",
+          "suggestion": "Compartilhar com usuários",
+          "checked_at": "2026-04-12T00:56:07.101Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
@@ -172,7 +196,15 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation 'Përdoruesit e ndarjes' means 'The users of sharing' which is awkward and unclear. It should convey the action of sharing TO users, not users OF sharing.",
+          "suggestion": "Ndaj me përdoruesit",
+          "checked_at": "2026-04-12T00:56:14.805Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -184,7 +216,15 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Korisnici za deljenje' means 'Users for sharing' which reverses the meaning. The English 'Share for users' indicates sharing TO users, while the Serbian suggests users FOR the purpose of sharing.",
+          "suggestion": "Deli sa korisnicima",
+          "checked_at": "2026-04-12T00:56:18.608Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

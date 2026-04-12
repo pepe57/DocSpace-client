@@ -3,7 +3,7 @@
   "content": "Reconnect",
   "content_en_sha1_hash": "6988b16a8fd21194b9d1d8d8c49312194ff46ae3",
   "created_at": "2025-05-19T21:30:47.744Z",
-  "updated_at": "2026-04-11T20:45:27.204Z",
+  "updated_at": "2026-04-12T03:14:06.866Z",
   "comment": {
     "text": "This is a button label that allows users to re-establish a connection to a third-party service or storage.",
     "is_auto": true,

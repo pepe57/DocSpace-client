@@ -3,7 +3,7 @@
   "content": "When the balance drops to {{min}}, the wallet will be automatically topped up to {{max}}.",
   "content_en_sha1_hash": "9bd7cb1f518775deb509f52ee99d50a8dcbcfb83",
   "created_at": "2026-04-10T13:53:43.960Z",
-  "updated_at": "2026-04-11T20:38:55.989Z",
+  "updated_at": "2026-04-11T22:08:06.224Z",
   "comment": {
     "text": "This is a descriptive sentence explaining the automatic top-up behavior of a wallet. It appears in the billing section to inform the user about the auto-payment settings, with `{{min}}` and `{{max}}` representing currency values.",
     "is_auto": true,
@@ -64,7 +64,15 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical error: 'η υπόλοιπο' uses feminine article 'η' with neuter noun 'υπόλοιπο', should be 'το υπόλοιπο'",
+          "suggestion": "Όταν το υπόλοιπο πέσει στο {{min}}, το πορτοφόλι θα αναπληρωθεί αυτόματα στο {{max}}.",
+          "checked_at": "2026-04-11T22:07:29.499Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -88,7 +96,15 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Armenian translation uses a colon (:) at the end instead of a period (.), which changes the sentence structure and suggests the sentence is incomplete or introducing a list",
+          "suggestion": "Երբ մնացորդը իջնի մինչև {{min}}, դրամապանակը ավտոմատ կերպով կավելացվի մինչև {{max}}:",
+          "checked_at": "2026-04-11T22:07:35.697Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -148,7 +164,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation incorrectly states the wallet will be topped up 'with the maximum amount of {{max}}' instead of 'to {{max}}'. This changes the meaning from topping up TO a target balance to topping up BY a maximum amount.",
+          "suggestion": "Dacă soldul contului scade până la {{min}}, portofelul va fi alimentat automat până la {{max}}.",
+          "checked_at": "2026-04-11T22:07:48.892Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -160,7 +184,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation uses past tense 'පුරවා ඇත' (has been topped up) instead of future tense 'පුරවනු ලැබේ' (will be topped up), completely changing the meaning from a future automatic action to a past completed action",
+          "suggestion": "එම ඍජුව {{min}} දක්වා අඩු වූ විට, වෝලට් {{max}} දක්වා ස්වයංක්‍රියව පුරවනු ලැබේ.",
+          "checked_at": "2026-04-11T22:07:53.707Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -202,13 +234,29 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Incorrect verb form - 'опуститься' (will drop) should be 'опустится' (drops) to match the present tense condition in English",
+          "suggestion": "Коли баланс опустится до {{min}}, гаманець буде автоматично поповнено до {{max}}.",
+          "checked_at": "2026-04-11T22:08:02.490Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'ví dụ điện tử' means 'electronic example' instead of 'electronic wallet'. This is a critical mistranslation that changes the meaning from wallet to example.",
+          "suggestion": "Khi số dư giảm xuống {{min}}, ví điện tử sẽ tự động được nạp lại lên {{max}}.",
+          "checked_at": "2026-04-11T22:08:05.051Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

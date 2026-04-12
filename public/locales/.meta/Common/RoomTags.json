@@ -3,7 +3,7 @@
   "content": "<bold>{{roomName}}</bold> room tags",
   "content_en_sha1_hash": "15f8c4482aed922ca46775cdbea247d4cbc50f77",
   "created_at": "2026-03-26T08:26:45.756Z",
-  "updated_at": "2026-04-11T20:43:59.874Z",
+  "updated_at": "2026-04-12T01:38:20.223Z",
   "comment": {
     "text": "This is a label indicating the tags associated with a specific room. It appears in a filter or management interface, with `{{roomName}}` being the name of the room.",
     "is_auto": true,
@@ -142,7 +142,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'etichete de spațiu' means 'space tags' which is incorrect. The English refers to 'room tags' - tags that belong to or are associated with a specific room, not tags about spaces in general.",
+          "suggestion": "<bold>{{roomName}}</bold> etichete de cameră",
+          "checked_at": "2026-04-12T01:38:05.434Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -166,7 +174,15 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'tagovi' is Croatian/Serbian, not Slovenian. In Slovenian, 'tags' should be 'oznake'.",
+          "suggestion": "<bold>{{roomName}}</bold> oznake prostora",
+          "checked_at": "2026-04-12T01:38:11.488Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

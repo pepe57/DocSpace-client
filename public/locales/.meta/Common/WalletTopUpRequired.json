@@ -3,7 +3,7 @@
   "content": "Top up required: {{currency}}",
   "content_en_sha1_hash": "905faeb2e76ac54b11e540892ab0a95807a23187",
   "created_at": "2026-04-10T13:53:45.886Z",
-  "updated_at": "2026-04-11T20:39:14.791Z",
+  "updated_at": "2026-04-11T22:20:56.760Z",
   "comment": {
     "text": "This is a warning message displayed when a wallet top-up is needed to complete a purchase. `{{currency}}` shows the amount required for the top-up.",
     "is_auto": true,
@@ -34,7 +34,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation uses 'Yeniləmə' (update/renewal) instead of conveying the concept of 'top up' (adding money to a wallet/account balance)",
+          "suggestion": "Balans artırılması tələb olunur: {{currency}}",
+          "checked_at": "2026-04-11T22:20:15.224Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -76,7 +84,15 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The French translation is identical to the English text - it appears to not be translated at all",
+          "suggestion": "Recharge requise : {{currency}}",
+          "checked_at": "2026-04-11T22:20:23.008Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -112,7 +128,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Iespējojams papildinājums' means 'Possible supplement/addition' which suggests something optional, while the English 'Top up required' indicates a mandatory action needed to complete a purchase",
+          "suggestion": "Nepieciešams papildināt: {{currency}}",
+          "checked_at": "2026-04-11T22:20:32.318Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -154,7 +178,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation uses 'අලුත් කිරීම' which means 'renewal/update' rather than 'top up' which should be 'පිරවීම' or 'එකතු කිරීම'",
+          "suggestion": "අවශ්‍ය පිරවීම: {{currency}}",
+          "checked_at": "2026-04-11T22:20:42.572Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -166,13 +198,29 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'nadgraditi' means 'to upgrade' rather than 'to top up' or 'to add funds', which changes the meaning in a financial context",
+          "suggestion": "Potrebno je dopolniti: {{currency}}",
+          "checked_at": "2026-04-11T22:20:46.574Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation 'Krijoni top-up' means 'Create top-up' which is an action instruction, while the English 'Top up required' indicates a requirement/necessity. These convey completely different meanings.",
+          "suggestion": "Nevojitet plotësim: {{currency}}",
+          "checked_at": "2026-04-11T22:20:49.338Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
@@ -202,7 +250,15 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'required' is missing from the Vietnamese translation, which changes the meaning from indicating a mandatory top-up to just stating 'top-up'",
+          "suggestion": "Cần nạp tiền: {{currency}}",
+          "checked_at": "2026-04-11T22:20:55.851Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

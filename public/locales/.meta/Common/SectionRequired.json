@@ -3,7 +3,7 @@
   "content": "This section is required",
   "content_en_sha1_hash": "966ddeb8d027a6ea2fc2fa4163eeb661d2fe085a",
   "created_at": "2025-05-19T21:30:48.346Z",
-  "updated_at": "2026-04-11T20:43:47.864Z",
+  "updated_at": "2026-04-12T01:29:41.979Z",
   "comment": {
     "text": "This is an error message displayed when a required section of a form has not been filled out.",
     "is_auto": true,

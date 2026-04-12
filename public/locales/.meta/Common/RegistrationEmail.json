@@ -3,7 +3,7 @@
   "content": "Your registration email address",
   "content_en_sha1_hash": "8cc0ae7ce8d6f84fb6f6364ece769b5cac5b2cd4",
   "created_at": "2025-05-19T21:30:47.781Z",
-  "updated_at": "2026-04-11T20:45:21.341Z",
+  "updated_at": "2026-04-12T03:06:24.938Z",
   "comment": {
     "text": "This is a placeholder text for an email input field. It appears in various registration, login, and access recovery forms, prompting the user to enter their email address.",
     "is_auto": true,

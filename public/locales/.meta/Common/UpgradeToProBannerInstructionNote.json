@@ -3,7 +3,7 @@
   "content": "Please note that the editors will be unavailable during the upgrade. We also recommend to <1>backup your data</1> before you start.",
   "content_en_sha1_hash": "6254435f524d28160ed4c7af92aa2d841ada3ca0",
   "created_at": "2025-05-26T07:15:49.220Z",
-  "updated_at": "2026-04-11T20:39:55.753Z",
+  "updated_at": "2026-04-11T22:51:14.476Z",
   "comment": {
     "text": "This is an instructional note displayed in a banner, informing users about the implications of upgrading to a Pro plan. It advises them that editors will be unavailable and suggests backing up data before starting the upgrade process. The `<1>backup your data</1>` tag indicates a clickable link within the sentence.",
     "is_auto": true,
@@ -148,7 +148,15 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order changes the meaning - 'Сначала рекомендуется' (First it is recommended) suggests backing up should be done first, while the English 'We also recommend' indicates it's an additional recommendation alongside the main warning",
+          "suggestion": "Пожалуйста, обратите внимание, что редакторы будут недоступны в ходе обновления. Мы также рекомендуем <1>создать резервную копию данных</1> перед началом.",
+          "checked_at": "2026-04-11T22:50:59.442Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "si": {
@@ -208,7 +216,15 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'të rezervoni të dhënat tuaja' means 'to reserve your data' which is incorrect. The English 'backup your data' should be translated as 'të bëni një kopje rezervë të të dhënave tuaja' or similar.",
+          "suggestion": "Ju lutemi vini re se redaktorët nuk do të jenë të disponueshëm gjatë përmirësimit. Ne rekomandojmë gjithashtu që të <1>bëni një kopje rezervë të të dhënave tuaja</1> përpara se të filloni.",
+          "checked_at": "2026-04-11T22:51:07.888Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     }
   }

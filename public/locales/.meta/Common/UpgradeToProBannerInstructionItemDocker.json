@@ -3,7 +3,7 @@
   "content": "Docker instruction.",
   "content_en_sha1_hash": "ebb408553e05d849ad37700e004798f23d8228e3",
   "created_at": "2025-05-26T07:15:49.186Z",
-  "updated_at": "2026-04-11T20:39:59.455Z",
+  "updated_at": "2026-04-11T22:53:05.970Z",
   "comment": {
     "text": "This is a short label for an instruction item, specifically for Docker installation. It appears within a list of instructions for upgrading to a Pro plan.",
     "is_auto": true,
@@ -34,7 +34,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation changes 'instruction' (singular) to 'təlimatlar' (plural instructions), which alters the meaning",
+          "suggestion": "Docker təlimatı.",
+          "checked_at": "2026-04-11T22:52:29.719Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -76,7 +84,15 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation adds 'installation' which is not present in the English text. The English simply says 'Docker instruction' while French says 'Docker installation instructions'",
+          "suggestion": "Consignes Docker.",
+          "checked_at": "2026-04-11T22:52:38.040Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {

@@ -3,7 +3,7 @@
   "content": "When balance goes below",
   "content_en_sha1_hash": "617a35845fe6462abff14d4bbc63cf3672c3254d",
   "created_at": "2026-04-10T13:53:43.974Z",
-  "updated_at": "2026-04-11T20:38:55.033Z",
+  "updated_at": "2026-04-11T22:07:21.261Z",
   "comment": {
     "text": "This is a label for an input field where the user specifies a minimum balance threshold. It appears in the auto-payment settings, indicating when an automatic top-up should be triggered.",
     "is_auto": true,
@@ -34,7 +34,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation 'Çəhrə aşağı düşəndə' means 'When face goes down' which is completely wrong. The English refers to a financial balance threshold, not a face.",
+          "suggestion": "Balans aşağı düşəndə",
+          "checked_at": "2026-04-11T22:06:35.579Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -64,7 +72,15 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Spanish translation is missing the word 'below' - it says 'when balance is inferior' instead of 'when balance goes below'",
+          "suggestion": "Cuando el saldo esté por debajo de",
+          "checked_at": "2026-04-11T22:06:42.385Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -76,13 +92,29 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 's'effondre' means 'collapses' or 'crashes', which implies a sudden dramatic fall, rather than simply going below a threshold",
+          "suggestion": "Quand le solde passe en dessous de",
+          "checked_at": "2026-04-11T22:06:45.786Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'նվազում է' means 'decreases/is decreasing' which implies a continuous process, while the English 'goes below' refers to crossing a specific threshold point",
+          "suggestion": "Երբ հավասարակշռությունը ցածր է գալիս",
+          "checked_at": "2026-04-11T22:06:48.816Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -94,13 +126,29 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation changes the meaning from 'below a threshold' to 'down to a specific amount', which implies the balance reaches exactly that amount rather than falling below it",
+          "suggestion": "残高が次の金額を下回る場合：",
+          "checked_at": "2026-04-11T22:06:52.345Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '아래로 내려갈 때' means 'when it goes down below' which implies directional movement downward, but the English 'goes below' refers to falling below a threshold value, not physical downward movement",
+          "suggestion": "잔액이 다음 금액 미만이 될 때",
+          "checked_at": "2026-04-11T22:06:55.149Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -118,7 +166,15 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Dutch translation is incomplete - it's missing the verb 'goes' and appears to be cut off",
+          "suggestion": "Wanneer het saldo onder komt",
+          "checked_at": "2026-04-11T22:07:00.183Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -154,7 +210,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation uses 'තැන්ඩර' (tender) which is incorrect for 'balance' in a financial context",
+          "suggestion": "ශේෂය අඩු වුණාම",
+          "checked_at": "2026-04-11T22:07:07.809Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -190,7 +254,15 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation uses an incorrect possessive construction with an apostrophe ('ın) which is grammatically wrong and changes the meaning",
+          "suggestion": "Bakiye şunun altına düştüğünde",
+          "checked_at": "2026-04-11T22:07:17.303Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
@@ -202,7 +274,15 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Vietnamese translation is incomplete - missing the word 'below' which is essential for understanding the threshold condition",
+          "suggestion": "Khi số dư xuống dưới",
+          "checked_at": "2026-04-11T22:07:20.295Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

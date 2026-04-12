@@ -3,7 +3,7 @@
   "content": "Automatically analyze and process responses",
   "content_en_sha1_hash": "dbdd0c940852dce39f897bcf0671e80f9ac60945",
   "created_at": "2026-03-31T15:18:26.957Z",
-  "updated_at": "2026-04-11T20:39:03.122Z",
+  "updated_at": "2026-04-11T22:12:45.745Z",
   "comment": {
     "text": "This is a feature description in a welcome tour dialog. It explains that the system can automatically analyze and process responses, likely using AI.",
     "is_auto": true,
@@ -34,7 +34,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation uses imperative mood ('edin' - 'do/make') instead of describing an automatic feature. The English describes what the system does automatically, while the Azerbaijani reads like a command to the user.",
+          "suggestion": "Cavabları avtomatik analiz edir və emal edir",
+          "checked_at": "2026-04-11T22:12:06.476Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -166,7 +174,15 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Slovenian translation is missing a verb and appears to be a noun phrase rather than a complete sentence describing the action",
+          "suggestion": "Samodejno analiziraj in obdelaj odgovore",
+          "checked_at": "2026-04-11T22:12:35.590Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
@@ -178,7 +194,15 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Mixed verb forms - 'анализирај' (imperative) and 'обрађује' (present tense) create grammatical inconsistency and unclear meaning",
+          "suggestion": "Автоматски анализира и обрађује одговоре",
+          "checked_at": "2026-04-11T22:12:39.324Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

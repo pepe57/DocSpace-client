@@ -3,7 +3,7 @@
   "content": "Transaction history",
   "content_en_sha1_hash": "aa7d3d7dd9d1706c1bda7bd97c31b7c47a7d310f",
   "created_at": "2026-04-10T13:53:43.722Z",
-  "updated_at": "2026-04-11T20:40:28.675Z",
+  "updated_at": "2026-04-11T23:13:40.936Z",
   "comment": {
     "text": "This is the title for a section or page displaying a user's past transactions.",
     "is_auto": true,
@@ -34,7 +34,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation 'Tədbirlər tarixindəi' means 'Events history' or 'Activities history', not 'Transaction history'. Also contains a typo with extra 'i' at the end.",
+          "suggestion": "Əməliyyat tarixçəsi",
+          "checked_at": "2026-04-11T23:13:03.881Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -154,7 +162,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'තොරතුරු ගනුදෙනිය' means 'information transaction' rather than 'transaction history'. It refers to a single transaction of information, not a historical record of transactions.",
+          "suggestion": "ගනුදෙනු ඉතිහාසය",
+          "checked_at": "2026-04-11T23:13:27.245Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

@@ -3,7 +3,7 @@
   "content": "Automatically switch between light and dark themes when your system does.",
   "content_en_sha1_hash": "c63fc79ca86878cd4320587abf222c6e63118c5c",
   "created_at": "2026-04-03T21:51:34.692Z",
-  "updated_at": "2026-04-11T20:41:21.847Z",
+  "updated_at": "2026-04-11T23:48:56.346Z",
   "comment": {
     "text": "This is a description for a radio button option. It explains that selecting this option will make the application's theme (light or dark) automatically match the operating system's theme setting.",
     "is_auto": true,
@@ -40,7 +40,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation uses imperative mood 'edin' (do/make) which changes the meaning from a description of automatic behavior to a command for the user to manually switch themes",
+          "suggestion": "Sisteminiz bunu etdikdə açıq və qaranlıq temalar arasında avtomatik keçid edilir.",
+          "checked_at": "2026-04-11T23:48:10.349Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -58,7 +66,15 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation uses imperative form 'Wechseln Sie' (you switch) instead of describing what the system will do automatically",
+          "suggestion": "Automatisch zwischen hellen und dunklen Themen wechseln, wenn Ihr System dies tut.",
+          "checked_at": "2026-04-11T23:48:15.232Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -70,7 +86,15 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Spanish translation uses imperative mood 'Cambie' (Change) instead of describing automatic behavior, changing the meaning from automatic switching to a command",
+          "suggestion": "Cambia automáticamente entre los temas claros y oscuros cuando lo haga su sistema.",
+          "checked_at": "2026-04-11T23:48:18.508Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -106,7 +130,15 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Korean translation omits the conditional aspect 'when your system does' which is crucial for understanding that the switching happens in response to system changes",
+          "suggestion": "시스템이 전환할 때 라이트 테마와 다크 테마 간에 자동으로 전환됩니다.",
+          "checked_at": "2026-04-11T23:48:27.139Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -136,7 +168,15 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation uses imperative mood 'Alterne' (Switch) instead of describing automatic behavior. The English describes automatic switching that happens when the system does it, but the Portuguese reads like a command to manually switch.",
+          "suggestion": "Alterna automaticamente entre os temas claro e escuro quando o seu sistema o fizer.",
+          "checked_at": "2026-04-11T23:48:33.693Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -148,7 +188,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Romanian translation is missing the word 'automat' (automatically) and uses imperative mood 'Comutați' (Switch) instead of describing automatic behavior",
+          "suggestion": "Comută automat între temele luminoasă și întunecată când sistemul dumneavoastră face acest lucru.",
+          "checked_at": "2026-04-11T23:48:38.160Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -196,13 +244,29 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation changes the meaning from a passive description to an active command. The English describes what happens automatically, while the Turkish uses imperative form telling the user to switch.",
+          "suggestion": "Sisteminiz geçiş yaptığında açık ve koyu temalar arasında otomatik olarak geçiş yapar.",
+          "checked_at": "2026-04-11T23:48:49.819Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation uses imperative mood 'перемикайтеся' (you switch) instead of describing what the system does automatically",
+          "suggestion": "Автоматично перемикається між світлою та темною темами, коли це робить ваша система.",
+          "checked_at": "2026-04-11T23:48:52.468Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "vi": {
@@ -214,7 +278,15 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Chinese translation omits the key concept of 'automatically' which is essential to understanding that the switching happens without user intervention",
+          "suggestion": "当系统主题发生变化时，自动在浅色和深色主题之间切换。",
+          "checked_at": "2026-04-11T23:48:56.344Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     }
   }

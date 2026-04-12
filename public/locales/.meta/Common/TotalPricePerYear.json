@@ -3,7 +3,7 @@
   "content": "<2>{{price}}</2><3>/year</3>",
   "content_en_sha1_hash": "92ecc3c41c8c7b6dc7c9384e83b6089126a69f26",
   "created_at": "2026-04-10T13:53:43.707Z",
-  "updated_at": "2026-04-11T20:40:44.472Z",
+  "updated_at": "2026-04-11T23:24:14.717Z",
   "comment": {
     "text": "This is a price display for a yearly subscription. It shows the total price ({{price}}) followed by \"/year\", with the price in a larger font and \"/year\" in bold.",
     "is_auto": true,
@@ -34,7 +34,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The text '/year' is not translated to Azerbaijani - it should be '/il' meaning 'per year'",
+          "suggestion": "<2>{{price}}</2><3>/il</3>",
+          "checked_at": "2026-04-11T23:23:41.087Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -184,7 +192,15 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The text '/годишње' is written in Cyrillic script, but the target language is Serbian (Latin) which should use Latin script",
+          "suggestion": "<2>{{price}}</2><3>/godišnje</3>",
+          "checked_at": "2026-04-11T23:24:09.783Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

@@ -3,7 +3,7 @@
   "content": "{{currency}} per 1 backup",
   "content_en_sha1_hash": "d85e845aa0379da19ebcadd952f30a7ee8e2786f",
   "created_at": "2026-04-10T13:53:42.985Z",
-  "updated_at": "2026-04-11T20:46:29.515Z",
+  "updated_at": "2026-04-12T04:35:10.600Z",
   "comment": {
     "text": "This is a short label indicating the price for a single backup. It appears on a billing services page, with `{{currency}}` representing the formatted price.",
     "is_auto": true,

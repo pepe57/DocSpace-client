@@ -3,7 +3,7 @@
   "content": "Learn more about {{license}} Edition on the <1>official website</1>",
   "content_en_sha1_hash": "62cad8c148a203ce2ed7a69d5c5c57a129dd8912",
   "created_at": "2025-05-26T07:15:49.119Z",
-  "updated_at": "2026-04-11T20:40:04.814Z",
+  "updated_at": "2026-04-11T22:56:47.915Z",
   "comment": {
     "text": "This is a short informational message displayed in a banner, encouraging users to learn more about a specific ONLYOFFICE edition. `{{license}}` will be replaced with the name of the edition (e.g., \"Enterprise\"). `<1></1>` is a tag for a clickable link to the official website.",
     "is_auto": true,
@@ -64,7 +64,15 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The verb 'Aprender' (to learn) should be in infinitive form 'Aprender más' or imperative form 'Aprende más', but the current form sounds incomplete and unnatural in Spanish",
+          "suggestion": "Aprende más sobre {{license}} Edition en el <1>sitio web oficial</1>",
+          "checked_at": "2026-04-11T22:56:18.406Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
@@ -172,7 +180,15 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_tag",
+          "description": "The closing tag </1> is missing from the translation",
+          "suggestion": "Сазнајте више о {{license}} издању <1>на званичном веб-сајту</1>",
+          "checked_at": "2026-04-11T22:56:42.279Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

@@ -3,7 +3,7 @@
   "content": "Use this button to upload existing PDF forms or create new ones from scratch.",
   "content_en_sha1_hash": "33fc5544ea2ecd5cba567840fcf0d4af6a3244fe",
   "created_at": "2026-03-31T15:18:26.833Z",
-  "updated_at": "2026-04-11T20:40:30.395Z",
+  "updated_at": "2026-04-11T23:14:53.566Z",
   "comment": {
     "text": "This is a tooltip for a button. It explains that the button allows users to upload existing PDF forms or create new ones.",
     "is_auto": true,
@@ -178,7 +178,15 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'улажење' means 'entering' or 'investing', not 'uploading'. This completely changes the meaning of the action.",
+          "suggestion": "Користите овај дугме за отпремање постојећих PDF формулара или креирање нових од почетка.",
+          "checked_at": "2026-04-11T23:14:48.224Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

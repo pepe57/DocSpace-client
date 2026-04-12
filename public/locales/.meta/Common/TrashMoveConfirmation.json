@@ -3,7 +3,7 @@
   "content": "Display notification when moving items to {{sectionName}}",
   "content_en_sha1_hash": "b42767b732c4005a1996d81998ef7f3c1c631f8c",
   "created_at": "2026-04-03T21:51:34.707Z",
-  "updated_at": "2026-04-11T20:40:26.127Z",
+  "updated_at": "2026-04-11T23:11:43.225Z",
   "comment": {
     "text": "This is a label for a toggle switch in user settings. It controls whether a notification appears when files are moved to the trash. `{{sectionName}}` will always be \"Trash\".",
     "is_auto": true,

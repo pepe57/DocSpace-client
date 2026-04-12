@@ -3,7 +3,7 @@
   "content": "Uploader",
   "content_en_sha1_hash": "d1c7310f3bc833ce522db3329fe0f4f539e9c27d",
   "created_at": "2025-05-19T21:30:49.434Z",
-  "updated_at": "2026-04-11T20:39:44.842Z",
+  "updated_at": "2026-04-11T22:43:41.508Z",
   "comment": {
     "text": "This is a label for a section or feature related to uploading files. It appears in the plugin settings and as a title for a developer tool.",
     "is_auto": true,
@@ -58,7 +58,15 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation 'Hochgeladen von' means 'Uploaded by' (indicating who uploaded something), while the English 'Uploader' refers to the tool/feature that performs uploading",
+          "suggestion": "Uploader",
+          "checked_at": "2026-04-11T22:43:09.122Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -136,7 +144,15 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation 'Upload' is a verb/action, while the English 'Uploader' is a noun referring to a tool or component that performs uploads",
+          "suggestion": "Carregador",
+          "checked_at": "2026-04-11T22:43:24.304Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {

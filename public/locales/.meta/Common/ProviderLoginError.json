@@ -3,7 +3,7 @@
   "content": "Authorization error",
   "content_en_sha1_hash": "14a7e84261230bbb4b1ed8b2fc1a0afddf92688d",
   "created_at": "2025-05-19T21:30:47.577Z",
-  "updated_at": "2026-04-11T20:45:50.239Z",
+  "updated_at": "2026-04-12T03:42:54.282Z",
   "comment": {
     "text": "This is the title of a toast message that appears when there is an error during the authorization process with an external provider.",
     "is_auto": true,

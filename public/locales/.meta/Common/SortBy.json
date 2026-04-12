@@ -3,7 +3,7 @@
   "content": "Sort by",
   "content_en_sha1_hash": "a2a5bdeca9391be1e0cdff1c19895bae7fadc2c2",
   "created_at": "2025-05-19T21:30:48.943Z",
-  "updated_at": "2026-04-11T20:42:19.256Z",
+  "updated_at": "2026-04-12T00:29:11.982Z",
   "comment": {
     "text": "This is a label for a dropdown menu or button that allows users to choose the order in which items are displayed. It appears as a short label.",
     "is_auto": true,
@@ -202,7 +202,15 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Şöyle sırala:' means 'Sort like this:' which implies a specific sorting method, while 'Sort by' is a general label for choosing sorting criteria",
+          "suggestion": "Sıralama ölçütü",
+          "checked_at": "2026-04-12T00:29:08.976Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

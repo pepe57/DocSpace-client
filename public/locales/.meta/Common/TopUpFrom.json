@@ -3,7 +3,7 @@
   "content": "From",
   "content_en_sha1_hash": "3f66052a107eaf9bae7cad0f61fb462f47ec2c47",
   "created_at": "2026-04-10T13:53:43.613Z",
-  "updated_at": "2026-04-11T20:40:50.933Z",
+  "updated_at": "2026-04-11T23:28:49.238Z",
   "comment": {
     "text": "This is a short label indicating the source of funds for a top-up transaction, appearing in a billing or payment interface.",
     "is_auto": true,
@@ -40,7 +40,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation 'Nəşərdən' means 'From publication/edition' which is incorrect for a billing context where 'From' indicates the source of funds",
+          "suggestion": "Mənbə",
+          "checked_at": "2026-04-11T23:28:11.930Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -88,7 +96,15 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_variable",
+          "description": "The Armenian translation contains '{}ից' but the English text 'From' has no variable placeholder. The {} appears to be incorrectly added.",
+          "suggestion": "Ից",
+          "checked_at": "2026-04-11T23:28:23.400Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -106,7 +122,15 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '지' (meaning 'from/of' as a particle) is incomplete and does not properly convey 'From' as a standalone label in a UI context",
+          "suggestion": "출처",
+          "checked_at": "2026-04-11T23:28:28.493Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -118,7 +142,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Noņemšana' means 'removal' or 'taking away', which is the opposite of 'From' indicating a source. This completely changes the meaning in a billing context.",
+          "suggestion": "No",
+          "checked_at": "2026-04-11T23:28:32.287Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "nl": {

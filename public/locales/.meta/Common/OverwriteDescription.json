@@ -3,7 +3,7 @@
   "content": "The new file will replace the existing one as a new version.",
   "content_en_sha1_hash": "0d9f5c9f81c7babac9ce4dd02769692be95654fb",
   "created_at": "2025-05-19T21:30:47.186Z",
-  "updated_at": "2026-04-11T20:47:04.210Z",
+  "updated_at": "2026-04-12T05:17:51.995Z",
   "comment": {
     "text": "This is a description displayed in a dialog when a user attempts to upload a file with the same name as an existing file. It explains that the new file will replace the old one as a new version.",
     "is_auto": true,

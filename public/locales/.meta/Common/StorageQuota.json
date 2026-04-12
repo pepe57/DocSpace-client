@@ -3,7 +3,7 @@
   "content": "Storage quota",
   "content_en_sha1_hash": "fbd20573f984732d839815359efcd0afd938b995",
   "created_at": "2025-05-19T21:30:49.110Z",
-  "updated_at": "2026-04-11T20:41:59.537Z",
+  "updated_at": "2026-04-12T00:14:52.153Z",
   "comment": {
     "text": "This is a label for a setting related to storage limits, or a filter option to display items based on their storage quota. It appears in a form for managing room quotas and in a filter menu.",
     "is_auto": true,

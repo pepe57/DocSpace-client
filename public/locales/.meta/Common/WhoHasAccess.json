@@ -3,7 +3,7 @@
   "content": "Who has access",
   "content_en_sha1_hash": "b82540c6a77efe28089091e2a93027edf47bac9e",
   "created_at": "2025-08-26T11:15:03.431Z",
-  "updated_at": "2026-04-11T20:38:50.723Z",
+  "updated_at": "2026-04-11T22:03:52.637Z",
   "comment": {
     "text": "This is a section title in sharing dialogs, indicating the area where users can view or manage who has access to a shared item.",
     "is_auto": true,
@@ -76,7 +76,15 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation 'Kenen on pääsy' is grammatically incorrect and unclear. It literally means 'Whose is access' which doesn't properly convey the meaning of 'Who has access'",
+          "suggestion": "Kenellä on pääsy",
+          "checked_at": "2026-04-11T22:03:23.282Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fr": {

@@ -3,7 +3,7 @@
   "content": "The {{productName}} Wallet allows you to easily purchase services such as storage, AI tools, and backups. Add funds and select the services you need to get started.",
   "content_en_sha1_hash": "1512af4bdecc76d22ea3fbb5de9c045a7ba5ba43",
   "created_at": "2026-04-10T13:53:43.909Z",
-  "updated_at": "2026-04-11T20:39:16.424Z",
+  "updated_at": "2026-04-11T22:22:23.807Z",
   "comment": {
     "text": "This is a descriptive text displayed in the Wallet section. It explains the purpose of the Wallet feature, which is to purchase services like storage, AI tools, and backups. The `{{productName}}` variable will be replaced with the product's brand name.",
     "is_auto": true,
@@ -166,7 +166,15 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Den {{productName}} Wallet vam om' appears to be incorrect Slovenian grammar and doesn't properly convey 'allows you to easily purchase'",
+          "suggestion": "{{productName}} Wallet vam omogoča enostaven nakup storitev, kot so shranjevanje, orodja za umetno inteligenco in varnostno kopiranje. Dodajte sredstva in izberite storitve, ki jih potrebujete, da začnete.",
+          "checked_at": "2026-04-11T22:22:09.007Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
@@ -178,13 +186,29 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Манетник' (Manetnik) is not the correct Serbian translation for 'Wallet'. This appears to be an incorrect or non-standard term.",
+          "suggestion": "{{productName}} Новчаник омогућава вам да лако купујете услуге као што су складиштење, AI алати и резервне копије. Додајте средства и изаберите услуге које вам требају да започнете.",
+          "checked_at": "2026-04-11T22:22:16.788Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'usluge kojima vam je potrebno' is grammatically incorrect and unclear. It should be 'usluge koje su vam potrebne' (services that you need).",
+          "suggestion": "{{productName}} Novčanik vam omogućava lako kupovinu usluga kao što su skladištenje, AI alati i rezervne kopije. Dodajte sredstva i izaberite usluge koje su vam potrebne da počnete.",
+          "checked_at": "2026-04-11T22:22:19.371Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

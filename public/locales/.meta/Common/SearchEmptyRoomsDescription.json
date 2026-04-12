@@ -3,7 +3,7 @@
   "content": "No rooms match this filter. Try a different one or clear filter to view all rooms.",
   "content_en_sha1_hash": "f23a94b4f404fdc1101c69caa60118df9f3d9514",
   "created_at": "2025-05-19T21:30:48.337Z",
-  "updated_at": "2026-04-11T20:43:51.080Z",
+  "updated_at": "2026-04-12T01:32:10.518Z",
   "comment": {
     "text": "This is an informational message displayed when a search or filter for rooms yields no results. It suggests trying a different filter or clearing the current one.",
     "is_auto": true,
@@ -40,7 +40,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'fərqli filtri və ya təmiz filtri sınayın' translates to 'try a different filter or clean filter' which doesn't accurately convey the meaning of 'clear filter'. The word 'sınayın' (try) is incorrectly applied to both actions.",
+          "suggestion": "Bu filtrə uyğun otaq yoxdur. Bütün otaqlara baxmaq üçün fərqli filtr sınayın və ya filtri təmizləyin.",
+          "checked_at": "2026-04-12T01:31:26.891Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -136,13 +144,29 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'quarto' (bedroom) is used instead of 'sala' (room) in the first sentence, creating inconsistency and potential confusion since 'salas' is correctly used in the second sentence",
+          "suggestion": "Nenhuma sala corresponde a este filtro. Tente um filtro diferente ou limpe o filtro para ver todas as salas.",
+          "checked_at": "2026-04-12T01:31:51.159Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'rooms' is translated as 'quartos' (bedrooms) instead of the correct term for collaborative workspaces in software context",
+          "suggestion": "Nenhuma sala corresponde a este filtro. Tente um diferente ou limpe o filtro para ver todas as salas.",
+          "checked_at": "2026-04-12T01:31:54.480Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ro": {

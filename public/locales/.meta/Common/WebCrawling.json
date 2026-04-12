@@ -3,7 +3,7 @@
   "content": "Web crawling",
   "content_en_sha1_hash": "358b1643a23f6468c430bdf829af3459c4b5ac48",
   "created_at": "2025-10-27T16:14:24.665Z",
-  "updated_at": "2026-04-11T20:39:09.996Z",
+  "updated_at": "2026-04-11T22:17:42.213Z",
   "comment": {
     "text": "This is a label indicating that a web crawling operation is in progress. It appears in the header of a tool call message within the AI agent chat.",
     "is_auto": true,
@@ -160,7 +160,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'වෙබ් සෙවීම' means 'web searching' or 'web browsing', not 'web crawling'. Web crawling is an automated process of systematically browsing and indexing web content, which is different from general web searching.",
+          "suggestion": "වෙබ් ක්‍රෝලිං",
+          "checked_at": "2026-04-11T22:17:29.559Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -184,7 +192,15 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'пузaње' (crawling/creeping) contains a Latin 'a' instead of Cyrillic 'а' and uses an inappropriate translation that suggests physical crawling rather than web data collection",
+          "suggestion": "Веб скенирање",
+          "checked_at": "2026-04-11T22:17:35.862Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

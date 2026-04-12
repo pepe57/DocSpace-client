@@ -3,7 +3,7 @@
   "content": "Share this folder",
   "content_en_sha1_hash": "d3f176d5d32755268adb0267e9ada02f92c15cf2",
   "created_at": "2025-08-26T11:15:01.359Z",
-  "updated_at": "2026-04-11T20:43:01.596Z",
+  "updated_at": "2026-04-12T00:58:10.863Z",
   "comment": {
     "text": "This is the title of a dialog box that appears when a user initiates sharing for a folder.",
     "is_auto": true,
@@ -82,7 +82,15 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Կիսվել այս թղթապանակով' means 'Share with this folder' or 'Share by means of this folder', which is the opposite meaning. The English 'Share this folder' means to make the folder itself available to others, not to share something using the folder.",
+          "suggestion": "Կիսվել այս թղթապանակը",
+          "checked_at": "2026-04-12T00:57:45.411Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "it": {

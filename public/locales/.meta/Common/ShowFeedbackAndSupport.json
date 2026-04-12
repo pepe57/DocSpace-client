@@ -3,7 +3,7 @@
   "content": "Show Feedback & Support link",
   "content_en_sha1_hash": "9746ad3e037af1dafd58bdcfd2f18f37672ab9d1",
   "created_at": "2025-05-26T07:15:47.993Z",
-  "updated_at": "2026-04-11T20:42:48.219Z",
+  "updated_at": "2026-04-12T00:49:00.520Z",
   "comment": {
     "text": "This is a checkbox label. It controls the visibility of a \"Feedback & Support\" link within the application's interface.",
     "is_auto": true,
@@ -142,7 +142,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation uses 'Afişare linkul' which is grammatically incorrect. It should be 'Afişează linkul' (imperative) or 'Afişare link' (noun form).",
+          "suggestion": "Afişează linkul de feedback şi asistenţă",
+          "checked_at": "2026-04-12T00:48:48.499Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {

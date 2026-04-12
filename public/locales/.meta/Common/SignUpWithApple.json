@@ -3,7 +3,7 @@
   "content": "Sign up with Apple",
   "content_en_sha1_hash": "73ca824af2283271f333afbfd3ba3a3054f212ed",
   "created_at": "2025-05-19T21:30:48.817Z",
-  "updated_at": "2026-04-11T20:42:36.309Z",
+  "updated_at": "2026-04-12T00:41:23.360Z",
   "comment": {
     "text": "This is the label for a button that allows users to create a new account using their Apple ID.",
     "is_auto": true,

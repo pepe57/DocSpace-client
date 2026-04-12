@@ -3,7 +3,7 @@
   "content": "Use the official documentation to upgrade:",
   "content_en_sha1_hash": "543e777ff5b1b9ec51febc46ab0a1b341669aea6",
   "created_at": "2025-05-26T07:15:49.164Z",
-  "updated_at": "2026-04-11T21:46:28.033Z",
+  "updated_at": "2026-04-11T22:54:20.476Z",
   "comment": {
     "text": "This is a line of text appearing in a banner that instructs users on how to upgrade their ONLYOFFICE DocSpace. It is part of a sentence providing a link to official documentation.",
     "is_auto": true,
@@ -87,7 +87,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \":\" but translation ends with \"՝\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T21:46:28.026Z",
+          "checked_at": "2026-04-11T22:53:57.309Z",
           "checked_by": "deterministic"
         }
       ],

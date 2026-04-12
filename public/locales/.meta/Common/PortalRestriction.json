@@ -3,7 +3,7 @@
   "content": "Your IP address is not included in the list of allowed IP addresses to access this {{productName}}. Turn off a VPN if it's enabled and reload the page, or use another IP address to log in.",
   "content_en_sha1_hash": "7757cc59017d043dfa9a644e5a686d93b5f7d6da",
   "created_at": "2025-05-19T21:30:47.430Z",
-  "updated_at": "2026-04-11T20:46:11.976Z",
+  "updated_at": "2026-04-12T04:12:53.538Z",
   "comment": {
     "text": "This error message appears when a user tries to access the portal from an IP address not on the allowed list. The `{{productName}}` variable will be replaced with the product's brand name (e.g., \"ONLYOFFICE DocSpace\").",
     "is_auto": true,

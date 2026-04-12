@@ -3,7 +3,7 @@
   "content": "All current passwords will be reset. {{productName}} users will get an email with the access restoration link.",
   "content_en_sha1_hash": "3531a741576e6d7f3c7d70f497013990e0744339",
   "created_at": "2025-05-26T07:15:46.918Z",
-  "updated_at": "2026-04-11T20:44:53.013Z",
+  "updated_at": "2026-04-12T02:32:19.555Z",
   "comment": {
     "text": "This is a warning message displayed during the backup restoration process. It informs the user that all current passwords will be reset and that users will receive an email with an access restoration link. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,

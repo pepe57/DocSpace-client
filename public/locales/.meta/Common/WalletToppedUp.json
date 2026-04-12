@@ -3,7 +3,7 @@
   "content": "Wallet has been successfully topped up",
   "content_en_sha1_hash": "17e7ecec92293818e1ecd5eb2fcd5a4974f0a674",
   "created_at": "2026-04-10T13:53:43.927Z",
-  "updated_at": "2026-04-11T20:39:15.531Z",
+  "updated_at": "2026-04-11T22:21:38.898Z",
   "comment": {
     "text": "Toast message confirming a user's wallet balance has been successfully increased.",
     "is_auto": true,
@@ -34,7 +34,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation says 'loading/uploading with your wallet was completed' instead of 'wallet has been topped up/recharged'",
+          "suggestion": "Pul kisəniz uğurla dolduruldu",
+          "checked_at": "2026-04-11T22:21:02.009Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -58,7 +66,15 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation says 'Your wallet has been added successfully' instead of 'topped up/recharged successfully'. The verb 'προστεθεί' means 'added' rather than indicating the wallet balance was increased.",
+          "suggestion": "Το πορτοφόλι έχει επαναφορτιστεί με επιτυχία",
+          "checked_at": "2026-04-11T22:21:08.828Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -118,7 +134,15 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation uses 'bijgewerkt' (updated) instead of conveying the concept of 'topped up' (adding money/credits to increase balance)",
+          "suggestion": "Portemonnee succesvol opgewaardeerd",
+          "checked_at": "2026-04-11T22:21:22.830Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pl": {

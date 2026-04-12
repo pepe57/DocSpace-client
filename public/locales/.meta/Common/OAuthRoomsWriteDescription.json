@@ -3,7 +3,7 @@
   "content": "View and manage all rooms",
   "content_en_sha1_hash": "23410e53db5831fa0df990ac3c4dc8b59656b9fa",
   "created_at": "2025-05-19T21:30:47.083Z",
-  "updated_at": "2026-04-11T20:47:22.455Z",
+  "updated_at": "2026-04-12T05:41:41.010Z",
   "comment": {
     "text": "This is a permission description displayed to users during the OAuth authorization process. It informs the user that the application will have the ability to view and manage all rooms within DocSpace.",
     "is_auto": true,

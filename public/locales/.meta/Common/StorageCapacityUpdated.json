@@ -3,7 +3,7 @@
   "content": "Storage capacity has been updated",
   "content_en_sha1_hash": "3eb6406c46e8164622584626f24aef1424e211c3",
   "created_at": "2026-04-10T13:53:43.341Z",
-  "updated_at": "2026-04-11T20:42:00.294Z",
+  "updated_at": "2026-04-12T00:15:35.496Z",
   "comment": {
     "text": "This is a toast message confirming that the storage capacity has been successfully updated. It appears after a user changes their storage plan.",
     "is_auto": true,
@@ -88,7 +88,15 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation 'Տեսակարարությունը թարմացվել է' means 'The variety/type has been updated' rather than 'Storage capacity has been updated'. The word 'տեսակարարություն' refers to variety or type, not storage capacity.",
+          "suggestion": "Պահեստավորման հզորությունը թարմացվել է",
+          "checked_at": "2026-04-12T00:15:05.443Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "it": {
@@ -160,7 +168,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation contains untranslated English text 'capacity' mixed with Sinhala text, making it a hybrid that is not proper Sinhala",
+          "suggestion": "ගබඩා ධාරිතාව යාවත්කාලීන කර ඇත",
+          "checked_at": "2026-04-12T00:15:21.018Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

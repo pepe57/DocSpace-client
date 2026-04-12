@@ -3,7 +3,7 @@
   "content": "Subscription cancellation",
   "content_en_sha1_hash": "456f00501390f0982cec7b46a28f73039329035f",
   "created_at": "2026-04-10T13:53:43.513Z",
-  "updated_at": "2026-04-11T20:41:42.616Z",
+  "updated_at": "2026-04-12T00:03:11.997Z",
   "comment": {
     "text": "This is the title of a modal dialog that appears when a user initiates the process of canceling their subscription.",
     "is_auto": true,
@@ -112,7 +112,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Word order is incorrect in Latvian - 'Atcelšana abonementa' should be 'Abonementa atcelšana' for proper grammar",
+          "suggestion": "Abonementa atcelšana",
+          "checked_at": "2026-04-12T00:02:49.507Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -154,7 +162,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'නිෂ්ක්‍යාපනය කිරීම' means 'deactivation' or 'disabling', which does not accurately convey the concept of 'subscription cancellation'. The translation should specifically refer to canceling or terminating a subscription service.",
+          "suggestion": "දායකත්ව අවලංගු කිරීම",
+          "checked_at": "2026-04-12T00:02:59.139Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -190,7 +206,15 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'İptal başvurusu' means 'cancellation application/request' which implies applying to cancel, rather than the actual cancellation process itself",
+          "suggestion": "Abonelik iptali",
+          "checked_at": "2026-04-12T00:03:07.772Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

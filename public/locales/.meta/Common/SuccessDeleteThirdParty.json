@@ -3,7 +3,7 @@
   "content": "Third-party {{service}} is deleted",
   "content_en_sha1_hash": "d86937aacc3666d3c688a15acd671e3d6e2dafd7",
   "created_at": "2025-05-26T07:15:48.633Z",
-  "updated_at": "2026-04-11T20:41:37.130Z",
+  "updated_at": "2026-04-11T23:59:15.951Z",
   "comment": {
     "text": "This is a toast message confirming the successful deletion of a third-party service. The `{{service}}` variable will be replaced with the name of the deleted service.",
     "is_auto": true,
@@ -28,7 +28,15 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order in Arabic places 'الجهة الخارجية' (third-party) after the service variable, which changes the meaning to suggest the service itself is the third party, rather than indicating a third-party service was deleted",
+          "suggestion": "تم حذف خدمة {{service}} من جهة خارجية",
+          "checked_at": "2026-04-11T23:58:38.126Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -52,7 +60,15 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The German translation is missing 'Third-party' (Drittanbieter-) which is important information specifying the type of service being deleted",
+          "suggestion": "Drittanbieter-{{service}} wurde gelöscht",
+          "checked_at": "2026-04-11T23:58:44.142Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -94,7 +110,15 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation uses '第三方' which is Chinese for 'third-party', not Japanese",
+          "suggestion": "サードパーティの{{service}}が削除されました。",
+          "checked_at": "2026-04-11T23:58:54.725Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -154,7 +178,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order in Sinhala places 'third-party' after the service name, which changes the meaning from 'Third-party service is deleted' to 'Service third-party is deleted'",
+          "suggestion": "තෙවන පාර්ශ්වීය {{service}} මකා දමන ලදී",
+          "checked_at": "2026-04-11T23:59:06.031Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

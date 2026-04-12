@@ -3,7 +3,7 @@
   "content": "Maximum {{count}} files allowed",
   "content_en_sha1_hash": "4886f6d97491793d45f7b46f21d0ad5ac83aa7c5",
   "created_at": "2025-11-13T07:57:55.552Z",
-  "updated_at": "2026-04-11T20:43:33.488Z",
+  "updated_at": "2026-04-12T01:20:04.028Z",
   "comment": {
     "text": "This is an informational message displayed in a file selection dialog, indicating the maximum number of files a user can attach. The `{{count}}` variable represents this maximum number.",
     "is_auto": true,
@@ -64,13 +64,29 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word order changes the meaning. The Spanish version suggests 'Maximum number of files {{count}} allowed' rather than 'Maximum {{count}} files allowed', which could be confusing when the variable is substituted.",
+          "suggestion": "Máximo {{count}} archivos permitidos",
+          "checked_at": "2026-04-12T01:19:30.176Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation changes the meaning from 'Maximum X files allowed' to 'Maximum amount of X files', which is awkward and doesn't clearly convey the permission/limit concept",
+          "suggestion": "Enintään {{count}} tiedostoa sallittu",
+          "checked_at": "2026-04-12T01:19:32.450Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -94,7 +110,15 @@
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation says 'can be uploaded' (アップロードできます) which implies an action capability, while the English simply states a limit/restriction about what is 'allowed'",
+          "suggestion": "最大 {{count}} 件のファイルが許可されています",
+          "checked_at": "2026-04-12T01:19:41.651Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -142,7 +166,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The variable {{count}} is placed incorrectly in the sentence structure, making it grammatically incorrect and unclear",
+          "suggestion": "Sunt permise maximum {{count}} fișiere",
+          "checked_at": "2026-04-12T01:19:50.979Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -190,7 +222,15 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation uses passive voice 'izin verilir' (is allowed/permitted) which changes the meaning from stating a limit to describing permission",
+          "suggestion": "Maksimum {{count}} dosyaya izin verilir",
+          "checked_at": "2026-04-12T01:20:00.026Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

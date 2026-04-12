@@ -3,7 +3,7 @@
   "content": "Share your form via a Virtual Data Room. Assign recipient roles to the room participants so they can fill out the form accordingly. Select an existing room or create a new one.",
   "content_en_sha1_hash": "b92f861d3ca32b57c91d73b768f3aed5580a6695",
   "created_at": "2025-10-13T13:22:12.853Z",
-  "updated_at": "2026-04-11T20:43:29.748Z",
+  "updated_at": "2026-04-12T01:17:27.201Z",
   "comment": {
     "text": "This is the description text for an info bar that appears when a user chooses to share a form via a Virtual Data Room (VDR). It explains how VDRs facilitate form sharing by allowing role assignment to participants.",
     "is_auto": true,
@@ -46,7 +46,15 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'Задайте роли на получателите на участниците в стаята' is grammatically incorrect and confusing. It literally translates to 'Assign roles to the recipients of the participants in the room' which doesn't make sense.",
+          "suggestion": "Споделете формуляра си чрез Виртуална стая за данни. Задайте роли на получателите - участниците в стаята, за да могат да попълнят формуляра съответно. Изберете съществуваща стая или създайте нова.",
+          "checked_at": "2026-04-12T01:16:49.146Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -148,7 +156,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The phrase 'accordingly' is missing from the Romanian translation, which changes the meaning of how participants should fill out the form",
+          "suggestion": "Partajați formularul dvs în Sala virtuală de date. Atribuiți rol de destinatar participanților la sală pentru ca aceștia să poată completa formularul în conformitate cu rolul lor. Selectați o sală existentă sau creați o sală nouă.",
+          "checked_at": "2026-04-12T01:17:09.276Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -160,7 +176,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The term 'අතථ්‍ය දත්ත කාමරයක්' (virtual data room) contains a spelling error - 'අතථ්‍ය' should be 'අතථ්‍ය' (virtual)",
+          "suggestion": "අතථ්‍ය දත්ත කාමරයක් හරහා ඔබේ පෝරමය බෙදා ගන්න. කාමර සහභාගිවන්නන්ට ලබන්නාගේ භූමිකාවන් පවරන්න එවිට ඔවුන්ට ඒ අනුව පෝරමය පුරවා ගත හැකිය. පවතින කාමරයක් තෝරන්න හෝ නව එකක් සාදන්න.",
+          "checked_at": "2026-04-12T01:17:16.155Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

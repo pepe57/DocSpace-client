@@ -3,7 +3,7 @@
   "content": "You have not added any payment",
   "content_en_sha1_hash": "4fb29167e163f23123e64c8fb677cce0b14f19d0",
   "created_at": "2026-04-10T13:53:44.003Z",
-  "updated_at": "2026-04-11T20:38:42.556Z",
+  "updated_at": "2026-04-11T21:57:45.197Z",
   "comment": {
     "text": "This is an informational text displayed when no payment method has been added to the user's account.",
     "is_auto": true,
@@ -88,13 +88,29 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Italian translation adds 'metodo di' (method of) which is not present in the English source text",
+          "suggestion": "Non hai aggiunto alcun pagamento",
+          "checked_at": "2026-04-11T21:57:16.243Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Japanese translation says 'payment has not been completed' which implies a payment process was started but not finished, while the English means 'no payment method has been added at all'",
+          "suggestion": "お支払い方法が追加されていません",
+          "checked_at": "2026-04-11T21:57:18.868Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -142,7 +158,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Romanian translation adds 'metodă de' (method of) which is not present in the English text. The English refers to 'payment' generally, not specifically 'payment method'.",
+          "suggestion": "Nu ați adăugat nicio plată",
+          "checked_at": "2026-04-11T21:57:29.299Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -178,7 +202,15 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Serbian translation adds 'начин' (method) which is not present in the English text. The English says 'any payment' while Serbian says 'any payment method'",
+          "suggestion": "Нисте додали ниједно плаћање",
+          "checked_at": "2026-04-11T21:57:37.440Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
@@ -190,7 +222,15 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Ödeme eklemeyi unuttunuz' means 'You forgot to add payment' which implies the user forgot to do something, while the English 'You have not added any payment' is a neutral statement about the current state without implying forgetfulness",
+          "suggestion": "Henüz ödeme eklemediniz",
+          "checked_at": "2026-04-11T21:57:41.878Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

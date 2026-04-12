@@ -3,7 +3,7 @@
   "content": "Storage adjustment",
   "content_en_sha1_hash": "cada0ac2400324c1a417bff83865372c673871d6",
   "created_at": "2026-04-10T13:53:45.677Z",
-  "updated_at": "2026-04-11T20:42:01.630Z",
+  "updated_at": "2026-04-12T00:17:02.379Z",
   "comment": {
     "text": "This is a label in an order summary, indicating a change in storage capacity for a subscription. It appears as a short noun phrase.",
     "is_auto": true,
@@ -112,7 +112,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Paghādes regulēšana' means 'supply regulation' or 'delivery regulation', which is completely different from 'storage adjustment' that refers to changing storage capacity",
+          "suggestion": "Krātuves pielāgošana",
+          "checked_at": "2026-04-12T00:16:40.569Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -154,7 +162,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ගඩා ගස්තු සංෝධනය' translates to 'storage costs adjustment' rather than 'storage adjustment'. The word 'ගස්තු' (costs) adds meaning not present in the English original.",
+          "suggestion": "ගබඩා සංශෝධනය",
+          "checked_at": "2026-04-12T00:16:50.784Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -166,7 +182,15 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian translation 'Pravila za shranjevanje' means 'Storage rules/policies' rather than 'Storage adjustment' which refers to a change in storage capacity",
+          "suggestion": "Prilagoditev shranjevanja",
+          "checked_at": "2026-04-12T00:16:53.791Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
@@ -178,7 +202,15 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation 'Прављење пропусне менице' means 'Making a promissory note' which is completely unrelated to storage adjustment in a subscription context",
+          "suggestion": "Подешавање складишта",
+          "checked_at": "2026-04-12T00:16:57.154Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

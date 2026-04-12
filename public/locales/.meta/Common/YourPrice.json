@@ -3,7 +3,7 @@
   "content": "Your price",
   "content_en_sha1_hash": "16a067af179c1f81645e2954ee05c68337fd773c",
   "created_at": "2026-04-10T13:53:44.036Z",
-  "updated_at": "2026-04-11T20:38:35.998Z",
+  "updated_at": "2026-04-11T21:52:57.735Z",
   "comment": {
     "text": "This is a label indicating the user's current price, displayed on the billing page when a grace period or unpaid period is active.",
     "is_auto": true,
@@ -100,7 +100,15 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Korean translation '내 요금' (my fee/charge) incorrectly uses the possessive '내' (my) instead of '귀하의' (your), changing the perspective from second person to first person",
+          "suggestion": "귀하의 요금",
+          "checked_at": "2026-04-11T21:52:32.420Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {
@@ -202,7 +210,15 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Vietnamese translation 'Phí thanh toán của bạn' means 'Your payment fee' which refers to a fee for making a payment, not the user's current price/cost",
+          "suggestion": "Giá của bạn",
+          "checked_at": "2026-04-11T21:52:56.387Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

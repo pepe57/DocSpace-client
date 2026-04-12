@@ -3,7 +3,7 @@
   "content": "You don't have enough permission",
   "content_en_sha1_hash": "0100053d13b47532703554baf465379a9dc4dc52",
   "created_at": "2025-08-04T07:29:37.418Z",
-  "updated_at": "2026-04-11T20:38:43.278Z",
+  "updated_at": "2026-04-11T21:58:22.346Z",
   "comment": {
     "text": "This is a tooltip message indicating that the user lacks the necessary permissions to perform an action. It appears when hovering over a disabled UI element.",
     "is_auto": true,

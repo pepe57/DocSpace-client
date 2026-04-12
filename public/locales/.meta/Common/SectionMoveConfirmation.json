@@ -3,7 +3,7 @@
   "content": "Move to {{sectionName}}?",
   "content_en_sha1_hash": "ee3b1c51a995b4cd544de5f673d85dd47977b235",
   "created_at": "2025-06-02T10:19:15.915Z",
-  "updated_at": "2026-04-11T20:43:49.875Z",
+  "updated_at": "2026-04-12T01:31:22.187Z",
   "comment": {
     "text": "This is a dialog title asking for confirmation to move an item to a specific section. The `{{sectionName}}` variable will be replaced with the name of the destination section (e.g., \"Archive\" or \"Trash\").",
     "is_auto": true,
@@ -52,7 +52,15 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Czech translation uses reflexive form 'Přesunout se do' which means 'to move oneself to' rather than 'to move (something) to'. This changes the meaning from moving an item to moving oneself.",
+          "suggestion": "Přesunout do {{sectionName}}?",
+          "checked_at": "2026-04-12T01:30:39.349Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -76,7 +84,15 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Finnish translation 'Siirry' means 'Go to' or 'Navigate to', but the English 'Move to' means relocating/transferring an item to another location. These are different actions.",
+          "suggestion": "Siirrä {{sectionName}} -kohtaan?",
+          "checked_at": "2026-04-12T01:30:44.873Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -124,13 +140,29 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation 'Ga naar' means 'Go to' which implies navigation, while the English 'Move to' implies moving/transferring an item to a destination",
+          "suggestion": "Verplaatsen naar {{sectionName}}?",
+          "checked_at": "2026-04-12T01:30:56.326Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation 'Przejdź do' means 'Go to' or 'Navigate to', which implies navigation rather than moving/transferring an item to a section",
+          "suggestion": "Przenieść do {{sectionName}}?",
+          "checked_at": "2026-04-12T01:30:58.785Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pt": {

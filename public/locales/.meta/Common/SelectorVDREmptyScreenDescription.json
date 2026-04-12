@@ -3,7 +3,7 @@
   "content": "To share your form and assign roles to the room participants for filling it out, please create a Virtual Data Room.",
   "content_en_sha1_hash": "7bfa16e48ac3fd715755d7c60f25d71d0451a9d6",
   "created_at": "2025-05-19T21:30:48.496Z",
-  "updated_at": "2026-04-11T20:43:27.488Z",
+  "updated_at": "2026-04-12T01:16:03.580Z",
   "comment": {
     "text": "This is a description displayed on an empty screen within a selector component. It instructs the user to create a Virtual Data Room to share their form and assign roles for filling it out.",
     "is_auto": true,
@@ -34,7 +34,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The sentence structure changes the logical flow - the Azerbaijani version suggests creating a Virtual Data Room first and then assigning roles, while the English emphasizes that creating the room is necessary 'to share your form and assign roles'",
+          "suggestion": "Formanızı paylaşmaq və onu doldurmaq üçün otaq iştirakçılarına rollar təyin etmək üçün, lütfən Virtual Məlumat Otağı yaradın.",
+          "checked_at": "2026-04-12T01:15:26.261Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -142,7 +150,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The phrase 'to the room participants' is missing from the Romanian translation, which changes the meaning by not specifying who the roles are assigned to",
+          "suggestion": "Pentru a partaja formularul și atribui roluri participanților camerei pentru completarea formularului, creați Sala virtuală de date.",
+          "checked_at": "2026-04-12T01:15:49.170Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -154,7 +170,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "There is a typo in the Sinhala translation - 'පුරවාපොිරීම' should be 'පුරවාගැනීම' (filling out)",
+          "suggestion": "ඔබේ ආකෘතිය බෙදා හැරීම සහ එය පුරවාගැනීම සඳහා කාමරයේ සහභාගීකරුවන්ට භූමිකා පැවරීම සඳහා, කරුණාකර වර්චුවල් දත්ත කාමරයක් සාදන්න.",
+          "checked_at": "2026-04-12T01:15:53.644Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {

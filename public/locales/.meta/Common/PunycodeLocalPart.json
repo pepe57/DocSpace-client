@@ -3,7 +3,7 @@
   "content": "Punycode local part is not supported",
   "content_en_sha1_hash": "527a2aa6c62b234fef95360c6517ee1bcfa5a635",
   "created_at": "2025-05-19T21:30:47.687Z",
-  "updated_at": "2026-04-11T20:45:42.231Z",
+  "updated_at": "2026-04-12T03:32:54.722Z",
   "comment": {
     "text": "Error text. This message appears when the local part of an email address (the part before the \"@\" symbol) uses Punycode, which is not supported.",
     "is_auto": true,

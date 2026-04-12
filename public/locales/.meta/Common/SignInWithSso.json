@@ -3,7 +3,7 @@
   "content": "Sign in with SSO",
   "content_en_sha1_hash": "01bb06993459150dbe13098f52962ab2acda16f8",
   "created_at": "2025-05-19T21:30:48.790Z",
-  "updated_at": "2026-04-11T20:42:40.698Z",
+  "updated_at": "2026-04-12T00:43:44.193Z",
   "comment": {
     "text": "This is a button label that allows users to log in using Single Sign-On (SSO).",
     "is_auto": true,

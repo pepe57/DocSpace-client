@@ -3,7 +3,7 @@
   "content": "Software license",
   "content_en_sha1_hash": "cb2cde9860819e645714e5902ea20dfa6c78f38b",
   "created_at": "2025-05-26T07:15:48.283Z",
-  "updated_at": "2026-04-11T20:42:21.103Z",
+  "updated_at": "2026-04-12T00:30:18.181Z",
   "comment": {
     "text": "This is a label in the \"About\" dialog, indicating the type of license under which the software is distributed. It appears next to a link to the license details.",
     "is_auto": true,

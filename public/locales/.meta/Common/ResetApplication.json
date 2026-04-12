@@ -3,7 +3,7 @@
   "content": "Reset application",
   "content_en_sha1_hash": "93e3b88bc025a8b58df20fb4ea9f533c792cfd53",
   "created_at": "2025-05-19T21:30:47.892Z",
-  "updated_at": "2026-04-11T20:45:01.376Z",
+  "updated_at": "2026-04-12T02:42:12.316Z",
   "comment": {
     "text": "This is the label for a button that opens a dialog to reset the application, and also the label for the button within that dialog that performs the reset.",
     "is_auto": true,

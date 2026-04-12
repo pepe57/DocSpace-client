@@ -3,7 +3,7 @@
   "content": "{{productName}} will become unavailable during the restore process. After the restore is complete all the changes made after the date of the selected restore point will be lost.",
   "content_en_sha1_hash": "95f4959d72ad296d2309ba5ebff78078d35592ae",
   "created_at": "2025-05-26T07:15:46.930Z",
-  "updated_at": "2026-04-11T20:44:51.964Z",
+  "updated_at": "2026-04-12T02:31:13.455Z",
   "comment": {
     "text": "This is a warning message displayed when initiating a backup restore. It informs the user that the product will be unavailable and recent changes will be lost. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,

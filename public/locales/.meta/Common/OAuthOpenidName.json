@@ -3,7 +3,7 @@
   "content": "Open ID",
   "content_en_sha1_hash": "7e9214361af45339a0429beffb174514a8d73f3e",
   "created_at": "2025-05-19T21:30:47.019Z",
-  "updated_at": "2026-04-11T20:47:29.034Z",
+  "updated_at": "2026-04-12T05:49:51.720Z",
   "comment": {
     "text": "This is a label for an OAuth scope, indicating that the application requests access to a user's OpenID for authentication. It appears in a list of requested permissions during the OAuth authorization process.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Sign up with X",
   "content_en_sha1_hash": "c9d454650713a7d52e23aafa112622948303592f",
   "created_at": "2025-11-18T14:41:35.160Z",
-  "updated_at": "2026-04-11T20:42:31.277Z",
+  "updated_at": "2026-04-12T00:37:50.880Z",
   "comment": {
     "text": "Button label. This text appears on a button allowing users to create an account using their X (formerly Twitter) credentials.",
     "is_auto": true,
@@ -52,7 +52,15 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The German translation uses 'Anmeldung' (sign in/log in) instead of conveying 'sign up' (account creation). This is the opposite action.",
+          "suggestion": "Registrierung mit X",
+          "checked_at": "2026-04-12T00:37:21.057Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -70,7 +78,15 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The preposition 'with' is missing from the Finnish translation, making it unclear that registration is done using X credentials",
+          "suggestion": "Rekisteröidy X:llä",
+          "checked_at": "2026-04-12T00:37:25.226Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -82,7 +98,15 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The preposition 'with' is missing from the Armenian translation. The English 'Sign up with X' indicates using X as a method/platform for signing up, but the Armenian only says 'Sign up X' without the connecting preposition.",
+          "suggestion": "Գրանցվեք X-ով",
+          "checked_at": "2026-04-12T00:37:29.530Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "it": {

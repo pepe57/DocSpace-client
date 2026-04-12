@@ -3,7 +3,7 @@
   "content": "Output ({{currency}}/1M)",
   "content_en_sha1_hash": "e02b245e12993218dee7e0ca1be519a09823ecfc",
   "created_at": "2026-04-10T13:53:45.567Z",
-  "updated_at": "2026-04-11T20:47:04.900Z",
+  "updated_at": "2026-04-12T05:18:59.229Z",
   "comment": {
     "text": "This is a table column header that displays the output cost of an AI model. The `{{currency}}` variable will be replaced with a currency symbol (e.g., $, €, ¥).",
     "is_auto": true,

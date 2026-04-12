@@ -3,7 +3,7 @@
   "content": "Export results directly to your systems",
   "content_en_sha1_hash": "ccfcf22c11b14776638fdcabfe057a097e748b35",
   "created_at": "2026-03-31T15:18:26.996Z",
-  "updated_at": "2026-04-11T20:39:01.260Z",
+  "updated_at": "2026-04-11T22:11:24.168Z",
   "comment": {
     "text": "This is a short descriptive text appearing on a welcome tour card. It highlights a feature allowing users to export data to external systems.",
     "is_auto": true,

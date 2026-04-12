@@ -3,7 +3,7 @@
   "content": "Linux instruction.",
   "content_en_sha1_hash": "4b856283dbe4b6431a050771a1ebbbed5a4f4760",
   "created_at": "2025-05-26T07:15:49.197Z",
-  "updated_at": "2026-04-11T20:39:58.277Z",
+  "updated_at": "2026-04-11T22:52:26.791Z",
   "comment": {
     "text": "This is a short label for an item in a list of instructions, specifically referring to Linux. It appears as part of a sentence providing a link to Linux installation instructions.",
     "is_auto": true,
@@ -40,7 +40,15 @@
     "bg": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Bulgarian translation uses plural form 'инструкции' (instructions) while the English uses singular 'instruction'",
+          "suggestion": "Linux инструкция.",
+          "checked_at": "2026-04-11T22:51:55.530Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "cs": {
@@ -100,7 +108,15 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "Missing space between 'Linux' and '설명서' which makes the text grammatically incorrect and harder to read",
+          "suggestion": "Linux 설명서.",
+          "checked_at": "2026-04-11T22:52:07.128Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "lo-LA": {

@@ -3,7 +3,7 @@
   "content": "Upload PDF form",
   "content_en_sha1_hash": "b5afa97be11c4d1636475bc3623a9f975f26ebd9",
   "created_at": "2025-05-19T21:30:49.443Z",
-  "updated_at": "2026-04-11T20:39:41.616Z",
+  "updated_at": "2026-04-11T22:41:15.595Z",
   "comment": {
     "text": "This is a button label that allows users to upload a PDF form.",
     "is_auto": true,
@@ -220,7 +220,15 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Albanian translation 'NgarkoNI' appears to have a capitalization error or typo. The correct Albanian verb form should be 'Ngarkoni' (upload/load)",
+          "suggestion": "Ngarkoni formularin PDF",
+          "checked_at": "2026-04-11T22:41:08.212Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     }
   }

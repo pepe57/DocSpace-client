@@ -3,7 +3,7 @@
   "content": "Select an option or create one",
   "content_en_sha1_hash": "2571b4424ae499623b7168722a07d2d539dd56dc",
   "created_at": "2026-02-19T13:36:18.706Z",
-  "updated_at": "2026-04-11T20:43:45.536Z",
+  "updated_at": "2026-04-12T01:27:46.874Z",
   "comment": {
     "text": "This is a placeholder text for a dropdown or input field. It prompts the user to either choose an existing item from a list or create a new one.",
     "is_auto": true,
@@ -52,7 +52,15 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The German translation is incomplete - it ends with 'eine' but doesn't specify what should be created (missing 'neue' or similar)",
+          "suggestion": "Wählen Sie eine Option oder erstellen Sie eine neue",
+          "checked_at": "2026-04-12T01:27:18.390Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -64,7 +72,15 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Spanish translation is incomplete - 'una' at the end should be 'una nueva' to properly convey 'create one'",
+          "suggestion": "Seleccionar una opción o crear una nueva",
+          "checked_at": "2026-04-12T01:27:21.674Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fi": {

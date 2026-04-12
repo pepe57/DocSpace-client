@@ -3,7 +3,7 @@
   "content": "Save the file copy in the original format as well",
   "content_en_sha1_hash": "590aa54a4acb697b9b402769bb231a09e8ad806a",
   "created_at": "2026-04-03T21:51:34.700Z",
-  "updated_at": "2026-04-11T20:47:09.492Z",
+  "updated_at": "2026-04-12T05:24:34.932Z",
   "comment": {
     "text": "This is the label for a toggle button in the user's profile settings. It allows users to choose whether to save a copy of edited files in their original format.",
     "is_auto": true,

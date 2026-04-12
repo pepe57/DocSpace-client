@@ -3,7 +3,7 @@
   "content": "The file will be moved to {{sectionName}} {{date}}",
   "content_en_sha1_hash": "b3ab597530eaf3fa6c84d6cbaec2140f75e0086d",
   "created_at": "2025-06-02T10:19:17.358Z",
-  "updated_at": "2026-04-11T20:43:48.680Z",
+  "updated_at": "2026-04-12T01:30:32.673Z",
   "comment": {
     "text": "This is a tooltip message indicating when a file will be moved to the Trash section. `{{sectionName}}` is the name of the section (e.g., \"Trash\"), and `{{date}}` is the date of the move.",
     "is_auto": true,
@@ -52,7 +52,15 @@
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The German translation is missing a preposition to properly connect the date information. The word order makes it unclear how the date relates to the move action.",
+          "suggestion": "Die Datei wird am {{date}} nach {{sectionName}} verschoben",
+          "checked_at": "2026-04-12T01:29:50.870Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "el-GR": {
@@ -70,7 +78,15 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Finnish translation adds '-kansioon' (to folder) which is not present in the English text and changes the meaning by specifying it's a folder",
+          "suggestion": "Tiedosto siirretään {{sectionName}} {{date}}",
+          "checked_at": "2026-04-12T01:29:54.956Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -142,7 +158,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Romanian translation adds 'la data de' (on the date of) which changes the meaning from a simple temporal indicator to a specific date reference, potentially altering the user's understanding of when the action occurs",
+          "suggestion": "Fișierul va fi mutat în {{sectionName}} {{date}}",
+          "checked_at": "2026-04-12T01:30:14.065Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -190,7 +214,15 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The preposition 'to' indicating the destination of the move is missing from the Turkish translation",
+          "suggestion": "Dosya {{date}} tarihinde {{sectionName}} bölümüne taşınacaktır.",
+          "checked_at": "2026-04-12T01:30:29.786Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

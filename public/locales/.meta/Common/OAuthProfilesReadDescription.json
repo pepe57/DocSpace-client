@@ -3,7 +3,7 @@
   "content": "View basic information about your profile",
   "content_en_sha1_hash": "88d333b1826774dd3af1c211ba7693458c814b5f",
   "created_at": "2025-05-19T21:30:47.046Z",
-  "updated_at": "2026-04-11T20:47:25.987Z",
+  "updated_at": "2026-04-12T05:46:18.437Z",
   "comment": {
     "text": "This is a description of an OAuth permission scope. It informs the user that the application requests permission to view basic information about their profile.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Third-party service was successfully connected.",
   "content_en_sha1_hash": "d90004d45511c7e00dbd7ab694c8f7ffb4579948",
   "created_at": "2025-05-26T07:15:48.645Z",
-  "updated_at": "2026-04-11T20:41:36.237Z",
+  "updated_at": "2026-04-11T23:58:34.714Z",
   "comment": {
     "text": "Toast message. Appears after a third-party service (e.g., Google Drive, Dropbox) has been successfully linked to the user's account.",
     "is_auto": true,

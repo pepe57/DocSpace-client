@@ -3,7 +3,7 @@
   "content": "Service management is unavailable during the grace period, and no charges will apply to the services during this time. To regain full functionality, please upgrade to a {{planName}} plan.",
   "content_en_sha1_hash": "ceb82bec4023b3e839d5c3db0aeaed838a8c2841",
   "created_at": "2026-04-10T13:53:43.229Z",
-  "updated_at": "2026-04-11T20:43:16.052Z",
+  "updated_at": "2026-04-12T01:07:52.794Z",
   "comment": {
     "text": "This is a warning message displayed in a modal dialog. It informs the user that service management is restricted during a grace period and prompts them to upgrade their plan. `{{planName}}` will be replaced with the name of the suggested plan.",
     "is_auto": true,
@@ -58,7 +58,15 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation says service management 'is available' (είναι διαθέσιμη) during the grace period, which is the opposite of the English 'is unavailable'",
+          "suggestion": "Η διαχείριση υπηρεσιών δεν είναι διαθέσιμη κατά τη διάρκεια της περιόδου χάριτος και δεν θα επιβληθούν χρεώσεις για τις υπηρεσίες κατά τη διάρκεια αυτής. Για να αποκτήσετε πλήρη λειτουργικότητα, παρακαλούμε αναβαθμίστε σε ένα πρόγραμμα {{planName}}.",
+          "checked_at": "2026-04-12T01:07:13.759Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -118,7 +126,15 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation uses 'proefperiode' (trial period) instead of 'grace period'. These are different concepts - a grace period is typically an extension after expiration, while a trial period is an initial free period.",
+          "suggestion": "Service management is niet beschikbaar tijdens de respijtperiode, en er worden geen kosten in rekening gebracht voor de services gedurende deze periode. Om de volledige functionaliteit terug te krijgen, upgrade alstublieft naar een {{planName}} plan.",
+          "checked_at": "2026-04-12T01:07:27.352Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -166,31 +182,71 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'med poskusne dobe' (during trial period) is incorrect - it should be 'med obdobjem odloga' or similar to properly convey 'grace period'",
+          "suggestion": "Usluga upravljanja ni na voljo med obdobjem odloga, in v tem času ne veljajo stroški za storitve. Za ponovno pridobitev polne funkcionalnosti prosim nadgradite na načrt {{planName}}.",
+          "checked_at": "2026-04-12T01:07:37.619Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'i papërfundueshëm' means 'endless/infinite' which is incorrect. The English 'unavailable' should be translated as 'i padisponueshëm' or 'nuk është i disponueshëm'",
+          "suggestion": "Shërbimi i menaxhimit është i padisponueshëm gjatë periudhës së mërzitjes, dhe asnjë pagesë nuk do të zbatohet për shërbimet gjatë kësaj kohe. Për të rikthyer funksionalitetin e plotë, ju lutem kaloni në një plan {{planName}}.",
+          "checked_at": "2026-04-12T01:07:41.215Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Serbian translation contains additional content not present in the English original: 'Да бисте повезали нову картицу, пратите овај линк.' (To connect a new card, follow this link.) This extra sentence about connecting a new card is not in the English text.",
+          "suggestion": "Управљање услугама није доступно током грейс периода и у том периоду се не врше наплате за услуге. Да бисте поново имали пуну функционалност, надоградите се на план {{planName}}.",
+          "checked_at": "2026-04-12T01:07:44.274Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Serbian translation contains additional unrelated content about connecting a new card that is not present in the English text",
+          "suggestion": "Upravljanje uslugama nije dostupno tokom grejs perioda i u tom periodu se ne vrše naplate za usluge. Da biste ponovo imali punu funkcionalnost, nadogradite se na plan {{planName}}.",
+          "checked_at": "2026-04-12T01:07:46.780Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation incorrectly translates 'grace period' as 'ücretsiz deneme süresi' (free trial period), which changes the meaning. A grace period is a temporary extension after expiration, not a free trial.",
+          "suggestion": "Hizmet yönetimi, ek süre boyunca kullanılamayacaktır ve bu süre zarfında hizmetler için herhangi bir ücret uygulanmayacaktır. Tam işlevselliği geri kazanmak için lütfen {{planName}} planına yükseltin.",
+          "checked_at": "2026-04-12T01:07:49.629Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

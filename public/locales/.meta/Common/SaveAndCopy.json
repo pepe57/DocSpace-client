@@ -3,7 +3,7 @@
   "content": "Save & copy",
   "content_en_sha1_hash": "603fdf838c5744f12c8c5ca87bdd30bbeee7233f",
   "created_at": "2026-02-18T14:56:12.395Z",
-  "updated_at": "2026-04-11T20:43:57.496Z",
+  "updated_at": "2026-04-12T01:36:21.157Z",
   "comment": {
     "text": "This is a button label. It appears on a button that, when clicked, saves the current settings and copies a link to the clipboard.",
     "is_auto": true,

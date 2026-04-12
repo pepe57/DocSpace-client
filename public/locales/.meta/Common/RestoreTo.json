@@ -3,7 +3,7 @@
   "content": "Restore to",
   "content_en_sha1_hash": "55a3efe467e20e4698ed5e79684c4b701ff485cb",
   "created_at": "2025-05-19T21:30:47.920Z",
-  "updated_at": "2026-04-11T20:44:50.112Z",
+  "updated_at": "2026-04-12T02:29:00.947Z",
   "comment": {
     "text": "This is a button label. It appears in a dialog when restoring a file or folder, indicating the action of restoring to a specific location.",
     "is_auto": true,

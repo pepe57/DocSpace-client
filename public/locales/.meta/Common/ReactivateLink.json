@@ -3,7 +3,7 @@
   "content": "Reactivate link",
   "content_en_sha1_hash": "f271b20a28fc605f08783c87c682440e160ccd0f",
   "created_at": "2026-02-18T14:56:09.264Z",
-  "updated_at": "2026-04-11T20:45:37.380Z",
+  "updated_at": "2026-04-12T03:27:22.333Z",
   "comment": {
     "text": "This is a button label that appears when a shared link has expired. Clicking it reactivates the link, making it accessible again.",
     "is_auto": true,

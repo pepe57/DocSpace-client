@@ -3,7 +3,7 @@
   "content": "Top up wallet",
   "content_en_sha1_hash": "155fb560e348142a6331187a877f862f8cc8df81",
   "created_at": "2026-04-10T13:53:43.673Z",
-  "updated_at": "2026-04-11T20:40:47.297Z",
+  "updated_at": "2026-04-11T23:26:12.881Z",
   "comment": {
     "text": "Dialog title for a modal window where users can add funds to their wallet.",
     "is_auto": true,
@@ -76,7 +76,15 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English word 'wallet' is translated but the French keeps the English word 'wallet' instead of using the proper French translation",
+          "suggestion": "Recharger le portefeuille",
+          "checked_at": "2026-04-11T23:25:40.995Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -142,7 +150,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation is grammatically incomplete - 'Depunere bani în portofelul' is missing the definite article and sounds unnatural",
+          "suggestion": "Alimentează portofelul",
+          "checked_at": "2026-04-11T23:25:55.914Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -154,7 +170,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'උප මුදල ගෙවන්න' means 'pay subsidiary money' or 'pay additional money', which implies making a payment rather than adding funds to a wallet",
+          "suggestion": "පසුම්බිය පිරවන්න",
+          "checked_at": "2026-04-11T23:25:59.990Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -190,7 +214,15 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Cüzdanı Yenile' means 'Refresh Wallet' which implies updating/refreshing the wallet display, not adding funds to it. This is the opposite of the intended meaning.",
+          "suggestion": "Cüzdana Para Yükle",
+          "checked_at": "2026-04-11T23:26:08.262Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,7 +3,7 @@
   "content": "use custom filter",
   "content_en_sha1_hash": "b37de48bcfb125d7817951f1376561bed347cc4c",
   "created_at": "2025-08-26T11:14:54.775Z",
-  "updated_at": "2026-04-11T20:39:40.140Z",
+  "updated_at": "2026-04-11T22:39:59.473Z",
   "comment": {
     "text": "This is a button label indicating that a user has been granted permission to apply a custom filter to a shared document.",
     "is_auto": true,
@@ -142,7 +142,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "Missing article 'un' before 'filtru' - Romanian requires an article for proper grammar and clarity",
+          "suggestion": "folosire un filtru particularizat",
+          "checked_at": "2026-04-11T22:39:46.281Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {

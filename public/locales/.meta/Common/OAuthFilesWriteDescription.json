@@ -3,7 +3,7 @@
   "content": "View and manage all files and folders",
   "content_en_sha1_hash": "07c9e42a035928c689645c2bb99f9e8490d45a8b",
   "created_at": "2025-05-19T21:30:47.010Z",
-  "updated_at": "2026-04-11T20:47:29.925Z",
+  "updated_at": "2026-04-12T05:50:59.176Z",
   "comment": {
     "text": "This text describes the \"write\" permission for files and folders within an OAuth consent dialog. It informs the user that the application will be able to view, create, edit, and delete all files and folders.",
     "is_auto": true,

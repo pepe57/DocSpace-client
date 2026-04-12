@@ -3,7 +3,7 @@
   "content": "Sign in with WeChat",
   "content_en_sha1_hash": "9044841df03cf83e460dec7b8fdfd51a25bf49e2",
   "created_at": "2025-09-09T10:39:43.472Z",
-  "updated_at": "2026-04-11T20:42:38.941Z",
+  "updated_at": "2026-04-12T00:42:34.278Z",
   "comment": {
     "text": "This is a button label for signing into the application using a WeChat account. It appears on the sign-in page.",
     "is_auto": true,

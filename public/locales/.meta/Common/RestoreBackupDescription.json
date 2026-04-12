@@ -3,7 +3,7 @@
   "content": "Use this option to restore your space from the previously saved backup file.",
   "content_en_sha1_hash": "11a400f57bd31afaba762b7268abcb9729fcb0cf",
   "created_at": "2025-05-26T07:15:46.907Z",
-  "updated_at": "2026-04-11T20:44:54.082Z",
+  "updated_at": "2026-04-12T02:33:25.438Z",
   "comment": {
     "text": "This is a descriptive text that appears below the \"Restore backup\" heading, explaining the purpose of restoring a space from a backup file.",
     "is_auto": true,

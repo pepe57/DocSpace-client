@@ -3,7 +3,7 @@
   "content": "Agent managers can manage the assigned {{aiAgent}}, invite new users, and assign roles below their level.\nThey can use the chat, upload knowledge files, work with Result storage, and manage chat settings.",
   "content_en_sha1_hash": "cc775f7206bb72ef36c1f9ccb45b183e8348c5d8",
   "created_at": "2025-12-19T10:16:37.940Z",
-  "updated_at": "2026-04-11T20:44:40.613Z",
+  "updated_at": "2026-04-12T02:18:01.923Z",
   "comment": {
     "text": "This is a description of the \"AI Agent Manager\" role, displayed in a tooltip or information panel. It explains the permissions and capabilities of users assigned this role, with `{{aiAgent}}` being a placeholder for the localized term \"AI Agent\".",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Renew the license",
   "content_en_sha1_hash": "075111d7857278a9999a7ef8434f55c4e01acb80",
   "created_at": "2026-02-18T14:56:10.169Z",
-  "updated_at": "2026-04-11T20:45:07.366Z",
+  "updated_at": "2026-04-12T02:48:49.347Z",
   "comment": {
     "text": "Button label. This text appears on a button that users click to renew their ONLYOFFICE DocSpace license.",
     "is_auto": true,

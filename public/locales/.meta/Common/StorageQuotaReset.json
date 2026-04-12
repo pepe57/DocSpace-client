@@ -3,7 +3,7 @@
   "content": "Storage quota successfully set to default.",
   "content_en_sha1_hash": "b6fea99a34e64a58d31ebe5913e5b51c86e315db",
   "created_at": "2025-05-19T21:30:49.128Z",
-  "updated_at": "2026-04-11T20:41:57.533Z",
+  "updated_at": "2026-04-12T00:13:33.724Z",
   "comment": {
     "text": "This is a toast message confirming that the storage quota has been successfully reverted to its default setting.",
     "is_auto": true,
@@ -94,7 +94,15 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation says the quota was 'set by default' (défini par défaut) rather than 'set to default', which changes the meaning from reverting to default settings to being set in a default manner",
+          "suggestion": "Le quota de stockage a été défini sur la valeur par défaut avec succès.",
+          "checked_at": "2026-04-12T00:13:07.245Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {

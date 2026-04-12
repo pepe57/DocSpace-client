@@ -3,7 +3,7 @@
   "content": "Top up",
   "content_en_sha1_hash": "91d42a8b742abdae628f62177ef45374076d645e",
   "created_at": "2026-04-10T13:53:43.578Z",
-  "updated_at": "2026-04-11T20:40:53.421Z",
+  "updated_at": "2026-04-11T23:30:43.314Z",
   "comment": {
     "text": "This is a button label that allows users to add funds to their account or balance.",
     "is_auto": true,
@@ -46,7 +46,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation 'Hesabınızı doldurun' means 'Fill out your account' which implies completing account information, not adding funds to an account balance",
+          "suggestion": "Balansı artır",
+          "checked_at": "2026-04-11T23:30:05.736Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -70,7 +78,15 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek word 'Ανανέωση' means 'renewal' or 'refresh', which does not convey the meaning of adding funds to an account. 'Top up' specifically refers to adding money/credits to a balance.",
+          "suggestion": "Φόρτιση",
+          "checked_at": "2026-04-11T23:30:11.297Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -136,13 +152,29 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish word 'Dopaść' means 'to catch/pursue' which is completely wrong for a button that adds funds to an account. The correct meaning should be 'to add money/top up balance'.",
+          "suggestion": "Doładuj",
+          "checked_at": "2026-04-11T23:30:23.503Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese 'Repor' means 'to replace/restore' rather than 'to add funds'. For adding money to an account balance, the correct term should be 'Recarregar' or 'Adicionar fundos'.",
+          "suggestion": "Recarregar",
+          "checked_at": "2026-04-11T23:30:26.114Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -166,7 +198,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ඉහළ නැංවන්න' means 'to raise up' or 'to lift up' which does not convey the financial meaning of adding funds to an account balance",
+          "suggestion": "අරමුදල් එකතු කරන්න",
+          "checked_at": "2026-04-11T23:30:32.485Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -202,7 +242,15 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation 'Yükle' means 'upload/load' which is incorrect for adding funds to an account. The correct meaning should be about adding money/credits.",
+          "suggestion": "Para yükle",
+          "checked_at": "2026-04-11T23:30:40.151Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

@@ -3,7 +3,7 @@
   "content": "Each folder corresponds to a specific form and contains draft files from people who started filling but haven't submitted yet.",
   "content_en_sha1_hash": "065878dbee3e177aedc9fbc1ef4a058a2dece394",
   "created_at": "2026-03-31T15:18:26.779Z",
-  "updated_at": "2026-04-11T20:40:33.188Z",
+  "updated_at": "2026-04-11T23:16:45.421Z",
   "comment": {
     "text": "This is a tooltip that appears during a product tour, explaining the purpose of the \"In Progress\" section within the forms module. It describes that this section holds draft forms from users who have started but not yet submitted them.",
     "is_auto": true,
@@ -46,7 +46,15 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The word 'neodevдали' contains Cyrillic characters 'д' in what should be Czech text using Latin script",
+          "suggestion": "Každá složka odpovídá konkrétnímu formuláři a obsahuje návrhové soubory od uživatelů, kteří začali vyplňovat, ale ještě neodevzdali.",
+          "checked_at": "2026-04-11T23:16:08.604Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -112,7 +120,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'vemla' (form) should be 'forma' in Latvian. 'Vemla' is not a standard Latvian word for form.",
+          "suggestion": "Katrai mapei atbilst konkrēta forma un tā satur projektā saglabātos failus no cilvēkiem, kuri sākuši aizpildīt, bet vēl nav tos iesnieguši.",
+          "checked_at": "2026-04-11T23:16:22.065Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -160,13 +176,29 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical error: 'Každá priečinok' uses feminine determiner 'Každá' with masculine noun 'priečinok', should be 'Každý priečinok'",
+          "suggestion": "Každý priečinok zodpovedá konkrétnemu formuláru a obsahuje návrhové súbory od ľudí, ktorí začali vyplňovať, ale ešte neposlali.",
+          "checked_at": "2026-04-11T23:16:32.650Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'folder' is translated as 'zbirka' (collection) instead of 'mapa' (folder), which changes the technical meaning in a file management context",
+          "suggestion": "Vsaka mapa se nanaša na specifičen obrazec in vsebuje predlog fajle od ljudi, ki so začeli popunjati, vendar še niso oddali.",
+          "checked_at": "2026-04-11T23:16:35.503Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

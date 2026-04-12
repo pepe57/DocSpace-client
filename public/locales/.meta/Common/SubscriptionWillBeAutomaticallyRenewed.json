@@ -3,7 +3,7 @@
   "content": "Subscription will be automatically renewed <1>on {{finalDate}}</1>",
   "content_en_sha1_hash": "6e554c22966d656fbeaa981cbe82bd31254def6d",
   "created_at": "2026-04-10T13:53:43.527Z",
-  "updated_at": "2026-04-11T20:41:38.114Z",
+  "updated_at": "2026-04-12T00:00:04.433Z",
   "comment": {
     "text": "This is a sentence displayed on the billing page, informing the user that their subscription will automatically renew. The `<1>on {{finalDate}}</1>` part indicates the specific date of renewal.",
     "is_auto": true,
@@ -34,7 +34,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The English word 'on' is not translated to Azerbaijani and remains in English within the tag markup",
+          "suggestion": "Abunəlik avtomatik olaraq yenilənəcək <1>{{finalDate}} tarixində</1>",
+          "checked_at": "2026-04-11T23:59:19.225Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -58,7 +66,22 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "wrong_language",
+          "description": "The word 'dipernovithei' appears to be transliterated English rather than proper Greek",
+          "suggestion": "Συνδρομή θα ανανεωθεί αυτόματα <1>στις {{finalDate}}</1>",
+          "checked_at": "2026-04-11T23:59:25.665Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        },
+        {
+          "type": "wrong_language",
+          "description": "The word 'on' should be translated to Greek instead of remaining in English",
+          "suggestion": "Συνδρομή θα ανανεωθεί αυτόματα <1>στις {{finalDate}}</1>",
+          "checked_at": "2026-04-11T23:59:25.665Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -70,7 +93,15 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'päivätty {{finalDate}}' is grammatically incorrect and unclear. 'Päivätty' means 'dated' which doesn't make sense in this context about renewal timing.",
+          "suggestion": "Tila jatkuu automaattisesti uudistumisella <1>{{finalDate}}</1>",
+          "checked_at": "2026-04-11T23:59:28.798Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "fr": {
@@ -142,19 +173,43 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The article 'A' at the beginning is incorrect and creates a grammatical error. It should be removed as Romanian doesn't require an article before 'abonamentul'.",
+          "suggestion": "Abonamentul va fi reînnoit automat <1>pe {{finalDate}}</1>",
+          "checked_at": "2026-04-11T23:59:43.038Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Russian translation is missing the preposition 'on' which indicates when the renewal will occur",
+          "suggestion": "Подписка будет автоматически продлена <1>{{finalDate}}</1>",
+          "checked_at": "2026-04-11T23:59:45.242Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation says 'annual subscription' (වාර්ෂික දායකත්වය) but the English text refers to general 'subscription' without specifying it's annual",
+          "suggestion": "දායකත්වය ස්වයංක්‍රීයව අලුත් කරනු ලබන්නේ <1>{{finalDate}}</1> දිනදීය",
+          "checked_at": "2026-04-11T23:59:48.359Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -166,7 +221,15 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Akejša' appears to be incorrect or a typo. It should be 'Naročnina' (subscription) in Slovenian.",
+          "suggestion": "Naročnina se bo avtomatsko obnovila <1>na {{finalDate}}</1>",
+          "checked_at": "2026-04-11T23:59:52.082Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
@@ -178,13 +241,29 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The preposition 'on' is missing from the Serbian translation. The English specifies 'on {{finalDate}}' but Serbian only has '{{finalDate}}' without the preposition.",
+          "suggestion": "Абонплата ће се аутоматски обновити <1>{{finalDate}}</1>",
+          "checked_at": "2026-04-11T23:59:55.465Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The preposition 'on' is missing from the Serbian translation. The English specifies 'on {{finalDate}}' but Serbian only has '{{finalDate}}' without the preposition.",
+          "suggestion": "A pretplata će biti automatski obnovljena <1>dana {{finalDate}}</1>",
+          "checked_at": "2026-04-11T23:59:57.920Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -196,7 +275,15 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation is grammatically incorrect and unclear. 'дата {{finalDate}}' should be 'на дату {{finalDate}}' or '{{finalDate}}' to properly convey 'on {{finalDate}}'",
+          "suggestion": "Підписка буде автоматично поновлена <1>{{finalDate}}</1>",
+          "checked_at": "2026-04-12T00:00:01.628Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

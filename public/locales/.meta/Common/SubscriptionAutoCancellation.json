@@ -3,7 +3,7 @@
   "content": "Subscription will be automatically canceled on {{finalDate}}",
   "content_en_sha1_hash": "052b6c0869cca2a025f2225ae034b9d30f6d3f9b",
   "created_at": "2026-04-10T13:53:43.451Z",
-  "updated_at": "2026-04-11T20:41:47.112Z",
+  "updated_at": "2026-04-12T00:05:59.492Z",
   "comment": {
     "text": "This is a text label indicating that a subscription will be automatically canceled on a specific date. The `{{finalDate}}` variable will be replaced with the cancellation date.",
     "is_auto": true,
@@ -130,7 +130,15 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "Missing preposition 'on' before the date variable - the Polish translation should indicate 'on the date' not just 'the date'",
+          "suggestion": "Subskrypcja zostanie automatycznie anulowana w dniu {{finalDate}}.",
+          "checked_at": "2026-04-12T00:05:38.159Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -166,13 +174,29 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "Missing preposition 'on' before the date variable - the Slovak translation should indicate when the cancellation will occur",
+          "suggestion": "Predplatné bude automaticky zrušené dňa {{finalDate}}.",
+          "checked_at": "2026-04-12T00:05:45.780Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "Missing preposition 'on' before the date variable - the Slovenian translation lacks the equivalent of 'on' to indicate when the cancellation occurs",
+          "suggestion": "Naročnina bo samodejno preklicana dne {{finalDate}}.",
+          "checked_at": "2026-04-12T00:05:48.102Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
@@ -184,13 +208,29 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "Missing preposition 'on' before the date variable - the Serbian translation lacks the equivalent of 'on' to indicate when the cancellation will occur",
+          "suggestion": "Преплата ће бити автоматски отказана {{finalDate}}",
+          "checked_at": "2026-04-12T00:05:52.145Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "Missing preposition 'on' before the date variable - the Serbian translation should indicate when the cancellation will occur",
+          "suggestion": "Pretplata će biti automatski otkazana {{finalDate}}",
+          "checked_at": "2026-04-12T00:05:54.139Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "tr": {
@@ -202,7 +242,15 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "Missing preposition 'on' before the date variable - the Ukrainian translation lacks the equivalent of 'on' to indicate when the cancellation will occur",
+          "suggestion": "Підписка буде автоматично скасована {{finalDate}}.",
+          "checked_at": "2026-04-12T00:05:57.616Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

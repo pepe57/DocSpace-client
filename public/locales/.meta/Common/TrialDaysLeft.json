@@ -3,7 +3,7 @@
   "content": "Trial {{count}} days",
   "content_en_sha1_hash": "9c538da52c03c4af1cda11f0c9a7ecfa5601131f",
   "created_at": "2025-05-19T21:30:49.334Z",
-  "updated_at": "2026-04-11T20:40:24.580Z",
+  "updated_at": "2026-04-11T23:10:31.577Z",
   "comment": {
     "text": "This is a short label displayed in the tariff bar, indicating the remaining days of a trial period. `{{count}}` is a number representing the days left.",
     "is_auto": true,
@@ -112,7 +112,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Latvian translation adds explanatory text '(-s)' for plural form that is not present in the English original, and uses a longer descriptive phrase instead of the concise label format",
+          "suggestion": "Izmēģinājuma {{count}} dienas",
+          "checked_at": "2026-04-11T23:10:10.349Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -124,13 +132,29 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Polish translation changes the meaning from a short label format 'Trial X days' to a longer descriptive phrase 'Remaining days of trial period: X'",
+          "suggestion": "Okres próbny {{count}} dni",
+          "checked_at": "2026-04-11T23:10:13.467Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation changes the meaning from 'Trial X days' (indicating X days remaining) to 'X days of the trial period' which is less clear about remaining time",
+          "suggestion": "{{count}} dias restantes do período de avaliação",
+          "checked_at": "2026-04-11T23:10:17.055Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -160,7 +184,15 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovak translation uses singular form 'skúšobný deň' (trial day) with '(dní)' in parentheses, but it should properly handle Slovak plural forms based on the count variable",
+          "suggestion": "Skúšobné obdobie {{count}} dní",
+          "checked_at": "2026-04-11T23:10:23.813Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sl": {

@@ -3,7 +3,7 @@
   "content": "This room is opened in the <1>{{roomMode}}</1> mode. If you have an account in this {{productName}}, please authorize.",
   "content_en_sha1_hash": "966e9f6f87aa9004801797a1570d6371db7bf248",
   "created_at": "2025-06-24T16:31:00.928Z",
-  "updated_at": "2026-04-11T20:45:47.511Z",
+  "updated_at": "2026-04-12T03:39:35.994Z",
   "comment": {
     "text": "This is a toast message displayed to users accessing a public room. It informs them about the room's mode and prompts them to authorize if they have an account, with `{{roomMode}}` indicating the room's access level and `{{productName}}` being the brand name.",
     "is_auto": true,

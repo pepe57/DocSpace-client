@@ -3,7 +3,7 @@
   "content": "Save to file",
   "content_en_sha1_hash": "ede741f7184fe965890ad117aad72fb8d0c1fc2a",
   "created_at": "2025-10-27T16:14:24.144Z",
-  "updated_at": "2026-04-11T20:43:54.612Z",
+  "updated_at": "2026-04-12T01:34:39.375Z",
   "comment": {
     "text": "This is a button label that allows users to save the current chat session or a specific message to a file.",
     "is_auto": true,
@@ -148,7 +148,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Romanian translation 'Salvare ca fișier' means 'Save as file' which implies creating a new file or choosing a file format, while the English 'Save to file' means saving content into a file",
+          "suggestion": "Salvare în fișier",
+          "checked_at": "2026-04-12T01:34:26.675Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
@@ -190,7 +198,15 @@
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Serbian translation uses imperative mood 'Sačuvajte' (Save!) instead of infinitive form appropriate for a button label",
+          "suggestion": "Sačuvaj u fajl",
+          "checked_at": "2026-04-12T01:34:35.043Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "tr": {

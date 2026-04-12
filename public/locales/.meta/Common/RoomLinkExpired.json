@@ -3,7 +3,7 @@
   "content": "The room link you are trying to open does not exist or has expired.",
   "content_en_sha1_hash": "c16f473a9fbf86a65ac485294a575a3b10d7278a",
   "created_at": "2025-05-19T21:30:48.190Z",
-  "updated_at": "2026-04-11T21:47:27.339Z",
+  "updated_at": "2026-04-12T01:50:44.648Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts to access a Room link that is no longer valid or has been removed.",
     "is_auto": true,
@@ -111,7 +111,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"o\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T21:47:27.334Z",
+          "checked_at": "2026-04-12T01:50:17.428Z",
           "checked_by": "deterministic"
         }
       ],
@@ -168,7 +168,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Lunk-ul' is not a valid Romanian word. The correct Romanian word for 'link' is 'link-ul' or 'legătura'.",
+          "suggestion": "Link-ul de sală pe care încercați să-l deschideți nu există sau a expirat.",
+          "checked_at": "2026-04-12T01:50:29.430Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {

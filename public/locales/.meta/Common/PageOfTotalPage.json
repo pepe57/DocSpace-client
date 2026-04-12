@@ -3,7 +3,7 @@
   "content": "{{page}} of {{totalPage}}",
   "content_en_sha1_hash": "f8ec268e271534118f3f085bb25e67c3a21ba057",
   "created_at": "2025-05-19T21:30:47.214Z",
-  "updated_at": "2026-04-11T20:47:00.631Z",
+  "updated_at": "2026-04-12T05:13:19.653Z",
   "comment": {
     "text": "This string indicates the current page number and the total number of pages in a pagination control. It appears as a short label, where `{{page}}` is the current page number and `{{totalPage}}` is the total number of pages.",
     "is_auto": true,

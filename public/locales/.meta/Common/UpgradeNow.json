@@ -3,7 +3,7 @@
   "content": "Upgrade now",
   "content_en_sha1_hash": "09a80c7a63cdefe5e5c7bccdc6bf4b894b15c07c",
   "created_at": "2026-04-10T13:53:43.815Z",
-  "updated_at": "2026-04-11T20:40:07.339Z",
+  "updated_at": "2026-04-11T22:58:40.552Z",
   "comment": {
     "text": "This is the label for a button that allows users to upgrade their current plan.",
     "is_auto": true,
@@ -130,7 +130,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian translation 'Atjaunot tagad' means 'Update now' or 'Refresh now', which refers to updating existing content rather than upgrading to a higher service plan",
+          "suggestion": "Uzlabot tagad",
+          "checked_at": "2026-04-11T22:58:19.552Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -148,7 +156,15 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Portuguese translation 'Aumentar agora' means 'Increase now' which refers to making something bigger/larger, not upgrading to a better plan or version",
+          "suggestion": "Atualizar agora",
+          "checked_at": "2026-04-11T22:58:23.612Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -214,7 +230,15 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Ukrainian translation 'Підвищити зараз' means 'to increase/raise now' which is incorrect for a subscription upgrade context. The word 'підвищити' typically refers to raising levels, prices, or improving something, not upgrading a service plan.",
+          "suggestion": "Оновити зараз",
+          "checked_at": "2026-04-11T22:58:38.026Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

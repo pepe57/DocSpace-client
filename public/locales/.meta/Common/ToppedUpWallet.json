@@ -3,7 +3,7 @@
   "content": "You have successfully topped up your wallet.",
   "content_en_sha1_hash": "4350e83421e271363fd27380f9431f01f3ad9986",
   "created_at": "2026-04-10T13:53:43.563Z",
-  "updated_at": "2026-04-11T20:40:54.123Z",
+  "updated_at": "2026-04-11T23:31:22.765Z",
   "comment": {
     "text": "This is a message displayed in a modal dialog, confirming that the user's wallet has been successfully topped up.",
     "is_auto": true,
@@ -76,7 +76,15 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'wallet' should be translated to French rather than kept as an English loanword",
+          "suggestion": "Vous avez réussi à recharger votre portefeuille.",
+          "checked_at": "2026-04-11T23:30:53.570Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -118,7 +126,15 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Dutch translation uses 'bijgewerkt' (updated) instead of conveying the concept of 'topped up' which means adding money/credit to a wallet",
+          "suggestion": "Uw portemonnee is succesvol opgewaardeerd.",
+          "checked_at": "2026-04-11T23:31:02.615Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -154,7 +170,15 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation uses 'සාචිපුරුද්ද' which appears to be an incorrect or non-standard term for 'wallet'. The standard Sinhala term for wallet would be 'පසුම්බිය' or 'මුදල් පසුම්බිය'.",
+          "suggestion": "ඔබගේ පසුම්බිය සාර්ථකව පිරවා ඇත.",
+          "checked_at": "2026-04-11T23:31:11.374Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -190,7 +214,15 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Turkish translation says 'you deposited money with your wallet' instead of 'you topped up your wallet'. The preposition and meaning are incorrect.",
+          "suggestion": "Cüzdanınıza başarıyla para yatırdınız.",
+          "checked_at": "2026-04-11T23:31:19.548Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "uk-UA": {

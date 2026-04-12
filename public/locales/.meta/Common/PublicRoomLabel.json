@@ -3,7 +3,7 @@
   "content": "Public",
   "content_en_sha1_hash": "dc5eb704bbcae1aff4efb71c55461d47767dabe7",
   "created_at": "2025-05-19T21:30:47.669Z",
-  "updated_at": "2026-04-11T20:45:43.894Z",
+  "updated_at": "2026-04-12T03:35:08.122Z",
   "comment": {
     "text": "This is a short label identifying a public room. It appears as a room type in a list or selection.",
     "is_auto": true,

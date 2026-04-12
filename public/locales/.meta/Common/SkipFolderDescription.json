@@ -3,7 +3,7 @@
   "content": "No folder will be copied",
   "content_en_sha1_hash": "140e409b50247a5f7ff22b7ce99dfef6e6751f2c",
   "created_at": "2025-05-19T21:30:48.916Z",
-  "updated_at": "2026-04-11T20:42:22.843Z",
+  "updated_at": "2026-04-12T00:31:29.068Z",
   "comment": {
     "text": "This is a message displayed in a dialog box when a user chooses to skip copying a folder during a file operation. It informs the user that the folder will not be copied.",
     "is_auto": true,
@@ -142,7 +142,15 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Grammatical error: 'folder' (singular) is incorrectly paired with 'vor fi' (plural verb form)",
+          "suggestion": "Nici-un folder nu va fi copiat",
+          "checked_at": "2026-04-12T00:31:16.916Z",
+          "checked_by": "openrouter/anthropic/claude-sonnet-4"
+        }
+      ],
       "approved_at": null
     },
     "ru": {
