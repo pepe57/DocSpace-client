@@ -44,6 +44,7 @@ export type TCreateAiProvider = {
   title: string;
   key: string;
   url: string;
+  modelSettings?: TModelSettingsItem[];
 };
 
 export type TAiProvider = {
@@ -61,6 +62,7 @@ export type TUpdateAiProvider = {
   title?: TCreateAiProvider["title"];
   key?: TCreateAiProvider["key"];
   url?: TCreateAiProvider["url"];
+  modelSettings?: TModelSettingsItem[];
 };
 
 export type TDeleteAiProviders = { ids: TAiProvider["id"][] };
@@ -71,6 +73,8 @@ export type TModel = {
   providerId: TAiProvider["id"];
   providerTitle: TAiProvider["title"];
   modelId: string;
+  alias?: string;
+  capabilities?: TModelCapabilities;
   price?: {
     prompt: number;
     completion: number;
@@ -164,7 +168,9 @@ export type TEditAgentData = Partial<TCreateAgentData>;
 export type TDefaultProvider = {
   providerId: TAiProvider["id"];
   providerTitle: TAiProvider["title"];
+  providerType?: ProviderType;
   defaultModel: TModel["modelId"];
+  defaultModelAlias?: string;
 };
 
 export type TUpdateDefaultProviderData = {
@@ -172,11 +178,25 @@ export type TUpdateDefaultProviderData = {
   defaultModel: TModel["modelId"];
 };
 
-// TODO: Replace mock-driven types with API response types when backend is ready
 export type TModelCapabilities = {
   vision: boolean;
   toolCalling: boolean;
-  extendedThinking: boolean;
+  thinking: boolean;
+};
+
+export type TModelSettingsItem = {
+  modelId: string;
+  isEnabled: boolean;
+  alias?: string;
+  capabilities?: TModelCapabilities;
+};
+
+export type TModelSettingsDto = {
+  id: string;
+  alias?: string;
+  isEnabled: boolean;
+  isRecommended: boolean;
+  capabilities: TModelCapabilities;
 };
 
 export type TProviderModelInfo = {
@@ -190,4 +210,10 @@ export type TSelectedModelData = {
   modelId: string;
   displayName?: string;
   capabilities?: TModelCapabilities;
+};
+
+export type TPreviewModelsRequest = {
+  type: ProviderType;
+  key: string;
+  url?: string;
 };
