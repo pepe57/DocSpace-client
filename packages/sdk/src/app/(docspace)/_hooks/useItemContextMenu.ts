@@ -87,6 +87,7 @@ export default function useItemContextMenu({
     if (isTrashSection) {
       model.add(AVAILABLE_CONTEXT_ITEMS.restore);
     } else {
+      if (file.security.Rename) model.add(AVAILABLE_CONTEXT_ITEMS.rename);
       if (file.security.Copy) model.add(AVAILABLE_CONTEXT_ITEMS.copy);
       if (file.security.Duplicate) model.add(AVAILABLE_CONTEXT_ITEMS.duplicate);
       if (file.security.Move) model.add(AVAILABLE_CONTEXT_ITEMS.moveTo);
@@ -120,6 +121,7 @@ export default function useItemContextMenu({
     if (isTrashSection) {
       items.push(AVAILABLE_CONTEXT_ITEMS.restore);
     } else {
+      if (folder.security.Rename) items.push(AVAILABLE_CONTEXT_ITEMS.rename);
       if (folder.security.Copy) items.push(AVAILABLE_CONTEXT_ITEMS.copy);
       if (folder.security.Duplicate)
         items.push(AVAILABLE_CONTEXT_ITEMS.duplicate);

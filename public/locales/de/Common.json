@@ -1563,5 +1563,10 @@
   "YourName": "Ihr Name",
   "RequestDetails": "Bitte beschreiben Sie hier die Details Ihrer Anfrage.",
   "EnterEmail": "Geben Sie E-Mail ein",
-  "SuccessfullySentMessage": "Ihre Nachricht wurde erfolgreich gesendet. Sie werden von der Verkaufsabteilung kontaktiert."
+  "SuccessfullySentMessage": "Ihre Nachricht wurde erfolgreich gesendet. Sie werden von der Verkaufsabteilung kontaktiert.",
+  "PlanUsersLimit": "Sie möchten das Team auf <1>{{usersCount}}</1> Admins herabstufen, und die aktuelle Anzahl solcher Benutzer in Ihrem {{productName}} ist <1>{{currentUsersCount}}</1>.",
+  "PlanStorageLimit": "Die Beschränkung des neuen Tarifs ist <1>{{storageValue}}</1> an Speicherplatz, und Ihr aktuell verwendeter Speicherplatz ist <1>{{currentStorageValue}}</1>.",
+  "ChangePricingPlan": "Preisplan ändern",
+  "CannotChangePlan": "Sie können Ihren Tarif nicht ändern, weil das verwendete Speichervolumen oder die Anzahl der Admins Limits des gewählten Tarifs überschreitet:",
+  "SaveOrChange": "Bitte beseitigen Sie die Diskrepanz in den widersprüchlichen Parametern, um fortzufahren oder Ihren aktiven Preisplan beizubehalten."
 }

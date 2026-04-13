@@ -1563,5 +1563,10 @@
   "YourName": "Vaše meno",
   "RequestDetails": "Tu popíšte podrobnosti vašej žiadosti.",
   "EnterEmail": "Zadajte email",
-  "SuccessfullySentMessage": "Vaša správa bola úspešne odoslaná. Obchodné oddelenie vás bude kontaktovať."
+  "SuccessfullySentMessage": "Vaša správa bola úspešne odoslaná. Obchodné oddelenie vás bude kontaktovať.",
+  "PlanUsersLimit": "Chcete znížiť úroveň tímu na <1>{{{usersCount}}</1> administrátorov pri súčasnom počte takýchto používateľov vo vašom {{productName}} - <1>{{{currentUsersCount}}</1>.",
+  "PlanStorageLimit": "Nový limit rýchlosti je <1>{{storageValue}}</1> úložiska a váš aktuálne využívaný objem úložiska je <1>{{currentStorageValue}}</1>.",
+  "ChangePricingPlan": "Zmeniť cenový plán",
+  "CannotChangePlan": "Nemôžete zmeniť plán, pretože používaná kapacita úložiska alebo počet administrátorov prekračuje limity vybraného plánu:",
+  "SaveOrChange": "Znížte požadovaný parameter alebo zachovajte aktuálny cenový plán."
 }
