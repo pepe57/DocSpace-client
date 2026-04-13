@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Kündigungsbenachrichtigung nicht mehr anzeigen",
-  "OpenSameTab": "{{organizationName}}-Editor in derselben Registerkarte öffnen",
   "DefaultHomepage": "Standard-Startseite",
-  "GroupByRooms": "Nach Räumen gruppieren"
+  "GroupByRooms": "Nach Räumen gruppieren",
+  "OpenSameTab": "{{organizationName}}-Editor in derselben Registerkarte öffnen"
 }

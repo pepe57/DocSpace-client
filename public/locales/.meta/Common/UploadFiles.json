@@ -3,7 +3,7 @@
   "content": "Upload files",
   "content_en_sha1_hash": "41aca16f905ad31d0eec695b710915a4892e116f",
   "created_at": "2026-04-03T21:51:34.730Z",
-  "updated_at": "2026-04-03T21:52:17.225Z",
+  "updated_at": "2026-04-10T08:21:04.283Z",
   "comment": {
     "text": "Used as a label for buttons and action items that trigger file uploads. It appears in dropdown menus, action lists, and within the knowledge section of the Create/Edit Agent dialog.",
     "is_auto": true,
@@ -24,7 +24,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 3561,
+      "line_number": 3560,
       "context": "icon: CatalogFolderReactSvgUrl,\n };\n \n const uploadFiles = {\n key: \"upload-files\",\n label: t(\"Common:UploadFiles\"),\n onClick: () => this.onUploadAction(\"file\"),\n icon: ActionsUploadReactSvgUrl,\n };\n \n const uploadFolder = {",
       "module": "/packages/client"
     }
@@ -69,7 +69,13 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Greek translation 'Μεταφόρτωση αρχεία' is grammatically incorrect (noun-noun juxtaposition). It should use the accusative case for the object to correctly mean 'Upload files'.",
+          "suggestion": "Μεταφόρτωση αρχείων"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -87,7 +93,13 @@
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The French translation 'Télécharger' means 'to download'. For 'Upload', the correct term is 'Téléverser' or 'Charger'.",
+          "suggestion": "Téléverser les fichiers"
+        }
+      ],
       "approved_at": null
     },
     "hy-AM": {
@@ -165,7 +177,13 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Sinhala translation 'ගොනු දමන්න' (Gonu damanna) literally means 'Put files' or 'Drop files'. In a software UI context for 'Upload files', the correct technical term should involve 'uploading' (උඩුගත කිරීම) to avoid ambiguity with simply placing or dropping files.",
+          "suggestion": "ගොනු උඩුගත කරන්න"
+        }
+      ],
       "approved_at": null
     },
     "sk": {
@@ -207,7 +225,13 @@
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Передати' means 'to transfer' or 'to hand over' (often used for passing a baton or transferring ownership), whereas 'Upload' in a software context specifically means 'Завантажити'.",
+          "suggestion": "Завантажити файли"
+        }
+      ],
       "approved_at": null
     },
     "vi": {

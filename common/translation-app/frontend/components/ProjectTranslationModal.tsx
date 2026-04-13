@@ -31,7 +31,7 @@ const ProjectTranslationModal: React.FC<ProjectTranslationModalProps> = ({
   sourceLanguage,
 }) => {
   const [phase, setPhase] = useState<Phase>("setup");
-  const [models, setModels] = useState<string[]>([]);
+  const [models, setModels] = useState<{ name: string; displayName?: string }[]>([]);
   const [selectedModel, setSelectedModel] = useState<string>("");
   const [languages, setLanguages] = useState<string[]>([]);
   const [targetLanguage, setTargetLanguage] = useState<string>("");
@@ -53,11 +53,12 @@ const ProjectTranslationModal: React.FC<ProjectTranslationModalProps> = ({
           getLanguages(projectName),
         ]);
 
-        const modelNames: string[] = (modelsRes.data?.data || []).map(
-          (m: any) => m.name
+        const modelList = (modelsRes.data?.data || []).map(
+          (m: any) => ({ name: m.name, displayName: m.displayName || m.name })
         );
-        setModels(modelNames);
+        setModels(modelList);
 
+        const modelNames = modelList.map((m: { name: string }) => m.name);
         const savedModel = typeof window !== "undefined"
           ? localStorage.getItem("translation-app-selected-model")
           : null;
@@ -196,7 +197,7 @@ const ProjectTranslationModal: React.FC<ProjectTranslationModalProps> = ({
                   className="w-full border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-primary-500"
                 >
                   {models.map((m) => (
-                    <option key={m} value={m}>{m}</option>
+                    <option key={m.name} value={m.name}>{m.displayName || m.name}</option>
                   ))}
                 </select>
               </div>

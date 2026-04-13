@@ -3,7 +3,7 @@
   "content": "Save the file copy in the original format as well",
   "content_en_sha1_hash": "590aa54a4acb697b9b402769bb231a09e8ad806a",
   "created_at": "2026-04-03T21:51:34.700Z",
-  "updated_at": "2026-04-03T21:53:43.820Z",
+  "updated_at": "2026-04-08T03:29:30.568Z",
   "comment": {
     "text": "This text serves as a label for a toggle button in the file management section, indicating whether a copy of the file should also be saved in its original format.",
     "is_auto": true,
@@ -207,7 +207,13 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation misses the 'as well' (also) nuance, which is important for a toggle indicating an additional action.",
+          "suggestion": "同时也以原始格式保存文件副本"
+        }
+      ],
       "approved_at": null
     }
   }

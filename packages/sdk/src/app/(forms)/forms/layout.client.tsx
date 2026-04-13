@@ -44,6 +44,7 @@ import {
   frameCallbackData,
   frameCallEvent,
   frameHandlePing,
+  getFrameId,
 } from "@docspace/shared/utils/common";
 import { ShareAccessRights } from "@docspace/shared/enums";
 
@@ -77,6 +78,7 @@ import useEditorGuard from "../_hooks/useEditorGuard";
 
 import { MIN_SECTION_WIDTH } from "../_api/aiAgentSettings";
 import { useFormsTourStore } from "../_store/FormsTourStore";
+import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
 import useFormsTour from "../_hooks/useFormsTour";
 import FormsSidebar from "../_components/sidebar";
@@ -119,6 +121,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const formsListStore = useFormsListStore();
   const { items, folders, isLoading } = formsListStore;
   const tourStore = useFormsTourStore();
+  const dbSettingsStore = useFormsDbSettingsStore();
   const customActionsStore = useFormsCustomActionsStore();
   const { currentDeviceType } = useDeviceType();
   const router = useRouter();
@@ -150,7 +153,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   React.useEffect(() => {
     if (isReady && !appReadySent.current) {
       appReadySent.current = true;
-      frameCallEvent({ event: "onAppReady", data: {} });
+      frameCallEvent({ event: "onAppReady", data: { frameId: getFrameId() } });
     }
   }, [isReady]);
 
@@ -165,6 +168,8 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   React.useEffect(() => {
     const handler = (e: MessageEvent) => {
       let eventData;
+      if (window.self === window.parent || e.source !== window.parent) return;
+
       try {
         eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
       } catch {
@@ -323,9 +328,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         activeSection === FormsSection.Settings;
 
       if (isSettingsInternalNav) {
-        setTimeout(() => {
-          window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
-        }, 0);
+        if (!tourStore.isRunning) {
+          setTimeout(() => {
+            window.dispatchEvent(new CustomEvent(AnimationEvents.END_ANIMATION));
+          }, 0);
+        }
       } else {
         if (prevSection === FormsSection.CompletedForms) {
           goBackToCompletedRoot();
@@ -454,21 +461,22 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     closeEditor();
   }, [closeEditor]);
 
-  const { Tour } = useFormsTour();
+  const { Tour } = useFormsTour(showMenu);
 
   // Show welcome dialog on first visit
   const [showWelcome, setShowWelcome] = React.useState(false);
   React.useEffect(() => {
-    if (isReady && !tourStore.tourCompleted && showMenu) {
+    if (isReady && !tourStore.tourCompleted) {
       setShowWelcome(true);
     }
-  }, [isReady, tourStore.tourCompleted, showMenu]);
+  }, [isReady, tourStore.tourCompleted]);
 
   // Clean up mock data when tour ends
   const prevTourRunning = React.useRef(tourStore.isRunning);
   const savedUserAccess = React.useRef<number | null>(null);
   const savedAskFromDBAgentId = React.useRef<number | null>(null);
   const savedAiAgentEnabled = React.useRef<boolean | null>(null);
+  const savedSendToDb = React.useRef<boolean | null>(null);
   React.useEffect(() => {
     if (prevTourRunning.current && !tourStore.isRunning) {
       // Tour just ended — restore original state
@@ -485,6 +493,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           aiStore.askFromDBAgentId = savedAskFromDBAgentId.current;
           savedAskFromDBAgentId.current = null;
         }
+        if (savedSendToDb.current !== null) {
+          dbSettingsStore.setSendToDb(savedSendToDb.current);
+          savedSendToDb.current = null;
+        }
         if (savedUserAccess.current !== null) {
           formsSettingsStore.userAccess = savedUserAccess.current;
           savedUserAccess.current = null;
@@ -498,6 +510,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     formsListStore,
     fetchSection,
     aiStore,
+    dbSettingsStore,
     formsSettingsStore,
   ]);
 
@@ -522,6 +535,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     } else if (activeSection === FormsSection.MyForms) {
       formsListStore.setFolders([]);
       formsListStore.setItems(createMockFormFiles(), 10);
+    } else {
+      // Settings / Library — clear mock data from previous section
+      formsListStore.setFolders([]);
+      formsListStore.setItems([], 0);
     }
     formsListStore.setIsLoading(false);
   }, [activeSection, completedFolder, tourStore.isRunning, formsListStore]);
@@ -623,6 +640,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             if (!aiStore.askFromDBAgentId) {
               savedAskFromDBAgentId.current = aiStore.askFromDBAgentId;
               aiStore.askFromDBAgentId = -999;
+            }
+            if (!dbSettingsStore.sendToDb) {
+              savedSendToDb.current = dbSettingsStore.sendToDb;
+              dbSettingsStore.setSendToDb(true);
             }
             if (!hasManagementAccess) {
               savedUserAccess.current = formsSettingsStore.userAccess as number;

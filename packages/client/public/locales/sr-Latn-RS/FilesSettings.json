@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Ne prikazuj više obaveštenje o otkazivanju",
-  "OpenSameTab": "Otvori {{organizationName}} uređivač u istoj kartici",
   "DefaultHomepage": "Podrazumevana početna stranica",
-  "GroupByRooms": "Grupisanje po sobama"
+  "GroupByRooms": "Grupisanje po sobama",
+  "OpenSameTab": "Otvori {{organizationName}} uređivač u istoj kartici"
 }

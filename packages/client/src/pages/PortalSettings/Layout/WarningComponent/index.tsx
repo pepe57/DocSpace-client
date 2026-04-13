@@ -36,6 +36,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 
 type InjectedProps = {
   isPayer?: boolean;
+  isPayerInfoLoaded?: boolean;
   walletCustomerEmail?: string;
   cardLinkedOnNonProfit?: boolean;
   cardLinkedOnFreeTariff?: boolean;
@@ -49,6 +50,7 @@ type InjectedProps = {
 
 const Warning = ({
   isPayer,
+  isPayerInfoLoaded,
   walletCustomerEmail,
   cardLinkedOnNonProfit,
   cardLinkedOnFreeTariff,
@@ -144,7 +146,7 @@ const Warning = ({
 
       if (maxFreeBackups > 0) {
         try {
-          const backupText = t("Services:FreeBackupsPerMonth", {
+          const backupText = t("Common:FreeBackupsPerMonth", {
             value:
               backupsCount >= maxFreeBackups ? maxFreeBackups : backupsCount,
             maxValue: maxFreeBackups,
@@ -208,6 +210,8 @@ const Warning = ({
     (isPortalPaymentsRoute || isWalletRoute || isPaymentsServiceRoute) &&
     !isPayer
   ) {
+    if (!isPayerInfoLoaded) return null;
+
     return (
       <WarningComponent
         title={
@@ -249,12 +253,13 @@ export default inject(
       cardLinkedOnFreeTariff,
       isBackupServiceOn,
     } = paymentStore;
-    const { walletCustomerEmail, isNotPaidPeriod } = currentTariffStatusStore;
+    const { walletCustomerEmail, isNotPaidPeriod, isPayerInfoLoaded } =
+      currentTariffStatusStore;
     const { isBackupPaid, maxFreeBackups } = currentQuotaStore;
     const { backupsCount, isInited } = backup;
-
     return {
       isPayer,
+      isPayerInfoLoaded,
       walletCustomerEmail,
       cardLinkedOnNonProfit,
       cardLinkedOnFreeTariff,

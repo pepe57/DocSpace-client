@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "عدم عرض إشعار الإلغاء مرة أخرى",
-  "OpenSameTab": "افتح محرر {{organizationName}} في نفس علامة التبويب",
   "DefaultHomepage": "الصفحة الرئيسية الافتراضية",
-  "GroupByRooms": "تجميع حسب الغرف"
+  "GroupByRooms": "تجميع حسب الغرف",
+  "OpenSameTab": "افتح محرر {{organizationName}} في نفس علامة التبويب"
 }

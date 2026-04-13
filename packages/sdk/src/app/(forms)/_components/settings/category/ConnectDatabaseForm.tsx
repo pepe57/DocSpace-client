@@ -85,6 +85,11 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
   );
 
   const onTestConnection = React.useCallback(async () => {
+    if (!store.host.trim() || !store.port.trim()) {
+      toastr.error(t("Common:EmptyFieldError"));
+      return;
+    }
+
     store.setIsTesting(true);
     try {
       const result = await testDbConnection(store.formData);
@@ -213,9 +218,10 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
               scale
               type={InputType.text}
               value={store.port}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                store.setPort(e.target.value)
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                const v = e.target.value.replace(/\D/g, "");
+                store.setPort(v);
+              }}
               size={InputSize.base}
               placeholder="3306"
             />

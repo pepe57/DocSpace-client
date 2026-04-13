@@ -3,7 +3,7 @@
   "content": "Automatically switch between light and dark themes when your system does.",
   "content_en_sha1_hash": "c63fc79ca86878cd4320587abf222c6e63118c5c",
   "created_at": "2026-04-03T21:51:34.692Z",
-  "updated_at": "2026-04-03T21:52:49.699Z",
+  "updated_at": "2026-04-07T22:05:52.625Z",
   "comment": {
     "text": "This key provides the description for the \"System\" theme option within the interface theme selection settings. It explains that the application will automatically switch between light and dark modes to match the user's operating system preferences.",
     "is_auto": true,
@@ -27,7 +27,13 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'القوالب' (templates) is used instead of 'السمات' (themes). In UI context, 'themes' refers to visual modes, whereas 'templates' refers to document layouts.",
+          "suggestion": "قم بالتبديل تلقائيًا بين السمات الفاتحة والداكنة عندما يقوم نظامك بذلك."
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -201,7 +207,13 @@
     "vi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The phrase 'khi hệ thống của bạn hoạt động' means 'when your system is operating/working', which changes the meaning from 'when your system does [switch]' to a general state of the system being active.",
+          "suggestion": "Tự động chuyển đổi giữa chế độ sáng và tối theo cài đặt của hệ thống."
+        }
+      ],
       "approved_at": null
     },
     "zh-CN": {

@@ -23,6 +23,8 @@ export const SDKConfigProvider: React.FC<{ children: React.ReactNode }> = ({
   const [sdkConfig, setSdkConfig] = useState<TFrameConfig | null>(null);
 
   const handleMessage = useCallback((e: MessageEvent) => {
+    if (window.self === window.parent || e.source !== window.parent) return;
+
     let eventData;
     try {
       eventData = typeof e.data === "string" ? JSON.parse(e.data) : e.data;

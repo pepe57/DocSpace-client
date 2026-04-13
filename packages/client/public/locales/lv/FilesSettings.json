@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Nerādīt atcelšanas paziņojumu atkārtoti",
-  "OpenSameTab": "Atvērt {{organizationName}} redaktoru tajā pašā cilnē",
   "DefaultHomepage": "Sākuma lapa",
-  "GroupByRooms": "Grupēt pēc telpām"
+  "GroupByRooms": "Grupēt pēc telpām",
+  "OpenSameTab": "Atvērt {{organizationName}} redaktoru tajā pašā cilnē"
 }

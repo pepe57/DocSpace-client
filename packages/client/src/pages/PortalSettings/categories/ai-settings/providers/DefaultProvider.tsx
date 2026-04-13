@@ -214,7 +214,7 @@ const DefaultProviderComponent = ({
             formatAiModelsCurrency ? formatAiModelsCurrency(v) : String(v);
           const priceLabel =
             m.price != null
-              ? t("Services:AIModelPrice", {
+              ? t("Common:AIModelPrice", {
                   inputPrice: safeFormat(m.price.prompt),
                   outputPrice: safeFormat(m.price.completion),
                 })

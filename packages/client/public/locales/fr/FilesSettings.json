@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Ne plus afficher la notification d'annulation",
-  "OpenSameTab": "Ouvrir l'éditeur {{organizationName}} dans le même onglet",
   "DefaultHomepage": "Page d'accueil par défaut",
-  "GroupByRooms": "Grouper par salles"
+  "GroupByRooms": "Grouper par salles",
+  "OpenSameTab": "Ouvrir l'éditeur {{organizationName}} dans le même onglet"
 }

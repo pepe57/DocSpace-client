@@ -26,6 +26,19 @@
 .headerNavigation {
   flex: 1;
   min-width: 0;
+  position: relative;
+}
+
+.tourAnchor {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 0;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0;
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .root,

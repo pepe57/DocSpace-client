@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Annuleringsmelding niet meer weergeven",
-  "OpenSameTab": "Open {{organizationName}} editor in hetzelfde tabblad",
   "DefaultHomepage": "Standaard Homepage",
-  "GroupByRooms": "Groepeer op kamers"
+  "GroupByRooms": "Groepeer op kamers",
+  "OpenSameTab": "Open {{organizationName}} editor in hetzelfde tabblad"
 }

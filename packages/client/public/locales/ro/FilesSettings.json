@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Nu afișa din nou notificarea de anulare",
-  "OpenSameTab": "Deschide editorul {{organizationName}} în aceeași filă",
   "DefaultHomepage": "Pagina principală implicită",
-  "GroupByRooms": "Grupează după săli"
+  "GroupByRooms": "Grupează după săli",
+  "OpenSameTab": "Deschide editorul {{organizationName}} în aceeași filă"
 }

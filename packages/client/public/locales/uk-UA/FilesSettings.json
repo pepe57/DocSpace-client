@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Більше не показувати сповіщення про скасування",
-  "OpenSameTab": "Відкрити редактор {{organizationName}} на тій самій вкладці",
   "DefaultHomepage": "Головна сторінка за замовчуванням",
-  "GroupByRooms": "Групувати за кімнатами"
+  "GroupByRooms": "Групувати за кімнатами",
+  "OpenSameTab": "Відкрити редактор {{organizationName}} на тій самій вкладці"
 }

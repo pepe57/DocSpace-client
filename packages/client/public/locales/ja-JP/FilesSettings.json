@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "キャンセル通知を再表示しない",
-  "OpenSameTab": "{{organizationName}}エディタを同じタブで開く",
   "DefaultHomepage": "デフォルトホームページ",
-  "GroupByRooms": "部屋ごとにグループ化"
+  "GroupByRooms": "部屋ごとにグループ化",
+  "OpenSameTab": "{{organizationName}}エディタを同じタブで開く"
 }

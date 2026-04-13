@@ -3,7 +3,7 @@
   "content": "OAuth 2.0",
   "content_en_sha1_hash": "11ff1c5f1bf611e663f09de411b0c9a4d410b907",
   "created_at": "2025-05-19T21:30:53.924Z",
-  "updated_at": "2026-04-03T21:51:41.073Z",
+  "updated_at": "2026-04-10T08:21:04.346Z",
   "comment": {
     "text": "OAuth 2.0 is a translation key used to display the English content \"OAuth 2.0\" in various UI contexts throughout the application, primarily for title settings and button labels, such as on create and edit pages of OAuth-related settings.",
     "is_auto": true,
@@ -19,13 +19,13 @@
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
       "line_number": 111,
-      "context": "color={globalColors.mainRed}\n linkTitle={t(\"Webhooks:CreateWebhook\")}\n />\n <Card\n icon={<OAuthSvg />}\n title={t(\"OAuth:OAuth\")}\n description={t(\"Settings:OAuthDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/oauth\"\n color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />",
+      "context": "color={globalColors.mainRed}\n linkTitle={t(\"Webhooks:CreateWebhook\")}\n />\n <Card\n icon={<OAuthSvg />}\n title={t(\"OAuth:OAuth\")}\n description={t(\"Settings:OAuthDescription\", { organizationName: t(\"Common:OrganizationName\"), productName: t(\"Common:ProductName\") })}\n url=\"/developer-tools/oauth/create\"\n color={globalColors.purple}\n linkTitle={t(\"Settings:RegisterApp\")}\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/index.tsx",
       "line_number": 34,
-      "context": "import { useTranslation } from \"react-i18next\";\n \n import { SettingsStore } from \"@docspace/shared/store/SettingsStore\";\n \n import useViewEffect from \"SRC_DIR/Hooks/useViewEffect\";\n import OAuthStore from \"SRC_DIR/store/OAuthStore\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n \n import { OAuthContainer } from \"./OAuth.styled\";\n import { OAuthProps } from \"./OAuth.types\";",
+      "context": "import { useTranslation } from \"react-i18next\";\n \n import { SettingsStore } from \"@docspace/shared/store/SettingsStore\";\n \n import useViewEffect from \"@docspace/ui-kit/hooks/useViewEffect\";\n import OAuthStore from \"SRC_DIR/store/OAuthStore\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n \n import { OAuthContainer } from \"./OAuth.styled\";\n import { OAuthProps } from \"./OAuth.types\";",
       "module": "/packages/client"
     },
     {

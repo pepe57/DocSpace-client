@@ -565,6 +565,9 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
       style={navDropdownMinWidth ? { "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties : undefined}
     >
       <div className={styles.headerNavigation}>
+        <span data-tour={`section-${activeSection}`} className={styles.tourAnchor}>
+          {getSectionTitle()}
+        </span>
         <Navigation
           showText
           isRootFolder
