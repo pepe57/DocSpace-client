@@ -26,8 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { memo, useEffect, useLayoutEffect, useMemo, useRef } from "react";
-import { createPortal } from "react-dom";
+import React, { memo, useEffect, useMemo } from "react";
 
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
@@ -37,6 +36,7 @@ import { Text } from "@docspace/ui-kit/components/text";
 import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
 import { isMobileDevice } from "@docspace/shared/utils";
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 
@@ -47,7 +47,7 @@ import styles from "./ModelSelectorPopup.module.scss";
 const ROW_HEIGHT = 30;
 const ROW_GAP = 2;
 const SECTION_HEADER_HEIGHT = 36;
-const FOOTER_PADDING = 80;
+const POPUP_PADDING = 24;
 
 type ModelSelectorPopupProps = {
   anchor: React.RefObject<HTMLDivElement | null>;
@@ -140,55 +140,22 @@ export const ModelSelectorPopup = ({
   onClose,
 }: ModelSelectorPopupProps) => {
   const { t } = useTranslation(["AISettings", "Common"]);
-  const ref = useRef<HTMLDivElement>(null);
   const isMobileHardware = isMobileDevice();
   const isLandscape = window.innerWidth > window.innerHeight;
   const isMobilePortrait = isMobileHardware && !isLandscape;
   const isMobileLandscape = isMobileHardware && isLandscape;
 
-  useLayoutEffect(() => {
-    if (isMobilePortrait) return;
-    if (!anchor.current || !ref.current) return;
-
-    const addButton = anchor.current.querySelector(
-      '[data-testid="add-model-button"]',
-    );
-    const anchorEl = addButton ?? anchor.current;
-    const rect = anchorEl.getBoundingClientRect();
-    const popupEl = ref.current;
-
-    let left = anchor.current.getBoundingClientRect().left;
-
-    if (left + 285 > window.innerWidth) {
-      left = window.innerWidth - 285 - 8;
-    }
-
-    popupEl.style.left = `${left}px`;
-
-    if (isMobileLandscape) {
-      const bottom = window.innerHeight - rect.top + 8;
-      popupEl.style.top = "auto";
-      popupEl.style.bottom = `${bottom}px`;
-      popupEl.style.maxHeight = `${Math.max(rect.top - 16, 100)}px`;
-    } else {
-      const top = rect.bottom + 8;
-      popupEl.style.top = `${top}px`;
-      popupEl.style.maxHeight = `${Math.max(window.innerHeight - top - FOOTER_PADDING, 100)}px`;
-    }
-  }, [anchor, recommended.length, other.length, isMobilePortrait, isMobileLandscape]);
-
   useEffect(() => {
     if (isMobilePortrait) return;
 
     const handleClickOutside = (e: MouseEvent) => {
-      if (
-        ref.current &&
-        !ref.current.contains(e.target as Node) &&
-        anchor.current &&
-        !anchor.current.contains(e.target as Node)
-      ) {
-        onClose();
-      }
+      const target = e.target as HTMLElement;
+      if (target.closest('[data-testid="model-selector-popup"]')) return;
+      const addButton = anchor.current?.querySelector(
+        '[data-testid="add-model-button"]',
+      );
+      if (addButton?.contains(target)) return;
+      onClose();
     };
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -200,19 +167,82 @@ export const ModelSelectorPopup = ({
     [recommended, other, isCustomProvider],
   );
 
-  const modelList = isCustomProvider ? (
+  const backdrop = isMobileHardware ? (
+    <Backdrop
+      visible
+      withBackground
+      shouldShowBackdrop
+      onClick={onClose}
+      zIndex={449}
+    />
+  ) : null;
+
+  const mobilePortraitScrollMax = window.innerHeight - 64 - POPUP_PADDING;
+
+  const modelContent = isCustomProvider ? (
     <>
       <div className={styles.sectionHeader}>
         <Text className={styles.sectionTitle}>
           {t("AISettings:SelectModels")}
         </Text>
       </div>
-      <div
-        className={styles.scrollWrapper}
-        style={{ height: scrollHeight }}
-      >
-        <Scrollbar className={styles.scrollbar}>
-          {[...recommended, ...other].map((model) => (
+      {[...recommended, ...other].map((model) => (
+        <ModelRow
+          key={model.modelId}
+          model={model}
+          isSelected={selectedModelIds.has(model.modelId)}
+          showPencil
+          onToggle={onToggle}
+          onEdit={onEditModel}
+        />
+      ))}
+    </>
+  ) : (
+    <>
+      {recommended.length > 0 ? (
+        <>
+          <div className={styles.sectionHeader}>
+            <Text className={styles.sectionTitle}>
+              {t("AISettings:RecommendedModels")}
+            </Text>
+            <HelpButton
+              tooltipContent={t("AISettings:RecommendedModelsTooltip", {
+                productName: t("Common:ProductName"),
+              })}
+              place="bottom"
+              size={12}
+            />
+          </div>
+          {recommended.map((model) => (
+            <ModelRow
+              key={model.modelId}
+              model={model}
+              isSelected={selectedModelIds.has(model.modelId)}
+              showPencil={false}
+              onToggle={onToggle}
+              onEdit={onEditModel}
+            />
+          ))}
+        </>
+      ) : null}
+      {other.length > 0 ? (
+        <>
+          <div
+            className={classNames(
+              styles.sectionHeader,
+              styles.sectionHeaderOther,
+            )}
+          >
+            <Text className={styles.sectionTitle}>
+              {t("AISettings:OtherModels")}
+            </Text>
+            <HelpButton
+              tooltipContent={t("AISettings:OtherModelsTooltip")}
+              place="bottom"
+              size={12}
+            />
+          </div>
+          {other.map((model) => (
             <ModelRow
               key={model.modelId}
               model={model}
@@ -222,97 +252,57 @@ export const ModelSelectorPopup = ({
               onEdit={onEditModel}
             />
           ))}
-        </Scrollbar>
-      </div>
+        </>
+      ) : null}
     </>
+  );
+
+  // Mobile portrait: own Scrollbar (DropDown's withDynamicScrollbar is off, fixedDirection skips height calc)
+  // Desktop/landscape: flat content, DropDown's withDynamicScrollbar handles scroll
+  const children = isMobilePortrait ? (
+    <div
+      onClick={(e) => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
+    >
+      <Scrollbar
+        style={{
+          height: Math.min(scrollHeight, mobilePortraitScrollMax),
+        }}
+      >
+        {modelContent}
+      </Scrollbar>
+    </div>
   ) : (
     <div
-      className={styles.scrollWrapper}
-      style={{ height: scrollHeight }}
+      onClick={(e) => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
     >
-      <Scrollbar fixedSize className={styles.scrollbar}>
-        {recommended.length > 0 ? (
-          <>
-            <div className={styles.sectionHeader}>
-              <Text className={styles.sectionTitle}>
-                {t("AISettings:RecommendedModels")}
-              </Text>
-              <HelpButton
-                tooltipContent={t("AISettings:RecommendedModelsTooltip", {
-                  productName: t("Common:ProductName"),
-                })}
-                place="bottom"
-                size={12}
-              />
-            </div>
-            {recommended.map((model) => (
-              <ModelRow
-                key={model.modelId}
-                model={model}
-                isSelected={selectedModelIds.has(model.modelId)}
-                showPencil={false}
-                onToggle={onToggle}
-                onEdit={onEditModel}
-              />
-            ))}
-          </>
-        ) : null}
-        {other.length > 0 ? (
-          <>
-            <div
-              className={classNames(
-                styles.sectionHeader,
-                styles.sectionHeaderOther,
-              )}
-            >
-              <Text className={styles.sectionTitle}>
-                {t("AISettings:OtherModels")}
-              </Text>
-              <HelpButton
-                tooltipContent={t("AISettings:OtherModelsTooltip")}
-                place="bottom"
-                size={12}
-              />
-            </div>
-            {other.map((model) => (
-              <ModelRow
-                key={model.modelId}
-                model={model}
-                isSelected={selectedModelIds.has(model.modelId)}
-                showPencil
-                onToggle={onToggle}
-                onEdit={onEditModel}
-              />
-            ))}
-          </>
-        ) : null}
-      </Scrollbar>
+      {modelContent}
     </div>
   );
 
-  return createPortal(
-    <>
-      {isMobileHardware ? (
-        <Backdrop
-          visible
-          withBackground
-          shouldShowBackdrop
-          onClick={onClose}
-          zIndex={449}
-        />
-      ) : null}
-      <div
-        ref={ref}
-        className={classNames(styles.popup, {
-          [styles.mobileView]: isMobilePortrait,
-        })}
-        onClick={(e) => e.stopPropagation()}
-        onMouseDown={(e) => e.stopPropagation()}
-        data-testid="model-selector-popup"
-      >
-        {modelList}
-      </div>
-    </>,
-    document.body,
+  return (
+    <DropDown
+      open
+      isDefaultMode
+      forwardedRef={anchor}
+      directionY={isMobileLandscape ? "both" : "bottom"}
+      directionX="right"
+      fixedDirection={isMobilePortrait}
+      isMobileView={isMobilePortrait}
+      withBackdrop={false}
+      backDrop={backdrop}
+      zIndex={450}
+      className={classNames(styles.popup, {
+        [styles.mobileView]: isMobilePortrait,
+      })}
+      withDynamicScrollbar={!isMobilePortrait}
+      bottomSpace={88}
+      topSpace={16}
+      useFlexibleHeight
+      dataTestId="model-selector-popup"
+    >
+      {children}
+    </DropDown>
   );
 };
