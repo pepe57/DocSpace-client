@@ -42,6 +42,11 @@ const {
 } = require("../config/config");
 const { Ollama } = require("ollama");
 const { verifyOllamaConnection } = require("../utils/ollamaUtils");
+const {
+  FatalProviderError,
+  isFatalProviderError,
+  detectFatalProviderMessage,
+} = require("../utils/llmProvider");
 const { spellCheck: spellCheckPrompt } = require("../prompts/spell-check");
 
 // ─── CLI args ─────────────────────────────────────────────────────────────────
@@ -74,17 +79,6 @@ const MODEL = PROVIDER === "openrouter"
   : PROVIDER === "claude-code"
     ? CLAUDE_CODE_MODEL
     : OLLAMA_MODEL;
-
-/**
- * Fatal error that should stop the entire script (e.g. quota exceeded, auth failure).
- * Non-fatal errors (timeout, parse error) are retried or skipped per-key.
- */
-class FatalProviderError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "FatalProviderError";
-  }
-}
 
 const concurrencyArg = cliArgs.find((a) => a.startsWith("--concurrency="));
 const CONCURRENCY = NO_LLM ? 1 : (concurrencyArg ? parseInt(concurrencyArg.split("=")[1], 10) : concurrencyConfig.spellCheck);
@@ -477,8 +471,7 @@ async function generateClaudeCode(prompt) {
         resolve(stdout.trim());
       } else {
         const msg = stderr || stdout || `exit code ${code}`;
-        if (msg.includes("rate limit") || msg.includes("quota") || msg.includes("limit exceeded") || msg.includes("overloaded")
-            || msg.includes("hit your limit") || msg.includes("not exist") || msg.includes("not have access")) {
+        if (detectFatalProviderMessage(msg)) {
           reject(new FatalProviderError(`Claude Code fatal: ${msg.substring(0, 200)}`));
         } else {
           reject(new Error(`Claude Code error: ${msg.substring(0, 300)}`));
@@ -1028,7 +1021,7 @@ async function verifyTranslation(
       }
     } catch (error) {
       // Fatal errors (quota, auth) — stop the entire script
-      if (error instanceof FatalProviderError) {
+      if (isFatalProviderError(error)) {
         throw error;
       }
 
@@ -1382,7 +1375,7 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
           for (const result of results) {
             if (result.status === "rejected") {
               const err = result.reason;
-              if (err instanceof FatalProviderError) {
+              if (isFatalProviderError(err)) {
                 console.error(`\n⛔ FATAL: ${err.message}`);
                 console.error("Saving checkpoint and stopping...");
                 saveCheckpoint();
@@ -1451,6 +1444,9 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
           await writeJsonWithConsistentEol(metadataFile, metadata);
         }
       } catch (fileError) {
+        if (isFatalProviderError(fileError)) {
+          throw fileError;
+        }
         console.error(
           `Error processing metadata file ${metadataFile}: ${fileError.message}`,
         );
@@ -1465,6 +1461,9 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
 
     return stats;
   } catch (error) {
+    if (isFatalProviderError(error)) {
+      throw error;
+    }
     console.error(
       `Error verifying translations for project ${project}: ${error.message}`,
     );
@@ -1657,6 +1656,9 @@ async function verifyAllTranslationsSpellCheck() {
         projectStats.errors || [],
       );
     } catch (error) {
+      if (isFatalProviderError(error)) {
+        throw error;
+      }
       console.error(`Error processing project ${project}: ${error.message}`);
       overallStats.errors.push({ project, error: error.message });
     }
@@ -1738,4 +1740,3 @@ verifyAllTranslationsSpellCheck()
     saveCheckpoint();
     process.exit(1);
   });
-

@@ -14,6 +14,48 @@
 
 const { ollamaConfig, openRouterConfig } = require("../config/config");
 
+class FatalProviderError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "FatalProviderError";
+  }
+}
+
+function isFatalProviderError(error) {
+  return error instanceof FatalProviderError || error?.name === "FatalProviderError";
+}
+
+function detectFatalProviderMessage(message = "") {
+  const lower = message.toLowerCase();
+  return lower.includes("rate limit")
+    || lower.includes("quota")
+    || lower.includes("limit exceeded")
+    || lower.includes("hit your limit")
+    || lower.includes("payment required")
+    || lower.includes("api error 402")
+    || lower.includes("api error 403")
+    || lower.includes("overloaded")
+    || lower.includes("not have access")
+    || lower.includes("does not exist")
+    || lower.includes("not exist");
+}
+
+async function readErrorBody(response) {
+  try {
+    return await response.text();
+  } catch {
+    return "";
+  }
+}
+
+function throwProviderHttpError(providerName, status, body = "") {
+  const message = `${providerName} API error ${status}: ${body}`;
+  if (status === 402 || status === 403 || detectFatalProviderMessage(message)) {
+    throw new FatalProviderError(message);
+  }
+  throw new Error(message);
+}
+
 // ─── Repetition loop detector ─────────────────────────────────────────────────
 
 /**
@@ -95,6 +137,10 @@ async function verifyOpenRouterConnection() {
       headers: { Authorization: `Bearer ${openRouterConfig.apiKey}` },
     });
     if (!response.ok) {
+      if (response.status === 402 || response.status === 403) {
+        const body = await readErrorBody(response);
+        throwProviderHttpError("OpenRouter", response.status, body);
+      }
       console.log(
         `OpenRouter connection failed: ${response.status} ${response.statusText}`,
       );
@@ -125,7 +171,8 @@ async function listOpenRouterModels() {
     headers: { Authorization: `Bearer ${openRouterConfig.apiKey}` },
   });
   if (!response.ok) {
-    throw new Error(`OpenRouter models error: ${response.status}`);
+    const body = await readErrorBody(response);
+    throwProviderHttpError("OpenRouter", response.status, body);
   }
   const data = await response.json();
   return (data.data || []).map((m) => ({
@@ -252,8 +299,8 @@ async function createOpenRouterStream(model, messages, options = {}) {
   });
 
   if (!response.ok) {
-    const body = await response.text();
-    throw new Error(`OpenRouter API error ${response.status}: ${body}`);
+    const body = await readErrorBody(response);
+    throwProviderHttpError("OpenRouter", response.status, body);
   }
 
   const reader = response.body.getReader();
@@ -392,8 +439,8 @@ async function openRouterCompletion(model, messages, options = {}) {
     );
 
     if (!response.ok) {
-      const body = await response.text();
-      throw new Error(`OpenRouter API error ${response.status}: ${body}`);
+      const body = await readErrorBody(response);
+      throwProviderHttpError("OpenRouter", response.status, body);
     }
 
     const data = await response.json();
@@ -439,9 +486,8 @@ async function createRawStream(model, messages, options = {}) {
     );
 
     if (!response.ok) {
-      throw new Error(
-        `OpenRouter HTTP error during correction: ${response.status}`,
-      );
+      const body = await readErrorBody(response);
+      throwProviderHttpError("OpenRouter", response.status, body);
     }
 
     return {
@@ -493,6 +539,9 @@ async function createRawStream(model, messages, options = {}) {
 }
 
 module.exports = {
+  FatalProviderError,
+  isFatalProviderError,
+  detectFatalProviderMessage,
   isOpenRouterModel,
   getProviderName,
   verifyConnection,
@@ -503,4 +552,3 @@ module.exports = {
   completionChat,
   createRawStream,
 };
-
