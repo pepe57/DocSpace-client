@@ -1563,5 +1563,10 @@
   "YourName": "Jak się nazywasz",
   "RequestDetails": "Dokładnie opisz swoją prośbę tutaj.",
   "EnterEmail": "Wpisz e-mail",
-  "SuccessfullySentMessage": "Twoja wiadomość została wysłana. Dział sprzedaży skontaktuje się z Tobą."
+  "SuccessfullySentMessage": "Twoja wiadomość została wysłana. Dział sprzedaży skontaktuje się z Tobą.",
+  "PlanUsersLimit": "Chcesz zmniejszyć zespół do <1>{{usersCount}}</1> adminów, obecnie masz ich <1>{{currentUsersCount}}</1> w swoim {{productName}}.",
+  "PlanStorageLimit": "Limit dla nowej taryfy wynosi <1>{{storageValue}}</1> pamięci, obecnie zużyto <1>{{currentStorageValue}}</1> pamięci.",
+  "ChangePricingPlan": "Zmień plan cenowy",
+  "CannotChangePlan": "Nie możesz zmienić swojego planu, ponieważ zużyta pamięć lub liczba administratorów przekroczyły limit wybranego planu:",
+  "SaveOrChange": "Wyeliminuj rozbieżność w sprzecznym parametrze, aby kontynuować lub zachowaj swój aktywny plan cenowy."
 }

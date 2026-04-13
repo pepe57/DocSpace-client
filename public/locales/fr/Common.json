@@ -1563,5 +1563,10 @@
   "YourName": "Votre nom",
   "RequestDetails": "Veuillez décrire ici les détails de votre demande.",
   "EnterEmail": "Saisir l'adresse e-mail",
-  "SuccessfullySentMessage": "Votre message a été envoyé avec succès. Vous serez contacté par le service commercial."
+  "SuccessfullySentMessage": "Votre message a été envoyé avec succès. Vous serez contacté par le service commercial.",
+  "PlanUsersLimit": "Vous souhaitez réduire l'équipe à <1>{{usersCount}}</1> administrateurs, et le nombre actuel de ces utilisateurs dans votre {{productName}} est <1>{{currentUsersCount}}</1>.",
+  "PlanStorageLimit": "La limite du nouveau plan tarifaire est de <1>{{storageValue}}</1> de stockage, et votre espace de stockage actuel utilisé est de <1>{{currentStorageValue}}</1>.",
+  "ChangePricingPlan": "Changer de plan tarifaire",
+  "CannotChangePlan": "Vous ne pouvez pas changer de plan tarifaire, car le volume de stockage utilisé ou le nombre d'administrateurs dépasse les limites du plan sélectionné :",
+  "SaveOrChange": "Veuillez éliminer la différence entre les paramètres en conflit afin de poursuivre ou de conserver votre plan tarifaire actif."
 }

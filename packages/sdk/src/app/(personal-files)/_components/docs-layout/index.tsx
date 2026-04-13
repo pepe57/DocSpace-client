@@ -62,6 +62,7 @@ import { OpenFileContext } from "@/app/(docspace)/_contexts/OpenFileContext";
 import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
+import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
 import type { TFileItem, TFolderItem } from "@/app/(docspace)/_hooks/useItemList";
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
@@ -72,10 +73,12 @@ import { useInfoPanelStore } from "../../_store/InfoPanelStore";
 import useDocsActions from "../../_hooks/useDocsActions";
 import useTrashActions from "../../_hooks/useTrashActions";
 import useFileOperations from "../../_hooks/useFileOperations";
+import useRenameActions from "../../_hooks/useRenameActions";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
 import DocsSidebar from "../sidebar";
 import DropZone from "../drop-zone";
 import DeleteDialog from "../delete-dialog";
+import RenameDialog from "../rename-dialog";
 import DocsInfoPanel from "../info-panel";
 
 import styles from "./DocsLayout.module.scss";
@@ -130,6 +133,15 @@ const DocsLayoutInner = observer(({
   } = useTrashActions();
 
   const {
+    renameDialogVisible,
+    renameInitialName,
+    isRenaming,
+    requestRename,
+    closeRenameDialog,
+    confirmRename,
+  } = useRenameActions();
+
+  const {
     selectorDialogVisible,
     selectorMode,
     foldersTree,
@@ -150,6 +162,11 @@ const DocsLayoutInner = observer(({
   const deleteHandler = React.useMemo(
     () => ({ deleteItem: requestDeleteItem, deleteItems: requestDelete }),
     [requestDeleteItem, requestDelete],
+  );
+
+  const renameHandler = React.useMemo(
+    () => ({ renameItem: requestRename }),
+    [requestRename],
   );
 
   const fileOperationsHandler = React.useMemo(
@@ -191,6 +208,7 @@ const DocsLayoutInner = observer(({
     <OpenFileContext.Provider value={openFileHandler}>
       <ShareContext.Provider value={shareHandler}>
         <DeleteContext.Provider value={deleteHandler}>
+        <RenameContext.Provider value={renameHandler}>
         <FileOperationsContext.Provider value={fileOperationsHandler}>
         <div className={styles.root}>
           <DocsSidebar />
@@ -318,8 +336,16 @@ const DocsLayoutInner = observer(({
               alert={operationProgress.alert}
             />
           )}
+          <RenameDialog
+            visible={renameDialogVisible}
+            initialName={renameInitialName}
+            isRenaming={isRenaming}
+            onClose={closeRenameDialog}
+            onSave={confirmRename}
+          />
         </div>
         </FileOperationsContext.Provider>
+        </RenameContext.Provider>
         </DeleteContext.Provider>
       </ShareContext.Provider>
     </OpenFileContext.Provider>

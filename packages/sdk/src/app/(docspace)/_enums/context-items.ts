@@ -21,4 +21,5 @@ export enum AVAILABLE_CONTEXT_ITEMS {
   delete = "delete",
   deletePermanently = "delete-permanently",
   restore = "restore",
+  rename = "rename",
 }

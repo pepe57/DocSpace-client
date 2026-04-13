@@ -1563,5 +1563,10 @@
   "YourName": "Jūsu vārds, uzvārds",
   "RequestDetails": "Lūdzu, aprakstiet sīkāku informāciju par savu pieprasījumu šeit.",
   "EnterEmail": "Ievadiet e-pastu",
-  "SuccessfullySentMessage": "Jūsu ziņojums tika veiksmīgi nosūtīts! Ar jums sazināsies Pārdošanas nodaļa."
+  "SuccessfullySentMessage": "Jūsu ziņojums tika veiksmīgi nosūtīts! Ar jums sazināsies Pārdošanas nodaļa.",
+  "PlanUsersLimit": "Jūs vēlaties pazemināt darba grupu līdz <1>{{usersCount}}</1> administratoru (-iem) lietotāju (-iem), un pašreizējais šādu lietotāju skaits jūsu {{productName}} ir <1>{{currentUsersCount}}</1>.",
+  "PlanStorageLimit": "Jaunā tarifa ierobežojums ir <1>{{storageValue}}</1> no krātuves, un pašreizējā izmantotā krātuve ir <1>{{currentStorageValue}}</1>.",
+  "ChangePricingPlan": "Mainīt cenu plānu",
+  "CannotChangePlan": "Plānu nevar mainīt, jo izmantotais krātuves apjoms vai administratoru skaits pārsniedz atlasītā plāna ierobežojumus:",
+  "SaveOrChange": "Novērsiet konfliktējošā parametra neatbilstību, lai turpinātu vai paturētu aktīvo cenu plānu."
 }
