@@ -26,6 +26,9 @@ const {
   verifyConnection,
   isOpenRouterModel,
   getProviderName,
+  FatalProviderError,
+  isFatalProviderError,
+  detectFatalProviderMessage,
 } = require("../utils/llmProvider");
 const { autoComment: autoCommentPrompt } = require("../prompts/auto-comment");
 
@@ -90,7 +93,12 @@ function runClaudeCode(prompt) {
       if (code === 0) {
         resolve(stdout.trim());
       } else {
-        reject(new Error(`Claude Code error: ${(stderr || stdout || "").substring(0, 300)}`));
+        const msg = (stderr || stdout || "").substring(0, 300);
+        if (detectFatalProviderMessage(msg)) {
+          reject(new FatalProviderError(`Claude Code fatal: ${msg}`));
+        } else {
+          reject(new Error(`Claude Code error: ${msg}`));
+        }
       }
     });
 
@@ -121,6 +129,9 @@ async function generateViaClaudeCode(keyPath, prompt) {
       }
       throw new Error("Empty response");
     } catch (error) {
+      if (isFatalProviderError(error)) {
+        throw error;
+      }
       console.error(`  Error (attempt ${attempt}/${maxRetries}): ${error.message}`);
       if (attempt < maxRetries) {
         await new Promise((r) => setTimeout(r, 2000 * attempt));
@@ -244,6 +255,11 @@ async function generateBasicComment(keyPath, content, usages) {
         throw new Error("Model returned empty response");
       }
     } catch (error) {
+      if (isFatalProviderError(error) || detectFatalProviderMessage(error.message)) {
+        throw isFatalProviderError(error)
+          ? error
+          : new FatalProviderError(`${getProviderName(MODEL)} fatal: ${error.message}`);
+      }
       lastError = error;
       retries++;
 
@@ -381,6 +397,9 @@ async function generateAutoComment(projectName) {
           stats.namespaces[namespace].processedKeys++;
 
           if (result.status === "rejected") {
+            if (isFatalProviderError(result.reason)) {
+              throw result.reason;
+            }
             console.error(`Error: ${result.reason.message}`);
             stats.namespaces[namespace].errors++;
             stats.errors.push({ error: result.reason.message });
@@ -426,6 +445,9 @@ async function generateAutoComment(projectName) {
 
     return stats;
   } catch (error) {
+    if (isFatalProviderError(error)) {
+      throw error;
+    }
     console.error(
       `Error generating metadata for project ${projectName} (current namespace: ${currentNamespace}):`,
       error,
@@ -522,6 +544,9 @@ async function generateAutoCommentsMetadata() {
         );
       }
     } catch (error) {
+      if (isFatalProviderError(error)) {
+        throw error;
+      }
       console.error(`Error processing project ${project}:`, error);
       overallStats.errors.push({
         project,
@@ -594,4 +619,3 @@ generateAutoCommentsMetadata()
     console.error("Error generating auto comments:", error);
     process.exit(1);
   });
-
