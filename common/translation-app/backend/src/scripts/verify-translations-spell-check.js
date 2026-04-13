@@ -17,6 +17,7 @@
  *   --no-llm                   Run only deterministic checks (no API calls, very fast)
  *   --recheck                  Only re-verify keys that already have issues in .meta
  *   --recheck-types=TYPE,...   With --recheck, filter by issue types (e.g. incorrect_translation,wrong_language)
+ *   --concurrency=N            Parallel LLM calls (overrides SPELLCHECK_CONCURRENCY env)
  *
  * Examples:
  *   node verify-translations-spell-check.js fr,de
@@ -25,6 +26,7 @@
  *   node verify-translations-spell-check.js --no-llm
  *   node verify-translations-spell-check.js --recheck --provider=openrouter
  *   node verify-translations-spell-check.js --recheck --provider=claude-code
+ *   node verify-translations-spell-check.js --provider=claude-code --concurrency=5
  *   node verify-translations-spell-check.js --recheck --recheck-types=incorrect_translation,wrong_script
  */
 const fs = require("fs-extra");
@@ -84,7 +86,8 @@ class FatalProviderError extends Error {
   }
 }
 
-const CONCURRENCY = NO_LLM ? 1 : concurrencyConfig.spellCheck;
+const concurrencyArg = cliArgs.find((a) => a.startsWith("--concurrency="));
+const CONCURRENCY = NO_LLM ? 1 : (concurrencyArg ? parseInt(concurrencyArg.split("=")[1], 10) : concurrencyConfig.spellCheck);
 const LANGUAGES_TO_CHECK = positionalArgs[0] ? positionalArgs[0].split(",") : null;
 const CHECKPOINT_FILE = path.join(appRootPath, "verification-checkpoint.json");
 

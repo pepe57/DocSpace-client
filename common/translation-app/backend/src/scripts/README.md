@@ -113,6 +113,9 @@ node src/scripts/verify-translations-spell-check.js --recheck --recheck-types=in
 node src/scripts/verify-translations-spell-check.js --provider=openrouter
 node src/scripts/verify-translations-spell-check.js --provider=claude-code
 node src/scripts/verify-translations-spell-check.js --provider=ollama
+
+# Parallel processing (overrides SPELLCHECK_CONCURRENCY from .env)
+node src/scripts/verify-translations-spell-check.js --provider=claude-code --concurrency=5
 ```
 
 **Features:**
