@@ -473,7 +473,7 @@ async function generateClaudeCode(prompt) {
       } else {
         const msg = stderr || stdout || `exit code ${code}`;
         if (msg.includes("rate limit") || msg.includes("quota") || msg.includes("limit exceeded") || msg.includes("overloaded")
-            || msg.includes("not exist") || msg.includes("not have access")) {
+            || msg.includes("hit your limit") || msg.includes("not exist") || msg.includes("not have access")) {
           reject(new FatalProviderError(`Claude Code fatal: ${msg.substring(0, 200)}`));
         } else {
           reject(new Error(`Claude Code error: ${msg.substring(0, 300)}`));
