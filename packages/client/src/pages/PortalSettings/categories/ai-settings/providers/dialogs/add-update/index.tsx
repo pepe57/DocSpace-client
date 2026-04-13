@@ -148,8 +148,7 @@ const AddUpdateDialogComponent = ({
     getSelectedOptionByProviderType(providerData?.type),
   );
   const initialProviderType =
-    providerData?.type ??
-    (getSelectedOptionByProviderType(providerData?.type).key as ProviderType);
+    providerData?.type ?? (providerTypes[0].key as ProviderType);
   const [providerTitle, setProviderTitle] = useState(
     providerData?.title ||
       (variant === "add" ? getAutoFillName(initialProviderType) : ""),
@@ -208,17 +207,19 @@ const AddUpdateDialogComponent = ({
   const isCustomProvider =
     (selectedOption.key as ProviderType) === ProviderType.OpenAiCompatible;
 
-  const canTogglePopup = useRef(false);
+  const [canTogglePopup, setCanTogglePopup] = useState(false);
 
   useEffect(() => {
-    if (showModelsBlock) {
-      canTogglePopup.current = false;
-      const timer = setTimeout(() => {
-        canTogglePopup.current = true;
-      }, 300);
-      return () => clearTimeout(timer);
+    if (!showModelsBlock) {
+      setCanTogglePopup(false);
+      return;
     }
-    canTogglePopup.current = false;
+
+    setCanTogglePopup(false);
+    const timer = setTimeout(() => {
+      setCanTogglePopup(true);
+    }, 300);
+    return () => clearTimeout(timer);
   }, [showModelsBlock]);
 
   const requiredFieldsFilled =
@@ -491,7 +492,7 @@ const AddUpdateDialogComponent = ({
                 <SelectedModelsList
                   selectedModels={selectedModels}
                   onAddClick={() => {
-                    if (canTogglePopup.current) modelSelection.togglePopup();
+                    if (canTogglePopup) modelSelection.togglePopup();
                   }}
                   hasError={modelSelection.hasError}
                 />

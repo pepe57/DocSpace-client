@@ -78,7 +78,7 @@ export const useModelSelection = (
   const [isLoadingModels, setIsLoadingModels] = useState(false);
   const [modelsLoaded, setModelsLoaded] = useState(false);
 
-  const frozenSortIds = useRef<Set<string> | null>(null);
+  const [frozenSortIds, setFrozenSortIds] = useState<Set<string> | null>(null);
   const modelOverrides = useRef<Record<string, TModelOverride>>({});
 
   useEffect(() => {
@@ -112,16 +112,14 @@ export const useModelSelection = (
       if (savedState) {
         setSelectedModelIds(new Set(savedState.selectedIds));
         modelOverrides.current = { ...savedState.overrides };
-        if (savedState.selectedIds.length > 0) {
-          setModelsLoaded(true);
-        }
+        setModelsLoaded(savedState.selectedIds.length > 0);
       } else {
         setSelectedModelIds(new Set());
         modelOverrides.current = {};
+        setModelsLoaded(false);
       }
 
       setAvailableModels([]);
-      setModelsLoaded(false);
       setHasError(false);
     },
     [],
@@ -158,7 +156,7 @@ export const useModelSelection = (
   );
 
   const orderedModels = useMemo(() => {
-    const sortIds = frozenSortIds.current ?? selectedModelIds;
+    const sortIds = frozenSortIds ?? selectedModelIds;
     const recommended = availableModels.filter((m) => m.isRecommended);
     const other = availableModels.filter((m) => !m.isRecommended);
 
@@ -166,7 +164,7 @@ export const useModelSelection = (
       recommended: sortSelectedFirst(recommended, sortIds),
       other: sortSelectedFirst(other, sortIds),
     };
-  }, [availableModels, selectedModelIds, isPopupOpen]);
+  }, [availableModels, selectedModelIds, frozenSortIds]);
 
   const selectedModels = useMemo(() => {
     return availableModels.filter((m) => selectedModelIds.has(m.modelId));
@@ -182,19 +180,19 @@ export const useModelSelection = (
   const togglePopup = useCallback(() => {
     setIsPopupOpen((prev) => {
       if (prev) {
-        frozenSortIds.current = null;
+        setFrozenSortIds(null);
         if (selectedModelIds.size === 0) {
           setHasError(true);
         }
         return false;
       }
-      frozenSortIds.current = new Set(selectedModelIds);
+      setFrozenSortIds(new Set(selectedModelIds));
       return true;
     });
   }, [selectedModelIds]);
 
   const closePopup = useCallback(() => {
-    frozenSortIds.current = null;
+    setFrozenSortIds(null);
     setIsPopupOpen(false);
     if (selectedModelIds.size === 0) {
       setHasError(true);

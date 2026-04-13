@@ -195,8 +195,6 @@ export const ModelSelectorPopup = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose, anchor, isMobilePortrait]);
 
-  const allModels = isCustomProvider ? [...recommended, ...other] : null;
-
   const scrollHeight = useMemo(
     () => calcContentHeight(recommended, other, isCustomProvider),
     [recommended, other, isCustomProvider],
@@ -214,7 +212,7 @@ export const ModelSelectorPopup = ({
         style={{ height: scrollHeight }}
       >
         <Scrollbar className={styles.scrollbar}>
-          {allModels?.map((model) => (
+          {[...recommended, ...other].map((model) => (
             <ModelRow
               key={model.modelId}
               model={model}
