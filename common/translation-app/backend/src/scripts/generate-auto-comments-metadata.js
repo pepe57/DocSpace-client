@@ -6,8 +6,10 @@
  * for all translation keys, preserving existing metadata where available.
  *
  * Options:
- *   --model=MODEL       Override LLM model (e.g. --model=anthropic/claude-sonnet-4)
- *   --regenerate        Regenerate ALL comments (including existing ones)
+ *   --model=MODEL           Override LLM model (e.g. --model=anthropic/claude-sonnet-4)
+ *   --regenerate            Regenerate ALL comments (including existing ones)
+ *   --provider=claude-code  Use Claude Code CLI (free with subscription)
+ *   --concurrency=N         Parallel LLM calls (default: 1)
  */
 const fs = require("fs-extra");
 const { writeJsonWithConsistentEol } = require("../utils/fsUtils");
@@ -31,6 +33,8 @@ const { autoComment: autoCommentPrompt } = require("../prompts/auto-comment");
 
 const cliArgs = process.argv.slice(2);
 const modelArg = cliArgs.find((a) => a.startsWith("--model="));
+const concurrencyArg = cliArgs.find((a) => a.startsWith("--concurrency="));
+const CONCURRENCY = concurrencyArg ? parseInt(concurrencyArg.split("=")[1], 10) : 1;
 const REGENERATE = cliArgs.includes("--regenerate");
 const USE_CLAUDE_CODE = cliArgs.includes("--provider=claude-code");
 
@@ -47,6 +51,7 @@ const MODEL = modelArg
 
 const PROVIDER_NAME = USE_CLAUDE_CODE ? "claude-code" : (isOpenRouterModel(MODEL) ? "openrouter" : "ollama");
 console.log(`Provider: ${PROVIDER_NAME}`);
+if (CONCURRENCY > 1) console.log(`Concurrency: ${CONCURRENCY}`);
 console.log(`Model: ${MODEL}`);
 if (!openRouterConfig.apiKey && !modelArg && !USE_CLAUDE_CODE) {
   console.log("Note: OPENROUTER_API_KEY not set — using Ollama. Set it in .env or use --provider=claude-code.");
@@ -353,68 +358,70 @@ async function generateAutoComment(projectName) {
 
       let processedCount = 0;
 
-      for (const keyFile of keyFiles) {
-        try {
-          const keyMeta = await fs.readJson(keyFile);
-          const keyPath = keyMeta.key_path || path.basename(keyFile, ".json");
+      // Process key files in parallel batches
+      for (let batchStart = 0; batchStart < keyFiles.length; batchStart += CONCURRENCY) {
+        const batch = keyFiles.slice(batchStart, batchStart + CONCURRENCY);
 
+        const results = await Promise.allSettled(
+          batch.map(async (keyFile) => {
+            const keyMeta = await fs.readJson(keyFile);
+            const keyPath = keyMeta.key_path || path.basename(keyFile, ".json");
+
+            if (REGENERATE || !keyMeta.comment || keyMeta.comment.text === "") {
+              const comment = await generateBasicComment(keyPath, keyMeta.content, keyMeta.usage);
+              return { keyFile, keyMeta, keyPath, comment, needsComment: true };
+            }
+            return { keyFile, keyMeta, keyPath, comment: null, needsComment: false };
+          }),
+        );
+
+        // Process results sequentially (writes to shared stats)
+        for (const result of results) {
           processedCount++;
           stats.namespaces[namespace].processedKeys++;
 
-          // Show progress information
-          console.log(
-            `Processing key: ${keyPath} (${processedCount}/${keyFiles.length} in ${namespace})`,
-          );
+          if (result.status === "rejected") {
+            console.error(`Error: ${result.reason.message}`);
+            stats.namespaces[namespace].errors++;
+            stats.errors.push({ error: result.reason.message });
+            continue;
+          }
 
-          if (REGENERATE || !keyMeta.comment || keyMeta.comment.text === "") {
-            const comment = await generateBasicComment(
-              keyPath,
-              keyMeta.content,
-              keyMeta.usage,
-            );
+          const { keyFile, keyMeta, keyPath, comment, needsComment } = result.value;
 
-            if (comment && comment !== "") {
-              // Initialize comment object if it doesn't exist
-              if (!keyMeta.comment) {
-                keyMeta.comment = {
-                  text: "",
-                  is_auto: false,
-                  updated_at: null,
-                };
-              }
+          console.log(`Processing key: ${keyPath} (${processedCount}/${keyFiles.length} in ${namespace})`);
 
-              keyMeta.comment.text = comment;
-              keyMeta.comment.is_auto = true;
-              keyMeta.comment.model = MODEL;
-              const now = new Date().toISOString();
-              keyMeta.comment.updated_at = now;
-              keyMeta.updated_at = now;
-
-              await writeJsonWithConsistentEol(keyFile, keyMeta);
-
-              // Update stats
-              stats.namespaces[namespace].updatedComments++;
-              stats.updatedComments++;
-              console.log(`  ✓ Generated comment for ${keyPath}`);
-            } else {
-              stats.namespaces[namespace].skippedKeys++;
-              stats.skippedKeys++;
-              console.log(`  ✗ Skipped ${keyPath}: no comment generated`);
-            }
-          } else {
+          if (!needsComment) {
             stats.namespaces[namespace].skippedKeys++;
             stats.skippedKeys++;
             console.log(`  ↷ Skipped ${keyPath}: already has a comment (use --regenerate to overwrite)`);
+            continue;
           }
-        } catch (error) {
-          console.error(`Error reading metadata file ${keyFile}:`, error);
-          stats.namespaces[namespace].errors++;
-          stats.errors.push({
-            file: keyFile,
-            error: error.message,
-          });
+
+          if (comment && comment !== "") {
+            if (!keyMeta.comment) {
+              keyMeta.comment = { text: "", is_auto: false, updated_at: null };
+            }
+            keyMeta.comment.text = comment;
+            keyMeta.comment.is_auto = true;
+            keyMeta.comment.model = MODEL;
+            const now = new Date().toISOString();
+            keyMeta.comment.updated_at = now;
+            keyMeta.updated_at = now;
+
+            await writeJsonWithConsistentEol(keyFile, keyMeta);
+
+            stats.namespaces[namespace].updatedComments++;
+            stats.updatedComments++;
+            console.log(`  ✓ Generated comment for ${keyPath}`);
+          } else {
+            stats.namespaces[namespace].skippedKeys++;
+            stats.skippedKeys++;
+            console.log(`  ✗ Skipped ${keyPath}: no comment generated`);
+          }
         }
       }
+
     }
 
     return stats;

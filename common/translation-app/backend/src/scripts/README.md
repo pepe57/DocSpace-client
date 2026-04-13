@@ -73,8 +73,11 @@ node src/scripts/generate-auto-comments-metadata.js --model=anthropic/claude-son
 # Use Claude Code CLI (free with subscription)
 node src/scripts/generate-auto-comments-metadata.js --provider=claude-code
 
+# Parallel processing
+node src/scripts/generate-auto-comments-metadata.js --provider=claude-code --concurrency=5
+
 # Combine options
-node src/scripts/generate-auto-comments-metadata.js --regenerate --provider=claude-code
+node src/scripts/generate-auto-comments-metadata.js --regenerate --provider=claude-code --concurrency=5
 ```
 
 **Providers:** Auto-detected from `.env`. If `OPENROUTER_API_KEY` is set, uses OpenRouter with `OPENROUTER_COMMENT_MODEL`. Otherwise falls back to local Ollama.
