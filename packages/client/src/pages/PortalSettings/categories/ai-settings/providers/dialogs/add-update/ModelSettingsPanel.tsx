@@ -158,7 +158,7 @@ export const ModelSettingsPanel = ({
           label={t("Common:SaveButton")}
           scale
           onClick={handleSave}
-          isDisabled={!hasChanges}
+          isDisabled={!hasChanges || displayName.trim().length === 0}
           testId="model-settings-save-button"
         />
         <Button
