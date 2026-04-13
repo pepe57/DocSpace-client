@@ -52,14 +52,12 @@ import { ProviderType } from "@docspace/shared/api/ai/enums";
 
 type ModelSettingsProps = {
   agentParams: TAgentParams;
-  modelAliases?: TAIConfig["modelAliases"];
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
   setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
 const ModelSettings = ({
   agentParams,
-  modelAliases,
   systemAiEnabled,
   setAgentParams,
 }: ModelSettingsProps) => {
@@ -284,22 +282,22 @@ const ModelSettings = ({
     return models.map((model) => ({
       key: model.modelId,
       value: model.modelId,
-      label: modelAliases?.[model.modelId] ?? model.modelId,
+      label: model.alias ?? model.modelId,
     }));
-  }, [models, modelAliases]);
+  }, [models]);
 
   const modelSelectedOptions = React.useMemo(() => {
     return selectedModel
       ? {
           key: selectedModel.modelId,
           value: selectedModel.modelId,
-          label: modelAliases?.[selectedModel.modelId] ?? selectedModel.modelId,
+          label: selectedModel.alias ?? selectedModel.modelId,
         }
       : {
           key: "empty-selected-option",
           label: t("Common:NoModelsFound"),
         };
-  }, [selectedModel, modelAliases, t]);
+  }, [selectedModel, t]);
 
   const onSelectModel = React.useCallback(
     (option: TOption) => {
