@@ -51,6 +51,7 @@ import useContextMenuModel from "../../../../_hooks/useContextMenuModel";
 import { ShareContext } from "../../../../_contexts/ShareContext";
 import { DeleteContext } from "../../../../_contexts/DeleteContext";
 import { FileOperationsContext } from "../../../../_contexts/FileOperationsContext";
+import { RenameContext } from "../../../../_contexts/RenameContext";
 import { generateFilesItemValue } from "../../../_utils";
 
 import { RowContent } from "./RowContent";
@@ -82,6 +83,7 @@ const Row = observer(
     const onShareClick = React.useContext(ShareContext);
     const deleteCtx = React.useContext(DeleteContext);
     const fileOpsCtx = React.useContext(FileOperationsContext);
+    const renameCtx = React.useContext(RenameContext);
 
     const { getContextMenuModel } = useContextMenuModel({
       item: observableItem,
@@ -91,6 +93,7 @@ const Row = observer(
       onMoveClick: fileOpsCtx?.moveItem,
       onDuplicateClick: fileOpsCtx?.duplicateItem,
       onRestoreClick: fileOpsCtx?.restoreItem,
+      onRenameClick: renameCtx?.renameItem,
     });
 
     const element = (
