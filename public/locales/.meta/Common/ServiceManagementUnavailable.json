@@ -3,7 +3,7 @@
   "content": "Service management is unavailable during the grace period, and no charges will apply to the services during this time. To regain full functionality, please upgrade to a {{planName}} plan.",
   "content_en_sha1_hash": "ceb82bec4023b3e839d5c3db0aeaed838a8c2841",
   "created_at": "2026-04-10T13:53:43.229Z",
-  "updated_at": "2026-04-12T07:14:23.211Z",
+  "updated_at": "2026-04-12T21:17:48.088Z",
   "comment": {
     "text": "This is a warning message displayed in a modal dialog. It informs the user that service management is restricted during a grace period and prompts them to upgrade their plan. `{{planName}}` will be replaced with the name of the suggested plan.",
     "is_auto": true,
@@ -172,7 +172,15 @@
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"grace period\" is translated as \"periudhës së mërzitjes\" which means \"period of boredom/annoyance\" in Albanian. The correct translation for \"grace period\" should use a word meaning leniency, tolerance, or grace (e.g., \"periudhës së tolerancës\" or \"periudhës së faljes\").",
+          "suggestion": "Shërbimi i menaxhimit është i padisponueshëm gjatë periudhës së faljes, dhe asnjë pagesë nuk do të zbatohet për shërbimet gjatë kësaj kohe. Për të rikthyer funksionalitetin e plotë, ju lutem kaloni në një plan {{planName}}.",
+          "checked_at": "2026-04-12T21:17:28.987Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

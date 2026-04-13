@@ -3,7 +3,7 @@
   "content": "Scalability and clustering.",
   "content_en_sha1_hash": "6cc8e719d41e0d79ee36d84a4938186906c5e5a8",
   "created_at": "2025-05-26T07:15:49.299Z",
-  "updated_at": "2026-04-11T22:46:44.959Z",
+  "updated_at": "2026-04-12T13:12:30.068Z",
   "comment": {
     "text": "This is a header for a feature in a \"Upgrade to Pro\" banner, describing the benefits of the Pro version.",
     "is_auto": true,
@@ -39,7 +39,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"ə\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T22:46:12.908Z",
+          "checked_at": "2026-04-12T13:11:03.030Z",
           "checked_by": "deterministic"
         }
       ],
@@ -89,7 +89,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"s\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T22:46:20.222Z",
+          "checked_at": "2026-04-12T13:11:23.611Z",
           "checked_by": "deterministic"
         }
       ],

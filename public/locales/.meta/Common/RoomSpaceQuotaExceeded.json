@@ -3,7 +3,7 @@
   "content": "Room space quota exceeded ({{size}}).",
   "content_en_sha1_hash": "606136070a50ade8aee4b2dfd310061b4b615d61",
   "created_at": "2025-05-19T21:30:48.282Z",
-  "updated_at": "2026-04-12T07:14:23.215Z",
+  "updated_at": "2026-04-13T00:12:43.028Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts to upload files or create content in a room, but the room's storage limit has been reached. The `{{size}}` variable indicates the current size of the room.",
     "is_auto": true,
@@ -34,15 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \")\"",
-          "suggestion": "",
-          "checked_at": "2026-04-12T01:39:04.497Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -54,29 +46,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \")\"",
-          "suggestion": "",
-          "checked_at": "2026-04-12T01:39:07.150Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \")\"",
-          "suggestion": "",
-          "checked_at": "2026-04-12T01:39:09.199Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -93,7 +69,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \")\"",
           "suggestion": "",
-          "checked_at": "2026-04-12T01:39:12.675Z",
+          "checked_at": "2026-04-13T00:09:28.805Z",
           "checked_by": "deterministic"
         }
       ],
@@ -102,29 +78,13 @@
     "fi": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \")\"",
-          "suggestion": "",
-          "checked_at": "2026-04-12T01:39:14.905Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \")\"",
-          "suggestion": "",
-          "checked_at": "2026-04-12T01:39:17.105Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "hy-AM": {
@@ -136,15 +96,7 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \")\"",
-          "suggestion": "",
-          "checked_at": "2026-04-12T01:39:20.561Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ja-JP": {
@@ -173,7 +125,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \")\"",
           "suggestion": "",
-          "checked_at": "2026-04-12T01:39:24.736Z",
+          "checked_at": "2026-04-13T00:10:34.297Z",
           "checked_by": "deterministic"
         }
       ],
@@ -182,29 +134,13 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \")\"",
-          "suggestion": "",
-          "checked_at": "2026-04-12T01:39:27.456Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \")\"",
-          "suggestion": "",
-          "checked_at": "2026-04-12T01:39:29.753Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pt": {
@@ -215,7 +151,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \")\"",
           "suggestion": "",
-          "checked_at": "2026-04-12T01:39:31.661Z",
+          "checked_at": "2026-04-13T00:11:01.276Z",
           "checked_by": "deterministic"
         }
       ],
@@ -229,7 +165,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \")\"",
           "suggestion": "",
-          "checked_at": "2026-04-12T01:39:32.651Z",
+          "checked_at": "2026-04-13T00:11:08.759Z",
           "checked_by": "deterministic"
         }
       ],
@@ -238,15 +174,7 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "punctuation_mismatch",
-          "description": "English ends with \".\" but translation ends with \")\"",
-          "suggestion": "",
-          "checked_at": "2026-04-12T01:39:34.604Z",
-          "checked_by": "deterministic"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
@@ -269,7 +197,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \")\"",
           "suggestion": "",
-          "checked_at": "2026-04-12T01:39:37.412Z",
+          "checked_at": "2026-04-13T00:11:39.354Z",
           "checked_by": "deterministic"
         }
       ],
@@ -283,7 +211,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \")\"",
           "suggestion": "",
-          "checked_at": "2026-04-12T01:39:39.660Z",
+          "checked_at": "2026-04-13T00:11:46.552Z",
           "checked_by": "deterministic"
         }
       ],
@@ -303,7 +231,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \")\"",
           "suggestion": "",
-          "checked_at": "2026-04-12T01:39:44.175Z",
+          "checked_at": "2026-04-13T00:12:10.966Z",
           "checked_by": "deterministic"
         }
       ],
@@ -317,7 +245,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \")\"",
           "suggestion": "",
-          "checked_at": "2026-04-12T01:39:45.307Z",
+          "checked_at": "2026-04-13T00:12:19.682Z",
           "checked_by": "deterministic"
         }
       ],
@@ -337,7 +265,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \")\"",
           "suggestion": "",
-          "checked_at": "2026-04-12T01:39:48.262Z",
+          "checked_at": "2026-04-13T00:12:35.837Z",
           "checked_by": "deterministic"
         }
       ],

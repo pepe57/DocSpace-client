@@ -3,7 +3,7 @@
   "content": "Sessions",
   "content_en_sha1_hash": "e11e37a9253b34ff1c7224447e143fabca1be9fd",
   "created_at": "2025-05-19T21:30:48.560Z",
-  "updated_at": "2026-04-12T07:14:23.211Z",
+  "updated_at": "2026-04-12T21:14:25.280Z",
   "comment": {
     "text": "This is a table header label for a list of active user sessions. It identifies the column displaying session information.",
     "is_auto": true,

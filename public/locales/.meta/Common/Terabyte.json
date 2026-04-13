@@ -3,7 +3,7 @@
   "content": "TB",
   "content_en_sha1_hash": "f8a902b067d4344b687920f92c669bffad7b0e0e",
   "created_at": "2025-05-19T21:30:49.270Z",
-  "updated_at": "2026-04-12T07:14:23.198Z",
+  "updated_at": "2026-04-12T15:58:33.169Z",
   "comment": {
     "text": "This is a unit of data storage, \"Terabyte,\" used as a short label in dropdown menus and size displays.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Select date",
   "content_en_sha1_hash": "b84a6ecbc04c1f54b6fa504c6441ca78e07db586",
   "created_at": "2025-05-19T21:30:48.374Z",
-  "updated_at": "2026-04-12T01:26:37.507Z",
+  "updated_at": "2026-04-13T02:24:43.964Z",
   "comment": {
     "text": "This is the label for a date picker component, prompting the user to choose a specific date.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "You have successfully topped up your wallet.",
   "content_en_sha1_hash": "4350e83421e271363fd27380f9431f01f3ad9986",
   "created_at": "2026-04-10T13:53:43.563Z",
-  "updated_at": "2026-04-12T07:14:23.194Z",
+  "updated_at": "2026-04-12T14:59:13.915Z",
   "comment": {
     "text": "This is a message displayed in a modal dialog, confirming that the user's wallet has been successfully topped up.",
     "is_auto": true,

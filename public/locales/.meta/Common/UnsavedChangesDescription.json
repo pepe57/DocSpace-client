@@ -3,7 +3,7 @@
   "content": "You have unsaved changes. If you leave now, your updates will be lost. Are you sure you want to leave?",
   "content_en_sha1_hash": "bf93e223453b70379fe230b3e48ccbdff6974aef",
   "created_at": "2025-10-27T16:14:23.077Z",
-  "updated_at": "2026-04-12T07:14:23.189Z",
+  "updated_at": "2026-04-12T13:48:33.952Z",
   "comment": {
     "text": "This is the body text of a confirmation dialog. It appears when a user attempts to navigate away from a page with unsaved changes, warning them that their work will be lost if they proceed.",
     "is_auto": true,

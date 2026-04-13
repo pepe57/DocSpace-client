@@ -3,7 +3,7 @@
   "content": "Trial expired",
   "content_en_sha1_hash": "b4420c2f63be184a11970f1c2fdeaa3108ec551c",
   "created_at": "2025-05-19T21:30:49.343Z",
-  "updated_at": "2026-04-11T23:09:50.529Z",
+  "updated_at": "2026-04-12T14:13:05.165Z",
   "comment": {
     "text": "This is a status label indicating that a trial period has ended. It appears in the tariff bar or payment subscription details.",
     "is_auto": true,

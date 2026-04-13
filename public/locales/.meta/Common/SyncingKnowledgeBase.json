@@ -3,7 +3,7 @@
   "content": "Syncing form data to knowledge base...",
   "content_en_sha1_hash": "1cd0f68a7543087af9bdc3447f7cdd3edb7e9f33",
   "created_at": "2026-03-20T09:07:36.950Z",
-  "updated_at": "2026-04-12T07:14:23.198Z",
+  "updated_at": "2026-04-12T16:12:13.868Z",
   "comment": {
     "text": "This is a tooltip that appears when form data is being synchronized with the knowledge base.",
     "is_auto": true,
@@ -82,7 +82,15 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'համաժուժvum' does not appear to be a valid or standard Armenian term for 'synchronizing'. The correct Armenian word for 'synchronize/syncing' is 'համաժամացվում' (from 'համաժամ' meaning simultaneous/in-sync). 'Ժուժ' is not a recognized root for synchronization in Armenian.",
+          "suggestion": "Ձևի տվյալները համաժամացվում են գիտելիքների բազայի հետ...",
+          "checked_at": "2026-04-12T16:11:05.800Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "it": {

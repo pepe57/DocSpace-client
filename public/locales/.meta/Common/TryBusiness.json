@@ -3,7 +3,7 @@
   "content": "Try Business",
   "content_en_sha1_hash": "1355ceed14169abd7406ec07f2a5ad9a56c2c888",
   "created_at": "2025-05-19T21:30:49.352Z",
-  "updated_at": "2026-04-12T07:14:23.190Z",
+  "updated_at": "2026-04-12T14:09:46.701Z",
   "comment": {
     "text": "This is a button label that appears in the tariff bar for users on a free plan, prompting them to upgrade to a business plan.",
     "is_auto": true,
@@ -46,7 +46,15 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"Business\" is a product/plan name (the Business tier) and should be preserved as a proper noun. \"Zkuste podnikat\" translates back as \"Try doing business / Try entrepreneurship\", which loses the plan name entirely and conveys a completely different meaning.",
+          "suggestion": "Zkuste Business",
+          "checked_at": "2026-04-12T14:08:17.576Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "de": {

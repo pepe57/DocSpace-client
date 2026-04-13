@@ -3,7 +3,7 @@
   "content": "Uploader",
   "content_en_sha1_hash": "d1c7310f3bc833ce522db3329fe0f4f539e9c27d",
   "created_at": "2025-05-19T21:30:49.434Z",
-  "updated_at": "2026-04-12T07:14:23.186Z",
+  "updated_at": "2026-04-12T12:57:50.876Z",
   "comment": {
     "text": "This is a label for a section or feature related to uploading files. It appears in the plugin settings and as a title for a developer tool.",
     "is_auto": true,
@@ -94,7 +94,15 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"Chi carica\" means \"the one who uploads\" (a person), while \"Uploader\" refers to a tool/feature for uploading files. The translation conveys a human agent rather than a software feature.",
+          "suggestion": "Uploader",
+          "checked_at": "2026-04-12T12:56:30.347Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
@@ -178,7 +186,15 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"Особа која је отпремила\" means \"A person (female) who has uploaded\" — a gender-specific, past-tense description of a person. The English \"Uploader\" is used as a tool/feature name (developer tool section title) and as a general role label. The translation fails the tool-name usage and incorrectly implies a specific completed action by a female person rather than a neutral noun.",
+          "suggestion": "Отпремач",
+          "checked_at": "2026-04-12T12:57:34.418Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

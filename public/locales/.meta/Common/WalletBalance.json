@@ -3,7 +3,7 @@
   "content": "Wallet balance",
   "content_en_sha1_hash": "f6c5a5f1b0992e37616dc3006177189990143c8a",
   "created_at": "2026-04-10T13:53:45.872Z",
-  "updated_at": "2026-04-12T07:14:23.184Z",
+  "updated_at": "2026-04-12T11:22:16.747Z",
   "comment": {
     "text": "This is a label indicating the current amount of money in the user's account, displayed as part of a billing information panel.",
     "is_auto": true,

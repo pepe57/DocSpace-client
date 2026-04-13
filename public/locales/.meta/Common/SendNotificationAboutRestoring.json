@@ -3,7 +3,7 @@
   "content": "Send notification about space restoring to users",
   "content_en_sha1_hash": "e040fbeb56224222df87a697364fe2553d230591",
   "created_at": "2025-05-26T07:15:47.743Z",
-  "updated_at": "2026-04-12T07:14:23.211Z",
+  "updated_at": "2026-04-12T21:29:41.985Z",
   "comment": {
     "text": "This is a checkbox label. It allows the user to choose whether to send a notification to users when a space is restored from backup.",
     "is_auto": true,

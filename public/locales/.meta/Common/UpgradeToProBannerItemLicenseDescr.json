@@ -3,7 +3,7 @@
   "content": "+ 1-year subscription for functionality and security updates.",
   "content_en_sha1_hash": "bf909f01efdd41c4e5073f4e8f004d859d3df47c",
   "created_at": "2025-05-26T07:15:49.243Z",
-  "updated_at": "2026-04-12T07:14:23.187Z",
+  "updated_at": "2026-04-12T13:20:48.428Z",
   "comment": {
     "text": "This is a description for a banner item, detailing a benefit of upgrading to a Pro plan. It explains that the upgrade includes a one-year subscription for updates.",
     "is_auto": true,
@@ -147,7 +147,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"i\"",
           "suggestion": "",
-          "checked_at": "2026-04-11T22:49:42.367Z",
+          "checked_at": "2026-04-12T13:20:15.970Z",
           "checked_by": "deterministic"
         }
       ],

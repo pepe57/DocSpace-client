@@ -3,7 +3,7 @@
   "content": "Spreadsheet",
   "content_en_sha1_hash": "cc6fdf1b0963eceb567d2f5b641f4950751636eb",
   "created_at": "2025-05-19T21:30:48.999Z",
-  "updated_at": "2026-04-12T00:25:41.011Z",
+  "updated_at": "2026-04-12T17:51:14.633Z",
   "comment": {
     "text": "This is a button label or menu item for creating a new spreadsheet, or a label within a conversion dialog. It refers to the file type.",
     "is_auto": true,
@@ -208,7 +208,15 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"Tabela\" means \"Table\" in Slovenian, not \"Spreadsheet\". The correct Slovenian term for a spreadsheet (xlsx file type) is \"Preglednica\" or \"Razpredelnica\".",
+          "suggestion": "Preglednica",
+          "checked_at": "2026-04-12T17:50:54.642Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

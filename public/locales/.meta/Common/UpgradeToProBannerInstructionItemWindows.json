@@ -3,7 +3,7 @@
   "content": "Windows instruction.",
   "content_en_sha1_hash": "deb54dea949d2be02af8b22d87c61f6454d31396",
   "created_at": "2025-05-26T07:15:49.209Z",
-  "updated_at": "2026-04-12T07:14:23.187Z",
+  "updated_at": "2026-04-12T13:25:25.347Z",
   "comment": {
     "text": "This is a label for an instruction item, appearing as a clickable link within a banner promoting a Pro plan upgrade. It directs users to Windows-specific installation instructions.",
     "is_auto": true,

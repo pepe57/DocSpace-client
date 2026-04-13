@@ -3,7 +3,7 @@
   "content": "Storage capacity has been updated",
   "content_en_sha1_hash": "3eb6406c46e8164622584626f24aef1424e211c3",
   "created_at": "2026-04-10T13:53:43.341Z",
-  "updated_at": "2026-04-12T07:14:23.203Z",
+  "updated_at": "2026-04-12T17:25:56.102Z",
   "comment": {
     "text": "This is a toast message confirming that the storage capacity has been successfully updated. It appears after a user changes their storage plan.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Service URL",
   "content_en_sha1_hash": "077225837f3d213b1dc433defc47c2a4e06d2b94",
   "created_at": "2025-05-26T07:15:47.778Z",
-  "updated_at": "2026-04-12T07:14:23.211Z",
+  "updated_at": "2026-04-12T21:16:00.204Z",
   "comment": {
     "text": "This is a placeholder text for an input field where the user enters the URL of a storage service.",
     "is_auto": true,

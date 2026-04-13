@@ -3,7 +3,7 @@
   "content": "Submit to Template Gallery",
   "content_en_sha1_hash": "fe9fb56e0050b72b9bd60d116d510df268c747b9",
   "created_at": "2025-12-22T09:40:11.547Z",
-  "updated_at": "2026-04-12T07:14:23.201Z",
+  "updated_at": "2026-04-12T17:04:30.340Z",
   "comment": {
     "text": "This is a button label that allows users to submit a document to the Template Gallery. It also appears as a dialog title for the submission process.",
     "is_auto": true,
@@ -124,15 +124,7 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "wrong_language",
-          "description": "The Dutch translation is identical to the English text - it appears to not be translated at all",
-          "suggestion": "Indienen bij Sjablonengalerij",
-          "checked_at": "2026-04-12T00:06:19.411Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "pl": {

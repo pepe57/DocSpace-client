@@ -3,7 +3,7 @@
   "content": "or continue with",
   "content_en_sha1_hash": "a1aa5858e0e7bb74686ebe81912f61fc201800cb",
   "created_at": "2025-05-19T21:30:47.130Z",
-  "updated_at": "2026-04-12T05:27:57.233Z",
+  "updated_at": "2026-04-12T07:57:08.070Z",
   "comment": {
     "text": "This text appears as a separator between different login options, indicating that users can either log in with an email/password or continue using social media or SSO providers.",
     "is_auto": true,
@@ -208,7 +208,15 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The translation '或选择' means 'or choose/select' but omits the concept of 'continue with'. The English phrase implies proceeding further using a specific provider, while the Chinese only says 'or choose', dropping the 'continue with' meaning entirely.",
+          "suggestion": "或继续使用",
+          "checked_at": "2026-04-12T07:57:08.069Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

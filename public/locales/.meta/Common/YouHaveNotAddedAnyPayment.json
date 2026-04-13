@@ -3,7 +3,7 @@
   "content": "You have not added any payment",
   "content_en_sha1_hash": "4fb29167e163f23123e64c8fb677cce0b14f19d0",
   "created_at": "2026-04-10T13:53:44.003Z",
-  "updated_at": "2026-04-12T07:14:23.179Z",
+  "updated_at": "2026-04-12T08:13:50.865Z",
   "comment": {
     "text": "This is an informational text displayed when no payment method has been added to the user's account.",
     "is_auto": true,

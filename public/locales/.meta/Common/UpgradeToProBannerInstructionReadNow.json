@@ -3,7 +3,7 @@
   "content": "Read now",
   "content_en_sha1_hash": "9f762253688c402f7f083fe41a6f024509cb2b8b",
   "created_at": "2025-05-26T07:15:49.231Z",
-  "updated_at": "2026-04-12T07:14:23.187Z",
+  "updated_at": "2026-04-12T13:22:20.715Z",
   "comment": {
     "text": "This is a link label that, when clicked, directs the user to the official documentation for installing ONLYOFFICE DocSpace. It appears within a section providing instructions related to upgrading to a Pro plan.",
     "is_auto": true,

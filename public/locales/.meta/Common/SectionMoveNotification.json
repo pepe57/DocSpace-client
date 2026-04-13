@@ -3,7 +3,7 @@
   "content": "The file will be moved to {{sectionName}} {{date}}",
   "content_en_sha1_hash": "b3ab597530eaf3fa6c84d6cbaec2140f75e0086d",
   "created_at": "2025-06-02T10:19:17.358Z",
-  "updated_at": "2026-04-12T07:14:23.213Z",
+  "updated_at": "2026-04-13T02:28:44.181Z",
   "comment": {
     "text": "This is a tooltip message indicating when a file will be moved to the Trash section. `{{sectionName}}` is the name of the section (e.g., \"Trash\"), and `{{date}}` is the date of the move.",
     "is_auto": true,

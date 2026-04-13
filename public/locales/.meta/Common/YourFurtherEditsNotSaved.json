@@ -3,7 +3,7 @@
   "content": "Your further edits may not be saved.",
   "content_en_sha1_hash": "3dbfb8cd57bf68171c29e8fb98b89ce9f2c8182b",
   "created_at": "2026-02-18T14:56:21.766Z",
-  "updated_at": "2026-04-12T07:14:23.179Z",
+  "updated_at": "2026-04-12T08:05:36.454Z",
   "comment": {
     "text": "This is a warning message displayed in a bar at the top of the document editor. It appears when a user's storage quota is exceeded, indicating that subsequent changes might not be saved.",
     "is_auto": true,
@@ -130,7 +130,15 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"may not be saved\" expresses possibility/uncertainty (might not be saved), but \"kunnen niet worden opgeslagen\" means \"cannot be saved\" (impossibility). The Dutch translation removes the conditional nuance.",
+          "suggestion": "Uw verdere wijzigingen worden mogelijk niet opgeslagen.",
+          "checked_at": "2026-04-12T08:04:46.801Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "pl": {

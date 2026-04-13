@@ -3,7 +3,7 @@
   "content": "Sign in with Apple",
   "content_en_sha1_hash": "a5331c078a904d6fac5ef4352f021b442da8a2d4",
   "created_at": "2025-05-19T21:30:48.744Z",
-  "updated_at": "2026-04-12T00:46:36.568Z",
+  "updated_at": "2026-04-12T18:59:51.565Z",
   "comment": {
     "text": "This is the label for a button that allows users to log in using their Apple ID.",
     "is_auto": true,

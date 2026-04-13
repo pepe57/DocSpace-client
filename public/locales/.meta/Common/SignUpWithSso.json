@@ -3,7 +3,7 @@
   "content": "Sign up with SSO",
   "content_en_sha1_hash": "aa2bbf27ca1af663107f2a143436cf3c8c71d4e8",
   "created_at": "2025-05-19T21:30:48.862Z",
-  "updated_at": "2026-04-12T07:14:23.207Z",
+  "updated_at": "2026-04-12T18:24:58.930Z",
   "comment": {
     "text": "This is a button label for initiating the sign-up process using Single Sign-On (SSO). It appears on the sign-up screen.",
     "is_auto": true,

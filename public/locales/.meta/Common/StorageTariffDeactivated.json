@@ -3,7 +3,7 @@
   "content": "Your additional storage subscription has been deactivated due to non-payment",
   "content_en_sha1_hash": "d95e5887fc80daff26ead869b2eb0182bf416e2c",
   "created_at": "2026-04-10T13:53:43.376Z",
-  "updated_at": "2026-04-12T07:14:23.202Z",
+  "updated_at": "2026-04-12T17:15:59.280Z",
   "comment": {
     "text": "This is an error message displayed in a dialog box. It informs the user that their additional storage subscription has been deactivated because of a missed payment.",
     "is_auto": true,

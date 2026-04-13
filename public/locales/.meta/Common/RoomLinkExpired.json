@@ -3,7 +3,7 @@
   "content": "The room link you are trying to open does not exist or has expired.",
   "content_en_sha1_hash": "c16f473a9fbf86a65ac485294a575a3b10d7278a",
   "created_at": "2025-05-19T21:30:48.190Z",
-  "updated_at": "2026-04-12T07:14:23.217Z",
+  "updated_at": "2026-04-13T01:02:29.506Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts to access a Room link that is no longer valid or has been removed.",
     "is_auto": true,
@@ -111,7 +111,7 @@
           "type": "punctuation_mismatch",
           "description": "English ends with \".\" but translation ends with \"o\"",
           "suggestion": "",
-          "checked_at": "2026-04-12T01:50:17.428Z",
+          "checked_at": "2026-04-13T00:59:45.639Z",
           "checked_by": "deterministic"
         }
       ],

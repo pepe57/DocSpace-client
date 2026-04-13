@@ -3,7 +3,7 @@
   "content": "Submit your templates to share them with the {{organizationName}} community.",
   "content_en_sha1_hash": "f402c1826e5738eb55c2ef6d097ef02787db7f76",
   "created_at": "2025-05-19T21:30:49.165Z",
-  "updated_at": "2026-04-12T07:14:23.201Z",
+  "updated_at": "2026-04-12T17:06:09.875Z",
   "comment": {
     "text": "This is the body text for a block encouraging users to submit templates. It appears within the template gallery and includes the variable `{{organizationName}}` which will be replaced by the name of the organization.",
     "is_auto": true,

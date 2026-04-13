@@ -3,7 +3,7 @@
   "content": "Would you like to enable automatic top-ups so your balance never runs out?",
   "content_en_sha1_hash": "4e8a95782e3c4f52d937db0d2d9ae74053cc4d62",
   "created_at": "2026-04-10T13:53:43.989Z",
-  "updated_at": "2026-04-12T07:14:23.180Z",
+  "updated_at": "2026-04-12T08:23:43.470Z",
   "comment": {
     "text": "This is a question displayed in a modal dialog, asking the user if they want to enable automatic top-ups for their balance.",
     "is_auto": true,

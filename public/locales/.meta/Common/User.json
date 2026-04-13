@@ -3,7 +3,7 @@
   "content": "User",
   "content_en_sha1_hash": "9f8a2389a20ca0752aa9e95093515517e90e194c",
   "created_at": "2025-05-19T21:30:49.454Z",
-  "updated_at": "2026-04-11T22:38:48.266Z",
+  "updated_at": "2026-04-12T12:47:34.892Z",
   "comment": {
     "text": "This is a label for a user type, appearing in tables, dropdowns, and dialogs. It refers to a standard user account.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Each completed file is named with a number, the submitter's name, and the submission date. Use the AI Chat button to ask questions or get summaries about submissions.",
   "content_en_sha1_hash": "67322cfe2b2165935ee717df44eb105df580ae8b",
   "created_at": "2026-03-31T15:18:26.684Z",
-  "updated_at": "2026-04-12T07:14:23.193Z",
+  "updated_at": "2026-04-12T14:41:38.436Z",
   "comment": {
     "text": "This is a tooltip message that appears when a user is guided through the \"Completed submissions\" folder in the forms section. It explains the naming convention for completed files and highlights the AI Chat feature for interacting with submissions.",
     "is_auto": true,

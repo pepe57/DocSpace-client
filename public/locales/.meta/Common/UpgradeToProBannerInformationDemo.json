@@ -3,7 +3,7 @@
   "content": "Request demonstration <1>here</1>",
   "content_en_sha1_hash": "5a17e37a14adcdf587aa798979c9909eed1f5cd0",
   "created_at": "2025-05-26T07:15:49.130Z",
-  "updated_at": "2026-04-12T07:14:23.188Z",
+  "updated_at": "2026-04-12T13:36:49.020Z",
   "comment": {
     "text": "This is a clickable text link within a banner, prompting users to request a demonstration of the Pro version. The `<1>here</1>` tag indicates a clickable link.",
     "is_auto": true,

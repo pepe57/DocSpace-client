@@ -3,7 +3,7 @@
   "content": "Room administration and archiving, user invitation and management. Several admins can be assigned to the room.",
   "content_en_sha1_hash": "fcf79ad90b7d19194bb1754fbe16c0cc2c3a8dc2",
   "created_at": "2026-04-10T13:53:43.179Z",
-  "updated_at": "2026-04-12T07:14:23.216Z",
+  "updated_at": "2026-04-13T00:49:27.661Z",
   "comment": {
     "text": "This is a descriptive text providing details about the Room Manager feature. It appears below the \"RoomAdmin\" label within a help section, explaining its functionalities like administration, archiving, and user management.",
     "is_auto": true,
@@ -208,15 +208,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "missing_content",
-          "description": "Missing punctuation between two separate sentences about room management and admin assignment",
-          "suggestion": "房间管理和存档，用户邀请和管理。可为房间指派多名管理员。",
-          "checked_at": "2026-04-12T01:48:07.454Z",
-          "checked_by": "openrouter/anthropic/claude-sonnet-4"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

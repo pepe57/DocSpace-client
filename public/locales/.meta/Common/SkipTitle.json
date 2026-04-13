@@ -3,7 +3,7 @@
   "content": "Skip",
   "content_en_sha1_hash": "3da474537ac378c616d6b301acc1674bc348cecd",
   "created_at": "2025-05-19T21:30:48.925Z",
-  "updated_at": "2026-04-12T07:14:23.205Z",
+  "updated_at": "2026-04-12T18:05:27.237Z",
   "comment": {
     "text": "This is a button label. It allows the user to skip an action, such as resolving a conflict or dismissing a tip.",
     "is_auto": true,

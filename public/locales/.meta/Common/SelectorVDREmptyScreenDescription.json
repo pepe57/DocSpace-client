@@ -3,7 +3,7 @@
   "content": "To share your form and assign roles to the room participants for filling it out, please create a Virtual Data Room.",
   "content_en_sha1_hash": "7bfa16e48ac3fd715755d7c60f25d71d0451a9d6",
   "created_at": "2025-05-19T21:30:48.496Z",
-  "updated_at": "2026-04-12T07:14:23.212Z",
+  "updated_at": "2026-04-12T21:32:56.602Z",
   "comment": {
     "text": "This is a description displayed on an empty screen within a selector component. It instructs the user to create a Virtual Data Room to share their form and assign roles for filling it out.",
     "is_auto": true,

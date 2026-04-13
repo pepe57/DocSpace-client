@@ -3,7 +3,7 @@
   "content": "When uploading a large amount of data, the context may be partially truncated, which can reduce the accuracy of responses. It’s recommended to limit the number of files and their total size.",
   "content_en_sha1_hash": "dce1181ee7a007698739a58027258d8d7383988c",
   "created_at": "2025-11-13T07:57:55.565Z",
-  "updated_at": "2026-04-12T07:14:23.212Z",
+  "updated_at": "2026-04-12T21:44:02.745Z",
   "comment": {
     "text": "This is a tooltip description that appears when a user attempts to attach a large number of files to an AI chat, warning about potential truncation and reduced response accuracy.",
     "is_auto": true,
@@ -112,7 +112,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'Augsneldējot' is not a valid Latvian word. It appears to be a corrupted form of 'Augšupielādējot' (when uploading), making the sentence incomprehensible at the start.",
+          "suggestion": "Augšupielādējot lielu datu apjomu, konteksts var tikt daļēji saīsināts, kas var samazināt atbilžu precizitāti. Ieteicams ierobežot failu skaitu un to kopējo apjomu.",
+          "checked_at": "2026-04-12T21:42:59.140Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "nl": {

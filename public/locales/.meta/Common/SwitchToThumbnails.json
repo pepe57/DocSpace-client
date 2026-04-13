@@ -3,7 +3,7 @@
   "content": "Switch to thumbnails view",
   "content_en_sha1_hash": "7319bf6b4edb601de0b266f9131c2c8f253e74c9",
   "created_at": "2025-05-19T21:30:49.233Z",
-  "updated_at": "2026-04-11T23:51:30.329Z",
+  "updated_at": "2026-04-12T16:15:36.675Z",
   "comment": {
     "text": "This is a tooltip for an icon button. It appears when the user hovers over the button, indicating that clicking it will change the current view to a thumbnail layout.",
     "is_auto": true,

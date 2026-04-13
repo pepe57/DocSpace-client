@@ -3,7 +3,7 @@
   "content": "Select who will complete the fields for each recipient role on this form. Select a recipient role and assign it to a room member",
   "content_en_sha1_hash": "8485683e547463ba672162277ca9dccdbd3fd3e4",
   "created_at": "2025-10-13T13:22:14.685Z",
-  "updated_at": "2026-04-12T07:14:23.204Z",
+  "updated_at": "2026-04-12T17:43:36.693Z",
   "comment": {
     "text": "This is the body text for an informational bar that appears when setting up a form. It explains how to assign form fields to specific room members for completion.",
     "is_auto": true,

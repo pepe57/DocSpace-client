@@ -3,7 +3,7 @@
   "content": "How many times has the form \"{{formName}}\" been submitted?",
   "content_en_sha1_hash": "e0f429db1b42b106eec7f0e62a00cf8810eab3d9",
   "created_at": "2026-03-31T15:18:24.717Z",
-  "updated_at": "2026-04-12T07:14:23.193Z",
+  "updated_at": "2026-04-12T14:50:25.508Z",
   "comment": {
     "text": "This is a prompt for an AI chat panel, asking about the submission count for a specific form. The `{{formName}}` variable will be replaced with the title of the form.",
     "is_auto": true,
@@ -112,7 +112,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Latvian word \"formula\" means a mathematical formula, not a form/document. The correct Latvian word for \"form\" is \"veidlapa\" or \"forma\".",
+          "suggestion": "Cik reizes ir iesniegta veidlapa \"{{formName}}\"?",
+          "checked_at": "2026-04-12T14:49:26.118Z",
+          "checked_by": "claude-code/sonnet"
+        }
+      ],
       "approved_at": null
     },
     "nl": {

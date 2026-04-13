@@ -3,7 +3,7 @@
   "content": "The top-up might take some time to complete",
   "content_en_sha1_hash": "879c71750a4b87b47a412c63d6e1558334cfb3a8",
   "created_at": "2026-04-10T13:53:43.643Z",
-  "updated_at": "2026-04-12T07:14:23.195Z",
+  "updated_at": "2026-04-12T15:08:13.751Z",
   "comment": {
     "text": "This is a message displayed to the user while a top-up transaction is processing, indicating that it may not be instantaneous.",
     "is_auto": true,

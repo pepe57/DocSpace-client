@@ -3,7 +3,7 @@
   "content": "The sizes are shown for the Retina displays. For the displays with standard resolutions the logo width and height will be resized accordingly upon upload.",
   "content_en_sha1_hash": "fba22904e71580d8ea3a4b8838ac44bbd60ffca4",
   "created_at": "2025-05-26T07:15:49.630Z",
-  "updated_at": "2026-04-12T07:14:23.180Z",
+  "updated_at": "2026-04-12T08:36:49.777Z",
   "comment": {
     "text": "This is a tooltip that appears when hovering over the help icon next to the logo upload fields. It explains how logo dimensions are handled for different display types.",
     "is_auto": true,

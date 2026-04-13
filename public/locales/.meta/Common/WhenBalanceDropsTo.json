@@ -3,7 +3,7 @@
   "content": "When the balance drops to {{min}}, the wallet will be automatically topped up to {{max}}.",
   "content_en_sha1_hash": "9bd7cb1f518775deb509f52ee99d50a8dcbcfb83",
   "created_at": "2026-04-10T13:53:43.960Z",
-  "updated_at": "2026-04-12T07:14:23.181Z",
+  "updated_at": "2026-04-12T08:45:34.762Z",
   "comment": {
     "text": "This is a descriptive sentence explaining the automatic top-up behavior of a wallet. It appears in the billing section to inform the user about the auto-payment settings, with `{{min}}` and `{{max}}` representing currency values.",
     "is_auto": true,

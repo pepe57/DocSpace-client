@@ -3,7 +3,7 @@
   "content": "<1>{{accessType}}</1> will be able to <3>{{accessRights}}</3> {{shareContents}} of {{shareParent}}.",
   "content_en_sha1_hash": "d60c21d40db2e8ae5b6226321b0b0a4a461a4f2e",
   "created_at": "2025-08-26T11:15:00.768Z",
-  "updated_at": "2026-04-12T07:14:23.209Z",
+  "updated_at": "2026-04-12T20:21:20.028Z",
   "comment": {
     "text": "This is a sentence displayed in the sharing permissions dialog, indicating what a specific user or group ({{accessType}}) can do ({{accessRights}}) with the shared content ({{shareContents}}) within its parent folder or project ({{shareParent}}).",
     "is_auto": true,

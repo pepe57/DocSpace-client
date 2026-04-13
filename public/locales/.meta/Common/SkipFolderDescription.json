@@ -3,7 +3,7 @@
   "content": "No folder will be copied",
   "content_en_sha1_hash": "140e409b50247a5f7ff22b7ce99dfef6e6751f2c",
   "created_at": "2025-05-19T21:30:48.916Z",
-  "updated_at": "2026-04-12T07:14:23.206Z",
+  "updated_at": "2026-04-12T18:07:16.286Z",
   "comment": {
     "text": "This is a message displayed in a dialog box when a user chooses to skip copying a folder during a file operation. It informs the user that the folder will not be copied.",
     "is_auto": true,

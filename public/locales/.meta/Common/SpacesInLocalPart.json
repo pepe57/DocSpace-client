@@ -3,7 +3,7 @@
   "content": "Local part can't contain spaces",
   "content_en_sha1_hash": "1303a27e549235cda77cad1ed3ebba10af960eb5",
   "created_at": "2025-05-19T21:30:48.980Z",
-  "updated_at": "2026-04-12T00:26:49.471Z",
+  "updated_at": "2026-04-12T17:52:47.744Z",
   "comment": {
     "text": "This is an error message displayed when a user enters a space in the local part of an email address (the part before the \"@\" symbol).",
     "is_auto": true,

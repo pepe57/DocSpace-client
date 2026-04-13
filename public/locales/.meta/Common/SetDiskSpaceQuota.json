@@ -3,7 +3,7 @@
   "content": "Set storage quota to define the maximum disk space for this {{productName}}.",
   "content_en_sha1_hash": "499f7a97f93e9c092c5eca67c5fa8cfdfa381f2e",
   "created_at": "2025-05-19T21:30:48.569Z",
-  "updated_at": "2026-04-12T07:14:23.210Z",
+  "updated_at": "2026-04-12T21:12:45.877Z",
   "comment": {
     "text": "This is a descriptive sentence within a dialog, explaining the purpose of setting a storage quota. It includes the variable `{{productName}}` which will be replaced with the product's brand name.",
     "is_auto": true,

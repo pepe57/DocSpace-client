@@ -3,7 +3,7 @@
   "content": "Docker instruction.",
   "content_en_sha1_hash": "ebb408553e05d849ad37700e004798f23d8228e3",
   "created_at": "2025-05-26T07:15:49.186Z",
-  "updated_at": "2026-04-12T07:14:23.188Z",
+  "updated_at": "2026-04-12T13:28:34.865Z",
   "comment": {
     "text": "This is a short label for an instruction item, specifically for Docker installation. It appears within a list of instructions for upgrading to a Pro plan.",
     "is_auto": true,

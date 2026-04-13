@@ -3,7 +3,7 @@
   "content": "Do more with {{planName}} plan",
   "content_en_sha1_hash": "e2ed747ebe643fc02022f1f0dfa21047a14d8063",
   "created_at": "2026-04-10T13:53:43.302Z",
-  "updated_at": "2026-04-12T07:14:23.204Z",
+  "updated_at": "2026-04-12T17:40:31.319Z",
   "comment": {
     "text": "This is a suggestion message displayed to users on the payment page. It encourages them to upgrade their plan, with `{{planName}}` being the name of the suggested plan.",
     "is_auto": true,

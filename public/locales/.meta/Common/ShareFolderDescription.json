@@ -3,7 +3,7 @@
   "content": "Provide access to the folder and set the permission levels.",
   "content_en_sha1_hash": "85cdb69a150659c5463be79cc84498e6c5fe9ad6",
   "created_at": "2025-08-26T11:15:01.383Z",
-  "updated_at": "2026-04-12T00:57:32.793Z",
+  "updated_at": "2026-04-12T20:42:51.701Z",
   "comment": {
     "text": "This is a descriptive sentence appearing in an information bar when sharing a folder. It explains that users can grant access and define permission levels for the folder.",
     "is_auto": true,

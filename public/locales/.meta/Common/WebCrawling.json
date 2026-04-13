@@ -3,7 +3,7 @@
   "content": "Web crawling",
   "content_en_sha1_hash": "358b1643a23f6468c430bdf829af3459c4b5ac48",
   "created_at": "2025-10-27T16:14:24.665Z",
-  "updated_at": "2026-04-12T07:14:23.182Z",
+  "updated_at": "2026-04-12T09:16:04.350Z",
   "comment": {
     "text": "This is a label indicating that a web crawling operation is in progress. It appears in the header of a tool call message within the AI agent chat.",
     "is_auto": true,

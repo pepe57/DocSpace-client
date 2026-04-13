@@ -3,7 +3,7 @@
   "content": "Show link to Help Center",
   "content_en_sha1_hash": "f1caebab0b9dd55772001bc3d83522b321581b0b",
   "created_at": "2025-05-26T07:15:48.005Z",
-  "updated_at": "2026-04-12T07:14:23.208Z",
+  "updated_at": "2026-04-12T19:12:42.834Z",
   "comment": {
     "text": "This is a checkbox label. It allows the user to enable or disable the display of a link to the Help Center within the application.",
     "is_auto": true,

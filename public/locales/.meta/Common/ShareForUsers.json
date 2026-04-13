@@ -3,7 +3,7 @@
   "content": "Share for users",
   "content_en_sha1_hash": "bf53de1cbc0dfc480132454f260d5d9fc5503d8a",
   "created_at": "2025-09-23T07:24:16.793Z",
-  "updated_at": "2026-04-12T07:14:23.209Z",
+  "updated_at": "2026-04-12T20:36:15.733Z",
   "comment": {
     "text": "This is a section header in a sharing dialog. It introduces the list of users with whom a document or folder is shared.",
     "is_auto": true,

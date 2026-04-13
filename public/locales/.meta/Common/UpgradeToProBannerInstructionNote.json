@@ -3,7 +3,7 @@
   "content": "Please note that the editors will be unavailable during the upgrade. We also recommend to <1>backup your data</1> before you start.",
   "content_en_sha1_hash": "6254435f524d28160ed4c7af92aa2d841ada3ca0",
   "created_at": "2025-05-26T07:15:49.220Z",
-  "updated_at": "2026-04-12T07:14:23.187Z",
+  "updated_at": "2026-04-12T13:23:52.381Z",
   "comment": {
     "text": "This is an instructional note displayed in a banner, informing users about the implications of upgrading to a Pro plan. It advises them that editors will be unavailable and suggests backing up data before starting the upgrade process. The `<1>backup your data</1>` tag indicates a clickable link within the sentence.",
     "is_auto": true,

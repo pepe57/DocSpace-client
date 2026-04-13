@@ -3,7 +3,7 @@
   "content": "Create PDF forms from templates or scratch",
   "content_en_sha1_hash": "92bf44ccc48709705c33e9994b5bacf9d7f5e3d5",
   "created_at": "2026-03-31T15:18:26.887Z",
-  "updated_at": "2026-04-12T07:14:23.182Z",
+  "updated_at": "2026-04-12T09:05:28.218Z",
   "comment": {
     "text": "This is a feature description displayed in a welcome tour dialog. It explains one of the key functionalities of the application: creating PDF forms.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Usage",
   "content_en_sha1_hash": "0bb18642b70b9f8a9c12ccf39487328f306b8e19",
   "created_at": "2026-04-10T13:53:45.857Z",
-  "updated_at": "2026-04-12T07:14:23.186Z",
+  "updated_at": "2026-04-12T12:55:47.843Z",
   "comment": {
     "text": "Tab label. This tab displays the user's transaction history and usage details for AI tools.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Select specific users from {{productName}} and invite them to fill out the original form.",
   "content_en_sha1_hash": "3be65286af53e08e26a1e63c3c611aff14f48e44",
   "created_at": "2025-09-23T07:24:16.886Z",
-  "updated_at": "2026-04-12T07:14:23.208Z",
+  "updated_at": "2026-04-12T19:53:42.672Z",
   "comment": {
     "text": "This is the description text for the \"Share with users\" option within a sharing dialog. It explains that users can be selected from the portal to share the document with. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,

@@ -3,7 +3,7 @@
   "content": "Maximum {{count}} files allowed",
   "content_en_sha1_hash": "4886f6d97491793d45f7b46f21d0ad5ac83aa7c5",
   "created_at": "2025-11-13T07:57:55.552Z",
-  "updated_at": "2026-04-12T07:14:23.212Z",
+  "updated_at": "2026-04-12T21:46:31.599Z",
   "comment": {
     "text": "This is an informational message displayed in a file selection dialog, indicating the maximum number of files a user can attach. The `{{count}}` variable represents this maximum number.",
     "is_auto": true,
