@@ -67,13 +67,21 @@ export const SelectedModelsList = ({
           [styles.selectedModelsError]: hasError,
         })}
       >
-        <div ref={addButtonRef} className={styles.addButtonAnchor}>
+        <div
+          ref={addButtonRef}
+          className={styles.addButtonAnchor}
+          onClick={() => onAddClick()}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") onAddClick();
+          }}
+        >
           <Tag
             tag="add-model"
             label={t("AISettings:SelectModels")}
             icon={PlusIcon}
             withLabel={false}
-            onClick={() => onAddClick()}
             className="add-model-tag"
             dataTestId="add-model-button"
           />

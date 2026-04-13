@@ -75,6 +75,7 @@
 
 .addButtonAnchor {
   display: inline-flex;
+  cursor: pointer;
 }
 
 .selectedModelsContainer {
@@ -86,18 +87,11 @@
     width: 32px;
     min-height: 24px;
     max-width: 32px;
-    cursor: pointer;
+    pointer-events: none;
 
     svg {
       width: 12px;
       height: 12px;
-    }
-
-    &:hover,
-    &:active,
-    &:focus {
-      background: var(--tag-background) !important;
-      border: var(--tag-border) !important;
     }
   }
 

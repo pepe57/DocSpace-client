@@ -52,6 +52,7 @@ import type {
   TModelCapabilities,
   TModelSettingsDto,
   TModelSettingsItem,
+  TProviderModelInfo,
   TProviderTypeWithUrl,
   TUpdateAiProvider,
 } from "@docspace/shared/api/ai/types";
@@ -169,6 +170,7 @@ const AddUpdateDialogComponent = ({
           url: string;
           key: string;
           models?: TModelSelectionState;
+          availableModels?: TProviderModelInfo[];
         }
       >
     >
@@ -192,9 +194,11 @@ const AddUpdateDialogComponent = ({
     }
   }, [modelSelection.modelsLoaded, modelSelection.getState]);
 
-  const showModelsBlock = modelSelection.modelsLoaded;
   const isCustomProvider =
     (selectedOption.key as ProviderType) === ProviderType.OpenAiCompatible;
+  const showModelsBlock = isCustomProvider
+    ? modelSelection.modelsLoaded
+    : modelSelection.modelsLoaded && modelSelection.availableModels.length > 0;
 
   const [canTogglePopup, setCanTogglePopup] = useState(false);
 
@@ -245,6 +249,7 @@ const AddUpdateDialogComponent = ({
       url: providerUrl,
       key: providerKey,
       models: modelSelection.getState(),
+      availableModels: [...modelSelection.availableModels],
     };
 
     setSelectedOption(option);
@@ -263,7 +268,10 @@ const AddUpdateDialogComponent = ({
       setProviderKey("");
     }
 
-    modelSelection.loadModelsForProvider(savedValues?.models);
+    modelSelection.loadModelsForProvider(
+      savedValues?.models,
+      savedValues?.availableModels,
+    );
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

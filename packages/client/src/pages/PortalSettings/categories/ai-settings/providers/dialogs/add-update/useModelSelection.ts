@@ -67,7 +67,7 @@ const mapModelSettingsToModelInfo = (
   capabilities: dto.capabilities,
 });
 
-const DEBOUNCE_MS = 500;
+const DEBOUNCE_MS = 300;
 
 export const useModelSelection = (
   providerType: ProviderType,
@@ -99,14 +99,19 @@ export const useModelSelection = (
     if (initialModels) return;
     if (!providerKey) return;
 
+    const abortController = new AbortController();
+
     const timer = setTimeout(async () => {
       setIsLoadingModels(true);
       try {
-        const dtos = await previewProviderModels({
-          type: providerType,
-          key: providerKey,
-          url: providerUrl || undefined,
-        });
+        const dtos = await previewProviderModels(
+          {
+            type: providerType,
+            key: providerKey,
+            url: providerUrl || undefined,
+          },
+          abortController,
+        );
         const models = dtos.map(mapModelSettingsToModelInfo);
         setAvailableModels(models);
 
@@ -119,19 +124,29 @@ export const useModelSelection = (
 
         setModelsLoaded(true);
       } catch (e) {
+        if (abortController.signal.aborted) return;
+
         toastr.error(e as string);
         setAvailableModels([]);
         setModelsLoaded(false);
       } finally {
-        setIsLoadingModels(false);
+        if (!abortController.signal.aborted) {
+          setIsLoadingModels(false);
+        }
       }
     }, DEBOUNCE_MS);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      abortController.abort();
+    };
   }, [providerType, providerKey, providerUrl, initialModels]);
 
   const loadModelsForProvider = useCallback(
-    (savedState?: TModelSelectionState) => {
+    (
+      savedState?: TModelSelectionState,
+      cachedModels?: TProviderModelInfo[],
+    ) => {
       if (savedState) {
         setSelectedModelIds(new Set(savedState.selectedIds));
         modelOverrides.current = { ...savedState.overrides };
@@ -142,7 +157,7 @@ export const useModelSelection = (
         setModelsLoaded(false);
       }
 
-      setAvailableModels([]);
+      setAvailableModels(cachedModels ?? []);
       setHasError(false);
       setOverridesVersion(0);
     },

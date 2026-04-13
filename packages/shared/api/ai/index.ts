@@ -115,11 +115,13 @@ export const getAvailableProviderUrls = async () => {
 
 export const previewProviderModels = async (
   data: TPreviewModelsRequest,
+  abortController?: AbortController | null,
 ) => {
   const res = (await request({
     method: "post",
     url: `${baseUrl}/providers/models/preview`,
     data,
+    signal: abortController?.signal,
   })) as TModelSettingsDto[];
 
   return res;
