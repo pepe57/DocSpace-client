@@ -136,17 +136,12 @@ const AIProviderComponent = ({
     });
   };
 
-  const [isLoadingProviderModels, setIsLoadingProviderModels] = useState(false);
-
   const onUpdateAIProvider = async (provider: TAiProvider) => {
-    setIsLoadingProviderModels(true);
     try {
       const models = await getProviderModelSettings(provider.id);
       setUpdateDialogData({ visible: true, provider, models });
     } catch (e) {
       toastr.error(e as string);
-    } finally {
-      setIsLoadingProviderModels(false);
     }
   };
 
