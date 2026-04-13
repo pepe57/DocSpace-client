@@ -49,7 +49,7 @@ const MODEL = modelArg
     : (openRouterConfig.apiKey
         ? (openRouterConfig.commentModel || openRouterConfig.model)
         : null)
-      || process.env.OLLAMA_MODEL
+      || process.env.OLLAMA_DEFAULT_MODEL
       || "gemma4:latest";
 
 const PROVIDER_NAME = USE_CLAUDE_CODE ? "claude-code" : (isOpenRouterModel(MODEL) ? "openrouter" : "ollama");

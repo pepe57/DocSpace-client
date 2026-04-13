@@ -218,10 +218,12 @@ javascripts.forEach(({ workspace, files }) => {
       let lineNumber = 0;
       let codeFragment = "";
 
-      // Find the line number where the key is used
+      // Find the line number where the key is used (match key in quotes to avoid partial matches)
+      const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const keyInQuotes = new RegExp(`["'\`]${escapedKey}["'\`]`);
       const lines = jsFileText.split("\n");
       for (let i = 0; i < lines.length; i++) {
-        if (lines[i].includes(key)) {
+        if (keyInQuotes.test(lines[i])) {
           lineNumber = i + 1; // Convert to 1-based line numbering
 
           // Extract code fragment with context (5 lines before and after)
