@@ -1497,5 +1497,10 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vi ste na vrsti",
-  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala."
+  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala.",
+  "PlanUsersLimit": "Želite znižati nivo ekipe na <1>{{usersCount}}</1> skrbnikov in trenutno število teh uporabnikov v vašem {{productName}} je <1>{{currentUsersCount}}</1>.",
+  "PlanStorageLimit": "Nova tarifna omejitev je <1>{{storageValue}}</1> prostora za shranjevanje in vaš trenutni prostor je <1>{{currentStorageValue}}</1>.",
+  "ChangePricingPlan": "Zamenjaj cenovni paket",
+  "CannotChangePlan": "Svojega paketa ne morete spremeniti, ker uporabljena količina prostora za shranjevanje ali število skrbnikov presega omejitve izbranega paketa:",
+  "SaveOrChange": "Prosimo, da odpravite neujemanje pri problematičnem parametru, če želite nadaljevati ali ohraniti aktiven cenovni paket."
 }

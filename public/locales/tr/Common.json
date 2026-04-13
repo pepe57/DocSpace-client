@@ -1497,5 +1497,10 @@
   "YourName": "Adınız",
   "YourPrice": "Ücret",
   "YourTurn": "Sıra sizde",
-  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir."
+  "YouWillBeContacted": "Satış ekibi, talebi oluşturduktan sonra sizinle iletişime geçecektir.",
+  "PlanUsersLimit": "Ekibi <1>{{usersCount}}</1> yönetici sayısına düşürmek istiyorsunuz ve {{productName}}'inizdeki bu tür kullanıcıların mevcut sayısı <1>{{currentUsersCount}}</1>.",
+  "PlanStorageLimit": "Yeni tarifenin sınırlaması <1>{{storageValue}}</1> depolama alanı ve mevcut kullanılan depolama alanınız <1>{{currentStorageValue}}</1>.",
+  "ChangePricingPlan": "Fiyatlandırma planını değiştir",
+  "CannotChangePlan": "Kullanılan depolama hacmi veya yönetici sayısı seçilen planın limitlerini aştığı için planınızı değiştiremezsiniz:",
+  "SaveOrChange": "Devam etmek veya aktif fiyatlandırma planınızı sürdürmek için lütfen çakışan parametredeki uyuşmazlığı giderin."
 }

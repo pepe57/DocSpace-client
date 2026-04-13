@@ -1497,5 +1497,10 @@
   "YourName": "Il tuo nome",
   "YourPrice": "Il tuo prezzo",
   "YourTurn": "Il tuo turno",
-  "YouWillBeContacted": "Il team di vendita ti contatterà dopo aver creato la richiesta."
+  "YouWillBeContacted": "Il team di vendita ti contatterà dopo aver creato la richiesta.",
+  "PlanUsersLimit": "Desideri eseguire il downgrade del team a <1>{{usersCount}}</1> amministratori e il numero attuale di tali utenti nel tuo {{productName}} è <1>{{currentUsersCount}}</1>.",
+  "PlanStorageLimit": "Il limite della nuova tariffa è <1>{{storageValue}}</1> di spazio di archiviazione e lo spazio di archiviazione utilizzato attualmente è <1>{{currentStorageValue}}</1>.",
+  "ChangePricingPlan": "Cambia piano tariffario",
+  "CannotChangePlan": "Non puoi modificare il tuo piano perché il volume di archiviazione utilizzato o il numero di amministratori supera i limiti del piano selezionato:",
+  "SaveOrChange": "Ti preghiamo di eliminare la mancata corrispondenza nel parametro in conflitto per procedere o mantenere il tuo piano tariffario attivo."
 }

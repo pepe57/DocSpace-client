@@ -1497,5 +1497,10 @@
   "YourName": "Numele dvs.",
   "YourPrice": "Preţul dvs.",
   "YourTurn": "Acum e rândul dvs.",
-  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării."
+  "YouWillBeContacted": "Echipa de vânzări vă va contacta după crearea solicitării.",
+  "PlanUsersLimit": "Doriți să retrogradați echipa la <1>{{usersCount}}</1> administratori, numărul curent astfel de utilizatori din spațiul dvs {{productName}} este <1>{{currentUsersCount}}</1>.",
+  "PlanStorageLimit": "O limită la abonamentul nou este <1>{{storageValue}}</1> de spațiu de stocare, și spațiul de stocare ocupat  este de  <1>{{currentStorageValue}}</1>.",
+  "ChangePricingPlan": "Schimbare abonament",
+  "CannotChangePlan": "Nu vă puteți schimba abonamentul deoarece volumul de stocare utilizat sau numărul de administratori depășește limitele abonamentului selectat:",
+  "SaveOrChange": "Eliminați nepotrivirea în parametrul de conflict pentru a continua sau mențineți abonamentul dvs actual."
 }

@@ -1497,5 +1497,10 @@
   "YourName": "Nimesi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
+  "PlanUsersLimit": "Haluat alentaa tiimin<1>{{usersCount}}</1>ylläpitäjiksi ja nykyinen määrä sellaisia käyttäjiä {{productName}}-ssasi on <1>{{currentUsersCount}}</1>.",
+  "PlanStorageLimit": "Uuden tariffin rajoitus on <1>{{storageValue}}</1> muistista ja käytetyn muistin määrä on  <1>{{currentStorageValue}}</1>.",
+  "ChangePricingPlan": "Muuta hinnoitteluohjelmaa",
+  "CannotChangePlan": "Et voi muuttaa ohjelmaasi, koska käytetyn muistin määrä tai ylläpitäjien määrä ylittää valitun ohjelman rajoitukset:",
+  "SaveOrChange": "Ole hyvä ja poista ristiriitaisen parametrin yhteensopimattomuus jatkaaksesi tai säilyttääksesi aktiivinen tilauksesi."
 }

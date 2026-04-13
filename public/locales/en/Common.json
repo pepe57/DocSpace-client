@@ -1497,5 +1497,13 @@
   "YourName": "Your name",
   "YourPrice": "Your price",
   "YourTurn": "Your turn",
-  "YouWillBeContacted": "The sales team will contact you after creating the request."
+  "YouWillBeContacted": "The sales team will contact you after creating the request.",
+  "Source": "Source",
+  "AIAgentName": "AI Agent: {{AgentName}}",
+  "TopUpInProgress": "Top up in progress",
+  "PlanUsersLimit": "You wish to downgrade the team to <1>{{usersCount}}</1> admins, and current number of such users in your {{productName}} is <1>{{currentUsersCount}}</1>.",
+  "PlanStorageLimit": "New tariff's limitation is <1>{{storageValue}}</1> of storage, and your current used storage is <1>{{currentStorageValue}}</1>.",
+  "ChangePricingPlan": "Change pricing plan",
+  "CannotChangePlan": "You cannot change your plan because the used storage volume or the number of admins exceeds the limitations of the selected plan:",
+  "SaveOrChange": "Please eliminate the mismatch in the conflicting parameter to proceed or keep your active pricing plan."
 }

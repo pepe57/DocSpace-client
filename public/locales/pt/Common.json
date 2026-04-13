@@ -1497,5 +1497,10 @@
   "YourName": "O seu nome",
   "YourPrice": "O seu preço",
   "YourTurn": "A sua vez",
-  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido."
+  "YouWillBeContacted": "A equipa de vendas entrará em contacto consigo depois de criar o pedido.",
+  "PlanUsersLimit": "Deseja diminuir a equipa para <1>{{usersCount}}</1> administradores, e o número atual deste tipo de utilizadores no seu {{productName}} é <1>{{currentUsersCount}}</1>.",
+  "PlanStorageLimit": "O limite de armazenamento do novo plano de preços é <1>{{storageValue}}</1>, e está atualmente a utilizar <1>{{currentStorageValue}}</1>.",
+  "ChangePricingPlan": "Alterar o plano de preços",
+  "CannotChangePlan": "Não pode alterar o seu plano porque o volume de armazenamento utilizado ou o número de administradores excede as limitações do plano selecionado:",
+  "SaveOrChange": "Elimine a incompatibilidade no parâmetro conflitante para prosseguir ou manter seu plano de preços ativo."
 }

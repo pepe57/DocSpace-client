@@ -1497,5 +1497,10 @@
   "YourName": "Adınız",
   "YourPrice": "Qiymətiniz",
   "YourTurn": "Sizin növbəniz",
-  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq."
+  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq.",
+  "PlanUsersLimit": "Siz komandanı <1>{{usersCount}}</1> admin səviyyəsinə endirmək istəyirsiniz və {{productName}}-də belə istifadəçilərin cari sayı <1>{{currentUsersCount}}</1>-dir.",
+  "PlanStorageLimit": "Yeni tarifin məhdudiyyəti <1>{{storageValue}}</1> yaddaş və cari istifadə etdiyiniz yaddaş <1>{{currentStorageValue}}</1>-dir.",
+  "ChangePricingPlan": "Qiymət planını dəyişdirin",
+  "CannotChangePlan": "İstifadə olunan yaddaşın həcmi və ya admin sayı seçilmiş planın məhdudiyyətlərini keçdiyi üçün planınızı dəyişə bilməzsiniz:",
+  "SaveOrChange": "Aktiv qiymət planınızı davam etdirmək və ya saxlamaq üçün lütfən, ziddiyyətli parametrdəki uyğunsuzluğu aradan qaldırın."
 }
