@@ -20,6 +20,8 @@
   "EncryptDataWarningDescription": "A criptografia de armazenamento pode levar algum tempo. Os espaços ficarão indisponíveis durante o processo. Certifique-se de ter armazenamento suficiente e de que seus dados tenham backup. Não se esqueça de desabilitar os backups automáticos e interromper todos os que estão em execução. Caso contrário, isso será feito automaticamente.",
   "EncryptStorage": "Criptografar armazenamento",
   "EncryptWarningDialogContent": "Todos os espaços ficarão indisponíveis durante o processo de criptografia. Tem certeza de que deseja continuar?",
+  "EnterDomainName": "Insira o nome de domínio",
+  "EnterSpaceName": "Digite o nome do espaço",
   "MoreDetails": "Para mais detalhes sobre como interromper serviços, consulte nosso <1>{{link}}</1>.",
   "NewSpace": "Novo espaço",
   "NotifyUsers": "Notificar usuários que o espaço estará indisponível",
@@ -32,7 +34,5 @@
   "StorageEncrypted": "Armazenamento criptografado",
   "Subheader": "Use esta seção para criar vários espaços e torná-los acessíveis para seus usuários",
   "SubmitDelete": "Enviar uma solicitação de exclusão",
-  "VisitSpace": "Visite este espaço depois de criar",
-  "EnterSpaceName": "Digite o nome do espaço",
-  "EnterDomainName": "Insira o nome de domínio"
+  "VisitSpace": "Visite este espaço depois de criar"
 }

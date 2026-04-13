@@ -1,6 +1,8 @@
 {
   "BackToRoom": "Լրացնել կրկին",
   "CheckReadyForms": "Ստուգել պատրաստի ձևերը",
+  "CompletedFormDescription": "Լրացնել կրկին",
+  "CompletedFormTitle": "Ձևաթուղթը լրացված է",
   "DescriptionForAnonymous": "Ձեր ներկայացված PDF ձևին հատկացվել է ձևի եզակի համար: Կարգավիճակը ստուգելու համար դիմեք ձևի սեփականատիրոջը:",
   "DescriptionForRegisteredUser": "Ձեր կողմից ներկայացված PDF ձևը հասանելի է Complete(ամբողջական) թղթապանակում:",
   "FillItOutAgain": "Լրացնել կրկին",
@@ -17,7 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "Ձեզ հանձնարարվել է լրացնել ձևաթուղթն որպես առաջին ստացող։ Ձեր էլ. փոստին ուղարկվել է ծանուցում։ Կարող եք սկսել լրացնել այն հիմա կամ պատճենել լրացման հղումը և վերադառնալ ավելի ուշ։",
   "LinkToFillOutForm": "Ձևաթուղթը լրացնելու հղում",
   "LinkToForm": "Ձևաթղթի հղում",
-  "LinkToViewOnlyForm": "Ձևաթղթի դիտման հղում՝ միայն կարդալու ռեժիմում",
-  "CompletedFormTitle": "Ձևաթուղթը լրացված է",
-  "CompletedFormDescription": "Լրացնել կրկին"
+  "LinkToViewOnlyForm": "Ձևաթղթի դիտման հղում՝ միայն կարդալու ռեժիմում"
 }

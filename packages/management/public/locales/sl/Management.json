@@ -20,6 +20,8 @@
   "EncryptDataWarningDescription": "Šifriranje shrambe lahko traja dlje. Med postopkom prostori ne bodo na voljo. Prepričajte se, da imate dovolj prostora za shranjevanje in da so vaši podatki varnostno kopirani. Ne pozabite onemogočiti samodejnih varnostnih kopij in ustaviti vseh delujočih. V nasprotnem primeru bo to izvedeno samodejno.",
   "EncryptStorage": "Šifriraj shrambo",
   "EncryptWarningDialogContent": "Med postopkom šifriranja bodo vsi prostori nedosegljivi. Ste prepričani, da želite nadaljevati?",
+  "EnterDomainName": "Vnesi ime domene",
+  "EnterSpaceName": "Vnesi ime prostora",
   "MoreDetails": "Za več podrobnosti o tem, kako zaustaviti storitve, poglejte naš <1>{{link}}</1>.",
   "NewSpace": "Nov prostor",
   "NotifyUsers": "Obvestite uporabnike, da prostor ne bo na voljo",
@@ -32,7 +34,5 @@
   "StorageEncrypted": "Shramba šifrirana",
   "Subheader": "Uporabite ta razdelek, da ustvarite več prostorov in omogočite dostop do njih svojim uporabnikom",
   "SubmitDelete": "Oddaj zahtevo za izbris",
-  "VisitSpace": "Po kreiranju obiščite ta prostor",
-  "EnterSpaceName": "Vnesi ime prostora",
-  "EnterDomainName": "Vnesi ime domene"
+  "VisitSpace": "Po kreiranju obiščite ta prostor"
 }

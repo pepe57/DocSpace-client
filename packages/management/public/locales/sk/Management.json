@@ -20,6 +20,8 @@
   "EncryptDataWarningDescription": "Šifrovanie úložiska môže trvať dlhšie. Priestory budú počas tohto procesu nedostupné. Uistite sa, že máte dostatok úložného miesta a že sú vaše údaje zálohované. Nezabudnite zrušiť automatické zálohovanie a zastaviť všetky spustené procesy zálohovania. V opačnom prípade sa to uskutoční automaticky.",
   "EncryptStorage": "Šifrovanie úložiska",
   "EncryptWarningDialogContent": "Počas procesu šifrovania budú všetky priestory nedostupné. Ste si istí, že chcete pokračovať?",
+  "EnterDomainName": "Zadajte meno domény",
+  "EnterSpaceName": "Zadajte meno priestoru",
   "MoreDetails": "Viac informácií o tom, ako zastaviť služby, nájdete v našom <1>{{link}}</1>.",
   "NewSpace": "Nový priestor",
   "NotifyUsers": "Upozorniť používateľov, že priestor bude nedostupný.",
@@ -32,7 +34,5 @@
   "StorageEncrypted": "Úložisko bolo zašifrované",
   "Subheader": "V tejto časti môžete vytvoriť niekoľko priestorov a sprístupniť ich používateľom",
   "SubmitDelete": "Odoslať žiadosť o vymazanie",
-  "VisitSpace": "Navštívte tento priestor po vytvorení",
-  "EnterSpaceName": "Zadajte meno priestoru",
-  "EnterDomainName": "Zadajte meno domény"
+  "VisitSpace": "Navštívte tento priestor po vytvorení"
 }

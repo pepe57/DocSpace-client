@@ -20,6 +20,8 @@
   "EncryptDataWarningDescription": "Depolama alanını şifreleme işlemi zaman alabilir. Bu süreçte alanlar kullanılamaz olacaktır. Yeterli depolama alanınızın olduğundan ve verilerinizin yedeklendiğinden emin olun. Otomatik yedeklemeleri devre dışı bırakmayı ve çalışan tüm yedeklemeleri durdurmayı unutmayın. Aksi takdirde bu işlem otomatik olarak yapılacaktır.",
   "EncryptStorage": "Depolamayı şifrele",
   "EncryptWarningDialogContent": "Şifreleme işlemi sırasında tüm alanlar kullanılamaz hale gelecektir. Devam etmek istediğinizden emin misiniz?",
+  "EnterDomainName": "Alan(Domain) adını girin",
+  "EnterSpaceName": "Alan adını girin",
   "MoreDetails": "Hizmetlerin nasıl durdurulacağı hakkında daha fazla bilgi için lütfen <1>{{link}}</1> adresimize bakın.",
   "NewSpace": "Yeni alan",
   "NotifyUsers": "Alanların kullanılamayacağını kullanıcılara bildirin",
@@ -32,7 +34,5 @@
   "StorageEncrypted": "Depolama şifrelendi",
   "Subheader": "Çeşitli alanlar oluşturmak ve bunları kullanıcılarınız için erişilebilir kılmak için bu bölümü kullanın",
   "SubmitDelete": "Silme talebi gönder",
-  "VisitSpace": "Oluşturduktan sonra bu alanı ziyaret edin",
-  "EnterSpaceName": "Alan adını girin",
-  "EnterDomainName": "Alan(Domain) adını girin"
+  "VisitSpace": "Oluşturduktan sonra bu alanı ziyaret edin"
 }

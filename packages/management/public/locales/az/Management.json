@@ -20,6 +20,8 @@
   "EncryptDataWarningDescription": "Yaddaşın şifrələnməsi vaxt apara bilər. Sahələr proses zamanı əlçatmaz olacaq. Kifayət qədər yaddaşınız olduğundan və məlumatlarınızın ehtiyat nüsxəsinin alındığından əmin olun. Avtomatik ehtiyat nüsxələrini deaktiv etməyi və işləyən ehtiyat nüsxələri dayandırmağı unutmayın. Əks halda, avtomatik olaraq həyata keçiriləcək.",
   "EncryptStorage": "Yaddaşı şifrələyin",
   "EncryptWarningDialogContent": "Şifrələmə prosesi zamanı bütün sahələr əlçatmaz olacaq. Davam etmək istədiyinizə əminsiniz?",
+  "EnterDomainName": "Domen adını daxil edin",
+  "EnterSpaceName": "Sahə adını daxil edin",
   "MoreDetails": "Xidmətlərin dayandırılması haqqında ətraflı məlumat üçün <1>{{link}}</1> nəzərdən keçirin.",
   "NewSpace": "Yeni sahə",
   "NotifyUsers": "İstifadəçilərə sahənin əlçatmaz olduğunu bildirin",
@@ -32,7 +34,5 @@
   "StorageEncrypted": "Yaddaş şifrələndi",
   "Subheader": "Bir neçə sahə yaratmaq və onları istifadəçiləriniz üçün əlçatan etmək üçün bu bölmədən istifadə edin",
   "SubmitDelete": "Silinmə sorğusu göndərin",
-  "VisitSpace": "Yaradıldıqdan sonra bu sahəyə baş çəkin",
-  "EnterSpaceName": "Sahə adını daxil edin",
-  "EnterDomainName": "Domen adını daxil edin"
+  "VisitSpace": "Yaradıldıqdan sonra bu sahəyə baş çəkin"
 }

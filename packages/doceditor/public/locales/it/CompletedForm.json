@@ -1,6 +1,8 @@
 {
   "BackToRoom": "Compilalo di nuovo",
   "CheckReadyForms": "Controlla i moduli pronti",
+  "CompletedFormDescription": "Compilalo di nuovo",
+  "CompletedFormTitle": "Il modulo è completato",
   "DescriptionForAnonymous": "Al modulo PDF inviato è stato assegnato un numero di modulo univoco. Per controllare lo stato, contatta il proprietario del modulo.",
   "DescriptionForRegisteredUser": "Il modulo PDF inviato è disponibile nella cartella Completato.",
   "FillItOutAgain": "Compilalo di nuovo",
@@ -17,7 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "Sei assegnato alla compilazione del modulo come primo destinatario. È stata inviata una notifica al tuo indirizzo e-mail. Puoi iniziare a compilarlo ora oppure copiare il link di compilazione e tornare più tardi.",
   "LinkToFillOutForm": "Link per compilare il modulo:",
   "LinkToForm": "Link al modulo:",
-  "LinkToViewOnlyForm": "Link alla versione di sola visualizzazione del modulo:",
-  "CompletedFormTitle": "Il modulo è completato",
-  "CompletedFormDescription": "Compilalo di nuovo"
+  "LinkToViewOnlyForm": "Link alla versione di sola visualizzazione del modulo:"
 }

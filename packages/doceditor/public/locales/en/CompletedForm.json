@@ -1,6 +1,8 @@
 {
   "BackToRoom": "Back to room",
   "CheckReadyForms": "Check ready forms",
+  "CompletedFormDescription": "Your form completed and saved",
+  "CompletedFormTitle": "The form is completed",
   "DescriptionForAnonymous": "Your submitted PDF form was assigned a unique form number. To check the status, please contact the form owner.",
   "DescriptionForRegisteredUser": "Your submitted PDF form available to you in the Complete folder.",
   "FillItOutAgain": "Fill it out again",
@@ -17,7 +19,5 @@
   "FormVDRYouFirstRecepientDescription": "You are assigned to fill out the form as the first recipient. A notification has been sent to your email. You can start filling it out now or copy the filling link and return later.",
   "LinkToFillOutForm": "Link to fill out form:",
   "LinkToForm": "Link to form:",
-  "LinkToViewOnlyForm": "Link to view-only form:",
-  "CompletedFormTitle": "The form is completed",
-  "CompletedFormDescription": "Your form completed and saved"
+  "LinkToViewOnlyForm": "Link to view-only form:"
 }

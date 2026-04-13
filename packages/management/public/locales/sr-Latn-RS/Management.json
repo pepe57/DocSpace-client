@@ -20,6 +20,8 @@
   "EncryptDataWarningDescription": "Enkriptovanje skladišta može potrajati. Prostori će biti nedostupni tokom procesa. Uverite se da imate dovoljno skladišnog prostora i da su vaši podaci sigurnosno kopirani. Ne zaboravite da isključite automatske sigurnosne kopije i zaustavite sve aktivne. Inače, to će biti automatski učinjeno.",
   "EncryptStorage": "Enkriptujte skladište",
   "EncryptWarningDialogContent": "Svi prostori će postati nedostupni tokom procesa enkripcije. Da li ste sigurni da želite da nastavite?",
+  "EnterDomainName": "Unesi ime domena",
+  "EnterSpaceName": "Unesi ime prostora",
   "MoreDetails": "Za više detalja o tome kako zaustaviti usluge, molimo pogledajte naš <1>{{link}}</1>",
   "NewSpace": "Novi prostor",
   "NotifyUsers": "Obavestite korisnike da prostor neće biti dostupan",
@@ -32,7 +34,5 @@
   "StorageEncrypted": "Skladište je enkriptovano",
   "Subheader": "Koristite ovaj odeljak da napravite nekoliko prostora i učinite ih dostupnim svojim korisnicima",
   "SubmitDelete": "Pošalji zahtev za brisanje",
-  "VisitSpace": "Posetite ovaj prostor posle kreiranja",
-  "EnterSpaceName": "Unesi ime prostora",
-  "EnterDomainName": "Unesi ime domena"
+  "VisitSpace": "Posetite ovaj prostor posle kreiranja"
 }
