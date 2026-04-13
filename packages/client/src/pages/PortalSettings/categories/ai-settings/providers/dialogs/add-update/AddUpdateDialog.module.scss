@@ -98,6 +98,12 @@
   :global(.model-tag) {
     min-height: 24px;
     pointer-events: none;
+    font-weight: 400;
+    border-color: #{variables.$light-gray-selected};
+
+    :global(.dark) & {
+      border-color: #{variables.$gray-dark-strong};
+    }
 
     &:hover {
       background: var(--tag-background) !important;

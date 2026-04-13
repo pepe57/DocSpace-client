@@ -65,6 +65,11 @@
   height: 16px;
   flex-shrink: 0;
   padding-bottom: 7px;
+
+  :global(.help-icon) {
+    padding-bottom: 1px;
+    padding-inline-start: 1px;
+  }
 }
 
 .sectionHeaderOther {
@@ -105,20 +110,21 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-weight: 400;
   font-size: 13px;
   line-height: 20px;
   height: 24px;
   padding: 1px 7px;
   box-sizing: border-box;
+  border-radius: 6px;
+
   :global(.light) & {
-    border: 1px solid #{colors.$gray-light-mid};
+    border: 1px solid #{colors.$light-gray-selected};
   }
 
   :global(.dark) & {
     border: 1px solid #{colors.$gray-dark-strong};
   }
-
-  border-radius: 6px;
 }
 
 .pencilIcon {
@@ -129,7 +135,7 @@
   padding-inline-start: 12px;
   margin-inline-end: 20px;
 
-  --icon-button-hover-color: var(--icon-button-color);
+  --icon-button-hover-color: var(--icon-button-color) !important;
 
   .modelRow:hover & {
     visibility: visible;
