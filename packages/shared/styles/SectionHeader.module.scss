@@ -115,17 +115,6 @@
         }
       }
 
-      .title-icon {
-        svg {
-          path {
-            fill: var(--room-icon-link-icon-path);
-          }
-          rect {
-            stroke: var(--background-color);
-          }
-        }
-      }
-
       .header_sign-in-button {
         margin-inline-start: auto;
         display: block;
@@ -153,7 +142,24 @@
     }
   }
 
-  &:not(.isExternalFolder) {
+  &:not(.isColoredTitleIcon) {
+    :global {
+      .header-container {
+        .title-icon {
+          svg {
+            path {
+              fill: var(--room-icon-link-icon-path);
+            }
+            rect {
+              stroke: var(--background-color);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &:not(.isExternalFolder):not(.isColoredTitleIcon) {
     :global {
       .header-container {
         .title-icon {

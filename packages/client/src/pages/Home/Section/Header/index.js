@@ -34,6 +34,7 @@
  */
 
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
+import PublicRoomRestrictedIconUrl from "PUBLIC_DIR/images/public-room.restricted.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
@@ -217,6 +218,7 @@ const SectionHeaderContent = (props) => {
     filesSelection,
     isCollaborator,
     isVisitor,
+    isExternalShareRestricted,
   } = props;
 
   const location = useLocation();
@@ -547,7 +549,9 @@ const SectionHeaderContent = (props) => {
         isInPublicRoom ||
         (isShared && (isArchive ? selectedFolder?.isRoom : isRoom))
       ) {
-        return PublicRoomIconUrl;
+        return isExternalShareRestricted
+          ? PublicRoomRestrictedIconUrl
+          : PublicRoomIconUrl;
       } else if (!isRootRooms && !isArchive && !isSharedWithMeFolderRoot)
         return PublicRoomIconUrl;
     }
@@ -566,7 +570,15 @@ const SectionHeaderContent = (props) => {
     isRoom,
     isSharedWithMeFolderRoot,
     isLifetimeEnabled,
+    isExternalShareRestricted,
   ]);
+
+  const titleTooltip = React.useMemo(() => {
+    if (isRoom && selectedFolder?.shared && isExternalShareRestricted)
+      return t("Common:ExternalAccessDisabledByAdmin");
+
+    return undefined;
+  }, [isRoom, selectedFolder, isExternalShareRestricted, t]);
 
   const titleIconTooltip = React.useMemo(() => {
     if (sharedType) return t("Files:RecentlyOpenedTooltip");
@@ -940,6 +952,8 @@ const SectionHeaderContent = (props) => {
           [styles.isExternalFolder]:
             location.state?.isExternal || selectedFolder?.external,
           [styles.isLifetimeEnabled]: isLifetimeEnabled,
+          [styles.isColoredTitleIcon]:
+            titleIcon === PublicRoomRestrictedIconUrl,
         })}
       >
         {tableGroupMenuVisible ? (
@@ -1022,6 +1036,7 @@ const SectionHeaderContent = (props) => {
               isPublicRoom={isPublicRoom}
               titleIcon={titleIcon}
               titleIconTooltip={titleIconTooltip}
+              titleTooltip={titleTooltip}
               showRootFolderTitle={
                 insideTheRoom || insideTheAgent || isContactsInsideGroupPage
               }
@@ -1437,6 +1452,8 @@ export default inject(
       setChangeAvatarVisible,
       setChangeNameVisible,
       getIcon: filesStore.filesSettingsStore.getIcon,
+      isExternalShareRestricted:
+        true || !filesStore.filesSettingsStore.externalShare,
 
       isRootRooms,
       isArchive,
