@@ -143,8 +143,8 @@ export const ModelSettingsPanel = ({
               />
               <Checkbox
                 label={t("AISettings:CapabilityExtendedThinking")}
-                isChecked={capabilities.extendedThinking}
-                onChange={() => handleCapabilityChange("extendedThinking")}
+                isChecked={capabilities.thinking}
+                onChange={() => handleCapabilityChange("thinking")}
               />
             </div>
           </FieldContainer>

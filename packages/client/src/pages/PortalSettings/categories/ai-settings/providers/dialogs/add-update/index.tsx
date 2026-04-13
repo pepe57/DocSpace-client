@@ -50,6 +50,8 @@ import type {
   TAiProvider,
   TCreateAiProvider,
   TModelCapabilities,
+  TModelSettingsDto,
+  TModelSettingsItem,
   TProviderTypeWithUrl,
   TUpdateAiProvider,
 } from "@docspace/shared/api/ai/types";
@@ -73,48 +75,25 @@ type AddEditDialogProps = {
   onClose: () => void;
   aiProviderTypesWithUrls: TProviderTypeWithUrl[];
   providerData?: TAiProvider;
+  initialModels?: TModelSettingsDto[];
   addAIProvider?: AISettingsStore["addAIProvider"];
   updateAIProvider?: AISettingsStore["updateAIProvider"];
   getAIConfig?: SettingsStore["getAIConfig"];
 };
 
-const providerTypes: TOption[] = [
-  {
-    key: ProviderType.OpenAi,
-    label: getAiProviderLabel(ProviderType.OpenAi),
-  },
-  {
-    key: ProviderType.Anthropic,
-    label: getAiProviderLabel(ProviderType.Anthropic),
-  },
-  {
-    key: ProviderType.TogetherAi,
-    label: getAiProviderLabel(ProviderType.TogetherAi),
-  },
-  {
-    key: ProviderType.OpenAiCompatible,
-    label: getAiProviderLabel(ProviderType.OpenAiCompatible),
-  },
-  {
-    key: ProviderType.OpenRouter,
-    label: getAiProviderLabel(ProviderType.OpenRouter),
-  },
-  {
-    key: ProviderType.DeepSeek,
-    label: getAiProviderLabel(ProviderType.DeepSeek),
-  },
-  {
-    key: ProviderType.XAi,
-    label: getAiProviderLabel(ProviderType.XAi),
-  },
-  {
-    key: ProviderType.Google,
-    label: getAiProviderLabel(ProviderType.Google),
-  },
-];
+const buildProviderOptions = (
+  aiProviderTypesWithUrls: TProviderTypeWithUrl[],
+): TOption[] =>
+  aiProviderTypesWithUrls.map((item) => ({
+    key: item.type,
+    label: getAiProviderLabel(item.type),
+  }));
 
-const getSelectedOptionByProviderType = (type?: ProviderType) => {
-  return providerTypes.find((item) => item.key === type) || providerTypes[0];
+const getSelectedOptionByProviderType = (
+  options: TOption[],
+  type?: ProviderType,
+) => {
+  return options.find((item) => item.key === type) || options[0];
 };
 
 const getURLByProviderType = (
@@ -139,16 +118,22 @@ const AddUpdateDialogComponent = ({
   addAIProvider,
   updateAIProvider,
   providerData,
+  initialModels,
   getAIConfig,
 }: AddEditDialogProps) => {
   const { t } = useTranslation(["Common", "AISettings", "OAuth", "Webhooks"]);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
+  const providerOptions = useMemo(
+    () => buildProviderOptions(aiProviderTypesWithUrls),
+    [aiProviderTypesWithUrls],
+  );
+
   const [selectedOption, setSelectedOption] = useState(
-    getSelectedOptionByProviderType(providerData?.type),
+    getSelectedOptionByProviderType(providerOptions, providerData?.type),
   );
   const initialProviderType =
-    providerData?.type ?? (providerTypes[0].key as ProviderType);
+    providerData?.type ?? (providerOptions[0]?.key as ProviderType);
   const [providerTitle, setProviderTitle] = useState(
     providerData?.title ||
       (variant === "add" ? getAutoFillName(initialProviderType) : ""),
@@ -171,6 +156,8 @@ const AddUpdateDialogComponent = ({
   const modelSelection = useModelSelection(
     selectedOption.key as ProviderType,
     providerKey,
+    providerUrl,
+    variant === "update" ? initialModels : undefined,
   );
 
   const valuesByProvider = useRef<
@@ -185,16 +172,7 @@ const AddUpdateDialogComponent = ({
         }
       >
     >
-  >({
-    [ProviderType.OpenAi]: { title: "", url: "", key: "" },
-    [ProviderType.Anthropic]: { title: "", url: "", key: "" },
-    [ProviderType.TogetherAi]: { title: "", url: "", key: "" },
-    [ProviderType.OpenAiCompatible]: { title: "", url: "", key: "" },
-    [ProviderType.OpenRouter]: { title: "", url: "", key: "" },
-    [ProviderType.DeepSeek]: { title: "", url: "", key: "" },
-    [ProviderType.XAi]: { title: "", url: "", key: "" },
-    [ProviderType.Google]: { title: "", url: "", key: "" },
-  });
+  >({});
 
   const initFormData = useRef({
     selectedOption,
@@ -202,6 +180,17 @@ const AddUpdateDialogComponent = ({
     providerUrl,
     providerKey,
   });
+
+  const initialModelStateRef = useRef<TModelSelectionState | null>(null);
+
+  useEffect(() => {
+    if (
+      modelSelection.modelsLoaded &&
+      initialModelStateRef.current === null
+    ) {
+      initialModelStateRef.current = modelSelection.getState();
+    }
+  }, [modelSelection.modelsLoaded, modelSelection.getState]);
 
   const showModelsBlock = modelSelection.modelsLoaded;
   const isCustomProvider =
@@ -224,17 +213,28 @@ const AddUpdateDialogComponent = ({
 
   const requiredFieldsFilled =
     providerTitle.trim().length > 0 && providerUrl.trim().length > 0;
-  const modelsValid = showModelsBlock
-    ? modelSelection.selectedModelIds.size > 0
-    : true;
-  const hasChanges = !equal(initFormData.current, {
+  const modelsReady =
+    variant === "add"
+      ? showModelsBlock && modelSelection.selectedModelIds.size > 0
+      : showModelsBlock
+        ? modelSelection.selectedModelIds.size > 0
+        : true;
+  const hasFormChanges = !equal(initFormData.current, {
     selectedOption,
     providerTitle,
     providerUrl,
     providerKey,
   });
 
-  const canSubmit = requiredFieldsFilled && modelsValid && hasChanges;
+  const currentModelState = modelSelection.getState();
+  const hasModelChanges =
+    showModelsBlock &&
+    initialModelStateRef.current !== null &&
+    !equal(initialModelStateRef.current, currentModelState);
+
+  const hasChanges = hasFormChanges || hasModelChanges;
+
+  const canSubmit = requiredFieldsFilled && modelsReady && hasChanges;
 
   const onSelectProvider = (option: TOption) => {
     const currentProviderType = selectedOption.key as ProviderType;
@@ -272,6 +272,21 @@ const AddUpdateDialogComponent = ({
 
     setIsRequestRunning(true);
 
+    const buildModelSettings = (): TModelSettingsItem[] => {
+      const state = modelSelection.getState();
+      const selectedSet = new Set(state.selectedIds);
+
+      return modelSelection.availableModels.map((model) => {
+        const override = state.overrides[model.modelId];
+        return {
+          modelId: model.modelId,
+          isEnabled: selectedSet.has(model.modelId),
+          alias: override?.displayName ?? model.displayName,
+          capabilities: override?.capabilities ?? model.capabilities,
+        };
+      });
+    };
+
     try {
       if (variant === "add") {
         const data: TCreateAiProvider = {
@@ -279,6 +294,7 @@ const AddUpdateDialogComponent = ({
           title: providerTitle,
           type: selectedOption.key as ProviderType,
           url: providerUrl,
+          modelSettings: showModelsBlock ? buildModelSettings() : undefined,
         };
 
         await addAIProvider?.(data);
@@ -302,6 +318,10 @@ const AddUpdateDialogComponent = ({
 
         if (!isKeyInputHidden && providerKey.length > 0) {
           data.key = providerKey;
+        }
+
+        if (showModelsBlock) {
+          data.modelSettings = buildModelSettings();
         }
 
         await updateAIProvider?.(providerData.id, data);
@@ -328,11 +348,7 @@ const AddUpdateDialogComponent = ({
 
   const onResetKey = () => setIsKeyInputHidden(false);
 
-  const filteredProviderTypes = useMemo(() => {
-    return providerTypes.filter((item) =>
-      aiProviderTypesWithUrls.find((p) => p.type === item.key),
-    );
-  }, [aiProviderTypesWithUrls]);
+  const filteredProviderTypes = providerOptions;
 
   useEffect(() => {
     if (providerData?.type) {

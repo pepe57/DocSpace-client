@@ -31,13 +31,11 @@ import { useState, useCallback, useRef, useMemo, useEffect } from "react";
 import { ProviderType } from "@docspace/shared/api/ai/enums";
 import type {
   TModelCapabilities,
+  TModelSettingsDto,
   TProviderModelInfo,
 } from "@docspace/shared/api/ai/types";
-
-import {
-  fetchModelsForProviderByKey,
-  getRecommendedModelIds,
-} from "./mockModelData";
+import { previewProviderModels } from "@docspace/shared/api/ai";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 type TModelOverride = {
   displayName: string;
@@ -60,52 +58,77 @@ const sortSelectedFirst = (
   });
 };
 
+const mapModelSettingsToModelInfo = (
+  dto: TModelSettingsDto,
+): TProviderModelInfo => ({
+  modelId: dto.id,
+  displayName: dto.alias ?? dto.id,
+  isRecommended: dto.isRecommended,
+  capabilities: dto.capabilities,
+});
+
 const DEBOUNCE_MS = 500;
 
 export const useModelSelection = (
   providerType: ProviderType,
   providerKey: string,
+  providerUrl?: string,
+  initialModels?: TModelSettingsDto[],
 ) => {
   const [availableModels, setAvailableModels] = useState<TProviderModelInfo[]>(
-    [],
+    () => (initialModels ? initialModels.map(mapModelSettingsToModelInfo) : []),
   );
-  const [selectedModelIds, setSelectedModelIds] = useState<Set<string>>(
-    new Set(),
+  const [selectedModelIds, setSelectedModelIds] = useState<Set<string>>(() =>
+    initialModels
+      ? new Set(initialModels.filter((d) => d.isEnabled).map((d) => d.id))
+      : new Set(),
   );
   const [hasError, setHasError] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [settingsModelId, setSettingsModelId] = useState<string | null>(null);
   const [isLoadingModels, setIsLoadingModels] = useState(false);
-  const [modelsLoaded, setModelsLoaded] = useState(false);
+  const [modelsLoaded, setModelsLoaded] = useState(
+    () => !!initialModels && initialModels.length > 0,
+  );
 
   const [frozenSortIds, setFrozenSortIds] = useState<Set<string> | null>(null);
   const modelOverrides = useRef<Record<string, TModelOverride>>({});
+  const [overridesVersion, setOverridesVersion] = useState(0);
 
   useEffect(() => {
+    if (initialModels) return;
     if (!providerKey) return;
 
     const timer = setTimeout(async () => {
       setIsLoadingModels(true);
       try {
-        const models = await fetchModelsForProviderByKey(
-          providerType,
-          providerKey,
-        );
+        const dtos = await previewProviderModels({
+          type: providerType,
+          key: providerKey,
+          url: providerUrl || undefined,
+        });
+        const models = dtos.map(mapModelSettingsToModelInfo);
         setAvailableModels(models);
 
-        const recommendedIds = getRecommendedModelIds(providerType);
+        const recommendedIds = dtos
+          .filter((d) => d.isRecommended)
+          .map((d) => d.id);
         setSelectedModelIds((prev) =>
           prev.size > 0 ? prev : new Set(recommendedIds),
         );
 
         setModelsLoaded(true);
+      } catch (e) {
+        toastr.error(e as string);
+        setAvailableModels([]);
+        setModelsLoaded(false);
       } finally {
         setIsLoadingModels(false);
       }
     }, DEBOUNCE_MS);
 
     return () => clearTimeout(timer);
-  }, [providerType, providerKey]);
+  }, [providerType, providerKey, providerUrl, initialModels]);
 
   const loadModelsForProvider = useCallback(
     (savedState?: TModelSelectionState) => {
@@ -121,6 +144,7 @@ export const useModelSelection = (
 
       setAvailableModels([]);
       setHasError(false);
+      setOverridesVersion(0);
     },
     [],
   );
@@ -145,6 +169,7 @@ export const useModelSelection = (
       capabilities: TModelCapabilities,
     ) => {
       modelOverrides.current[modelId] = { displayName, capabilities };
+      setOverridesVersion((v) => v + 1);
 
       setAvailableModels((prev) =>
         prev.map((m) =>
@@ -175,7 +200,7 @@ export const useModelSelection = (
       selectedIds: Array.from(selectedModelIds),
       overrides: { ...modelOverrides.current },
     };
-  }, [selectedModelIds]);
+  }, [selectedModelIds, overridesVersion]);
 
   const togglePopup = useCallback(() => {
     setIsPopupOpen((prev) => {
