@@ -36,6 +36,7 @@ const {
   projectLocalesMap,
   ollamaConfig,
   openRouterConfig,
+  concurrencyConfig,
 } = require("../config/config");
 const { Ollama } = require("ollama");
 const { verifyOllamaConnection } = require("../utils/ollamaUtils");
@@ -83,6 +84,7 @@ class FatalProviderError extends Error {
   }
 }
 
+const CONCURRENCY = NO_LLM ? 1 : concurrencyConfig.spellCheck;
 const LANGUAGES_TO_CHECK = positionalArgs[0] ? positionalArgs[0].split(",") : null;
 const CHECKPOINT_FILE = path.join(appRootPath, "verification-checkpoint.json");
 
@@ -1310,118 +1312,100 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
           resumeAtLanguage = null; // only for the first key
         }
 
+        // Build list of languages to process (applying skip/recheck filters)
+        const langsToProcess = [];
         for (let langIndex = 0; langIndex < languages.length; langIndex++) {
           const language = languages[langIndex];
 
-          // Skip already-processed languages for resumed key
           if (skipLangsUntil) {
             if (language !== skipLangsUntil) continue;
-            skipLangsUntil = null; // found it, process from here
+            skipLangsUntil = null;
           }
 
-          // Save checkpoint when starting new language
-          if (checkpoint.lastLanguage !== language) {
-            checkpoint.lastProject = project;
-            checkpoint.lastMetadataFile = toPortablePath(metadataFile);
-            checkpoint.lastLanguage = language;
-            saveCheckpoint();
+          const translatedContent = getTranslationContent(translations, namespace, key, language);
+          if (!translatedContent) continue;
+
+          if (RECHECK) {
+            const existingIssues = metadata.languages?.[language]?.ai_spell_check_issues || [];
+            if (existingIssues.length === 0) continue;
+            if (RECHECK_TYPES && !existingIssues.some((i) => RECHECK_TYPES.has(i.type))) continue;
           }
 
-          try {
-            const translatedContent = getTranslationContent(
-              translations,
-              namespace,
-              key,
-              language,
-            );
-            if (!translatedContent) {
+          langsToProcess.push({ language, langIndex, translatedContent });
+        }
+
+        // Process languages in parallel batches of CONCURRENCY
+        for (let batchStart = 0; batchStart < langsToProcess.length; batchStart += CONCURRENCY) {
+          const batch = langsToProcess.slice(batchStart, batchStart + CONCURRENCY);
+
+          const results = await Promise.allSettled(
+            batch.map(async ({ language, langIndex, translatedContent }) => {
+              const progress = {
+                current: langIndex + 1,
+                total: languages.length,
+                keyIndex: stats.totalKeys,
+                totalKeys: metadataFiles.length,
+              };
+
+              // Phase 1: deterministic checks (instant)
+              const deterministicIssues = runDeterministicChecks(englishContent, translatedContent, language, key);
+
+              if (deterministicIssues.length > 0) {
+                console.log(`  [static] ${language}: ${deterministicIssues.length} issue(s): ${deterministicIssues.map((i) => i.type).join(", ")}`);
+              }
+
+              // Phase 2: LLM verification
+              const hasStructuralIssue = deterministicIssues.some((i) =>
+                ["empty_translation", "wrong_script"].includes(i.type),
+              );
+
+              let llmIssues = [];
+              if (!NO_LLM && !hasStructuralIssue) {
+                llmIssues = await verifyTranslation(keyPath, englishContent, translatedContent, language, progress, keyContext);
+              }
+
+              // Merge & stamp
+              const llmTypes = new Set(llmIssues.map((i) => i.type));
+              const uniqueDeterministic = deterministicIssues.filter((i) => !llmTypes.has(i.type));
+              const now = new Date().toISOString();
+              for (const issue of uniqueDeterministic) { issue.checked_at = now; issue.checked_by = "deterministic"; }
+              for (const issue of llmIssues) { issue.checked_at = now; issue.checked_by = `${PROVIDER}/${MODEL}`; }
+
+              return { language, issues: [...uniqueDeterministic, ...llmIssues], translatedContent };
+            }),
+          );
+
+          // Process results (sequential — writes to shared metadata/stats)
+          for (const result of results) {
+            if (result.status === "rejected") {
+              const err = result.reason;
+              if (err instanceof FatalProviderError) {
+                console.error(`\n⛔ FATAL: ${err.message}`);
+                console.error("Saving checkpoint and stopping...");
+                saveCheckpoint();
+                if (metadataUpdated) {
+                  metadata.updated_at = new Date().toISOString();
+                  await writeJsonWithConsistentEol(metadataFile, metadata);
+                }
+                throw err;
+              }
+              console.error(`Error: ${err.message}`);
+              stats.errors.push({ file: metadataFile, key: keyPath, error: err.message });
+              saveCheckpoint();
               continue;
             }
 
-            // --recheck mode: skip key+lang pairs that have no existing issues
-            if (RECHECK) {
-              const existingIssues =
-                metadata.languages?.[language]?.ai_spell_check_issues || [];
-              if (existingIssues.length === 0) {
-                continue;
-              }
-              // If --recheck-types is set, only re-check if at least one issue matches
-              if (RECHECK_TYPES) {
-                const hasMatchingType = existingIssues.some((i) =>
-                  RECHECK_TYPES.has(i.type),
-                );
-                if (!hasMatchingType) {
-                  continue;
-                }
-              }
-            }
+            const { language, issues, translatedContent } = result.value;
 
-            const progress = {
-              current: langIndex + 1,
-              total: languages.length,
-              keyIndex: stats.totalKeys,
-              totalKeys: metadataFiles.length,
-            };
-
-            // Phase 1: deterministic checks (instant, no LLM)
-            const deterministicIssues = runDeterministicChecks(
-              englishContent,
-              translatedContent,
-              language,
-              key,
-            );
-
-            if (deterministicIssues.length > 0) {
-              console.log(
-                `  [static] ${deterministicIssues.length} issue(s): ${deterministicIssues.map((i) => i.type).join(", ")}`,
-              );
-            }
-
-            // Phase 2: LLM verification (skip if --no-llm or deterministic found critical structural issues)
-            const hasStructuralIssue = deterministicIssues.some((i) =>
-              ["empty_translation", "wrong_script"].includes(i.type),
-            );
-
-            let llmIssues = [];
-            if (!NO_LLM && !hasStructuralIssue) {
-              llmIssues = await verifyTranslation(
-                keyPath,
-                englishContent,
-                translatedContent,
-                language,
-                progress,
-                keyContext,
-              );
-            }
-
-            // Merge: deterministic issues that overlap with LLM types are deduplicated
-            const llmTypes = new Set(llmIssues.map((i) => i.type));
-            const uniqueDeterministic = deterministicIssues.filter(
-              (i) => !llmTypes.has(i.type),
-            );
-            // Stamp each issue with when and how it was found
-            const now = new Date().toISOString();
-            for (const issue of uniqueDeterministic) {
-              issue.checked_at = now;
-              issue.checked_by = "deterministic";
-            }
-            for (const issue of llmIssues) {
-              issue.checked_at = now;
-              issue.checked_by = `${PROVIDER}/${MODEL}`;
-            }
-
-            const issues = [...uniqueDeterministic, ...llmIssues];
+            // Update checkpoint
+            checkpoint.lastProject = project;
+            checkpoint.lastMetadataFile = toPortablePath(metadataFile);
+            checkpoint.lastLanguage = language;
 
             if (!metadata.languages) metadata.languages = {};
             if (!metadata.languages[language]) {
-              metadata.languages[language] = {
-                ai_translated: false,
-                ai_model: null,
-                ai_spell_check_issues: [],
-                approved_at: null,
-              };
+              metadata.languages[language] = { ai_translated: false, ai_model: null, ai_spell_check_issues: [], approved_at: null };
             }
-
             metadata.languages[language].ai_spell_check_issues = issues;
             metadataUpdated = true;
 
@@ -1429,70 +1413,33 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
             stats.llmCalls++;
             stats.languages[language].processed++;
 
-            // Log speed & ETA every 10 LLM calls
-            if (!NO_LLM && stats.llmCalls % 10 === 0) {
-              const elapsed = (Date.now() - stats.startTime) / 1000;
-              const avgSec = elapsed / stats.llmCalls;
-              const totalPairs = metadataFiles.length * languages.length;
-              const remaining = totalPairs - stats.llmCalls;
-              const etaSec = remaining * avgSec;
-              const etaMin = Math.floor(etaSec / 60);
-              const etaHrs = Math.floor(etaMin / 60);
-              const etaStr = etaHrs > 0
-                ? `${etaHrs}h ${etaMin % 60}m`
-                : `${etaMin}m ${Math.floor(etaSec % 60)}s`;
-              console.log(
-                `  ⏱ ${stats.llmCalls} checked | ${avgSec.toFixed(1)}s/call | ETA: ~${etaStr}`,
-              );
-            }
-
             if (issues.length > 0) {
               stats.updatedIssues++;
               stats.languages[language].updated++;
               stats.languages[language].issues += issues.length;
-              console.log(
-                `Found ${issues.length} issues for ${keyPath} in ${language}`,
-              );
+              console.log(`Found ${issues.length} issues for ${keyPath} in ${language}`);
 
-              // Save issues to CSV immediately
               for (const issue of issues) {
-                appendIssueToTSV(
-                  tsvFilename,
-                  project,
-                  metadataFile,
-                  keyPath,
-                  language,
-                  englishContent,
-                  translatedContent,
-                  issue,
-                );
+                appendIssueToTSV(tsvFilename, project, metadataFile, keyPath, language, englishContent, translatedContent, issue);
                 counters.totalIssuesFound++;
               }
             }
-          } catch (langError) {
-            // Fatal errors — save progress and stop
-            if (langError instanceof FatalProviderError) {
-              console.error(`\n⛔ FATAL: ${langError.message}`);
-              console.error("Saving checkpoint and stopping...");
-              saveCheckpoint();
-              if (metadataUpdated) {
-                metadata.updated_at = new Date().toISOString();
-                await writeJsonWithConsistentEol(metadataFile, metadata);
-              }
-              throw langError;
-            }
+          }
 
-            console.error(
-              `Error processing ${keyPath} for ${language}: ${langError.message}`,
-            );
-            stats.errors.push({
-              file: metadataFile,
-              key: keyPath,
-              language,
-              error: langError.message,
-            });
-            // Save checkpoint on error
-            saveCheckpoint();
+          // Save checkpoint after each batch
+          saveCheckpoint();
+
+          // Log speed & ETA periodically
+          if (!NO_LLM && stats.llmCalls > 0 && stats.llmCalls % 10 < CONCURRENCY) {
+            const elapsed = (Date.now() - stats.startTime) / 1000;
+            const avgSec = elapsed / stats.llmCalls;
+            const totalPairs = metadataFiles.length * languages.length;
+            const remaining = totalPairs - stats.llmCalls;
+            const etaSec = remaining * avgSec;
+            const etaMin = Math.floor(etaSec / 60);
+            const etaHrs = Math.floor(etaMin / 60);
+            const etaStr = etaHrs > 0 ? `${etaHrs}h ${etaMin % 60}m` : `${etaMin}m ${Math.floor(etaSec % 60)}s`;
+            console.log(`  ⏱ ${stats.llmCalls} checked | ${avgSec.toFixed(1)}s/call | ETA: ~${etaStr}`);
           }
         }
 
@@ -1604,6 +1551,9 @@ async function verifyAllTranslationsSpellCheck() {
   console.log("LANGUAGES_TO_CHECK: ", LANGUAGES_TO_CHECK);
   console.log("CHECKPOINT_FILE: ", CHECKPOINT_FILE);
   console.log("RESUMING: ", resuming ? "yes" : "no");
+  if (CONCURRENCY > 1) {
+    console.log("CONCURRENCY: ", CONCURRENCY);
+  }
   if (RECHECK) {
     console.log("MODE: RECHECK — only keys with existing issues in .meta");
     if (RECHECK_TYPES) {

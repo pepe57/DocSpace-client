@@ -65,6 +65,11 @@ const openRouterConfig = {
   ),
 };
 
+// Concurrency for LLM calls (spell-check, auto-comments)
+const concurrencyConfig = {
+  spellCheck: parseInt(process.env.SPELLCHECK_CONCURRENCY || "1", 10),
+};
+
 // Translation configuration
 const translationConfig = {
   baseLanguage: process.env.BASE_LANGUAGE || "en",
@@ -78,5 +83,6 @@ module.exports = {
   openRouterConfig,
   translationConfig,
   metadataConfig,
+  concurrencyConfig,
 };
 
