@@ -1407,6 +1407,8 @@
   "SubscriptionAutoRenewedWithUpdate": "Subscription will be automatically renewed <1>on {{finalDate}}</1> with updated pricing and specifications — <1>{{price}}/month ({{amount}})</1>",
   "SubscriptionCancellation": "Subscription cancellation",
   "SubscriptionWillBeAutomaticallyRenewed": "Subscription will be automatically renewed <1>on {{finalDate}}</1>",
+  "Source": "Source",
+  "AIAgentName": "AI Agent: {{AgentName}}",
   "SwitchPlan": "You’re about to switch to the <1>{{planName}} plan</1>.",
   "ToppedUpWallet": "You have successfully topped up your wallet.",
   "TopUp": "Top up",
@@ -1564,5 +1566,10 @@
   "YourName": "Your name",
   "RequestDetails": "Please describe your request details here.",
   "EnterEmail": "Enter email",
-  "SuccessfullySentMessage": "Your message was successfully sent. You will be contacted by the Sales Department."
+  "SuccessfullySentMessage": "Your message was successfully sent. You will be contacted by the Sales Department.",
+  "PlanUsersLimit": "You wish to downgrade the team to <1>{{usersCount}}</1> admins, and current number of such users in your {{productName}} is <1>{{currentUsersCount}}</1>.",
+  "PlanStorageLimit": "New tariff's limitation is <1>{{storageValue}}</1> of storage, and your current used storage is <1>{{currentStorageValue}}</1>.",
+  "ChangePricingPlan": "Change pricing plan",
+  "CannotChangePlan": "You cannot change your plan because the used storage volume or the number of admins exceeds the limitations of the selected plan:",
+  "SaveOrChange": "Please eliminate the mismatch in the conflicting parameter to proceed or keep your active pricing plan."
 }

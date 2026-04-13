@@ -1563,5 +1563,10 @@
   "YourName": "Uw naam",
   "RequestDetails": "Beschrijf hier de details van uw aanvraag.",
   "EnterEmail": "Voer e-mail in",
-  "SuccessfullySentMessage": "Uw bericht is succesvol verzonden. De verkoopafdeling neemt contact met u op."
+  "SuccessfullySentMessage": "Uw bericht is succesvol verzonden. De verkoopafdeling neemt contact met u op.",
+  "PlanUsersLimit": "U wilt het team downgraden naar <1>{{usersCount}}</1> beheerders, en het huidige aantal van deze gebruikers in uw {{productName}} is <1>{{currentUsersCount}}</1>.",
+  "PlanStorageLimit": "De beperking van het nieuwe tarief is <1>{{storageValue}}</1> aan opslag, en uw huidige gebruikte opslag is <1>{{currentStorageValue}}</1>.",
+  "ChangePricingPlan": "Wijzig prijsplan",
+  "CannotChangePlan": "U kunt uw plan niet aanpassen omdat het gebruikte opslagvolume of het aantal beheerders de beperkingen van het geselecteerde plan overschrijdt:",
+  "SaveOrChange": "Verhelp de discrepantie in de conflicterende parameter om door te gaan of behoud uw actieve prijsplan."
 }
