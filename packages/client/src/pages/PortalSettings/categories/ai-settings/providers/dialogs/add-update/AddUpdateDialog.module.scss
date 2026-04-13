@@ -73,6 +73,10 @@
   color: var(--input-error-color);
 }
 
+.addButtonAnchor {
+  display: inline-flex;
+}
+
 .selectedModelsContainer {
   display: flex;
   flex-wrap: wrap;
@@ -89,7 +93,9 @@
       height: 12px;
     }
 
-    &:hover {
+    &:hover,
+    &:active,
+    &:focus {
       background: var(--tag-background) !important;
       border: var(--tag-border) !important;
     }

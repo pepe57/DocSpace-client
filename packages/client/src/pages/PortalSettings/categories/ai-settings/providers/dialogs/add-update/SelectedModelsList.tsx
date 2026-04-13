@@ -41,12 +41,14 @@ type SelectedModelsListProps = {
   selectedModels: TProviderModelInfo[];
   onAddClick: () => void;
   hasError: boolean;
+  addButtonRef?: React.RefObject<HTMLDivElement | null>;
 };
 
 export const SelectedModelsList = ({
   selectedModels,
   onAddClick,
   hasError,
+  addButtonRef,
 }: SelectedModelsListProps) => {
   const { t } = useTranslation(["AISettings"]);
 
@@ -65,15 +67,17 @@ export const SelectedModelsList = ({
           [styles.selectedModelsError]: hasError,
         })}
       >
-        <Tag
-          tag="add-model"
-          label={t("AISettings:SelectModels")}
-          icon={PlusIcon}
-          withLabel={false}
-          onClick={() => onAddClick()}
-          className="add-model-tag"
-          dataTestId="add-model-button"
-        />
+        <div ref={addButtonRef} className={styles.addButtonAnchor}>
+          <Tag
+            tag="add-model"
+            label={t("AISettings:SelectModels")}
+            icon={PlusIcon}
+            withLabel={false}
+            onClick={() => onAddClick()}
+            className="add-model-tag"
+            dataTestId="add-model-button"
+          />
+        </div>
         {selectedModels.map((model) => (
           <Tag
             key={model.modelId}

@@ -135,7 +135,7 @@ export const useModelSelection = (
       if (savedState) {
         setSelectedModelIds(new Set(savedState.selectedIds));
         modelOverrides.current = { ...savedState.overrides };
-        setModelsLoaded(savedState.selectedIds.length > 0);
+        setModelsLoaded(true);
       } else {
         setSelectedModelIds(new Set());
         modelOverrides.current = {};

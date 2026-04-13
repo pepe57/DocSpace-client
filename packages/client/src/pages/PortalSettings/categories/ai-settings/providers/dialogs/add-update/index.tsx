@@ -504,13 +504,14 @@ const AddUpdateDialogComponent = ({
               )}
             </FieldContainer>
             {showModelsBlock ? (
-              <div ref={addButtonRef} style={{ position: "relative" }}>
+              <div style={{ position: "relative" }}>
                 <SelectedModelsList
                   selectedModels={selectedModels}
                   onAddClick={() => {
                     if (canTogglePopup) modelSelection.togglePopup();
                   }}
                   hasError={modelSelection.hasError}
+                  addButtonRef={addButtonRef}
                 />
                 {modelSelection.isPopupOpen ? (
                   <ModelSelectorPopup

@@ -26,7 +26,7 @@
  * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
  */
 
-import React, { memo, useEffect, useMemo } from "react";
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
@@ -141,7 +141,20 @@ export const ModelSelectorPopup = ({
 }: ModelSelectorPopupProps) => {
   const { t } = useTranslation(["AISettings", "Common"]);
   const isMobileHardware = isMobileDevice();
-  const isLandscape = window.innerWidth > window.innerHeight;
+
+  const [windowSize, setWindowSize] = useState(() => ({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  }));
+
+  useEffect(() => {
+    const handler = () =>
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+
+  const isLandscape = windowSize.width > windowSize.height;
   const isMobilePortrait = isMobileHardware && !isLandscape;
   const isMobileLandscape = isMobileHardware && isLandscape;
 
@@ -177,7 +190,7 @@ export const ModelSelectorPopup = ({
     />
   ) : null;
 
-  const mobilePortraitScrollMax = window.innerHeight - 64 - POPUP_PADDING;
+  const mobilePortraitScrollMax = windowSize.height - 64 - POPUP_PADDING;
 
   const modelContent = isCustomProvider ? (
     <>
@@ -269,7 +282,7 @@ export const ModelSelectorPopup = ({
           height: Math.min(scrollHeight, mobilePortraitScrollMax),
         }}
       >
-        {modelContent}
+        <div className={styles.mobileScrollContent}>{modelContent}</div>
       </Scrollbar>
     </div>
   ) : (
@@ -306,3 +319,4 @@ export const ModelSelectorPopup = ({
     </DropDown>
   );
 };
+
