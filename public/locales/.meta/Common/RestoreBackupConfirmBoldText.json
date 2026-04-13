@@ -3,7 +3,7 @@
   "content": "You are about to restore {{productName}} from a backup file.",
   "content_en_sha1_hash": "6039791e5b28c520e61f9beb72dc5ff5f50b10ea",
   "created_at": "2026-03-20T09:07:35.034Z",
-  "updated_at": "2026-04-12T02:36:43.012Z",
+  "updated_at": "2026-04-13T09:25:01.292Z",
   "comment": {
     "text": "This is the bolded first part of a confirmation message in a modal dialog. It informs the user that they are about to restore the product from a backup file. `{{productName}}` will be replaced with the product's brand name.",
     "is_auto": true,
@@ -166,7 +166,15 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Slovenian phrase 'Na želite obnoviti' is grammatically incorrect and does not convey the meaning of 'You are about to restore'. The word 'želite' means 'you want', not 'you are about to'. The prefix 'Na' is not a standard Slovenian construction for expressing imminent action.",
+          "suggestion": "Nameravate obnoviti {{productName}} iz varnostne kopije. (You intend to restore {{productName}} from a backup file.) OR Obnoviti boste {{productName}} iz varnostne kopije. (You will restore {{productName}} from a backup file.)",
+          "checked_at": "2026-04-13T09:24:26.134Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

@@ -3,7 +3,7 @@
   "content": "Viewer",
   "content_en_sha1_hash": "dbad9f126b33570e09839a2d60720898de1a512d",
   "created_at": "2025-05-19T21:30:48.141Z",
-  "updated_at": "2026-04-13T01:36:32.570Z",
+  "updated_at": "2026-04-13T08:18:09.238Z",
   "comment": {
     "text": "This is a label for the \"Viewer\" role, indicating a user with read-only access. It appears in dialogs and panels where user roles or access rights are defined.",
     "is_auto": true,
@@ -166,7 +166,15 @@
     "ru": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"Просмотр\" means \"viewing\" (the action/process), not \"Viewer\" (the agent/role). As a role label for read-only access, the translation should be an agent noun referring to a person, not a gerund/action noun. This is semantically incorrect for a user role.",
+          "suggestion": "Просмотрщик",
+          "checked_at": "2026-04-13T08:17:57.193Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "si": {

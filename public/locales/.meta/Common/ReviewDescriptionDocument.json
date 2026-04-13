@@ -3,7 +3,7 @@
   "content": "Viewing, reviewing, commenting.",
   "content_en_sha1_hash": "b4d8b6b8ce37549c9885b62e2e1334d954aff902",
   "created_at": "2025-09-29T18:22:08.487Z",
-  "updated_at": "2026-04-12T02:23:32.429Z",
+  "updated_at": "2026-04-13T09:04:54.115Z",
   "comment": {
     "text": "This is a short description of document access rights, displayed in a dropdown menu or similar UI element. It indicates that the user has permissions to view, review, and comment on the document.",
     "is_auto": true,

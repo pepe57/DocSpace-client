@@ -3,7 +3,7 @@
   "content": "Room groups",
   "content_en_sha1_hash": "23e8b8d6adb6d989089f0fd3181a1a44f1c6ccb8",
   "created_at": "2026-02-19T13:36:15.152Z",
-  "updated_at": "2026-04-13T01:10:53.605Z",
+  "updated_at": "2026-04-13T08:10:47.931Z",
   "comment": {
     "text": "This is a label for a filter or section heading, referring to collections of rooms. It appears when managing or filtering rooms within DocSpace.",
     "is_auto": true,
@@ -166,7 +166,15 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"Skupne sob\" appears to mean \"shared/common rooms\" rather than \"room groups/groups of rooms\". The word \"skupne\" is the plural feminine form of the adjective \"skupen\" (shared/common), not a noun for groups. This changes the meaning from a collection/categorization of rooms to rooms that are shared.",
+          "suggestion": "Skupine sob",
+          "checked_at": "2026-04-13T08:10:32.306Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {
@@ -178,7 +186,15 @@
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Serbian translation uses wrong grammatical case. 'Групе соби' uses dative/locative singular, but the correct form should use genitive plural to properly convey 'groups of rooms'. The English 'Room groups' should translate to 'Групе соба' (genitive case).",
+          "suggestion": "Групе соба",
+          "checked_at": "2026-04-13T08:10:42.906Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "sr-Latn-RS": {

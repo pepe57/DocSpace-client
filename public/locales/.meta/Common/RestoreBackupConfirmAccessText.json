@@ -3,7 +3,7 @@
   "content": "If your account is not included in the backup file, you will lose access. Please ensure you are restoring the correct backup file, as this action cannot be undone.",
   "content_en_sha1_hash": "5cbeb8674dde916fd8a96bd799f65f83428adcd3",
   "created_at": "2026-03-20T09:07:35.054Z",
-  "updated_at": "2026-04-12T02:38:54.171Z",
+  "updated_at": "2026-04-13T09:27:34.944Z",
   "comment": {
     "text": "This is a warning message displayed in a confirmation modal when restoring a backup. It informs the user about potential loss of access if their account is not in the backup.",
     "is_auto": true,
@@ -58,7 +58,22 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Verb tense changes meaning: English 'are restoring' (present continuous - action being checked before happening) is translated as 'ανακαταστήσατε' (past tense - action already completed). This reverses the intent: the warning should verify the correct file BEFORE restoration, not confirm restoration already happened.",
+          "suggestion": "Παρακαλούμε να διασφαλίσετε ότι ανακαταστάσετε το σωστό αρχείο...",
+          "checked_at": "2026-04-13T09:27:34.943Z",
+          "checked_by": "claude-code/haiku"
+        },
+        {
+          "type": "incorrect_translation",
+          "description": "'Backup file' is translated as 'αρχείο καταγραφής' (recording/logging file), not backup file. These are different concepts. 'Καταγραφή' means recording or logging, not backup storage.",
+          "suggestion": "Replace 'αρχείο καταγραφής' with 'αρχείο αντιγράφου ασφαλείας' (backup file) throughout the text.",
+          "checked_at": "2026-04-13T09:27:34.943Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "es": {

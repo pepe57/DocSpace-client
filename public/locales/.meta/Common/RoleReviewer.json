@@ -3,7 +3,7 @@
   "content": "Reviewer",
   "content_en_sha1_hash": "a74f16c11792da6a36979a58a1ba2b4333632f57",
   "created_at": "2025-05-19T21:30:48.086Z",
-  "updated_at": "2026-04-12T02:03:40.600Z",
+  "updated_at": "2026-04-13T08:27:55.277Z",
   "comment": {
     "text": "This is a label for a user role, indicating a person who has review access rights to a document. It appears in sharing settings and member lists.",
     "is_auto": true,
@@ -100,7 +100,15 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Գրախոս does not appear to be a standard Armenian word for 'Reviewer'. Based on Armenian linguistic patterns, 'Reviewer' (someone with review/examination access) should be translated as 'Ստուգատար' (studgatar) or similar role-designation words used in Armenian UI terminology. The provided translation appears to be either a proper name or a word that does not convey the intended meaning of a user role with review access rights.",
+          "suggestion": "Ստուգատար",
+          "checked_at": "2026-04-13T08:27:08.057Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "it": {

@@ -3,7 +3,7 @@
   "content": "Form fillers can fill out forms and view only their completed/started forms within the Complete and In Process folders.",
   "content_en_sha1_hash": "feefe7fdf044fbc2fbabfaea05d182d09dbe37d8",
   "created_at": "2025-05-19T21:30:48.048Z",
-  "updated_at": "2026-04-12T02:08:04.564Z",
+  "updated_at": "2026-04-13T08:43:17.698Z",
   "comment": {
     "text": "This is a tooltip description for the \"Form Filler\" role in a Form Room. It explains the permissions of a form filler, specifically that they can fill out forms and view only their own forms in the \"Complete\" and \"In Process\" folders.",
     "is_auto": true,
@@ -28,7 +28,15 @@
     "ar-SA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The possessive pronoun 'their' is missing. The English clearly states 'view only their completed/started forms' but the Arabic omits the equivalent possessive marker, saying only 'view the completed/started forms'. In permission descriptions, this distinction is critical to clarify that form fillers can only see their own forms, not all forms in the system.",
+          "suggestion": "يمكن لمعبئي النماذج تعبئة النماذج وعرض نماذجهم المكتملة/التي بدأت فقط داخل مجلدات الاكتمال والمراحل الجارية.",
+          "checked_at": "2026-04-13T08:39:24.380Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "az": {
@@ -88,13 +96,29 @@
     "it": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The possessive pronoun 'their' is explicitly stated in English ('their completed/started forms') but is missing in the Italian translation ('i moduli' should be 'i loro moduli'). This omits important information about ownership/scope.",
+          "suggestion": "Chi compila i moduli può compilare i moduli e visualizzare solo i loro moduli completati/iniziati nelle cartelle Completato e In corso.",
+          "checked_at": "2026-04-13T08:40:02.482Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "ja-JP": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Japanese translation omits the possessive qualifier 'their' from 'their completed/started forms'. The English explicitly states form fillers can view only 'their' forms, but the Japanese 'フォームのみを表示することができます' (can view only forms) lacks the possessive 'their own' (自分の). In a permissions context, this distinction is critical—form fillers should only access their own forms, not all completed forms.",
+          "suggestion": "フォーム記入者は、フォームに記入し、「完成」および「処理中」フォルダ内の自分の入力済み/開始済みフォームのみを表示することができます。",
+          "checked_at": "2026-04-13T08:40:00.609Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "ko-KR": {
@@ -112,7 +136,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The word 'their' in 'their completed/started forms' is missing from the Latvian translation. The translation says 'aizpildītās/sāktās veidlapas' (completed/started forms) without the possessive marker 'savas' (one's own). This is critical because form fillers should only see THEIR OWN forms, not any completed/started forms.",
+          "suggestion": "Veidlapu aizpildītāji var aizpildīt veidlapas un skatīt tikai savas aizpildītās/sāktās veidlapas mapēs Complete (Pabeigts) un In Process (Notiekošs).",
+          "checked_at": "2026-04-13T08:40:00.774Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "nl": {
@@ -124,7 +156,15 @@
     "pl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The Polish translation is missing the possessive 'their' (Polish: 'swoje'). The English explicitly states form fillers can view 'their completed/started forms', emphasizing they can only see their own forms. The Polish version 'wypełnione/rozpoczęte formularze' (completed/started forms) loses this ownership qualifier, making it ambiguous whether form fillers can see all completed forms or only their own.",
+          "suggestion": "Osoby wypełniające formularze mogą wypełniać formularze i wyświetlać tylko swoje wypełnione/rozpoczęte formularze w katalogach Gotowe oraz W toku.",
+          "checked_at": "2026-04-13T08:40:28.744Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "pt": {
@@ -136,13 +176,29 @@
     "pt-BR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The possessive 'their' is missing from the Portuguese translation. English says 'their completed/started forms' but Portuguese says 'os formulários concluídos/iniciados' (the completed/started forms). This loses the critical meaning that form fillers can ONLY see forms THEY THEMSELVES filled out, not all completed/started forms in the system.",
+          "suggestion": "Os preenchedores de formulários podem preencher formulários e visualizar apenas seus formulários concluídos/iniciados nas pastas Concluído e Em processamento.",
+          "checked_at": "2026-04-13T08:40:28.934Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The possessive 'their' is missing from the Romanian translation. The English explicitly specifies 'their completed/started forms' to clarify that form fillers can only view their own forms. The Romanian 'formularele completate/începute' omits this critical possessive specification, which could cause ambiguity about the permission boundary—it could be misread as form fillers can view any completed/started forms rather than only their own.",
+          "suggestion": "Persoanele care completează formularele pot completa formulare și pot vizualiza numai formularele lor completate/începute în folderele Complete și In Process.",
+          "checked_at": "2026-04-13T08:40:38.450Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "ru": {

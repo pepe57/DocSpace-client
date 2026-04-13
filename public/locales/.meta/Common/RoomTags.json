@@ -3,7 +3,7 @@
   "content": "<bold>{{roomName}}</bold> room tags",
   "content_en_sha1_hash": "15f8c4482aed922ca46775cdbea247d4cbc50f77",
   "created_at": "2026-03-26T08:26:45.756Z",
-  "updated_at": "2026-04-13T00:04:13.419Z",
+  "updated_at": "2026-04-13T07:48:45.240Z",
   "comment": {
     "text": "This is a label indicating the tags associated with a specific room. It appears in a filter or management interface, with `{{roomName}}` being the name of the room.",
     "is_auto": true,

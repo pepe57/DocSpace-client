@@ -3,7 +3,7 @@
   "content": "Review",
   "content_en_sha1_hash": "e29a79fe0c349724caeaa1762fa917f5543248ca",
   "created_at": "2025-05-19T21:30:47.938Z",
-  "updated_at": "2026-04-12T02:25:44.380Z",
+  "updated_at": "2026-04-13T09:08:13.544Z",
   "comment": {
     "text": "This is a label for a room type or a sharing permission. It indicates that users in this room or with this permission can review documents.",
     "is_auto": true,
@@ -88,7 +88,15 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"Prověřit\" is a verb infinitive (\"to verify\"), but \"Review\" in this context is a noun used as a label for a room type and sharing permission. Czech grammar requires a noun form such as \"Kontrola\", \"Recenze\", or \"Přezkum\" for this UI label.",
+          "suggestion": "Kontrola or Recenze",
+          "checked_at": "2026-04-13T09:06:41.373Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "de": {
@@ -160,7 +168,15 @@
     "nl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"Beoordeel\" is the imperative verb form (command: 'Judge!' or 'Assess!'), but \"Review\" here is used as a noun/label for a room type and sharing permission. The correct noun form in Dutch is \"Beoordeling\", not the imperative \"Beoordeel\".",
+          "suggestion": "Beoordeling",
+          "checked_at": "2026-04-13T09:07:33.342Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "pl": {
@@ -172,7 +188,15 @@
     "pt": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Portuguese translation uses the verb infinitive 'Rever' instead of the noun 'Revisão'. For UI labels (room type, permission level), Portuguese requires the noun form. 'Rever' is grammatically incorrect for this context and reads awkwardly to Portuguese speakers.",
+          "suggestion": "Revisão",
+          "checked_at": "2026-04-13T09:07:40.045Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "pt-BR": {
@@ -208,7 +232,15 @@
     "sl": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The translation uses 'Preglej' (imperative verb form) instead of the noun form. In the context of a room type label and sharing permission name, the translation should use the noun form 'Pregled' to properly designate the permission/room type, not a command.",
+          "suggestion": "Pregled",
+          "checked_at": "2026-04-13T09:07:58.493Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "sr-Cyrl-RS": {

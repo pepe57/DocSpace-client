@@ -3,7 +3,7 @@
   "content": "Operations with existing files: viewing, reviewing, commenting.",
   "content_en_sha1_hash": "47084e89cece6c67096d21cb0a5b610942ae04f5",
   "created_at": "2025-05-19T21:30:48.095Z",
-  "updated_at": "2026-04-12T02:02:34.092Z",
+  "updated_at": "2026-04-13T08:26:48.597Z",
   "comment": {
     "text": "This text describes the permissions associated with the \"Reviewer\" role in sharing settings. It appears as a description next to the role name, explaining that reviewers can view, review, and comment on existing files.",
     "is_auto": true,

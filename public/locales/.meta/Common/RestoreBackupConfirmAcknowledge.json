@@ -3,7 +3,7 @@
   "content": "I acknowledge that all current data will be overwritten.",
   "content_en_sha1_hash": "b4aee762103e3c14cbc5c340aec124b45758e322",
   "created_at": "2026-03-20T09:07:35.064Z",
-  "updated_at": "2026-04-12T02:37:48.626Z",
+  "updated_at": "2026-04-13T09:26:51.880Z",
   "comment": {
     "text": "This is the label for a checkbox in a confirmation modal. It appears when restoring a backup, and the user must check it to acknowledge that current data will be overwritten.",
     "is_auto": true,
@@ -34,7 +34,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani uses 'silinəcəyini' (will be deleted/erased) instead of a term meaning 'overwritten' or 'replaced'. In the backup restore context, data is being overwritten with backup data, not deleted. This is a critical semantic difference that misrepresents what happens to the user's data.",
+          "suggestion": "Bütün mövcud məlumatların əvəz olunacağını təsdiq edirəm. (or: Bütün mövcud məlumatların yazılacağını təsdiq edirəm.)",
+          "checked_at": "2026-04-13T09:25:15.495Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -112,7 +120,15 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The word 'pārscrits' is not a valid Latvian form. The correct past participle of 'pārrakstīt' (overwrite) in passive voice is 'pārrakstīts'. The current form appears to be missing the 'rak' component needed for proper Latvian grammar.",
+          "suggestion": "Es atzīstu, ka visi pašreiz esošie dati tiks pārrakstīti.",
+          "checked_at": "2026-04-13T09:25:58.728Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "nl": {

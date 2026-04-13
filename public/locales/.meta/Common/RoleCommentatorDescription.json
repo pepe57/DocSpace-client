@@ -3,7 +3,7 @@
   "content": "Operations with existing files: viewing, commenting.",
   "content_en_sha1_hash": "ce4731d6a339d2e7324665f3b5fc839d54a12c0e",
   "created_at": "2025-05-19T21:30:47.993Z",
-  "updated_at": "2026-04-12T02:14:44.441Z",
+  "updated_at": "2026-04-13T08:51:20.150Z",
   "comment": {
     "text": "This is a description of the \"Commentator\" role, explaining that users with this role can view and comment on existing files. It appears in sharing settings and access options.",
     "is_auto": true,
@@ -214,7 +214,15 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "missing_content",
+          "description": "The phrase 'with existing files' from the English text is absent in the Chinese translation. The English specifically qualifies that these operations apply only to existing files, which is a critical detail for understanding the Commentator role's limitations. The Chinese '支持的文件操作' (supported file operations) does not convey this important scope qualifier.",
+          "suggestion": "现有文件的操作：查看、评论。",
+          "checked_at": "2026-04-13T08:51:20.149Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "sq-AL": {

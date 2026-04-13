@@ -3,7 +3,7 @@
   "content": "reviewing",
   "content_en_sha1_hash": "7cd4341e2d7a4899e6abe3e3fb0ef1034064bdc6",
   "created_at": "2025-05-19T21:30:47.947Z",
-  "updated_at": "2026-04-12T02:22:25.947Z",
+  "updated_at": "2026-04-13T09:02:55.196Z",
   "comment": {
     "text": "This is a short label indicating a user's access level to a document, specifically that they can review it. It appears in a list of access rights.",
     "is_auto": true,
@@ -34,7 +34,15 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Azerbaijani translation uses a passive verb form 'Nəzərdən keçirilir' (being reviewed/under review) rather than an active form. In the context of access rights labels, 'reviewing' should indicate the user's capability to perform the action, not a passive state. The translation should use an active form like 'Nəzərdən keçmə' (reviewing) or 'İncelə' (review) to match the active meaning of the English label.",
+          "suggestion": "Nəzərdən keçmə",
+          "checked_at": "2026-04-13T09:01:22.996Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "bg": {
@@ -58,7 +66,15 @@
     "el-GR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Greek translation conveys passive voice ('is being reviewed') rather than the action capability expressed by English 'reviewing'. In the context of access rights labels, 'Reviewing' should indicate the user HAS reviewing access, not that something IS being reviewed. This changes the meaning from describing a capability to describing a state.",
+          "suggestion": "Ανασκόπηση",
+          "checked_at": "2026-04-13T09:01:40.505Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "es": {
@@ -160,7 +176,15 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "\"prehliadanie\" means \"viewing\" or \"browsing\" in Slovak, but doesn't convey the evaluative meaning of \"reviewing.\" In the context of document access rights, \"reviewing\" implies the ability to assess and provide feedback on a document, which is distinct from simply viewing it. The translation should reflect this distinction.",
+          "suggestion": "Preskúmanie",
+          "checked_at": "2026-04-13T09:02:36.210Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "sl": {

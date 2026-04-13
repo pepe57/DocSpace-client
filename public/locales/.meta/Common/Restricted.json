@@ -3,7 +3,7 @@
   "content": "Restricted",
   "content_en_sha1_hash": "aa2a08d2afa23e5f0a3fbe6e6ed494979fd09160",
   "created_at": "2025-05-19T21:30:47.929Z",
-  "updated_at": "2026-04-12T02:27:55.406Z",
+  "updated_at": "2026-04-13T09:12:04.599Z",
   "comment": {
     "text": "This is a label for a permission level, indicating limited access for an API key. It appears in a dropdown menu and as a display label for the selected permission.",
     "is_auto": true,
@@ -88,7 +88,15 @@
     "hy-AM": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "The Armenian translation uses the predicate form 'Սահմանափակված է' (is restricted) instead of the adjectival form. In the context of a dropdown label or permission name (comparing with 'All', 'ReadOnly'), the English 'Restricted' functions as an adjective/label, not a statement. The verb 'է' (is) makes this a complete predicate, not a simple label.",
+          "suggestion": "Սահմանափակված",
+          "checked_at": "2026-04-13T09:11:05.256Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "it": {

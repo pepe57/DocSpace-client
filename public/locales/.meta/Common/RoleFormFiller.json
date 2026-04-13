@@ -3,7 +3,7 @@
   "content": "Form filler",
   "content_en_sha1_hash": "36309bd9112093f7939d015f5678b7699adce63e",
   "created_at": "2025-05-19T21:30:48.030Z",
-  "updated_at": "2026-04-12T02:10:21.400Z",
+  "updated_at": "2026-04-13T08:45:29.152Z",
   "comment": {
     "text": "This is a label for a user role. It identifies a user who can fill out forms.",
     "is_auto": true,
@@ -172,7 +172,15 @@
     "sk": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [],
+      "ai_spell_check_issues": [
+        {
+          "type": "incorrect_translation",
+          "description": "Slovak translation means 'filled form' (a form that is completed) but English means 'Form filler' (a person/role who fills forms). The meaning is opposite: one describes the form, the other describes a person.",
+          "suggestion": "Plniteľ formulárov",
+          "checked_at": "2026-04-13T08:45:13.921Z",
+          "checked_by": "claude-code/haiku"
+        }
+      ],
       "approved_at": null
     },
     "sl": {

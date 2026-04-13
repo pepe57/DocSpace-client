@@ -3,7 +3,7 @@
   "content": "File content copy, file downloading and printing restriction activated.",
   "content_en_sha1_hash": "ebb37aa6cdb89eeddede98c5708c63779c37e554",
   "created_at": "2025-05-19T21:30:48.264Z",
-  "updated_at": "2026-04-13T00:17:04.536Z",
+  "updated_at": "2026-04-13T07:54:16.158Z",
   "comment": {
     "text": "This is a short message that appears next to a shared link, indicating that restrictions on copying, downloading, and printing the file content are active. It is appended to an existing sentence.",
     "is_auto": true,
