@@ -3,7 +3,7 @@
   "content": "Too many email addresses parsed",
   "content_en_sha1_hash": "7531bc36e27ca0a753d1abb3356083e66a1e9e71",
   "created_at": "2025-05-19T21:30:46.366Z",
-  "updated_at": "2026-04-11T20:48:58.394Z",
+  "updated_at": "2026-04-13T14:59:05.750Z",
   "comment": {
     "text": "This is an error message displayed when a user attempts to input multiple email addresses into a field designed for a single email address.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
-      "line_number": 140,
-      "context": "return t(\"SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"IncorrectEmail\");\n case ErrorKeys.ManyEmails:\n return t(\"ManyEmails\");\n case ErrorKeys.EmptyEmail:\n return t(\"EmptyEmail\");\n default:\n throw new Error(\"Unknown translation key\");",
+      "line_number": 141,
+      "context": "case ErrorKeys.MaxLengthExceeded:\n return t(\"MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"IncorrectEmail\");\n case ErrorKeys.ManyEmails:\n return t(\"ManyEmails\");\n case ErrorKeys.EmptyEmail:\n return t(\"EmptyEmail\");\n default:\n throw new Error(\"Unknown translation key\");\n }",
       "module": "/libs/ui-kit"
     },
     {

@@ -3,7 +3,7 @@
   "content": "{{inputPrice}}/M input tokens | {{outputPrice}}/M output tokens",
   "content_en_sha1_hash": "59fd5325bfe26e9733559605cfce51d27cfe98de",
   "created_at": "2026-04-10T13:53:44.328Z",
-  "updated_at": "2026-04-11T21:00:06.866Z",
+  "updated_at": "2026-04-13T14:59:05.811Z",
   "comment": {
     "text": "This text displays the pricing for AI model usage, showing the cost per million input tokens and output tokens. `{{inputPrice}}` and `{{outputPrice}}` are numerical values representing these costs.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/sub-components/ModelSettingsTable/RowView/index.tsx",
-      "line_number": 115,
+      "line_number": 112,
       "context": "<Text\n fontSize=\"12px\"\n fontWeight={600}\n className={styles.prices}\n >\n {t(\"AIModelPrice\", {\n inputPrice,\n outputPrice,\n })}\n </Text>\n </div>",
       "module": "/libs/ui-kit"
     },

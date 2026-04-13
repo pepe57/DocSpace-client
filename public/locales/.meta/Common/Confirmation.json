@@ -3,7 +3,7 @@
   "content": "Confirmation",
   "content_en_sha1_hash": "3424edc2354c7c55f6eb740b673d349b02d27c8d",
   "created_at": "2025-05-19T21:30:43.625Z",
-  "updated_at": "2026-04-11T20:56:46.409Z",
+  "updated_at": "2026-04-13T14:59:05.747Z",
   "comment": {
     "text": "This is the title of a confirmation dialog. It appears when the AI assistant wants to open a file or use a tool, prompting the user to confirm the action.",
     "is_auto": true,
@@ -25,32 +25,32 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 57,
-      "context": "import ServicesLoader from \"./ServicesLoader\";\n import StorageTariffDeactivated from \"../dialogs/StorageTariffDeactivated\";\n import StoragePlanUpgrade from \"./panels/additional-storage/StoragePlanUpgrade\";\n import StoragePlanCancel from \"./panels/additional-storage/StoragePlanCancel\";\n import GracePeriodModal from \"./panels/additional-storage/GracePeriodModal\";\n import ConfirmationDialog from \"./sub-components/ConfirmationDialog\";\n import AIServiceDialog from \"./panels/ai-service/AIServiceDialog\";\n import { getBrandName } from \"@docspace/shared/constants/brands\";\n type TServicesProps = {\n showPortalSettingsLoader?: boolean;\n initialOpenDialog?: string;",
+      "line_number": 171,
+      "context": "const confirmationDialogContent: Record<\n string,\n { title: string; body: string | React.ReactNode[] }\n > = {\n [BACKUP_SERVICE]: {\n title: t(\"Confirmation\"),\n body: !isCurrentConfirmState\n ? t(\"EnableBackupConfirm\", {\n productName: getBrandName(\"ProductName\"),\n })\n : isFreeTariff",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/index.tsx",
-      "line_number": 57,
-      "context": "import ServicesLoader from \"./ServicesLoader\";\n import StorageTariffDeactivated from \"../dialogs/StorageTariffDeactivated\";\n import StoragePlanUpgrade from \"./panels/additional-storage/StoragePlanUpgrade\";\n import StoragePlanCancel from \"./panels/additional-storage/StoragePlanCancel\";\n import GracePeriodModal from \"./panels/additional-storage/GracePeriodModal\";\n import ConfirmationDialog from \"./sub-components/ConfirmationDialog\";\n import AIServiceDialog from \"./panels/ai-service/AIServiceDialog\";\n import { getBrandName } from \"@docspace/shared/constants/brands\";\n type TServicesProps = {\n showPortalSettingsLoader?: boolean;\n initialOpenDialog?: string;",
+      "line_number": 171,
+      "context": "const confirmationDialogContent: Record<\n string,\n { title: string; body: string | React.ReactNode[] }\n > = {\n [BACKUP_SERVICE]: {\n title: t(\"Confirmation\"),\n body: !isCurrentConfirmState\n ? t(\"EnableBackupConfirm\", {\n productName: getBrandName(\"ProductName\"),\n })\n : isFreeTariff",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 48,
-      "context": "import BalanceAmount from \"../../../shared/balance-amount\";\n \n import ServiceToggleSection from \"../../sub-components/ServiceToggleSection\";\n import { finishRefreshingWithMinCycle } from \"../../../utils/refreshing\";\n \n import ConfirmationDialog from \"../../sub-components/ConfirmationDialog\";\n \n import PricingBillingBody from \"../../panels/ai-service/PricingBillingBody\";\n \n import ModelSettingsTable from \"./sub-components/ModelSettingsTable\";\n import AiPageLoader from \"./AiPageLoader\";",
+      "line_number": 183,
+      "context": "}\n };\n \n const confirmationDialogContent = isAiToolsServiceOn\n ? {\n title: t(\"Confirmation\"),\n body: [\n t(\"DisableAIToolsConfirm\", {\n organizationName: logoText,\n }),\n <CommonTrans",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/ai-tools/AiPage.tsx",
-      "line_number": 48,
-      "context": "import BalanceAmount from \"../../../shared/balance-amount\";\n \n import ServiceToggleSection from \"../../sub-components/ServiceToggleSection\";\n import { finishRefreshingWithMinCycle } from \"../../../utils/refreshing\";\n \n import ConfirmationDialog from \"../../sub-components/ConfirmationDialog\";\n \n import PricingBillingBody from \"../../panels/ai-service/PricingBillingBody\";\n \n import ModelSettingsTable from \"./sub-components/ModelSettingsTable\";\n import AiPageLoader from \"./AiPageLoader\";",
+      "line_number": 183,
+      "context": "}\n };\n \n const confirmationDialogContent = isAiToolsServiceOn\n ? {\n title: t(\"Confirmation\"),\n body: [\n t(\"DisableAIToolsConfirm\", {\n organizationName: logoText,\n }),\n <CommonTrans",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/billing/services/pages/backup/BackupPage.tsx",
-      "line_number": 44,
-      "context": "import { BACKUP_SERVICE } from \"../../../constants\";\n import WalletInfo from \"../../../shared/top-up-balance/sub-components/WalletInfo\";\n import { useApi } from \"../../../../providers\";\n import { now, formatDateLocalized } from \"../../../../utils/date\";\n import { toastr } from \"../../../../components\";\n import ConfirmationDialog from \"../../sub-components/ConfirmationDialog\";\n import TopUpModal from \"../../../shared/top-up-balance/TopUpModal\";\n import BackupPageLoader from \"./BackupPageLoader\";\n \n import { usePaymentStore } from \"../../../store/PaymentStoreProvider\";\n import { useServicesStore } from \"../../../store/ServicesStoreProvider\";",
+      "line_number": 113,
+      "context": "setIsLoading(false);\n }\n };\n \n const confirmationDialogContent = {\n title: t(\"Confirmation\"),\n \n body: !isBackupServiceOn\n ? t(\"EnableBackupConfirm\", {\n productName: getBrandName(\"ProductName\"),\n })",
       "module": "/libs/ui-kit"
     },
     {

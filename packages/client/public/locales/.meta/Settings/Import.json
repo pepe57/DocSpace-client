@@ -3,7 +3,7 @@
   "content": "Import",
   "content_en_sha1_hash": "d6fbc9d2bdd580e18ed0bc5805dc26db323d6f5f",
   "created_at": "2025-05-19T21:30:51.611Z",
-  "updated_at": "2026-04-11T21:24:00.947Z",
+  "updated_at": "2026-04-13T14:59:05.849Z",
   "comment": {
     "text": "Button label. This action initiates the process of bringing external data into the application.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/data-import/components/Providers.tsx",
-      "line_number": 44,
-      "context": "import WorkspaceDarkSvgUrl from \"PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url\";\n \n import { LinkType } from \"@docspace/ui-kit/components/link\";\n import { Link, LinkTarget } from \"@docspace/ui-kit/components/link\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import { WorkspacesContainer } from \"../StyledDataImport\";\n import DataImportLoader from \"../sub-components/DataImportLoader\";\n import { ProvidersProps, InjectedProvidersProps } from \"../types\";\n import { getBrandName } from \"@docspace/shared/constants/brands\";\n \n const Providers = (props: ProvidersProps) => {",
+      "line_number": 128,
+      "context": "isHovered\n isTextOverflow\n color=\"accent\"\n dataTestId={`workspace_item_${workspace.title}_import_link`}\n >\n {t(\"Import\")}\n </Link>\n </div>\n ))}\n </div>\n </WorkspacesContainer>",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Restore all",
   "content_en_sha1_hash": "9eca7fb8c0e99c10b51061dabb85aee7a49051cf",
   "created_at": "2025-05-19T21:30:56.049Z",
-  "updated_at": "2026-04-11T21:08:33.755Z",
+  "updated_at": "2026-04-13T14:59:05.912Z",
   "comment": {
     "text": "This is a button label that restores all items from the trash.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1555,
-      "context": "if (this.filesActionsStore.emptyPersonalRoomInProgress) return;\n \n this.dialogsStore.setEmptyTrashDialogVisible(true);\n };\n \n onRestoreAllAction = () => {\n const { activeFiles, activeFolders } = this.filesStore;\n const isExistActiveItems = [...activeFiles, ...activeFolders].length > 0;\n \n if (isExistActiveItems) return;",
+      "line_number": 1719,
+      "context": "disabled: false,\n },\n {\n id: \"header_option_restore-all\",\n key: \"restore-all\",\n label: t(\"RestoreAll\"),\n onClick: this.onRestoreAllAction,\n icon: MoveReactSvgUrl,\n disabled: false,\n },\n ];",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 1555,
-      "context": "if (this.filesActionsStore.emptyPersonalRoomInProgress) return;\n \n this.dialogsStore.setEmptyTrashDialogVisible(true);\n };\n \n onRestoreAllAction = () => {\n const { activeFiles, activeFolders } = this.filesStore;\n const isExistActiveItems = [...activeFiles, ...activeFolders].length > 0;\n \n if (isExistActiveItems) return;",
+      "line_number": 1719,
+      "context": "disabled: false,\n },\n {\n id: \"header_option_restore-all\",\n key: \"restore-all\",\n label: t(\"RestoreAll\"),\n onClick: this.onRestoreAllAction,\n icon: MoveReactSvgUrl,\n disabled: false,\n },\n ];",
       "module": "/packages/client"
     }
   ],

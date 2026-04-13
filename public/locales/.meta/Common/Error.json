@@ -3,7 +3,7 @@
   "content": "Error",
   "content_en_sha1_hash": "7f2f6a15cf8da2b27e5a4af47b58e7ad71c0b3d9",
   "created_at": "2025-05-19T21:30:45.027Z",
-  "updated_at": "2026-04-11T20:53:26.814Z",
+  "updated_at": "2026-04-13T14:59:05.868Z",
   "comment": {
     "text": "This is a general error message displayed in toast notifications or as part of a larger error message when an unexpected issue occurs.",
     "is_auto": true,
@@ -103,14 +103,14 @@
     },
     {
       "file_path": "/packages/shared/pages/EncryptionPortal/index.tsx",
-      "line_number": 34,
-      "context": "import classNames from \"classnames\";\n \n import { Text } from \"@docspace/ui-kit/components/text\";\n import { PreparationPortalProgress } from \"@docspace/ui-kit/components/progress-bar\";\n import ErrorContainer from \"@docspace/ui-kit/components/error-container/ErrorContainer\";\n import PreparationPortalLoader from \"../../skeletons/preparation-portal\";\n \n import { EncryptionStatus } from \"../../enums\";\n \n import {",
+      "line_number": 155,
+      "context": "};\n getSettings();\n }, [statusEncryption]);\n \n const headerText = errorMessage\n ? t(\"Error\")\n : statusEncryption === EncryptionStatus.Decrypted ||\n statusEncryption === EncryptionStatus.DecryptionStarted\n ? t(\"DecryptionPortalTitle\")\n : t(\"EncryptionPortalTitle\");",
       "module": "/packages/shared"
     },
     {
       "file_path": "/packages/shared/pages/PreparationPortal/index.tsx",
-      "line_number": 49,
-      "context": "export const PreparationPortal = (props: IPreparationPortal) => {\n const { withoutHeader, isDialog, style } = props;\n \n const { t, ready } = useTranslation([\"Common\"]);\n \n const errorInternalServer = t(\"Common:ErrorInternalServer\");\n \n const [percent, setPercent] = useState(0);\n const [errorMessage, setErrorMessage] = useState(\"\");\n \n const getRecoveryProgress = useCallback(async () => {",
+      "line_number": 147,
+      "context": "if (!isDialog) getRecoveryProgress();\n }, [ready, getRecoveryProgress, isDialog]);\n \n const headerText = errorMessage\n ? t(\"Common:Error\")\n : t(\"Common:PreparationPortalTitle\");\n \n const componentBody = errorMessage ? (\n <Text className={styles.preparationPortalError}>{`${errorMessage}`}</Text>\n ) : (",
       "module": "/packages/shared"
     }
   ],

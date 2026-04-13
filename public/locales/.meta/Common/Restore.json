@@ -3,7 +3,7 @@
   "content": "Restore",
   "content_en_sha1_hash": "3cbe6d6b9a8d1596bb5bca12e14d81c9e108a1a3",
   "created_at": "2025-05-19T21:30:47.901Z",
-  "updated_at": "2026-04-12T02:41:06.848Z",
+  "updated_at": "2026-04-13T14:59:05.736Z",
   "comment": {
     "text": "This is a button label or dialog title. It appears when restoring a file, folder, or room from the trash.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/components/FilesSelector/utils.ts",
-      "line_number": 50,
-      "context": "isRestore?: boolean,\n isFormRoom?: boolean,\n isThirdParty?: boolean,\n isSelectFolder?: boolean,\n ) => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {",
+      "line_number": 54,
+      "context": ") => {\n if (isRestore) return t(\"Common:RestoreTo\");\n if (isSelectFolder) return t(\"Common:SelectFolder\");\n if (isMove) return t(\"Common:MoveTo\");\n if (isCopy && !isEditorDialog) return t(\"Common:Copy\");\n if (isRestoreAll) return t(\"Common:Restore\");\n if (isSelect) {\n return filterParam ? t(\"Common:SelectFile\") : t(\"Common:SelectAction\");\n }\n \n if (isFormRoom) {",
       "module": "/packages/client"
     },
     {
@@ -79,20 +79,20 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 324,
+      "line_number": 341,
       "context": "const getRestoreItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: () => onRestoreClick?.(i),\n disabled: !onRestoreClick,\n };\n },",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 324,
+      "line_number": 341,
       "context": "const getRestoreItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_restore\",\n key: \"restore\",\n label: t(\"Common:Restore\"),\n icon: MoveReactSvgUrl,\n onClick: () => onRestoreClick?.(i),\n disabled: !onRestoreClick,\n };\n },",
       "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/backup-list/index.tsx",
-      "line_number": 205,
-      "context": "className={classNames(\n styles.restoreBackupWarningDescription,\n \"restore-backup_warning-description\",\n )}\n >\n {t(\"Common:RestoreBackupWarningText\", {\n productName: getBrandName(\"ProductName\"),\n })}{\" \"}\n {!standalone ? (\n <Text\n as=\"span\"",
+      "line_number": 339,
+      "context": ">\n <Button\n className=\"restore\"\n primary\n size={ButtonSize.normal}\n label={t(\"Common:Restore\")}\n onClick={onRestorePortal}\n isDisabled={\n isCopyingToLocal ||\n !isChecked ||\n filesList.length === 0 ||",
       "module": "/packages/shared"
     },
     {
@@ -103,8 +103,8 @@
     },
     {
       "file_path": "/packages/shared/pages/backup/restore-backup/sub-components/restore-confirm-modal/index.tsx",
-      "line_number": 71,
-      "context": "isCloseable={!isLoading}\n isLarge\n dataTestId=\"restore_backup_confirm_dialog\"\n >\n <ModalDialog.Header>\n {t(\"Common:RestoreBackupConfirmTitle\")}\n </ModalDialog.Header>\n <ModalDialog.Body>\n <div\n className={styles.restoreBackupConfirmModalBody}\n data-testid=\"restore_backup_confirm_modal\"",
+      "line_number": 108,
+      "context": "</ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:Restore\")}\n onClick={onConfirm}\n isDisabled={!isRestoreAcknowledged || isLoading}\n isLoading={isLoading}\n testId=\"restore_backup_confirm_button\"\n />",
       "module": "/packages/shared"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Deactivate {{productName}}",
   "content_en_sha1_hash": "54fe2d3e5e6088fc60b02a8e670df55142d8e8e1",
   "created_at": "2025-05-19T21:30:52.177Z",
-  "updated_at": "2026-04-11T21:23:03.179Z",
+  "updated_at": "2026-04-13T14:59:05.850Z",
   "comment": {
     "text": "This is the title for a section in the portal settings. It refers to the action of deactivating the entire portal, where `{{productName}}` will be replaced with the product's brand name (e.g., \"DocSpace\").",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/index.js",
-      "line_number": 33,
-      "context": "import { withTranslation } from \"react-i18next\";\n import { useNavigate, useLocation } from \"react-router\";\n import { Tabs } from \"@docspace/ui-kit/components/tabs\";\n import { inject, observer } from \"mobx-react\";\n import { combineUrl } from \"@docspace/shared/utils/combineUrl\";\n import PortalDeactivationSection from \"./portalDeactivation\";\n import PortalDeletionSection from \"./portalDeletion\";\n import DeleteDataLoader from \"./DeleteDataLoader\";\n import config from \"../../../../../package.json\";\n import useDeleteData from \"./useDeleteData\";\n import { getBrandName } from \"@docspace/shared/constants/brands\";",
+      "line_number": 72,
+      "context": "await fetchPortalDeletionData();\n },\n },\n {\n id: \"deactivation\",\n name: t(\"PortalDeactivation\", { productName: getBrandName(\"ProductName\") }),\n content: <PortalDeactivationSection />,\n onClick: async () => {\n clearAbortControllerArr();\n await fetchPortalDeactivationData();\n },",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/delete-data/portalDeactivation.js",
-      "line_number": 42,
-      "context": "import { EmployeeActivationStatus } from \"@docspace/shared/enums\";\n import { showEmailActivationToast } from \"SRC_DIR/helpers/people-helpers\";\n import { MainContainer, ButtonWrapper } from \"./StyledDeleteData\";\n import { getBrandName } from \"@docspace/shared/constants/brands\";\n \n const PortalDeactivation = (props) => {\n const { t, tReady, owner, currentColorScheme, sendActivationLink } = props;\n const [isDesktopView, setIsDesktopView] = useState(false);\n \n const onCheckView = () => {\n if (isDesktop()) setIsDesktopView(true);",
+      "line_number": 53,
+      "context": "else setIsDesktopView(false);\n };\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalDeactivation\", { productName: getBrandName(\"ProductName\") }),\n );\n onCheckView();\n window.addEventListener(\"resize\", onCheckView);\n return () => window.removeEventListener(\"resize\", onCheckView);\n }, []);",
       "module": "/packages/client"
     },
     {

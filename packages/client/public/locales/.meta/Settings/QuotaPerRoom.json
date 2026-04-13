@@ -3,7 +3,7 @@
   "content": "Quota per room",
   "content_en_sha1_hash": "c6d44419e178bb95bb2e8d662bb28b6b56efd1ec",
   "created_at": "2025-05-19T21:30:52.338Z",
-  "updated_at": "2026-04-11T21:22:46.630Z",
+  "updated_at": "2026-04-13T14:59:05.902Z",
   "comment": {
     "text": "This is a title for a settings section or a link label that allows administrators to configure storage quotas for individual rooms within ONLYOFFICE DocSpace.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/storage-management/sub-components/QuotaPerRoom.js",
-      "line_number": 33,
-      "context": "import { inject, observer } from \"mobx-react\";\n \n import QuotaPerItemComponent from \"./QuotaPerItem\";\n import { getBrandName } from \"@docspace/shared/constants/brands\";\n \n const QuotaPerRoomComponent = (props) => {\n const { setRoomQuota, defaultRoomsQuota, isDefaultRoomsQuotaSet } = props;\n const { t } = useTranslation(\"Settings\");\n \n const initialSizeProp = isDefaultRoomsQuotaSet\n ? { initialSize: defaultRoomsQuota }",
+      "line_number": 43,
+      "context": "? { initialSize: defaultRoomsQuota }\n : {};\n \n return (\n <QuotaPerItemComponent\n formLabel={t(\"QuotaPerRoom\")}\n toggleLabel={t(\"DefineQuotaPerRoom\")}\n disableQuota={() => setRoomQuota(-1, t)}\n saveQuota={(size) => setRoomQuota(size, t)}\n {...initialSizeProp}\n isQuotaSet={isDefaultRoomsQuotaSet}",
       "module": "/packages/client"
     },
     {

@@ -3,7 +3,7 @@
   "content": "Lifetime (min)",
   "content_en_sha1_hash": "20610b86435a234a6314cab2a967b3e0bbfd719f",
   "created_at": "2025-05-19T21:30:51.805Z",
-  "updated_at": "2026-04-11T21:23:30.830Z",
+  "updated_at": "2026-04-13T14:59:05.899Z",
   "comment": {
     "text": "This is a label for an input field where users define the session lifetime in minutes.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/sessionLifetime.js",
-      "line_number": 43,
-      "context": "import isEqual from \"lodash/isEqual\";\n \n import { DeviceType } from \"@docspace/shared/enums\";\n import { saveToSessionStorage } from \"@docspace/shared/utils/saveToSessionStorage\";\n import { getFromSessionStorage } from \"@docspace/shared/utils/getFromSessionStorage\";\n import SessionLifetimeLoader from \"../sub-components/loaders/session-lifetime-loader\";\n import { LearnMoreWrapper } from \"../StyledSecurity\";\n import useSecurity from \"../useSecurity\";\n import { createDefaultHookSettingsProps } from \"../../../utils/createDefaultHookSettingsProps\";\n import styles from \"./sessionLifetime.module.scss\";",
+      "line_number": 289,
+      "context": "/>\n \n {type ? (\n <>\n <Text className={styles.lifetime} fontSize=\"15px\" fontWeight=\"600\">\n {t(\"Lifetime\")}\n </Text>\n <TextInput\n className={styles.lifetimeInput}\n testId=\"session_lifetime_input\"\n maxLength={4}",
       "module": "/packages/client"
     }
   ],

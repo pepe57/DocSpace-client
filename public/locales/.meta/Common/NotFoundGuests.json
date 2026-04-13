@@ -3,7 +3,7 @@
   "content": "No added guests yet",
   "content_en_sha1_hash": "e98856533c4e928082936c4943b3796791537ac1",
   "created_at": "2025-05-19T21:30:46.873Z",
-  "updated_at": "2026-04-11T20:47:47.199Z",
+  "updated_at": "2026-04-13T14:59:05.804Z",
   "comment": {
     "text": "This is an empty state message displayed when no guests have been added to the current view.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/Home/Section/ContactsBody/EmptyScreen.tsx",
-      "line_number": 86,
-      "context": "const isEmptyGroup = contactsTab === \"inside_group\";\n const isEmptyGuests = contactsTab === \"guests\";\n \n const title = isEmptyGuests\n ? isFiltered\n ? t(\"Common:NotFoundGuestsFilter\")\n : t(\"Common:NotFoundGuests\")\n : t(\"Common:NotFoundMembers\");\n \n const description = isEmptyGuests\n ? isFiltered",
+      "line_number": 87,
+      "context": "const isEmptyGuests = contactsTab === \"guests\";\n \n const title = isEmptyGuests\n ? isFiltered\n ? t(\"Common:NotFoundGuestsFilter\")\n : t(\"Common:NotFoundGuests\")\n : t(\"Common:NotFoundMembers\");\n \n const description = isEmptyGuests\n ? isFiltered\n ? t(\"Common:NotFoundFilterGuestsDescription\")",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Provider",
   "content_en_sha1_hash": "7ceee3f3615a2bbe4ce0ac5a269a311e4821daf4",
   "created_at": "2025-10-27T16:14:31.653Z",
-  "updated_at": "2026-04-11T21:02:35.930Z",
+  "updated_at": "2026-04-13T14:59:05.810Z",
   "comment": {
     "text": "This is a label for a field where users select or view an AI service provider. It appears in AI settings, either for knowledge base configuration or when managing individual AI providers.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/ai-settings/providers/dialogs/add-update/index.tsx",
-      "line_number": 225,
-      "context": "url: providerUrl,\n };\n \n await addAIProvider?.(data);\n toastr.success(\n t(\"AISettings:ProviderAddedSuccess\", {\n aiProvider: t(\"Common:AIProvider\"),\n }),\n );\n }",
+      "line_number": 304,
+      "context": "data-testid={\n variant === \"add\" ? \"add-provider-form\" : \"update-provider-form\"\n }\n >\n <FieldContainer\n labelText={t(\"AISettings:Provider\")}\n labelVisible\n isVertical\n removeMargin\n >\n <ComboBox",
       "module": "/packages/client"
     }
   ],

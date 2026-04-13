@@ -3,7 +3,7 @@
   "content": "Domain name",
   "content_en_sha1_hash": "79f88a9bb9f4ec699c8ec64acf057a2ef9a2bf7c",
   "created_at": "2025-05-19T21:30:57.436Z",
-  "updated_at": "2026-04-11T21:31:51.058Z",
+  "updated_at": "2026-04-13T14:59:05.985Z",
   "comment": {
     "text": "This is a label for an input field where users enter a domain name.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/management/src/dialogs/change-domain/index.tsx",
-      "line_number": 55,
-      "context": "export const ChangeDomainDialog = observer(() => {\n const { t } = useTranslation([\"Management\", \"Common\"]);\n const router = useRouter();\n const { spacesStore } = useStores();\n const [domainNameError, setDomainNameError] =\n React.useState<null | Array<string>>(null);\n const [isLoading, setIsLoading] = React.useState<boolean>(false);\n const {\n setDomainName,\n setChangeDomainDialogVisible,",
+      "line_number": 108,
+      "context": "<Text\n fontSize=\"13px\"\n fontWeight=\"600\"\n style={{ paddingBottom: \"5px\" }}\n >\n {t(\"DomainName\")}\n </Text>\n <TextInput\n testId=\"change-domain-input\"\n type={InputType.text}\n size={InputSize.base}",
       "module": "/packages/management"
     }
   ],

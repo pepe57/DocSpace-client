@@ -3,7 +3,7 @@
   "content": "{{productName}} Renaming",
   "content_en_sha1_hash": "0319b32930f9f565cf61d81d5d89dbc5851737dc",
   "created_at": "2025-05-19T21:30:52.254Z",
-  "updated_at": "2026-04-11T21:22:56.758Z",
+  "updated_at": "2026-04-13T14:59:05.774Z",
   "comment": {
     "text": "This is the title for a dialog and a navigation item related to changing the name of the portal. `{{productName}}` will be replaced with the product's name (e.g., \"ONLYOFFICE DocSpace\").",
     "is_auto": true,
@@ -25,14 +25,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 40,
-      "context": "import { inject, observer } from \"mobx-react\";\n import { useNavigate } from \"react-router\";\n import { isMobileDevice } from \"@docspace/shared/utils\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import withLoading from \"SRC_DIR/HOCs/withLoading\";\n import { PortalRenamingDialog } from \"SRC_DIR/components/dialogs\";\n import { Text } from \"@docspace/ui-kit/components/text\";\n import { Link } from \"@docspace/ui-kit/components/link\";\n import { saveToSessionStorage } from \"@docspace/shared/utils/saveToSessionStorage\";\n import { getFromSessionStorage } from \"@docspace/shared/utils/getFromSessionStorage\";\n import { globalColors } from \"@docspace/ui-kit/providers/theme/themes\";",
+      "line_number": 126,
+      "context": "}\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalRenaming\", { productName: getBrandName(\"ProductName\") }),\n );\n setPortalName(portalNameInitially);\n \n const checkScroll = checkScrollSettingsBlock();\n checkInnerWidth();",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 40,
-      "context": "import { inject, observer } from \"mobx-react\";\n import { useNavigate } from \"react-router\";\n import { isMobileDevice } from \"@docspace/shared/utils\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import withLoading from \"SRC_DIR/HOCs/withLoading\";\n import { PortalRenamingDialog } from \"SRC_DIR/components/dialogs\";\n import { Text } from \"@docspace/ui-kit/components/text\";\n import { Link } from \"@docspace/ui-kit/components/link\";\n import { saveToSessionStorage } from \"@docspace/shared/utils/saveToSessionStorage\";\n import { getFromSessionStorage } from \"@docspace/shared/utils/getFromSessionStorage\";\n import { globalColors } from \"@docspace/ui-kit/providers/theme/themes\";",
+      "line_number": 126,
+      "context": "}\n }, [isMobileDevice, setIsCustomizationView]);\n \n useEffect(() => {\n setDocumentTitle(\n t(\"PortalRenaming\", { productName: getBrandName(\"ProductName\") }),\n );\n setPortalName(portalNameInitially);\n \n const checkScroll = checkScrollSettingsBlock();\n checkInnerWidth();",
       "module": "/packages/client"
     },
     {

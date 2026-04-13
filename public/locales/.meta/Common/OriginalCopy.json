@@ -3,7 +3,7 @@
   "content": "Save the file copy in the original format as well",
   "content_en_sha1_hash": "590aa54a4acb697b9b402769bb231a09e8ad806a",
   "created_at": "2026-04-03T21:51:34.700Z",
-  "updated_at": "2026-04-12T05:24:34.932Z",
+  "updated_at": "2026-04-13T14:59:05.905Z",
   "comment": {
     "text": "This is the label for a toggle button in the user's profile settings. It allows users to choose whether to save a copy of edited files in their original format.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/FileManagement.tsx",
-      "line_number": 67,
-      "context": "} catch (error) {\n toastr.error(error as string);\n }\n }, [settings, docsSettingsStore]);\n \n const onChangeOriginalCopy = useCallback(async () => {\n const newVal = !settings?.storeOriginalFiles;\n try {\n await storeOriginal(newVal);\n if (settings) {\n docsSettingsStore.setFilesSettings({",
+      "line_number": 132,
+      "context": "<ToggleButton\n className={styles.toggleBtn}\n onChange={onChangeOriginalCopy}\n isChecked={settings.storeOriginalFiles}\n />\n <Text>{t(\"OriginalCopy\")}</Text>\n </div>\n \n <div className={styles.toggleBtnWrapper}>\n <ToggleButton\n className={styles.toggleBtn}",
       "module": "/packages/sdk"
     }
   ],

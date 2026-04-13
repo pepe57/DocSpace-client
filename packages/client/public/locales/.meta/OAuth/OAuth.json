@@ -3,7 +3,7 @@
   "content": "OAuth 2.0",
   "content_en_sha1_hash": "11ff1c5f1bf611e663f09de411b0c9a4d410b907",
   "created_at": "2025-05-19T21:30:53.924Z",
-  "updated_at": "2026-04-11T21:18:41.433Z",
+  "updated_at": "2026-04-13T14:59:05.853Z",
   "comment": {
     "text": "This is a navigation link and card title for the OAuth 2.0 settings section. It appears in the developer tools settings, allowing users to manage OAuth applications.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/OAuth/index.tsx",
-      "line_number": 34,
-      "context": "import { useTranslation } from \"react-i18next\";\n \n import { SettingsStore } from \"@docspace/shared/store/SettingsStore\";\n \n import useViewEffect from \"@docspace/ui-kit/hooks/useViewEffect\";\n import OAuthStore from \"SRC_DIR/store/OAuthStore\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n \n import { OAuthContainer } from \"./OAuth.styled\";\n import { OAuthProps } from \"./OAuth.types\";",
+      "line_number": 67,
+      "context": "revokeDeveloperTokenDialogVisible,\n apiOAuthLink,\n logoText,\n error,\n }: OAuthProps) => {\n const { t } = useTranslation([\"OAuth\"]);\n \n useViewEffect({\n view: viewAs,\n setView: setViewAs,\n currentDeviceType,",
       "module": "/packages/client"
     },
     {

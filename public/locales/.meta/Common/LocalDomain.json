@@ -3,7 +3,7 @@
   "content": "Local domains are not supported",
   "content_en_sha1_hash": "2f3c69b6241eaebb3afffd20ba46edbf9cf52247",
   "created_at": "2025-05-19T21:30:46.290Z",
-  "updated_at": "2026-04-11T20:49:20.592Z",
+  "updated_at": "2026-04-13T14:59:05.749Z",
   "comment": {
     "text": "Error text. This message appears when a user attempts to use a local domain (e.g., \"localhost\") where it is not permitted, such as when entering an email address or a domain name.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
-      "line_number": 122,
-      "context": "return;\n }\n \n const translatedErrors = result.errors?.map((errorKey: string) => {\n switch (errorKey) {\n case ErrorKeys.LocalDomain:\n return t(\"LocalDomain\");\n case ErrorKeys.IncorrectDomain:\n return t(\"IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"DomainIpAddress\");",
+      "line_number": 123,
+      "context": "}\n \n const translatedErrors = result.errors?.map((errorKey: string) => {\n switch (errorKey) {\n case ErrorKeys.LocalDomain:\n return t(\"LocalDomain\");\n case ErrorKeys.IncorrectDomain:\n return t(\"IncorrectDomain\");\n case ErrorKeys.DomainIpAddress:\n return t(\"DomainIpAddress\");\n case ErrorKeys.PunycodeDomain:",
       "module": "/libs/ui-kit"
     },
     {

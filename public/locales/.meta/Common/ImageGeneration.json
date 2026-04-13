@@ -3,7 +3,7 @@
   "content": "Image generation",
   "content_en_sha1_hash": "eef911848cb6f5e8847627024f9d0a9d983cdd64",
   "created_at": "2026-04-10T13:53:45.255Z",
-  "updated_at": "2026-04-11T20:51:10.031Z",
+  "updated_at": "2026-04-13T14:59:06.024Z",
   "comment": {
     "text": "This is a label for a feature or service. It refers to the creation of images using AI.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/services/panels/ai-service/GetStartedBody.tsx",
-      "line_number": 14,
-      "context": "import ChatIcon from \"../../../../assets/icons/32/ai-chat.svg\";\n import SummarizationIcon from \"../../../../assets/icons/32/ai-summarization.svg\";\n import TranslationIcon from \"../../../../assets/icons/32/ai-translation.svg\";\n import OcrIcon from \"../../../../assets/icons/32/ai-ocr.svg\";\n import GenerationIcon from \"../../../../assets/icons/32/ai-text-generation.svg\";\n import ImageGenerationIcon from \"../../../../assets/icons/32/ai-img-generation.svg\";\n import ErrorIcon from \"../../../../assets/icons/32/ai-error.svg\";\n import AiTokensIcon from \"../../../../assets/icons/32/ai-tokens.svg\";\n import AiVectorizationIcon from \"../../../../assets/icons/32/ai-vectorization.svg\";\n import AiSearchIcon from \"../../../../assets/icons/32/ai-search.svg\";\n import RightArrowIcon from \"../../../../assets/icons/16/right.arrow.react.svg\";",
+      "line_number": 96,
+      "context": "description: t(\"TextGenerationDescription\"),\n icon: <GenerationIcon />,\n },\n {\n id: \"image-generation\",\n title: t(\"ImageGeneration\"),\n description: t(\"ImageGenerationDescription\"),\n icon: <ImageGenerationIcon />,\n },\n {\n id: \"error-checking\",",
       "module": "/libs/ui-kit"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Configure deep link",
   "content_en_sha1_hash": "edfb8002794be0c3c97a60c2efb077b54207446d",
   "created_at": "2025-05-19T21:30:50.950Z",
-  "updated_at": "2026-04-11T21:25:16.979Z",
+  "updated_at": "2026-04-13T14:59:05.832Z",
   "comment": {
     "text": "This is a menu item label in the portal settings. It links to a page where users can set up a deep link for their ONLYOFFICE DocSpace.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/configure-deep-link.tsx",
-      "line_number": 63,
-      "context": "loadBaseInfo: (page: string) => Promise<void>;\n common: CommonStore;\n settingsStore: SettingsStore;\n isLoaded: boolean;\n isLoadedPage: boolean;\n setIsLoadedConfigureDeepLink: (value: boolean) => void;\n configureDeepLinkUrl: string;\n currentColorScheme: TColorScheme;\n }\n \n const StyledWrapper = styled.div`",
+      "line_number": 199,
+      "context": "return (\n <StyledWrapper>\n {!isMobileView ? (\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"ConfigureDeepLink\")}\n </Text>\n ) : null}\n <Text>{t(\"ConfigureDeepLinkDescription\")}</Text>\n {configureDeepLinkUrl ? (\n <Link",
       "module": "/packages/client"
     },
     {

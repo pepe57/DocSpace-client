@@ -3,7 +3,7 @@
   "content": "KB",
   "content_en_sha1_hash": "315b39a0fc19fb45d146c17b813d46c7acb0b872",
   "created_at": "2025-05-19T21:30:46.020Z",
-  "updated_at": "2026-04-11T20:50:29.017Z",
+  "updated_at": "2026-04-13T14:59:05.858Z",
   "comment": {
     "text": "This is a unit of measurement for file size, appearing as a short label in dropdowns and lists. It represents 1024 bytes.",
     "is_auto": true,
@@ -14,7 +14,7 @@
     {
       "file_path": "/libs/ui-kit/billing/utils/common.ts",
       "line_number": 51,
-      "context": "let power = 0;\n let resultSize = bytes;\n \n const sizeNames = [\n t(\"Bytes\"),\n t(\"Kilobyte\"),\n t(\"Megabyte\"),\n t(\"Gigabyte\"),\n t(\"Terabyte\"),\n t(\"Petabyte\"),\n t(\"Exabyte\"),",
+      "context": "let power = 0;\n let resultSize = bytes;\n \n const sizeNames = [\n t(\"Common:Bytes\"),\n t(\"Common:Kilobyte\"),\n t(\"Common:Megabyte\"),\n t(\"Common:Gigabyte\"),\n t(\"Common:Terabyte\"),\n t(\"Common:Petabyte\"),\n t(\"Common:Exabyte\"),",
       "module": "/libs/ui-kit"
     },
     {

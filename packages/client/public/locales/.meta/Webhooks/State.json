@@ -3,7 +3,7 @@
   "content": "State",
   "content_en_sha1_hash": "a72502067518684f9deeec70cf119fd26326cd33",
   "created_at": "2025-05-19T21:30:49.847Z",
-  "updated_at": "2026-04-11T21:28:18.645Z",
+  "updated_at": "2026-04-13T14:59:05.852Z",
   "comment": {
     "text": "This is a table column header. It indicates the current status or condition of an item, such as an API key, OAuth application, or webhook.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/ApiKeys/sub-components/TableView/TableHeader.tsx",
-      "line_number": 27,
-      "context": "//\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import { useState } from \"react\";\n import { TableHeader as TableHeaderComponent } from \"@docspace/ui-kit/components/table\";\n \n import { useTranslation } from \"react-i18next\";\n import { inject, observer } from \"mobx-react\";\n import { TableHeaderColumn, TableHeaderProps } from \"../../types\";",
+      "line_number": 88,
+      "context": "title: t(\"Common:Permissions\"),\n enable: true,\n resizable: true,\n },\n {\n key: \"State\",\n title: t(\"State\"),\n enable: true,\n resizable: true,\n },\n ];",
       "module": "/packages/client"
     },
     {
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/sub-components/WebhooksTable/WebhooksTableView/WebhookTableHeader.js",
-      "line_number": 27,
-      "context": "//\n // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing\n // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0\n // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode\n \n import { useState, useEffect } from \"react\";\n import { TableHeader } from \"@docspace/ui-kit/components/table\";\n \n import { useTranslation } from \"react-i18next\";\n import { inject, observer } from \"mobx-react\";",
+      "line_number": 111,
+      "context": "enable: true,\n resizable: true,\n onChange: onColumnChange,\n },\n {\n key: \"State\",\n title: t(\"State\"),\n enable: true,\n resizable: true,\n onChange: onColumnChange,\n },",
       "module": "/packages/client"
     }
   ],

@@ -3,7 +3,7 @@
   "content": "Members",
   "content_en_sha1_hash": "1cb449c1126609b4b41e1d87f65f0d7cd19b49b9",
   "created_at": "2025-05-19T21:30:46.449Z",
-  "updated_at": "2026-04-11T20:48:47.413Z",
+  "updated_at": "2026-04-13T14:59:05.727Z",
   "comment": {
     "text": "This is a label for a section or item, referring to the users associated with a particular account or room.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 247,
-      "context": "withoutBackground,\n withBlur,\n setActiveTab,\n injectedElement,\n alwaysShowFooter = false,\n onlyRoomMembers,\n targetEntityType = \"room\",\n disabledInvitedText,\n isAgent,\n }: PeopleSelectorProps) => {\n const t = useCommonTranslation();",
+      "line_number": 697,
+      "context": "? {\n withTabs: true,\n tabsData: [\n {\n id: PEOPLE_TAB_ID,\n name: t(\"Members\"),\n onClick: () => changeActiveTab(PEOPLE_TAB_ID),\n content: null,\n },\n ...[\n withGroups && {",
       "module": "/libs/ui-kit"
     },
     {

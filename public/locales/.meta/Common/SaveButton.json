@@ -3,7 +3,7 @@
   "content": "Save",
   "content_en_sha1_hash": "efc007a393f66cdb14d57d385822a3d9e36ef873",
   "created_at": "2025-05-19T21:30:48.300Z",
-  "updated_at": "2026-04-13T02:32:40.179Z",
+  "updated_at": "2026-04-13T14:59:05.738Z",
   "comment": {
     "text": "Button label or dialog header. It confirms and applies changes, such as renaming a chat or saving export settings.",
     "is_auto": true,
@@ -357,6 +357,12 @@
       "file_path": "/packages/sdk/src/app/(forms)/_components/settings/category/ConnectDatabaseForm.tsx",
       "line_number": 300,
       "context": "<div className={styles.buttonWrapper}>\n <Button\n primary\n size={ButtonSize.normal}\n label={t(\"Common:SaveButton\")}\n onClick={onSave}\n isLoading={store.isSaving}\n scale\n />\n </div>",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/rename-dialog/index.tsx",
+      "line_number": 121,
+      "context": "isDisabled={isRenaming}\n />\n </ModalDialog.Body>\n <ModalDialog.Footer>\n <Button\n label={t(\"Common:SaveButton\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onSubmit}\n isLoading={isRenaming}",
       "module": "/packages/sdk"
     },
     {

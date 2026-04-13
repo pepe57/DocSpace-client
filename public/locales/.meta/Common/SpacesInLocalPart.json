@@ -3,7 +3,7 @@
   "content": "Local part can't contain spaces",
   "content_en_sha1_hash": "1303a27e549235cda77cad1ed3ebba10af960eb5",
   "created_at": "2025-05-19T21:30:48.980Z",
-  "updated_at": "2026-04-12T17:52:47.744Z",
+  "updated_at": "2026-04-13T14:59:05.750Z",
   "comment": {
     "text": "This is an error message displayed when a user enters a space in the local part of an email address (the part before the \"@\" symbol).",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/dialogs/SalesDepartmentRequestDialog.tsx",
-      "line_number": 134,
-      "context": "return t(\"PunycodeDomain\");\n case ErrorKeys.PunycodeLocalPart:\n return t(\"PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"IncorrectEmail\");",
+      "line_number": 135,
+      "context": "case ErrorKeys.PunycodeLocalPart:\n return t(\"PunycodeLocalPart\");\n case ErrorKeys.IncorrectLocalPart:\n return t(\"IncorrectLocalPart\");\n case ErrorKeys.SpacesInLocalPart:\n return t(\"SpacesInLocalPart\");\n case ErrorKeys.MaxLengthExceeded:\n return t(\"MaxLengthExceeded\");\n case ErrorKeys.IncorrectEmail:\n return t(\"IncorrectEmail\");\n case ErrorKeys.ManyEmails:",
       "module": "/libs/ui-kit"
     },
     {

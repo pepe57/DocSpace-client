@@ -3,7 +3,7 @@
   "content": "Display file extension next to file name",
   "content_en_sha1_hash": "5aca0949443f945850e45a5d1a5def5c80406042",
   "created_at": "2026-04-03T21:51:34.715Z",
-  "updated_at": "2026-04-11T20:54:56.849Z",
+  "updated_at": "2026-04-13T14:59:05.906Z",
   "comment": {
     "text": "This is a label for a toggle button in the user's profile settings. It controls whether file extensions (e.g., \".docx\", \".pdf\") are shown next to file names in the interface.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/category/FileManagement.tsx",
-      "line_number": 40,
-      "context": "import { toastr } from \"@docspace/ui-kit/components/toast\";\n import {\n storeOriginal,\n changeDeleteConfirm,\n changeKeepNewFileName,\n enableDisplayFileExtension,\n } from \"@docspace/shared/api/files\";\n \n import { useDocsSettingsStore } from \"../../../_store/DocsSettingsStore\";\n \n import styles from \"./FileManagement.module.scss\";",
+      "line_number": 154,
+      "context": "<ToggleButton\n className={styles.toggleBtn}\n onChange={onChangeDisplayFileExtension}\n isChecked={settings.displayFileExtension}\n />\n <Text>{t(\"DisplayFileExtension\")}</Text>\n </div>\n </div>\n </div>\n );\n });",
       "module": "/packages/sdk"
     }
   ],

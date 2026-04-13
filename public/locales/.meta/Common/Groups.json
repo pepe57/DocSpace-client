@@ -3,7 +3,7 @@
   "content": "Groups",
   "content_en_sha1_hash": "ae9629f4ebb82c6331c0809fa9a0e54b00e578e6",
   "created_at": "2025-05-19T21:30:45.668Z",
-  "updated_at": "2026-04-11T20:51:28.014Z",
+  "updated_at": "2026-04-13T14:59:05.727Z",
   "comment": {
     "text": "This is a label for a section or category within the application, referring to collections of users. It appears in selectors for filtering or organizing users, and as a title for a dedicated \"Groups\" page.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/Groups/index.tsx",
-      "line_number": 43,
-      "context": "type TSelectorItem,\n type TSelectorWithAside,\n } from \"../../components/selector\";\n import { useTheme } from \"../../context/ThemeContext\";\n \n import type { GroupsSelectorProps } from \"./GroupsSelector.types\";\n \n const GroupsSelector = (props: GroupsSelectorProps) => {\n const {\n id,\n className,",
+      "line_number": 178,
+      "context": "withHeader\n {...withAside}\n headerProps={{\n ...headerProps,\n onCloseClick: headerProps?.onCloseClick ?? onClose ?? (() => {}),\n headerLabel: headerProps?.headerLabel || t(\"Groups\"),\n }}\n alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}\n withSearch\n searchPlaceholder={t(\"Search\")}\n onSearch={onSearch}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 228,
-      "context": "roomId,\n \n checkIfUserInvited,\n \n withGroups,\n isGroupsOnly,\n \n withGuests,\n isGuestsOnly,",
+      "line_number": 704,
+      "context": "content: null,\n },\n ...[\n withGroups && {\n id: GROUP_TAB_ID,\n name: t(\"Groups\"),\n onClick: () => changeActiveTab(GROUP_TAB_ID),\n content: null,\n },\n ],\n ...[",
       "module": "/libs/ui-kit"
     },
     {

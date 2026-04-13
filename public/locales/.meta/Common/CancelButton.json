@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-04-11T20:57:52.052Z",
+  "updated_at": "2026-04-13T14:59:05.740Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-input/attachment/index.tsx",
-      "line_number": 135,
-      "context": "onCloseClick: toggleAttachment,\n }}\n withSearch\n withBreadCrumbs\n withoutBackButton\n withCancelButton\n withCreate={false}\n withFooterCheckbox={false}\n withFooterInput={false}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"AddButton\")}",
+      "line_number": 139,
+      "context": "withoutBackButton\n withCancelButton\n withCreate={false}\n withFooterCheckbox={false}\n withFooterInput={false}\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"AddButton\")}\n disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId=\"\"",
       "module": "/libs/ui-kit"
     },
     {
@@ -37,8 +37,8 @@
     },
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/export-selector/index.tsx",
-      "line_number": 96,
-      "context": "onCloseClick: onCloseFolderSelector,\n }}\n withSearch\n withBreadCrumbs\n withoutBackButton\n withCancelButton\n withCreate={false}\n withFooterCheckbox\n withFooterInput\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"SaveButton\")}",
+      "line_number": 100,
+      "context": "withoutBackButton\n withCancelButton\n withCreate={false}\n withFooterCheckbox\n withFooterInput\n cancelButtonLabel={t(\"CancelButton\")}\n submitButtonLabel={t(\"SaveButton\")}\n disabledItems={[]}\n isRoomsOnly={false}\n isThirdParty={false}\n currentFolderId={currentFolderId}",
       "module": "/libs/ui-kit"
     },
     {
@@ -91,7 +91,7 @@
     },
     {
       "file_path": "/libs/ui-kit/billing/shared/top-up-balance/sub-components/TopUpButtons.tsx",
-      "line_number": 145,
+      "line_number": 137,
       "context": "onClick={onTopUp}\n isLoading={isLoading}\n testId=\"top_up_button\"\n />\n <Button\n key=\"CancelButton\"\n label={t(\"CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={() => onClose(false)}\n isDisabled={isLoading}",
       "module": "/libs/ui-kit"
     },
@@ -115,32 +115,32 @@
     },
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 41,
-      "context": "import {\n Selector,\n SearchLoader,\n RowLoader,\n type TSelectorItem,\n type TSelectorCancelButton,\n type TSelectorHeader,\n type TSelectorSearch,\n } from \"../../components/selector\";\n \n import useSocketHelper from \"../utils/hooks/useSocketHelper\";",
+      "line_number": 219,
+      "context": "},\n };\n \n const cancelButtonSelectorProps: TSelectorCancelButton = {\n withCancelButton: true,\n cancelButtonLabel: t(\"CancelButton\"),\n onCancel: onClose,\n };\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 41,
-      "context": "BreadCrumbsLoader,\n RowLoader,\n SearchLoader,\n type SelectorProps,\n type TSelectorBreadCrumbs,\n type TSelectorCancelButton,\n type TSelectorCheckbox,\n type TSelectorHeader,\n type TSelectorInput,\n type TSelectorSearch,\n type TSelectorSubmitButton,",
+      "line_number": 186,
+      "context": "};\n \n const cancelButtonProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton,\n cancelButtonLabel: cancelButtonLabel || t(\"CancelButton\"),\n cancelButtonId,\n onCancel,\n }\n : {};",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/MCPServers/index.tsx",
-      "line_number": 267,
-      "context": "withoutBackButton: false,\n onBackClick: onBackClick,\n onCloseClick: onClose ?? onBackClick,\n withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"CancelButton\")}\n onCancel={onBackClick}\n selectedItems={initedSelectedServersItems}\n />\n );",
+      "line_number": 268,
+      "context": "onBackClick: onBackClick,\n onCloseClick: onClose ?? onBackClick,\n withoutBorder: false,\n }}\n withCancelButton\n cancelButtonLabel={t(\"CancelButton\")}\n onCancel={onBackClick}\n selectedItems={initedSelectedServersItems}\n />\n );\n };",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 40,
-      "context": "Selector,\n SelectorAccessRightsMode,\n RowLoader,\n SearchLoader,\n type TSelectorAccessRights,\n type TSelectorCancelButton,\n type TSelectorCheckbox,\n type TSelectorHeader,\n type TSelectorInfo,\n type TSelectorItem,\n type TSelectorSearch,",
+      "line_number": 589,
+      "context": ": ({} as TSelectorHeader);\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton,\n cancelButtonLabel: cancelButtonLabel || t(\"CancelButton\"),\n onCancel,\n }\n : ({} as TSelectorCancelButton);\n \n const searchSelectorProps: TSelectorSearch = {",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 40,
-      "context": "import {\n Selector,\n RowLoader,\n SearchLoader,\n type TSelectorItem,\n type TSelectorCancelButton,\n type TSelectorHeader,\n type TSelectorSearch,\n type TSelectorWithAside,\n } from \"../../components/selector\";",
+      "line_number": 295,
+      "context": ": {};\n \n const cancelButtonSelectorProps: TSelectorCancelButton = withCancelButton\n ? {\n withCancelButton: true,\n cancelButtonLabel: cancelButtonLabel || t(\"CancelButton\"),\n onCancel,\n }\n : {};\n \n const searchSelectorProps: TSelectorSearch = withSearch",
       "module": "/libs/ui-kit"
     },
     {
@@ -1021,8 +1021,14 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/docs-layout/index.tsx",
-      "line_number": 272,
+      "line_number": 290,
       "context": "initSelectedItemId={selectorInitData.currentFolderId}\n initSearchValue={null}\n initTotal={selectorInitData.total}\n initHasNextPage={selectorInitData.hasNextPage}\n submitButtonLabel={getSubmitLabel(selectorMode, t)}\n cancelButtonLabel={t(\"Common:CancelButton\")}\n withCancelButton\n withBreadCrumbs\n withSearch\n withCreate={false}\n withFooterInput={false}",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/rename-dialog/index.tsx",
+      "line_number": 130,
+      "context": "onClick={onSubmit}\n isLoading={isRenaming}\n isDisabled={hasError}\n />\n <Button\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n onClick={onClose}\n isDisabled={isRenaming}\n />",
       "module": "/packages/sdk"
     },
     {

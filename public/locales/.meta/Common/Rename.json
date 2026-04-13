@@ -3,7 +3,7 @@
   "content": "Rename",
   "content_en_sha1_hash": "d3f4cb898fbe0c7a7ac4f721438c4c26ad1a2513",
   "created_at": "2025-05-19T21:30:47.845Z",
-  "updated_at": "2026-04-12T02:51:01.679Z",
+  "updated_at": "2026-04-13T14:59:05.739Z",
   "comment": {
     "text": "This is a button label and a dialog title. It allows users to change the name of a chat or other item.",
     "is_auto": true,
@@ -13,14 +13,14 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-header/sub-components/rename-chat/index.tsx",
-      "line_number": 44,
-      "context": "} from \"../../../../../../components/text-input\";\n import { Button, ButtonSize } from \"../../../../../../components/button\";\n \n import { useChatStore } from \"../../../../store/chatStore\";\n \n import { RenameChatProps } from \"../../../../Chat.types\";\n import { useCommonTranslation } from \"../../../../../../utils/i18n\";\n import { toastr } from \"../../../../../../components/toast\";\n \n const RenameChat = ({ chatId, prevTitle, onRenameToggle }: RenameChatProps) => {\n const [isLoading, setIsLoading] = React.useState(false);",
+      "line_number": 105,
+      "context": "<ModalDialog\n visible\n onClose={onRenameClose}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Rename\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <TextInput\n value={newName}\n onChange={handleRename}\n size={InputSize.base}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-header/sub-components/select-chat/index.tsx",
-      "line_number": 34,
-      "context": "import React from \"react\";\n import { observer } from \"mobx-react\";\n import classNames from \"classnames\";\n \n import SelectSessionReactSvg from \"../../../../../../assets/select.session.react.svg\";\n import RenameReactSvg from \"../../../../../../assets/rename.react.svg\";\n import RemoveSvg from \"../../../../../../assets/icons/16/catalog.trash.react.svg\";\n import SaveToFileIcon from \"../../../../../../assets/message.save.svg\";\n \n import { RectangleSkeleton } from \"../../../../../../components/rectangle\";",
+      "line_number": 220,
+      "context": "const contextModel = React.useMemo(() => {\n return [\n {\n key: \"rename\",\n label: t(\"Rename\"),\n iconNode: <RenameReactSvg />,\n onClick: onRenameToggle,\n },\n {\n key: \"save_to_file\",",
       "module": "/libs/ui-kit"
     },
     {
@@ -34,6 +34,18 @@
       "line_number": 2533,
       "context": "},\n indexOptions,\n {\n id: \"option_rename\",\n key: \"rename\",\n label: t(\"Common:Rename\"),\n icon: RenameReactSvgUrl,\n onClick: () => this.onClickRename(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
+      "line_number": 327,
+      "context": "const getRenameItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_rename\",\n key: \"rename\",\n label: t(\"Common:Rename\"),\n icon: RenameReactSvgUrl,\n onClick: () => onRenameClick?.(i),\n disabled: !onRenameClick,\n };\n },",
+      "module": "/packages/sdk"
+    },
+    {
+      "file_path": "/packages/sdk/src/app/(personal-files)/_components/rename-dialog/index.tsx",
+      "line_number": 103,
+      "context": "[onSubmit],\n );\n \n return (\n <ModalDialog visible={visible} onClose={onClose} autoMaxHeight withForm>\n <ModalDialog.Header>{t(\"Common:Rename\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <TextInput\n forwardedRef={inputRef}\n type={InputType.text}\n scale",
+      "module": "/packages/sdk"
     },
     {
       "file_path": "/packages/shared/components/media-viewer/MediaViewer.helpers.tsx",

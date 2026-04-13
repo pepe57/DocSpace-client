@@ -3,7 +3,7 @@
   "content": "Download",
   "content_en_sha1_hash": "a479c9c34e878d07b4d67a73a48f432ad7dc53c8",
   "created_at": "2025-05-19T21:30:44.645Z",
-  "updated_at": "2026-04-11T20:54:45.797Z",
+  "updated_at": "2026-04-13T14:59:05.839Z",
   "comment": {
     "text": "This is a button label that allows users to download a file or a document version.",
     "is_auto": true,
@@ -55,7 +55,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 151,
+      "line_number": 154,
       "context": ": filesSelectionStore.selection.some((k) => !k.security.Download);\n \n return {\n id: \"option_download\",\n key: \"download\",\n label: t(\"Common:Download\"),\n icon: DownloadReactSvgUrl,\n onClick: () => downloadAction(i),\n disabled: isDisabled,\n };\n },",
       "module": "/packages/sdk"
     },
@@ -109,8 +109,8 @@
     },
     {
       "file_path": "/packages/shared/dialogs/download-dialog/index.tsx",
-      "line_number": 570,
-      "context": "autoMaxWidth\n isLarge\n withBodyScroll\n withoutPadding\n >\n <ModalDialog.Header>{t(\"Common:DownloadAs\")}</ModalDialog.Header>\n \n <ModalDialog.Body>\n <div className={styles.modalBody}>\n {needPassword ? (\n <PasswordContent",
+      "line_number": 592,
+      "context": "<ModalDialog.Footer>\n <Button\n key=\"DownloadButton\"\n label={\n needPassword ? t(\"Common:ContinueButton\") : t(\"Common:Download\")\n }\n size={ButtonSize.normal}\n primary\n onClick={needPassword ? onReDownload : onDownload}\n isDisabled={",
       "module": "/packages/shared"
     }
   ],

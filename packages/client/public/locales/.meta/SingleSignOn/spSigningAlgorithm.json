@@ -3,7 +3,7 @@
   "content": "Signing Algorithm",
   "content_en_sha1_hash": "5876cdfee061eaf6c6ae5e34c3638b9562c92889",
   "created_at": "2025-05-19T21:30:50.175Z",
-  "updated_at": "2026-04-11T21:26:19.705Z",
+  "updated_at": "2026-04-13T14:59:05.891Z",
   "comment": {
     "text": "This is a label for a dropdown menu or input field within the Single Sign-On settings. It allows users to select the cryptographic algorithm used for signing authentication requests or responses.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/integration/SingleSignOn/Certificates.js",
-      "line_number": 82,
-      "context": "spCertificates,\n idpShowAdditionalParameters,\n spShowAdditionalParameters,\n idpVerifyAlgorithm,\n spEncryptAlgorithm,\n spSigningAlgorithm,\n isLoadingXml,\n isDisabledSpSigning,\n isDisabledSpEncrypt,\n isDisabledIdpSigning,\n } = props;",
+      "line_number": 207,
+      "context": "{provider === \"ServiceProvider\" ? (\n <>\n <SsoComboBox\n isDisabled={isDisabledSpSigning}\n labelText={t(\"spSigningAlgorithm\")}\n name=\"spSigningAlgorithm\"\n options={verifyAlgorithmsOptions}\n tabIndex={14}\n value={spSigningAlgorithm}\n dataTestId=\"sp_signing_combobox\"",
       "module": "/packages/client"
     }
   ],

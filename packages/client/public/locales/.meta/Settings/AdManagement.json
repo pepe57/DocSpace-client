@@ -3,7 +3,7 @@
   "content": "Ad Management",
   "content_en_sha1_hash": "18c92cf5613e4306b2ab3e01e2c3b8b2c34e9b43",
   "created_at": "2025-07-02T07:49:04.410Z",
-  "updated_at": "2026-04-11T21:25:58.331Z",
+  "updated_at": "2026-04-13T14:59:05.831Z",
   "comment": {
     "text": "This is a category item title in the portal settings, referring to the section for managing advertisements within the platform.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ad-management.tsx",
-      "line_number": 39,
-      "context": "import { Text } from \"@docspace/ui-kit/components/text\";\n import { RadioButtonGroup } from \"@docspace/ui-kit/components/radio-button-group\";\n import { SaveCancelButtons } from \"@docspace/shared/components/save-cancel-buttons\";\n import { toastr } from \"@docspace/ui-kit/components/toast\";\n import { DeviceType } from \"@docspace/shared/enums\";\n import { setAdManagement } from \"@docspace/shared/api/settings\";\n import { saveToSessionStorage } from \"@docspace/shared/utils/saveToSessionStorage\";\n import { getFromSessionStorage } from \"@docspace/shared/utils/getFromSessionStorage\";\n import { SettingsStore } from \"@docspace/shared/store/SettingsStore\";\n import CommonStore from \"SRC_DIR/store/CommonStore\";",
+      "line_number": 174,
+      "context": "return (\n <div className={styles.wrapper}>\n {!isMobileView ? (\n <Text fontSize=\"16px\" fontWeight={700}>\n {t(\"AdManagement\")}\n </Text>\n ) : null}\n <Text>\n {t(\"AdManagementDescription\", { productName: getBrandName(\"ProductName\") })}\n </Text>",
       "module": "/packages/client"
     },
     {

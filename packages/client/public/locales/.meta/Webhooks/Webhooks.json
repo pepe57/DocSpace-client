@@ -3,7 +3,7 @@
   "content": "Webhooks",
   "content_en_sha1_hash": "fdfe2da709ca2c4f3b21ce6ad01969c1158e9db6",
   "created_at": "2025-05-19T21:30:49.888Z",
-  "updated_at": "2026-04-11T21:28:04.143Z",
+  "updated_at": "2026-04-13T14:59:05.853Z",
   "comment": {
     "text": "This is a page title and a card title in the Developer Tools settings. It refers to the functionality for configuring webhooks.",
     "is_auto": true,
@@ -25,8 +25,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Webhooks/index.js",
-      "line_number": 44,
-      "context": "import { toastr } from \"@docspace/ui-kit/components/toast\";\n import { setDocumentTitle } from \"SRC_DIR/helpers/utils\";\n import { EmptyServerErrorContainer } from \"SRC_DIR/components/EmptyContainer/EmptyServerErrorContainer\";\n import { DeleteWebhookDialog } from \"./sub-components/DeleteWebhookDialog\";\n import { WebhookConfigsLoader } from \"./sub-components/Loaders\";\n import WebhooksTable from \"./sub-components/WebhooksTable\";\n import WebhookInfo from \"./sub-components/WebhookInfo\";\n import WebhookDialog from \"./sub-components/WebhookDialog\";\n \n const MainWrapper = styled.div`\n width: 100%;",
+      "line_number": 93,
+      "context": "isLoadedArticleBody,\n isLoadedSectionHeader,\n } = props;\n \n const { t } = useTranslation([\"Webhooks\", \"Common\"]);\n \n setDocumentTitle(t(\"Webhooks\"));\n \n const [searchParams] = useSearchParams();\n const [isCreateOpened, setIsCreateOpened] = useState(",
       "module": "/packages/client"
     }
   ],

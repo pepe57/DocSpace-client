@@ -3,7 +3,7 @@
   "content": "Select",
   "content_en_sha1_hash": "8598222918d3c6e513d63060cf55e2971ded729a",
   "created_at": "2025-05-19T21:30:48.355Z",
-  "updated_at": "2026-04-13T02:27:41.599Z",
+  "updated_at": "2026-04-13T14:59:05.737Z",
   "comment": {
     "text": "This is a button label. It appears on various selectors (people, AI agents, files) to confirm the user's selection.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/shared/transaction-history/index.tsx",
-      "line_number": 653,
+      "line_number": 465,
       "context": "<PeopleSelector\n withCancelButton\n onCancel={onCloseContactSelector}\n cancelButtonLabel=\"\"\n disableSubmitButton={false}\n submitButtonLabel={t(\"SelectAction\")}\n onSubmit={onSubmitContactSelector}\n withHeader\n headerProps={{\n onCloseClick: onCloseContactSelector,\n isCloseable: true,",
       "module": "/libs/ui-kit"
     },
@@ -169,7 +169,7 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(docspace)/_hooks/useContextMenuModel.ts",
-      "line_number": 75,
+      "line_number": 78,
       "context": "const getSelectItem = useCallback(\n (i: TFileItem | TFolderItem) => {\n return {\n id: \"option_select\",\n key: \"select\",\n label: t(\"Common:SelectAction\"),\n icon: CheckBoxReactSvgUrl,\n onClick: () => filesSelectionStore.addSelection(i),\n disabled: false,\n };\n },",
       "module": "/packages/sdk"
     },

@@ -3,7 +3,7 @@
   "content": "Reconnect",
   "content_en_sha1_hash": "6988b16a8fd21194b9d1d8d8c49312194ff46ae3",
   "created_at": "2025-05-19T21:30:47.744Z",
-  "updated_at": "2026-04-12T03:14:06.866Z",
+  "updated_at": "2026-04-13T14:59:05.933Z",
   "comment": {
     "text": "This is a button label that allows users to re-establish a connection to a third-party service or storage.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/shared/dialogs/connect/ConnectDialog.tsx",
-      "line_number": 106,
-      "context": "const isAccount = !!link;\n const showUrlField = !!connectItem?.requiredConnectionUrl;\n \n const header = isConnectDialogReconnect\n ? t(\"Common:ReconnectStorage\")\n : t(\"Common:ConnectingAccount\");\n \n const onChangeUrl = (e: React.ChangeEvent<HTMLInputElement>) => {\n setIsUrlValid(true);\n setUrlValue(e.target.value);",
+      "line_number": 305,
+      "context": "labelVisible\n labelText={t(\"Common:Account\")}\n isVertical\n >\n <Button\n label={t(\"Common:Reconnect\")}\n size={ButtonSize.normal}\n onClick={onReconnect}\n scale\n isDisabled={isLoading}\n testId=\"connect_dialog_reconnect_button\"",
       "module": "/packages/shared"
     }
   ],

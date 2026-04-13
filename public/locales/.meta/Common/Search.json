@@ -3,7 +3,7 @@
   "content": "Search",
   "content_en_sha1_hash": "bce06414177f72ab70e6387b6af9f8ceef0d6049",
   "created_at": "2025-05-19T21:30:48.328Z",
-  "updated_at": "2026-04-13T02:30:40.808Z",
+  "updated_at": "2026-04-13T14:59:05.744Z",
   "comment": {
     "text": "This is a placeholder text for a search input field, prompting the user to type their search query.",
     "is_auto": true,
@@ -13,32 +13,32 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/selectors/AIAgent/index.tsx",
-      "line_number": 38,
-      "context": "import { useTheme } from \"../../context/ThemeContext\";\n import { useCommonTranslation } from \"../../utils/i18n\";\n \n import {\n Selector,\n SearchLoader,\n RowLoader,\n type TSelectorItem,\n type TSelectorCancelButton,\n type TSelectorHeader,\n type TSelectorSearch,",
+      "line_number": 225,
+      "context": "onCancel: onClose,\n };\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Files/hooks/useSelectorBody.tsx",
-      "line_number": 38,
-      "context": "import { useCommonTranslation } from \"../../../utils/i18n\";\n import {\n Selector,\n BreadCrumbsLoader,\n RowLoader,\n SearchLoader,\n type SelectorProps,\n type TSelectorBreadCrumbs,\n type TSelectorCancelButton,\n type TSelectorCheckbox,\n type TSelectorHeader,",
+      "line_number": 168,
+      "context": "const searchProps: TSelectorSearch = withSearch\n ? {\n withSearch,\n searchLoader: <SearchLoader />,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n isSearchLoading: showBreadCrumbsLoader,\n onSearch: onSearch!,\n onClearSearch: onClearSearch!,\n }",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Groups/index.tsx",
-      "line_number": 36,
-      "context": "import { useApi } from \"../../providers/api/ApiProvider\";\n import { useCommonTranslation } from \"../../utils/i18n\";\n import {\n RowLoader,\n SearchLoader,\n Selector,\n type TSelectorItem,\n type TSelectorWithAside,\n } from \"../../components/selector\";\n import { useTheme } from \"../../context/ThemeContext\";",
+      "line_number": 182,
+      "context": "onCloseClick: headerProps?.onCloseClick ?? onClose ?? (() => {}),\n headerLabel: headerProps?.headerLabel || t(\"Groups\"),\n }}\n alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}\n withSearch\n searchPlaceholder={t(\"Search\")}\n onSearch={onSearch}\n searchValue={searchValue}\n onClearSearch={onClearSearch}\n isSearchLoading={false}\n disableSubmitButton={!selectedItem}",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/People/index.tsx",
-      "line_number": 38,
-      "context": "import {\n Selector,\n SelectorAccessRightsMode,\n RowLoader,\n SearchLoader,\n type TSelectorAccessRights,\n type TSelectorCancelButton,\n type TSelectorCheckbox,\n type TSelectorHeader,\n type TSelectorInfo,",
+      "line_number": 596,
+      "context": "}\n : ({} as TSelectorCancelButton);\n \n const searchSelectorProps: TSelectorSearch = {\n withSearch: true,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n onSearch,\n onClearSearch,\n searchLoader: <SearchLoader />,\n isSearchLoading:",
       "module": "/libs/ui-kit"
     },
     {
       "file_path": "/libs/ui-kit/selectors/Room/index.tsx",
-      "line_number": 38,
-      "context": "import { useCommonTranslation } from \"../../utils/i18n\";\n import {\n Selector,\n RowLoader,\n SearchLoader,\n type TSelectorItem,\n type TSelectorCancelButton,\n type TSelectorHeader,\n type TSelectorSearch,\n type TSelectorWithAside,",
+      "line_number": 303,
+      "context": ": {};\n \n const searchSelectorProps: TSelectorSearch = withSearch\n ? {\n withSearch: true,\n searchPlaceholder: t(\"Search\"),\n searchValue,\n onSearch: onSearchAction,\n onClearSearch: onClearSearchAction,\n searchLoader: <SearchLoader />,\n isSearchLoading: isFirstLoad && !searchValue && !afterSearch.current,",
       "module": "/libs/ui-kit"
     },
     {

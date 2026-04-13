@@ -3,7 +3,7 @@
   "content": "Analyzing...",
   "content_en_sha1_hash": "7fb4834e16a472487aaaf0338e03264eacaf4140",
   "created_at": "2025-10-27T16:14:24.637Z",
-  "updated_at": "2026-04-11T20:59:14.479Z",
+  "updated_at": "2026-04-13T14:59:06.006Z",
   "comment": {
     "text": "This is a status message indicating that the AI is processing information. It appears briefly while the AI agent is performing an action.",
     "is_auto": true,
@@ -13,8 +13,8 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/ai-agent/chat/components/chat-message-body/index.tsx",
-      "line_number": 60,
-      "context": "setAiPlaylistImages,\n setMediaViewerVisible,\n openFile,\n openLink,\n }: MessageBodyProps) => {\n const { messages, isAnalyzing, fetchNextMessages, addMessageId } =\n useMessageStore();\n const { currentChat } = useChatStore();\n const t = useCommonTranslation();\n \n const chatBodyRef = useRef<HTMLDivElement>(null);",
+      "line_number": 138,
+      "context": "<div\n className={styles.chatLoader}\n data-testid=\"chat-loader-container\"\n >\n <Loader type={LoaderTypes.track} />\n {t(\"Analyzing\")}\n </div>\n ) : null}\n </div>\n )}\n </div>",
       "module": "/libs/ui-kit"
     }
   ],

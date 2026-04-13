@@ -3,7 +3,7 @@
   "content": "Services",
   "content_en_sha1_hash": "5cbd584046863bc7b753e57e8681a98a87f36f0f",
   "created_at": "2025-06-03T20:59:25.520Z",
-  "updated_at": "2026-04-11T21:22:16.657Z",
+  "updated_at": "2026-04-13T14:59:05.809Z",
   "comment": {
     "text": "This is a tab label in the portal settings, referring to various services available within the application.",
     "is_auto": true,
@@ -19,14 +19,14 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/Layout/Article/Body/index.js",
-      "line_number": 64,
-      "context": "isCommunity,\n currentDeviceType,\n isProfileLoading,\n currentColorScheme,\n baseDomain,\n aiServicesEnabled,\n } = props;\n \n const [selectedKeys, setSelectedKeys] = React.useState([]);\n \n const prevLocation = React.useRef(null);",
+      "line_number": 235,
+      "context": "return \"Common:FreeAccessToLicensedVersion\";\n case \"DataImport\":\n return t(\"DataImport\");\n case \"StorageManagement\":\n return t(\"StorageManagement\");\n case \"Services\":\n return t(\"Services\");\n case \"AISettings\":\n return t(\"Settings:AISettings\");\n default:\n throw new Error(\"Unexpected translation key\");",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/utils/settingsTree.js",
-      "line_number": 100,
-      "context": "{\n id: \"portal-settings_catalog-ai-services-management\",\n key: \"0-0-6\",\n icon: \"\",\n link: \"ai-services-management\",\n tKey: \"AiServicesManagement\",\n },\n ],\n },\n {\n id: \"portal-settings_catalog-branding\",",
+      "line_number": 583,
+      "context": "{\n id: \"portal-settings_catalog-services\",\n key: \"10-3\",\n icon: \"\",\n link: \"services\",\n tKey: \"Services\",\n isCategory: true,\n },\n ],\n },\n {",
       "module": "/packages/client"
     }
   ],
