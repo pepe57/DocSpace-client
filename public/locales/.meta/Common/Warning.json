@@ -3,7 +3,7 @@
   "content": "Warning",
   "content_en_sha1_hash": "e9c45563358e813f157ba81b33143542165ba84e",
   "created_at": "2025-05-19T21:30:49.575Z",
-  "updated_at": "2026-04-03T21:51:40.979Z",
+  "updated_at": "2026-04-10T08:21:04.279Z",
   "comment": {
     "text": "This \"Warning\" translation key is used to display a caution message when sensitive information about file protection is detected in a file. It appears as a warning text in error messages or dialog boxes, providing context for users when accessing protected files.",
     "is_auto": true,
@@ -65,12 +65,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/components/dialogs/StorageTariffDeactiveted/index.tsx",
-      "line_number": 105,
-      "context": "displayType={ModalDialogType.modal}\n isLarge\n >\n <ModalDialog.Header>\n <Text fontSize=\"21px\" isBold>\n {t(\"Common:Warning\")}\n </Text>\n </ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontWeight={600}>{t(\"StorageTariffDeactivated\")}</Text>\n <br />",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/components/dialogs/WarningQuotaDialog/WarningQuotaDialog.tsx",
       "line_number": 92,
       "context": "autoMaxHeight\n visible={visible}\n onClose={onCloseDialog}\n displayType={ModalDialogType.modal}\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text style={{ marginBottom: \"16px\" }}>{getWarningDescription()}</Text>\n <Text>{t(\"Settings:WantToContinue\")}</Text>\n </ModalDialog.Body>\n <ModalDialog.Footer>",
@@ -95,14 +89,8 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/services/panels/additional-storage/GracePeriodModal.tsx",
-      "line_number": 72,
-      "context": "onClose={onClose}\n displayType={ModalDialogType.modal}\n autoMaxHeight\n isLarge\n >\n <ModalDialog.Header>{t(\"Common:Warning\")}</ModalDialog.Header>\n <ModalDialog.Body>\n <Text fontWeight={600}>\n {t(\"ServiceManagementUnavailable\", { planName: tariffPlanTitle })}\n </Text>\n <br />",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 327,
+      "line_number": 328,
       "context": ") : null}\n \n {enable ? (\n <>\n <Text fontSize=\"16px\" fontWeight=\"700\" className={styles.warningText}>\n {t(\"Common:Warning\")}\n </Text>\n <Text className={styles.ipSecurityWarning}>\n {t(\"IPSecurityWarningHelper\")}\n </Text>\n </>",
       "module": "/packages/client"
     },
@@ -273,13 +261,7 @@
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'අවවාදයයි' can mean 'warning', it's a rather formal and literary term. A more common and natural translation for 'Warning' in most contexts would be 'අතුරුත්තරණය' (aturuththaranya) or 'අපඉඟි' (apigi). 'අවවාදයයි' might be used in official or formal announcements but is not the typical usage.",
-          "suggestion": "Consider using 'අතුරුත්තරණය' (aturuththaranya) or 'අපඉඟි' (apigi) for a more common and natural translation."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {

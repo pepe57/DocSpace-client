@@ -86,6 +86,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
 
   const deleteFromList = useCallback(
     async (fileId: number) => {
+      if (!window.confirm(t("Common:DeletePermanently") + "?")) return;
+
       try {
         await deleteFile(fileId, false, true);
         const newItems = formsListStore.items.filter((f) => f.id !== fileId);
@@ -136,6 +138,8 @@ export default function useFormsActions({ t }: UseFormsActionsProps) {
 
   const deleteFolderFromList = useCallback(
     async (folderId: number) => {
+      if (!window.confirm(t("Common:DeletePermanently") + "?")) return;
+
       try {
         await deleteFolderApi(folderId, false, true);
         const newFolders = formsListStore.folders.filter(

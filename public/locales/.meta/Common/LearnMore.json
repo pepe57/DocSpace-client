@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2026-04-03T21:51:41.056Z",
+  "updated_at": "2026-04-10T08:21:04.337Z",
   "comment": {
     "text": "The translation key \"LearnMore\" is used to display a link or button that encourages users to access more information about a particular topic, in this case, privacy limitations warnings, DNS settings, or language and time zone settings. This text appears as a clickable link or button, prompting users to learn additional details.",
     "is_auto": true,
@@ -54,7 +54,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/ai-services-management.tsx",
-      "line_number": 245,
+      "line_number": 246,
       "context": "isHovered\n href={aiServicesManagementUrl}\n fontWeight={600}\n dataTestId=\"ai_services_management_learn_more\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n <RadioButtonGroup\n className={styles.radioButtonGroup}\n fontSize=\"13px\"",
       "module": "/packages/client"
     },
@@ -149,12 +149,6 @@
       "module": "/packages/client"
     },
     {
-      "file_path": "/packages/client/src/pages/PortalSettings/categories/payments/SaaS/wallet/WalletContainer.tsx",
-      "line_number": 153,
-      "context": "fontWeight={600}\n href={walletHelpUrl}\n color={currentColorScheme?.main?.accent ?? undefined}\n dataTestId=\"wallet_learn_more_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n \n <div className={styles.balanceWrapper}>\n <BalanceAmount",
-      "module": "/packages/client"
-    },
-    {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/adminMessage.js",
       "line_number": 173,
       "context": "color={currentColorScheme.main?.accent}\n target=\"_blank\"\n isHovered\n href={administratorMessageSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <RadioButtonGroup",
@@ -228,7 +222,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/security/access-portal/ipSecurity.js",
-      "line_number": 273,
+      "line_number": 274,
       "context": "color={currentColorScheme.main?.accent}\n target=\"_blank\"\n isHovered\n href={ipSettingsUrl}\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </LearnMoreWrapper>\n \n <RadioButtonGroup",
       "module": "/packages/client"
     },
@@ -396,7 +390,7 @@
       "ai_spell_check_issues": [
         {
           "type": "incorrect_translation",
-          "description": "The translation 'Saiba ma' is incomplete and does not accurately convey the meaning of 'Learn more'. 'Saiba' means 'know', but the phrase is cut off. A full and accurate translation would be 'Saiba mais'.",
+          "description": "The Portuguese translation is truncated/incomplete ('Saiba ma' instead of 'Saiba mais'), which changes the word meaning and looks like a technical error.",
           "suggestion": "Saiba mais"
         }
       ],
@@ -469,6 +463,12 @@
       "approved_at": null
     },
     "zh-CN": {
+      "ai_translated": false,
+      "ai_model": null,
+      "ai_spell_check_issues": [],
+      "approved_at": null
+    },
+    "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],

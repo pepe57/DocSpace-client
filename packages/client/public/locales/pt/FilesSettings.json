@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Não volte a apresentar a notificação de cancelamento",
-  "OpenSameTab": "Abra o editor {{organizationName}} na mesma guia",
   "DefaultHomepage": "Página inicial padrão",
-  "GroupByRooms": "Agrupar por salas"
+  "GroupByRooms": "Agrupar por salas",
+  "OpenSameTab": "Abra o editor {{organizationName}} na mesma guia"
 }

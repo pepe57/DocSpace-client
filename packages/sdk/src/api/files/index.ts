@@ -159,7 +159,7 @@ export async function getFolder(
 
 		const shareHeader: [string, string] =
 			share || shareKey
-				? ["Authorization", `Bearer ${shareKey || shareKey || ""}`]
+				? ["Request-Token", share || shareKey || ""]
 				: ["", ""];
 
 		logger.debug(`Start GET /files/${params}`);

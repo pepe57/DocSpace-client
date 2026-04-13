@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Նորից չցուցադրել չեղարկման ծանուցումը",
-  "OpenSameTab": "Նույն ներդիրում բացեք {{organizationName}} խմբագիրը",
   "DefaultHomepage": "Ստանդարտ գլխավոր էջ",
-  "GroupByRooms": "Խմբավորել ըստ սենյակների"
+  "GroupByRooms": "Խմբավորել ըստ սենյակների",
+  "OpenSameTab": "Նույն ներդիրում բացեք {{organizationName}} խմբագիրը"
 }

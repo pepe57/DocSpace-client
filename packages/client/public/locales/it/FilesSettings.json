@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Non mostrare più la notifica di annullamento",
-  "OpenSameTab": "Apri l'editor di {{organizationName}} nella stessa scheda",
   "DefaultHomepage": "Homepage predefinita",
-  "GroupByRooms": "Raggruppa per stanze"
+  "GroupByRooms": "Raggruppa per stanze",
+  "OpenSameTab": "Apri l'editor di {{organizationName}} nella stessa scheda"
 }

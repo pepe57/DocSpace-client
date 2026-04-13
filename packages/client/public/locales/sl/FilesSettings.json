@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Ne prikaži več obvestila o preklicu",
-  "OpenSameTab": "Odpri urejevalnik {{organizationName}} v istem zavihku",
   "DefaultHomepage": "Privzeto domača stran",
-  "GroupByRooms": "Združite po sobah"
+  "GroupByRooms": "Združite po sobah",
+  "OpenSameTab": "Odpri urejevalnik {{organizationName}} v istem zavihku"
 }

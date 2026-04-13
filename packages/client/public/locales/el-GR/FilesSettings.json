@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Να μην εμφανιστεί ξανά η ειδοποίηση ακύρωσης",
-  "OpenSameTab": "Ανοίξτε το πρόγραμμα επεξεργασίας {{organizationName}} στην ίδια καρτέλα",
   "DefaultHomepage": "Προεπιλεγμένη Αρχική Σελίδα",
-  "GroupByRooms": "Ομαδοποίηση ανά δωμάτια"
+  "GroupByRooms": "Ομαδοποίηση ανά δωμάτια",
+  "OpenSameTab": "Ανοίξτε το πρόγραμμα επεξεργασίας {{organizationName}} στην ίδια καρτέλα"
 }

@@ -66,3 +66,4 @@ export const getI18NInstance = (lng: string) => {
 
   return i18n;
 };
+

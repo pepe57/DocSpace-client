@@ -222,9 +222,9 @@ const SectionHeaderContent = (props) => {
     const arrayOfParams = getArrayOfParams();
 
     const serviceSubPageHeaders = {
-      "ai-services": "Services:OrganizationAI",
       "backup": "Common:Backup",
-      "disk-storage": "Payments:AdditionalDiskStorage",
+      "ai-services": "Common:OrganizationAI",
+      "disk-storage": "Common:AdditionalDiskStorage",
     };
 
     let number = 1;

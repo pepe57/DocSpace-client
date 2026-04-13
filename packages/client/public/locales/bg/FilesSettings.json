@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Не показвай отново известието за анулиране",
-  "OpenSameTab": "Отворете редактора на {{organizationName}} в същия раздел",
   "DefaultHomepage": "Начална страница по подразбиране",
-  "GroupByRooms": "Групиране по стаи"
+  "GroupByRooms": "Групиране по стаи",
+  "OpenSameTab": "Отворете редактора на {{organizationName}} в същия раздел"
 }
