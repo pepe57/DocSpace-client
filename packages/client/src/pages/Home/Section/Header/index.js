@@ -219,6 +219,7 @@ const SectionHeaderContent = (props) => {
     isCollaborator,
     isVisitor,
     isExternalShareRestricted,
+    hasExternalLinks,
   } = props;
 
   const location = useLocation();
@@ -549,7 +550,7 @@ const SectionHeaderContent = (props) => {
         isInPublicRoom ||
         (isShared && (isArchive ? selectedFolder?.isRoom : isRoom))
       ) {
-        return isExternalShareRestricted
+        return isExternalShareRestricted && hasExternalLinks
           ? PublicRoomRestrictedIconUrl
           : PublicRoomIconUrl;
       } else if (!isRootRooms && !isArchive && !isSharedWithMeFolderRoot)
@@ -571,14 +572,15 @@ const SectionHeaderContent = (props) => {
     isSharedWithMeFolderRoot,
     isLifetimeEnabled,
     isExternalShareRestricted,
+    hasExternalLinks,
   ]);
 
   const titleTooltip = React.useMemo(() => {
-    if (isRoom && selectedFolder?.shared && isExternalShareRestricted)
+    if (isRoom && selectedFolder?.shared && isExternalShareRestricted && hasExternalLinks)
       return t("Common:ExternalAccessDisabledByAdmin");
 
     return undefined;
-  }, [isRoom, selectedFolder, isExternalShareRestricted, t]);
+  }, [isRoom, selectedFolder, isExternalShareRestricted, hasExternalLinks, t]);
 
   const titleIconTooltip = React.useMemo(() => {
     if (sharedType) return t("Files:RecentlyOpenedTooltip");
@@ -1279,7 +1281,7 @@ export default inject(
 
     const { isIndexEditingMode, setIsIndexEditingMode, getIndexingArray } =
       indexingStore;
-    const { isPublicRoom } = publicRoomStore;
+    const { isPublicRoom, hasExternalLinks } = publicRoomStore;
 
     let folderPath = navigationPath;
 
@@ -1454,6 +1456,7 @@ export default inject(
       getIcon: filesStore.filesSettingsStore.getIcon,
       isExternalShareRestricted:
         true || !filesStore.filesSettingsStore.externalShare,
+      hasExternalLinks,
 
       isRootRooms,
       isArchive,

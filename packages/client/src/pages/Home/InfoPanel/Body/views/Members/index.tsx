@@ -101,6 +101,7 @@ const Members = ({
   setAccessSettingsIsVisible,
   templateAvailable,
   isExternalShareRestricted,
+  hasExternalLinks,
 }: MembersProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -222,7 +223,7 @@ const Members = ({
           </div>,
         );
 
-        if (isExternalShareRestricted && !isArchiveFolder) {
+        if (isExternalShareRestricted && hasExternalLinks && !isArchiveFolder) {
           publicRoomItems.push(
             <div
               key="restricted-bar"
@@ -344,6 +345,7 @@ const Members = ({
 
     const showRestrictedBar =
       isExternalShareRestricted &&
+      hasExternalLinks &&
       isPublicRoomType &&
       infoPanelSelection?.security?.EditAccess &&
       !searchValue &&
@@ -480,7 +482,7 @@ export default inject(
 
     const { id: selfId } = userStore.user!;
 
-    const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
+    const { primaryLink, additionalLinks, setExternalLink, hasExternalLinks } = publicRoomStore;
 
     const { isArchiveFolderRoot } = treeFoldersStore;
     const { setTemplateAccessSettingsVisible: setAccessSettingsIsVisible } =
@@ -511,6 +513,7 @@ export default inject(
       isArchiveFolder: isArchiveFolderRoot,
       isPublicRoom,
       additionalLinks,
+      hasExternalLinks,
       getPrimaryLink: filesStore.getPrimaryLink,
       setExternalLink,
 

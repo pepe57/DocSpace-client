@@ -51,7 +51,7 @@ export const IconDisplay: FC<IconDisplayProps> = ({ option }) => {
   return (
     <TooltipContainer
       as="div"
-      className={styles.iconContainer}
+      className={`${styles.iconContainer}${option.fillIcon === false ? ` ${styles.coloredIcon}` : ""}`}
       title={
         option.title ||
         (typeof option.label === "string" ? option.label : undefined)

@@ -98,6 +98,7 @@ export type MembersProps = {
 
   primaryLink?: PublicRoomStore["primaryLink"];
   additionalLinks?: PublicRoomStore["additionalLinks"];
+  hasExternalLinks?: boolean;
   setExternalLink?: PublicRoomStore["setExternalLink"];
   setExternalLinks?: PublicRoomStore["setExternalLinks"];
 

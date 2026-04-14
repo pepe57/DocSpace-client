@@ -81,6 +81,7 @@ type RoomsItemHeaderProps = {
   getIcon?: FilesSettingsStore["getIcon"];
   isRoomMembersPanel?: boolean;
   isExternalShareRestricted?: boolean;
+  hasExternalLinks?: boolean;
 } & (
   | {
       roomsView: InfoPanelView.infoMembers;
@@ -107,6 +108,7 @@ const RoomsItemHeader = ({
   searchProps,
   isRoomMembersPanel,
   isExternalShareRestricted,
+  hasExternalLinks,
 }: RoomsItemHeaderProps) => {
   const { t } = useTranslation([
     "Files",
@@ -141,11 +143,11 @@ const RoomsItemHeader = ({
 
   const badgeUrl =
     "isRoom" in selection && selection.isRoom
-      ? getRoomBadgeUrl(selection, 12, isExternalShareRestricted)
+      ? getRoomBadgeUrl(selection, 12, isExternalShareRestricted, hasExternalLinks)
       : null;
 
   const badgeIconColor =
-    isExternalShareRestricted && badgeUrl
+    isExternalShareRestricted && hasExternalLinks && badgeUrl
       ? "var(--info-panel-link-blocked)"
       : undefined;
 
@@ -310,7 +312,7 @@ export default inject(
     const { roomsView, setIsMobileHidden } = infoPanelStore;
 
     const { displayFileExtension, getIcon, externalShare } = filesSettingsStore;
-    const { externalLinks } = publicRoomStore;
+    const { externalLinks, hasExternalLinks } = publicRoomStore;
     const { setTemplateAccessSettingsVisible } = dialogsStore;
 
     const { onChangeFile } = avatarEditorDialogStore;
@@ -335,6 +337,7 @@ export default inject(
       setTemplateAccessSettingsVisible,
       getIcon,
       isExternalShareRestricted,
+      hasExternalLinks,
     };
   },
 )(observer(RoomsItemHeader));

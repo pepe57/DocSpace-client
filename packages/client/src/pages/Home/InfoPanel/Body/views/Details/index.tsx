@@ -92,6 +92,7 @@ type DetailsProps = {
 
   roomLifetime?: TRoomLifetime;
   isExternalShareRestricted?: boolean;
+  hasExternalLinks?: boolean;
 };
 
 const Details = ({
@@ -112,6 +113,7 @@ const Details = ({
   roomLifetime,
   onCreateRoomFromTemplate,
   isExternalShareRestricted,
+  hasExternalLinks,
 }: DetailsProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -192,11 +194,11 @@ const Details = ({
 
   const badgeUrl =
     "external" in selection
-      ? getRoomBadgeUrl(selection, 24, isExternalShareRestricted)
+      ? getRoomBadgeUrl(selection, 24, isExternalShareRestricted, hasExternalLinks)
       : undefined;
 
   const badgeIconColor =
-    isExternalShareRestricted && badgeUrl
+    isExternalShareRestricted && hasExternalLinks && badgeUrl
       ? "var(--info-panel-link-blocked)"
       : undefined;
 
@@ -342,6 +344,7 @@ export default inject(
     avatarEditorDialogStore,
     selectedFolderStore,
     treeFoldersStore,
+    publicRoomStore,
   }: TStore) => {
     const { getInfoPanelItemIcon, openUser, infoPanelRoomSelection } =
       infoPanelStore;
@@ -375,6 +378,7 @@ export default inject(
         infoPanelRoomSelection?.lifetime ?? selectedFolderStore?.lifetime,
       onCreateRoomFromTemplate,
       isExternalShareRestricted: !filesSettingsStore.externalShare,
+      hasExternalLinks: publicRoomStore.hasExternalLinks,
     };
   },
 )(observer(Details));

@@ -372,11 +372,18 @@ export default function withFileActions(WrappedFileItem) {
       const checkedProps = id <= 0 ? false : isSelected;
 
       const { isExternalShareRestricted } = this.props;
-      const isRestrictedRoom = true || isExternalShareRestricted;
-      const badgeUrl = getRoomBadgeUrl(item, 12, isRestrictedRoom);
-      const badgeIconColor = isRestrictedRoom
-        ? "var(--info-panel-link-blocked)"
-        : undefined;
+      const itemHasExternalLinks =
+        item.shareSettings?.PrimaryExternalLink != null;
+      const badgeUrl = getRoomBadgeUrl(
+        item,
+        12,
+        isExternalShareRestricted,
+        itemHasExternalLinks,
+      );
+      const badgeIconColor =
+        isExternalShareRestricted && itemHasExternalLinks && badgeUrl
+          ? "var(--info-panel-link-blocked)"
+          : undefined;
 
       return (
         <WrappedFileItem

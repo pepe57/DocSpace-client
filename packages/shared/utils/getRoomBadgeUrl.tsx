@@ -69,6 +69,7 @@ export const getRoomBadgeUrl = (
   item?: Nullable<ItemType>,
   size: SizeIcon = 12,
   isExternalShareRestricted?: boolean,
+  hasExternalLinks?: boolean,
 ) => {
   if (!item || !item.roomType) return null;
 
@@ -82,7 +83,9 @@ export const getRoomBadgeUrl = (
       item.roomType === RoomsType.CustomRoom) &&
     item.shared;
 
-  if (showPlanetIcon) return isExternalShareRestricted ? alert : planet;
+  if (showPlanetIcon) {
+    return isExternalShareRestricted && hasExternalLinks ? alert : planet;
+  }
 
   return null;
 };

@@ -349,9 +349,11 @@
     z-index: 1;
   }
 
-  svg {
-    path {
-      fill: var(--share-selector-not-active-color);
+  &:not(.coloredIcon) {
+    svg {
+      path {
+        fill: var(--share-selector-not-active-color);
+      }
     }
   }
 }

@@ -65,6 +65,7 @@ type RoomsContextBtnProps = {
 
   getIcon?: FilesSettingsStore["getIcon"];
   isExternalShareRestricted?: boolean;
+  hasExternalLinks?: boolean;
 };
 
 const RoomsContextBtn = ({
@@ -73,6 +74,7 @@ const RoomsContextBtn = ({
   getItemContextOptionsActions,
   getIcon,
   isExternalShareRestricted,
+  hasExternalLinks,
 }: RoomsContextBtnProps) => {
   const { t } = useTranslation([
     "Files",
@@ -99,7 +101,7 @@ const RoomsContextBtn = ({
 
     const isRoom = "isRoom" in selection && selection.isRoom;
     const badgeUrl = isRoom
-      ? getRoomBadgeUrl(selection, 12, isExternalShareRestricted)
+      ? getRoomBadgeUrl(selection, 12, isExternalShareRestricted, hasExternalLinks)
       : null;
 
     const isFile = "isFile" in selection && selection.isFile;
@@ -133,7 +135,7 @@ const RoomsContextBtn = ({
           : undefined,
       badgeUrl: badgeUrl ?? undefined,
     };
-  }, [selection]);
+  }, [selection, isExternalShareRestricted, hasExternalLinks]);
 
   const onHideContextMenu = () => {
     // Callback is called when the context menu is closed.
@@ -172,10 +174,11 @@ const RoomsContextBtn = ({
 };
 
 export default inject(
-  ({ contextOptionsStore, filesSettingsStore }: TStore) => ({
+  ({ contextOptionsStore, filesSettingsStore, publicRoomStore }: TStore) => ({
     getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
     getIcon: filesSettingsStore.getIcon,
     isExternalShareRestricted: !filesSettingsStore.externalShare,
+    hasExternalLinks: publicRoomStore.hasExternalLinks,
   }),
 )(observer(RoomsContextBtn));
 
