@@ -45,6 +45,7 @@ import {
   TextInput,
 } from "@docspace/ui-kit/components/text-input";
 import { ProviderType } from "@docspace/shared/api/ai/enums";
+import { modelCache } from "SRC_DIR/components/dialogs/CreateEditAgentDialog/sub-components/modelCache";
 import { getAiProviderLabel } from "@docspace/shared/utils";
 import type {
   TAiProvider,
@@ -391,6 +392,7 @@ const AddUpdateDialogComponent = ({
         );
       }
 
+      modelCache.clear();
       getAIConfig?.();
 
       onClose();
