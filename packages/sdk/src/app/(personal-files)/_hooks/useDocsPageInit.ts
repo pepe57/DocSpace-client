@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import { setAuthToken } from "@docspace/shared/api/client";
 
@@ -52,33 +52,32 @@ export const useDocsPageInit = ({
   filesSettings,
   portalSettings,
   user,
-}: UseDocsPageInitParams) => {
+}: UseDocsPageInitParams): boolean => {
   useSDKConfig();
 
   const docsSettingsStore = useDocsSettingsStore();
   const docsUserStore = useDocsUserStore();
   const filesSettingsStore = useFilesSettingsStore();
   const settingsStore = useSettingsStore();
+  const [isReady, setIsReady] = useState(false);
+  const initialised = useRef(false);
 
-  React.useEffect(() => {
+  useLayoutEffect(() => {
+    if (initialised.current) return;
+    initialised.current = true;
+
     docsSettingsStore.setFilesSettings(filesSettings);
-  }, [filesSettings, docsSettingsStore]);
-
-  React.useEffect(() => {
     filesSettingsStore.setFilesSettings(filesSettings);
-  }, [filesSettings, filesSettingsStore]);
+    settingsStore.setDisplayAbout(portalSettings.displayAbout);
 
-  React.useEffect(() => {
     if (user) {
       docsUserStore.setUser(user);
     }
-  }, [user, docsUserStore]);
 
-  React.useEffect(() => {
-    settingsStore.setDisplayAbout(portalSettings.displayAbout);
-  }, [portalSettings, settingsStore]);
+    setIsReady(true);
+  }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!window.ClientConfig)
       window.ClientConfig = {} as NonNullable<typeof window.ClientConfig>;
     const prevIsFrame = window.ClientConfig.isFrame;
@@ -95,4 +94,6 @@ export const useDocsPageInit = ({
       }
     };
   }, [authToken]);
+
+  return isReady;
 };

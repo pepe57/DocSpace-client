@@ -29,6 +29,7 @@
 import type { TFilesSettings, TGetFolder } from "@docspace/shared/api/files/types";
 import type { TSettings } from "@docspace/shared/api/settings/types";
 import type { TUser } from "@docspace/shared/api/people/types";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import { useDocsPageInit } from "../_hooks/useDocsPageInit";
 import DocsLayout from "../_components/docs-layout";
@@ -50,7 +51,23 @@ export default function DocsPage({
   filesFilter,
   user,
 }: DocsPageProps) {
-  useDocsPageInit({ authToken, filesSettings, portalSettings, user });
+  const isReady = useDocsPageInit({ authToken, filesSettings, portalSettings, user });
+
+  if (!isReady) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        <Loader type={LoaderTypes.dualRing} size="40px" />
+      </div>
+    );
+  }
 
   const { folders, files, total, current, pathParts } = folderData;
 
