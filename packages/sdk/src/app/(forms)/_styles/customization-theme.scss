@@ -178,6 +178,43 @@ body.light {
   --tile-badge-box-shadow: none;
   --tile-option-button-padding-end: 8px;
   --tile-min-width: 198px;
+
+  // ── Calendar / DatePicker ──────────────────────────────────────────────────
+  --calendar-bg: var(--color-main-background);
+  --calendar-border: var(--color-border);
+  --calendar-shadow: none;
+  --calendar-radius: var(--border-radius-element);
+  --calendar-title: var(--color-main-text);
+  --calendar-weekday: var(--color-text-maxcontrast);
+  --calendar-arrow: var(--color-main-text);
+  --calendar-disabled-arrow: var(--color-border-maxcontrast);
+  --calendar-outline: var(--color-border);
+  --calendar-hover-bg: var(--color-primary-light-hover);
+  --calendar-accent: var(--color-primary-element);
+  --calendar-selected-text: var(--color-primary-element-text);
+  --calendar-past: var(--color-text-maxcontrast);
+  --calendar-disabled: var(--color-border-maxcontrast);
+  --calendar-hover-radius: var(--border-radius-element);
+  --calendar-current-radius: var(--border-radius-element);
+  --calendar-focused-radius: var(--border-radius-element);
+  --calendar-focused-bg: var(--color-primary-element);
+  --calendar-focused-text: var(--color-primary-element-text);
+  --date-picker-bg: var(--color-main-background);
+  --date-picker-header-border: 1px solid var(--color-border);
+
+  // ── AddButton ──────────────────────────────────────────────────────────────
+  --add-button-radius: var(--border-radius-element);
+  --add-button-bg: var(--color-primary-light);
+  --add-button-bg-hover: var(--color-primary-light-hover);
+  --add-button-icon-color: var(--color-primary-light-text);
+  --add-button-icon-color-hover: var(--color-primary-light-text);
+
+  // ── SelectedItem ───────────────────────────────────────────────────────────
+  --selected-item-radius: var(--border-radius-element);
+  --selected-item-bg: var(--color-primary-light);
+  --selected-item-bg-hover: var(--color-primary-light-hover);
+  --selected-item-active-bg: var(--color-primary-element);
+  --selected-item-active-text: var(--color-primary-element-text);
 }
 
 body.dark {
@@ -345,6 +382,43 @@ body.dark {
   --tile-badge-box-shadow: none;
   --tile-option-button-padding-end: 8px;
   --tile-min-width: 198px;
+
+  // ── Calendar / DatePicker ──────────────────────────────────────────────────
+  --calendar-bg: var(--color-main-background);
+  --calendar-border: var(--color-border);
+  --calendar-shadow: none;
+  --calendar-radius: var(--border-radius-element);
+  --calendar-title: var(--color-main-text);
+  --calendar-weekday: var(--color-text-maxcontrast);
+  --calendar-arrow: var(--color-main-text);
+  --calendar-disabled-arrow: var(--color-border-maxcontrast);
+  --calendar-outline: var(--color-border);
+  --calendar-hover-bg: var(--color-background-hover);
+  --calendar-accent: var(--color-primary-element);
+  --calendar-selected-text: var(--color-primary-element-text);
+  --calendar-past: var(--color-text-maxcontrast);
+  --calendar-disabled: var(--color-border-maxcontrast);
+  --calendar-hover-radius: var(--border-radius-element);
+  --calendar-current-radius: var(--border-radius-element);
+  --calendar-focused-radius: var(--border-radius-element);
+  --calendar-focused-bg: var(--color-primary-element);
+  --calendar-focused-text: var(--color-primary-element-text);
+  --date-picker-bg: var(--color-main-background);
+  --date-picker-header-border: 1px solid var(--color-border);
+
+  // ── AddButton ──────────────────────────────────────────────────────────────
+  --add-button-radius: var(--border-radius-element);
+  --add-button-bg: var(--color-primary-light);
+  --add-button-bg-hover: var(--color-primary-light-hover);
+  --add-button-icon-color: var(--color-primary-element);
+  --add-button-icon-color-hover: var(--color-primary-element);
+
+  // ── SelectedItem ───────────────────────────────────────────────────────────
+  --selected-item-radius: var(--border-radius-element);
+  --selected-item-bg: var(--color-primary-light);
+  --selected-item-bg-hover: var(--color-primary-light-hover);
+  --selected-item-active-bg: var(--color-primary-element);
+  --selected-item-active-text: var(--color-primary-element-text);
 
   // ── Chat ───────────────────────────────────────────────────────────────────
   --chat-background: var(--color-main-background);
