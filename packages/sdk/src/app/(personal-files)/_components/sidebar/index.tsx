@@ -49,6 +49,7 @@ import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 import { DocsSection, DOCS_SECTION_FOLDER_ALIAS } from "@/types/docs";
 import { PAGE_COUNT } from "@/utils/constants";
 
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { useSidebar } from "../../_contexts/SidebarContext";
 import DocsMainButton from "../main-button";
 import SidebarNavItem from "./SidebarNavItem";
@@ -68,13 +69,14 @@ const DocsSidebar = () => {
   const { rootFolderType } = useFilesListStore();
   const activeSection = rootFolderType != null ? FOLDER_TYPE_TO_SECTION[rootFolderType] : undefined;
   const { showText, currentDeviceType, toggleShowText } = useSidebar();
+  const { sdkConfig } = useSDKConfig();
 
   const router = useRouter();
   const pathname = usePathname();
 
   const isSettings = pathname === "/personal-files/settings";
   const showMainButton = currentDeviceType === DeviceType.desktop;
-  const isMainButtonDisabled = isSettings || activeSection !== DocsSection.MyDocuments;
+  const isMainButtonDisabled = isSettings || activeSection !== DocsSection.MyDocuments || !!sdkConfig?.disableActionButton;
 
   const handleSectionClick = React.useCallback(
     (section: DocsSection) => {
