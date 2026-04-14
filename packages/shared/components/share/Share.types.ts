@@ -260,6 +260,7 @@ export type ListProps = {
   loadNextPage: (params: IndexRange) => Promise<void>;
   linksBlockLength: number;
   withoutTitlesAndLinks: boolean;
+  restrictedBarVisible?: boolean;
   children: React.ReactNode;
 };
 

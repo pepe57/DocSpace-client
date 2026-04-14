@@ -100,6 +100,7 @@ const Members = ({
   isMembersPanelUpdating,
   setAccessSettingsIsVisible,
   templateAvailable,
+  isExternalShareRestricted,
 }: MembersProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -220,6 +221,23 @@ const Members = ({
             ) : null}
           </div>,
         );
+
+        if (isExternalShareRestricted && !isArchiveFolder) {
+          publicRoomItems.push(
+            <div
+              key="restricted-bar"
+              data-restricted-bar
+              className={styles.restrictedBarItem}
+              data-testid="info_panel_members_restricted_bar"
+            >
+              <PublicRoomBar
+                hideHeader
+                headerText=""
+                bodyText={t("Common:ExternalLinksDisabledForGuests")}
+              />
+            </div>,
+          );
+        }
       }
 
       if (primaryLink && !searchValue) {
@@ -324,6 +342,14 @@ const Members = ({
       !searchValue &&
       !isTemplate;
 
+    const showRestrictedBar =
+      isExternalShareRestricted &&
+      isPublicRoomType &&
+      infoPanelSelection?.security?.EditAccess &&
+      !searchValue &&
+      !isTemplate &&
+      !isArchiveFolder;
+
     const publicRoomItemsLength = publicRoomItems.length;
 
     const isTemplateOwner =
@@ -396,6 +422,7 @@ const Members = ({
           itemCount={total + headersCount + publicRoomItemsLength}
           linksBlockLength={publicRoomItemsLength}
           withoutTitlesAndLinks={!!searchValue}
+          restrictedBarVisible={showRestrictedBar}
         >
           {publicRoomItems}
           {membersList.map((user, index) => {
@@ -493,6 +520,8 @@ export default inject(
       setAccessSettingsIsVisible,
       templateAvailable: templateAvailableToEveryone,
       isRootFolder,
+      isExternalShareRestricted:
+        true || !filesStore.filesSettingsStore.externalShare,
     };
   },
 )(observer(Members));
