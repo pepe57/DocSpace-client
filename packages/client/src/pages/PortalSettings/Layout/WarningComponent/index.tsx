@@ -110,7 +110,7 @@ const Warning = ({
         <Trans
           t={t}
           i18nKey="ConnectService"
-          ns="Services"
+          ns="Common"
           components={{
             1: (
               <Link
@@ -218,7 +218,7 @@ const Warning = ({
           <Trans
             t={t}
             i18nKey="OnlyPayerCanManageSection"
-            ns="Payments"
+            ns="Common"
             components={{
               1: (
                 <Link

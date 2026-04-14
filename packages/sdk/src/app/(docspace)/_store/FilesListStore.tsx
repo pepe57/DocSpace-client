@@ -58,6 +58,11 @@ class FilesListStore {
     this.items = this.items.filter((i) => i.id !== id);
   };
 
+  updateItemTitle = (id: number | string, title: string) => {
+    const item = this.items.find((i) => i.id === id);
+    if (item) item.title = title;
+  };
+
   get itemsCount() {
     return this.items.length;
   }

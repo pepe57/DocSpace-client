@@ -24,63 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import React from "react";
 
-import type { TFilesSettings, TGetFolder } from "@docspace/shared/api/files/types";
-import type { TSettings } from "@docspace/shared/api/settings/types";
-import type { TUser } from "@docspace/shared/api/people/types";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import type { TFileItem, TFolderItem } from "../_hooks/useItemList";
 
-import { useDocsPageInit } from "../_hooks/useDocsPageInit";
-import DocsLayout from "../_components/docs-layout";
-
-type DocsPageProps = {
-  authToken: string;
-  filesSettings: TFilesSettings;
-  folderData: TGetFolder;
-  portalSettings: TSettings;
-  filesFilter: string;
-  user?: TUser;
+export type RenameHandler = {
+  renameItem: (item: TFileItem | TFolderItem) => void;
 };
 
-export default function DocsPage({
-  authToken,
-  filesSettings,
-  folderData,
-  portalSettings,
-  filesFilter,
-  user,
-}: DocsPageProps) {
-  const isReady = useDocsPageInit({ authToken, filesSettings, portalSettings, user });
-
-  if (!isReady) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-          height: "100%",
-        }}
-      >
-        <Loader type={LoaderTypes.dualRing} size="40px" />
-      </div>
-    );
-  }
-
-  const { folders, files, total, current, pathParts } = folderData;
-
-  return (
-    <DocsLayout
-      folders={folders}
-      files={files}
-      total={total}
-      current={current}
-      pathParts={pathParts}
-      filesSettings={filesSettings}
-      portalSettings={portalSettings}
-      filesFilter={filesFilter}
-    />
-  );
-}
+/**
+ * Provides rename handler for files/folders.
+ * Used by context menu in Row/Tile components.
+ */
+export const RenameContext = React.createContext<RenameHandler | null>(null);

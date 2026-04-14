@@ -76,6 +76,7 @@
     filterParam: "ALL",
     buttonColor: "#5299E0",
     infoPanelVisible: true,
+    destination: "my-forms",
     downloadToEvent: false,
     filter: {
       count: "100",
@@ -300,7 +301,7 @@
           maxTotalUploadSize: config2.maxTotalUploadSize
         });
       case "forms" /* Forms */:
-        return buildPath("/sdk/forms/my-forms", {
+        return buildPath(`/sdk/forms/${config2.destination}`, {
           ...baseFrameOptions,
           roomId: config2.id,
           libraryId: config2.libraryId,

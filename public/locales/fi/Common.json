@@ -1563,5 +1563,10 @@
   "YourName": "Nimesi",
   "RequestDetails": "Ole hyvä ja kuvaile pyyntösi yksityiskohdat tässä.",
   "EnterEmail": "Syötä sähköposti",
-  "SuccessfullySentMessage": "Viestisi lähetettiin onnistuneesti. Sinuun otetaan yhteyttä Myyntiosastolta."
+  "SuccessfullySentMessage": "Viestisi lähetettiin onnistuneesti. Sinuun otetaan yhteyttä Myyntiosastolta.",
+  "PlanUsersLimit": "Haluat alentaa tiimin<1>{{usersCount}}</1>ylläpitäjiksi ja nykyinen määrä sellaisia käyttäjiä {{productName}}-ssasi on <1>{{currentUsersCount}}</1>.",
+  "PlanStorageLimit": "Uuden tariffin rajoitus on <1>{{storageValue}}</1> muistista ja käytetyn muistin määrä on  <1>{{currentStorageValue}}</1>.",
+  "ChangePricingPlan": "Muuta hinnoitteluohjelmaa",
+  "CannotChangePlan": "Et voi muuttaa ohjelmaasi, koska käytetyn muistin määrä tai ylläpitäjien määrä ylittää valitun ohjelman rajoitukset:",
+  "SaveOrChange": "Ole hyvä ja poista ristiriitaisen parametrin yhteensopimattomuus jatkaaksesi tai säilyttääksesi aktiivinen tilauksesi."
 }

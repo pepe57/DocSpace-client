@@ -57,6 +57,7 @@ import useDownloadActions from "@/app/(docspace)/_hooks/useDownloadActions";
 import { ShareContext } from "@/app/(docspace)/_contexts/ShareContext";
 import { DeleteContext } from "@/app/(docspace)/_contexts/DeleteContext";
 import { FileOperationsContext } from "@/app/(docspace)/_contexts/FileOperationsContext";
+import { RenameContext } from "@/app/(docspace)/_contexts/RenameContext";
 
 import { useActiveItemsStore } from "@/app/(docspace)/_store/ActiveItemsStore";
 import type { TileProps } from "../TileView.types";
@@ -96,6 +97,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
   const onShareClick = React.useContext(ShareContext);
   const deleteCtx = React.useContext(DeleteContext);
   const fileOpsCtx = React.useContext(FileOperationsContext);
+  const renameCtx = React.useContext(RenameContext);
   const { getContextMenuModel } = useContextMenuModel({
     item: observableItem,
     onShareClick: onShareClick ?? undefined,
@@ -104,6 +106,7 @@ const Tile = ({ item, getIcon, index }: TileProps) => {
     onMoveClick: fileOpsCtx?.moveItem,
     onDuplicateClick: fileOpsCtx?.duplicateItem,
     onRestoreClick: fileOpsCtx?.restoreItem,
+    onRenameClick: renameCtx?.renameItem,
   });
   const { downloadAction } = useDownloadActions();
   const { markAsFavorite, removeFromFavorites } = useFavoritesActions({ t });

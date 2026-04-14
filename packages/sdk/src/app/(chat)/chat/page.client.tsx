@@ -26,17 +26,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 
 import { getFileInfo } from "@docspace/shared/api/files";
 import type { TFile } from "@docspace/ui-kit/types";
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 
 const Chat = dynamic(() => import("@docspace/ui-kit/ai-agent/chat"), {
   ssr: false,
 });
+
+const fullSize: React.CSSProperties = { width: "100%", height: "100%" };
 
 type ChatPageProps = {
   agentId: string;
@@ -51,6 +54,8 @@ const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
     null,
   );
   const [isFileLoading, setIsFileLoading] = useState(!!fileId);
+  const [isChatReady, setIsChatReady] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!agentId) {
@@ -91,6 +96,52 @@ const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
     };
   }, [fileId]);
 
+  // Detect when Chat finishes internal initialization.
+  // ChatContainer sets data-testid="chat-container" (without "-loading" suffix)
+  // when isLoadingChat becomes false. We watch both attribute changes (normal
+  // transition) and childList (ChatCore may swap the entire ChatContainer element
+  // in the error/no-access path).
+  useEffect(() => {
+    const el = wrapperRef.current;
+    if (!el || !agentId) return;
+
+    const check = () =>
+      !!el.querySelector('[data-testid="chat-container"]');
+
+    if (check()) {
+      setIsChatReady(true);
+      return;
+    }
+
+    const observer = new MutationObserver(() => {
+      if (check()) {
+        setIsChatReady(true);
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(el, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ["data-testid"],
+    });
+
+    // Fallback: if Chat gets stuck loading, reveal it after 15 s so the user
+    // can at least see whatever state it ended up in.
+    const timerId = window.setTimeout(() => {
+      if (!isChatReady) {
+        setIsChatReady(true);
+        observer.disconnect();
+      }
+    }, 15_000);
+
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timerId);
+    };
+  }, [agentId]);
+
   const clearAttachmentFile = useCallback(() => setAttachmentFile(null), []);
 
   if (!agentId) {
@@ -98,19 +149,45 @@ const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
   }
 
   return (
-    <Chat
-      agentId={agentId}
-      selectedModel=""
-      standalone
-      attachmentFile={attachmentFile}
-      clearAttachmentFile={clearAttachmentFile}
-      allowAttachFiles
-      allowSelectChat
-      isLoading={isFileLoading}
-      width="100%"
-      height="100%"
-      style={{ width: "100%", height: "100%" }}
-    />
+    <div
+      ref={wrapperRef}
+      style={{ ...fullSize, position: "relative" }}
+    >
+      {!isChatReady && (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1,
+          }}
+        >
+          <Loader type={LoaderTypes.dualRing} size="40px" />
+        </div>
+      )}
+      <div
+        style={{
+          ...fullSize,
+          visibility: isChatReady ? "visible" : "hidden",
+        }}
+      >
+        <Chat
+          agentId={agentId}
+          selectedModel=""
+          standalone
+          attachmentFile={attachmentFile}
+          clearAttachmentFile={clearAttachmentFile}
+          allowAttachFiles
+          allowSelectChat
+          isLoading={isFileLoading}
+          width="100%"
+          height="100%"
+          style={fullSize}
+        />
+      </div>
+    </div>
   );
 };
 
