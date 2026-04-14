@@ -34,13 +34,13 @@ import styles from "./LibraryLanding.module.scss";
 type StatsBarProps = {
   templatesCount: number;
   countriesCount: number;
-  language: string;
+  country: string;
 };
 
 const StatsBar = ({
   templatesCount,
   countriesCount,
-  language,
+  country,
 }: StatsBarProps) => {
   const { t } = useTranslation("Common");
 
@@ -57,7 +57,7 @@ const StatsBar = ({
           <span className={styles.statsLabel}>
             {t("Common:LibraryStatsTemplates", {
               count: templatesCount,
-              language,
+              country,
             })}
           </span>
         </div>
