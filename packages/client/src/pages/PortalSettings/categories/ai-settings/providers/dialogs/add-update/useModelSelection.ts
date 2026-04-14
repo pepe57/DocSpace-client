@@ -45,6 +45,7 @@ type TModelOverride = {
 export type TModelSelectionState = {
   selectedIds: string[];
   overrides: Record<string, TModelOverride>;
+  snapshots: Record<string, TModelOverride>;
 };
 
 const sortSelectedFirst = (
@@ -93,6 +94,7 @@ export const useModelSelection = (
 
   const [frozenSortIds, setFrozenSortIds] = useState<Set<string> | null>(null);
   const modelOverrides = useRef<Record<string, TModelOverride>>({});
+  const settingsSnapshots = useRef<Record<string, TModelOverride>>({});
   const [overridesVersion, setOverridesVersion] = useState(0);
 
   useEffect(() => {
@@ -150,10 +152,12 @@ export const useModelSelection = (
       if (savedState) {
         setSelectedModelIds(new Set(savedState.selectedIds));
         modelOverrides.current = { ...savedState.overrides };
+        settingsSnapshots.current = { ...savedState.snapshots };
         setModelsLoaded(true);
       } else {
         setSelectedModelIds(new Set());
         modelOverrides.current = {};
+        settingsSnapshots.current = {};
         setModelsLoaded(false);
       }
 
@@ -214,6 +218,7 @@ export const useModelSelection = (
     return {
       selectedIds: Array.from(selectedModelIds),
       overrides: { ...modelOverrides.current },
+      snapshots: { ...settingsSnapshots.current },
     };
   }, [selectedModelIds, overridesVersion]);
 
@@ -239,10 +244,22 @@ export const useModelSelection = (
     }
   }, [selectedModelIds]);
 
-  const openSettings = useCallback((modelId: string) => {
-    setSettingsModelId(modelId);
-    setIsPopupOpen(false);
-  }, []);
+  const openSettings = useCallback(
+    (modelId: string) => {
+      if (!settingsSnapshots.current[modelId]) {
+        const model = availableModels.find((m) => m.modelId === modelId);
+        if (model) {
+          settingsSnapshots.current[modelId] = {
+            displayName: model.displayName,
+            capabilities: { ...model.capabilities },
+          };
+        }
+      }
+      setSettingsModelId(modelId);
+      setIsPopupOpen(false);
+    },
+    [availableModels],
+  );
 
   const closeSettings = useCallback(() => {
     setSettingsModelId(null);

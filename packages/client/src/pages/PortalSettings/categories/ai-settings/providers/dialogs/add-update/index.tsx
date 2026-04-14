@@ -280,7 +280,7 @@ const AddUpdateDialogComponent = ({
 
     setIsRequestRunning(true);
 
-    const buildModelSettings = (): TModelSettingsItem[] => {
+    const buildAllSettings = (): TModelSettingsItem[] => {
       const state = modelSelection.getState();
       const selectedSet = new Set(state.selectedIds);
 
@@ -295,14 +295,65 @@ const AddUpdateDialogComponent = ({
       });
     };
 
+    const buildUpdateDelta = (
+      allSettings: TModelSettingsItem[],
+    ): TModelSettingsItem[] | undefined => {
+      if (!initialModels) return undefined;
+
+      const initialMap = new Map(initialModels.map((m) => [m.id, m]));
+
+      const changed = allSettings.filter((item) => {
+        const initial = initialMap.get(item.modelId);
+        if (!initial) return true;
+        return (
+          item.isEnabled !== initial.isEnabled ||
+          item.alias !== (initial.alias ?? initial.id) ||
+          !equal(item.capabilities, initial.capabilities)
+        );
+      });
+
+      return changed.length > 0 ? changed : undefined;
+    };
+
+    const buildAddDelta = (
+      allSettings: TModelSettingsItem[],
+    ): TModelSettingsItem[] | undefined => {
+      const state = modelSelection.getState();
+      const modelMap = new Map(
+        modelSelection.availableModels.map((m) => [m.modelId, m]),
+      );
+
+      const changed = allSettings.filter((item) => {
+        const model = modelMap.get(item.modelId);
+        if (!model) return true;
+
+        const isEnabledChanged = item.isEnabled !== !!model.isRecommended;
+        const snapshot = state.snapshots[item.modelId];
+
+        if (!snapshot) return isEnabledChanged;
+
+        return (
+          isEnabledChanged ||
+          item.alias !== snapshot.displayName ||
+          !equal(item.capabilities, snapshot.capabilities)
+        );
+      });
+
+      return changed.length > 0 ? changed : undefined;
+    };
+
     try {
+      const allSettings = showModelsBlock ? buildAllSettings() : undefined;
+
       if (variant === "add") {
         const data: TCreateAiProvider = {
           key: providerKey,
           title: providerTitle,
           type: selectedOption.key as ProviderType,
           url: providerUrl,
-          modelSettings: showModelsBlock ? buildModelSettings() : undefined,
+          modelSettings: allSettings
+            ? buildAddDelta(allSettings)
+            : undefined,
         };
 
         await addAIProvider?.(data);
@@ -328,8 +379,8 @@ const AddUpdateDialogComponent = ({
           data.key = providerKey;
         }
 
-        if (showModelsBlock) {
-          data.modelSettings = buildModelSettings();
+        if (allSettings) {
+          data.modelSettings = buildUpdateDelta(allSettings);
         }
 
         await updateAIProvider?.(providerData.id, data);
