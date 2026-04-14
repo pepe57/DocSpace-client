@@ -43,6 +43,7 @@ import styles from "./RoomTypeList.module.scss";
 
 type RoomTypeListProps = {
   disabledFormRoom: boolean;
+  isExternalShareRestricted?: boolean;
 
   setRoomType: (roomType: RoomsType) => void;
   setTemplateDialogIsVisible: (isVisible: boolean) => void;
@@ -50,6 +51,7 @@ type RoomTypeListProps = {
 
 const RoomTypeList = ({
   disabledFormRoom = true,
+  isExternalShareRestricted,
 
   setRoomType,
   setTemplateDialogIsVisible,
@@ -58,6 +60,7 @@ const RoomTypeList = ({
 
   const handleClick = (roomType: RoomsType | "template") => {
     if (disabledFormRoom && roomType === RoomsType.FormRoom) return;
+    if (isExternalShareRestricted && roomType === RoomsType.PublicRoom) return;
 
     if (roomType === "template") {
       setTemplateDialogIsVisible(true);
@@ -68,15 +71,26 @@ const RoomTypeList = ({
     setRoomType(roomType);
   };
 
-  const tooltipContent = t("Files:FormRoomCreationLimit", {
+  const formRoomTooltipContent = t("Files:FormRoomCreationLimit", {
     sectionName: t("Common:Rooms"),
   });
+
+  const publicRoomTooltipContent = t("Common:PublicRoomCreationDisabled");
 
   return (
     <div className={styles.roomTypeList}>
       {RoomsTypeValues.map((roomType) => {
         const isFormRoom = roomType === RoomsType.FormRoom;
-        const showTooltip = isFormRoom && disabledFormRoom;
+        const isPublicRoom = roomType === RoomsType.PublicRoom;
+
+        const showFormRoomTooltip = isFormRoom && disabledFormRoom;
+        const showPublicRoomTooltip =
+          isPublicRoom && isExternalShareRestricted;
+        const showTooltip = showFormRoomTooltip || showPublicRoomTooltip;
+
+        const tooltipContent = showFormRoomTooltip
+          ? formRoomTooltipContent
+          : publicRoomTooltipContent;
 
         const roomTypeElement = (
           <RoomType
@@ -86,6 +100,7 @@ const RoomTypeList = ({
             type="listItem"
             onClick={() => handleClick(roomType)}
             disabledFormRoom={disabledFormRoom}
+            disabledPublicRoom={isExternalShareRestricted}
             isOpen={false}
             selectedId={roomType.toString()}
           />

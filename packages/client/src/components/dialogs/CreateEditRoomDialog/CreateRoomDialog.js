@@ -70,6 +70,7 @@ const CreateRoomDialog = ({
   setSelectedRoomType,
   getThirdPartyIcon,
   isDefaultRoomsQuotaSet,
+  isExternalShareRestricted,
   fetchedRoomParams,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
@@ -278,6 +279,7 @@ const CreateRoomDialog = ({
             t={t}
             setRoomType={setRoomType}
             disabledFormRoom={disabledFormRoom}
+            isExternalShareRestricted={isExternalShareRestricted}
             setTemplateDialogIsVisible={setTemplateDialogIsVisible}
           />
         ) : (
