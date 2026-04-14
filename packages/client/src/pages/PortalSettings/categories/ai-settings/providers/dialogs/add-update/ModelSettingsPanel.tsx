@@ -96,6 +96,7 @@ export const ModelSettingsPanel = ({
       backdropVisible={false}
       isBackButton
       onBackClick={onClose}
+      zIndex={451}
     >
       <ModalDialog.Header>{t("Common:ModelSettings")}</ModalDialog.Header>
 
