@@ -35,8 +35,7 @@ import { RoomsType, ShareAccessRights } from "@docspace/ui-kit/enums";
 
 import { createApiKey } from "@docspace/shared/api/api-keys";
 import { createRoom, setRoomSecurity } from "@docspace/shared/api/rooms";
-import { getGroupsFull } from "@docspace/shared/api/groups";
-import type { TGroup } from "@docspace/shared/api/groups/types";
+import { getGroups } from "@docspace/shared/api/groups";
 
 export default function CreatePortalClient() {
   const [status, setStatus] = useState("Preparing...");
@@ -68,7 +67,7 @@ export default function CreatePortalClient() {
         setStatus("Inviting everyone to the room...");
         setPercent(60);
 
-        const groups = (await getGroupsFull()) as TGroup[];
+        const { items: groups } = await getGroups();
         const everyoneGroup = groups.find((g) => g.isSystem);
 
         if (everyoneGroup) {

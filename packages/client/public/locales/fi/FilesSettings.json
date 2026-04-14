@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Älä näytä peruutusilmoitusta enää",
-  "OpenSameTab": "Avaa {{organizationName}} editori samassa välilehdessä",
   "DefaultHomepage": "Oletusetusivu",
-  "GroupByRooms": "Ryhmittele huoneittain"
+  "GroupByRooms": "Ryhmittele huoneittain",
+  "OpenSameTab": "Avaa {{organizationName}} editori samassa välilehdessä"
 }

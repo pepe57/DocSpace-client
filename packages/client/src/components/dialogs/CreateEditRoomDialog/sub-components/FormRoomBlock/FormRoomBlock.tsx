@@ -82,7 +82,7 @@ const FormRoomBlock = ({
         description={t("Common:ExportResultsToDatabaseDescription")}
         isChecked={roomParams.sendFormToExternalDB || false}
         onCheckedChange={onSendFormToExternalDBChange}
-        isDisabled={isDisabled}
+        isDisabled={isDisabled || !hasDatabaseConnection}
       />
 
       <IntegrationBar t={t} hasDatabaseConnection={hasDatabaseConnection} />

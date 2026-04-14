@@ -334,14 +334,6 @@ export const enum TariffState {
   NotPaid = 3,
 }
 
-/**
- * Enum for theme keys.
- * @readonly
- */
-export const enum PortalFeaturesLimitations {
-  Limitless = -1,
-  Unavailable = 0,
-}
 
 /**
  * Enum for payment method status.

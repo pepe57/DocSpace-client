@@ -66,15 +66,7 @@ import {
 const PortalIntegration = (props) => {
   const { t, currentColorScheme, sdkLink, theme, tReady } = props;
 
-  const isSmall = useRef(
-    (() => {
-      const content = document.querySelector(".section-wrapper-content");
-      const rect = content.getBoundingClientRect();
-      return rect.width <= 600;
-    })(),
-  );
-
-  const [isFlex, setIsFlex] = useState(isSmall.current);
+  const [isFlex, setIsFlex] = useState(false);
 
   const navigate = useNavigate();
 
@@ -146,20 +138,18 @@ const PortalIntegration = (props) => {
     if (tReady) setDocumentTitle(t("JavascriptSdk"));
   }, [tReady]);
 
-  const onResize = (entries) => {
-    const belowThreshold = entries[0].contentRect.width <= 600;
-    if (belowThreshold !== isSmall.current) {
-      isSmall.current = belowThreshold;
-      setIsFlex(belowThreshold);
-    }
-  };
-
   useEffect(() => {
-    const rObserver = new ResizeObserver(onResize);
     const content = document.querySelector(".section-wrapper-content");
+    if (!content) return;
+
+    const onResize = (entries) => {
+      setIsFlex(entries[0].contentRect.width <= 600);
+    };
+
+    const rObserver = new ResizeObserver(onResize);
     rObserver.observe(content);
     return () => {
-      rObserver.unobserve(content);
+      rObserver.disconnect();
     };
   }, []);
 

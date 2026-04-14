@@ -1429,7 +1429,6 @@ class ContextOptionsStore {
   };
 
   onCreateTemplate = async () => {
-    this.oformsStore.setTemplateGalleryVisible(false);
     this.oformsStore.setIsVisibleInfoPanelTemplateGallery(false);
 
     const event = new Event(Events.CREATE);

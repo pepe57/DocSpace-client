@@ -20,6 +20,7 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 import DuplicateReactSvgUrl from "PUBLIC_DIR/images/icons/16/duplicate.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
+import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 
 import { useFilesSelectionStore } from "../_store/FilesSelectionStore";
 import { AVAILABLE_CONTEXT_ITEMS } from "../_enums/context-items";
@@ -39,6 +40,7 @@ type UseContextMenuModelProps = {
   onMoveClick?: (item: TFileItem | TFolderItem) => void;
   onDuplicateClick?: (item: TFileItem | TFolderItem) => void;
   onRestoreClick?: (item: TFileItem | TFolderItem) => void;
+  onRenameClick?: (item: TFileItem | TFolderItem) => void;
   onCopySelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
   onMoveSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
   onRestoreSelectedClick?: (items: (TFileItem | TFolderItem)[]) => void;
@@ -53,6 +55,7 @@ export default function useContextMenuModel({
   onMoveClick,
   onDuplicateClick,
   onRestoreClick,
+  onRenameClick,
   onCopySelectedClick,
   onMoveSelectedClick,
   onRestoreSelectedClick,
@@ -316,6 +319,20 @@ export default function useContextMenuModel({
     [t, onMoveClick],
   );
 
+  const getRenameItem = useCallback(
+    (i: TFileItem | TFolderItem) => {
+      return {
+        id: "option_rename",
+        key: "rename",
+        label: t("Common:Rename"),
+        icon: RenameReactSvgUrl,
+        onClick: () => onRenameClick?.(i),
+        disabled: !onRenameClick,
+      };
+    },
+    [t, onRenameClick],
+  );
+
   const getRestoreItem = useCallback(
     (i: TFileItem | TFolderItem) => {
       return {
@@ -549,6 +566,9 @@ export default function useContextMenuModel({
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.duplicate))
         model.push(getDuplicateItem(item!));
 
+      if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.rename))
+        model.push(getRenameItem(item!));
+
       if (contextOptions.includes(AVAILABLE_CONTEXT_ITEMS.restore))
         model.push(getRestoreItem(item!));
 
@@ -593,6 +613,7 @@ export default function useContextMenuModel({
       getCopyItem,
       getDuplicateItem,
       getMoveToItem,
+      getRenameItem,
       getRestoreItem,
       getDeleteItem,
       getHeaderContextMenuModel,

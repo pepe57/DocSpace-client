@@ -222,9 +222,9 @@ const SectionHeaderContent = (props) => {
     const arrayOfParams = getArrayOfParams();
 
     const serviceSubPageHeaders = {
-      "ai-services": "Services:OrganizationAI",
       "backup": "Common:Backup",
-      "disk-storage": "Payments:AdditionalDiskStorage",
+      "ai-services": "Common:OrganizationAI",
+      "disk-storage": "Common:AdditionalDiskStorage",
     };
 
     let number = 1;
@@ -371,14 +371,14 @@ const SectionHeaderContent = (props) => {
                 organizationName: logoText,
               })
             : t("DataImport")
-      : !standalone && isPaymentPage  
-        ? t("Billing") 
+      : !standalone && isPaymentPage
+        ? t("Common:Billing")
         : t(header, {
-          organizationName: logoText,
-          license: t("Common:EnterpriseLicense"),
-          productName: t("Common:ProductName"),
-          aiServices: t("Common:AIServices"),
-        });
+            organizationName: logoText,
+            license: t("Common:EnterpriseLicense"),
+            productName: t("Common:ProductName"),
+            aiServices: t("Common:AIServices"),
+          });
 
   // console.log(translatedHeader, header);
 
@@ -542,3 +542,4 @@ export default inject(
     ])(observer(SectionHeaderContent)),
   ),
 );
+

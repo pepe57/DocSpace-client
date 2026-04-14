@@ -1,6 +1,6 @@
 {
   "CancellaionNotification": "Ləğvetmə bildirişini yenidən göstərməyin",
-  "OpenSameTab": "Eyni tabda {{organizationName}} redaktorunu açın",
   "DefaultHomepage": "Standart Ana Səhifə",
-  "GroupByRooms": "Otaqlar üzrə qruplaşdır"
+  "GroupByRooms": "Otaqlar üzrə qruplaşdır",
+  "OpenSameTab": "Eyni tabda {{organizationName}} redaktorunu açın"
 }
