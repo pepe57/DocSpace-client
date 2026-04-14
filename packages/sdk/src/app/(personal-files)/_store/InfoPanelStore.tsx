@@ -57,6 +57,10 @@ class InfoPanelStore {
     this.shareChanged = false;
   };
 
+  toggle = () => {
+    this.isVisible = !this.isVisible;
+  };
+
   setShareChanged = (changed: boolean) => {
     this.shareChanged = changed;
   };

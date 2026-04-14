@@ -59,6 +59,8 @@ const Header = ({
   isEmptyList,
   showTitle = true,
   onBurgerClick,
+  isInfoPanelVisible = false,
+  onToggleInfoPanel,
 }: HeaderProps) => {
   const searchParams = useSearchParams();
 
@@ -148,7 +150,7 @@ const Header = ({
   return (
     <div
       className={classnames(styles.headerContainer, {
-        [styles.infoPanelVisible]: false,
+        [styles.infoPanelVisible]: isInfoPanelVisible,
         [styles.isExternalFolder]: false,
         [styles.isLifetimeEnabled]: false,
       })}
@@ -156,14 +158,14 @@ const Header = ({
       {tableGroupMenuVisible ? (
         <TableGroupMenu
           withComboBox
-          withoutInfoPanelToggler
+          withoutInfoPanelToggler={!onToggleInfoPanel}
           isChecked={isChecked}
           isIndeterminate={!isChecked}
           headerMenu={getHeaderContextMenuModel()}
           onClick={() => {}}
           onChange={onCheckboxChange}
-          toggleInfoPanel={() => {}}
-          isInfoPanelVisible={false}
+          toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
+          isInfoPanelVisible={isInfoPanelVisible}
           checkboxOptions={getHeaderMenu()}
         />
       ) : (
@@ -200,8 +202,8 @@ const Header = ({
             isCurrentFolderInfo={false}
             showTitle={showTitle}
             isRoom={!!current.roomType}
-            isInfoPanelVisible={false}
-            toggleInfoPanel={() => {}}
+            isInfoPanelVisible={isInfoPanelVisible}
+            toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
             withLogo=""
             burgerLogo=""
             onLogoClick={onBurgerClick ?? (() => {})}

@@ -9,4 +9,6 @@ export type HeaderProps = {
 
   showTitle?: boolean;
   onBurgerClick?: () => void;
+  isInfoPanelVisible?: boolean;
+  onToggleInfoPanel?: () => void;
 };
