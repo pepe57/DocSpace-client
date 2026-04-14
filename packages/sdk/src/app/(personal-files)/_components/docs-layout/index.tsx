@@ -67,6 +67,7 @@ import type { TFileItem, TFolderItem } from "@/app/(docspace)/_hooks/useItemList
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { SidebarProvider, useSidebar } from "../../_contexts/SidebarContext";
 import DocsMainButton from "../main-button";
 import { useInfoPanelStore } from "../../_store/InfoPanelStore";
@@ -115,6 +116,7 @@ const DocsLayoutInner = observer(({
   const { rootFolderType } = useFilesListStore();
   const { currentDeviceType } = useSidebar();
   const infoPanelStore = useInfoPanelStore();
+  const { sdkConfig } = useSDKConfig();
   const router = useRouter();
 
   const isMyDocuments = rootFolderType === FolderType.USER;
@@ -220,6 +222,8 @@ const DocsLayoutInner = observer(({
                     current={current}
                     pathParts={pathParts}
                     isEmptyList={isEmptyList}
+                    isInfoPanelVisible={sdkConfig?.infoPanelVisible ? infoPanelStore.isVisible : false}
+                    onToggleInfoPanel={sdkConfig?.infoPanelVisible ? infoPanelStore.toggle : undefined}
                   />
                 }
                 sectionFilterContent={<Filter filesFilter={filesFilter} />}
@@ -244,7 +248,7 @@ const DocsLayoutInner = observer(({
             </RootScrollbar>
           </DropZone>
           <DocsInfoPanel />
-          {showMobileButton && <DocsMainButton mode="mobile" />}
+          {showMobileButton && <DocsMainButton mode="mobile" isDisabled={sdkConfig?.disableActionButton} />}
           <DeleteDialog
             visible={deleteDialogVisible}
             isLoading={isDeleting}
