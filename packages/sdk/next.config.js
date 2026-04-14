@@ -52,6 +52,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  outputFileTracingIncludes: {
+    "/forms/**": ["./src/app/(forms)/_styles/*.scss"],
+  },
   serverExternalPackages: [
     "nconf",
     "date-and-time",

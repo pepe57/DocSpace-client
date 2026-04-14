@@ -35,6 +35,7 @@ import {
   PATHNAME_HEADER,
   ROOM_ID_HEADER,
   SHARE_KEY_HEADER,
+  SRC_STYLES_HEADER,
   THEME_HEADER,
 } from "@/utils/constants";
 import { handlePublicRoomValidation } from "@/utils/middleware/handlePublicRoomValidation";
@@ -85,9 +86,11 @@ export async function proxy(request: NextRequest) {
   if (request.nextUrl.pathname.includes("forms")) {
     const roomId = searchParams.get("roomId") ?? "";
     const libraryId = searchParams.get("libraryId") ?? "";
+    const srcStyles = searchParams.get("srcStyles") ?? "";
 
     requestHeaders.set(ROOM_ID_HEADER, roomId);
     requestHeaders.set(LIBRARY_ID_HEADER, libraryId);
+    requestHeaders.set(SRC_STYLES_HEADER, srcStyles);
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
 
     return NextResponse.next({
