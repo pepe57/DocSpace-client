@@ -27,9 +27,7 @@
 "use client";
 
 import React from "react";
-import { Provider } from "mobx-react";
 
-import store from "@/app/(docspace)/_store";
 import { SettingsStoreContextProvider } from "@/app/(docspace)/_store/SettingsStore";
 import { FilesSettingsStoreContextProvider } from "@/app/(docspace)/_store/FilesSettingsStore";
 import { FilesSelectionStoreContextProvider } from "@/app/(docspace)/_store/FilesSelectionStore";
@@ -54,32 +52,30 @@ export const DocsStoreProviders = ({
   initViewAs?: TViewAs;
 }) => {
   return (
-    <Provider {...store}>
-      <SettingsStoreContextProvider initData={{ viewAs: initViewAs }}>
-        <FilesSettingsStoreContextProvider>
-          <FilesListStoreContextProvider>
-            <FilesSelectionStoreContextProvider>
-              <NavigationStoreContextProvider>
-                <MediaViewerStoreContextProvider>
-                  <DialogsStoreContextProvider>
-                    <DownloadDialogStoreContextProvider>
-                      <ActiveItemsStoreContextProvider>
-                        <DocsSettingsStoreContextProvider>
-                          <DocsUserStoreContextProvider>
-                            <InfoPanelStoreContextProvider>
-                              {children}
-                            </InfoPanelStoreContextProvider>
-                          </DocsUserStoreContextProvider>
-                        </DocsSettingsStoreContextProvider>
-                      </ActiveItemsStoreContextProvider>
-                    </DownloadDialogStoreContextProvider>
-                  </DialogsStoreContextProvider>
-                </MediaViewerStoreContextProvider>
-              </NavigationStoreContextProvider>
-            </FilesSelectionStoreContextProvider>
-          </FilesListStoreContextProvider>
-        </FilesSettingsStoreContextProvider>
-      </SettingsStoreContextProvider>
-    </Provider>
+    <SettingsStoreContextProvider initData={{ viewAs: initViewAs }}>
+      <FilesSettingsStoreContextProvider>
+        <FilesListStoreContextProvider>
+          <FilesSelectionStoreContextProvider>
+            <NavigationStoreContextProvider>
+              <MediaViewerStoreContextProvider>
+                <DialogsStoreContextProvider>
+                  <DownloadDialogStoreContextProvider>
+                    <ActiveItemsStoreContextProvider>
+                      <DocsSettingsStoreContextProvider>
+                        <DocsUserStoreContextProvider>
+                          <InfoPanelStoreContextProvider>
+                            {children}
+                          </InfoPanelStoreContextProvider>
+                        </DocsUserStoreContextProvider>
+                      </DocsSettingsStoreContextProvider>
+                    </ActiveItemsStoreContextProvider>
+                  </DownloadDialogStoreContextProvider>
+                </DialogsStoreContextProvider>
+              </MediaViewerStoreContextProvider>
+            </NavigationStoreContextProvider>
+          </FilesSelectionStoreContextProvider>
+        </FilesListStoreContextProvider>
+      </FilesSettingsStoreContextProvider>
+    </SettingsStoreContextProvider>
   );
 };
