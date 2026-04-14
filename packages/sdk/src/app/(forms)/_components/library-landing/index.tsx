@@ -41,7 +41,7 @@ type LibraryLandingPageProps = {
   categories: CategoryData[];
   totalTemplatesCount: number;
   countriesCount: number;
-  country: string;
+  language: string;
   langId: number | null;
   roomId?: string;
   libraryId?: string;
@@ -53,7 +53,7 @@ const LibraryLandingPage = ({
   categories,
   totalTemplatesCount,
   countriesCount,
-  country,
+  language,
   langId,
   roomId,
   libraryId,
@@ -63,7 +63,7 @@ const LibraryLandingPage = ({
     <div className={styles.root}>
       <HeroSection
         templatesCount={totalTemplatesCount}
-        country={country}
+        language={language}
         langId={langId}
         roomId={roomId}
         libraryId={libraryId}
@@ -72,7 +72,7 @@ const LibraryLandingPage = ({
       <StatsBar
         templatesCount={totalTemplatesCount}
         countriesCount={countriesCount}
-        country={country}
+        language={language}
       />
 
       <CategoryList categories={categories} onClickItem={onClickItem} />

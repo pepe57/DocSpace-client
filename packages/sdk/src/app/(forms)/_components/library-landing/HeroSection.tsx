@@ -36,7 +36,7 @@ import styles from "./LibraryLanding.module.scss";
 
 type HeroSectionProps = {
   templatesCount: number;
-  country: string;
+  language: string;
   langId: number | null;
   roomId?: string;
   libraryId?: string;
@@ -44,7 +44,7 @@ type HeroSectionProps = {
 
 const HeroSection = ({
   templatesCount,
-  country,
+  language,
   langId,
   roomId,
   libraryId,
@@ -54,7 +54,7 @@ const HeroSection = ({
   const steps = [
     {
       title: t("Common:LibraryStep1Title"),
-      desc: t("Common:LibraryStep1Desc", { count: templatesCount, country }),
+      desc: t("Common:LibraryStep1Desc", { count: templatesCount, language }),
     },
     {
       title: t("Common:LibraryStep2Title"),

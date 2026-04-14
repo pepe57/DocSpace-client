@@ -204,7 +204,7 @@ const LibraryLandingRoute = () => {
       categories={categories}
       totalTemplatesCount={totalTemplatesCount}
       countriesCount={countriesCount}
-      country={breadcrumb?.langTitle ?? ""}
+      language={breadcrumb?.langTitle ?? ""}
       langId={langId}
       roomId={roomId}
       libraryId={libraryId}
