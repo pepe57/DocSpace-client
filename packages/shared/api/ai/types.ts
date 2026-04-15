@@ -35,9 +35,10 @@ import {
   TAIConfig,
   TMCPTool,
   TServer,
+  TModelCapabilities,
 } from "@docspace/ui-kit/types/ai";
 
-export type { TMessage, TChat, TAIConfig, TMCPTool, TServer };
+export type { TMessage, TChat, TAIConfig, TMCPTool, TServer, TModelCapabilities };
 
 export type TCreateAiProvider = {
   type: ProviderType;
@@ -176,12 +177,6 @@ export type TDefaultProvider = {
 export type TUpdateDefaultProviderData = {
   providerId: TAiProvider["id"];
   defaultModel: TModel["modelId"];
-};
-
-export type TModelCapabilities = {
-  vision: boolean;
-  toolCalling: boolean;
-  thinking: boolean;
 };
 
 export type TModelSettingsItem = {

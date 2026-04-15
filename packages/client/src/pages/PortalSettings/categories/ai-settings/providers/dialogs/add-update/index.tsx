@@ -581,6 +581,7 @@ const AddUpdateDialogComponent = ({
                     other={orderedModels.other}
                     selectedModelIds={modelSelection.selectedModelIds}
                     isCustomProvider={isCustomProvider}
+                    isSettingsOpen={!!modelSelection.settingsModelId}
                     onToggle={modelSelection.toggleModel}
                     onEditModel={modelSelection.openSettings}
                     onClose={modelSelection.closePopup}

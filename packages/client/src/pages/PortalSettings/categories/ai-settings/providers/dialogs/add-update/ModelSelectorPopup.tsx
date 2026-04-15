@@ -55,6 +55,7 @@ type ModelSelectorPopupProps = {
   other: TProviderModelInfo[];
   selectedModelIds: Set<string>;
   isCustomProvider: boolean;
+  isSettingsOpen: boolean;
   onToggle: (modelId: string) => void;
   onEditModel: (modelId: string) => void;
   onClose: () => void;
@@ -135,6 +136,7 @@ export const ModelSelectorPopup = ({
   other,
   selectedModelIds,
   isCustomProvider,
+  isSettingsOpen,
   onToggle,
   onEditModel,
   onClose,
@@ -159,7 +161,7 @@ export const ModelSelectorPopup = ({
   const isMobileLandscape = isMobileHardware && isLandscape;
 
   useEffect(() => {
-    if (isMobilePortrait) return;
+    if (isMobilePortrait || isSettingsOpen) return;
 
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -173,7 +175,7 @@ export const ModelSelectorPopup = ({
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [onClose, anchor, isMobilePortrait]);
+  }, [onClose, anchor, isMobilePortrait, isSettingsOpen]);
 
   const scrollHeight = useMemo(
     () => calcContentHeight(recommended, other, isCustomProvider),

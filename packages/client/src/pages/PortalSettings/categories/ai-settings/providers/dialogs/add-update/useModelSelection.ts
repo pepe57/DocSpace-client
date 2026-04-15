@@ -256,7 +256,6 @@ export const useModelSelection = (
         }
       }
       setSettingsModelId(modelId);
-      setIsPopupOpen(false);
     },
     [availableModels],
   );

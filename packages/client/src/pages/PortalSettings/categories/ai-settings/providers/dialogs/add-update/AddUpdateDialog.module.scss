@@ -97,6 +97,8 @@
 
   :global(.model-tag) {
     min-height: 24px;
+    max-width: calc(100% - 40px);
+    overflow: hidden;
     pointer-events: none;
     font-weight: 400;
     border-color: #{variables.$light-gray-selected};
