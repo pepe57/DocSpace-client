@@ -1840,7 +1840,7 @@ class FilesStore {
           filterData.searchArea = SearchArea.Active;
           const newUrl = getCategoryUrl(CategoryType.Chat, folderId);
 
-          history.pushState(null, "", `${newUrl}?${filterData.toUrlParams()}`);
+          history.replaceState(null, "", `${newUrl}?${filterData.toUrlParams()}`);
         }
 
         if (newTotal > 0) {
