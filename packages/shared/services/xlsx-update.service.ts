@@ -68,27 +68,26 @@ export class XlsxUpdateService {
   ): Promise<XlsxTask> {
     let attempts = 0;
 
-    const step: (seed: XlsxTask) => Promise<XlsxTask> = pipe(
+    const step: () => Promise<XlsxTask> = pipe(
       delay(1000),
       () => {
         if (++attempts > maxAttempts) throw new Error("XLSX update timed out");
         return getProgressXlsx(itemId) as Promise<XlsxTask>;
       },
-      (task: XlsxTask) => {
+      (task) => {
         onProgress(task);
         return task;
       },
       stopWhen(
-        (task: XlsxTask) => task.isCompleted,
-        (task: XlsxTask) => {
+        (task) => task.isCompleted,
+        (task) => {
           XlsxUpdateService.assertTaskSucceeded(task);
           return task;
         },
-        () => step(null as unknown as XlsxTask),
+        () => step(),
       ),
     );
 
-    return step(null as unknown as XlsxTask);
+    return step();
   }
 }
-
