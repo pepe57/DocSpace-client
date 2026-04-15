@@ -55,6 +55,7 @@ const PaymentsPage = (props) => {
     walletHelpUrl,
     getAIConfig,
     openOnNewPage,
+    isNotPaidPeriod,
   } = props;
   const location = useLocation();
   const tabIds = ["portal-payments", "payment-method", "wallet", "services"];
@@ -87,7 +88,7 @@ const PaymentsPage = (props) => {
         clearAbortControllerArr();
       },
     },
-    {
+    !isNotPaidPeriod && {
       id: "payment-method",
       name: t("Common:PaymentMethod"),
       content: <PaymentMethod />,
@@ -103,7 +104,7 @@ const PaymentsPage = (props) => {
         clearAbortControllerArr();
       },
     },
-    {
+    !isNotPaidPeriod && {
       id: "services",
       name: t("Settings:Services"),
       content: <ServicesList getAIConfig={getAIConfig} />,
@@ -111,7 +112,7 @@ const PaymentsPage = (props) => {
         clearAbortControllerArr();
       },
     },
-  ];
+  ].filter(Boolean);
 
   const onSelect = (e) => {
     const url = isManagement()
@@ -145,7 +146,13 @@ const PaymentsPage = (props) => {
 };
 
 export const Component = inject(
-  ({ settingsStore, authStore, userStore, filesSettingsStore }) => {
+  ({
+    settingsStore,
+    authStore,
+    userStore,
+    filesSettingsStore,
+    currentTariffStatusStore,
+  }) => {
     const {
       standalone,
       currentDeviceType,
@@ -157,6 +164,7 @@ export const Component = inject(
 
     const { user } = userStore;
     const { openOnNewPage } = filesSettingsStore;
+    const { isNotPaidPeriod } = currentTariffStatusStore;
 
     return {
       standalone,
@@ -166,6 +174,7 @@ export const Component = inject(
       walletHelpUrl,
       getAIConfig,
       openOnNewPage,
+      isNotPaidPeriod,
       language: authStore?.language,
       user: user
         ? {
