@@ -195,6 +195,7 @@ const SetRoomParams = ({
   const hasDatabaseConnection = externalDbEnabled;
   const showFormRoomBlock =
     isFormRoom && !(isRoomAdmin && !hasDatabaseConnection);
+  const canShowIntegrationsBar = !isRoomAdmin;
 
   const checkWidth = () => {
     if (!isMobile()) {
@@ -569,6 +570,7 @@ const SetRoomParams = ({
           setRoomParams={setRoomParams}
           isDisabled={isDisabled}
           hasDatabaseConnection={hasDatabaseConnection}
+          canShowIntegrationsBar={canShowIntegrationsBar}
         />
       ) : null}
 
