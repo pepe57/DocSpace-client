@@ -28,99 +28,53 @@
 
 @use "@docspace/ui-kit/styles/variables";
 
-.modalBody {
+.body {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-
+  gap: 25px;
   padding-top: 24px;
 }
 
-.resetKeyHint {
-  box-sizing: border-box;
-  padding: 12px 16px;
-  font-size: 12px;
-  line-height: 16px;
-  border-radius: 6px;
-  background: var(--ai-provider-key-hint-bg-color);
-  color: var(--ai-provider-key-hint-color);
-  margin-bottom: 4px;
-}
-
-.fieldHint {
+.hint {
   font-size: 12px;
   line-height: 16px;
   margin-top: 4px;
   color: variables.$gray;
+}
 
-  &.fieldHintError {
-    color: var(--input-error-color);
+.capabilitiesField {
+  label {
+    font-weight: 700 !important;
+    font-size: 16px;
+
+    height: auto;
+    padding-bottom: 2px;
+
+    span {
+      line-height: 22px !important ;
+    }
   }
 }
 
-.selectedModelsField {
+.capabilitiesDescription {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  color: variables.$gray;
+  margin-bottom: 16px;
+}
+
+.checkboxList {
   display: flex;
   flex-direction: column;
-  position: relative;
-  margin-top: 5px;
-}
+  gap: 14px;
 
-.selectedModelsLabel {
-  margin-bottom: 13px;
-}
-
-.requiredMark {
-  color: var(--input-error-color);
-}
-
-.addButtonAnchor {
-  display: inline-flex;
-  cursor: pointer;
-}
-
-.selectedModelsContainer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  row-gap: 4px;
-  :global(.add-model-tag) {
-    width: 32px;
-    min-height: 24px;
-    max-width: 32px;
-    pointer-events: none;
-
-    svg {
-      width: 12px;
-      height: 12px;
-    }
+  label {
+    padding-bottom: 0px;
   }
 
-  :global(.model-tag) {
-    min-height: 24px;
-    max-width: calc(100% - 40px);
-    overflow: hidden;
-    pointer-events: none;
-    font-weight: 400;
-    border-color: #{variables.$light-gray-selected};
-
-    :global(.dark) & {
-      border-color: #{variables.$gray-dark-strong};
-    }
-
-    &:hover {
-      background: var(--tag-background) !important;
-      border: var(--tag-border) !important;
-    }
-  }
-
-  &.selectedModelsError {
-    :global(.add-model-tag) {
-      border-color: var(--input-error-color) !important;
-    }
+  svg {
+    margin-inline-end: 8px !important;
   }
 }
 
-.selectedModelsErrorText {
-  color: var(--input-error-color);
-  margin-top: 4px;
-}
