@@ -89,6 +89,7 @@ const getFolderInfo = ({
       providerId: 1,
       modelId: "GPT-5.1",
       prompt: "",
+      multimodal: { image: { formats: [".png", ".jpg", ".jpeg", ".gif", ".webp"] } },
       capabilities: {
         vision: false,
         toolCalling: true,
