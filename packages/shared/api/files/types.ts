@@ -528,6 +528,7 @@ export type TDefaultTemplate = {
 
 export type UpdateXlsxResponse = {
   form: TFile;
+  isNewFile: boolean;
   task: {
     id: string;
     percentage: number;

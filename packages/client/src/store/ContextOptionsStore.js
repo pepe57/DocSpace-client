@@ -1598,15 +1598,12 @@ class ContextOptionsStore {
     const { clearSecondaryProgressData, setSecondaryProgressBarData } =
       this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
 
-    // TODO: Temporary workaround until backend implementation is ready
-    const isUpdate = true;
-
     try {
       const response = await XlsxUpdateService.start(item.id, isFolder(item));
 
       if (!response) return;
 
-      const { form, task } = response;
+      const { form, task, isNewFile } = response;
 
       if (task.isCompleted) {
         XlsxUpdateService.assertTaskSucceeded(task);
@@ -1633,9 +1630,9 @@ class ContextOptionsStore {
       const messageVar = { formName: form.title };
 
       toastr.success(
-        isUpdate
-          ? t("Common:SpreadsheetUpdated", messageVar)
-          : t("Common:SpreadsheetGenerated", messageVar),
+        isNewFile
+          ? t("Common:SpreadsheetGenerated", messageVar)
+          : t("Common:SpreadsheetUpdated", messageVar),
       );
     } catch (error) {
       toastr.error(error);
