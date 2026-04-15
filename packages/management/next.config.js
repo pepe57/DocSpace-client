@@ -28,6 +28,7 @@
 
 const path = require("path");
 const fs = require("fs");
+const os = require("os");
 
 // Use fs.readFileSync instead of require to avoid module system issues
 const packagePath = path.resolve(__dirname, "package.json");
@@ -44,16 +45,16 @@ const requireESM = createRequire(__filename);
 const buildModule = requireESM("@docspace/shared/utils/build");
 const { getBanner, getAllLocalIps } = buildModule.default;
 
+const productionMode = "production";
+const isDev = process.env.NODE_ENV !== productionMode;
 const version = pkg.version;
 const banner = getBanner(version);
-const localIps = getAllLocalIps(require("os"));
 
 const nextConfig = {
   basePath: "/management",
   typescript: {
     ignoreBuildErrors: true,
   },
-  allowedDevOrigins: localIps,
   serverExternalPackages: [
     "nconf",
     "date-and-time",
@@ -78,6 +79,11 @@ const nextConfig = {
 
 if (process.env.DEPLOY) {
   nextConfig.output = "standalone";
+}
+
+if (isDev) {
+  const localIps = getAllLocalIps(os);
+  nextConfig.allowedDevOrigins = localIps;
 }
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
