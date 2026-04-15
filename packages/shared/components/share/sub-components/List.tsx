@@ -88,6 +88,7 @@ const List: FC<ListProps> = (props) => {
     const temp: React.ReactElement<{
       isShareLink?: boolean;
       "data-share"?: boolean;
+      "data-restricted-bar"?: boolean;
       user: TUser;
       index?: number;
     }>[] = [];
@@ -97,6 +98,7 @@ const List: FC<ListProps> = (props) => {
         item as React.ReactElement<{
           isShareLink?: boolean;
           "data-share"?: boolean;
+          "data-restricted-bar"?: boolean;
           user: TUser;
           index?: number;
         }>,
