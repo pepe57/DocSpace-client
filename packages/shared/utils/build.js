@@ -44,7 +44,22 @@ const getBanner = (version) => `/*
 * Version: ${version} (build at: ${getBuildDate()})
 */`;
 
+const getAllLocalIps = (os) => {
+  const interfaces = os.networkInterfaces();
+  const ips = ["localhost", "127.0.0.1"];
+
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      if (iface.family === "IPv4") {
+        ips.push(iface.address);
+      }
+    }
+  }
+  return ips;
+};
+
 export default {
   getBuildDate,
   getBanner,
+  getAllLocalIps,
 };

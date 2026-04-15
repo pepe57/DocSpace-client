@@ -42,16 +42,18 @@ const { createRequire } = require("module");
 const requireESM = createRequire(__filename);
 
 const buildModule = requireESM("@docspace/shared/utils/build");
-const { getBanner } = buildModule.default;
+const { getBanner, getAllLocalIps } = buildModule.default;
 
 const version = pkg.version;
 const banner = getBanner(version);
+const localIps = getAllLocalIps(require("os"));
 
 const nextConfig = {
   basePath: "/management",
   typescript: {
     ignoreBuildErrors: true,
   },
+  allowedDevOrigins: localIps,
   serverExternalPackages: [
     "nconf",
     "date-and-time",
