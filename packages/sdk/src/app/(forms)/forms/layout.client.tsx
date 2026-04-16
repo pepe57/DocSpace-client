@@ -466,10 +466,15 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   // Show welcome dialog on first visit
   const [showWelcome, setShowWelcome] = React.useState(false);
   React.useEffect(() => {
-    if (isReady && !tourStore.tourCompleted) {
+    if (
+      isReady &&
+      !tourStore.tourCompleted &&
+      !tourStore.isRunning &&
+      activeSection === FormsSection.MyForms
+    ) {
       setShowWelcome(true);
     }
-  }, [isReady, tourStore.tourCompleted]);
+  }, [isReady, tourStore.tourCompleted, tourStore.isRunning, activeSection]);
 
   // Clean up mock data when tour ends
   const prevTourRunning = React.useRef(tourStore.isRunning);

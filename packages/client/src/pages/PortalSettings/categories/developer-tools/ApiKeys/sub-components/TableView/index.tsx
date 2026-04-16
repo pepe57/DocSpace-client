@@ -53,9 +53,8 @@ const TableWrapper = styled(TableContainer).attrs(injectDefaultTheme)`
         props.theme.filesSection.tableView.row.backgroundActive};
 
       .table-container_cell {
-        margin-top: -1px;
-        border-top: ${(props) =>
-          `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
+        box-shadow: ${(props) =>
+          `0 -1px 0 0 ${props.theme.filesSection.tableView.row.borderColor}`};
 
         margin-inline-start: -24px;
         padding-inline-start: 24px;
@@ -69,8 +68,7 @@ const TableWrapper = styled(TableContainer).attrs(injectDefaultTheme)`
 
     &:first-child:hover {
       .table-container_cell {
-        margin-top: 0;
-        border-top: none;
+        box-shadow: none;
       }
     }
   }
@@ -155,3 +153,4 @@ export default inject(({ setup, settingsStore, userStore }: TStore) => {
     culture,
   };
 })(observer(TableView));
+
