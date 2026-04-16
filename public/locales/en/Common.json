@@ -1545,7 +1545,7 @@
   "YouWillBeContacted": "The sales team will contact you after creating the request.",
   "RoomTags": "<bold>{{roomName}}</bold> room tags",
   "BlockedByAdmin": "Blocked by admin",
-  "ExternalAccessDisabledByAdmin": "External access is disabled by administrator policy",
+  "ExternalAccessDisabledByAdmin": "External access is disabled by administrator policy.",
   "ExternalLinksDisabledByAdmin": "External links are disabled by your administrator.",
   "ExternalLinksDisabledForGuests": "Guests cannot access this room because external links are disabled by your administrator.",
   "LinkBlockedByAdminWarning": "This link is blocked by admin and won't work for external users"
