@@ -246,7 +246,7 @@ const AccessControl = ({
   const defaultLinkTypeOptions = [
     {
       id: "default-link-type-anyone",
-      label: t("Settings:DefaultLinkTypeAnyone"),
+      label: t("Common:AnyoneWithLink"),
       value: "false",
       dataTestId: "default_link_type_anyone",
     },
@@ -469,4 +469,3 @@ export const AccessControlSection = inject(({ filesSettingsStore }: TStore) => {
     settingsIsLoaded,
   };
 })(observer(AccessControl));
-

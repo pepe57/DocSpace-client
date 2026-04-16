@@ -330,7 +330,6 @@
   "ExternalSharingRestricted": "Restricted ({{productName}} users only)",
   "DefaultSharingLinkType": "Default Sharing Link Type",
   "DefaultSharingLinkTypeDescription": "Configure which link type is selected by default when users create a sharing link.",
-  "DefaultLinkTypeAnyone": "Anyone with the link",
   "DefaultLinkTypeInternal": "{{productName}} users only",
   "AppliesTo": "Applies to:",
   "AppliesToDocuments": "{{myDocuments}} (Including shared folders/files from the {{myDocuments}})",
