@@ -106,6 +106,105 @@ function contextMenuStep(
   };
 }
 
+function navSectionStep(
+  section: string,
+  title: string,
+  content: string,
+  showMenu: boolean,
+  callbacks?: TourStepCallbacks,
+  extraBefore?: () => Promise<void>,
+): Step {
+  const path = `/forms/${section}`;
+  const navItemSelector = `#forms-nav-${section}`;
+  const anchorSelector = `[data-tour="section-${section}"]`;
+  const target = showMenu ? navItemSelector : anchorSelector;
+
+  return {
+    target,
+    spotlightTarget: showMenu
+      ? () => {
+          // When sidebar shows text, spotlight the article item container (full-width nav item).
+          // When sidebar is icon-only (narrow), spotlight the invisible content-header anchor
+          // instead — it sits directly behind the visible section title in the header.
+          const articleContainer = document.querySelector("#article-container");
+          const isTextVisible =
+            articleContainer?.getAttribute("data-show-text") === "true";
+
+          if (isTextVisible) {
+            const wrapper = document.querySelector(navItemSelector) as HTMLElement | null;
+            return (wrapper?.firstElementChild as HTMLElement) ?? wrapper;
+          }
+
+          // The tourAnchor CSS now mirrors Navigation .heading at every breakpoint
+          // (18px desktop/mobile, 21px tablet), so its getBoundingClientRect()
+          // always matches the visible title text.
+          return document.querySelector(anchorSelector) as HTMLElement | null;
+        }
+      : undefined,
+    placement: "auto" as const,
+    content,
+    title,
+    data: { page: path } satisfies TourStepData,
+    skipBeacon: true,
+    before: async () => {
+      if (!showMenu) {
+        callbacks?.navigate(path);
+        await waitForElement(anchorSelector).catch(() => {});
+      }
+      if (extraBefore) await extraBefore();
+      // Outline the visible nav item (invisible anchors don't need it)
+      if (showMenu) {
+        await waitForElement(navItemSelector).catch(() => {});
+        document
+          .querySelector(navItemSelector)
+          ?.classList.add("tour-outline-item");
+      }
+    },
+    after: () => {
+      document
+        .querySelector(".tour-outline-item")
+        ?.classList.remove("tour-outline-item");
+    },
+  };
+}
+
+function settingsStep(
+  subSection: "billing" | "ai-agent" | "access" | "collect-data",
+  title: string,
+  content: string,
+  callbacks?: TourStepCallbacks,
+): Step {
+  const path = `/forms/settings/${subSection}`;
+  // Wait for the *page content* element, not the tab — the tab is always in the
+  // DOM (Tabs renders all items at once), so waiting for it resolves before the
+  // URL actually changes.  The page wrapper is unmounted/remounted on each route
+  // transition, so it only appears once navigation has fully completed.
+  const pageSelector = `[data-tour="settings-${subSection}"]`;
+  const tabSelector = `[data-testid="${subSection}_tab"]`;
+  const containerSelector = '[data-tour="settings-spotlight"]';
+
+  return {
+    target: containerSelector,
+    spotlightPadding: 8,
+    placement: "auto" as const,
+    content,
+    title,
+    data: { page: path } satisfies TourStepData,
+    skipBeacon: true,
+    before: async () => {
+      callbacks?.navigate(path);
+      await waitForElement(pageSelector);
+      (document.querySelector(tabSelector) as HTMLElement | null)
+        ?.setAttribute("data-tour-active", "true");
+    },
+    after: () => {
+      document
+        .querySelector("[data-tour-active]")
+        ?.removeAttribute("data-tour-active");
+    },
+  };
+}
+
 export function getTourSteps(
   t: TFunction,
   callbacks?: TourStepCallbacks,
@@ -116,26 +215,16 @@ export function getTourSteps(
 
   return [
     // My Forms
-    {
-      target: showMenu
-        ? "#forms-nav-my-forms"
-        : '[data-tour="section-my-forms"]',
-      content: t(
+    navSectionStep(
+      "my-forms",
+      t("Common:MyForms"),
+      t(
         "Common:TourMyForms",
         "This is your main workspace. All your PDF forms are stored here. Upload new forms or create them from scratch.",
       ),
-      title: t("Common:MyForms"),
-      data: { page: "/forms/my-forms" } satisfies TourStepData,
-      skipBeacon: true,
-      ...(!showMenu && {
-        before: async () => {
-          callbacks?.navigate("/forms/my-forms");
-          await waitForElement('[data-tour="section-my-forms"]').catch(
-            () => {},
-          );
-        },
-      }),
-    },
+      showMenu,
+      callbacks,
+    ),
     // Plus button — only with Create permission
     canCreate && {
       target: '[data-testid="plus-button"]',
@@ -160,47 +249,27 @@ export function getTourSteps(
         callbacks,
       ),
     // In Progress
-    {
-      target: showMenu
-        ? "#forms-nav-in-progress"
-        : '[data-tour="section-in-progress"]',
-      content: t(
+    navSectionStep(
+      "in-progress",
+      t("Common:InProgress"),
+      t(
         "Common:TourInProgress",
         "Each folder corresponds to a specific form and contains draft files from people who started filling but haven't submitted yet.",
       ),
-      title: t("Common:InProgress"),
-      data: { page: "/forms/in-progress" } satisfies TourStepData,
-      skipBeacon: true,
-      ...(!showMenu && {
-        before: async () => {
-          callbacks?.navigate("/forms/in-progress");
-          await waitForElement('[data-tour="section-in-progress"]').catch(
-            () => {},
-          );
-        },
-      }),
-    },
+      showMenu,
+      callbacks,
+    ),
     // Completed Forms
-    {
-      target: showMenu
-        ? "#forms-nav-completed-forms"
-        : '[data-tour="section-completed-forms"]',
-      content: t(
+    navSectionStep(
+      "completed-forms",
+      t("Common:CompletedForms"),
+      t(
         "Common:TourCompletedForms",
         "Each folder contains all submitted copies of a specific form, organized by submission.",
       ),
-      title: t("Common:CompletedForms"),
-      data: { page: "/forms/completed-forms" } satisfies TourStepData,
-      skipBeacon: true,
-      ...(!showMenu && {
-        before: async () => {
-          callbacks?.navigate("/forms/completed-forms");
-          await waitForElement(
-            '[data-tour="section-completed-forms"]',
-          ).catch(() => {});
-        },
-      }),
-    },
+      showMenu,
+      callbacks,
+    ),
     // Inside completed folder + AI Chat
     {
       target: '[data-tour="forms-grid"]',
@@ -220,85 +289,60 @@ export function getTourSteps(
       },
     },
     // Library — only if visible
-    showLibrary && {
-      target: showMenu
-        ? "#forms-nav-library"
-        : '[data-tour="section-library"]',
-      content: t(
-        "Common:TourLibrary",
-        "Browse ready-made form templates. Pick a template to quickly create a new form without starting from scratch.",
+    showLibrary &&
+      navSectionStep(
+        "library",
+        t("Common:Library"),
+        t(
+          "Common:TourLibrary",
+          "Browse ready-made form templates. Pick a template to quickly create a new form without starting from scratch.",
+        ),
+        showMenu,
+        callbacks,
       ),
-      title: t("Common:Library"),
-      data: { page: "/forms/library" } satisfies TourStepData,
-      skipBeacon: true,
-      ...(!showMenu && {
-        before: async () => {
-          callbacks?.navigate("/forms/library");
-          await waitForElement('[data-tour="section-library"]').catch(
-            () => {},
-          );
-        },
-      }),
-    },
     // Settings — Billing — only for Owner/Admin
-    showSettings && {
-      target: '[data-tour="settings-billing"]',
-      content: t(
-        "Common:TourBilling",
-        "Manage your subscription plan and payment details for this forms room.",
+    showSettings &&
+      settingsStep(
+        "billing",
+        t("Common:Billing", "Billing"),
+        t(
+          "Common:TourBilling",
+          "Manage your subscription plan and payment details for this forms room.",
+        ),
+        callbacks,
       ),
-      title: t("Common:Billing", "Billing"),
-      data: { page: "/forms/settings/billing" } satisfies TourStepData,
-      skipBeacon: true,
-      before: async () => {
-        callbacks?.navigate("/forms/settings/billing");
-        await waitForElement('[data-tour="settings-billing"]');
-      },
-    },
     // Settings — AI Agent — only for Owner/Admin
-    showSettings && {
-      target: '[data-tour="settings-ai-agent"]',
-      content: t(
-        "Common:TourAiAgent",
-        "Enable the AI agent to automatically process submitted forms, extract data, and assist with form review.",
+    showSettings &&
+      settingsStep(
+        "ai-agent",
+        t("Common:AIAgent"),
+        t(
+          "Common:TourAiAgent",
+          "Enable the AI agent to automatically process submitted forms, extract data, and assist with form review.",
+        ),
+        callbacks,
       ),
-      title: t("Common:AIAgent"),
-      data: { page: "/forms/settings/ai-agent" } satisfies TourStepData,
-      skipBeacon: true,
-      before: async () => {
-        callbacks?.navigate("/forms/settings/ai-agent");
-        await waitForElement('[data-tour="settings-ai-agent"]');
-      },
-    },
     // Settings — Access — only for Owner/Admin
-    showSettings && {
-      target: '[data-tour="settings-access"]',
-      content: t(
-        "Common:TourAccess",
-        "Manage who can access this forms room. Add Form Admins and Form Managers to control permissions.",
+    showSettings &&
+      settingsStep(
+        "access",
+        t("Common:AccessSettings", "Access Settings"),
+        t(
+          "Common:TourAccess",
+          "Manage who can access this forms room. Add Form Admins and Form Managers to control permissions.",
+        ),
+        callbacks,
       ),
-      title: t("Common:AccessSettings", "Access Settings"),
-      data: { page: "/forms/settings/access" } satisfies TourStepData,
-      skipBeacon: true,
-      before: async () => {
-        callbacks?.navigate("/forms/settings/access");
-        await waitForElement('[data-tour="settings-access"]');
-      },
-    },
     // Settings — Collect Data — only for Owner/Admin
-    showSettings && {
-      target: '[data-tour="settings-collect-data"]',
-      content: t(
-        "Common:TourCollectData",
-        "Set up automatic data collection from completed forms. Export results to XLSX or connect a MySQL database.",
+    showSettings &&
+      settingsStep(
+        "collect-data",
+        t("Common:CollectData"),
+        t(
+          "Common:TourCollectData",
+          "Set up automatic data collection from completed forms. Export results to XLSX or connect a MySQL database.",
+        ),
+        callbacks,
       ),
-      title: t("Common:CollectData"),
-      data: { page: "/forms/settings/collect-data" } satisfies TourStepData,
-      skipBeacon: true,
-      before: async () => {
-        callbacks?.navigate("/forms/settings/collect-data");
-        await waitForElement('[data-tour="settings-collect-data"]');
-      },
-    },
   ].filter(Boolean) as Step[];
 }

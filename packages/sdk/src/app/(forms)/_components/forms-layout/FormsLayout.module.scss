@@ -1,3 +1,5 @@
+@use "@docspace/ui-kit/styles/mixins";
+
 .root {
   display: flex;
   width: 100%;
@@ -38,7 +40,20 @@
   opacity: 0;
   font-size: 18px;
   font-weight: 700;
+  line-height: 24px;
   white-space: nowrap;
+
+  // Match Navigation .heading which grows to 21px on tablet
+  @include mixins.tablet-and-below {
+    font-size: 21px;
+    line-height: 28px;
+  }
+
+  // Navigation .heading resets back to 18px on mobile
+  @include mixins.mobile {
+    font-size: 18px;
+    line-height: 24px;
+  }
 }
 
 .root :global([class*="Navigation_item"]:not([class*="itemWrapper"])) {

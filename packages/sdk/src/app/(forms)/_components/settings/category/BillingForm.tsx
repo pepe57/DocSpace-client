@@ -36,6 +36,7 @@ import { BillingRoot, Wallet, PaymentMethod } from "@docspace/ui-kit/billing";
 import AiPage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
 import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
 import { useFormsUserStore } from "../../../_store/FormsUserStore";
+import { useFormsTourStore } from "../../../_store/FormsTourStore";
 
 import WalletIcon from "@docspace/ui-kit/assets/icons/16/wallet.react.svg";
 import AiIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
@@ -94,6 +95,7 @@ const getTabDescription = (id: BillingTab, t: (key: string) => string) => {
 const BillingForm = () => {
   const { t, i18n } = useTranslation();
   const { user } = useFormsUserStore();
+  const tourStore = useFormsTourStore();
   const [activeTab, setActiveTab] = React.useState<BillingTab>("ai");
 
   const onOpenBilling = React.useCallback(() => {
@@ -162,17 +164,19 @@ const BillingForm = () => {
         ))}
       </div>
 
-      <MemoryRouter>
-        <BillingRoot config={billingConfig}>
-          <div key={activeTab} className={styles.billingContent}>
-            {activeTab === "payment-method" && <PaymentMethod />}
-            {activeTab === "wallet" && (
-              <Wallet showPortalSettingsLoader={false} />
-            )}
-            {activeTab === "ai" && <AiPage />}
-          </div>
-        </BillingRoot>
-      </MemoryRouter>
+      {!tourStore.showMockItems && (
+        <MemoryRouter>
+          <BillingRoot config={billingConfig}>
+            <div key={activeTab} className={styles.billingContent}>
+              {activeTab === "payment-method" && <PaymentMethod />}
+              {activeTab === "wallet" && (
+                <Wallet showPortalSettingsLoader={false} />
+              )}
+              {activeTab === "ai" && <AiPage />}
+            </div>
+          </BillingRoot>
+        </MemoryRouter>
+      )}
     </div>
   );
 };
