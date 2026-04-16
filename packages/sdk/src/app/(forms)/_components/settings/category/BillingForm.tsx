@@ -38,6 +38,9 @@ import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
 import { useFormsUserStore } from "../../../_store/FormsUserStore";
 import { useFormsTourStore } from "../../../_store/FormsTourStore";
 
+import { BillingCards, type BillingCardTab } from "@/components/BillingCards";
+import cardStyles from "@/components/BillingCards/BillingCards.module.scss";
+
 import WalletIcon from "@docspace/ui-kit/assets/icons/16/wallet.react.svg";
 import AiIcon from "@docspace/ui-kit/assets/icons/16/ai-agents.svg";
 import CardIcon from "@docspace/ui-kit/assets/icons/16/card.react.svg";
@@ -46,19 +49,12 @@ import styles from "./SettingsPanel.module.scss";
 
 const PAYMENTS_PATH = "/portal-settings/payments/portal-payments";
 
-const BILLING_ROUTES: TPaymentConfig["routes"] = {
-  portalPayments: "/portal-settings/payments",
-  services: "/portal-settings/payments/services",
-  aiServices: "/portal-settings/payments/services/ai",
-  backup: "/portal-settings/payments/services/backup",
-  diskStorage: "/portal-settings/payments/services/disk-storage",
-};
-
 type BillingTab = "wallet" | "ai" | "payment-method";
 
-const TABS: {
+const TAB_DEFS: {
   id: BillingTab;
   titleKey: string;
+  tKey: string;
   iconClass: string;
   icon: React.ReactNode;
   nativeIcon?: boolean;
@@ -66,31 +62,26 @@ const TABS: {
   {
     id: "wallet",
     titleKey: "Wallet",
-    iconClass: styles.billingIconWallet,
+    tKey: "BillingWalletCardDesc",
+    iconClass: cardStyles.billingIconWallet,
     icon: <WalletIcon />,
   },
   {
     id: "ai",
     titleKey: "OrganizationAI",
-    iconClass: styles.billingIconAi,
+    tKey: "BillingAICardDesc",
+    iconClass: cardStyles.billingIconAi,
     icon: <AiIcon />,
   },
   {
     id: "payment-method",
     titleKey: "PaymentMethod",
-    iconClass: styles.billingIconPayment,
+    tKey: "BillingPaymentMethodCardDesc",
+    iconClass: cardStyles.billingIconPayment,
     icon: <CardIcon />,
     nativeIcon: true,
   },
 ];
-
-const getTabDescription = (id: BillingTab, t: (key: string) => string) => {
-  switch (id) {
-    case "wallet": return t("BillingWalletCardDesc");
-    case "ai": return t("BillingAICardDesc");
-    case "payment-method": return t("BillingPaymentMethodCardDesc");
-  }
-};
 
 const BillingForm = () => {
   const { t, i18n } = useTranslation();
@@ -106,7 +97,6 @@ const BillingForm = () => {
   const billingConfig = React.useMemo<TPaymentConfig>(
     () => ({
       language: i18n.language || "en",
-      routes: BILLING_ROUTES,
       user: user
         ? {
             id: user.id,
@@ -117,6 +107,18 @@ const BillingForm = () => {
     }),
     [i18n.language, user],
   );
+
+  const tabs: BillingCardTab[] = TAB_DEFS.map((d) => ({
+    id: d.id,
+    title: t(d.titleKey, {
+      productName: t("ProductName"),
+      organizationName: t("OrganizationName"),
+    }),
+    description: t(d.tKey),
+    iconClass: d.iconClass,
+    icon: d.icon,
+    nativeIcon: d.nativeIcon,
+  }));
 
   return (
     <div className={styles.billingWrapper}>
@@ -133,36 +135,11 @@ const BillingForm = () => {
         </Link>
       </Text>
 
-      <div className={styles.billingCards}>
-        {TABS.map((tab) => (
-          <div
-            key={tab.id}
-            className={`${styles.billingCard} ${activeTab === tab.id ? styles.billingCardActive : ""}`}
-            onClick={() => setActiveTab(tab.id)}
-          >
-            <div className={`${styles.billingCardIcon} ${tab.iconClass}`}>
-              {tab.nativeIcon ? (
-                tab.icon
-              ) : (
-                <span className={styles.billingCardIconInner}>
-                  {tab.icon}
-                </span>
-              )}
-            </div>
-            <div className={styles.billingCardText}>
-              <Text fontSize="13px" fontWeight={600} truncate>
-                {t(tab.titleKey, {
-                  productName: t("ProductName"),
-                  organizationName: t("OrganizationName"),
-                })}
-              </Text>
-              <Text fontSize="11px" className={styles.billingCardDesc}>
-                {getTabDescription(tab.id, t)}
-              </Text>
-            </div>
-          </div>
-        ))}
-      </div>
+      <BillingCards
+        tabs={tabs}
+        activeTab={activeTab}
+        onTabChange={(id) => setActiveTab(id as BillingTab)}
+      />
 
       {!tourStore.showMockItems && (
         <MemoryRouter>
