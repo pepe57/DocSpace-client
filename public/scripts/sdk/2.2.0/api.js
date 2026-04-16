@@ -1616,9 +1616,18 @@
    * @param data - The message data containing the command name and parameters.
    */
   executeCommand_fn = function(data) {
+    var _a, _b, _c, _d;
     if (!data.commandName) return;
     if (!__privateGet(_SDKInstance, _allowedCommands).has(data.commandName)) {
       console.warn("Blocked iframe command not in allowlist:", data.commandName);
+      return;
+    }
+    if (data.commandName === "getExternalData") {
+      (_b = (_a = this.config.events) == null ? void 0 : _a.onGetExternalData) == null ? void 0 : _b.call(_a, data.commandData);
+      return;
+    }
+    if (data.commandName === "setExternalData") {
+      (_d = (_c = this.config.events) == null ? void 0 : _c.onSetExternalData) == null ? void 0 : _d.call(_c, data.commandData);
       return;
     }
     const command = this[data.commandName];
@@ -1794,7 +1803,9 @@
   /** Methods the iframe is allowed to invoke via `onCallCommand`. */
   __privateAdd(_SDKInstance, _allowedCommands, /* @__PURE__ */ new Set([
     "setIsLoaded",
-    "setConfig"
+    "setConfig",
+    "getExternalData",
+    "setExternalData"
   ]));
   var SDKInstance = _SDKInstance;
 
