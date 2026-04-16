@@ -28,6 +28,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
 import { MemoryRouter } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
@@ -158,5 +159,5 @@ const BillingForm = () => {
   );
 };
 
-export default BillingForm;
+export default observer(BillingForm);
 

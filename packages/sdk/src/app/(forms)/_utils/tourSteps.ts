@@ -199,7 +199,7 @@ function settingsStep(
     },
     after: () => {
       document
-        .querySelector("[data-tour-active]")
+        .querySelector(tabSelector)
         ?.removeAttribute("data-tour-active");
     },
   };

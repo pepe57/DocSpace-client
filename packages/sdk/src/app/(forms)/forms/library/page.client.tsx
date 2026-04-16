@@ -28,6 +28,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { observer } from "mobx-react";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -134,4 +135,4 @@ const LibraryPage = () => {
   );
 };
 
-export default LibraryPage;
+export default observer(LibraryPage);

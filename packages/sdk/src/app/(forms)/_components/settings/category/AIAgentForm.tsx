@@ -297,7 +297,7 @@ const AIAgentForm = ({ inline }: AIAgentFormProps) => {
         <Text fontSize="12px" fontWeight={400}>
           {t("Common:AIAgentDescription")}
         </Text>
-        {isCheckingProviders && (
+        {!tourStore.showMockItems && isCheckingProviders && (
           <div className={styles.statusRow}>
             <Loader type={LoaderTypes.track} size="16px" />
             <Text fontSize="12px">{t("Common:CheckingAIProviders")}</Text>
