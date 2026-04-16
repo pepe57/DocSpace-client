@@ -40,6 +40,7 @@ type FormRoomBlockProps = {
   setRoomParams: (params: Record<string, unknown>) => void;
   isDisabled?: boolean;
   hasDatabaseConnection?: boolean;
+  canShowIntegrationsBar?: boolean;
 };
 
 const FormRoomBlock = ({
@@ -48,6 +49,7 @@ const FormRoomBlock = ({
   setRoomParams,
   isDisabled,
   hasDatabaseConnection,
+  canShowIntegrationsBar = true,
 }: FormRoomBlockProps) => {
   const onSaveFormAsXLSXChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRoomParams({
@@ -75,7 +77,6 @@ const FormRoomBlock = ({
         onCheckedChange={onSaveFormAsXLSXChange}
         isDisabled={isDisabled}
       />
-
       <ToggleParam
         id="send-form-to-external-db"
         title={t("Common:ExportResultsToDatabase")}
@@ -84,8 +85,9 @@ const FormRoomBlock = ({
         onCheckedChange={onSendFormToExternalDBChange}
         isDisabled={isDisabled || !hasDatabaseConnection}
       />
-
-      <IntegrationBar t={t} hasDatabaseConnection={hasDatabaseConnection} />
+      {canShowIntegrationsBar && (
+        <IntegrationBar t={t} hasDatabaseConnection={hasDatabaseConnection} />
+      )}
     </div>
   );
 };
