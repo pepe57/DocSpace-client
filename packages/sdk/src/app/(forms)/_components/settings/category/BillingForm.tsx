@@ -28,6 +28,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
 import { MemoryRouter } from "react-router";
 
 import { Text } from "@docspace/ui-kit/components/text";
@@ -36,6 +37,7 @@ import { BillingRoot, Wallet, PaymentMethod } from "@docspace/ui-kit/billing";
 import AiPage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
 import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
 import { useFormsUserStore } from "../../../_store/FormsUserStore";
+import { useFormsTourStore } from "../../../_store/FormsTourStore";
 
 import { BillingCards, type BillingCardTab } from "@/components/BillingCards";
 import cardStyles from "@/components/BillingCards/BillingCards.module.scss";
@@ -85,6 +87,7 @@ const TAB_DEFS: {
 const BillingForm = () => {
   const { t, i18n } = useTranslation();
   const { user } = useFormsUserStore();
+  const tourStore = useFormsTourStore();
   const [activeTab, setActiveTab] = React.useState<BillingTab>("ai");
 
   const onOpenBilling = React.useCallback(() => {
@@ -139,20 +142,22 @@ const BillingForm = () => {
         onTabChange={(id) => setActiveTab(id as BillingTab)}
       />
 
-      <MemoryRouter>
-        <BillingRoot config={billingConfig}>
-          <div key={activeTab} className={styles.billingContent}>
-            {activeTab === "payment-method" && <PaymentMethod />}
-            {activeTab === "wallet" && (
-              <Wallet showPortalSettingsLoader={false} />
-            )}
-            {activeTab === "ai" && <AiPage />}
-          </div>
-        </BillingRoot>
-      </MemoryRouter>
+      {!tourStore.showMockItems && (
+        <MemoryRouter>
+          <BillingRoot config={billingConfig}>
+            <div key={activeTab} className={styles.billingContent}>
+              {activeTab === "payment-method" && <PaymentMethod />}
+              {activeTab === "wallet" && (
+                <Wallet showPortalSettingsLoader={false} />
+              )}
+              {activeTab === "ai" && <AiPage />}
+            </div>
+          </BillingRoot>
+        </MemoryRouter>
+      )}
     </div>
   );
 };
 
-export default BillingForm;
+export default observer(BillingForm);
 

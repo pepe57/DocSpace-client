@@ -110,7 +110,7 @@ export default function useFormsTour(showMenu = true) {
     steps,
     stepIndex: tourStore.stepIndex,
     run: tourStore.isRunning,
-    scrollToFirstStep: true,
+    scrollToFirstStep: false,
     tooltipComponent: TourTooltip,
     options: {
       arrowColor: isBase ? globalColors.white : globalColors.black,
@@ -119,6 +119,7 @@ export default function useFormsTour(showMenu = true) {
       overlayColor: "rgba(0, 0, 0, 0.5)",
       overlayClickAction: "close",
       blockTargetInteraction: true,
+      skipScroll: true,
       zIndex: 10000,
     },
     locale: {
@@ -129,6 +130,42 @@ export default function useFormsTour(showMenu = true) {
       skip: t("Common:Skip"),
     },
   });
+
+  // Prefetch all tour routes when the tour starts so bundle loading
+  // doesn't stall the tour transitions later.
+  useEffect(() => {
+    if (!tourStore.isRunning) return;
+
+    const sp = searchParamsRef.current;
+    const params = new URLSearchParams();
+    const rid = sp.get("roomId") ?? "";
+    const lid = sp.get("libraryId") ?? "";
+    if (rid) params.set("roomId", rid);
+    if (lid) params.set("libraryId", lid);
+    const qs = params.toString();
+    const qs_suffix = qs ? `?${qs}` : "";
+
+    const routes: string[] = [
+      `/forms/my-forms${qs_suffix}`,
+      `/forms/in-progress${qs_suffix}`,
+      `/forms/completed-forms${qs_suffix}`,
+    ];
+
+    if (showLibrary) routes.push(`/forms/library${qs_suffix}`);
+
+    if (showSettings) {
+      routes.push(
+        `/forms/settings/billing${qs_suffix}`,
+        `/forms/settings/ai-agent${qs_suffix}`,
+        `/forms/settings/access${qs_suffix}`,
+        `/forms/settings/collect-data${qs_suffix}`,
+      );
+    }
+
+    for (const route of routes) {
+      router.prefetch(route);
+    }
+  }, [tourStore.isRunning, showLibrary, showSettings, router]);
 
   useEffect(() => {
     const dismissContextMenu = () => {
@@ -159,7 +196,10 @@ export default function useFormsTour(showMenu = true) {
       }
 
       const currentPathname = pathnameRef.current;
-      if (targetPage && !currentPathname.startsWith(targetPage)) {
+      const willNavigate =
+        !!targetPage && !currentPathname.startsWith(targetPage);
+
+      if (willNavigate) {
         const sp = searchParamsRef.current;
         const params = new URLSearchParams();
         const rid = sp.get("roomId") ?? "";

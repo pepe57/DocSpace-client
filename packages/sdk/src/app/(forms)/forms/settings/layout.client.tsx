@@ -42,6 +42,8 @@ import {
 } from "../../_utils/sectionFromPathname";
 import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
+import { useFormsTourStore } from "../../_store/FormsTourStore";
+import { createMockRoomMembers } from "../../_utils/mockFormFiles";
 
 type SettingsMembersContextValue = {
   members: RoomMember[];
@@ -68,13 +70,16 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
   const router = useRouter();
   const { roomId } = useFormsSettingsStore();
   const aiStore = useFormsAiAgentStore();
+  const tourStore = useFormsTourStore();
 
   const activeSubSection = settingsSubSectionFromPathname(pathname);
 
-  const [members, setMembers] = React.useState<RoomMember[]>([]);
+  const [members, setMembers] = React.useState<RoomMember[]>(() =>
+    tourStore.showMockItems ? createMockRoomMembers() : [],
+  );
 
   const fetchMembers = React.useCallback(() => {
-    if (!roomId) return;
+    if (!roomId || tourStore.showMockItems) return;
 
     getRoomMembers(roomId, {})
       .then((res) => {
@@ -86,10 +91,10 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
         }
       })
       .catch(() => {});
-  }, [roomId, aiStore]);
+  }, [roomId, aiStore, tourStore.showMockItems]);
 
   React.useEffect(() => {
-    if (!roomId) return;
+    if (!roomId || tourStore.showMockItems) return;
 
     const abortController = new AbortController();
 
@@ -102,7 +107,7 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
     return () => {
       abortController.abort();
     };
-  }, [roomId]);
+  }, [roomId, tourStore.showMockItems]);
 
   const membersCtx = React.useMemo(
     () => ({ members, fetchMembers }),
@@ -155,7 +160,18 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
 
   return (
     <SettingsMembersContext.Provider value={membersCtx}>
-      <div>
+      <div data-tour="settings-container" style={{ position: "relative" }}>
+        <div
+          data-tour="settings-spotlight"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 360,
+            pointerEvents: "none",
+          }}
+        />
         <Tabs
           items={tabs}
           selectedItemId={activeSubSection}
