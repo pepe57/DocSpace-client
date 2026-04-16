@@ -157,15 +157,23 @@
 // Billing
 
 .billingNotice {
-  color: var(--text-disable-color);
+  color: var(--payment-text-color);
 }
 
 .billingPortalLink {
-  color: var(--text-disable-color);
+  color: var(--payment-text-color);
   text-decoration: underline dashed;
 }
 
 .billingWrapper {
+  --billing-card-bg: #{colors.$white};
+  --billing-card-shadow: rgba(0, 0, 0, 0.06);
+
+  :global(.dark) & {
+    --billing-card-bg: #{colors.$dark-gray-light};
+    --billing-card-shadow: rgba(255, 255, 255, 0.04);
+  }
+
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -185,7 +193,7 @@
   padding: 12px;
   border-radius: 10px;
   border: 1px solid var(--modal-dialog-header-border-color);
-  background-color: var(--color-background, #{colors.$white});
+  background-color: var(--billing-card-bg);
   cursor: pointer;
   opacity: 0.75;
   transition:
@@ -201,8 +209,13 @@
     background-color: color-mix(
       in srgb,
       var(--color-scheme-main-accent) 4%,
-      var(--color-background, #{colors.$white})
+      var(--billing-card-bg)
     );
+
+    :global(.dark) & {
+      border-color: #{colors.$gray-dark-strong};
+      background-color: #{colors.$light-dark-gray-hover};
+    }
   }
 
   &:active {
@@ -216,12 +229,18 @@
   border-color: var(--color-scheme-main-accent);
   box-shadow:
     0 0 0 1px var(--color-scheme-main-accent),
-    0 2px 8px rgba(0, 0, 0, 0.06);
+    0 2px 8px var(--billing-card-shadow);
   background-color: color-mix(
     in srgb,
     var(--color-scheme-main-accent) 8%,
-    var(--color-background, #{colors.$white})
+    var(--billing-card-bg)
   );
+
+  :global(.dark) & {
+    border-color: #{colors.$gray-dark-strong};
+    box-shadow: 0 0 0 1px #{colors.$gray-dark-strong};
+    background-color: #{colors.$light-dark-gray-hover};
+  }
 }
 
 .billingCardIcon {
@@ -272,7 +291,7 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  color: var(--text-disable-color);
+  color: var(--payment-text-color);
 }
 
 
