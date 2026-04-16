@@ -482,7 +482,8 @@ export default inject(
 
     const { id: selfId } = userStore.user!;
 
-    const { primaryLink, additionalLinks, setExternalLink, hasExternalLinks } = publicRoomStore;
+    const { primaryLink, additionalLinks, setExternalLink, hasExternalLinks } =
+      publicRoomStore;
 
     const { isArchiveFolderRoot } = treeFoldersStore;
     const { setTemplateAccessSettingsVisible: setAccessSettingsIsVisible } =
@@ -523,8 +524,7 @@ export default inject(
       setAccessSettingsIsVisible,
       templateAvailable: templateAvailableToEveryone,
       isRootFolder,
-      isExternalShareRestricted:
-        true || !filesStore.filesSettingsStore.externalShare,
+      isExternalShareRestricted: !filesStore.filesSettingsStore.externalShare,
     };
   },
 )(observer(Members));

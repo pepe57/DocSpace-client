@@ -313,7 +313,7 @@ export default inject<TStore>(
 
     const { setExternalLink, deleteExternalLink } = publicRoomStore;
 
-    const isExternalShareRestricted = true || !filesSettingsStore.externalShare;
+    const isExternalShareRestricted = !filesSettingsStore.externalShare;
 
     return {
       isArchiveFolder: isArchiveFolderRoot,

@@ -295,7 +295,7 @@ export default inject(
       setProcessCreatingRoomFromData,
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,
-      isExternalShareRestricted: true || !externalShare,
+      isExternalShareRestricted: !externalShare,
     };
   },
 )(observer(CreateRoomEvent));

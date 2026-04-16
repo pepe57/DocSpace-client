@@ -143,7 +143,12 @@ const RoomsItemHeader = ({
 
   const badgeUrl =
     "isRoom" in selection && selection.isRoom
-      ? getRoomBadgeUrl(selection, 12, isExternalShareRestricted, hasExternalLinks)
+      ? getRoomBadgeUrl(
+          selection,
+          12,
+          isExternalShareRestricted,
+          hasExternalLinks,
+        )
       : null;
 
   const badgeIconColor =
@@ -317,7 +322,7 @@ export default inject(
 
     const { onChangeFile } = avatarEditorDialogStore;
 
-    const isExternalShareRestricted = true || !externalShare;
+    const isExternalShareRestricted = !externalShare;
 
     return {
       roomsView,

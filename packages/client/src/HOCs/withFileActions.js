@@ -611,7 +611,7 @@ export default function withFileActions(WrappedFileItem) {
 
         withContentSelection,
 
-        isExternalShareRestricted: true || !filesSettingsStore.externalShare,
+        isExternalShareRestricted: !filesSettingsStore.externalShare,
 
         isNewBadgePanelVisible:
           newFilesPanelFolderId === item.id &&

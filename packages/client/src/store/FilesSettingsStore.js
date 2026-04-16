@@ -223,6 +223,8 @@ class FilesSettingsStore {
     settingsItems.forEach((key) => {
       this[key] = settings[key];
     });
+
+    this.externalShare = false; // TODO: remove after API returns actual value
   };
 
   setIsErrorSettings = (isError) => {

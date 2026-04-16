@@ -104,7 +104,7 @@ export default inject<TStore>(
       setIsScrollLocked,
     } = infoPanelStore;
 
-    const isExternalShareRestricted = true || !filesSettingsStore.externalShare;
+    const isExternalShareRestricted = !filesSettingsStore.externalShare;
 
     return {
       setView,

@@ -1454,8 +1454,7 @@ export default inject(
       setChangeAvatarVisible,
       setChangeNameVisible,
       getIcon: filesStore.filesSettingsStore.getIcon,
-      isExternalShareRestricted:
-        true || !filesStore.filesSettingsStore.externalShare,
+      isExternalShareRestricted: !filesStore.filesSettingsStore.externalShare,
       hasExternalLinks,
 
       isRootRooms,
