@@ -28,7 +28,7 @@
 
 .billingCards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -107,6 +107,11 @@
 .billingIconAi {
   color: var(--billing-card-color-ai);
   background-color: color-mix(in srgb, var(--billing-card-color-ai) 10%, transparent);
+}
+
+.billingIconStorage {
+  color: var(--billing-card-color-storage);
+  background-color: color-mix(in srgb, var(--billing-card-color-storage) 10%, transparent);
 }
 
 .billingIconPayment {

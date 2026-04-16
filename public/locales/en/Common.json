@@ -793,6 +793,7 @@
   "BillingWalletCardDesc": "Balance, top-up, and transaction history",
   "BillingAICardDesc": "AI credits, model settings, and usage",
   "BillingPaymentMethodCardDesc": "Linked card and payer details",
+  "BillingAdditionalStorageCardDesc": "Extra disk space, subscription, and pricing",
   "OpenSavedDocument": "Open saved document in new tab",
   "Or": "or",
   "orContinueWith": "or continue with",
