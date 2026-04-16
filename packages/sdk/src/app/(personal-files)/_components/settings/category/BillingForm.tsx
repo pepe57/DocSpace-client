@@ -53,7 +53,7 @@ type BillingTab = "wallet" | "storage" | "payment-method";
 const TAB_DEFS: {
   id: BillingTab;
   titleKey: string;
-  descKey: string;
+  tKey: string;
   iconClass: string;
   icon: React.ReactNode;
   nativeIcon?: boolean;
@@ -61,21 +61,21 @@ const TAB_DEFS: {
   {
     id: "wallet",
     titleKey: "Wallet",
-    descKey: "BillingWalletCardDesc",
+    tKey: "BillingWalletCardDesc",
     iconClass: cardStyles.billingIconWallet,
     icon: <WalletIcon />,
   },
   {
     id: "storage",
     titleKey: "AdditionalDiskStorage",
-    descKey: "BillingAdditionalStorageCardDesc",
+    tKey: "BillingAdditionalStorageCardDesc",
     iconClass: cardStyles.billingIconStorage,
     icon: <StorageIcon />,
   },
   {
     id: "payment-method",
     titleKey: "PaymentMethod",
-    descKey: "BillingPaymentMethodCardDesc",
+    tKey: "BillingPaymentMethodCardDesc",
     iconClass: cardStyles.billingIconPayment,
     icon: <CardIcon />,
     nativeIcon: true,
@@ -112,7 +112,7 @@ const BillingForm = () => {
       productName: t("ProductName"),
       organizationName: t("OrganizationName"),
     }),
-    description: t(d.descKey),
+    description: t(d.tKey),
     iconClass: d.iconClass,
     icon: d.icon,
     nativeIcon: d.nativeIcon,
