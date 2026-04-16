@@ -45,6 +45,7 @@ import {
   type DatabaseType,
 } from "../../../_store/FormsDbSettingsStore";
 import { useFormsSettingsStore } from "../../../_store/FormsSettingsStore";
+import { useFormsTourStore } from "../../../_store/FormsTourStore";
 import {
   testDbConnection,
   saveDbConfig,
@@ -63,12 +64,17 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
   const { t } = useTranslation(["Common"]);
   const store = useFormsDbSettingsStore();
   const { roomId } = useFormsSettingsStore();
+  const tourStore = useFormsTourStore();
 
   React.useEffect(() => {
-    if (inline && roomId) {
+    if (inline && roomId && !tourStore.showMockItems) {
       store.fetchConfig(roomId);
     }
-  }, [inline, roomId, store]);
+  }, [inline, roomId, store, tourStore.showMockItems]);
+
+  // During the tour, always show DB export as off so the connection form
+  // doesn't appear and no API calls are made.
+  const sendToDb = tourStore.showMockItems ? false : store.sendToDb;
 
   const selectedDbType = React.useMemo(
     () =>
@@ -169,7 +175,8 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
           </Text>
           <ToggleButton
             className={styles.toggle}
-            isChecked={store.sendToDb}
+            isChecked={sendToDb}
+            isDisabled={tourStore.showMockItems}
             onChange={onToggleSendToDb}
           />
         </div>
@@ -178,7 +185,7 @@ const ConnectDatabaseForm = ({ inline }: ConnectDatabaseFormProps) => {
         </Text>
       </div>
 
-      {store.sendToDb ? (
+      {sendToDb ? (
         <div className={styles.formBlock}>
           <div className={styles.fieldGroup}>
             <Text fontSize="13px" fontWeight={600}>

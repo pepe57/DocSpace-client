@@ -48,7 +48,10 @@ export async function getSettings(
       "GET",
     );
 
-    const res = await fetch(req, { next: { revalidate: 900 } });
+    const res = await fetch(req, {
+      next: { revalidate: 900 },
+      signal: AbortSignal.timeout(10000),
+    });
 
     if (res.status === 403) {
       logger.error(

@@ -303,9 +303,9 @@ const ModelSettings = ({
         }
       : {
           key: "empty-selected-option",
-          label: t("Common:NoModelsFound"),
+          label: isModelsLoading ? "" : t("Common:NoModelsFound"),
         };
-  }, [selectedModel, t]);
+  }, [selectedModel, isModelsLoading, t]);
 
   const onSelectModel = React.useCallback(
     (option: TOption) => {
@@ -406,7 +406,7 @@ const ModelSettings = ({
             />
           </FieldContainer>
         )}
-        {!selectedModel && !error && !hasProviderBeenSwitched ? (
+        {!selectedModel && !error && !hasProviderBeenSwitched && !isModelsLoading ? (
           <RectangleSkeleton width="100%" height="32px" />
         ) : (
           <ComboBox
