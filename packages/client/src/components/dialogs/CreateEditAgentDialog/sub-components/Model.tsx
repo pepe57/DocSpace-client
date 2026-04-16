@@ -83,6 +83,9 @@ const ModelSettings = ({
 
   const [isProvidersLoading, setIsProvidersLoading] = React.useState(false);
   const [isProvidersFetched, setIsProvidersFetched] = React.useState(false);
+  const [isModelsLoading, setIsModelsLoading] = React.useState(false);
+  const [hasProviderBeenSwitched, setHasProviderBeenSwitched] =
+    React.useState(false);
 
   const prevSelectedModel = React.useRef<TModel | null>(null);
 
@@ -237,11 +240,14 @@ const ModelSettings = ({
 
         setSelectedModel(preferredModel);
       }
+      setIsModelsLoading(false);
       return;
     }
 
     setSelectedModel(null);
-    fetchModels();
+    fetchModels().finally(() => {
+      setIsModelsLoading(false);
+    });
   }, [selectedProvider?.id]);
 
   const providerOptions = React.useMemo(() => {
@@ -274,6 +280,8 @@ const ModelSettings = ({
       setSelectedProvider(provider);
       setSelectedModel(null);
       setError(null);
+      setIsModelsLoading(true);
+      setHasProviderBeenSwitched(true);
     },
     [providers, selectedProvider.id],
   );
@@ -398,7 +406,7 @@ const ModelSettings = ({
             />
           </FieldContainer>
         )}
-        {!selectedModel && !error ? (
+        {!selectedModel && !error && !hasProviderBeenSwitched ? (
           <RectangleSkeleton width="100%" height="32px" />
         ) : (
           <ComboBox
@@ -412,7 +420,8 @@ const ModelSettings = ({
             className="ai-combobox"
             displaySelectedOption
             dropDownClassName="not-selectable"
-            isDisabled={!!error}
+            isDisabled={!!error || isModelsLoading}
+            isLoading={isModelsLoading}
             dataTestId="create_agent_model_combobox"
           />
         )}
