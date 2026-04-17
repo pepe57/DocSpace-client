@@ -178,12 +178,11 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
           onSelect={onSelect}
           withoutStickyIntend
         />
-        <div style={{ maxWidth: 700 }}>
-          {children}
-        </div>
+        <div>{children}</div>
       </div>
     </SettingsMembersContext.Provider>
   );
 };
 
 export default observer(SettingsShell);
+
