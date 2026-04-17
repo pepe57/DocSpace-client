@@ -53,9 +53,6 @@ const isDev = process.env.NODE_ENV !== productionMode;
 
 const nextConfig = {
   basePath: "/sdk",
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   serverExternalPackages: [
     "nconf",
     "date-and-time",

@@ -109,6 +109,8 @@ class FormsAiAgentStore {
     number,
     Promise<FolderAgentEntry | null>
   >();
+  private _askFromDbInitPromise: Promise<void> | null = null;
+  private _askFromDbInitRoomId: string | number | null = null;
 
   constructor() {
     makeAutoObservable(this, {
@@ -119,6 +121,8 @@ class FormsAiAgentStore {
       _pendingCreations: false,
       _savePanelWidthTimer: false,
       _createAgentForFolderImpl: false,
+      _askFromDbInitPromise: false,
+      _askFromDbInitRoomId: false,
     } as Record<string, false>);
   }
 
@@ -288,40 +292,61 @@ class FormsAiAgentStore {
     }
   };
 
-  private initAskFromDBAgent = async () => {
-    const saved = loadAskFromDBAgentId(this._roomId, this._userKey);
-    if (saved) {
-      const valid = await this.validateAgent(saved);
-      if (valid) {
-        runInAction(() => {
-          this.askFromDBAgentId = saved;
-        });
-        this.syncAgentMembers(saved).catch(() => {});
-        return;
+  private initAskFromDBAgent = (): Promise<void> => {
+    if (
+      this._askFromDbInitPromise &&
+      this._askFromDbInitRoomId === this._roomId
+    ) {
+      return this._askFromDbInitPromise;
+    }
+
+    const roomIdForRun = this._roomId;
+    this._askFromDbInitRoomId = roomIdForRun;
+
+    const work = (async () => {
+      const saved = loadAskFromDBAgentId(roomIdForRun, this._userKey);
+      if (saved) {
+        const valid = await this.validateAgent(saved);
+        if (valid) {
+          runInAction(() => {
+            this.askFromDBAgentId = saved;
+          });
+          this.syncAgentMembers(saved).catch(() => {});
+          return;
+        }
+        // Saved agent is stale — fall through to create a new one
       }
-      // Saved agent is stale — fall through to create a new one
-    }
 
-    try {
-      const agent = await createAIAgent({
-        title: "Ask from DB",
-        attachDefaultTools: true,
-        ...(this.defaultProvider && {
-          chatSettings: {
-            providerId: this.defaultProvider.providerId,
-            modelId: this.defaultProvider.defaultModel,
-          },
-        }),
-      });
+      try {
+        const agent = await createAIAgent({
+          title: "Ask from DB",
+          attachDefaultTools: true,
+          ...(this.defaultProvider && {
+            chatSettings: {
+              providerId: this.defaultProvider.providerId,
+              modelId: this.defaultProvider.defaultModel,
+            },
+          }),
+        });
 
-      saveAskFromDBAgentId(this._roomId, agent.id, this._userKey);
-      runInAction(() => {
-        this.askFromDBAgentId = agent.id;
-      });
-      await this.syncAgentMembers(agent.id);
-    } catch {
-      // best-effort
-    }
+        saveAskFromDBAgentId(roomIdForRun, agent.id, this._userKey);
+        runInAction(() => {
+          this.askFromDBAgentId = agent.id;
+        });
+        await this.syncAgentMembers(agent.id);
+      } catch {
+        // best-effort
+      }
+    })();
+
+    this._askFromDbInitPromise = work;
+    work.finally(() => {
+      if (this._askFromDbInitPromise === work) {
+        this._askFromDbInitPromise = null;
+      }
+    });
+
+    return work;
   };
 
   setDoneFolderId = (id: number | null) => {
@@ -343,22 +368,30 @@ class FormsAiAgentStore {
 
   setCurrentFolder = async (folderId: number | null) => {
     const version = ++this._folderVersion;
-    this.currentFolderId = folderId;
-    this.agentChatSettings = undefined;
+    runInAction(() => {
+      this.currentFolderId = folderId;
+      this.agentChatSettings = undefined;
+      if (folderId) {
+        this.overrideAgentId = null;
+        this.pendingAttachmentFile = null;
+      }
+    });
 
     if (folderId) {
-      this.overrideAgentId = null;
-      this.pendingAttachmentFile = null;
       const entry = this.folderAgentsMap[folderId];
       if (entry?.agentId) {
         const valid = await this.validateAgent(entry.agentId);
         if (version !== this._folderVersion) return;
         if (valid) {
-          this.isPanelVisible = true;
+          runInAction(() => {
+            this.isPanelVisible = true;
+          });
           await this.fetchAgentChatSettings(entry.agentId, version);
         } else {
-          const { [folderId]: _, ...rest } = this.folderAgentsMap;
-          this.folderAgentsMap = rest;
+          runInAction(() => {
+            const { [folderId]: _, ...rest } = this.folderAgentsMap;
+            this.folderAgentsMap = rest;
+          });
           this.persistMap();
         }
       }
