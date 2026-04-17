@@ -1,3 +1,5 @@
+@use "@docspace/ui-kit/styles/mixins";
+
 .chatPanel {
   position: relative;
   z-index: 1;
@@ -12,10 +14,8 @@
   &[data-position="right"] {
     order: 1;
   }
-}
 
-@media (max-width: 600px) {
-  .chatPanel {
+  @include mixins.mobile {
     position: fixed;
     inset: 0;
     width: 100% !important;

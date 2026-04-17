@@ -32,7 +32,9 @@ import { useTranslation } from "react-i18next";
 import { useJoyride, EVENTS, STATUS, ACTIONS } from "react-joyride";
 import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import { DeviceType } from "@docspace/shared/enums";
 
+import useDeviceType from "@/hooks/useDeviceType";
 import { useFormsTourStore } from "../_store/FormsTourStore";
 import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsListStore } from "../_store/FormsListStore";
@@ -50,6 +52,8 @@ export default function useFormsTour(showMenu = true) {
   const formsSettingsStore = useFormsSettingsStore();
   const { user } = useFormsUserStore();
   const router = useRouter();
+  const { currentDeviceType } = useDeviceType();
+  const isNonDesktop = currentDeviceType !== DeviceType.desktop;
   const pathname = usePathname();
   const pathnameRef = useRef(pathname);
   pathnameRef.current = pathname;
@@ -109,7 +113,7 @@ export default function useFormsTour(showMenu = true) {
     continuous: true,
     steps,
     stepIndex: tourStore.stepIndex,
-    run: tourStore.isRunning,
+    run: isNonDesktop ? false : tourStore.isRunning,
     scrollToFirstStep: false,
     tooltipComponent: TourTooltip,
     options: {
@@ -245,5 +249,5 @@ export default function useFormsTour(showMenu = true) {
     };
   }, [on, router, tourStore, navStore, tourCallbacks]);
 
-  return { Tour, controls, state };
+  return { Tour: isNonDesktop ? null : Tour, controls, state };
 }

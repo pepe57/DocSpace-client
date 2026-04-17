@@ -46,15 +46,38 @@ import { useLibraryParams } from "../../_hooks/useLibraryParams";
 import { libraryUrl } from "../../_utils/libraryUrl";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import FormPlusReactSvgUrl from "PUBLIC_DIR/images/form.plus.react.svg?url";
+import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
 
 import styles from "../forms-layout/FormsLayout.module.scss";
 
 type FormsHeaderProps = {
   onUploadFiles: () => void;
   onCreateBlankForm: () => void;
+  showMenu: boolean;
 };
 
-const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => {
+const BurgerButton = ({
+  onClick,
+  label,
+}: {
+  onClick: () => void;
+  label: string;
+}) => (
+  <button
+    type="button"
+    className={styles.burgerButton}
+    onClick={onClick}
+    aria-label={label}
+  >
+    <MenuIcon className={styles.burgerIcon} />
+  </button>
+);
+
+const FormsHeader = ({
+  onUploadFiles,
+  onCreateBlankForm,
+  showMenu,
+}: FormsHeaderProps) => {
   const { t } = useTranslation(["Common"]);
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
@@ -66,6 +89,7 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
     closeEditor,
     goBackToCompletedRoot,
     goBackToInProgressRoot,
+    toggleSidebar,
   } = useFormsNavigationStore();
 
   const router = useRouter();
@@ -324,6 +348,12 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
         className={styles.headerRow}
         style={navDropdownMinWidth ? { "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties : undefined}
       >
+        {showMenu && (
+          <BurgerButton
+            onClick={toggleSidebar}
+            label={t("Common:ShowArticleMenu")}
+          />
+        )}
         <div className={styles.headerNavigation}>
           <Navigation
             showText
@@ -564,6 +594,12 @@ const FormsHeader = ({ onUploadFiles, onCreateBlankForm }: FormsHeaderProps) => 
       className={styles.headerRow}
       style={navDropdownMinWidth ? { "--nav-dropdown-min-width": `${navDropdownMinWidth}px` } as React.CSSProperties : undefined}
     >
+      {showMenu && (
+        <BurgerButton
+          onClick={toggleSidebar}
+          label={t("Common:ShowArticleMenu")}
+        />
+      )}
       <div className={styles.headerNavigation}>
         <span data-tour={`section-${activeSection}`} className={styles.tourAnchor}>
           {getSectionTitle()}
