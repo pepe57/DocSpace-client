@@ -54,7 +54,9 @@ class SecondaryProgressDataStore {
   }
 
   get secondaryActiveOperations() {
-    return this.secondaryOperationsArray;
+    // .slice() returns a new reference on each mutation so MobX inject
+    // shallow comparison detects the change and triggers a re-render.
+    return this.secondaryOperationsArray.slice();
   }
 
   get isSecondaryProgressVisbile() {
@@ -309,13 +311,14 @@ class SecondaryProgressDataStore {
       if (progressInfo.completed && progressInfo.alert) {
         this.showToast(cuttentOperation, operation, false);
       }
-      this.secondaryOperationsArray[operationIndex] = {
+
+      this.secondaryOperationsArray.splice(operationIndex, 1, {
         ...operationObject,
         alert: progressInfo.alert,
         items: updatedItems,
         completed: isCompleted,
         percent: progressInfo.percent,
-      };
+      });
     } else {
       const progress = {
         operation,
@@ -353,7 +356,6 @@ class SecondaryProgressDataStore {
         ...incompleteOperations,
       );
 
-      console.log("clearSecondaryProgressData", this.secondaryOperationsArray);
       return;
     }
 
@@ -397,7 +399,6 @@ class SecondaryProgressDataStore {
 
       this.secondaryOperationsArray = [...newSecondaryOperationsArray];
     }
-    console.log("clearSecondaryProgressData", this.secondaryOperationsArray);
   };
 
   findOperationById = (itemId) => {
