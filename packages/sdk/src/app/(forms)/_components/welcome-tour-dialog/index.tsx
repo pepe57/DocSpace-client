@@ -32,6 +32,9 @@ import { ReactSVG } from "react-svg";
 import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
+import { DeviceType } from "@docspace/shared/enums";
+
+import useDeviceType from "@/hooks/useDeviceType";
 
 import FormFileReactSvgUrl from "PUBLIC_DIR/images/form.file.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
@@ -60,6 +63,8 @@ export default function WelcomeTourDialog({
   onSkip,
 }: WelcomeTourDialogProps) {
   const { t } = useTranslation(["Common"]);
+  const { currentDeviceType } = useDeviceType();
+  const isNonDesktop = currentDeviceType !== DeviceType.desktop;
 
   return (
     <ModalDialog visible={visible} onClose={onSkip} autoMaxHeight autoMaxWidth isLarge isHuge>
@@ -125,16 +130,19 @@ export default function WelcomeTourDialog({
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <Button
-          label={t("Common:WelcomeStartTour", "Take a tour")}
-          size={ButtonSize.normal}
-          primary
-          scale
-          onClick={onStart}
-        />
+        {!isNonDesktop && (
+          <Button
+            label={t("Common:WelcomeStartTour", "Take a tour")}
+            size={ButtonSize.normal}
+            primary
+            scale
+            onClick={onStart}
+          />
+        )}
         <Button
           label={t("Common:WelcomeStartUsing", "Start using")}
           size={ButtonSize.normal}
+          primary={isNonDesktop}
           scale
           onClick={onSkip}
         />

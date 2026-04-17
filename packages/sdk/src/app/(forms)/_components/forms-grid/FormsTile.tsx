@@ -46,7 +46,6 @@ import { FormsSection } from "@/types/forms";
 
 import useFormsActions from "../../_hooks/useFormsActions";
 import useFormsContextMenu from "../../_hooks/useFormsContextMenu";
-import { useFormsListStore } from "../../_store/FormsListStore";
 import { sectionFromPathname } from "../../_utils/sectionFromPathname";
 import { getThumbnail, setThumbnail } from "../../_utils/thumbnailCache";
 import FormStatusBadge from "./FormStatusBadge";
@@ -54,16 +53,16 @@ import styles from "./FormsTile.module.scss";
 
 type FormsTileProps = {
   item: TFileItem;
+  originalFile: TFile;
   getIcon: TGetIcon;
 };
 
-const FormsTile = ({ item, getIcon }: FormsTileProps) => {
+const FormsTile = ({ item, originalFile, getIcon }: FormsTileProps) => {
   const tileRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation("Common");
   const { filesSettings } = useFilesSettingsStore();
   const { openForm } = useFormsActions({ t });
   const { getContextMenuModel } = useFormsContextMenu();
-  const { items } = useFormsListStore();
   const pathname = usePathname();
   const activeSection = sectionFromPathname(pathname);
 
@@ -113,8 +112,6 @@ const FormsTile = ({ item, getIcon }: FormsTileProps) => {
   const temporaryExtension =
     item.id === -1 ? `.${item.fileExst}` : item.fileExst;
   const temporaryIcon = getIcon(temporaryExtension, 96, item.contentLength);
-
-  const originalFile = items.find((f) => f.id === item.id);
 
   const getDefaultAction = React.useCallback(
     (file: TFile) => {

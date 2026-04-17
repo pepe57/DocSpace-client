@@ -34,6 +34,7 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import Section from "@docspace/ui-kit/components/section";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import {
   FloatingButton,
   FloatingButtonIcons,
@@ -46,7 +47,7 @@ import {
   frameHandlePing,
   getFrameId,
 } from "@docspace/shared/utils/common";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import { DeviceType, ShareAccessRights } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
@@ -87,7 +88,6 @@ import AiChatPanel from "../_components/ai-chat-panel";
 import AiChatButton from "../_components/ai-chat-button";
 import CreateFormDialog from "../_components/create-form-dialog";
 import FormsHeader from "../_components/forms-header";
-import MobileStub from "../_components/mobile-stub";
 import WelcomeTourDialog from "../_components/welcome-tour-dialog";
 import {
   createMockFormFiles,
@@ -105,6 +105,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const { sdkConfig } = useSDKConfig();
   const isReady = useInitCommonStores(commonData);
 
+  const formsNavigationStore = useFormsNavigationStore();
   const {
     editingFile,
     closeEditor,
@@ -112,7 +113,9 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     inProgressFolder,
     goBackToCompletedRoot,
     goBackToInProgressRoot,
-  } = useFormsNavigationStore();
+    isSidebarOpen,
+    closeSidebar,
+  } = formsNavigationStore;
   // libraryNav removed — library uses URL routing now
   const aiStore = useFormsAiAgentStore();
   const { user } = useFormsUserStore();
@@ -286,6 +289,37 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const isEditing = Boolean(editingFile);
 
   useEditorGuard(isEditing);
+
+  // Single-overlay coordination: only one of {sidebar drawer, AI panel, editor}
+  // can be active at a time on mobile. Also close the sidebar when leaving
+  // mobile so no stale overlay stays rendered.
+  React.useEffect(() => {
+    if (currentDeviceType !== DeviceType.mobile && isSidebarOpen) {
+      closeSidebar();
+    }
+  }, [currentDeviceType, isSidebarOpen, closeSidebar]);
+
+  const prevSidebarOpen = React.useRef(isSidebarOpen);
+  React.useEffect(() => {
+    if (!prevSidebarOpen.current && isSidebarOpen && aiStore.isPanelVisible) {
+      aiStore.closePanel();
+    }
+    prevSidebarOpen.current = isSidebarOpen;
+  }, [isSidebarOpen, aiStore]);
+
+  const prevPanelVisible = React.useRef(aiStore.isPanelVisible);
+  React.useEffect(() => {
+    if (!prevPanelVisible.current && aiStore.isPanelVisible && isSidebarOpen) {
+      closeSidebar();
+    }
+    prevPanelVisible.current = aiStore.isPanelVisible;
+  }, [aiStore.isPanelVisible, isSidebarOpen, closeSidebar]);
+
+  React.useEffect(() => {
+    if (isEditing && isSidebarOpen) {
+      closeSidebar();
+    }
+  }, [isEditing, isSidebarOpen, closeSidebar]);
 
   const prevIsLoading = React.useRef(isLoading);
   const pendingEditorClose = React.useRef(false);
@@ -577,8 +611,24 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         } as React.CSSProperties
       }
     >
-      <MobileStub />
       {showMenu && <FormsSidebar />}
+      {showMenu && (
+        <Backdrop
+          visible={
+            isSidebarOpen && currentDeviceType === DeviceType.mobile
+          }
+          onClick={closeSidebar}
+          zIndex={220}
+          withBackground
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+          }}
+        />
+      )}
       <AiChatPanel rootRef={rootRef} />
       <div className={styles.sectionArea}>
         <Section
@@ -598,6 +648,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             <FormsHeader
               onUploadFiles={onUploadFiles}
               onCreateBlankForm={onCreateBlankForm}
+              showMenu={showMenu}
             />
           </Section.SectionHeader>
           <Section.SectionBody>
@@ -611,7 +662,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             </FormsDataProvider>
           </Section.SectionBody>
         </Section>
-        <AiChatButton />
+        <AiChatButton shiftUp={!!uploadProgress} />
         {uploadProgress && (
           <div className={styles.floatingButtonContainer}>
             <FloatingButton
