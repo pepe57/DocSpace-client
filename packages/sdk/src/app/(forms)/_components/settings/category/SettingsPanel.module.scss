@@ -34,12 +34,10 @@
   width: calc(100% + 16px);
 }
 
-// Settings shell — raise sticky tabs above section-level overlays on mobile.
 .settingsShell {
-  :global(.sticky) {
-    background: var(--section-header-bg, var(--background-color));
-
-    @include mixins.mobile {
+  @include mixins.mobile {
+    :global(.sticky) {
+      background: var(--section-header-bg, var(--background-color));
       z-index: 201;
     }
   }

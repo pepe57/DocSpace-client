@@ -135,8 +135,12 @@ export default function useFormsTour(showMenu = true) {
     },
   });
 
-  // Prefetch all tour routes when the tour starts so bundle loading
-  // doesn't stall the tour transitions later.
+  useEffect(() => {
+    if (isNonDesktop && tourStore.isRunning) {
+      tourStore.completeTour();
+    }
+  }, [isNonDesktop, tourStore]);
+
   useEffect(() => {
     if (!tourStore.isRunning) return;
 

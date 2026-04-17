@@ -543,6 +543,10 @@ const FormsHeader = ({
       libraryTitle = libLangTitle || "";
     }
 
+    if (currentDeviceType === DeviceType.mobile && libParams.depth >= 2) {
+      libraryTitle = libraryTitle ? `… / ${libraryTitle}` : "…";
+    }
+
     return (
       <div
         className={styles.headerRow}

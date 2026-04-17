@@ -620,7 +620,13 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           onClick={closeSidebar}
           zIndex={220}
           withBackground
-          style={{ position: "absolute" }}
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+          }}
         />
       )}
       <AiChatPanel rootRef={rootRef} />

@@ -96,8 +96,6 @@ const FormsSidebar = () => {
     if (saved === "false") setUserShowText(false);
   }, []);
 
-  // Tablet is always collapsed (80px). Mobile drawer always shows labels.
-  // Only desktop respects the user preference.
   const showText = isTablet ? false : isMobile ? true : userShowText;
 
   const toggleShowText = React.useCallback(() => {
