@@ -94,7 +94,7 @@
 		}
 	}
 
-	@include mixins.mobile {
+	@include mixins.tablet-and-below {
 		display: none;
 	}
 }

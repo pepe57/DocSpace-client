@@ -1,3 +1,5 @@
+@use "@docspace/ui-kit/styles/mixins";
+
 .foldersGrid,
 .filesGrid {
   display: grid;
@@ -9,6 +11,22 @@
   width: 100%;
   box-sizing: border-box;
   margin-inline-start: 1px;
+}
+
+// Mobile: folder list becomes a single-column full-width list.
+.foldersGrid {
+  @include mixins.mobile {
+    grid-template-columns: 1fr;
+    grid-gap: 8px;
+  }
+}
+
+// Mobile: file tiles use a fixed 2-column grid per design spec 5.1.
+.filesGrid {
+  @include mixins.mobile {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 16px;
+  }
 }
 
 .tile {

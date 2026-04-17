@@ -81,6 +81,7 @@ const FormsSidebar = () => {
   } = useFormsNavigationStore();
   const { currentDeviceType } = useDeviceType();
   const isMobile = currentDeviceType === DeviceType.mobile;
+  const isTablet = currentDeviceType === DeviceType.tablet;
   const formsSettingsStore = useFormsSettingsStore();
   const { hasLibrary } = formsSettingsStore;
   const showLibrary = hasLibrary && !!formsSettingsStore.folderSecurity?.Create;
@@ -88,15 +89,19 @@ const FormsSidebar = () => {
   const { user } = useFormsUserStore();
   const showSettings = user?.isOwner || user?.isAdmin;
 
-  const [showText, setShowText] = React.useState(true);
+  const [userShowText, setUserShowText] = React.useState(true);
 
   React.useEffect(() => {
     const saved = localStorage.getItem(SHOW_SIDEBAR_TEXT_KEY);
-    if (saved === "false") setShowText(false);
+    if (saved === "false") setUserShowText(false);
   }, []);
 
+  // Tablet is always collapsed (80px). Mobile drawer always shows labels.
+  // Only desktop respects the user preference.
+  const showText = isTablet ? false : isMobile ? true : userShowText;
+
   const toggleShowText = React.useCallback(() => {
-    setShowText((prev) => {
+    setUserShowText((prev) => {
       const next = !prev;
       localStorage.setItem(SHOW_SIDEBAR_TEXT_KEY, String(next));
       return next;

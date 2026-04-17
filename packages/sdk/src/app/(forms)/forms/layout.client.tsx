@@ -656,7 +656,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             </FormsDataProvider>
           </Section.SectionBody>
         </Section>
-        <AiChatButton />
+        <AiChatButton shiftUp={!!uploadProgress} />
         {uploadProgress && (
           <div className={styles.floatingButtonContainer}>
             <FloatingButton

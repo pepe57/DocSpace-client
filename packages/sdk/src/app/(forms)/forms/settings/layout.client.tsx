@@ -44,6 +44,7 @@ import { useFormsSettingsStore } from "../../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../../_store/FormsAiAgentStore";
 import { useFormsTourStore } from "../../_store/FormsTourStore";
 import { createMockRoomMembers } from "../../_utils/mockFormFiles";
+import styles from "../../_components/settings/category/SettingsPanel.module.scss";
 
 type SettingsMembersContextValue = {
   members: RoomMember[];
@@ -160,7 +161,11 @@ const SettingsShell = ({ children }: SettingsShellProps) => {
 
   return (
     <SettingsMembersContext.Provider value={membersCtx}>
-      <div data-tour="settings-container" style={{ position: "relative" }}>
+      <div
+        data-tour="settings-container"
+        className={styles.settingsShell}
+        style={{ position: "relative" }}
+      >
         <div
           data-tour="settings-spotlight"
           style={{
