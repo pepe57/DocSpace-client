@@ -128,6 +128,9 @@ const LinkRow = (props: LinkRowProps) => {
 
   const onCopyExternalLink = () => {
     copyShareLink(item, link, t as TFunction);
+    if (isExternalShareRestricted && !link.sharedTo.internal) {
+      toastr.error(t("Common:LinkBlockedByAdminWarning"));
+    }
     onCloseContextMenu();
   };
 
@@ -136,6 +139,31 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const getData = () => {
+    const isBlockedByAdmin =
+      !!isExternalShareRestricted && !link.sharedTo.internal;
+
+    if (isBlockedByAdmin) {
+      return [
+        {
+          key: "copy-link-settings-key",
+          label: t("Common:CopyLink"),
+          icon: CopyToReactSvgUrl,
+          onClick: onCopyExternalLink,
+          disabled: isDisabled,
+        },
+        {
+          key: "delete-link-separator",
+          isSeparator: true,
+        },
+        {
+          key: "delete-link-key",
+          label: link.canRevoke ? t("Common:RevokeLink") : t("Common:Delete"),
+          icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,
+          onClick: onDeleteLink,
+        },
+      ];
+    }
+
     return [
       {
         key: "edit-link-key",
@@ -271,6 +299,9 @@ const LinkRow = (props: LinkRowProps) => {
 
   const onCopyLink = (linkArg: TFileLink) => {
     copyShareLink(item, linkArg, t);
+    if (isExternalShareRestricted && !linkArg.sharedTo.internal) {
+      toastr.error(t("Common:LinkBlockedByAdminWarning"));
+    }
   };
 
   return (

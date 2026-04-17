@@ -369,17 +369,41 @@ export const useShare = ({
     }
   };
 
-  const onCopyLink = (link: TFileLink) => {
+  const onCopyLink = async (link: TFileLink) => {
     if (link.sharedTo?.isExpired) return;
 
-    if (isExternalShareRestricted && !link.sharedTo?.internal) {
-      toastr.warning(t("Common:LinkBlockedByAdminWarning"));
-    }
+    await copyShareLink(infoPanelSelection, link, t);
 
-    copyShareLink(infoPanelSelection, link, t);
+    if (isExternalShareRestricted && !link.sharedTo?.internal) {
+      toastr.error(t("Common:LinkBlockedByAdminWarning"));
+    }
   };
 
   const getData = (link: TFileLink): ContextMenuModel[] => {
+    const isBlockedByAdmin =
+      !!isExternalShareRestricted && !link.sharedTo.internal;
+
+    if (isBlockedByAdmin) {
+      return [
+        {
+          key: "copy-link-settings-key",
+          label: t("Common:CopyLink"),
+          icon: CopyToReactSvgUrl,
+          onClick: () => onCopyLink(link),
+        },
+        {
+          key: "delete-link-separator",
+          isSeparator: true,
+        },
+        {
+          key: "delete-link-key",
+          label: link.canRevoke ? t("Common:RevokeLink") : t("Common:Delete"),
+          icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,
+          onClick: () => removeLink(link),
+        },
+      ];
+    }
+
     return [
       {
         key: "edit-link-key",
