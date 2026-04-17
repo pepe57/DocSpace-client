@@ -544,7 +544,7 @@ const FormsHeader = ({
     }
 
     if (currentDeviceType === DeviceType.mobile && libParams.depth >= 2) {
-      libraryTitle = libraryTitle ? `… / ${libraryTitle}` : "…";
+      libraryTitle = libraryTitle ? `... / ${libraryTitle}` : "...";
     }
 
     return (
