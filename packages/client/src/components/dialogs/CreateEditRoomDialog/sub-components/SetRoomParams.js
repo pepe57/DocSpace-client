@@ -193,9 +193,7 @@ const SetRoomParams = ({
   const showLifetimeDialog = !hideConfirmRoomLifetime && filesCount > 0;
 
   const hasDatabaseConnection = externalDbEnabled;
-  const showFormRoomBlock =
-    isFormRoom && !(isRoomAdmin && !hasDatabaseConnection);
-  const canShowIntegrationsBar = !isRoomAdmin;
+  const showFormRoomBlock = isFormRoom;
 
   const checkWidth = () => {
     if (!isMobile()) {
@@ -567,10 +565,10 @@ const SetRoomParams = ({
         <FormRoomBlock
           t={t}
           roomParams={roomParams}
-          setRoomParams={setRoomParams}
           isDisabled={isDisabled}
+          isRoomAdmin={isRoomAdmin}
+          setRoomParams={setRoomParams}
           hasDatabaseConnection={hasDatabaseConnection}
-          canShowIntegrationsBar={canShowIntegrationsBar}
         />
       ) : null}
 
