@@ -343,6 +343,10 @@ const ModelSettings = ({
     prevSelectedModel.current = selectedModel;
   }, [selectedModel, setAgentParams, error]);
 
+  const isModelLoading =
+    isModelsLoading ||
+    (!selectedModel?.modelId && !error && !hasProviderBeenSwitched);
+
   return (
     <StyledParam increaseGap>
       <div className=" set_room_params-info">
@@ -406,25 +410,21 @@ const ModelSettings = ({
             />
           </FieldContainer>
         )}
-        {!selectedModel && !error && !hasProviderBeenSwitched && !isModelsLoading ? (
-          <RectangleSkeleton width="100%" height="32px" />
-        ) : (
-          <ComboBox
-            options={modelOptions}
-            selectedOption={modelSelectedOptions}
-            onSelect={onSelectModel}
-            scaled
-            scaledOptions
-            dropDownMaxHeight={modelOptions.length > 7 ? 300 : undefined}
-            isDefaultMode
-            className="ai-combobox"
-            displaySelectedOption
-            dropDownClassName="not-selectable"
-            isDisabled={!!error || isModelsLoading}
-            isLoading={isModelsLoading}
-            dataTestId="create_agent_model_combobox"
-          />
-        )}
+        <ComboBox
+          options={modelOptions}
+          selectedOption={modelSelectedOptions}
+          onSelect={onSelectModel}
+          scaled
+          scaledOptions
+          dropDownMaxHeight={modelOptions.length > 7 ? 300 : undefined}
+          isDefaultMode
+          className="ai-combobox"
+          displaySelectedOption
+          dropDownClassName="not-selectable"
+          isDisabled={!!error || isModelLoading}
+          isLoading={isModelLoading}
+          dataTestId="create_agent_model_combobox"
+        />
       </div>
     </StyledParam>
   );
