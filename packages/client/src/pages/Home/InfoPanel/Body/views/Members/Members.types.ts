@@ -109,6 +109,7 @@ export type MembersProps = {
   currentId?: SelectedFolderStore["id"];
   isRootFolder?: SelectedFolderStore["isRootFolder"];
   isExternalShareRestricted?: boolean;
+  defaultShareLinkInternal?: boolean;
 
   members: Nullable<TInfoPanelMembers>;
   total: number;

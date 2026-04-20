@@ -101,6 +101,7 @@ const Members = ({
   setAccessSettingsIsVisible,
   templateAvailable,
   isExternalShareRestricted,
+  defaultShareLinkInternal,
   hasExternalLinks,
 }: MembersProps) => {
   const { t } = useTranslation([
@@ -131,7 +132,9 @@ const Members = ({
         setExternalLink!(link);
       } else {
         const link = isExternalShareRestricted
-          ? await createExternalLink(roomId, { internal: true })
+          ? await createExternalLink(roomId, {
+              internal: !!defaultShareLinkInternal,
+            })
           : await getPrimaryLink!(roomId);
 
         setExternalLink!(link);
@@ -181,7 +184,9 @@ const Members = ({
               {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
             </Text>
 
-            {!isArchiveFolder && canAddLink && !(isPublicRoom && isExternalShareRestricted) ? (
+            {!isArchiveFolder &&
+            canAddLink &&
+            !(isPublicRoom && isExternalShareRestricted) ? (
               <div
                 data-tooltip-id="emailTooltip"
                 data-tooltip-content={t(
@@ -494,7 +499,8 @@ export default inject(
     const isPublicRoomType = isPublicRoom || isCustomRoom || isFormRoom;
 
     const { isRootFolder } = selectedFolderStore;
-    const { isExternalShareRestricted } = filesStore.filesSettingsStore;
+    const { isExternalShareRestricted, defaultShareLinkInternal } =
+      filesStore.filesSettingsStore;
 
     return {
       infoPanelSelection: { ...infoPanelRoomSelection, isRoom: true },
@@ -520,6 +526,7 @@ export default inject(
       templateAvailable: templateAvailableToEveryone,
       isRootFolder,
       isExternalShareRestricted,
+      defaultShareLinkInternal,
     };
   },
 )(observer(Members));
