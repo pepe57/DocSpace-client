@@ -72,8 +72,8 @@ export default async function Docs({
   filter.folder = params.folder || "@my";
   filter.pageCount = params.pageCount ? Number(params.pageCount) : PAGE_COUNT;
   if (params.page) filter.page = Number(params.page);
-  if (params.sortBy) filter.sortBy = params.sortBy;
-  if (params.sortOrder) filter.sortOrder = params.sortOrder;
+  if (params.sortBy) filter.sortBy = params.sortBy as typeof filter.sortBy;
+  if (params.sortOrder) filter.sortOrder = params.sortOrder as typeof filter.sortOrder;
   if (params.search) filter.search = params.search;
 
   const filesFilter = serializeFilter(filter);
