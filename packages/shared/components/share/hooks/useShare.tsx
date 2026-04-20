@@ -118,7 +118,10 @@ export const useShare = ({
     try {
       addLoaderLink();
 
-      const link = await ShareLinkService.getPrimaryLink(infoPanelSelection);
+      const link = await ShareLinkService.getPrimaryLink(
+        infoPanelSelection,
+        !!isExternalShareRestricted,
+      );
 
       if (link) {
         setFileLinks((links) => {
@@ -161,8 +164,10 @@ export const useShare = ({
     addLoaderLink();
 
     try {
-      const newLink =
-        await ShareLinkService.addExternalLink(infoPanelSelection);
+      const newLink = await ShareLinkService.addExternalLink(
+        infoPanelSelection,
+        !!isExternalShareRestricted,
+      );
 
       setFileLinks((links) => {
         const newLinks: TLink[] = [...links];

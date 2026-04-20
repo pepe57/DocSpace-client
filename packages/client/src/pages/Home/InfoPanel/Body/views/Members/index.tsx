@@ -123,31 +123,24 @@ const Members = ({
   }, [isMembersPanelUpdating, scrollToTop]);
 
   const onAddNewLink = async () => {
-    if (isPublicRoom || primaryLink) {
-      const roomId = infoPanelSelection!.id;
+    const roomId = infoPanelSelection!.id;
 
-      try {
+    try {
+      if (isPublicRoom || primaryLink) {
         const link = await createExternalLink(roomId);
+        setExternalLink!(link);
+      } else {
+        const link = isExternalShareRestricted
+          ? await createExternalLink(roomId, { internal: true })
+          : await getPrimaryLink!(roomId);
 
         setExternalLink!(link);
-      } catch (error) {
-        toastr.error(error as Error);
-        console.error(error);
-      }
-    } else {
-      getPrimaryLink!(infoPanelSelection!.id).then((link) => {
-        setExternalLink!(link);
-
-        const typeLink = link as {
-          sharedTo: { shareLink: string; requestToken: string };
-        };
-
-        const shareLink = typeLink.sharedTo.shareLink;
-
-        copyShareLink(shareLink);
-
+        copyShareLink(link.sharedTo.shareLink);
         toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
-      });
+      }
+    } catch (error) {
+      toastr.error(error as Error);
+      console.error(error);
     }
   };
 
