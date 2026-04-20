@@ -341,7 +341,8 @@ const Members = ({
       ((primaryLink && !isArchiveFolder) || isPublicRoom) &&
       infoPanelSelection?.security?.EditAccess &&
       !searchValue &&
-      !isTemplate;
+      !isTemplate &&
+      !isExternalShareRestricted;
 
     const showRestrictedBar =
       isExternalShareRestricted &&
