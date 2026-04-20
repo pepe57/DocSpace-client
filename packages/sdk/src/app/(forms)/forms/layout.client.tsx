@@ -32,7 +32,6 @@ import { observer } from "mobx-react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import Section from "@docspace/ui-kit/components/section";
-import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
 import {
   FloatingButton,
@@ -83,6 +82,7 @@ import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
 import useFormsTour from "../_hooks/useFormsTour";
 import useTourSandbox from "../_hooks/useTourSandbox";
 import FormsSidebar from "../_components/sidebar";
+import DualRingSpinner from "../_components/forms-layout/DualRingSpinner";
 import FormsEditor from "../_components/forms-editor";
 import AiChatPanel from "../_components/ai-chat-panel";
 import AiChatButton from "../_components/ai-chat-button";
@@ -540,19 +540,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const isSettings = activeSection === FormsSection.Settings;
 
   if (!isReady) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-          height: "100%",
-        }}
-      >
-        <Loader type={LoaderTypes.dualRing} size="40px" />
-      </div>
-    );
+    return <DualRingSpinner />;
   }
 
   return (
