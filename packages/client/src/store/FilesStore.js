@@ -5143,6 +5143,7 @@ class FilesStore {
 
     const {
       subjectId,
+      subjectOwnerId,
       filterValue,
       type,
       withSubfolders: withRoomsSubfolders,
@@ -5171,6 +5172,7 @@ class FilesStore {
           withRoomsSubfolders ||
           searchInContentRooms ||
           subjectId ||
+          subjectOwnerId ||
           tags ||
           withoutTags ||
           quotaFilter
