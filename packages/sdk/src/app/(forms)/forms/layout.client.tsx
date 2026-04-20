@@ -347,10 +347,24 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   }, [isLoading, closeEditor]);
 
   React.useEffect(() => {
-    if (roomId && user?.id && hasManagementAccess) {
-      aiStore.initForRoom(roomId, user.id);
-      aiStore.autoEnableIfAvailable();
+    if (!roomId || !user?.id || !hasManagementAccess) return;
+
+    aiStore.initForRoom(roomId, user.id);
+
+    const runAutoEnable = () => aiStore.autoEnableIfAvailable();
+    const win = window as Window & {
+      requestIdleCallback?: (
+        cb: () => void,
+        opts?: { timeout: number },
+      ) => number;
+      cancelIdleCallback?: (id: number) => void;
+    };
+    if (win.requestIdleCallback) {
+      const id = win.requestIdleCallback(runAutoEnable, { timeout: 2000 });
+      return () => win.cancelIdleCallback?.(id);
     }
+    const id = window.setTimeout(runAutoEnable, 2000);
+    return () => window.clearTimeout(id);
   }, [roomId, user?.id, aiStore, hasManagementAccess]);
 
   const prevPathname = React.useRef(pathname);
