@@ -211,6 +211,7 @@ const LinkRow = ({
             roomAccessOptions={roomAccessOptions}
             roomSelectedOptions={roomSelectedOptions}
             changeAccessOption={changeAccessOptionHandler}
+            isBlockedByAdmin={isBlockedByAdmin}
           />
           {!isArchiveFolder ? (
             <ContextMenuButton
