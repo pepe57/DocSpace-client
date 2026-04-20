@@ -36,9 +36,10 @@ import styles from "./EditorPage.module.scss";
 
 type EditorPageProps = {
   fileId: string;
+  action?: string;
 };
 
-export default function EditorPage({ fileId }: EditorPageProps) {
+export default function EditorPage({ fileId, action }: EditorPageProps) {
   const router = useRouter();
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const [isReady, setIsReady] = React.useState(false);
@@ -55,9 +56,10 @@ export default function EditorPage({ fileId }: EditorPageProps) {
     const params = new URLSearchParams();
     params.set("fileId", fileId);
     params.set("editorGoBack", "event");
+    if (action) params.set("action", action);
 
     return combineUrl(editorOrigin, `/doceditor?${params.toString()}`);
-  }, [fileId, editorOrigin]);
+  }, [fileId, action, editorOrigin]);
 
   React.useEffect(() => {
     const onMessage = (event: MessageEvent) => {

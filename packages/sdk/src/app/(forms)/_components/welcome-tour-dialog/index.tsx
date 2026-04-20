@@ -26,6 +26,7 @@
 
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
@@ -64,7 +65,17 @@ export default function WelcomeTourDialog({
 }: WelcomeTourDialogProps) {
   const { t } = useTranslation(["Common"]);
   const { currentDeviceType } = useDeviceType();
-  const isNonDesktop = currentDeviceType !== DeviceType.desktop;
+  const canTakeTour = currentDeviceType !== DeviceType.mobile;
+
+  const [reduceMotion, setReduceMotion] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   return (
     <ModalDialog visible={visible} onClose={onSkip} autoMaxHeight autoMaxWidth isLarge isHuge>
@@ -77,10 +88,12 @@ export default function WelcomeTourDialog({
             <div className={styles.videoContainer}>
               <video
                 className={styles.video}
-                autoPlay
-                loop
+                autoPlay={!reduceMotion}
+                loop={!reduceMotion}
                 muted
                 playsInline
+                preload="auto"
+                controls={reduceMotion}
               >
                 <source
                   src={AiFormsTutorialUrl}
@@ -130,7 +143,7 @@ export default function WelcomeTourDialog({
         </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        {!isNonDesktop && (
+        {canTakeTour && (
           <Button
             label={t("Common:WelcomeStartTour", "Take a tour")}
             size={ButtonSize.normal}
@@ -142,7 +155,7 @@ export default function WelcomeTourDialog({
         <Button
           label={t("Common:WelcomeStartUsing", "Start using")}
           size={ButtonSize.normal}
-          primary={isNonDesktop}
+          primary={!canTakeTour}
           scale
           onClick={onSkip}
         />

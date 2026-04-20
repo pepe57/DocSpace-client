@@ -33,13 +33,18 @@ import { Tabs, type TTabItem } from "@docspace/ui-kit/components/tabs";
 import { LoaderWrapper } from "@docspace/ui-kit/components/loader-wrapper";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 
+import { useDocsUserStore } from "../../_store/DocsUserStore";
 import BillingForm from "./category/BillingForm";
 import FileManagement from "./category/FileManagement";
 import InterfaceTheme from "./category/InterfaceTheme";
 
 const Settings = () => {
   const { t } = useTranslation(["Common", "Profile"]);
-  const [selectedTabId, setSelectedTabId] = React.useState("billing");
+  const { user } = useDocsUserStore();
+  const canSeeBilling = user?.isAdmin || user?.isOwner;
+  const [selectedTabId, setSelectedTabId] = React.useState(() =>
+    canSeeBilling ? "billing" : "file-management",
+  );
   const [isPending, startTransition] = React.useTransition();
 
   React.useEffect(() => {
@@ -65,11 +70,15 @@ const Settings = () => {
 
   const tabs: TTabItem[] = React.useMemo(
     () => [
-      {
-        id: "billing",
-        name: "Billing",
-        content: wrapContent(<BillingForm />),
-      },
+      ...(canSeeBilling
+        ? [
+            {
+              id: "billing",
+              name: "Billing",
+              content: wrapContent(<BillingForm />),
+            },
+          ]
+        : []),
       {
         id: "file-management",
         name: t("Common:FileManagement"),
@@ -81,7 +90,7 @@ const Settings = () => {
         content: wrapContent(<InterfaceTheme />),
       },
     ],
-    [t, isPending],
+    [t, isPending, canSeeBilling],
   );
 
   const onSelect = React.useCallback((tab: TTabItem) => {

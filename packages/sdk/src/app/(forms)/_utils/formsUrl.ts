@@ -24,73 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+type SearchParamsLike = { get: (key: string) => string | null };
 
-import React from "react";
-import { makeAutoObservable } from "mobx";
-
-const TOUR_COMPLETED_KEY = "forms_tour_completed";
-
-class FormsTourStore {
-  isRunning = false;
-  tourCompleted = false;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  get isDemo() {
-    return this.isRunning;
-  }
-
-  get showMockItems() {
-    return this.isRunning;
-  }
-
-  get forceShowAiChat() {
-    return this.isRunning;
-  }
-
-  hydrate = () => {
-    this.tourCompleted = localStorage.getItem(TOUR_COMPLETED_KEY) === "true";
-  };
-
-  startTour = () => {
-    this.isRunning = true;
-  };
-
-  completeTour = () => {
-    this.isRunning = false;
-    this.tourCompleted = true;
-    localStorage.setItem(TOUR_COMPLETED_KEY, "true");
-  };
-
-  resetTour = () => {
-    this.tourCompleted = false;
-    localStorage.removeItem(TOUR_COMPLETED_KEY);
-  };
+export function formsQuerySuffix(searchParams: SearchParamsLike): string {
+  const params = new URLSearchParams();
+  const rid = searchParams.get("roomId") ?? "";
+  const lid = searchParams.get("libraryId") ?? "";
+  if (rid) params.set("roomId", rid);
+  if (lid) params.set("libraryId", lid);
+  const qs = params.toString();
+  return qs ? `?${qs}` : "";
 }
 
-export const FormsTourStoreContext = React.createContext<FormsTourStore>(
-  null as unknown as FormsTourStore,
-);
-
-export const FormsTourStoreContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FormsTourStore(), []);
-  React.useEffect(() => {
-    store.hydrate();
-  }, [store]);
-  return (
-    <FormsTourStoreContext.Provider value={store}>
-      {children}
-    </FormsTourStoreContext.Provider>
-  );
-};
-
-export const useFormsTourStore = () => {
-  return React.useContext(FormsTourStoreContext);
-};
+export function appendRoomParams(
+  path: string,
+  searchParams: SearchParamsLike,
+): string {
+  return `${path}${formsQuerySuffix(searchParams)}`;
+}
