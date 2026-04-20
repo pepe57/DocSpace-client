@@ -1,11 +1,6 @@
 @use "@docspace/ui-kit/styles/mixins";
 
 .floatingButton {
-  --ai-chat-button-bg-default: var(
-    --ai-chat-button-bg,
-    var(--color-scheme-main-buttons)
-  );
-
   position: absolute;
   bottom: calc(24px + env(safe-area-inset-bottom, 0));
   z-index: 100;
@@ -13,7 +8,7 @@
   height: 48px;
   border-radius: 50%;
   border: none;
-  background: var(--ai-chat-button-bg-default);
+  background: var(--ai-chat-button-bg, var(--color-scheme-main-buttons));
   color: var(--color-scheme-text-buttons);
   cursor: pointer;
   display: flex;
