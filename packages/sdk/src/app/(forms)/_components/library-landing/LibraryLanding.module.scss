@@ -66,13 +66,19 @@
   );
   border: 1px solid var(--landing-dropdown-border-color, rgb(208, 213, 218));
   border-radius: 6px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: var(
+    --landing-search-dropdown-shadow,
+    0 4px 16px rgba(0, 0, 0, 0.08)
+  );
   max-height: 320px;
   overflow-y: auto;
 }
 
 :global(.dark) .searchDropdown {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.24);
+  box-shadow: var(
+    --landing-search-dropdown-shadow-dark,
+    0 4px 16px rgba(0, 0, 0, 0.24)
+  );
 }
 
 .searchResultItem {
@@ -234,7 +240,7 @@
 }
 
 :global(.dark) .statsCards {
-  background-color: var(--landing-stats-bg, rgba(255, 255, 255, 0.05));
+  background-color: var(--landing-stats-bg-dark, rgba(255, 255, 255, 0.05));
 }
 
 .statsCard {
@@ -251,7 +257,7 @@
 }
 
 :global(.dark) .statsCard:first-child {
-  border-color: var(--landing-stats-border, rgba(255, 255, 255, 0.1));
+  border-color: var(--landing-stats-border-dark, rgba(255, 255, 255, 0.1));
 }
 
 .statsNumber {
@@ -395,7 +401,7 @@
   }
 
   :global(.dark) .statsCard:first-child {
-    border-color: var(--landing-stats-border, rgba(255, 255, 255, 0.1));
+    border-color: var(--landing-stats-border-dark, rgba(255, 255, 255, 0.1));
   }
 
   .categoriesGrid {

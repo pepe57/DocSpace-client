@@ -130,6 +130,7 @@ body.light {
   --landing-item-hover-bg: var(--color-background-hover);
   --landing-stats-bg: rgba(0, 0, 0, 0.03);
   --landing-stats-border: var(--color-border);
+  --landing-search-dropdown-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 
   // ── MobileStub ─────────────────────────────────────────────────────────────
   --mobile-stub-bg: var(--color-main-background);
@@ -332,6 +333,8 @@ body.dark {
   --landing-item-hover-bg: var(--color-background-hover);
   --landing-stats-bg: rgba(255, 255, 255, 0.05);
   --landing-stats-border: var(--color-border);
+  --landing-stats-border-dark: var(--color-border);
+  --landing-search-dropdown-shadow-dark: 0 4px 16px rgba(0, 0, 0, 0.24);
 
   // ── MobileStub ─────────────────────────────────────────────────────────────
   --mobile-stub-bg: var(--color-main-background);
