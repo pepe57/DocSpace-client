@@ -1327,6 +1327,7 @@ export default inject(
     const { showProfileLoader } = clientLoadingStore;
 
     const { enabledHotkeys } = filesStore;
+    const { getIcon, isExternalShareRestricted } = filesStore.filesSettingsStore;
 
     return {
       currentClientView,
@@ -1453,8 +1454,8 @@ export default inject(
       setChangePasswordVisible,
       setChangeAvatarVisible,
       setChangeNameVisible,
-      getIcon: filesStore.filesSettingsStore.getIcon,
-      isExternalShareRestricted: !filesStore.filesSettingsStore.externalShare,
+      getIcon,
+      isExternalShareRestricted,
       hasExternalLinks,
 
       isRootRooms,

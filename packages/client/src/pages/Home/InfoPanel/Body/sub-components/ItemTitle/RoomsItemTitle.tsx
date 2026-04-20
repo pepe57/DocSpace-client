@@ -316,13 +316,11 @@ export default inject(
   }: TStore) => {
     const { roomsView, setIsMobileHidden } = infoPanelStore;
 
-    const { displayFileExtension, getIcon, externalShare } = filesSettingsStore;
+    const { displayFileExtension, getIcon, isExternalShareRestricted } = filesSettingsStore;
     const { externalLinks, hasExternalLinks } = publicRoomStore;
     const { setTemplateAccessSettingsVisible } = dialogsStore;
 
     const { onChangeFile } = avatarEditorDialogStore;
-
-    const isExternalShareRestricted = !externalShare;
 
     return {
       roomsView,

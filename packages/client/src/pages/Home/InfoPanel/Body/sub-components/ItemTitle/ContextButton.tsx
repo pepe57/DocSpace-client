@@ -177,7 +177,7 @@ export default inject(
   ({ contextOptionsStore, filesSettingsStore, publicRoomStore }: TStore) => ({
     getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
     getIcon: filesSettingsStore.getIcon,
-    isExternalShareRestricted: !filesSettingsStore.externalShare,
+    isExternalShareRestricted: filesSettingsStore.isExternalShareRestricted,
     hasExternalLinks: publicRoomStore.hasExternalLinks,
   }),
 )(observer(RoomsContextBtn));

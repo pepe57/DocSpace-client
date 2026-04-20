@@ -194,7 +194,12 @@ const Details = ({
 
   const badgeUrl =
     "external" in selection
-      ? getRoomBadgeUrl(selection, 24, isExternalShareRestricted, hasExternalLinks)
+      ? getRoomBadgeUrl(
+          selection,
+          24,
+          isExternalShareRestricted,
+          hasExternalLinks,
+        )
       : undefined;
 
   const badgeIconColor =
@@ -362,6 +367,8 @@ export default inject(
       currentQuotaStore;
 
     const { isAIAgentsFolderRoot } = treeFoldersStore;
+    const { isExternalShareRestricted } = filesSettingsStore;
+
     return {
       culture,
       createThumbnail,
@@ -377,7 +384,7 @@ export default inject(
       roomLifetime:
         infoPanelRoomSelection?.lifetime ?? selectedFolderStore?.lifetime,
       onCreateRoomFromTemplate,
-      isExternalShareRestricted: !filesSettingsStore.externalShare,
+      isExternalShareRestricted,
       hasExternalLinks: publicRoomStore.hasExternalLinks,
     };
   },

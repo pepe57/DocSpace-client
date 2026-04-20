@@ -242,7 +242,7 @@ export default inject(
 
     const { showStorageInfo } = currentQuotaStore;
 
-    const isExternalShareRestricted = !filesSettingsStore.externalShare;
+    const { isExternalShareRestricted } = filesSettingsStore;
     return {
       roomQuotaColumnIsEnable,
       roomColumnTypeIsEnabled,

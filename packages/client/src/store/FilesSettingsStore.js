@@ -207,6 +207,10 @@ class FilesSettingsStore {
     return this.maxUploadThreadCount / this.maxUploadFilesCount;
   }
 
+  get isExternalShareRestricted() {
+    return !this.externalShare;
+  }
+
   get isLoadedSettingsTree() {
     return (
       this.confirmDelete !== null &&

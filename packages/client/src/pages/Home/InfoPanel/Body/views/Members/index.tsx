@@ -494,6 +494,7 @@ export default inject(
     const isPublicRoomType = isPublicRoom || isCustomRoom || isFormRoom;
 
     const { isRootFolder } = selectedFolderStore;
+    const { isExternalShareRestricted } = filesStore.filesSettingsStore;
 
     return {
       infoPanelSelection: { ...infoPanelRoomSelection, isRoom: true },
@@ -518,7 +519,7 @@ export default inject(
       setAccessSettingsIsVisible,
       templateAvailable: templateAvailableToEveryone,
       isRootFolder,
-      isExternalShareRestricted: !filesStore.filesSettingsStore.externalShare,
+      isExternalShareRestricted,
     };
   },
 )(observer(Members));

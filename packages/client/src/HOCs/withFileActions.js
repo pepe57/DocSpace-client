@@ -481,6 +481,7 @@ export default function withFileActions(WrappedFileItem) {
       const { startUpload, secondaryProgressDataStore } = uploadDataStore;
       const { withContentSelection } = hotkeyStore;
       const { findOperationById } = secondaryProgressDataStore;
+      const { isExternalShareRestricted } = filesSettingsStore;
 
       const selectedItem = selection.find(
         (x) => x.id === item.id && x.fileExst === item.fileExst,
@@ -611,7 +612,7 @@ export default function withFileActions(WrappedFileItem) {
 
         withContentSelection,
 
-        isExternalShareRestricted: !filesSettingsStore.externalShare,
+        isExternalShareRestricted,
 
         isNewBadgePanelVisible:
           newFilesPanelFolderId === item.id &&
