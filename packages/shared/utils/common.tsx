@@ -66,8 +66,6 @@ import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.patt
 import { AvatarRole } from "@docspace/ui-kit/components/avatar";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
 
-import { flagsIcons } from "./image-flags";
-
 import { parseAddress } from "./email";
 
 import {
@@ -1155,48 +1153,6 @@ export const insertDataLayer = (id: string) => {
   window.dataLayer.push({ user_id: id });
 };
 
-export const mapCulturesToArray = (
-  culturesArg: string[],
-  isBetaBadge: boolean = true,
-  i18nArg?: I18n,
-) => {
-  let t = null;
-
-  if (i18nArg) {
-    t = i18nArg.getFixedT(null, "Common");
-  }
-
-  return culturesArg.map((culture, index) => {
-    let iconName = culture;
-
-    switch (culture) {
-      case "sr-Cyrl-RS":
-      case "sr-Latn-RS":
-        iconName = "sr";
-        break;
-      default:
-        break;
-    }
-
-    const icon = flagsIcons?.get(`${iconName}.react.svg`);
-
-    const cultureObj = t
-      ? {
-          key: culture,
-          label: t(`Culture_${culture}`),
-          icon,
-          ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
-          index,
-        }
-      : {
-          key: culture,
-          icon,
-          index,
-        };
-
-    return cultureObj;
-  });
-};
 
 export const mapTimezonesToArray = (
   timezones: TTimeZone[],
