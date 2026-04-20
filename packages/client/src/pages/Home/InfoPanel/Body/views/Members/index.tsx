@@ -181,7 +181,7 @@ const Members = ({
               {isFormRoom ? t("Common:PublicLink") : t("Common:SharedLinks")}
             </Text>
 
-            {!isArchiveFolder && canAddLink ? (
+            {!isArchiveFolder && canAddLink && !(isPublicRoom && isExternalShareRestricted) ? (
               <div
                 data-tooltip-id="emailTooltip"
                 data-tooltip-content={t(
