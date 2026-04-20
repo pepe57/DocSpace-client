@@ -1,3 +1,5 @@
+@use "@docspace/ui-kit/styles/mixins";
+
 .foldersGrid,
 .filesGrid {
   display: grid;
@@ -10,6 +12,20 @@
   box-sizing: border-box;
   margin-inline-start: 1px;
   padding-inline: var(--tile-grid-padding-inline, 0);
+}
+
+.foldersGrid {
+  @include mixins.mobile {
+    grid-template-columns: 1fr;
+    grid-gap: 8px;
+  }
+}
+
+.filesGrid {
+  @include mixins.mobile {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 16px;
+  }
 }
 
 .tile {

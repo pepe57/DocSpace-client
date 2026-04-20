@@ -24,40 +24,55 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
-
 import React from "react";
-import { useTranslation } from "react-i18next";
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+import { Text } from "@docspace/ui-kit/components/text";
 
-import DefaultFolderDark from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.dark.svg";
-import DefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.light.svg";
+import styles from "./BillingCards.module.scss";
 
-import styles from "./MobileStub.module.scss";
+export type BillingCardTab = {
+  id: string;
+  title: string;
+  description: string;
+  iconClass: string;
+  icon: React.ReactNode;
+  nativeIcon?: boolean;
+};
 
-const MobileStub = () => {
-  const { t } = useTranslation(["Common"]);
-  const { isBase } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
+type BillingCardsProps = {
+  tabs: BillingCardTab[];
+  activeTab: string;
+  onTabChange: (id: string) => void;
+};
 
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const Icon = isBase ? DefaultFolderLight : DefaultFolderDark;
-
+const BillingCards = ({ tabs, activeTab, onTabChange }: BillingCardsProps) => {
   return (
-    <div className={styles.mobileStub}>
-      <div className={styles.icon}>
-        {mounted ? <Icon /> : <div style={{ width: 200, height: 147 }} />}
-      </div>
-      <div className={styles.title}>{t("Common:FormsMobileStubTitle")}</div>
-      <div className={styles.description}>
-        {t("Common:FormsMobileStubDescription")}
-      </div>
+    <div className={styles.billingCards}>
+      {tabs.map((tab) => (
+        <div
+          key={tab.id}
+          className={`${styles.billingCard} ${activeTab === tab.id ? styles.billingCardActive : ""}`}
+          onClick={() => onTabChange(tab.id)}
+        >
+          <div className={`${styles.billingCardIcon} ${tab.iconClass}`}>
+            {tab.nativeIcon ? (
+              tab.icon
+            ) : (
+              <span className={styles.billingCardIconInner}>{tab.icon}</span>
+            )}
+          </div>
+          <div className={styles.billingCardText}>
+            <Text fontSize="13px" fontWeight={600} truncate>
+              {tab.title}
+            </Text>
+            <Text fontSize="11px" className={styles.billingCardDesc}>
+              {tab.description}
+            </Text>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default MobileStub;
+export { BillingCards };

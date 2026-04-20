@@ -330,6 +330,7 @@
   // src/instance/index.ts
   var _isConnected, _callIdCounter, _callbacks, _tasks, _classNames, _expectedOrigin, _iframe, _uploadIdCounter, _pendingUploads, _createLoader, _createIframe, _SDKInstance_instances, setupCSPValidation_fn, _sendMessage, _onMessage, parseMessageData_fn, handleMethodResponse_fn, drainNextTask_fn, createMethodTimer_fn, clearAllPending_fn, rejectAllPending_fn, processEvent_fn, _allowedCommands, executeCommand_fn, handleError_fn, executeMethod_fn, prepareFrameConfig_fn, createContainer_fn, setupIframe_fn, setupFrameEventHandlers_fn, assembleFrame_fn, _getMethodPromise;
   var _SDKInstance = class _SDKInstance {
+    /** @param config - Initial frame configuration. See {@link TFrameConfig}. */
     constructor(config2) {
       __privateAdd(this, _SDKInstance_instances);
       __privateAdd(this, _isConnected, false);
@@ -605,10 +606,19 @@
      */
     initFrame(config2) {
       this.config = __privateMethod(this, _SDKInstance_instances, prepareFrameConfig_fn).call(this, config2);
+      if (!this.config.frameId) {
+        console.warn("SDK Warning: frameId is empty. The frame may not initialize correctly.");
+      }
+      if (!this.config.src) {
+        console.warn("SDK Warning: src is empty. The iframe will not load any content.");
+      }
       try {
         __privateSet(this, _expectedOrigin, new URL(this.config.src).origin);
       } catch {
         __privateSet(this, _expectedOrigin, "");
+        if (this.config.src) {
+          console.warn(`SDK Warning: src "${this.config.src}" is not a valid URL.`);
+        }
       }
       __privateSet(this, _isConnected, false);
       __privateMethod(this, _SDKInstance_instances, clearAllPending_fn).call(this, new SDKError("DISCONNECTED" /* Disconnected */, "Frame reloaded"));
@@ -732,7 +742,11 @@
      * ```
      */
     getConfig() {
-      return { ...this.config };
+      const config2 = { ...this.config };
+      if (config2.filter) config2.filter = { ...config2.filter };
+      if (config2.events) config2.events = { ...config2.events };
+      if (config2.editorCustomization) config2.editorCustomization = { ...config2.editorCustomization };
+      return config2;
     }
     /**
      * Returns metadata about the folder currently open in the frame.
@@ -1253,7 +1267,7 @@
      * ```
      */
     executeInEditor(callback, data) {
-      void __privateGet(this, _getMethodPromise).call(this, "executeInEditor" /* ExecuteInEditor */, {
+      return __privateGet(this, _getMethodPromise).call(this, "executeInEditor" /* ExecuteInEditor */, {
         callback,
         data
       });
@@ -1602,9 +1616,18 @@
    * @param data - The message data containing the command name and parameters.
    */
   executeCommand_fn = function(data) {
+    var _a, _b, _c, _d;
     if (!data.commandName) return;
     if (!__privateGet(_SDKInstance, _allowedCommands).has(data.commandName)) {
       console.warn("Blocked iframe command not in allowlist:", data.commandName);
+      return;
+    }
+    if (data.commandName === "getExternalData") {
+      (_b = (_a = this.config.events) == null ? void 0 : _a.onGetExternalData) == null ? void 0 : _b.call(_a, data.commandData);
+      return;
+    }
+    if (data.commandName === "setExternalData") {
+      (_d = (_c = this.config.events) == null ? void 0 : _c.onSetExternalData) == null ? void 0 : _d.call(_c, data.commandData);
       return;
     }
     const command = this[data.commandName];
@@ -1681,8 +1704,8 @@
    */
   createContainer_fn = function(targetId) {
     let target = document.getElementById(targetId);
-    if (!target) return null;
     const existingContainer = document.getElementById(`${targetId}-container`);
+    if (!target && !existingContainer) return null;
     if (existingContainer) {
       const parentNode = existingContainer.parentNode;
       if (parentNode) {
@@ -1694,8 +1717,9 @@
     } else {
       __privateSet(this, _classNames, target.className);
     }
+    if (!target) return null;
     const container = document.createElement("div");
-    container.id = target.id + "-container";
+    container.id = `${targetId}-container`;
     container.className = "frame-container";
     Object.assign(container.style, {
       position: "relative",
@@ -1779,7 +1803,9 @@
   /** Methods the iframe is allowed to invoke via `onCallCommand`. */
   __privateAdd(_SDKInstance, _allowedCommands, /* @__PURE__ */ new Set([
     "setIsLoaded",
-    "setConfig"
+    "setConfig",
+    "getExternalData",
+    "setExternalData"
   ]));
   var SDKInstance = _SDKInstance;
 
@@ -1994,6 +2020,42 @@
        * ```
        */
       __publicField(this, "initSystem", (config2) => this.init({ ...config2, mode: "system" /* System */ }));
+      /**
+       * Initializes a frame in {@link SDKMode.PublicRoom} mode — anonymous access to view,
+       * edit, comment on, and review documents in a public room.
+       * Forces `mode` to {@link SDKMode.PublicRoom}. Requires {@link TFrameConfig.requestToken}.
+       *
+       * @param config - Frame configuration. See {@link TFrameConfig}.
+       * @returns The initialized {@link SDKInstance}.
+       *
+       * @example
+       * ```typescript
+       * import { SDK } from '@onlyoffice/docspace-sdk-js';
+       *
+       * const sdk = new SDK();
+       * const instance = sdk.initPublicRoom({
+       *   frameId: 'ds-frame',
+       *   src: 'https://docspace.example.com',
+       *   requestToken: 'public-room-token',
+       *   events: {
+       *     onAppReady: () => console.log('ready'),
+       *   },
+       * });
+       * ```
+       *
+       * @example
+       * With filter and header options.
+       * ```typescript
+       * const instance = sdk.initPublicRoom({
+       *   frameId: 'ds-frame',
+       *   src: 'https://docspace.example.com',
+       *   requestToken: 'public-room-token',
+       *   showFilter: true,
+       *   showHeader: true,
+       * });
+       * ```
+       */
+      __publicField(this, "initPublicRoom", (config2) => this.init({ ...config2, mode: "public-room" /* PublicRoom */ }));
       /**
        * Initializes a frame in {@link SDKMode.Uploader} mode — a file upload interface.
        * Forces `mode` to {@link SDKMode.Uploader}. Requires {@link TFrameConfig.id}

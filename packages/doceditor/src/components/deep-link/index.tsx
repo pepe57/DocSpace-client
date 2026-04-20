@@ -79,7 +79,7 @@ const DeepLink = ({
     if (isRemember) localStorage.setItem("defaultOpenDocument", "web");
     const url = new URL(window.location.href);
     url.searchParams.set("without_redirect", "true");
-    window.location.assign(url.toString());
+    window.history.replaceState(null, "", url.toString());
     setIsShowDeepLink(false);
   };
 

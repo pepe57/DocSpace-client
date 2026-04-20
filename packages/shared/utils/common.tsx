@@ -487,6 +487,10 @@ export function getProviderTranslation(
       return signUp
         ? t("Common:SignUpWithWechat")
         : t("Common:SignInWithWechat");
+    case "nextcloud":
+      return signUp
+        ? t("Common:SignUpWithNextcloud")
+        : t("Common:SignInWithNextcloud");
     default:
       return "";
   }
@@ -1588,3 +1592,4 @@ export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {
     return acc;
   }, initial);
 }
+
