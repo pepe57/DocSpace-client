@@ -119,6 +119,7 @@ export type ExpiredComboBoxProps = {
 export type ShareProps = {
   infoPanelSelection: TFile | TFolder;
   isExternalShareRestricted?: boolean;
+  defaultShareLinkInternal?: boolean;
   setEmbeddingPanelData?: (value: {
     visible: boolean;
     item?: TFile | TFolder;
@@ -201,6 +202,7 @@ export interface UseShareProps {
   setView?: (view: string) => void;
   setIsScrollLocked?: (isScrollLocked: boolean) => void;
   isExternalShareRestricted?: boolean;
+  defaultShareLinkInternal?: boolean;
   onOpenPanel?: (options: {
     visible: boolean;
     updateAccessLink: () => Promise<void>;

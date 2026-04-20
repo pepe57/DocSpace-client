@@ -47,7 +47,6 @@ interface ExternalShareProps {
   infoPanelSelection?: ShareProps["infoPanelSelection"];
   fileLinkProps?: ShareProps["fileLinkProps"];
   members?: ShareProps["members"];
-  isExternalShareRestricted?: boolean;
 }
 
 interface WrapperShareProps extends Omit<
@@ -104,7 +103,8 @@ export default inject<TStore>(
       setIsScrollLocked,
     } = infoPanelStore;
 
-    const { isExternalShareRestricted } = filesSettingsStore;
+    const { isExternalShareRestricted, defaultShareLinkInternal } =
+      filesSettingsStore;
 
     return {
       setView,
@@ -122,6 +122,7 @@ export default inject<TStore>(
       setEditGroupMembersDialogVisible,
 
       isExternalShareRestricted,
+      defaultShareLinkInternal,
     };
   },
 )(observer(WrapperShare as FC<ExternalShareProps>));

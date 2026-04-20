@@ -48,6 +48,7 @@ export const useShare = ({
   setEmbeddingPanelData,
   hideLinkTypeSelector,
   isExternalShareRestricted,
+  defaultShareLinkInternal,
 }: UseShareProps) => {
   const isFolder = infoPanelSelection.isFolder;
 
@@ -120,7 +121,7 @@ export const useShare = ({
 
       const link = await ShareLinkService.getPrimaryLink(
         infoPanelSelection,
-        !!isExternalShareRestricted,
+        defaultShareLinkInternal,
       );
 
       if (link) {
@@ -166,7 +167,7 @@ export const useShare = ({
     try {
       const newLink = await ShareLinkService.addExternalLink(
         infoPanelSelection,
-        !!isExternalShareRestricted,
+        defaultShareLinkInternal,
       );
 
       setFileLinks((links) => {
@@ -386,7 +387,7 @@ export const useShare = ({
 
   const getData = (link: TFileLink): ContextMenuModel[] => {
     const isBlockedByAdmin =
-      !!isExternalShareRestricted && !link.sharedTo.internal;
+      isExternalShareRestricted && !link.sharedTo.internal;
 
     if (isBlockedByAdmin) {
       return [

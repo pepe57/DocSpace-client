@@ -154,7 +154,7 @@ const LinkRow = ({
     const isLoaded = loadingLinks.includes(link.sharedTo.id);
     const canEditInternal = link.canEditInternal;
     const isBlockedByAdmin =
-      !!isExternalShareRestricted && !link.sharedTo.internal;
+      isExternalShareRestricted && !link.sharedTo.internal;
 
     return (
       <div className={className} key={link.sharedTo.id}>

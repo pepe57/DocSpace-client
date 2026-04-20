@@ -140,7 +140,7 @@ const LinkRow = (props: LinkRowProps) => {
 
   const getData = () => {
     const isBlockedByAdmin =
-      !!isExternalShareRestricted && !link.sharedTo.internal;
+      isExternalShareRestricted && !link.sharedTo.internal;
 
     if (isBlockedByAdmin) {
       return [
