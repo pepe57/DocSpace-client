@@ -24,35 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
-import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
-import { logger } from "@/../logger.mjs";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
-export async function getDefaultProvider(): Promise<
-  TDefaultProvider | undefined
-> {
-  logger.debug("Start GET /ai/providers/default");
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  try {
-    const [req] = await createRequest(
-      ["/ai/providers/default"],
-      [["", ""]],
-      "GET",
-    );
-    const res = await fetch(req, {
-      next: { revalidate: 900 },
-      signal: AbortSignal.timeout(8000),
-    });
+.svg {
+  display: block;
+  width: var(--dual-ring-size, 40px);
+  height: var(--dual-ring-size, 40px);
+  color: #{$loader-light};
+}
 
-    if (!res.ok) {
-      logger.error(`GET /ai/providers/default failed: ${res.status}`);
-      return;
+:global(.dark) {
+  :local {
+    .svg {
+      color: #{$loader-dark};
     }
+  }
+}
 
-    const json = await res.json();
+.outer,
+.inner {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  transform-origin: 50% 50%;
+  transform-box: view-box;
+  will-change: transform;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
 
-    return json.response as TDefaultProvider;
-  } catch (error) {
-    logger.error(`Error in getDefaultProvider: ${error}`);
+.outer {
+  animation-name: spin;
+  animation-duration: 1.1s;
+}
+
+.inner {
+  animation-name: spinReverse;
+  animation-duration: 1.1s;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinReverse {
+  to {
+    transform: rotate(-360deg);
   }
 }

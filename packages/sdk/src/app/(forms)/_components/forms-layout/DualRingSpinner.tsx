@@ -24,35 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
-import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
-import { logger } from "@/../logger.mjs";
+import type React from "react";
 
-export async function getDefaultProvider(): Promise<
-  TDefaultProvider | undefined
-> {
-  logger.debug("Start GET /ai/providers/default");
+import styles from "./DualRingSpinner.module.scss";
 
-  try {
-    const [req] = await createRequest(
-      ["/ai/providers/default"],
-      [["", ""]],
-      "GET",
-    );
-    const res = await fetch(req, {
-      next: { revalidate: 900 },
-      signal: AbortSignal.timeout(8000),
-    });
+type DualRingSpinnerProps = {
+  size?: string;
+};
 
-    if (!res.ok) {
-      logger.error(`GET /ai/providers/default failed: ${res.status}`);
-      return;
-    }
+const DualRingSpinner = ({ size = "40px" }: DualRingSpinnerProps) => {
+  return (
+    <div className={styles.wrapper}>
+      <svg
+        className={styles.svg}
+        style={{ "--dual-ring-size": size } as React.CSSProperties}
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-label="Loading"
+        role="status"
+      >
+        <title>loading</title>
+        <circle
+          className={styles.outer}
+          cx="50"
+          cy="50"
+          r="40"
+          strokeWidth="8"
+          strokeDasharray="62.83185307179586 62.83185307179586"
+        />
+        <circle
+          className={styles.inner}
+          cx="50"
+          cy="50"
+          r="20"
+          strokeWidth="4"
+          strokeDasharray="29.845130209103033 29.845130209103033"
+          strokeDashoffset="29.845130209103033"
+        />
+      </svg>
+    </div>
+  );
+};
 
-    const json = await res.json();
-
-    return json.response as TDefaultProvider;
-  } catch (error) {
-    logger.error(`Error in getDefaultProvider: ${error}`);
-  }
-}
+export default DualRingSpinner;

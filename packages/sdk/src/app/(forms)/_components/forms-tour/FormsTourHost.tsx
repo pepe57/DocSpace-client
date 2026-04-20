@@ -24,35 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
-import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
-import { logger } from "@/../logger.mjs";
+"use client";
 
-export async function getDefaultProvider(): Promise<
-  TDefaultProvider | undefined
-> {
-  logger.debug("Start GET /ai/providers/default");
+import { createPortal } from "react-dom";
+import { observer } from "mobx-react";
 
-  try {
-    const [req] = await createRequest(
-      ["/ai/providers/default"],
-      [["", ""]],
-      "GET",
-    );
-    const res = await fetch(req, {
-      next: { revalidate: 900 },
-      signal: AbortSignal.timeout(8000),
-    });
+import useFormsTour from "../../_hooks/useFormsTour";
 
-    if (!res.ok) {
-      logger.error(`GET /ai/providers/default failed: ${res.status}`);
-      return;
-    }
+type FormsTourHostProps = {
+  showMenu: boolean;
+};
 
-    const json = await res.json();
+const FormsTourHost = ({ showMenu }: FormsTourHostProps) => {
+  const { Tour } = useFormsTour(showMenu);
+  if (!Tour) return null;
+  return createPortal(Tour, document.body);
+};
 
-    return json.response as TDefaultProvider;
-  } catch (error) {
-    logger.error(`Error in getDefaultProvider: ${error}`);
-  }
-}
+export default observer(FormsTourHost);

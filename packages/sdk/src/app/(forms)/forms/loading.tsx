@@ -24,35 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
-import type { TDefaultProvider } from "@docspace/shared/api/ai/types";
-import { logger } from "@/../logger.mjs";
+import DualRingSpinner from "../_components/forms-layout/DualRingSpinner";
 
-export async function getDefaultProvider(): Promise<
-  TDefaultProvider | undefined
-> {
-  logger.debug("Start GET /ai/providers/default");
-
-  try {
-    const [req] = await createRequest(
-      ["/ai/providers/default"],
-      [["", ""]],
-      "GET",
-    );
-    const res = await fetch(req, {
-      next: { revalidate: 900 },
-      signal: AbortSignal.timeout(8000),
-    });
-
-    if (!res.ok) {
-      logger.error(`GET /ai/providers/default failed: ${res.status}`);
-      return;
-    }
-
-    const json = await res.json();
-
-    return json.response as TDefaultProvider;
-  } catch (error) {
-    logger.error(`Error in getDefaultProvider: ${error}`);
-  }
+export default function Loading() {
+  return <DualRingSpinner />;
 }
