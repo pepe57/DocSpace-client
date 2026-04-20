@@ -113,6 +113,7 @@ body.light {
 
   // ── AiChatButton ───────────────────────────────────────────────────────────
   --ai-chat-button-bg: var(--color-primary-element);
+  --ai-chat-button-color: var(--color-primary-element-text);
 
   // ── Loader ─────────────────────────────────────────────────────────────────
   --loader-track-base: var(--color-loading-dark);
@@ -316,6 +317,7 @@ body.dark {
 
   // ── AiChatButton ───────────────────────────────────────────────────────────
   --ai-chat-button-bg: var(--color-primary-element);
+  --ai-chat-button-color: var(--color-primary-element-text);
 
   // ── Loader ─────────────────────────────────────────────────────────────────
   --loader-track-base: var(--color-loading-dark);
