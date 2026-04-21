@@ -65,6 +65,7 @@ import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
+import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import { useFormsUserStore } from "../_store/FormsUserStore";
 import useInitCommonStores, {
   type CommonData,
@@ -132,6 +133,8 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   } = formsNavigationStore;
   // libraryNav removed — library uses URL routing now
   const aiStore = useFormsAiAgentStore();
+  const dbSettingsStore = useFormsDbSettingsStore();
+  const { sendToDb } = dbSettingsStore;
   const { user } = useFormsUserStore();
   const formsSettingsStore = useFormsSettingsStore();
   const { roomId, socketUrl, hasManagementAccess } = formsSettingsStore;
@@ -366,6 +369,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     const id = window.setTimeout(runAutoEnable, 2000);
     return () => window.clearTimeout(id);
   }, [roomId, user?.id, aiStore, hasManagementAccess]);
+
+  React.useEffect(() => {
+    if (!roomId || !user?.id || !hasManagementAccess || !sendToDb) return;
+    aiStore.initAskFromDBAgent();
+  }, [roomId, user?.id, aiStore, hasManagementAccess, sendToDb]);
 
   const prevPathname = React.useRef(pathname);
   const prevCompletedFolderShell = React.useRef(completedFolder);
