@@ -35,7 +35,7 @@ import {
   PATHNAME_HEADER,
   ROOM_ID_HEADER,
   SHARE_KEY_HEADER,
-  SRC_STYLES_HEADER,
+  STYLES_URL_HEADER,
   THEME_HEADER,
 } from "@/utils/constants";
 import { handlePublicRoomValidation } from "@/utils/middleware/handlePublicRoomValidation";
@@ -82,22 +82,17 @@ export async function proxy(request: NextRequest) {
   requestHeaders.set(THEME_HEADER, theme ?? "");
   requestHeaders.set(LOCALE_HEADER, locale ?? "");
   requestHeaders.set(SHARE_KEY_HEADER, shareKey ?? "");
+  requestHeaders.set(STYLES_URL_HEADER, searchParams.get("stylesUrl") ?? "");
 
   if (request.nextUrl.pathname.includes("forms")) {
     const roomId = searchParams.get("roomId") ?? "";
     const libraryId = searchParams.get("libraryId") ?? "";
-    const srcStyles = searchParams.get("srcStyles") ?? "";
 
     requestHeaders.set(ROOM_ID_HEADER, roomId);
     requestHeaders.set(LIBRARY_ID_HEADER, libraryId);
-    requestHeaders.set(SRC_STYLES_HEADER, srcStyles);
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
 
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
+    return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
   if (request.nextUrl.pathname === "/chat") {
@@ -106,11 +101,7 @@ export async function proxy(request: NextRequest) {
     requestHeaders.set(AGENT_ID_HEADER, agentId);
     requestHeaders.set(FILTER_HEADER, searchParams.toString());
 
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
+    return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
   if (request.nextUrl.pathname.includes("public-room")) {
