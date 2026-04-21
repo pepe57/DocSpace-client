@@ -68,7 +68,7 @@ beforeAll(() => {
     path.normalize("libs/ui-kit/components/error-container/ErrorContainer.tsx"),
     path.normalize("libs/ui-kit/styles/variables/_colors.scss"),
     path.normalize("packages/client/src/components/SmartBanner/main.css"),
-    path.normalize("packages/sdk/src/app/(forms)/_styles/base.scss"),
+    path.normalize("packages/sdk/src/styles/customization-theme.scss"),
   ];
 
   const javascripts = workspaces.flatMap((wsPath) => {
