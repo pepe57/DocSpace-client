@@ -37,7 +37,8 @@ import "@docspace/shared/styles/theme.scss";
 
 import "@/styles/globals.scss";
 import { getColorTheme, getPortalCultures, getSettings } from "@/api/settings";
-import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
+import { LOCALE_HEADER, STYLES_URL_HEADER, THEME_HEADER } from "@/utils/constants";
+import { loadStyles } from "@/utils/loadStyles";
 import Providers from "@/providers";
 import { getSelf } from "@/api/people";
 import Scripts from "@/components/Scripts";
@@ -64,12 +65,16 @@ export default async function RootLayout({
 
   const cookieStore = await cookies();
 
-  const [self, portalSettings, colorTheme, portalCultures] = await Promise.all([
-    getSelf(),
-    getSettings(),
-    getColorTheme(),
-    getPortalCultures(),
-  ]);
+  const stylesUrl = hdrs.get(STYLES_URL_HEADER) ?? "";
+
+  const [self, portalSettings, colorTheme, portalCultures, themeStyles] =
+    await Promise.all([
+      getSelf(),
+      getSettings(),
+      getColorTheme(),
+      getPortalCultures(),
+      loadStyles(stylesUrl),
+    ]);
 
   const theme =
     (hdrs.get(THEME_HEADER) as ThemeKeys | null) ||
@@ -124,6 +129,11 @@ export default async function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
       </head>
       <body style={styles} className={`${dirClass} ${themeClass}`}>
+        {themeStyles && (
+          <style href="sdk-theme" precedence="high">
+            {themeStyles}
+          </style>
+        )}
         <Providers
           contextData={{
             initialTheme: theme,
