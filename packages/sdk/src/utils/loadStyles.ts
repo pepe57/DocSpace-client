@@ -27,7 +27,7 @@
 import { readFileSync } from "fs";
 import { join, resolve, normalize } from "path";
 
-const STYLES_DIR = join(process.cwd(), "src/app/(forms)/_styles");
+const STYLES_DIR = join(process.cwd(), "src/styles");
 const MAX_CSS_BYTES = 512 * 1024;
 
 export function readScssFile(name: string): string {
@@ -71,12 +71,12 @@ async function fetchUrlStyles(url: string): Promise<string> {
   }
 }
 
-export async function loadStyles(srcStyles: string): Promise<string> {
-  if (!srcStyles) return "";
+export async function loadStyles(stylesUrl: string): Promise<string> {
+  if (!stylesUrl) return "";
 
-  if (srcStyles.startsWith("https://") || srcStyles.startsWith("http://")) {
-    return fetchUrlStyles(srcStyles);
+  if (stylesUrl.startsWith("https://") || stylesUrl.startsWith("http://")) {
+    return fetchUrlStyles(stylesUrl);
   }
 
-  return readScssFile(srcStyles);
+  return readScssFile(stylesUrl);
 }
