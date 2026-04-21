@@ -33,7 +33,6 @@ import {
   dateDiffAbs,
 } from "@docspace/ui-kit/utils/date";
 import { isMobile } from "react-device-detect";
-import type { I18nextProviderProps } from "react-i18next";
 import resizeImage from "resize-image";
 import { pbkdf2 } from "@noble/hashes/pbkdf2.js";
 import { sha256 } from "@noble/hashes/sha2.js";
@@ -115,7 +114,6 @@ export const desktopConstants = Object.freeze({
 });
 
 let timer: null | ReturnType<typeof setTimeout> = null;
-type I18n = I18nextProviderProps["i18n"];
 
 export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
   return currentLng
