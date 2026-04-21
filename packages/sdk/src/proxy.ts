@@ -27,6 +27,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
+
 import {
   AGENT_ID_HEADER,
   FILTER_HEADER,
@@ -35,6 +37,7 @@ import {
   PATHNAME_HEADER,
   ROOM_ID_HEADER,
   SHARE_KEY_HEADER,
+  STYLES_URL_HEADER,
   THEME_HEADER,
 } from "@/utils/constants";
 import { handlePublicRoomValidation } from "@/utils/middleware/handlePublicRoomValidation";
@@ -81,6 +84,10 @@ export async function proxy(request: NextRequest) {
   requestHeaders.set(THEME_HEADER, theme ?? "");
   requestHeaders.set(LOCALE_HEADER, locale ?? "");
   requestHeaders.set(SHARE_KEY_HEADER, shareKey ?? "");
+  requestHeaders.set(
+    STYLES_URL_HEADER,
+    sanitizeStylesUrl(searchParams.get("stylesUrl")),
+  );
 
   if (request.nextUrl.pathname.includes("forms")) {
     const roomId = searchParams.get("roomId") ?? "";
