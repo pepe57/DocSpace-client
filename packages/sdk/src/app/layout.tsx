@@ -42,6 +42,7 @@ import Providers from "@/providers";
 import { getSelf } from "@/api/people";
 import Scripts from "@/components/Scripts";
 import { logger } from "@/../logger.mjs";
+import { loadLocale } from "@/utils/translationLoaders";
 
 export const metadata: Metadata = {
   title: "ONLYOFFICE",
@@ -79,6 +80,10 @@ export default async function RootLayout({
     self?.cultureName ||
     (typeof portalSettings === "object" && portalSettings.culture) ||
     "en";
+
+  const initialLocaleNsMap =
+    locale && locale !== "en" ? await loadLocale(locale).catch(() => null) : null;
+  const initialLocaleResources = initialLocaleNsMap?.get("Common");
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
     | ThemeKeys
@@ -131,6 +136,7 @@ export default async function RootLayout({
             portalCultures,
             authToken:
               cookieStore.get("asc_auth_key")?.value || undefined,
+            initialLocaleResources,
           }}
         >
           {children}

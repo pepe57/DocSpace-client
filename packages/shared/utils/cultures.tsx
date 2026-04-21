@@ -24,73 +24,52 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import type { I18nextProviderProps } from "react-i18next";
 
-import React from "react";
-import { makeAutoObservable } from "mobx";
+import { flagsIcons } from "./image-flags";
+import { isBetaLanguage } from "./common";
 
-const TOUR_COMPLETED_KEY = "forms_tour_completed";
+type I18n = I18nextProviderProps["i18n"];
 
-class FormsTourStore {
-  isRunning = false;
-  tourCompleted = false;
+export const mapCulturesToArray = (
+  culturesArg: string[],
+  isBetaBadge: boolean = true,
+  i18nArg?: I18n,
+) => {
+  let t = null;
 
-  constructor() {
-    makeAutoObservable(this);
+  if (i18nArg) {
+    t = i18nArg.getFixedT(null, "Common");
   }
 
-  get isDemo() {
-    return this.isRunning;
-  }
+  return culturesArg.map((culture, index) => {
+    let iconName = culture;
 
-  get showMockItems() {
-    return this.isRunning;
-  }
+    switch (culture) {
+      case "sr-Cyrl-RS":
+      case "sr-Latn-RS":
+        iconName = "sr";
+        break;
+      default:
+        break;
+    }
 
-  get forceShowAiChat() {
-    return this.isRunning;
-  }
+    const icon = flagsIcons?.get(`${iconName}.react.svg`);
 
-  hydrate = () => {
-    this.tourCompleted = localStorage.getItem(TOUR_COMPLETED_KEY) === "true";
-  };
+    const cultureObj = t
+      ? {
+          key: culture,
+          label: t(`Culture_${culture}`),
+          icon,
+          ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
+          index,
+        }
+      : {
+          key: culture,
+          icon,
+          index,
+        };
 
-  startTour = () => {
-    this.isRunning = true;
-  };
-
-  completeTour = () => {
-    this.isRunning = false;
-    this.tourCompleted = true;
-    localStorage.setItem(TOUR_COMPLETED_KEY, "true");
-  };
-
-  resetTour = () => {
-    this.tourCompleted = false;
-    localStorage.removeItem(TOUR_COMPLETED_KEY);
-  };
-}
-
-export const FormsTourStoreContext = React.createContext<FormsTourStore>(
-  null as unknown as FormsTourStore,
-);
-
-export const FormsTourStoreContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FormsTourStore(), []);
-  React.useEffect(() => {
-    store.hydrate();
-  }, [store]);
-  return (
-    <FormsTourStoreContext.Provider value={store}>
-      {children}
-    </FormsTourStoreContext.Provider>
-  );
-};
-
-export const useFormsTourStore = () => {
-  return React.useContext(FormsTourStoreContext);
+    return cultureObj;
+  });
 };

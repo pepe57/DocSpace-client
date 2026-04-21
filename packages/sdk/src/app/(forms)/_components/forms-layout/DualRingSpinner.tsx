@@ -24,73 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import type React from "react";
 
-import React from "react";
-import { makeAutoObservable } from "mobx";
+import styles from "./DualRingSpinner.module.scss";
 
-const TOUR_COMPLETED_KEY = "forms_tour_completed";
+type DualRingSpinnerProps = {
+  size?: string;
+};
 
-class FormsTourStore {
-  isRunning = false;
-  tourCompleted = false;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  get isDemo() {
-    return this.isRunning;
-  }
-
-  get showMockItems() {
-    return this.isRunning;
-  }
-
-  get forceShowAiChat() {
-    return this.isRunning;
-  }
-
-  hydrate = () => {
-    this.tourCompleted = localStorage.getItem(TOUR_COMPLETED_KEY) === "true";
-  };
-
-  startTour = () => {
-    this.isRunning = true;
-  };
-
-  completeTour = () => {
-    this.isRunning = false;
-    this.tourCompleted = true;
-    localStorage.setItem(TOUR_COMPLETED_KEY, "true");
-  };
-
-  resetTour = () => {
-    this.tourCompleted = false;
-    localStorage.removeItem(TOUR_COMPLETED_KEY);
-  };
-}
-
-export const FormsTourStoreContext = React.createContext<FormsTourStore>(
-  null as unknown as FormsTourStore,
-);
-
-export const FormsTourStoreContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FormsTourStore(), []);
-  React.useEffect(() => {
-    store.hydrate();
-  }, [store]);
+const DualRingSpinner = ({ size = "40px" }: DualRingSpinnerProps) => {
   return (
-    <FormsTourStoreContext.Provider value={store}>
-      {children}
-    </FormsTourStoreContext.Provider>
+    <div className={styles.wrapper}>
+      <svg
+        className={styles.svg}
+        style={{ "--dual-ring-size": size } as React.CSSProperties}
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-label="Loading"
+        role="status"
+      >
+        <title>loading</title>
+        <circle
+          className={styles.outer}
+          cx="50"
+          cy="50"
+          r="40"
+          strokeWidth="8"
+          strokeDasharray="62.83185307179586 62.83185307179586"
+        />
+        <circle
+          className={styles.inner}
+          cx="50"
+          cy="50"
+          r="20"
+          strokeWidth="4"
+          strokeDasharray="29.845130209103033 29.845130209103033"
+          strokeDashoffset="29.845130209103033"
+        />
+      </svg>
+    </div>
   );
 };
 
-export const useFormsTourStore = () => {
-  return React.useContext(FormsTourStoreContext);
-};
+export default DualRingSpinner;

@@ -24,73 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
-import React from "react";
-import { makeAutoObservable } from "mobx";
-
-const TOUR_COMPLETED_KEY = "forms_tour_completed";
-
-class FormsTourStore {
-  isRunning = false;
-  tourCompleted = false;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  get isDemo() {
-    return this.isRunning;
-  }
-
-  get showMockItems() {
-    return this.isRunning;
-  }
-
-  get forceShowAiChat() {
-    return this.isRunning;
-  }
-
-  hydrate = () => {
-    this.tourCompleted = localStorage.getItem(TOUR_COMPLETED_KEY) === "true";
-  };
-
-  startTour = () => {
-    this.isRunning = true;
-  };
-
-  completeTour = () => {
-    this.isRunning = false;
-    this.tourCompleted = true;
-    localStorage.setItem(TOUR_COMPLETED_KEY, "true");
-  };
-
-  resetTour = () => {
-    this.tourCompleted = false;
-    localStorage.removeItem(TOUR_COMPLETED_KEY);
-  };
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-export const FormsTourStoreContext = React.createContext<FormsTourStore>(
-  null as unknown as FormsTourStore,
-);
+.svg {
+  display: block;
+  width: var(--dual-ring-size, 40px);
+  height: var(--dual-ring-size, 40px);
+  color: #{$loader-light};
+}
 
-export const FormsTourStoreContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FormsTourStore(), []);
-  React.useEffect(() => {
-    store.hydrate();
-  }, [store]);
-  return (
-    <FormsTourStoreContext.Provider value={store}>
-      {children}
-    </FormsTourStoreContext.Provider>
-  );
-};
+:global(.dark) {
+  :local {
+    .svg {
+      color: #{$loader-dark};
+    }
+  }
+}
 
-export const useFormsTourStore = () => {
-  return React.useContext(FormsTourStoreContext);
-};
+.outer,
+.inner {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  transform-origin: 50% 50%;
+  transform-box: view-box;
+  will-change: transform;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.outer {
+  animation-name: spin;
+  animation-duration: 1.1s;
+}
+
+.inner {
+  animation-name: spinReverse;
+  animation-duration: 1.1s;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinReverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}

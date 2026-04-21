@@ -193,8 +193,11 @@ const DocsLayoutInner = observer(({
   );
 
   const openFileHandler = React.useCallback(
-    (file: TFileItem) => {
-      router.push(`/personal-files/editor/${file.id}`);
+    (file: TFileItem, preview?: boolean) => {
+      const url = preview
+        ? `/personal-files/editor/${file.id}?action=view`
+        : `/personal-files/editor/${file.id}`;
+      router.push(url);
     },
     [router],
   );

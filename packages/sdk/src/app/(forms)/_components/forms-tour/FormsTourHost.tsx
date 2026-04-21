@@ -26,71 +26,19 @@
 
 "use client";
 
-import React from "react";
-import { makeAutoObservable } from "mobx";
+import { createPortal } from "react-dom";
+import { observer } from "mobx-react";
 
-const TOUR_COMPLETED_KEY = "forms_tour_completed";
+import useFormsTour from "../../_hooks/useFormsTour";
 
-class FormsTourStore {
-  isRunning = false;
-  tourCompleted = false;
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  get isDemo() {
-    return this.isRunning;
-  }
-
-  get showMockItems() {
-    return this.isRunning;
-  }
-
-  get forceShowAiChat() {
-    return this.isRunning;
-  }
-
-  hydrate = () => {
-    this.tourCompleted = localStorage.getItem(TOUR_COMPLETED_KEY) === "true";
-  };
-
-  startTour = () => {
-    this.isRunning = true;
-  };
-
-  completeTour = () => {
-    this.isRunning = false;
-    this.tourCompleted = true;
-    localStorage.setItem(TOUR_COMPLETED_KEY, "true");
-  };
-
-  resetTour = () => {
-    this.tourCompleted = false;
-    localStorage.removeItem(TOUR_COMPLETED_KEY);
-  };
-}
-
-export const FormsTourStoreContext = React.createContext<FormsTourStore>(
-  null as unknown as FormsTourStore,
-);
-
-export const FormsTourStoreContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const store = React.useMemo(() => new FormsTourStore(), []);
-  React.useEffect(() => {
-    store.hydrate();
-  }, [store]);
-  return (
-    <FormsTourStoreContext.Provider value={store}>
-      {children}
-    </FormsTourStoreContext.Provider>
-  );
+type FormsTourHostProps = {
+  showMenu: boolean;
 };
 
-export const useFormsTourStore = () => {
-  return React.useContext(FormsTourStoreContext);
+const FormsTourHost = ({ showMenu }: FormsTourHostProps) => {
+  const { Tour } = useFormsTour(showMenu);
+  if (!Tour) return null;
+  return createPortal(Tour, document.body);
 };
+
+export default observer(FormsTourHost);
