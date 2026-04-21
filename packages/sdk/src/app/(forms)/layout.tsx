@@ -24,39 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { headers } from "next/headers";
-
-import { SRC_STYLES_HEADER } from "@/utils/constants";
-
-import "./_styles/customization-theme.scss";
 import { FormsStoreProviders } from "./_store";
-import { loadStyles, readScssFile } from "./_utils/loadStyles";
 
-export default async function FormsLayout({
+export default function FormsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const hdrs = await headers();
-  const srcStyles = hdrs.get(SRC_STYLES_HEADER) ?? "";
-
-  const [baseStyles, themeStyles] = await Promise.all([
-    Promise.resolve(readScssFile("base")),
-    loadStyles(srcStyles),
-  ]);
-
   return (
     <main style={{ width: "100%", height: "100%", overflow: "hidden" }}>
-      {baseStyles && (
-        <style href="forms-base" precedence="low">
-          {baseStyles}
-        </style>
-      )}
-      {themeStyles && (
-        <style href="forms-theme" precedence="high">
-          {themeStyles}
-        </style>
-      )}
       <FormsStoreProviders>{children}</FormsStoreProviders>
     </main>
   );
