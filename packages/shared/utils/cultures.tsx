@@ -24,24 +24,52 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TUser } from "../../api/people/types";
-import type FirebaseHelper from "../../utils/firebase";
-import type { TColorScheme } from "@docspace/ui-kit/providers/theme";
-import type { DeviceType } from "../../enums";
+import type { I18nextProviderProps } from "react-i18next";
 
-export type ErrorUnavailableProps = Record<string, never>;
+import { flagsIcons } from "./image-flags";
+import { isBetaLanguage } from "./common";
 
-export type Error520Props = {
-	/** Error object containing details about the error that occurred */
-	errorLog: Error;
-	/** Current user information */
-	user: TUser;
-	/** Current version of the application */
-	version: string;
-	/** Firebase helper instance for crash reporting */
-	firebaseHelper?: FirebaseHelper;
-	/** Optional color scheme for theming */
-	currentColorScheme?: TColorScheme;
-	/** Current device type (desktop, mobile, etc.) */
-	currentDeviceType: DeviceType;
+type I18n = I18nextProviderProps["i18n"];
+
+export const mapCulturesToArray = (
+  culturesArg: string[],
+  isBetaBadge: boolean = true,
+  i18nArg?: I18n,
+) => {
+  let t = null;
+
+  if (i18nArg) {
+    t = i18nArg.getFixedT(null, "Common");
+  }
+
+  return culturesArg.map((culture, index) => {
+    let iconName = culture;
+
+    switch (culture) {
+      case "sr-Cyrl-RS":
+      case "sr-Latn-RS":
+        iconName = "sr";
+        break;
+      default:
+        break;
+    }
+
+    const icon = flagsIcons?.get(`${iconName}.react.svg`);
+
+    const cultureObj = t
+      ? {
+          key: culture,
+          label: t(`Culture_${culture}`),
+          icon,
+          ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
+          index,
+        }
+      : {
+          key: culture,
+          icon,
+          index,
+        };
+
+    return cultureObj;
+  });
 };

@@ -24,24 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TUser } from "../../api/people/types";
-import type FirebaseHelper from "../../utils/firebase";
-import type { TColorScheme } from "@docspace/ui-kit/providers/theme";
-import type { DeviceType } from "../../enums";
+import type React from "react";
 
-export type ErrorUnavailableProps = Record<string, never>;
+import styles from "./DualRingSpinner.module.scss";
 
-export type Error520Props = {
-	/** Error object containing details about the error that occurred */
-	errorLog: Error;
-	/** Current user information */
-	user: TUser;
-	/** Current version of the application */
-	version: string;
-	/** Firebase helper instance for crash reporting */
-	firebaseHelper?: FirebaseHelper;
-	/** Optional color scheme for theming */
-	currentColorScheme?: TColorScheme;
-	/** Current device type (desktop, mobile, etc.) */
-	currentDeviceType: DeviceType;
+type DualRingSpinnerProps = {
+  size?: string;
 };
+
+const DualRingSpinner = ({ size = "40px" }: DualRingSpinnerProps) => {
+  return (
+    <div className={styles.wrapper}>
+      <svg
+        className={styles.svg}
+        style={{ "--dual-ring-size": size } as React.CSSProperties}
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-label="Loading"
+        role="status"
+      >
+        <title>loading</title>
+        <circle
+          className={styles.outer}
+          cx="50"
+          cy="50"
+          r="40"
+          strokeWidth="8"
+          strokeDasharray="62.83185307179586 62.83185307179586"
+        />
+        <circle
+          className={styles.inner}
+          cx="50"
+          cy="50"
+          r="20"
+          strokeWidth="4"
+          strokeDasharray="29.845130209103033 29.845130209103033"
+          strokeDashoffset="29.845130209103033"
+        />
+      </svg>
+    </div>
+  );
+};
+
+export default DualRingSpinner;

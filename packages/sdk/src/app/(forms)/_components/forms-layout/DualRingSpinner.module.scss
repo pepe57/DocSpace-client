@@ -24,24 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TUser } from "../../api/people/types";
-import type FirebaseHelper from "../../utils/firebase";
-import type { TColorScheme } from "@docspace/ui-kit/providers/theme";
-import type { DeviceType } from "../../enums";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
-export type ErrorUnavailableProps = Record<string, never>;
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-export type Error520Props = {
-	/** Error object containing details about the error that occurred */
-	errorLog: Error;
-	/** Current user information */
-	user: TUser;
-	/** Current version of the application */
-	version: string;
-	/** Firebase helper instance for crash reporting */
-	firebaseHelper?: FirebaseHelper;
-	/** Optional color scheme for theming */
-	currentColorScheme?: TColorScheme;
-	/** Current device type (desktop, mobile, etc.) */
-	currentDeviceType: DeviceType;
-};
+.svg {
+  display: block;
+  width: var(--dual-ring-size, 40px);
+  height: var(--dual-ring-size, 40px);
+  color: #{$loader-light};
+}
+
+:global(.dark) {
+  :local {
+    .svg {
+      color: #{$loader-dark};
+    }
+  }
+}
+
+.outer,
+.inner {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  transform-origin: 50% 50%;
+  transform-box: view-box;
+  will-change: transform;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.outer {
+  animation-name: spin;
+  animation-duration: 1.1s;
+}
+
+.inner {
+  animation-name: spinReverse;
+  animation-duration: 1.1s;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinReverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}

@@ -24,24 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TUser } from "../../api/people/types";
-import type FirebaseHelper from "../../utils/firebase";
-import type { TColorScheme } from "@docspace/ui-kit/providers/theme";
-import type { DeviceType } from "../../enums";
+"use client";
 
-export type ErrorUnavailableProps = Record<string, never>;
+import { createPortal } from "react-dom";
+import { observer } from "mobx-react";
 
-export type Error520Props = {
-	/** Error object containing details about the error that occurred */
-	errorLog: Error;
-	/** Current user information */
-	user: TUser;
-	/** Current version of the application */
-	version: string;
-	/** Firebase helper instance for crash reporting */
-	firebaseHelper?: FirebaseHelper;
-	/** Optional color scheme for theming */
-	currentColorScheme?: TColorScheme;
-	/** Current device type (desktop, mobile, etc.) */
-	currentDeviceType: DeviceType;
+import useFormsTour from "../../_hooks/useFormsTour";
+
+type FormsTourHostProps = {
+  showMenu: boolean;
 };
+
+const FormsTourHost = ({ showMenu }: FormsTourHostProps) => {
+  const { Tour } = useFormsTour(showMenu);
+  if (!Tour) return null;
+  return createPortal(Tour, document.body);
+};
+
+export default observer(FormsTourHost);
