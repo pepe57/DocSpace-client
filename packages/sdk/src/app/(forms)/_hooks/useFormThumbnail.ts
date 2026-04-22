@@ -24,24 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const PAGE_COUNT = 100;
+"use client";
 
-export const THEME_HEADER = "x-sdk-config-theme";
-export const LOCALE_HEADER = "x-sdk-config-locale";
-export const FILTER_HEADER = "x-sdk-config-filter";
-export const SHARE_KEY_HEADER = "x-sdk-config-share-key";
-export const STYLES_URL_HEADER = "x-sdk-config-styles-url";
-export const PATHNAME_HEADER = "x-pathname";
+import { useEffect, useState } from "react";
 
-export const PUBLIC_ROOM_TITLE_HEADER = "x-public-room-title";
+import {
+  acquireThumbnail,
+  getThumbnailSync,
+  releaseThumbnail,
+} from "../_utils/thumbnailCache";
 
-export const ROOM_ID_HEADER = "x-sdk-config-room-id";
-export const LIBRARY_ID_HEADER = "x-sdk-config-library-id";
-export const AGENT_ID_HEADER = "x-sdk-config-agent-id";
-export const STYLES_URL_HEADER = "x-sdk-config-styles-url";
+export default function useFormThumbnail(key: string, enabled = true): string {
+  const [blobUrl, setBlobUrl] = useState<string>(() =>
+    key ? (getThumbnailSync(key) ?? "") : "",
+  );
 
-export const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;
-export const DEFAULT_MAX_UPLOAD_THREAD_COUNT = 3;
-export const DEFAULT_MAX_UPLOAD_FILES_COUNT = 2;
+  useEffect(() => {
+    if (!key || !enabled) return;
 
-export const MAX_VISIBLE_EXTENSIONS = 5;
+    const cached = getThumbnailSync(key);
+    if (cached) setBlobUrl(cached);
+
+    let cancelled = false;
+    acquireThumbnail(key)
+      .then((url) => {
+        if (!cancelled) setBlobUrl(url);
+      })
+      .catch(() => {});
+
+    return () => {
+      cancelled = true;
+      releaseThumbnail(key);
+    };
+  }, [key, enabled]);
+
+  return blobUrl;
+}

@@ -24,24 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const PAGE_COUNT = 100;
-
-export const THEME_HEADER = "x-sdk-config-theme";
-export const LOCALE_HEADER = "x-sdk-config-locale";
-export const FILTER_HEADER = "x-sdk-config-filter";
-export const SHARE_KEY_HEADER = "x-sdk-config-share-key";
-export const STYLES_URL_HEADER = "x-sdk-config-styles-url";
-export const PATHNAME_HEADER = "x-pathname";
-
-export const PUBLIC_ROOM_TITLE_HEADER = "x-public-room-title";
-
-export const ROOM_ID_HEADER = "x-sdk-config-room-id";
-export const LIBRARY_ID_HEADER = "x-sdk-config-library-id";
-export const AGENT_ID_HEADER = "x-sdk-config-agent-id";
-export const STYLES_URL_HEADER = "x-sdk-config-styles-url";
-
-export const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;
-export const DEFAULT_MAX_UPLOAD_THREAD_COUNT = 3;
-export const DEFAULT_MAX_UPLOAD_FILES_COUNT = 2;
-
-export const MAX_VISIBLE_EXTENSIONS = 5;
+export function stripHost(url: string | undefined | null): string {
+  return url ? url.replace(/^https?:\/\/[^/]+/, "") : "";
+}

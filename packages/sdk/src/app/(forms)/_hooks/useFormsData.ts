@@ -49,20 +49,6 @@ import { sectionFromPathname } from "../_utils/sectionFromPathname";
 const FORMS_PAGE_COUNT = 25;
 const MAX_FETCH_MORE_ITERATIONS = 5;
 
-const requestThumbnails = (files: TFile[]) => {
-  const ids = files
-    .filter(
-      (f) =>
-        typeof f.id !== "string" &&
-        f.thumbnailStatus === thumbnailStatuses.WAITING,
-    )
-    .map((f) => f.id);
-
-  if (ids.length) {
-    createThumbnails(ids).catch(() => {});
-  }
-};
-
 const filterByFolder = (
   files: TFile[],
   folderId: string | number,
@@ -85,6 +71,34 @@ export default function useFormsData() {
   const fetchMoreAbortRef = useRef<AbortController | null>(null);
   const doneFolderIdRef = useRef<number | null>(null);
   const inProgressFolderIdRef = useRef<number | null>(null);
+  const requestedThumbnailIds = useRef<Set<number>>(new Set());
+  const thumbnailScopeRef = useRef<string>("");
+
+  const requestThumbnails = useCallback(
+    (files: TFile[], scope: string | number) => {
+      const scopeKey = String(scope);
+      if (thumbnailScopeRef.current !== scopeKey) {
+        thumbnailScopeRef.current = scopeKey;
+        requestedThumbnailIds.current.clear();
+      }
+
+      const ids: number[] = [];
+      for (const f of files) {
+        if (typeof f.id === "string") continue;
+        if (f.thumbnailStatus !== thumbnailStatuses.WAITING) continue;
+        if (requestedThumbnailIds.current.has(f.id)) continue;
+        ids.push(f.id);
+      }
+
+      if (!ids.length) return;
+
+      for (const id of ids) requestedThumbnailIds.current.add(id);
+      createThumbnails(ids).catch(() => {
+        for (const id of ids) requestedThumbnailIds.current.delete(id);
+      });
+    },
+    [],
+  );
 
   useEffect(() => {
     return () => {
@@ -216,14 +230,14 @@ export default function useFormsData() {
         formsListStore.setFolders([]);
         formsListStore.setItems(files, total);
         currentPage.current = 0;
-        requestThumbnails(files);
+        requestThumbnails(files, folderId);
       } finally {
         if (!signal.aborted) {
           formsListStore.setIsLoading(false);
         }
       }
     },
-    [formsListStore, isCompletedWithXlsx],
+    [formsListStore, isCompletedWithXlsx, requestThumbnails],
   );
 
   const fetchSection = useCallback(
@@ -295,7 +309,7 @@ export default function useFormsData() {
           formsListStore.setFolders([]);
           formsListStore.setItems(files, total);
           currentPage.current = 0;
-          requestThumbnails(files);
+          requestThumbnails(files, folderId);
 
           if (res.current?.security) {
             formsSettingsStore.setFolderSecurity(res.current.security);
@@ -322,6 +336,7 @@ export default function useFormsData() {
       fetchSubfolder,
       formsListStore,
       formsSettingsStore,
+      requestThumbnails,
     ],
   );
 
@@ -377,7 +392,7 @@ export default function useFormsData() {
         ? formsListStore.items.length + fetched.length
         : formsListStore.items.length + fetched.length + 1;
       formsListStore.appendItems(fetched, total);
-      requestThumbnails(fetched);
+      requestThumbnails(fetched, folderId);
     } catch (error) {
       if (!controller.signal.aborted) {
         currentPage.current = savedPage;
@@ -388,7 +403,7 @@ export default function useFormsData() {
     } finally {
       isFetchingMore.current = false;
     }
-  }, [getFolderId, formsListStore, isCompletedWithXlsx]);
+  }, [getFolderId, formsListStore, isCompletedWithXlsx, requestThumbnails]);
 
   return { fetchSection, fetchMore, fetchSubfolder };
 }

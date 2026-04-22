@@ -27,6 +27,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
+
 import {
   AGENT_ID_HEADER,
   FILTER_HEADER,
@@ -121,8 +123,9 @@ export async function proxy(request: NextRequest) {
     }
 
     if (validationResult?.anonymousSessionKeyCookie) {
-      const cookieNameValue =
-        validationResult.anonymousSessionKeyCookie.split(";")[0]?.trim();
+      const cookieNameValue = validationResult.anonymousSessionKeyCookie
+        .split(";")[0]
+        ?.trim();
 
       if (cookieNameValue) {
         const existingCookies = requestHeaders.get("cookie") || "";
@@ -177,3 +180,4 @@ export const config = {
     "/chat",
   ],
 };
+

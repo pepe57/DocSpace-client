@@ -24,24 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const PAGE_COUNT = 100;
+export const CUSTOM_STYLES_LINK_ID = "sdk-custom-styles";
 
-export const THEME_HEADER = "x-sdk-config-theme";
-export const LOCALE_HEADER = "x-sdk-config-locale";
-export const FILTER_HEADER = "x-sdk-config-filter";
-export const SHARE_KEY_HEADER = "x-sdk-config-share-key";
-export const STYLES_URL_HEADER = "x-sdk-config-styles-url";
-export const PATHNAME_HEADER = "x-pathname";
+export const sanitizeStylesUrl = (
+  url: string | null | undefined,
+): string => {
+  if (!url || typeof url !== "string") return "";
 
-export const PUBLIC_ROOM_TITLE_HEADER = "x-public-room-title";
+  const trimmed = url.trim();
+  if (!trimmed) return "";
 
-export const ROOM_ID_HEADER = "x-sdk-config-room-id";
-export const LIBRARY_ID_HEADER = "x-sdk-config-library-id";
-export const AGENT_ID_HEADER = "x-sdk-config-agent-id";
-export const STYLES_URL_HEADER = "x-sdk-config-styles-url";
+  try {
+    const parsed = new URL(trimmed);
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") return "";
+    return parsed.toString();
+  } catch {
+    return "";
+  }
+};
 
-export const DEFAULT_CHUNK_UPLOAD_SIZE = 5 * 1024 * 1024;
-export const DEFAULT_MAX_UPLOAD_THREAD_COUNT = 3;
-export const DEFAULT_MAX_UPLOAD_FILES_COUNT = 2;
+export const applyCustomStyles = (url: string | null | undefined): void => {
+  if (typeof document === "undefined") return;
 
-export const MAX_VISIBLE_EXTENSIONS = 5;
+  const sanitized = sanitizeStylesUrl(url);
+  const existing = document.getElementById(
+    CUSTOM_STYLES_LINK_ID,
+  ) as HTMLLinkElement | null;
+
+  if (!sanitized) {
+    existing?.remove();
+    return;
+  }
+
+  if (existing) {
+    if (existing.href !== sanitized) existing.href = sanitized;
+    return;
+  }
+
+  const link = document.createElement("link");
+  link.id = CUSTOM_STYLES_LINK_ID;
+  link.rel = "stylesheet";
+  link.href = sanitized;
+  link.referrerPolicy = "no-referrer";
+  document.head.appendChild(link);
+};

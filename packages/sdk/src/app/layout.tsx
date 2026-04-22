@@ -35,9 +35,15 @@ import {
 
 import "@docspace/shared/styles/theme.scss";
 
+import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
+
 import "@/styles/globals.scss";
 import { getColorTheme, getPortalCultures, getSettings } from "@/api/settings";
-import { LOCALE_HEADER, STYLES_URL_HEADER, THEME_HEADER } from "@/utils/constants";
+import {
+  LOCALE_HEADER,
+  STYLES_URL_HEADER,
+  THEME_HEADER,
+} from "@/utils/constants";
 import { loadStyles } from "@/utils/loadStyles";
 import Providers from "@/providers";
 import { getSelf } from "@/api/people";
@@ -87,7 +93,9 @@ export default async function RootLayout({
     "en";
 
   const initialLocaleNsMap =
-    locale && locale !== "en" ? await loadLocale(locale).catch(() => null) : null;
+    locale && locale !== "en"
+      ? await loadLocale(locale).catch(() => null)
+      : null;
   const initialLocaleResources = initialLocaleNsMap?.get("Common");
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
@@ -127,6 +135,14 @@ export default async function RootLayout({
         <meta name="google" content="notranslate" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        {stylesUrl ? (
+          <link
+            id="sdk-custom-styles"
+            rel="stylesheet"
+            href={stylesUrl}
+            referrerPolicy="no-referrer"
+          />
+        ) : null}
       </head>
       <body style={styles} className={`${dirClass} ${themeClass}`}>
         {themeStyles && (
@@ -144,8 +160,7 @@ export default async function RootLayout({
             colorTheme,
             locale,
             portalCultures,
-            authToken:
-              cookieStore.get("asc_auth_key")?.value || undefined,
+            authToken: cookieStore.get("asc_auth_key")?.value || undefined,
             initialLocaleResources,
           }}
         >

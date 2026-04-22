@@ -168,6 +168,7 @@ export type TFrameConfig = {
   showSignOut?: boolean;
   showTitle?: boolean;
   src: string;
+  stylesUrl?: string | null;
   theme?: TFrameTheme;
   type?: TFrameType;
   viewAs?: TFrameViewAs;
