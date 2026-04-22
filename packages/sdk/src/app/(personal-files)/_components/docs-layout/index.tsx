@@ -76,6 +76,7 @@ import useTrashActions from "../../_hooks/useTrashActions";
 import useFileOperations from "../../_hooks/useFileOperations";
 import useRenameActions from "../../_hooks/useRenameActions";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
+import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 import DocsSidebar from "../sidebar";
 import DropZone from "../drop-zone";
 import DeleteDialog from "../delete-dialog";
@@ -123,6 +124,8 @@ const DocsLayoutInner = observer(({
   const showMobileButton = currentDeviceType !== DeviceType.desktop && isMyDocuments;
 
   const { uploadFilesToFolder } = useDocsActions();
+
+  useDocsFrameBridge({ isReady: true, uploadFilesToFolder });
   const {
     isTrash,
     requestDeleteItem,
@@ -216,7 +219,7 @@ const DocsLayoutInner = observer(({
         <RenameContext.Provider value={renameHandler}>
         <FileOperationsContext.Provider value={fileOperationsHandler}>
         <div className={styles.root}>
-          <DocsSidebar />
+          {sdkConfig?.showMenu !== false && <DocsSidebar />}
           <DropZone onFilesDropped={uploadFilesToFolder} disabled={!isMyDocuments}>
             <RootScrollbar>
               <SectionWrapper
