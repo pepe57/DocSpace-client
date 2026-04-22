@@ -71,7 +71,8 @@ export default async function RootLayout({
 
   const cookieStore = await cookies();
 
-  const stylesUrl = hdrs.get(STYLES_URL_HEADER) ?? "";
+  const rawStylesUrl = hdrs.get(STYLES_URL_HEADER) ?? "";
+  const sanitizedStylesUrl = sanitizeStylesUrl(rawStylesUrl);
 
   const [self, portalSettings, colorTheme, portalCultures, themeStyles] =
     await Promise.all([
@@ -79,7 +80,7 @@ export default async function RootLayout({
       getSettings(),
       getColorTheme(),
       getPortalCultures(),
-      loadStyles(stylesUrl),
+      Promise.resolve(sanitizedStylesUrl ? "" : loadStyles(rawStylesUrl)),
     ]);
 
   const theme =
@@ -135,11 +136,11 @@ export default async function RootLayout({
         <meta name="google" content="notranslate" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        {stylesUrl ? (
+        {sanitizedStylesUrl ? (
           <link
             id="sdk-custom-styles"
             rel="stylesheet"
-            href={stylesUrl}
+            href={sanitizedStylesUrl}
             referrerPolicy="no-referrer"
           />
         ) : null}

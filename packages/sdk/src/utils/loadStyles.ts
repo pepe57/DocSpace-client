@@ -28,7 +28,6 @@ import { readFileSync } from "fs";
 import { join, resolve, normalize } from "path";
 
 const STYLES_DIR = join(process.cwd(), "src/styles");
-const MAX_CSS_BYTES = 512 * 1024;
 
 export function readScssFile(name: string): string {
   if (!name) return "";
@@ -47,36 +46,6 @@ export function readScssFile(name: string): string {
   }
 }
 
-async function fetchUrlStyles(url: string): Promise<string> {
-  if (!url.startsWith("https://")) return "";
-
-  try {
-    const res = await fetch(url, { next: { revalidate: 300 } });
-    if (!res.ok) return "";
-
-    const contentType = res.headers.get("content-type") ?? "";
-    if (
-      !contentType.includes("text/css") &&
-      !contentType.includes("text/plain")
-    ) {
-      return "";
-    }
-
-    const buf = await res.arrayBuffer();
-    if (buf.byteLength > MAX_CSS_BYTES) return "";
-
-    return new TextDecoder().decode(buf);
-  } catch {
-    return "";
-  }
-}
-
-export async function loadStyles(stylesUrl: string): Promise<string> {
-  if (!stylesUrl) return "";
-
-  if (stylesUrl.startsWith("https://") || stylesUrl.startsWith("http://")) {
-    return fetchUrlStyles(stylesUrl);
-  }
-
+export function loadStyles(stylesUrl: string): string {
   return readScssFile(stylesUrl);
 }
