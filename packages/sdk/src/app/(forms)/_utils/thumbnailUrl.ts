@@ -24,30 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-const MAX_CACHE_SIZE = 100;
-
-const cache = new Map<string, string>();
-
-export function getThumbnail(key: string): string | undefined {
-  return cache.get(key);
-}
-
-export function setThumbnail(key: string, blobUrl: string): void {
-  if (cache.has(key)) {
-    const existing = cache.get(key)!;
-    if (existing !== blobUrl) {
-      URL.revokeObjectURL(existing);
-    }
-    cache.delete(key);
-  }
-
-  if (cache.size >= MAX_CACHE_SIZE) {
-    const oldest = cache.keys().next().value;
-    if (oldest !== undefined) {
-      URL.revokeObjectURL(cache.get(oldest)!);
-      cache.delete(oldest);
-    }
-  }
-
-  cache.set(key, blobUrl);
+export function stripHost(url: string | undefined | null): string {
+  return url ? url.replace(/^https?:\/\/[^/]+/, "") : "";
 }

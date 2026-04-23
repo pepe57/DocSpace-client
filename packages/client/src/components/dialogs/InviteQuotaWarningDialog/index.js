@@ -180,7 +180,9 @@ const InviteQuotaWarningDialog = (props) => {
         <Button
           key="OKButton"
           label={
-            isPaymentPageAvailable ? t("UpgradePlan") : t("Common:OKButton")
+            isPaymentPageAvailable
+              ? t("Common:UpgradePlan")
+              : t("Common:OKButton")
           }
           size="normal"
           primary

@@ -24,40 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+@use "@docspace/ui-kit/styles/variables/colors" as *;
 
-import React from "react";
-import { useTranslation } from "react-i18next";
+.wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
+.svg {
+  display: block;
+  width: var(--dual-ring-size, 40px);
+  height: var(--dual-ring-size, 40px);
+  color: #{$loader-light};
+}
 
-import DefaultFolderDark from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.dark.svg";
-import DefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.light.svg";
+:global(.dark) {
+  :local {
+    .svg {
+      color: #{$loader-dark};
+    }
+  }
+}
 
-import styles from "./MobileStub.module.scss";
+.outer,
+.inner {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  transform-origin: 50% 50%;
+  transform-box: view-box;
+  will-change: transform;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
 
-const MobileStub = () => {
-  const { t } = useTranslation(["Common"]);
-  const { isBase } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
+.outer {
+  animation-name: spin;
+  animation-duration: 1.1s;
+}
 
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
+.inner {
+  animation-name: spinReverse;
+  animation-duration: 1.1s;
+}
 
-  const Icon = isBase ? DefaultFolderLight : DefaultFolderDark;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
-  return (
-    <div className={styles.mobileStub}>
-      <div className={styles.icon}>
-        {mounted ? <Icon /> : <div style={{ width: 200, height: 147 }} />}
-      </div>
-      <div className={styles.title}>{t("Common:FormsMobileStubTitle")}</div>
-      <div className={styles.description}>
-        {t("Common:FormsMobileStubDescription")}
-      </div>
-    </div>
-  );
-};
-
-export default MobileStub;
+@keyframes spinReverse {
+  to {
+    transform: rotate(-360deg);
+  }
+}

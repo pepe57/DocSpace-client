@@ -615,8 +615,6 @@
   "FormManagersDescription": "ຜູ້ໃຊ້ທີ່ສາມາດເບິ່ງ ແລະ ຈັດການການຍື່ນແບບຟອມ.",
   "FormRoom": "ຫ້ອງແບບຟອມ",
   "Forms": "ແບບຟອມ",
-  "FormsMobileStubDescription": "ເພື່ອປະສົບການທີ່ສົມບູນແບບ, ກະລຸນາໃຊ້ອຸປະກອນທີ່ມີໜ້າຈໍກວ້າງກວ່າ.",
-  "FormsMobileStubTitle": "ຂະໜາດໜ້າຈໍນ້ອຍເກີນໄປ",
   "FormTemplates": "ຮູບແບບແບບຟອມ",
   "ForQuestionsContactPortalAdmin": "ສໍາລັບຄໍາຖາມໃດໆ, ກະລຸນາຕິດຕໍ່ຜູ້ບໍລິຫານ {{productName}} ຂອງເຈົ້າ.",
   "Free": "ຟຣີ",
@@ -924,7 +922,6 @@
   "OnlyPayerCanManageSection": "ພຽງແຕ່ຜູ້ຈ່າຍເງິນເທົ່ານັ້ນທີ່ສາມາດຈັດການພາກສ່ວນນີ້ໄດ້. <1>ຮູ້ເພີ່ມເຕີມ</1>",
   "OnlyPortalAdminsShown": "ມີພຽງຜູ້ເບິ່ງແຍງ {{productName}} ທີ່ສະແດງຢູ່ບ່ອນນີ້",
   "Open": "ເປີດ",
-  "OpenBilling": "ເປີດການຊຳລະເງິນ",
   "OpenPortalBilling": "ໄປທີ່ການຊຳລະເງິນຂອງພໍທໍລ",
   "OpenSavedDocument": "ເປີດເອກະສານທີ່ບັນທືກໄວ້ໃນແຖບໃໝ່",
   "Or": "ຫຼື",
@@ -1502,8 +1499,8 @@
   "YourCurrentPlan": "<1>ແຜນການປັດຈຸບັນຂອງທ່ານ:</1> {{amount}} <2>({{price}}/ເດືອນ)</2>",
   "YourFurtherEditsNotSaved": "ການແກ້ໄຂເພີ່ມເຕີມຂອງທ່ານອາດຈະບໍ່ສາມາດບັນທຶກໄດ້.",
   "YourLogo": "ໂລໂກ້ຂອງທ່ານ",
-  "YourName": "ຊື່​ຂອງ​ເຈົ້າ",
+  "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
   "YourPrice": "ລາຄາຂອງເຈົ້າ",
-  "YourTurn": "ຮອດຕາເຈົ້າແລ້ວ",
+  "YourName": "ຊື່​ຂອງ​ເຈົ້າ",
   "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ."
 }

@@ -24,6 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
+import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
+
 export default function Loading() {
-  return null;
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <Loader type={LoaderTypes.dualRing} size="40px" />
+    </div>
+  );
 }

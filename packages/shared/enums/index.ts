@@ -223,21 +223,6 @@ export const enum PageType {
   aiSettings = "aiSettings",
 }
 
-export const enum ShareRights {
-  None = "None",
-  ReadWrite = "ReadWrite",
-  Read = "Read",
-  Restrict = "Restrict",
-  Varies = "Varies",
-  Review = "Review",
-  Comment = "Comment",
-  FillForms = "FillForms",
-  CustomFilter = "CustomFilter",
-  RoomManager = "RoomManager",
-  Editing = "Editing",
-  ContentCreator = "ContentCreator",
-}
-
 export const enum ConflictResolveType {
   Skip = 0,
   Overwrite = 1,
@@ -280,22 +265,6 @@ export const enum TenantTrustedDomainsType {
   None = 0,
   Custom = 1,
   All = 2,
-}
-
-/**
- * Enum for file status.
- * @readonly
- */
-export const enum FileStatus {
-  None = 0,
-  IsEditing = 1,
-  IsNew = 2,
-  IsConverting = 4,
-  IsOriginal = 8,
-  IsEditingAlone = 16,
-  IsFavorite = 32,
-  IsTemplate = 64,
-  IsFillFormDraft = 128,
 }
 
 /**

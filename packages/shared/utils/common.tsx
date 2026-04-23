@@ -34,7 +34,6 @@ import {
   dateDiffAbs,
 } from "@docspace/ui-kit/utils/date";
 import { isMobile } from "react-device-detect";
-import type { I18nextProviderProps } from "react-i18next";
 import resizeImage from "resize-image";
 import { pbkdf2 } from "@noble/hashes/pbkdf2.js";
 import { sha256 } from "@noble/hashes/sha2.js";
@@ -66,8 +65,6 @@ import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.patt
 
 import { AvatarRole } from "@docspace/ui-kit/components/avatar";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
-
-import { flagsIcons } from "./image-flags";
 
 import { parseAddress } from "./email";
 
@@ -486,6 +483,10 @@ export function getProviderTranslation(
       return signUp
         ? t("Common:SignUpWithWechat")
         : t("Common:SignInWithWechat");
+    case "nextcloud":
+      return signUp
+        ? t("Common:SignUpWithNextcloud")
+        : t("Common:SignInWithNextcloud");
     default:
       return "";
   }
@@ -1152,43 +1153,6 @@ export const insertDataLayer = (id: string) => {
   window.dataLayer.push({ user_id: id });
 };
 
-export const mapCulturesToArray = (
-  culturesArg: string[],
-  isBetaBadge: boolean = true,
-  withLabel?: boolean,
-) => {
-  return culturesArg.map((culture, index) => {
-    let iconName = culture;
-
-    switch (culture) {
-      case "sr-Cyrl-RS":
-      case "sr-Latn-RS":
-        iconName = "sr";
-        break;
-      default:
-        break;
-    }
-
-    const icon = flagsIcons?.get(`${iconName}.react.svg`);
-
-    const cultureObj = withLabel
-      ? {
-          key: culture,
-          label: getCultureLabel(culture),
-          icon,
-          ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
-          index,
-        }
-      : {
-          key: culture,
-          icon,
-          index,
-        };
-
-    return cultureObj;
-  });
-};
-
 export const mapTimezonesToArray = (
   timezones: TTimeZone[],
 ): {
@@ -1260,7 +1224,9 @@ export const getUserTypeName = (
   if (isOwner) return t("Common:Owner");
 
   if (isPortalAdmin)
-    return t("Common:PortalAdmin", { productName: getBrandName("ProductName") });
+    return t("Common:PortalAdmin", {
+      productName: getBrandName("ProductName"),
+    });
 
   if (isRoomAdmin) return t("Common:RoomAdmin");
 
@@ -1583,3 +1549,4 @@ export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {
     return acc;
   }, initial);
 }
+

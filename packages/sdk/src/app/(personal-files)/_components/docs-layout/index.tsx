@@ -67,6 +67,7 @@ import type { TFileItem, TFolderItem } from "@/app/(docspace)/_hooks/useItemList
 import { useSettingsStore } from "@/app/(docspace)/_store/SettingsStore";
 import { useFilesListStore } from "@/app/(docspace)/_store/FilesListStore";
 
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import { SidebarProvider, useSidebar } from "../../_contexts/SidebarContext";
 import DocsMainButton from "../main-button";
 import { useInfoPanelStore } from "../../_store/InfoPanelStore";
@@ -75,6 +76,7 @@ import useTrashActions from "../../_hooks/useTrashActions";
 import useFileOperations from "../../_hooks/useFileOperations";
 import useRenameActions from "../../_hooks/useRenameActions";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
+import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 import DocsSidebar from "../sidebar";
 import DropZone from "../drop-zone";
 import DeleteDialog from "../delete-dialog";
@@ -115,12 +117,15 @@ const DocsLayoutInner = observer(({
   const { rootFolderType } = useFilesListStore();
   const { currentDeviceType } = useSidebar();
   const infoPanelStore = useInfoPanelStore();
+  const { sdkConfig } = useSDKConfig();
   const router = useRouter();
 
   const isMyDocuments = rootFolderType === FolderType.USER;
   const showMobileButton = currentDeviceType !== DeviceType.desktop && isMyDocuments;
 
   const { uploadFilesToFolder } = useDocsActions();
+
+  useDocsFrameBridge({ isReady: true, uploadFilesToFolder });
   const {
     isTrash,
     requestDeleteItem,
@@ -191,8 +196,11 @@ const DocsLayoutInner = observer(({
   );
 
   const openFileHandler = React.useCallback(
-    (file: TFileItem) => {
-      router.push(`/personal-files/editor/${file.id}`);
+    (file: TFileItem, preview?: boolean) => {
+      const url = preview
+        ? `/personal-files/editor/${file.id}?action=view`
+        : `/personal-files/editor/${file.id}`;
+      router.push(url);
     },
     [router],
   );
@@ -211,7 +219,7 @@ const DocsLayoutInner = observer(({
         <RenameContext.Provider value={renameHandler}>
         <FileOperationsContext.Provider value={fileOperationsHandler}>
         <div className={styles.root}>
-          <DocsSidebar />
+          {sdkConfig?.showMenu !== false && <DocsSidebar />}
           <DropZone onFilesDropped={uploadFilesToFolder} disabled={!isMyDocuments}>
             <RootScrollbar>
               <SectionWrapper
@@ -220,6 +228,8 @@ const DocsLayoutInner = observer(({
                     current={current}
                     pathParts={pathParts}
                     isEmptyList={isEmptyList}
+                    isInfoPanelVisible={sdkConfig?.infoPanelVisible ? infoPanelStore.isVisible : false}
+                    onToggleInfoPanel={sdkConfig?.infoPanelVisible ? infoPanelStore.toggle : undefined}
                   />
                 }
                 sectionFilterContent={<Filter filesFilter={filesFilter} />}
@@ -244,7 +254,7 @@ const DocsLayoutInner = observer(({
             </RootScrollbar>
           </DropZone>
           <DocsInfoPanel />
-          {showMobileButton && <DocsMainButton mode="mobile" />}
+          {showMobileButton && <DocsMainButton mode="mobile" isDisabled={sdkConfig?.disableActionButton} />}
           <DeleteDialog
             visible={deleteDialogVisible}
             isLoading={isDeleting}
