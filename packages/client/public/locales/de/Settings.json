@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "Das Thema wird endgültig gelöscht. Sie können diese Aktion nicht rückgängig machen.",
   "DetailedHelpCenter": "Detaillierte Anweisungen in unserem <1>Hilfe-Center</1>",
   "DeveloperToolsAccess": "Abschnitt Entwicklertools",
-  "DeveloperToolsAccessDescription": "Mit dieser Einstellung können Sie den Bereich Entwicklertools für alle Benutzer außer Gästen sichtbar machen. Wenn Sie den Zugriff auf diesen Bereich einschränken und ihn nur dem Besitzer und {{productName}}-Administratoren zugänglich machen möchten, wählen Sie Deaktivieren und klicken Sie auf Speichern.",
+  "DeveloperToolsAccessDescription": "Mit dieser Einstellung können Sie den Bereich Entwicklertools für alle Benutzer außer Gästen sichtbar machen. Wenn Sie den Zugriff auf diesen Bereich einschränken und ihn nur dem Besitzer und {{productName}}-Administratoren zugänglich machen möchten, wählen Sie Deaktivieren und klicken Sie auf <strong>Speichern</strong>.",
   "DeveloperToolsAccessMobileDescription": "Mit dieser Einstellung können Sie den Bereich Entwicklertools für alle Benutzer außer Gästen sichtbar machen.",
   "DeveloperToolsDescription": "Integrieren, erweitern und automatisieren Sie {{organizationName}} {{productName}} mit unserer vollständigen Suite von Entwicklertools — von REST API und Embed SDK bis hin zu Webhooks und OAuth Apps. Wählen Sie unten ein Tool, um zu starten.",
   "DisableAiServices": "Deaktivieren {{aiServices}}",

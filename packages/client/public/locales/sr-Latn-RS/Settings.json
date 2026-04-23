@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "Tema će biti obrisana zauvek. Nećete moći da poništite ovu radnju.",
   "DetailedHelpCenter": "Detaljna uputstva u našem <1>Centru za pomoć</1>",
   "DeveloperToolsAccess": "Odeljak sa alatima za programere",
-  "DeveloperToolsAccessDescription": "Ovo podešavanje vam omogućava da odeljak Alatke za programere učinite vidljivim svim korisnicima osim gostima. Ako želite da ograničite pristup ovom odeljku i učinite ga dostupnim samo vlasniku i administratorima {{productName}}, izaberite Onemogući i kliknite na dugme Sačuvaj.",
+  "DeveloperToolsAccessDescription": "Ovo podešavanje vam omogućava da odeljak Alatke za programere učinite vidljivim svim korisnicima osim gostima. Ako želite da ograničite pristup ovom odeljku i učinite ga dostupnim samo vlasniku i administratorima {{productName}}, izaberite Onemogući i kliknite na dugme <strong>Sačuvaj</strong>.",
   "DeveloperToolsAccessMobileDescription": "Ovo podešavanje vam omogućava da odeljak Alatke za programere učinite vidljivim svim korisnicima osim gostima.",
   "DeveloperToolsDescription": "Integrirajte, proširite i automatizujte {{organizationName}} {{productName}} koristeći našu punu paletu alata za programere — od REST API-ja i Embed SDK-ja do webhook-ova i OAuth aplikacija. Izaberite alat ispod da počnete.",
   "DisableAiServices": "Deaktivirati {{aiServices}}",

@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "O tema será eliminado permanentemente. Não será possível desfazer esta ação.",
   "DetailedHelpCenter": "Instruções detalhadas em nosso <1>Central de Ajuda</1>",
   "DeveloperToolsAccess": "Seção de Ferramentas do Desenvolvedor",
-  "DeveloperToolsAccessDescription": "Esta definição permite tornar a secção Ferramentas de Programador visível para todos os utilizadores, exceto convidados. Se pretender restringir o acesso a esta secção, tornando-a apenas acessível ao proprietário e aos administradores do {{productName}}, selecione Desativar e clique no botão Guardar.",
+  "DeveloperToolsAccessDescription": "Esta definição permite tornar a secção Ferramentas de Programador visível para todos os utilizadores, exceto convidados. Se pretender restringir o acesso a esta secção, tornando-a apenas acessível ao proprietário e aos administradores do {{productName}}, selecione Desativar e clique no botão <strong>Guardar</strong>.",
   "DeveloperToolsAccessMobileDescription": "Esta definição permite tornar a secção Ferramentas de Programador visível para todos os utilizadores, exceto convidados.",
   "DeveloperToolsDescription": "Integre, estenda e automatize {{organizationName}} {{productName}} usando nosso conjunto completo de ferramentas para desenvolvedores — desde REST API e Embed SDK até webhooks e aplicativos OAuth. Escolha uma ferramenta abaixo para começar.",
   "DisableAiServices": "Desativar {{aiServices}}",

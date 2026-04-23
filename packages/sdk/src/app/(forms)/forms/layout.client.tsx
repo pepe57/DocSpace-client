@@ -447,6 +447,14 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
                 new CustomEvent(AnimationEvents.END_ANIMATION),
               );
             }, 0);
+          } else if (
+            activeSection === FormsSection.MyForms ||
+            activeSection === FormsSection.InProgress ||
+            activeSection === FormsSection.CompletedForms
+          ) {
+            formsListStore.setItems([], 0);
+            formsListStore.setFolders([]);
+            formsListStore.setIsLoading(true);
           }
 
           if (prevSection === FormsSection.Settings) {

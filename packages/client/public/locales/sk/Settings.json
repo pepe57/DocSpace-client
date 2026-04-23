@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "Téma bude natrvalo vymazaná. Túto akciu nebudete môcť vrátiť späť.",
   "DetailedHelpCenter": "Podrobné pokyny v našom <1>Centrum pomoci</1>",
   "DeveloperToolsAccess": "Sekcia nástrojov pre vývojárov",
-  "DeveloperToolsAccessDescription": "Toto nastavenie vám umožňuje sprístupniť sekciu Vývojárske nástroje všetkým používateľom okrem hostí. Ak chcete obmedziť prístup k tejto sekcii a sprístupniť ju iba vlastníkovi a správcom {{productName}}, vyberte možnosť Zakázať a kliknite na tlačidlo Uložiť.",
+  "DeveloperToolsAccessDescription": "Toto nastavenie vám umožňuje sprístupniť sekciu Vývojárske nástroje všetkým používateľom okrem hostí. Ak chcete obmedziť prístup k tejto sekcii a sprístupniť ju iba vlastníkovi a správcom {{productName}}, vyberte možnosť Zakázať a kliknite na tlačidlo <strong>Uložiť</strong>.",
   "DeveloperToolsAccessMobileDescription": "Toto nastavenie vám umožňuje sprístupniť sekciu Vývojárske nástroje všetkým používateľom okrem hostí.",
   "DeveloperToolsDescription": "Integrujte, rozširote a automatizujte {{organizationName}} {{productName}} pomocou našej kompletnej súpravy nástrojov pre vývojárov — od REST API a Embed SDK až po webhooks a OAuth aplikácie. Vyberte si nástroj nižšie, aby ste začali.",
   "DisableAiServices": "Vypnúť {{aiServices}}",

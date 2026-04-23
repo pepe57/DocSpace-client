@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "Tēma tiks neatgriezeniski izdzēsta. Šo darbību nevarēs atsaukt.",
   "DetailedHelpCenter": "Detalizētas instrukcijas mūsu <1>Palīdzības centrā</1>",
   "DeveloperToolsAccess": "Izstrādātāja rīku sadaļa",
-  "DeveloperToolsAccessDescription": "Šis iestatījums ļauj padarīt sadaļu Izstrādātāja rīki redzamu visiem lietotājiem, izņemot viesus. Ja vēlaties ierobežot piekļuvi šai sadaļai, padarot to pieejamu tikai īpašniekam un {{productName}} administratoriem, atlasiet Atspējot un noklikšķiniet uz pogas Saglabāt.",
+  "DeveloperToolsAccessDescription": "Šis iestatījums ļauj padarīt sadaļu Izstrādātāja rīki redzamu visiem lietotājiem, izņemot viesus. Ja vēlaties ierobežot piekļuvi šai sadaļai, padarot to pieejamu tikai īpašniekam un {{productName}} administratoriem, atlasiet Atspējot un noklikšķiniet uz pogas <strong>Saglabāt</strong>.",
   "DeveloperToolsAccessMobileDescription": "Šis iestatījums ļauj padarīt sadaļu Izstrādātāja rīki redzamu visiem lietotājiem, izņemot viesus.",
   "DeveloperToolsDescription": "Integrējiet, paplašiniet un automatizējiet {{organizationName}} {{productName}} ar mūsu pilnu sēriju izstrādātāja rīku — no REST API un Embed SDK līdz webhooks un OAuth lietotnēm. Izvēlieties rīku zemāk, lai sāktu.",
   "DisableAiServices": "Atslēgt {{aiServices}}",

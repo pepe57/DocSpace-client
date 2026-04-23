@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "Tema bo trajno izbrisana. Tega dejanja ne boste mogli razveljaviti.",
   "DetailedHelpCenter": "Podrobna navodila v našem <1>Centru za pomoč</1>",
   "DeveloperToolsAccess": "Razdelek orodij za razvijalce",
-  "DeveloperToolsAccessDescription": "Ta nastavitev vam omogoča, da razdelek z orodji za razvijalce postane viden vsem uporabnikom razen gostom. Če želite omejiti dostop do tega razdelka, tako da bo dostopen samo lastniku in skrbnikom {{productName}}, izberite Onemogoči in kliknite gumb Shrani.",
+  "DeveloperToolsAccessDescription": "Ta nastavitev vam omogoča, da razdelek z orodji za razvijalce postane viden vsem uporabnikom razen gostom. Če želite omejiti dostop do tega razdelka, tako da bo dostopen samo lastniku in skrbnikom {{productName}}, izberite Onemogoči in kliknite gumb <strong>Shrani</strong>.",
   "DeveloperToolsAccessMobileDescription": "Ta nastavitev vam omogoča, da razdelek z orodji za razvijalce postane viden vsem uporabnikom razen gostom.",
   "DeveloperToolsDescription": "Integrirajte, razširite in avtomatizirajte {{organizationName}} {{productName}} z našo celotno paleto orodij za programerje — od REST API in Embed SDK do webhookov in OAuth aplikacij. Izberite orodje pod spalom, da začnete.",
   "DisableAiServices": "Onemkliti {{aiServices}}",

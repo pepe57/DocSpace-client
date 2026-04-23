@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "主题将被永久删除。您将无法撤销此操作。",
   "DetailedHelpCenter": "请参阅我们的 <1>帮助中心</1> 获取详细说明",
   "DeveloperToolsAccess": "开发者工具部分",
-  "DeveloperToolsAccessDescription": "此设置允许所有非访客用户查看开发者工具模块。如果您希望限制访问权限，仅允许{{productName}}的所有者和管理员访问该模块，请选择“禁用”，然后点击“保存”按钮。",
+  "DeveloperToolsAccessDescription": "此设置允许所有非访客用户查看开发者工具模块。如果您希望限制访问权限，仅允许{{productName}}的所有者和管理员访问该模块，请选择“禁用”，然后点击“<strong>保存</strong>”按钮。",
   "DeveloperToolsAccessMobileDescription": "此设置允许所有非访客用户查看开发者工具模块。",
   "DeveloperToolsDescription": "使用我们全套的开发工具——从 REST API 和嵌入式 SDK 到 Webhooks 和 OAuth 应用——来集成、扩展和自动化 {{organizationName}} {{productName}}。请在下方选择一个工具开始。",
   "DisableAiServices": "禁用 {{aiServices}}",

@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "El tema se eliminará definitivamente. No podrá deshacer esta acción.",
   "DetailedHelpCenter": "Instrucciones detalladas en nuestro <1>Centro de ayuda</1>",
   "DeveloperToolsAccess": "Sección de Herramientas de desarrollo",
-  "DeveloperToolsAccessDescription": "Esta configuración le permite hacer que la sección Herramientas de desarrollo sea visible para todos los usuarios excepto los invitados. Si desea restringir el acceso a esta sección para que solo puedan acceder a ella el propietario y los administradores de {{productName}}, seleccione Desactivar y haga clic en el botón Guardar.",
+  "DeveloperToolsAccessDescription": "Esta configuración le permite hacer que la sección Herramientas de desarrollo sea visible para todos los usuarios excepto los invitados. Si desea restringir el acceso a esta sección para que solo puedan acceder a ella el propietario y los administradores de {{productName}}, seleccione Desactivar y haga clic en el botón <strong>Guardar</strong>.",
   "DeveloperToolsAccessMobileDescription": "Esta configuración le permite hacer que la sección Herramientas de desarrollo sea visible para todos los usuarios excepto los invitados.",
   "DeveloperToolsDescription": "Integre, extienda y automatice {{organizationName}} {{productName}} usando nuestra completa suite de herramientas de desarrollador — desde API REST y Embed SDK hasta webhooks y aplicaciones OAuth. Seleccione una herramienta a continuación para empezar.",
   "DisableAiServices": "Deshabilitar {{aiServices}}",

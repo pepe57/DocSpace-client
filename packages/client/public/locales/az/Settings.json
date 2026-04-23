@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "Tema həmişəlik silinəcək. Bu əməliyyatı geri qaytara bilməzsiniz.",
   "DetailedHelpCenter": "Ətraflı təlimatlar <1>Yardım Mərkəzi</1>ndə",
   "DeveloperToolsAccess": "Tərtibatçı alətləri bölməsi",
-  "DeveloperToolsAccessDescription": "Bu parametr, Developer Tools bölməsini qonaqlar istisna olmaqla, bütün istifadəçilər üçün görünən etməyə imkan verir. Bu bölməyə girişi məhdudlaşdırmaq, onu yalnız sahibinə və {{productName}} administratorlara əlçatan etmək istəyirsinizsə, Deaktiv et seçin və Saxla düyməsini klikləyin.",
+  "DeveloperToolsAccessDescription": "Bu parametr, Developer Tools bölməsini qonaqlar istisna olmaqla, bütün istifadəçilər üçün görünən etməyə imkan verir. Bu bölməyə girişi məhdudlaşdırmaq, onu yalnız sahibinə və {{productName}} administratorlara əlçatan etmək istəyirsinizsə, Deaktiv et seçin və <strong>Saxla</strong> düyməsini klikləyin.",
   "DeveloperToolsAccessMobileDescription": "Bu parametr, Developer Tools bölməsini qonaqlar istisna olmaqla, bütün istifadəçilər üçün görünən etməyə imkan verir.",
   "DeveloperToolsDescription": "{{organizationName}} {{productName}} platformasını REST API və Embed SDK-dan webhooks və OAuth tətbiqlərinə qədər olan tam developer alətləri dəstimizlə inteqrasiya edin, genişləndirin və avtomatlaşdırın. Başlamaq üçün aşağıdakı alətlərdən birini seçin.",
   "DisableAiServices": "{{aiServices}} işlətməni dayandırmaq",

@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "The theme will be deleted permanently. You will not be able to undo this action.",
   "DetailedHelpCenter": "Detailed instructions in our <1>Help Center</1>",
   "DeveloperToolsAccess": "Developer Tools section",
-  "DeveloperToolsAccessDescription": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the owner and {{productName}} administrators only, select Disable and click Save button.",
+  "DeveloperToolsAccessDescription": "This setting allows you to make the Developer Tools section visible to all users except guests. If you want to restrict access to this section, making it accessible to the owner and {{productName}} administrators only, select Disable and click <strong>Save</strong> button.",
   "DeveloperToolsAccessMobileDescription": "This setting allows you to make the Developer Tools section visible to all users except guests.",
   "DeveloperToolsDescription": "Integrate, extend, and automate {{organizationName}} {{productName}} using our full suite of developer tools — from REST API and Embed SDK to webhooks and OAuth apps. Choose a tool below to get started.",
   "DisableAiServices": "Disable {{aiServices}}",

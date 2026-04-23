@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "Tema va fi ştearsă definitiv. Această acţiune nu poate fi anulată.",
   "DetailedHelpCenter": "Instrucțiuni detaliate în <1>Centrul nostru de Ajutor</1>",
   "DeveloperToolsAccess": "Secțiunea Instrumente pentru dezvoltatori",
-  "DeveloperToolsAccessDescription": "Această setare vă permite să faceți secțiunea Instrumente pentru dezvoltatori vizibilă pentru toți utilizatorii, cu excepția Invitaților. Dacă doriți să restricționați accesul la această secțiune și să permiteți accesul numai proprietarului și administratorilor  {{productName}}, selectați Dezactivare și faceți clic pe butonul Salvare.",
+  "DeveloperToolsAccessDescription": "Această setare vă permite să faceți secțiunea Instrumente pentru dezvoltatori vizibilă pentru toți utilizatorii, cu excepția Invitaților. Dacă doriți să restricționați accesul la această secțiune și să permiteți accesul numai proprietarului și administratorilor  {{productName}}, selectați Dezactivare și faceți clic pe butonul <strong>Salvare</strong>.",
   "DeveloperToolsAccessMobileDescription": "Această setare vă permite să faceți secțiunea Instrumente pentru dezvoltatori vizibilă pentru toți utilizatorii, cu excepția Invitaților.",
   "DeveloperToolsDescription": "Integrați, extindeți și automatizați {{organizationName}} {{productName}} folosind gama noastră completă de instrumente pentru dezvoltatori — de la REST API și Embed SDK la webhooks și aplicații OAuth. Alegeți un instrument de mai jos pentru a începe.",
   "DisableAiServices": "Dezactivare {{aiServices}}",

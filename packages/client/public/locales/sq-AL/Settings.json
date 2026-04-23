@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "Tema do të fshihet përgjithmonë. Nuk do të mund ta zhbëni këtë veprim.",
   "DetailedHelpCenter": "Udhëzime të detajuara në <1>Qendrën tonë të Ndihmës</1>",
   "DeveloperToolsAccess": "Seksioni i Veglave të Zhvilluesit",
-  "DeveloperToolsAccessDescription": "Ky cilësim ju lejon të bëni seksionin \"Veglat e zhvilluesit\" të dukshëm për të gjithë përdoruesit, përveç mysafirëve. Nëse dëshironi të kufizoni aksesin në këtë seksion, duke e bërë atë të aksesueshëm vetëm për pronarin dhe administratorët e {{productName}}, zgjidhni Çaktivizo dhe kliko butonin Ruaj.",
+  "DeveloperToolsAccessDescription": "Ky cilësim ju lejon të bëni seksionin \"Veglat e zhvilluesit\" të dukshëm për të gjithë përdoruesit, përveç mysafirëve. Nëse dëshironi të kufizoni aksesin në këtë seksion, duke e bërë atë të aksesueshëm vetëm për pronarin dhe administratorët e {{productName}}, zgjidhni Çaktivizo dhe kliko butonin <strong>Ruaj</strong>.",
   "DeveloperToolsAccessMobileDescription": "Ky cilësim ju lejon të bëni seksionin \"Veglat e zhvilluesit\" të dukshëm për të gjithë përdoruesit, përveç mysafirëve.",
   "DeveloperToolsDescription": "Integroni, zgjeroni dhe automatizoni {{organizationName}} {{productName}} duke përdorur gamën tonë të plotë mjetesh për zhvillues — nga REST API dhe Embed SDK deri te webhooks dhe aplikacionet OAuth. Zgjidhni një mjet më poshtë për të filluar.",
   "DisableAiServices": "Shkaktivizoni {{aiServices}}",

@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "Theme sẽ bị xóa vĩnh viễn. Bạn sẽ không thể hoàn tác thao tác này.",
   "DetailedHelpCenter": "Hướng dẫn chi tiết trong <1>Trung tâm Trợ giúp</1> của chúng tôi",
   "DeveloperToolsAccess": "Phần Công cụ dành cho Nhà phát triển",
-  "DeveloperToolsAccessDescription": "Cài đặt này cho phép bạn hiển thị phần Công cụ dành cho nhà phát triển cho tất cả người dùng, ngoại trừ khách. Nếu bạn muốn hạn chế quyền truy cập vào phần này, chỉ cho phép chủ sở hữu và quản trị viên {{productName}} truy cập, hãy chọn Tắt và nhấp vào nút Lưu.",
+  "DeveloperToolsAccessDescription": "Cài đặt này cho phép bạn hiển thị phần Công cụ dành cho nhà phát triển cho tất cả người dùng, ngoại trừ khách. Nếu bạn muốn hạn chế quyền truy cập vào phần này, chỉ cho phép chủ sở hữu và quản trị viên {{productName}} truy cập, hãy chọn Tắt và nhấp vào nút <strong>Lưu</strong>.",
   "DeveloperToolsAccessMobileDescription": "Cài đặt này cho phép bạn hiển thị phần Công cụ dành cho nhà phát triển cho tất cả người dùng, ngoại trừ khách.",
   "DeveloperToolsDescription": "Tích hợp, mở rộng và tự động hóa {{organizationName}} {{productName}} bằng bộ công cụ nhà phát triển đầy đủ của chúng tôi — từ REST API và Embed SDK đến webhooks và ứng dụng OAuth. Chọn một công cụ bên dưới để bắt đầu.",
   "DisableAiServices": "Tắt {{aiServices}}",

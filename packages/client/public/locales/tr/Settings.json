@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "Tema kalıcı olarak silinecek. Bu işlemi geri alamazsınız.",
   "DetailedHelpCenter": "<1>Yardım Merkezi</1>'ndeki ayrıntılı talimatlar",
   "DeveloperToolsAccess": "Geliştirici Araçları bölümü",
-  "DeveloperToolsAccessDescription": "Bu ayar, Geliştirici Araçları bölümünü misafirler haricindeki tüm kullanıcılara görünür hale getirmenizi sağlar. Bu bölüme erişimi kısıtlamak ve yalnızca sahibinin ve {{productName}} yöneticilerin erişebilmesini sağlamak istiyorsanız Devre Dışı Bırak'ı seçin ve Kaydet düğmesine tıklayın.",
+  "DeveloperToolsAccessDescription": "Bu ayar, Geliştirici Araçları bölümünü misafirler haricindeki tüm kullanıcılara görünür hale getirmenizi sağlar. Bu bölüme erişimi kısıtlamak ve yalnızca sahibinin ve {{productName}} yöneticilerin erişebilmesini sağlamak istiyorsanız Devre Dışı Bırak'ı seçin ve <strong>Kaydet</strong> düğmesine tıklayın.",
   "DeveloperToolsAccessMobileDescription": "Bu ayar, Geliştirici Araçları bölümünü misafirler haricindeki tüm kullanıcılara görünür hale getirmenizi sağlar.",
   "DeveloperToolsDescription": "Geliştirici araçlarımızın tüm yelpazesini kullanarak {{organizationName}} {{productName}}'i entegre edin, genişletin ve otomatikleştirin — REST API ve Embed SDK'dan web kancalarına ve OAuth uygulamalarına kadar. Başlamak için aşağıdaki araçlardan birini seçin.",
   "DisableAiServices": "{{aiServices}}'i Devre Dışı Bırak",

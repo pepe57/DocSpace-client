@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "このテーマは永久に削除されます。このアクションを元に戻すことはできません。",
   "DetailedHelpCenter": "<1>ヘルプセンター</1>で詳細な手順をご確認ください",
   "DeveloperToolsAccess": "開発者ツールセクション",
-  "DeveloperToolsAccessDescription": "この設定により、開発者ツールセクションをゲスト以外のすべてのユーザーに表示することができます。このセクションへのアクセスを制限し、所有者と{{productName}}管理者のみがアクセスできるようにしたい場合は、無効を選択して保存ボタンをクリックしてください。",
+  "DeveloperToolsAccessDescription": "この設定により、開発者ツールセクションをゲスト以外のすべてのユーザーに表示することができます。このセクションへのアクセスを制限し、所有者と{{productName}}管理者のみがアクセスできるようにしたい場合は、無効を選択して<strong>保存</strong>ボタンをクリックしてください。",
   "DeveloperToolsAccessMobileDescription": "この設定により、ゲストを除くすべてのユーザーに「開発者ツール」セクションを表示することができます。",
   "DeveloperToolsDescription": "{{organizationName}} {{productName}} を、REST API や Embed SDK からウェブフック、OAuth アプリまで、当社のフルセットの開発者ツールを使用して統合、拡張、自動化します。始めるには、以下のツールを選択してください。",
   "DisableAiServices": "{{aiServices}}を無効にする",
