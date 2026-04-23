@@ -58,8 +58,8 @@ const LanguageCombobox = (props: ComboboxProps) => {
   const withLabel = isMobileView || showLanguageName;
 
   const cultureNames = useMemo(() => {
-    return mapCulturesToArray(cultures, false, withLabel);
-  }, [cultures, withLabel]);
+    return mapCulturesToArray(cultures, false);
+  }, [cultures]);
 
   const currentCulture = cultureNames.find(
     (item) => item.key === selectedCulture,
@@ -122,3 +122,4 @@ const LanguageCombobox = (props: ComboboxProps) => {
   );
 };
 export { LanguageCombobox };
+
