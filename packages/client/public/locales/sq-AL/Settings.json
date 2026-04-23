@@ -78,7 +78,7 @@
   "DeleteThemeForever": "Fshini temën përgjithmonë?",
   "DeleteThemeNotice": "Tema do të fshihet përgjithmonë. Nuk do të mund ta zhbëni këtë veprim.",
   "DeveloperToolsAccess": "Seksioni i Veglave të Zhvilluesit",
-  "DeveloperToolsAccessDescription": "Ky cilësim ju lejon të bëni seksionin \"Veglat e zhvilluesit\" të dukshëm për të gjithë përdoruesit, përveç mysafirëve. Nëse dëshironi të kufizoni aksesin në këtë seksion, duke e bërë atë të aksesueshëm vetëm për pronarin dhe administratorët e {{productName}}, zgjidhni Çaktivizo dhe kliko butonin Ruaj.",
+  "DeveloperToolsAccessDescription": "Ky cilësim ju lejon të bëni seksionin \"Veglat e zhvilluesit\" të dukshëm për të gjithë përdoruesit, përveç mysafirëve. Nëse dëshironi të kufizoni aksesin në këtë seksion, duke e bërë atë të aksesueshëm vetëm për pronarin dhe administratorët e {{productName}}, zgjidhni Çaktivizo dhe kliko butonin <strong>Ruaj</strong>.",
   "DeveloperToolsAccessMobileDescription": "Ky cilësim ju lejon të bëni seksionin \"Veglat e zhvilluesit\" të dukshëm për të gjithë përdoruesit, përveç mysafirëve.",
   "DisableEmailDescription": "Nëse kjo kuti është e shënuar, përdoruesit e {{sectionName}} nuk do të kenë nevojë të verifikojnë adresën e tyre të email-it pas autorizimit të parë në {{productName}}.",
   "DisableEmailVerification": "Çaktivizoni verifikimin me email",

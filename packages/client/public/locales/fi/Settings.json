@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "Teema poistetaan lopullisesti. Et voi kumota tätä toimintoa.",
   "DetailedHelpCenter": "Yksityiskohtaiset ohjeet <1>Ohjekeskuksessamme</1>",
   "DeveloperToolsAccess": "Rajatut kehittäjän työkalut-oikeudet",
-  "DeveloperToolsAccessDescription": "Tämän asetuksen avulla voit näyttää Kehittäjätyökalut-osion kaikille käyttäjille paitsi vieraille. Jos haluat rajoittaa tämän osion käyttöoikeuksia niin, että se on vain omistajan ja {{productName}}-järjestelmänvalvojien käytettävissä, valitse Poista käytöstä ja napsauta Tallenna-painiketta.",
+  "DeveloperToolsAccessDescription": "Tämän asetuksen avulla voit näyttää Kehittäjätyökalut-osion kaikille käyttäjille paitsi vieraille. Jos haluat rajoittaa tämän osion käyttöoikeuksia niin, että se on vain omistajan ja {{productName}}-järjestelmänvalvojien käytettävissä, valitse Poista käytöstä ja napsauta <strong>Tallenna</strong>-painiketta.",
   "DeveloperToolsAccessMobileDescription": "Tämän asetuksen avulla voit näyttää Kehittäjätyökalut-osion kaikille käyttäjille paitsi vieraille.",
   "DeveloperToolsDescription": "Integroi, laajenna ja automatisoi {{organizationName}} {{productName}} käyttämällä koko sarjaamme kehittäjätyökaluja — REST API:sta ja Embed SDK:sta webhooks- ja OAuth-sovelluksiin. Valitse alla oleva työkalu aloittaaksesi.",
   "DisableAiServices": "Poista käytöstä {{aiServices}}",

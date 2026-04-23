@@ -78,7 +78,7 @@
   "DeleteThemeForever": "Xóa theme vĩnh viễn?",
   "DeleteThemeNotice": "Theme sẽ bị xóa vĩnh viễn. Bạn sẽ không thể hoàn tác thao tác này.",
   "DeveloperToolsAccess": "Quyền truy cập công cụ dành cho Nnhà Phát Triển có giới hạn",
-  "DeveloperToolsAccessDescription": "Cài đặt này cho phép bạn hiển thị phần Công cụ dành cho nhà phát triển cho tất cả người dùng, ngoại trừ khách. Nếu bạn muốn hạn chế quyền truy cập vào phần này, chỉ cho phép chủ sở hữu và quản trị viên {{productName}} truy cập, hãy chọn Tắt và nhấp vào nút Lưu.",
+  "DeveloperToolsAccessDescription": "Cài đặt này cho phép bạn hiển thị phần Công cụ dành cho nhà phát triển cho tất cả người dùng, ngoại trừ khách. Nếu bạn muốn hạn chế quyền truy cập vào phần này, chỉ cho phép chủ sở hữu và quản trị viên {{productName}} truy cập, hãy chọn Tắt và nhấp vào nút <strong>Lưu</strong>.",
   "DeveloperToolsAccessMobileDescription": "Cài đặt này cho phép bạn hiển thị phần Công cụ dành cho nhà phát triển cho tất cả người dùng, ngoại trừ khách.",
   "DisableEmailDescription": "Nếu mục này được chọn, người dùng {{sectionName}} sẽ không cần xác minh email của họ sau lần ủy quyền đầu tiên trong {{productName}}.",
   "DisableEmailVerification": "Tắt xác minh email",

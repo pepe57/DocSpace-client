@@ -78,7 +78,7 @@
   "DeleteThemeForever": "Obriši temu zauvek?",
   "DeleteThemeNotice": "Tema će biti obrisana zauvek. Nećete moći da poništite ovu radnju.",
   "DeveloperToolsAccess": "Ograničen pristup alatkama za programere",
-  "DeveloperToolsAccessDescription": "Ovo podešavanje vam omogućava da odeljak Alatke za programere učinite vidljivim svim korisnicima osim gostima. Ako želite da ograničite pristup ovom odeljku i učinite ga dostupnim samo vlasniku i administratorima {{productName}}, izaberite Onemogući i kliknite na dugme Sačuvaj.",
+  "DeveloperToolsAccessDescription": "Ovo podešavanje vam omogućava da odeljak Alatke za programere učinite vidljivim svim korisnicima osim gostima. Ako želite da ograničite pristup ovom odeljku i učinite ga dostupnim samo vlasniku i administratorima {{productName}}, izaberite Onemogući i kliknite na dugme <strong>Sačuvaj</strong>.",
   "DeveloperToolsAccessMobileDescription": "Ovo podešavanje vam omogućava da odeljak Alatke za programere učinite vidljivim svim korisnicima osim gostima.",
   "DisableEmailDescription": "Ako je ova opcija štiklirana, korisnici iz {{sectionName}} neće morati da verifikuju svoju e-mail adresu nakon prve autorizacije u {{productName}}.",
   "DisableEmailVerification": "Onemogući verifikaciju email adrese",
