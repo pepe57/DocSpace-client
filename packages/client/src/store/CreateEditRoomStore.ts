@@ -73,26 +73,6 @@ class CreateEditRoomStore {
 
   onClose: Nullable<VoidFunction> = null;
 
-  filesStore: Nullable<FilesStore> = null;
-
-  tagsStore: Nullable<TagsStore> = null;
-
-  selectedFolderStore: Nullable<SelectedFolderStore> = null;
-
-  filesActionsStore: Nullable<FilesActionsStore> = null;
-
-  thirdPartyStore: Nullable<ThirdPartyStore> = null;
-
-  settingsStore: Nullable<SettingsStore> = null;
-
-  currentQuotaStore: Nullable<CurrentQuotasStore> = null;
-
-  clientLoadingStore: Nullable<ClientLoadingStore> = null;
-
-  dialogsStore: Nullable<DialogsStore> = null;
-
-  avatarEditorDialogStore: Nullable<AvatarEditorDialogStore> = null;
-
   watermarksSettings: TWatermark = {} as TWatermark;
 
   initialWatermarksSettings: TWatermark | { enabled: boolean } =
@@ -103,29 +83,18 @@ class CreateEditRoomStore {
   selectedRoomType: Nullable<RoomsType> = null;
 
   constructor(
-    filesStore: FilesStore,
-    filesActionsStore: FilesActionsStore,
-    selectedFolderStore: SelectedFolderStore,
-    tagsStore: TagsStore,
-    thirdPartyStore: ThirdPartyStore,
-    settingsStore: SettingsStore,
-    currentQuotaStore: CurrentQuotasStore,
-    clientLoadingStore: ClientLoadingStore,
-    dialogsStore: DialogsStore,
-    avatarEditorDialogStore: AvatarEditorDialogStore,
+    public filesStore: FilesStore,
+    public filesActionsStore: FilesActionsStore,
+    public selectedFolderStore: SelectedFolderStore,
+    public tagsStore: TagsStore,
+    public thirdPartyStore: ThirdPartyStore,
+    public settingsStore: SettingsStore,
+    public currentQuotaStore: CurrentQuotasStore,
+    public clientLoadingStore: ClientLoadingStore,
+    public dialogsStore: DialogsStore,
+    public avatarEditorDialogStore: AvatarEditorDialogStore,
   ) {
     makeAutoObservable(this);
-
-    this.filesStore = filesStore;
-    this.tagsStore = tagsStore;
-    this.selectedFolderStore = selectedFolderStore;
-    this.filesActionsStore = filesActionsStore;
-    this.thirdPartyStore = thirdPartyStore;
-    this.settingsStore = settingsStore;
-    this.currentQuotaStore = currentQuotaStore;
-    this.clientLoadingStore = clientLoadingStore;
-    this.dialogsStore = dialogsStore;
-    this.avatarEditorDialogStore = avatarEditorDialogStore;
   }
 
   setSelectedRoomType = (type: RoomsType) => {
