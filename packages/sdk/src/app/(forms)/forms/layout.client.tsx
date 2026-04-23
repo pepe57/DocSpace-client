@@ -452,9 +452,6 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             activeSection === FormsSection.InProgress ||
             activeSection === FormsSection.CompletedForms
           ) {
-            // Clear stale items/folders from the previous section so the
-            // first render of the new page shows skeletons instead of the
-            // previous section's content or an empty state.
             formsListStore.setItems([], 0);
             formsListStore.setFolders([]);
             formsListStore.setIsLoading(true);
