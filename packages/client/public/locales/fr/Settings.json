@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "Le thème sera définitivement supprimé. Vous ne pourrez pas annuler cette action.",
   "DetailedHelpCenter": "Instructions détaillées dans notre <1>Help Center</1>",
   "DeveloperToolsAccess": "Accès limité aux outils de développement",
-  "DeveloperToolsAccessDescription": "Ce paramètre vous permet de rendre la section Outils de développement visible à tous les utilisateurs, à l'exception des invités. Si vous souhaitez restreindre l'accès à cette section, en la rendant accessible uniquement au propriétaire et aux administrateurs de {{productName}}, sélectionnez Désactiver et cliquez sur le bouton Enregistrer.",
+  "DeveloperToolsAccessDescription": "Ce paramètre vous permet de rendre la section Outils de développement visible à tous les utilisateurs, à l'exception des invités. Si vous souhaitez restreindre l'accès à cette section, en la rendant accessible uniquement au propriétaire et aux administrateurs de {{productName}}, sélectionnez Désactiver et cliquez sur le bouton <strong>Enregistrer</strong>.",
   "DeveloperToolsAccessMobileDescription": "Ce paramètre vous permet de rendre la section Outils de développement visible à tous les utilisateurs, à l'exception des invités.",
   "DeveloperToolsDescription": "Intégrez, étendez et automatisez {{organizationName}} {{productName}} en utilisant notre suite complète d'outils de développement — de REST API et Embed SDK aux webhooks et applications OAuth. Choisissez un outil ci-dessous pour commencer.",
   "DisableAiServices": "Désactiver {{aiServices}}",

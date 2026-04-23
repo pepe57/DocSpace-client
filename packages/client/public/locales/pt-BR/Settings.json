@@ -78,7 +78,7 @@
   "DeleteThemeForever": "Excluir tema para sempre?",
   "DeleteThemeNotice": "O tema será excluído permanentemente. Você não poderá desfazer esta ação.",
   "DeveloperToolsAccess": "Acesso limitado às ferramentas do desenvolvedor",
-  "DeveloperToolsAccessDescription": "Esta configuração permite que você torne a seção Ferramentas do Desenvolvedor visível para todos os usuários, exceto convidados. Se desejar restringir o acesso a esta seção, tornando-a acessível apenas ao proprietário e aos administradores do {{productName}}, selecione Desativar e clique no botão Salvar.",
+  "DeveloperToolsAccessDescription": "Esta configuração permite que você torne a seção Ferramentas do Desenvolvedor visível para todos os usuários, exceto convidados. Se desejar restringir o acesso a esta seção, tornando-a acessível apenas ao proprietário e aos administradores do {{productName}}, selecione Desativar e clique no botão <strong>Salvar</strong>.",
   "DeveloperToolsAccessMobileDescription": "Esta configuração permite que você torne a seção Ferramentas do Desenvolvedor visível para todos os usuários, exceto convidados.",
   "DisableEmailDescription": "Se esta caixa estiver marcada, os usuários do {{sectionName}} não precisarão verificar seu e-mail após a primeira autorização no {{productName}}.",
   "DisableEmailVerification": "Desativar verificação de e-mail",

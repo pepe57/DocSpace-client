@@ -78,7 +78,7 @@
   "DeleteThemeForever": "Vai izdzēst dizainu uz visiem laikiem?",
   "DeleteThemeNotice": "Tēma tiks neatgriezeniski izdzēsta. Šo darbību nevarēs atsaukt.",
   "DeveloperToolsAccess": "Ierobežota piekļuve Izstrādātāja rīkiem",
-  "DeveloperToolsAccessDescription": "Šis iestatījums ļauj padarīt sadaļu Izstrādātāja rīki redzamu visiem lietotājiem, izņemot viesus. Ja vēlaties ierobežot piekļuvi šai sadaļai, padarot to pieejamu tikai īpašniekam un {{productName}} administratoriem, atlasiet Atspējot un noklikšķiniet uz pogas Saglabāt.",
+  "DeveloperToolsAccessDescription": "Šis iestatījums ļauj padarīt sadaļu Izstrādātāja rīki redzamu visiem lietotājiem, izņemot viesus. Ja vēlaties ierobežot piekļuvi šai sadaļai, padarot to pieejamu tikai īpašniekam un {{productName}} administratoriem, atlasiet Atspējot un noklikšķiniet uz pogas <strong>Saglabāt</strong>.",
   "DeveloperToolsAccessMobileDescription": "Šis iestatījums ļauj padarīt sadaļu Izstrādātāja rīki redzamu visiem lietotājiem, izņemot viesus.",
   "DisableEmailDescription": "Ja šis lodziņš ir atzīmēts, {{sectionName}} lietotājiem pēc pirmās autorizācijas {{productName}} nebūs nepieciešams pārbaudīt savu e-pastu.",
   "DisableEmailVerification": "Atspējot e-pasta verifikāciju",

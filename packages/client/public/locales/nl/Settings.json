@@ -78,7 +78,7 @@
   "DeleteThemeForever": "Thema voorgoed verwijderen?",
   "DeleteThemeNotice": "Het thema wordt definitief verwijderd. U kunt deze actie niet ongedaan maken.",
   "DeveloperToolsAccess": "Sectie Ontwikkelaarstools",
-  "DeveloperToolsAccessDescription": "Met deze instelling kunt u het gedeelte Ontwikkelaarshulpmiddelen zichtbaar maken voor alle gebruikers, behalve gasten. Als u de toegang tot deze sectie wilt beperken en deze alleen toegankelijk wilt maken voor de eigenaar en beheerders van {{productName}}, selecteert u Uitschakelen en klikt u op de knop Opslaan.",
+  "DeveloperToolsAccessDescription": "Met deze instelling kunt u het gedeelte Ontwikkelaarshulpmiddelen zichtbaar maken voor alle gebruikers, behalve gasten. Als u de toegang tot deze sectie wilt beperken en deze alleen toegankelijk wilt maken voor de eigenaar en beheerders van {{productName}}, selecteert u Uitschakelen en klikt u op de knop <strong>Opslaan</strong>.",
   "DeveloperToolsAccessMobileDescription": "Met deze instelling kunt u het gedeelte Ontwikkelaarshulpmiddelen zichtbaar maken voor alle gebruikers, behalve gasten.",
   "DisableEmailDescription": "Als dit vakje is aangevinkt, hoeven gebruikers van {{sectionName}} hun e-mailadres niet te verifiëren na de eerste autorisatie in {{productName}}.",
   "DisableEmailVerification": "E-mailverificatie uitschakelen",

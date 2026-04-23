@@ -94,7 +94,7 @@
   "DeleteThemeNotice": "سيتم حذف الموضوع بشكل دائم. لن تتمكن من التراجع عن هذا الإجراء.",
   "DetailedHelpCenter": "إرشادات مفصلة في <1>مركز المساعدة</1>",
   "DeveloperToolsAccess": "وصول محدود إلى أدوات المطورين",
-  "DeveloperToolsAccessDescription": "يتيح لك هذا الإعداد جعل قسم أدوات المطور مرئيًا لجميع المستخدمين باستثناء الضيوف. إذا كنت تريد تقييد الوصول إلى هذا القسم، وجعله متاحًا للمالك ومسؤولي {{productName}} فقط، فحدد تعطيل وانقر فوق الزر حفظ.",
+  "DeveloperToolsAccessDescription": "يتيح لك هذا الإعداد جعل قسم أدوات المطور مرئيًا لجميع المستخدمين باستثناء الضيوف. إذا كنت تريد تقييد الوصول إلى هذا القسم، وجعله متاحًا للمالك ومسؤولي {{productName}} فقط، فحدد تعطيل وانقر فوق الزر <strong>حفظ</strong>.",
   "DeveloperToolsAccessMobileDescription": "يتيح لك هذا الإعداد جعل قسم أدوات المطور مرئيًا لجميع المستخدمين باستثناء الضيوف.",
   "DeveloperToolsDescription": "دمج وتوسيع وأتمتة {{organizationName}} {{productName}} باستخدام مجموعة أدوات المطورين الكاملة لدينا — بدءاً من REST API و Embed SDK وصولاً إلى webhooks وتطبيقات OAuth. اختر أداة أدناه للبدء.",
   "DisableAiServices": "تعطيل {{aiServices}}",
