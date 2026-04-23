@@ -30,6 +30,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 
 import styles from "./EditorPage.module.scss";
@@ -92,7 +93,15 @@ export default function EditorPage({ fileId, action }: EditorPageProps) {
 
   const onIframeLoad = React.useCallback(() => {
     setIsReady(true);
-  }, []);
+    frameCallEvent({
+      event: "onAppReady",
+      data: { frameId: getFrameId() },
+    });
+    frameCallEvent({
+      event: "onEditorOpen",
+      data: { fileId, action: action ?? null },
+    });
+  }, [fileId, action]);
 
   return (
     <div className={styles.editorWrapper}>
