@@ -2466,10 +2466,14 @@ describe("Locales Tests", () => {
     // This prevents race conditions, removes i18n dependency for static data,
     // and keeps a single source of truth in public/locales/.constants/.
 
-    // Exact match for brand/const keys, prefix match for Culture_*
-    const forbiddenExact = new Set(
-      Array.from(brandNameKeys).map((k) => `Common:${k}`),
-    );
+    // Exact match for brand/const keys, prefix match for Culture_*.
+    // Keys may appear with or without the "Common:" namespace (e.g.
+    // `t("ProductName")` is valid i18next shorthand when Common is the default ns).
+    const forbiddenExact = new Set();
+    brandNameKeys.forEach((k) => {
+      forbiddenExact.add(k);
+      forbiddenExact.add(`Common:${k}`);
+    });
 
     let message =
       "The following files use brand/constant/culture keys via t() instead of direct imports:\r\n\r\n" +
@@ -2479,7 +2483,10 @@ describe("Locales Tests", () => {
 
     javascriptFiles.forEach((jsFile) => {
       const violations = jsFile.translationKeys.filter(
-        (key) => forbiddenExact.has(key) || key.startsWith("Common:Culture_"),
+        (key) =>
+          forbiddenExact.has(key) ||
+          key.startsWith("Common:Culture_") ||
+          key.startsWith("Culture_"),
       );
 
       if (violations.length === 0) return;
