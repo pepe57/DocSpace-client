@@ -71,18 +71,26 @@ const PROVIDER = NO_LLM
       ? "openrouter"
       : "ollama";
 
-const OLLAMA_MODEL = process.env.OLLAMA_SPELLCHECK_MODEL || "gemma4:latest";
-const OPENROUTER_MODEL = openRouterConfig.spellCheckModel || openRouterConfig.model;
+const OLLAMA_MODEL = process.env.OLLAMA_SPELLCHECK_MODEL || "gemma4:26b";
+const OPENROUTER_MODEL =
+  openRouterConfig.spellCheckModel || openRouterConfig.model;
 const CLAUDE_CODE_MODEL = process.env.CLAUDE_CODE_MODEL || "sonnet";
-const MODEL = PROVIDER === "openrouter"
-  ? OPENROUTER_MODEL
-  : PROVIDER === "claude-code"
-    ? CLAUDE_CODE_MODEL
-    : OLLAMA_MODEL;
+const MODEL =
+  PROVIDER === "openrouter"
+    ? OPENROUTER_MODEL
+    : PROVIDER === "claude-code"
+      ? CLAUDE_CODE_MODEL
+      : OLLAMA_MODEL;
 
 const concurrencyArg = cliArgs.find((a) => a.startsWith("--concurrency="));
-const CONCURRENCY = NO_LLM ? 1 : (concurrencyArg ? parseInt(concurrencyArg.split("=")[1], 10) : concurrencyConfig.spellCheck);
-const LANGUAGES_TO_CHECK = positionalArgs[0] ? positionalArgs[0].split(",") : null;
+const CONCURRENCY = NO_LLM
+  ? 1
+  : concurrencyArg
+    ? parseInt(concurrencyArg.split("=")[1], 10)
+    : concurrencyConfig.spellCheck;
+const LANGUAGES_TO_CHECK = positionalArgs[0]
+  ? positionalArgs[0].split(",")
+  : null;
 const CHECKPOINT_FILE = path.join(appRootPath, "verification-checkpoint.json");
 
 /**
@@ -308,7 +316,9 @@ async function generateOllama(prompt) {
         resetInactivityTimer(stream);
 
         if (loopDetector.feed(token)) {
-          console.warn("\n  [ABORT] Repetition loop detected — stopping generation");
+          console.warn(
+            "\n  [ABORT] Repetition loop detected — stopping generation",
+          );
           stream.abort();
           break;
         }
@@ -363,7 +373,9 @@ async function generateOpenRouter(prompt) {
     const body = await response.text();
     // 402 = payment required, 403 = key limit exceeded — fatal, stop immediately
     if (response.status === 402 || response.status === 403) {
-      throw new FatalProviderError(`OpenRouter API error ${response.status}: ${body}`);
+      throw new FatalProviderError(
+        `OpenRouter API error ${response.status}: ${body}`,
+      );
     }
     throw new Error(`OpenRouter API error ${response.status}: ${body}`);
   }
@@ -417,7 +429,9 @@ async function generateOpenRouter(prompt) {
             resetInactivityTimer();
 
             if (loopDetector.feed(content)) {
-              console.warn("\n  [ABORT] Repetition loop detected — stopping generation");
+              console.warn(
+                "\n  [ABORT] Repetition loop detected — stopping generation",
+              );
               controller.abort();
               break;
             }
@@ -453,8 +467,12 @@ async function generateClaudeCode(prompt) {
     let stdout = "";
     let stderr = "";
 
-    child.stdout.on("data", (data) => { stdout += data; });
-    child.stderr.on("data", (data) => { stderr += data; });
+    child.stdout.on("data", (data) => {
+      stdout += data;
+    });
+    child.stderr.on("data", (data) => {
+      stderr += data;
+    });
 
     // Write prompt to stdin and close it
     child.stdin.write(prompt);
@@ -472,7 +490,11 @@ async function generateClaudeCode(prompt) {
       } else {
         const msg = stderr || stdout || `exit code ${code}`;
         if (detectFatalProviderMessage(msg)) {
-          reject(new FatalProviderError(`Claude Code fatal: ${msg.substring(0, 200)}`));
+          reject(
+            new FatalProviderError(
+              `Claude Code fatal: ${msg.substring(0, 200)}`,
+            ),
+          );
         } else {
           reject(new Error(`Claude Code error: ${msg.substring(0, 300)}`));
         }
@@ -516,7 +538,9 @@ async function verifyProviderConnection() {
         headers: { Authorization: `Bearer ${openRouterConfig.apiKey}` },
       });
       if (!response.ok) {
-        console.error(`OpenRouter connection failed: ${response.status} ${response.statusText}`);
+        console.error(
+          `OpenRouter connection failed: ${response.status} ${response.statusText}`,
+        );
         return false;
       }
       return true;
@@ -531,7 +555,9 @@ async function verifyProviderConnection() {
       execFileSync("claude", ["--version"], { timeout: 5000 });
       return true;
     } catch (error) {
-      console.error("Claude Code CLI not found. Install: npm install -g @anthropic-ai/claude-code");
+      console.error(
+        "Claude Code CLI not found. Install: npm install -g @anthropic-ai/claude-code",
+      );
       return false;
     }
   }
@@ -572,7 +598,9 @@ function formatContextBlock(keyContext) {
     parts.push(`**Context:** ${keyContext.comment}`);
   }
   if (keyContext.usages && keyContext.usages.length > 0) {
-    parts.push(`**Usage in code:**\n${keyContext.usages.map((u) => `- \`${u}\``).join("\n")}`);
+    parts.push(
+      `**Usage in code:**\n${keyContext.usages.map((u) => `- \`${u}\``).join("\n")}`,
+    );
   }
   return parts.join("\n");
 }
@@ -583,13 +611,25 @@ function formatContextBlock(keyContext) {
 // Mirrors ForbiddenValueElementsTest from locales.test.js
 const FORBIDDEN_ELEMENTS = ["ONLYOFFICE", "DOCSPACE"];
 const SKIP_FORBIDDEN_KEYS = new Set([
-  "OrganizationName", "ProductName", "ProductEditorsName",
+  "OrganizationName",
+  "ProductName",
+  "ProductEditorsName",
 ]);
 
 // Languages that use non-Latin primary scripts
 const NON_LATIN_LANGUAGES = new Set([
-  "ar-SA", "ja-JP", "zh-CN", "ko-KR", "hy-AM", "el-GR",
-  "lo-LA", "si", "uk-UA", "ru", "bg", "sr-Cyrl-RS",
+  "ar-SA",
+  "ja-JP",
+  "zh-CN",
+  "ko-KR",
+  "hy-AM",
+  "el-GR",
+  "lo-LA",
+  "si",
+  "uk-UA",
+  "ru",
+  "bg",
+  "sr-Cyrl-RS",
 ]);
 
 /**
@@ -649,7 +689,12 @@ function hasNonLatinChars(text) {
  * @param {string} keyName - The bare key name (without namespace prefix)
  * @returns {Array<Object>} Array of detected issues
  */
-function runDeterministicChecks(englishContent, translatedContent, language, keyName = "") {
+function runDeterministicChecks(
+  englishContent,
+  translatedContent,
+  language,
+  keyName = "",
+) {
   const issues = [];
 
   // 1. Empty / whitespace-only translation
@@ -687,7 +732,8 @@ function runDeterministicChecks(englishContent, translatedContent, language, key
   // 3. Missing/extra React & HTML tags
   //    Normalize tags (collapse internal whitespace) for comparison,
   //    but flag malformed tags with extra spaces separately.
-  const normalizeTag = (t) => t.replace(/\s+/g, " ").replace(/\s>/g, ">").replace(/\s\/>/g, "/>");
+  const normalizeTag = (t) =>
+    t.replace(/\s+/g, " ").replace(/\s>/g, ">").replace(/\s\/>/g, "/>");
   const enTags = extractTags(englishContent).map(normalizeTag);
   const trTagsRaw = extractTags(translatedContent);
   const trTags = trTagsRaw.map(normalizeTag);
@@ -712,7 +758,9 @@ function runDeterministicChecks(englishContent, translatedContent, language, key
   }
 
   // 3b. Malformed tags — tags with internal whitespace (e.g., "<strong >" instead of "<strong>")
-  const malformedTags = trTagsRaw.filter((t) => /\s+\/?>/.test(t) || /<\s+/.test(t));
+  const malformedTags = trTagsRaw.filter(
+    (t) => /\s+\/?>/.test(t) || /<\s+/.test(t),
+  );
   if (malformedTags.length > 0) {
     issues.push({
       type: "malformed_tag",
@@ -767,7 +815,10 @@ function runDeterministicChecks(englishContent, translatedContent, language, key
   //    Skip if translation is identical to English (intentional: brand names, product names, etc.)
   //    Require English text > 15 chars (after stripping markup) to avoid flagging short
   //    terms, abbreviations, and proper nouns (e.g. "PDFs", "E-mail", "OAuth 2.0").
-  if (NON_LATIN_LANGUAGES.has(language) && englishContent !== translatedContent) {
+  if (
+    NON_LATIN_LANGUAGES.has(language) &&
+    englishContent !== translatedContent
+  ) {
     const enTextOnly = englishContent
       .replace(/\{\{[^}]+\}\}/g, "")
       .replace(/<\/?[^>]+>/g, "")
@@ -788,9 +839,27 @@ function runDeterministicChecks(englishContent, translatedContent, language, key
   //    Period/exclamation checks only for Latin-script languages — many other
   //    scripts (Arabic, CJK, etc.) have different sentence-ending conventions.
   const LATIN_SCRIPT_LANGUAGES = new Set([
-    "de", "de-CH", "fr", "es", "es-MX", "it", "pt", "pt-BR",
-    "pl", "nl", "cs", "sk", "ro", "lv", "sl", "fi", "tr",
-    "sq-AL", "sr-Latn-RS", "az", "vi",
+    "de",
+    "de-CH",
+    "fr",
+    "es",
+    "es-MX",
+    "it",
+    "pt",
+    "pt-BR",
+    "pl",
+    "nl",
+    "cs",
+    "sk",
+    "ro",
+    "lv",
+    "sl",
+    "fi",
+    "tr",
+    "sq-AL",
+    "sr-Latn-RS",
+    "az",
+    "vi",
   ]);
 
   const enTrimmed = englishContent.trim();
@@ -809,7 +878,11 @@ function runDeterministicChecks(englishContent, translatedContent, language, key
     }
 
     // Period/exclamation check only for Latin-script languages
-    if (LATIN_SCRIPT_LANGUAGES.has(language) && ".!".includes(enEndChar) && trEndChar !== enEndChar) {
+    if (
+      LATIN_SCRIPT_LANGUAGES.has(language) &&
+      ".!".includes(enEndChar) &&
+      trEndChar !== enEndChar
+    ) {
       const equivalentEnds = {
         ".": ["."],
         "!": ["!", "！"],
@@ -835,8 +908,12 @@ function runDeterministicChecks(englishContent, translatedContent, language, key
   for (const [open, close] of bracketPairs) {
     // Skip {{variable}} braces — they are checked separately
     if (open === "{") continue;
-    const openCount = (translatedContent.match(new RegExp(`\\${open}`, "g")) || []).length;
-    const closeCount = (translatedContent.match(new RegExp(`\\${close}`, "g")) || []).length;
+    const openCount = (
+      translatedContent.match(new RegExp(`\\${open}`, "g")) || []
+    ).length;
+    const closeCount = (
+      translatedContent.match(new RegExp(`\\${close}`, "g")) || []
+    ).length;
     if (openCount !== closeCount) {
       issues.push({
         type: "unpaired_bracket",
@@ -864,7 +941,9 @@ function runDeterministicChecks(englishContent, translatedContent, language, key
   //    Mirrors ForbiddenValueElementsTest from locales.test.js
   if (!SKIP_FORBIDDEN_KEYS.has(keyName)) {
     const upperTranslation = translatedContent.toUpperCase();
-    const found = FORBIDDEN_ELEMENTS.filter((el) => upperTranslation.includes(el));
+    const found = FORBIDDEN_ELEMENTS.filter((el) =>
+      upperTranslation.includes(el),
+    );
     if (found.length > 0) {
       issues.push({
         type: "forbidden_value",
@@ -1006,7 +1085,9 @@ async function verifyTranslation(
           if (issues.length === 0) {
             console.log(`  ✓ OK`);
           } else {
-            console.log(`  ✗ ${issues.length} issue(s): ${issues.map((i) => i.type).join(", ")}`);
+            console.log(
+              `  ✗ ${issues.length} issue(s): ${issues.map((i) => i.type).join(", ")}`,
+            );
           }
           return issues;
         } catch (parseError) {
@@ -1045,9 +1126,13 @@ async function verifyTranslation(
           `Network error detected. Waiting before retry... ${error.message}`,
         );
         if (PROVIDER === "ollama") {
-          console.log(`ollama api url: '${ollamaConfig.apiUrl}' model: '${MODEL}'`);
+          console.log(
+            `ollama api url: '${ollamaConfig.apiUrl}' model: '${MODEL}'`,
+          );
         } else {
-          console.log(`openrouter api url: '${openRouterConfig.apiUrl}' model: '${MODEL}'`);
+          console.log(
+            `openrouter api url: '${openRouterConfig.apiUrl}' model: '${MODEL}'`,
+          );
         }
         await new Promise((resolve) => setTimeout(resolve, 2000 * retries));
       } else if (retries < maxRetries) {
@@ -1232,9 +1317,10 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
     // Skip files until we reach checkpoint if resuming.
     // Use basename for comparison — checkpoint may be from a different OS/machine
     // with different absolute paths. basename (e.g. "Guest.json") is stable.
-    let skipUntilKey = resuming && checkpoint.lastMetadataFile
-      ? toPortablePath(checkpoint.lastMetadataFile)
-      : null;
+    let skipUntilKey =
+      resuming && checkpoint.lastMetadataFile
+        ? toPortablePath(checkpoint.lastMetadataFile)
+        : null;
 
     // When resuming, also skip languages already done for the checkpoint key
     let resumeAtLanguage = resuming ? checkpoint.lastLanguage : null;
@@ -1249,7 +1335,9 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
           skippedKeys++;
           continue;
         }
-        console.log(` Resuming from file: ${currentKey} (skipped ${skippedKeys} already-processed keys)`);
+        console.log(
+          ` Resuming from file: ${currentKey} (skipped ${skippedKeys} already-processed keys)`,
+        );
         stats.totalKeys = skippedKeys; // so progress counter continues from where we left off
         skipUntilKey = null; // Found checkpoint, process from here
       }
@@ -1318,21 +1406,38 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
             skipLangsUntil = null;
           }
 
-          const translatedContent = getTranslationContent(translations, namespace, key, language);
+          const translatedContent = getTranslationContent(
+            translations,
+            namespace,
+            key,
+            language,
+          );
           if (!translatedContent) continue;
 
           if (RECHECK) {
-            const existingIssues = metadata.languages?.[language]?.ai_spell_check_issues || [];
+            const existingIssues =
+              metadata.languages?.[language]?.ai_spell_check_issues || [];
             if (existingIssues.length === 0) continue;
-            if (RECHECK_TYPES && !existingIssues.some((i) => RECHECK_TYPES.has(i.type))) continue;
+            if (
+              RECHECK_TYPES &&
+              !existingIssues.some((i) => RECHECK_TYPES.has(i.type))
+            )
+              continue;
           }
 
           langsToProcess.push({ language, langIndex, translatedContent });
         }
 
         // Process languages in parallel batches of CONCURRENCY
-        for (let batchStart = 0; batchStart < langsToProcess.length; batchStart += CONCURRENCY) {
-          const batch = langsToProcess.slice(batchStart, batchStart + CONCURRENCY);
+        for (
+          let batchStart = 0;
+          batchStart < langsToProcess.length;
+          batchStart += CONCURRENCY
+        ) {
+          const batch = langsToProcess.slice(
+            batchStart,
+            batchStart + CONCURRENCY,
+          );
 
           const results = await Promise.allSettled(
             batch.map(async ({ language, langIndex, translatedContent }) => {
@@ -1344,10 +1449,17 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
               };
 
               // Phase 1: deterministic checks (instant)
-              const deterministicIssues = runDeterministicChecks(englishContent, translatedContent, language, key);
+              const deterministicIssues = runDeterministicChecks(
+                englishContent,
+                translatedContent,
+                language,
+                key,
+              );
 
               if (deterministicIssues.length > 0) {
-                console.log(`  [static] ${language}: ${deterministicIssues.length} issue(s): ${deterministicIssues.map((i) => i.type).join(", ")}`);
+                console.log(
+                  `  [static] ${language}: ${deterministicIssues.length} issue(s): ${deterministicIssues.map((i) => i.type).join(", ")}`,
+                );
               }
 
               // Phase 2: LLM verification
@@ -1357,17 +1469,36 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
 
               let llmIssues = [];
               if (!NO_LLM && !hasStructuralIssue) {
-                llmIssues = await verifyTranslation(keyPath, englishContent, translatedContent, language, progress, keyContext);
+                llmIssues = await verifyTranslation(
+                  keyPath,
+                  englishContent,
+                  translatedContent,
+                  language,
+                  progress,
+                  keyContext,
+                );
               }
 
               // Merge & stamp
               const llmTypes = new Set(llmIssues.map((i) => i.type));
-              const uniqueDeterministic = deterministicIssues.filter((i) => !llmTypes.has(i.type));
+              const uniqueDeterministic = deterministicIssues.filter(
+                (i) => !llmTypes.has(i.type),
+              );
               const now = new Date().toISOString();
-              for (const issue of uniqueDeterministic) { issue.checked_at = now; issue.checked_by = "deterministic"; }
-              for (const issue of llmIssues) { issue.checked_at = now; issue.checked_by = `${PROVIDER}/${MODEL}`; }
+              for (const issue of uniqueDeterministic) {
+                issue.checked_at = now;
+                issue.checked_by = "deterministic";
+              }
+              for (const issue of llmIssues) {
+                issue.checked_at = now;
+                issue.checked_by = `${PROVIDER}/${MODEL}`;
+              }
 
-              return { language, issues: [...uniqueDeterministic, ...llmIssues], translatedContent };
+              return {
+                language,
+                issues: [...uniqueDeterministic, ...llmIssues],
+                translatedContent,
+              };
             }),
           );
 
@@ -1386,7 +1517,11 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
                 throw err;
               }
               console.error(`Error: ${err.message}`);
-              stats.errors.push({ file: metadataFile, key: keyPath, error: err.message });
+              stats.errors.push({
+                file: metadataFile,
+                key: keyPath,
+                error: err.message,
+              });
               saveCheckpoint();
               continue;
             }
@@ -1400,7 +1535,12 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
 
             if (!metadata.languages) metadata.languages = {};
             if (!metadata.languages[language]) {
-              metadata.languages[language] = { ai_translated: false, ai_model: null, ai_spell_check_issues: [], approved_at: null };
+              metadata.languages[language] = {
+                ai_translated: false,
+                ai_model: null,
+                ai_spell_check_issues: [],
+                approved_at: null,
+              };
             }
             metadata.languages[language].ai_spell_check_issues = issues;
             metadataUpdated = true;
@@ -1413,10 +1553,21 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
               stats.updatedIssues++;
               stats.languages[language].updated++;
               stats.languages[language].issues += issues.length;
-              console.log(`Found ${issues.length} issues for ${keyPath} in ${language}`);
+              console.log(
+                `Found ${issues.length} issues for ${keyPath} in ${language}`,
+              );
 
               for (const issue of issues) {
-                appendIssueToTSV(tsvFilename, project, metadataFile, keyPath, language, englishContent, translatedContent, issue);
+                appendIssueToTSV(
+                  tsvFilename,
+                  project,
+                  metadataFile,
+                  keyPath,
+                  language,
+                  englishContent,
+                  translatedContent,
+                  issue,
+                );
                 counters.totalIssuesFound++;
               }
             }
@@ -1426,7 +1577,11 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
           saveCheckpoint();
 
           // Log speed & ETA periodically
-          if (!NO_LLM && stats.llmCalls > 0 && stats.llmCalls % 10 < CONCURRENCY) {
+          if (
+            !NO_LLM &&
+            stats.llmCalls > 0 &&
+            stats.llmCalls % 10 < CONCURRENCY
+          ) {
             const elapsed = (Date.now() - stats.startTime) / 1000;
             const avgSec = elapsed / stats.llmCalls;
             const totalPairs = metadataFiles.length * languages.length;
@@ -1434,8 +1589,13 @@ async function verifyTranslationsSpellCheck(project, tsvFilename, counters) {
             const etaSec = remaining * avgSec;
             const etaMin = Math.floor(etaSec / 60);
             const etaHrs = Math.floor(etaMin / 60);
-            const etaStr = etaHrs > 0 ? `${etaHrs}h ${etaMin % 60}m` : `${etaMin}m ${Math.floor(etaSec % 60)}s`;
-            console.log(`  ⏱ ${stats.llmCalls} checked | ${avgSec.toFixed(1)}s/call | ETA: ~${etaStr}`);
+            const etaStr =
+              etaHrs > 0
+                ? `${etaHrs}h ${etaMin % 60}m`
+                : `${etaMin}m ${Math.floor(etaSec % 60)}s`;
+            console.log(
+              `  ⏱ ${stats.llmCalls} checked | ${avgSec.toFixed(1)}s/call | ETA: ~${etaStr}`,
+            );
           }
         }
 
@@ -1511,9 +1671,10 @@ function appendIssueToTSV( // sync — no async needed
   // Store relative path in TSV so the file is portable across machines
   const relativeMetaFile = metadataFile.replace(/\\/g, "/");
   const metaIdx = relativeMetaFile.lastIndexOf(".meta/");
-  const portableMetaPath = metaIdx !== -1
-    ? relativeMetaFile.slice(metaIdx)
-    : path.basename(metadataFile);
+  const portableMetaPath =
+    metaIdx !== -1
+      ? relativeMetaFile.slice(metaIdx)
+      : path.basename(metadataFile);
   const row = [
     project,
     portableMetaPath,
@@ -1566,7 +1727,9 @@ async function verifyAllTranslationsSpellCheck() {
   if (!NO_LLM) {
     const providerReady = await verifyProviderConnection();
     if (!providerReady) {
-      console.error(`${PROVIDER} is not available. Aborting verification process.`);
+      console.error(
+        `${PROVIDER} is not available. Aborting verification process.`,
+      );
       process.exit(1);
     }
   }
@@ -1740,3 +1903,4 @@ verifyAllTranslationsSpellCheck()
     saveCheckpoint();
     process.exit(1);
   });
+

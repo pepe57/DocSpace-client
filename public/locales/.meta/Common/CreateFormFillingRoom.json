@@ -3,7 +3,7 @@
   "content": "Create Form filling room",
   "content_en_sha1_hash": "2c00eeebf71b5e09d7795d3137d22acce6f3542a",
   "created_at": "2025-05-19T21:30:43.893Z",
-  "updated_at": "2026-04-11T20:56:03.311Z",
+  "updated_at": "2026-04-23T17:24:01.676Z",
   "comment": {
     "text": "This is a button label. It appears on a screen where users can choose to create different types of rooms, specifically for initiating the creation of a form filling room.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/components/ShareCollectSelector/ShareCollectSelector.tsx",
-      "line_number": 269,
+      "line_number": 284,
       "context": "onClose: onCloseInfoBar,\n };\n \n const createDefineRoomLabels: Partial<Record<RoomsType, string>> = {\n [RoomsType.VirtualDataRoom]: t(\"Common:CreateVirtualDataRoom\"),\n [RoomsType.FormRoom]: t(\"Common:CreateFormFillingRoom\"),\n };\n \n return (\n <FilesSelectorWrapper\n withCreate",
       "module": "/packages/client"
     },

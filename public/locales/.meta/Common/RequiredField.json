@@ -3,7 +3,7 @@
   "content": "Required field",
   "content_en_sha1_hash": "04148d61b0b7212b69dd8b267c98c74a3ae36942",
   "created_at": "2025-05-19T21:30:47.872Z",
-  "updated_at": "2026-04-12T02:44:24.755Z",
+  "updated_at": "2026-04-23T17:24:01.696Z",
   "comment": {
     "text": "Error text. This message appears when a required input field is left empty or invalid, indicating that the user must provide information to proceed.",
     "is_auto": true,
@@ -37,13 +37,13 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditAgentDialog/sub-components/SetAgentParams.tsx",
-      "line_number": 504,
+      "line_number": 502,
       "context": "isValidTitle={isValidTitle}\n isWrongTitle={isWrongTitle}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_agent_input\"\n />",
       "module": "/packages/client"
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditRoomDialog/sub-components/SetRoomParams.js",
-      "line_number": 525,
+      "line_number": 524,
       "context": "onFocus={() => setForceHideRoomTypeDropdown(true)}\n onBlur={() => setForceHideRoomTypeDropdown(false)}\n errorMessage={\n isWrongTitle\n ? t(\"Common:ContainsSpecCharacter\")\n : t(\"Common:RequiredField\")\n }\n onKeyUp={onKeyUp}\n isAutoFocussed\n dataTestId=\"create_edit_room_input\"\n />",
       "module": "/packages/client"
     },
@@ -61,8 +61,8 @@
     },
     {
       "file_path": "/packages/login/src/app/(root)/confirm/[Invite]/_sub-components/EmailInputForm.tsx",
-      "line_number": 83,
-      "context": "labelVisible={false}\n hasError={isEmailErrorShow ? !emailValid : undefined}\n errorMessage={\n emailErrorText\n ? t(`Common:${emailErrorText}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"email_field_container\"\n >\n <EmailInput\n id=\"login\"",
+      "line_number": 84,
+      "context": "hasError={isEmailErrorShow ? !emailValid : undefined}\n errorMessage={\n emailErrorText\n // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with \"Common:\" prefix\n ? t(`Common:${emailErrorText}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"email_field_container\"\n >\n <EmailInput\n id=\"login\"",
       "module": "/packages/login"
     },
     {
@@ -109,20 +109,20 @@
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/EmailContainer.tsx",
-      "line_number": 140,
-      "context": "labelVisible={false}\n hasError={isEmailErrorShow}\n errorMessage={\n errorText\n ? t(`Common:${errorText}`, errorText)\n : t(\"Common:RequiredField\")\n } // TODO: Add wrong login server error\n dataTestId=\"email_field\"\n >\n {isLdapLogin ? (\n <TextInput",
+      "line_number": 141,
+      "context": "hasError={isEmailErrorShow}\n errorMessage={\n errorText\n // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with \"Common:\" prefix\n ? t(`Common:${errorText}`, errorText)\n : t(\"Common:RequiredField\")\n } // TODO: Add wrong login server error\n dataTestId=\"email_field\"\n >\n {isLdapLogin ? (\n <TextInput",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/LoginForm/sub-components/ForgotPasswordModalDialog.tsx",
-      "line_number": 215,
-      "context": "key=\"e-mail\"\n isVertical\n hasError={isShowError ? emailError : undefined}\n labelVisible={false}\n errorMessage={\n errorText ? t(`Common:${errorText}`) : t(\"Common:RequiredField\")\n }\n dataTestId=\"email_input_field\"\n >\n <EmailInput\n hasError={isShowError ? emailError : undefined}",
+      "line_number": 218,
+      "context": "labelVisible={false}\n errorMessage={\n errorText\n // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with \"Common:\" prefix\n ? t(`Common:${errorText}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"email_input_field\"\n >\n <EmailInput\n hasError={isShowError ? emailError : undefined}",
       "module": "/packages/login"
     },
     {
       "file_path": "/packages/login/src/components/Register/sub-components/RegisterModalDialog.tsx",
-      "line_number": 113,
-      "context": "key=\"e-mail\"\n isVertical\n hasError={isShowError ? emailErr : undefined}\n labelVisible={false}\n errorMessage={\n errorText ? t(`Common:${errorText}`) : t(\"Common:RequiredField\")\n }\n dataTestId=\"register_email_field\"\n >\n <EmailInput\n hasError={isShowError ? emailErr : undefined}",
+      "line_number": 116,
+      "context": "labelVisible={false}\n errorMessage={\n errorText\n // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with \"Common:\" prefix\n ? t(`Common:${errorText}`)\n : t(\"Common:RequiredField\")\n }\n dataTestId=\"register_email_field\"\n >\n <EmailInput\n hasError={isShowError ? emailErr : undefined}",
       "module": "/packages/login"
     },
     {

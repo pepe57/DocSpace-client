@@ -3,7 +3,7 @@
   "content": "File management",
   "content_en_sha1_hash": "5cdd155bb48d903d911fae98b21437d3fcd9e39d",
   "created_at": "2026-04-03T21:51:34.670Z",
-  "updated_at": "2026-04-11T20:52:45.419Z",
+  "updated_at": "2026-04-23T17:24:02.046Z",
   "comment": {
     "text": "This is a navigation item label for a section within user settings, allowing users to manage their files.",
     "is_auto": true,
@@ -19,8 +19,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(personal-files)/_components/settings/index.tsx",
-      "line_number": 51,
-      "context": "name: \"Billing\",\n content: <BillingForm />,\n },\n {\n id: \"file-management\",\n name: t(\"Common:FileManagement\"),\n content: <FileManagement />,\n },\n {\n id: \"interface-theme\",\n name: t(\"Common:InterfaceTheme\"),",
+      "line_number": 84,
+      "context": "},\n ]\n : []),\n {\n id: \"file-management\",\n name: t(\"Common:FileManagement\"),\n content: wrapContent(<FileManagement />),\n },\n {\n id: \"interface-theme\",\n name: t(\"Common:InterfaceTheme\"),",
       "module": "/packages/sdk"
     }
   ],

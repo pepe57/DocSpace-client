@@ -3,7 +3,7 @@
   "content": "Ask AI",
   "content_en_sha1_hash": "8dbaeb8edb74d2923889062eac8ffeac56b9977b",
   "created_at": "2025-10-27T16:14:10.655Z",
-  "updated_at": "2026-04-11T20:59:03.781Z",
+  "updated_at": "2026-04-23T17:24:01.878Z",
   "comment": {
     "text": "This is the label for an action that invokes AI functionality. It appears in a hotkey list and as a context menu option.",
     "is_auto": true,
@@ -19,7 +19,7 @@
     },
     {
       "file_path": "/packages/client/src/store/ContextOptionsStore.js",
-      "line_number": 2180,
+      "line_number": 2238,
       "context": "),\n },\n {\n id: \"option_ask-ai\",\n key: \"ask-ai\",\n label: t(\"Common:AskAI\"),\n icon: AISvgUrl,\n onClick: () => this.filesActionsStore.askAIAction(item),\n disabled: false,\n },\n {",
       "module": "/packages/client"
     }

@@ -9,7 +9,7 @@
  *
  * Provider is auto-detected from the model name:
  *   - Contains "/" → OpenRouter  (e.g. "google/gemma-4-26b-a4b-it")
- *   - Otherwise   → Ollama      (e.g. "gemma4:latest")
+ *   - Otherwise   → Ollama      (e.g. "gemma4:26b")
  */
 
 const { ollamaConfig, openRouterConfig } = require("../config/config");
@@ -22,22 +22,26 @@ class FatalProviderError extends Error {
 }
 
 function isFatalProviderError(error) {
-  return error instanceof FatalProviderError || error?.name === "FatalProviderError";
+  return (
+    error instanceof FatalProviderError || error?.name === "FatalProviderError"
+  );
 }
 
 function detectFatalProviderMessage(message = "") {
   const lower = message.toLowerCase();
-  return lower.includes("rate limit")
-    || lower.includes("quota")
-    || lower.includes("limit exceeded")
-    || lower.includes("hit your limit")
-    || lower.includes("payment required")
-    || lower.includes("api error 402")
-    || lower.includes("api error 403")
-    || lower.includes("overloaded")
-    || lower.includes("not have access")
-    || lower.includes("does not exist")
-    || lower.includes("not exist");
+  return (
+    lower.includes("rate limit") ||
+    lower.includes("quota") ||
+    lower.includes("limit exceeded") ||
+    lower.includes("hit your limit") ||
+    lower.includes("payment required") ||
+    lower.includes("api error 402") ||
+    lower.includes("api error 403") ||
+    lower.includes("overloaded") ||
+    lower.includes("not have access") ||
+    lower.includes("does not exist") ||
+    lower.includes("not exist")
+  );
 }
 
 async function readErrorBody(response) {
@@ -222,7 +226,9 @@ async function createStreamingChat(model, messages, options = {}) {
           if (item.done) return item;
           const { content, thinking } = item.value;
           if (content && detector.feed(content)) {
-            console.warn("[llmProvider] Repetition loop detected — aborting stream");
+            console.warn(
+              "[llmProvider] Repetition loop detected — aborting stream",
+            );
             result.abort();
             return { done: true, value: undefined };
           }
@@ -552,3 +558,4 @@ module.exports = {
   completionChat,
   createRawStream,
 };
+

@@ -37,7 +37,9 @@ const { autoComment: autoCommentPrompt } = require("../prompts/auto-comment");
 const cliArgs = process.argv.slice(2);
 const modelArg = cliArgs.find((a) => a.startsWith("--model="));
 const concurrencyArg = cliArgs.find((a) => a.startsWith("--concurrency="));
-const CONCURRENCY = concurrencyArg ? parseInt(concurrencyArg.split("=")[1], 10) : 1;
+const CONCURRENCY = concurrencyArg
+  ? parseInt(concurrencyArg.split("=")[1], 10)
+  : 1;
 const REGENERATE = cliArgs.includes("--regenerate");
 const USE_CLAUDE_CODE = cliArgs.includes("--provider=claude-code");
 
@@ -45,19 +47,25 @@ const USE_CLAUDE_CODE = cliArgs.includes("--provider=claude-code");
 const MODEL = modelArg
   ? modelArg.split("=").slice(1).join("=")
   : USE_CLAUDE_CODE
-    ? (process.env.CLAUDE_CODE_MODEL || "sonnet")
+    ? process.env.CLAUDE_CODE_MODEL || "sonnet"
     : (openRouterConfig.apiKey
-        ? (openRouterConfig.commentModel || openRouterConfig.model)
-        : null)
-      || process.env.OLLAMA_DEFAULT_MODEL
-      || "gemma4:latest";
+        ? openRouterConfig.commentModel || openRouterConfig.model
+        : null) ||
+      process.env.OLLAMA_DEFAULT_MODEL ||
+      "gemma4:26b";
 
-const PROVIDER_NAME = USE_CLAUDE_CODE ? "claude-code" : (isOpenRouterModel(MODEL) ? "openrouter" : "ollama");
+const PROVIDER_NAME = USE_CLAUDE_CODE
+  ? "claude-code"
+  : isOpenRouterModel(MODEL)
+    ? "openrouter"
+    : "ollama";
 console.log(`Provider: ${PROVIDER_NAME}`);
 if (CONCURRENCY > 1) console.log(`Concurrency: ${CONCURRENCY}`);
 console.log(`Model: ${MODEL}`);
 if (!openRouterConfig.apiKey && !modelArg && !USE_CLAUDE_CODE) {
-  console.log("Note: OPENROUTER_API_KEY not set — using Ollama. Set it in .env or use --provider=claude-code.");
+  console.log(
+    "Note: OPENROUTER_API_KEY not set — using Ollama. Set it in .env or use --provider=claude-code.",
+  );
 }
 
 /**
@@ -77,8 +85,12 @@ function runClaudeCode(prompt) {
     let stdout = "";
     let stderr = "";
 
-    child.stdout.on("data", (data) => { stdout += data; });
-    child.stderr.on("data", (data) => { stderr += data; });
+    child.stdout.on("data", (data) => {
+      stdout += data;
+    });
+    child.stderr.on("data", (data) => {
+      stderr += data;
+    });
 
     child.stdin.write(prompt);
     child.stdin.end();
@@ -124,7 +136,9 @@ async function generateViaClaudeCode(keyPath, prompt) {
         .trim();
 
       if (cleaned) {
-        process.stdout.write(`  [response] ${cleaned.substring(0, 100)}${cleaned.length > 100 ? "..." : ""}\n`);
+        process.stdout.write(
+          `  [response] ${cleaned.substring(0, 100)}${cleaned.length > 100 ? "..." : ""}\n`,
+        );
         return cleaned;
       }
       throw new Error("Empty response");
@@ -132,7 +146,9 @@ async function generateViaClaudeCode(keyPath, prompt) {
       if (isFatalProviderError(error)) {
         throw error;
       }
-      console.error(`  Error (attempt ${attempt}/${maxRetries}): ${error.message}`);
+      console.error(
+        `  Error (attempt ${attempt}/${maxRetries}): ${error.message}`,
+      );
       if (attempt < maxRetries) {
         await new Promise((r) => setTimeout(r, 2000 * attempt));
       }
@@ -167,15 +183,17 @@ async function generateBasicComment(keyPath, content, usages) {
   // Check if provider is available
   const providerReady = await verifyConnection(MODEL);
   if (!providerReady) {
-    console.log(`${getProviderName(MODEL)} is not available. Skipping comment generation.`);
+    console.log(
+      `${getProviderName(MODEL)} is not available. Skipping comment generation.`,
+    );
     return null;
   }
 
   const inactivityMs = isOpenRouterModel(MODEL)
-    ? (openRouterConfig.inactivityTimeout || 30000)
+    ? openRouterConfig.inactivityTimeout || 30000
     : ollamaConfig.inactivityTimeout;
   const firstTokenMs = isOpenRouterModel(MODEL)
-    ? (openRouterConfig.firstTokenTimeout || 120000)
+    ? openRouterConfig.firstTokenTimeout || 120000
     : ollamaConfig.firstTokenTimeout;
 
   // Retry configuration
@@ -192,13 +210,15 @@ async function generateBasicComment(keyPath, content, usages) {
       let activeTimeout = null;
       let contentStarted = false;
 
-      const chatResult = await createStreamingChat(MODEL, [
-        { role: "user", content: prompt },
-      ], {
-        temperature: 0.1,
-        maxTokens: 8192,
-        think: true,
-      });
+      const chatResult = await createStreamingChat(
+        MODEL,
+        [{ role: "user", content: prompt }],
+        {
+          temperature: 0.1,
+          maxTokens: 8192,
+          think: true,
+        },
+      );
 
       const resetTimer = () => {
         clearTimeout(activeTimeout);
@@ -255,10 +275,15 @@ async function generateBasicComment(keyPath, content, usages) {
         throw new Error("Model returned empty response");
       }
     } catch (error) {
-      if (isFatalProviderError(error) || detectFatalProviderMessage(error.message)) {
+      if (
+        isFatalProviderError(error) ||
+        detectFatalProviderMessage(error.message)
+      ) {
         throw isFatalProviderError(error)
           ? error
-          : new FatalProviderError(`${getProviderName(MODEL)} fatal: ${error.message}`);
+          : new FatalProviderError(
+              `${getProviderName(MODEL)} fatal: ${error.message}`,
+            );
       }
       lastError = error;
       retries++;
@@ -375,7 +400,11 @@ async function generateAutoComment(projectName) {
       let processedCount = 0;
 
       // Process key files in parallel batches
-      for (let batchStart = 0; batchStart < keyFiles.length; batchStart += CONCURRENCY) {
+      for (
+        let batchStart = 0;
+        batchStart < keyFiles.length;
+        batchStart += CONCURRENCY
+      ) {
         const batch = keyFiles.slice(batchStart, batchStart + CONCURRENCY);
 
         const results = await Promise.allSettled(
@@ -384,10 +413,20 @@ async function generateAutoComment(projectName) {
             const keyPath = keyMeta.key_path || path.basename(keyFile, ".json");
 
             if (REGENERATE || !keyMeta.comment || keyMeta.comment.text === "") {
-              const comment = await generateBasicComment(keyPath, keyMeta.content, keyMeta.usage);
+              const comment = await generateBasicComment(
+                keyPath,
+                keyMeta.content,
+                keyMeta.usage,
+              );
               return { keyFile, keyMeta, keyPath, comment, needsComment: true };
             }
-            return { keyFile, keyMeta, keyPath, comment: null, needsComment: false };
+            return {
+              keyFile,
+              keyMeta,
+              keyPath,
+              comment: null,
+              needsComment: false,
+            };
           }),
         );
 
@@ -406,14 +445,19 @@ async function generateAutoComment(projectName) {
             continue;
           }
 
-          const { keyFile, keyMeta, keyPath, comment, needsComment } = result.value;
+          const { keyFile, keyMeta, keyPath, comment, needsComment } =
+            result.value;
 
-          console.log(`Processing key: ${keyPath} (${processedCount}/${keyFiles.length} in ${namespace})`);
+          console.log(
+            `Processing key: ${keyPath} (${processedCount}/${keyFiles.length} in ${namespace})`,
+          );
 
           if (!needsComment) {
             stats.namespaces[namespace].skippedKeys++;
             stats.skippedKeys++;
-            console.log(`  ↷ Skipped ${keyPath}: already has a comment (use --regenerate to overwrite)`);
+            console.log(
+              `  ↷ Skipped ${keyPath}: already has a comment (use --regenerate to overwrite)`,
+            );
             continue;
           }
 
@@ -440,7 +484,6 @@ async function generateAutoComment(projectName) {
           }
         }
       }
-
     }
 
     return stats;
@@ -619,3 +662,4 @@ generateAutoCommentsMetadata()
     console.error("Error generating auto comments:", error);
     process.exit(1);
   });
+

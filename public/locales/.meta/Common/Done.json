@@ -3,7 +3,7 @@
   "content": "Done",
   "content_en_sha1_hash": "e9b450d14bc2363d292c84f17cfad5cfbd58a458",
   "created_at": "2025-05-19T21:30:44.608Z",
-  "updated_at": "2026-04-11T20:54:50.791Z",
+  "updated_at": "2026-04-23T17:24:01.863Z",
   "comment": {
     "text": "Button label or toast message indicating the completion of an action.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/uploader/index.tsx",
-      "line_number": 298,
+      "line_number": 333,
       "context": "{getCommonTranslation(\"Open\")}\n </a>\n </>\n )}\n </>,\n getCommonTranslation(\"Done\"),\n );\n \n onUploadSuccess?.(uploadedFiles);\n } catch (err) {\n const message =",
       "module": "/libs/ui-kit"
     },
@@ -55,8 +55,8 @@
     },
     {
       "file_path": "/packages/sdk/src/app/(forms)/_hooks/useFormsTour.ts",
-      "line_number": 127,
-      "context": "zIndex: 10000,\n },\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },\n });",
+      "line_number": 138,
+      "context": "targetWaitTimeout: 15000,\n },\n locale: {\n back: t(\"Common:Back\"),\n close: t(\"Common:CloseButton\"),\n last: t(\"Common:Done\"),\n next: t(\"Common:Next\"),\n skip: t(\"Common:Skip\"),\n },\n });",
       "module": "/packages/sdk"
     }
   ],
