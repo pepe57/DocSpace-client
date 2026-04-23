@@ -324,7 +324,7 @@ class SecondaryProgressDataStore {
         operation,
         alert: progressInfo.alert,
         items: [progressInfo],
-        label: getOperationsProgressTitle(operation),
+        label: progressInfo.label ?? getOperationsProgressTitle(operation),
         completed: progressInfo.completed,
         percent: progressInfo.percent,
       };
