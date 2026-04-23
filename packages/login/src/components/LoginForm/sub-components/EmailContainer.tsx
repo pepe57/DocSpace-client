@@ -136,6 +136,7 @@ const EmailContainer = ({
 			hasError={isEmailErrorShow}
 			errorMessage={
 				errorText
+					// biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with "Common:" prefix
 					? t(`Common:${errorText}`, errorText)
 					: t("Common:RequiredField")
 			} // TODO: Add wrong login server error

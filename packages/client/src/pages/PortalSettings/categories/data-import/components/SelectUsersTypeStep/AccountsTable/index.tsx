@@ -72,7 +72,7 @@ const AccountsTable = (props: AccountsTableProps) => {
     },
     {
       key: UserTypes.User,
-      label: t(`Common:User`),
+      label: t("Common:User"),
       onClick: setTypeUser,
     },
   ];
@@ -80,7 +80,7 @@ const AccountsTable = (props: AccountsTableProps) => {
   if (isOwner) {
     typeOptions.unshift({
       key: UserTypes.PortalAdmin,
-      label: t(`Common:PortalAdmin`, {
+      label: t("Common:PortalAdmin", {
         productName: getBrandName("ProductName"),
       }),
       onClick: setTypePortalAdmin,

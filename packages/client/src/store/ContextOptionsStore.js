@@ -1641,7 +1641,7 @@ class ContextOptionsStore {
     }
   };
 
-  createMenuGroup = (options, groupConfig, t) => {
+  createMenuGroup = (options, groupConfig) => {
     const {
       groupKey,
       groupLabel,
@@ -1697,7 +1697,7 @@ class ContextOptionsStore {
         ? {
             id: `option_${groupKey}`,
             key: groupKey,
-            label: t(groupLabel),
+            label: groupLabel,
             icon: groupIcon,
             items: groupItems,
           }
@@ -2875,7 +2875,6 @@ class ContextOptionsStore {
       const { group, keysToRemove: groupKeysToRemove } = this.createMenuGroup(
         newOptions,
         configItem,
-        t,
       );
       if (group) {
         menuGroups.push(group);

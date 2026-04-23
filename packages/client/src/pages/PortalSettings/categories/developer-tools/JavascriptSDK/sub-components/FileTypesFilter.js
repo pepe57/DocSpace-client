@@ -92,6 +92,7 @@ export const FileTypesFilter = (props) => {
           <Checkbox
             key={category.key}
             className="checkbox"
+            // biome-ignore lint/plugin/no-dynamic-i18n-key: labelKey literals on FILE_TYPE_CATEGORIES are captured by the locales scanner
             label={t(category.labelKey)}
             onChange={() => onChangeCategoryCheckbox(category.key)}
             isChecked={isCategorySelected(category.key)}
