@@ -1502,5 +1502,11 @@
   "YourName": "お名前",
   "YourPrice": "価格",
   "YourTurn": "あなたの番です",
-  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。"
+  "YouWillBeContacted": "リクエスト作成後、営業担当よりご連絡させていただきます。",
+  "BillingAdditionalStorageCardDesc": "追加のディスク容量、サブスクリプション、および料金",
+  "SignInWithNextcloud": "Nextcloudでサインイン",
+  "SignUpWithNextcloud": "Nextcloudで登録",
+  "SpreadsheetGenerated": "{{formName}} 用のスプレッドシートが、すべての回答済みコピーに基づいて生成されました。",
+  "SpreadsheetUpdated": "{{formName}} のスプレッドシートは、すべての完了したコピーに基づいて更新されました。",
+  "SyncXlsxData": "回答をXLSXに同期"
 }

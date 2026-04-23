@@ -1502,5 +1502,11 @@
   "YourName": "Ваше имя",
   "YourPrice": "Ваша стоимость",
   "YourTurn": "Ваша очередь",
-  "YouWillBeContacted": "Отдел продаж свяжется с вами после создания запроса."
+  "YouWillBeContacted": "Отдел продаж свяжется с вами после создания запроса.",
+  "BillingAdditionalStorageCardDesc": "Дополнительное место на диске, подписка и стоимость",
+  "SignInWithNextcloud": "Войти через Nextcloud",
+  "SignUpWithNextcloud": "Зарегистрироваться через Nextcloud",
+  "SpreadsheetGenerated": "Электронная таблица для {{formName}} сгенерирована на основе всех заполненных копий",
+  "SpreadsheetUpdated": "Электронная таблица {{formName}} обновлена на основе всех заполненных копий",
+  "SyncXlsxData": "Синхронизировать ответы в XLSX"
 }

@@ -1502,5 +1502,11 @@
   "YourName": "Ձեր անունը",
   "YourPrice": "Ձեր գինը",
   "YourTurn": "Ձեր հերթն է",
-  "YouWillBeContacted": "Վաճառքի թիմը կկապվի ձեզ հետ հարցումը ստեղծելուց հետո:"
+  "YouWillBeContacted": "Վաճառքի թիմը կկապվի ձեզ հետ հարցումը ստեղծելուց հետո:",
+  "BillingAdditionalStorageCardDesc": "Լրացուցիչ սկավառակի տարածք, բաժանորդագրություն և գնագոյացում",
+  "SignInWithNextcloud": "Մուտք գործել Nextcloud-ով",
+  "SignUpWithNextcloud": "Գրանցվել Nextcloud-ով",
+  "SpreadsheetGenerated": "{{formName}}-ի աղյուսակը գեներացվել է բոլոր լրացված պատճենների հիման վրա",
+  "SpreadsheetUpdated": "{{formName}}-ի աղյուսակը թարմացվել է բոլոր լրացված պատճենների հիման վրա",
+  "SyncXlsxData": "Սինխրոնացնել պատասխանները XLSX-ի հետ"
 }

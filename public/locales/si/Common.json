@@ -1502,5 +1502,11 @@
   "YourName": "ඔබගේ නම",
   "YourPrice": "ඔබගේ මිල",
   "YourTurn": "ඔබේ වාරය.",
-  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත."
+  "YouWillBeContacted": "ඉල්ලීම සෑදීමෙන් පසු අලෙවි කණ්ඩායම ඔබව සම්බන්ධ කර ගනු ඇත.",
+  "BillingAdditionalStorageCardDesc": "අමතර තැටි ඉඩ, දායකත්වය සහ මිල ගණන්",
+  "SignInWithNextcloud": "Nextcloud සමඟ ඇතුළු වන්න",
+  "SignUpWithNextcloud": "Nextcloud සමඟ ලියාපදිංචි වන්න",
+  "SpreadsheetGenerated": "{{formName}} සඳහා වන පැතුරුම්පත සියලුම සම්පූර්ණ කරන ලද පිටපත් මත පදනම්ව ජනනය කර ඇත",
+  "SpreadsheetUpdated": "{{formName}} සඳහා වන පැතුරුම්පත සියලුම සම්පූර්ණ කරන ලද පිටපත් මත පදනම්ව යාවත්කාලීන කර ඇත",
+  "SyncXlsxData": "ප්‍රතිචාර XLSX වෙත සමමුහුර්ත කරන්න"
 }

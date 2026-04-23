@@ -1502,5 +1502,11 @@
   "YourName": "Το όνομά σας",
   "YourPrice": "Η τιμή σας",
   "YourTurn": "Η σειρά σας",
-  "YouWillBeContacted": "Η ομάδα πωλήσεων θα επικοινωνήσει μαζί σας μετά τη δημιουργία του αιτήματος."
+  "YouWillBeContacted": "Η ομάδα πωλήσεων θα επικοινωνήσει μαζί σας μετά τη δημιουργία του αιτήματος.",
+  "BillingAdditionalStorageCardDesc": "Επιπλέον χώρος δίσκου, συνδρομή και τιμολόγηση",
+  "SignInWithNextcloud": "Σύνδεση με Nextcloud",
+  "SignUpWithNextcloud": "Εγγραφή με Nextcloud",
+  "SpreadsheetGenerated": "Το φυλλοστοίχεια για το {{formName}} δημιουργήθηκε με βάση όλα τα ολοκληρωμένα αντίτυπα",
+  "SpreadsheetUpdated": "Το υπολογιστικό φύλλο για το {{formName}} ενημερώθηκε με βάση όλα τα ολοκληρωμένα αντίτυπα",
+  "SyncXlsxData": "Συγχρονισμός απαντήσεων σε XLSX"
 }

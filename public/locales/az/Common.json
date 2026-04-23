@@ -1502,5 +1502,11 @@
   "YourName": "Adınız",
   "YourPrice": "Qiymətiniz",
   "YourTurn": "Sizin növbəniz",
-  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq."
+  "YouWillBeContacted": "Satış qrupu sorğu yaratdıqdan sonra sizinlə əlaqə saxlayacaq.",
+  "BillingAdditionalStorageCardDesc": "Əlavə disk sahəsi, abunəlik və qiymətlandırma",
+  "SignInWithNextcloud": "Nextcloud ilə daxil ol",
+  "SignUpWithNextcloud": "Nextcloud ilə qeydiyyatdan keçin",
+  "SpreadsheetGenerated": "{{formName}} üçün elektron cədvəl bütün tamamlanmış surətlər əsasında yaradılır",
+  "SpreadsheetUpdated": "{{formName}} üçün elektron cədvəl bütün tamamlanmış surətlər əsasında yeniləndi",
+  "SyncXlsxData": "Cavabları XLSX-ə sinxronlaşdır"
 }

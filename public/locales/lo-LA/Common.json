@@ -1502,5 +1502,11 @@
   "YourName": "ຊື່​ຂອງ​ເຈົ້າ",
   "YourPrice": "ລາຄາຂອງເຈົ້າ",
   "YourTurn": "ເປັນຂອງເຈົ້າແລ້ວ",
-  "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ."
+  "YouWillBeContacted": "ທີມງານຂາຍຈະຕິດຕໍ່ທ່ານຫຼັງຈາກສ້າງຄໍາຮ້ອງຂໍ.",
+  "BillingAdditionalStorageCardDesc": "ພື້ນທີ່ຈັດເກັບຂໍ້ມູນເພີ່ມເຕີມ, ການສະໝັກໃຊ້ບໍລິການ, ແລະ ລາຄາ",
+  "SignInWithNextcloud": "ເຂົ້າສູ່ລະບົບດ້ວຍ Nextcloud",
+  "SignUpWithNextcloud": "ລົງທະບຽນດ້ວຍ Nextcloud",
+  "SpreadsheetGenerated": "ແຜ່ນຕາຕະລາງສຳລັບ {{formName}} ຖືກສ້າງຂຶ້ນໂດຍອີງຕາມທຸກໆສຳເນົາທີ່ສຳເລັດແລ້ວ",
+  "SpreadsheetUpdated": "ສະເປະດຊີດສຳລັບ {{formName}} ໄດ້ຖືກອັບເດດອີງຕາມທຸກໆສຳເນົາທີ່ສຳເລັດແລ້ວ",
+  "SyncXlsxData": "ຊິງຄ໌ຄຳຕອບໄປຫາ XLSX"
 }

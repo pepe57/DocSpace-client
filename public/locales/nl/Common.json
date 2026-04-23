@@ -1502,5 +1502,11 @@
   "YourName": "Uw naam",
   "YourPrice": "Uw prijs",
   "YourTurn": "Uw beurt",
-  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag."
+  "YouWillBeContacted": "Het salesteam neemt contact met u op na het aanmaken van de aanvraag.",
+  "BillingAdditionalStorageCardDesc": "Extra schijfruimte, abonnement en prijzen",
+  "SignInWithNextcloud": "Inloggen met Nextcloud",
+  "SignUpWithNextcloud": "Registreren met Nextcloud",
+  "SpreadsheetGenerated": "Het spreadsheet voor {{formName}} is gegenereerd op basis van alle voltooide kopieën",
+  "SpreadsheetUpdated": "Het spreadsheet voor {{formName}} is bijgewerkt op basis van alle voltooide kopieën",
+  "SyncXlsxData": "Antwoorden synchroniseren naar XLSX"
 }

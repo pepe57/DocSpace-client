@@ -1502,5 +1502,11 @@
   "YourName": "您的姓名",
   "YourPrice": "您的价格",
   "YourTurn": "轮到您了",
-  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。"
+  "YouWillBeContacted": "创建请求后销售团队将与您取得联系。",
+  "BillingAdditionalStorageCardDesc": "额外磁盘空间、订阅和价格",
+  "SignInWithNextcloud": "使用 Nextcloud 登录",
+  "SignUpWithNextcloud": "使用 Nextcloud 注册",
+  "SpreadsheetGenerated": "{{formName}} 的电子表格已根据所有已完成的副本生成",
+  "SpreadsheetUpdated": "{{formName}} 的电子表格已根据所有已完成的副本完成更新",
+  "SyncXlsxData": "同步回复到 XLSX"
 }

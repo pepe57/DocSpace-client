@@ -1502,5 +1502,11 @@
   "YourName": "اسمك",
   "YourPrice": "سعرك",
   "YourTurn": "دوركم الآن",
-  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب."
+  "YouWillBeContacted": "سيتصل بك فريق المبيعات بعد إنشاء الطلب.",
+  "BillingAdditionalStorageCardDesc": "مساحة قرص إضافية، والاشتراك، والأسعار",
+  "SignInWithNextcloud": "تسجيل الدخول باستخدام Nextcloud",
+  "SignUpWithNextcloud": "التسجيل باستخدام Nextcloud",
+  "SpreadsheetGenerated": "تم إنشاء جدول البيانات الخاص بـ {{formName}} بناءً على جميع النسخ المكتملة",
+  "SpreadsheetUpdated": "تم تحديث جدول البيانات الخاص بـ {{formName}} بناءً على جميع النسخ المكتملة",
+  "SyncXlsxData": "مزامنة الردود إلى XLSX"
 }

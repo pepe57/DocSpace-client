@@ -1502,5 +1502,11 @@
   "YourName": "Nimesi",
   "YourPrice": "Hintasi",
   "YourTurn": "Sinun vuorosi",
-  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen."
+  "YouWillBeContacted": "Myyntitiimi ottaa sinuun yhteyttä pyynnön luomisen jälkeen.",
+  "BillingAdditionalStorageCardDesc": "Lisätallennustila, tilaus ja hinnoittelu",
+  "SignInWithNextcloud": "Kirjaudu sisään Nextcloudilla",
+  "SignUpWithNextcloud": "Rekisteröidy Nextcloudilla",
+  "SpreadsheetGenerated": "{{formName}}-lomakkeen taulukko on luotu kaikkien täytettyjen kopioiden perusteella",
+  "SpreadsheetUpdated": "{{formName}}-taulukkolaskelma on päivitetty kaikkien täytettyjen kopioiden perusteella",
+  "SyncXlsxData": "Synkronoi vastaukset XLSX-tiedostoon"
 }

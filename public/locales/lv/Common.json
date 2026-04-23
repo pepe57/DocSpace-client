@@ -1502,5 +1502,11 @@
   "YourName": "Jūsu vārds",
   "YourPrice": "Jūsu cena",
   "YourTurn": "Jūsu kārta",
-  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides."
+  "YouWillBeContacted": "Pārdošanas komanda sazināsies ar jums pēc pieprasījuma izveides.",
+  "BillingAdditionalStorageCardDesc": "Papildu diska tilpums, abonements un cenas",
+  "SignInWithNextcloud": "Pieslēgties ar Nextcloud",
+  "SignUpWithNextcloud": "Reģistrēties ar Nextcloud",
+  "SpreadsheetGenerated": "Izklātes tabula {{formName}} ir ģenerēta, balstoties uz visām aizpildītajām kopijām",
+  "SpreadsheetUpdated": "Tabula {{formName}} ir atjaudināta, balstoties uz visām pabeigtajām kopijām",
+  "SyncXlsxData": "Sinhronizēt atbildes uz XLSX"
 }

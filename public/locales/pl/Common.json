@@ -1502,5 +1502,11 @@
   "YourName": "Twoje imię",
   "YourPrice": "Twoja cena",
   "YourTurn": "Twoja kolej",
-  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby."
+  "YouWillBeContacted": "Zespół sprzedaży skontaktuje się z Tobą po utworzeniu prośby.",
+  "BillingAdditionalStorageCardDesc": "Dodatkowe miejsce na dysku, subskrypcja i cennik",
+  "SignInWithNextcloud": "Zaloguj się przez Nextcloud",
+  "SignUpWithNextcloud": "Zarejestruj się za pomocą Nextcloud",
+  "SpreadsheetGenerated": "Arkusz kalkulacyjny dla {{formName}} został wygenerowany na podstawie wszystkich wypełnionych kopii",
+  "SpreadsheetUpdated": "Arkusz kalkulacyjny dla {{formName}} został zaktualizowany na podstawie wszystkich ukończonych kopii",
+  "SyncXlsxData": "Synchronizuj odpowiedzi do XLSX"
 }

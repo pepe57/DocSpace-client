@@ -1502,5 +1502,11 @@
   "YourName": "Il tuo nome",
   "YourPrice": "Il tuo prezzo",
   "YourTurn": "Il tuo turno",
-  "YouWillBeContacted": "Il team di vendita ti contatterà dopo aver creato la richiesta."
+  "YouWillBeContacted": "Il team di vendita ti contatterà dopo aver creato la richiesta.",
+  "BillingAdditionalStorageCardDesc": "Spazio disco extra, abbonamento e prezzi",
+  "SignInWithNextcloud": "Accedi con Nextcloud",
+  "SignUpWithNextcloud": "Iscriviti con Nextcloud",
+  "SpreadsheetGenerated": "Il foglio di calcolo per {{formName}} è stato generato sulla base di tutte le copie completate",
+  "SpreadsheetUpdated": "Il foglio di calcolo per {{formName}} è stato aggiornato in base a tutte le copie completate",
+  "SyncXlsxData": "Sincronizza le risposte in XLSX"
 }

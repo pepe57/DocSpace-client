@@ -1502,5 +1502,11 @@
   "YourName": "Vaše meno",
   "YourPrice": "Vaša cena",
   "YourTurn": "Ste na rade",
-  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím."
+  "YouWillBeContacted": "Po vytvorení požiadavky vás bude kontaktovať predajný tím.",
+  "BillingAdditionalStorageCardDesc": "Dodatočný diskový priestor, predplatné a cenník",
+  "SignInWithNextcloud": "Prihlásiť sa pomocou Nextcloud",
+  "SignUpWithNextcloud": "Registrovať sa pomocou Nextcloud",
+  "SpreadsheetGenerated": "Údajnica pre {{formName}} bola vygenerovaná na základe všetkých vyplnených kópií",
+  "SpreadsheetUpdated": "Tabuľka pre {{formName}} bola aktualizovaná na základe všetkých vyplnených kópií",
+  "SyncXlsxData": "Synchronizovať odpovede do XLSX"
 }

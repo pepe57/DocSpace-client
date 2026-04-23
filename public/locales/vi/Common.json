@@ -1502,5 +1502,11 @@
   "YourName": "Tên của bạn",
   "YourPrice": "Giá của bạn",
   "YourTurn": "Phiên của bạn",
-  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu."
+  "YouWillBeContacted": "Đội ngũ kinh doanh sẽ liên hệ với bạn sau khi tạo yêu cầu.",
+  "BillingAdditionalStorageCardDesc": "Dung lượng đĩa bổ sung, gói đăng ký và giá cả",
+  "SignInWithNextcloud": "Đăng nhập bằng Nextcloud",
+  "SignUpWithNextcloud": "Đăng ký với Nextcloud",
+  "SpreadsheetGenerated": "Bảng tính cho {{formName}} được tạo dựa trên tất cả các bản sao đã hoàn thành",
+  "SpreadsheetUpdated": "Bảng tính cho {{formName}} đã được cập nhật dựa trên tất cả các bản sao đã hoàn thành",
+  "SyncXlsxData": "Đồng bộ phản hồi sang XLSX"
 }

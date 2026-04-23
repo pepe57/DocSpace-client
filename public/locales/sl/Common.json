@@ -1502,5 +1502,11 @@
   "YourName": "Vaše ime",
   "YourPrice": "Vaša cena",
   "YourTurn": "Vi ste na vrsti",
-  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala."
+  "YouWillBeContacted": "Po oddanem povpraševanju vas bo prodajna ekipa kontaktirala.",
+  "BillingAdditionalStorageCardDesc": "Dodatna prostornost na disku, naročnina in cenevanje",
+  "SignInWithNextcloud": "Prijavite se z Nextcloud",
+  "SignUpWithNextcloud": "Registrirajte se z Nextcloud",
+  "SpreadsheetUpdated": "Tabela za {{formName}} je posodobljena na podlagi vseh zaključenih kopij",
+  "SyncXlsxData": "Sinhroniziraj odgovore v XLSX",
+  "SpreadsheetGenerated": "Preglednica za {{formName}} je ustvarjena na podlagi vseh izpolnjenih kopij."
 }

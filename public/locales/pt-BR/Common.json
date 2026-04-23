@@ -1502,5 +1502,11 @@
   "YourName": "Seu nome",
   "YourPrice": "Seu preço",
   "YourTurn": "Sua vez",
-  "YouWillBeContacted": "A equipe de vendas entrará em contato com você após a criação do pedido."
+  "YouWillBeContacted": "A equipe de vendas entrará em contato com você após a criação do pedido.",
+  "BillingAdditionalStorageCardDesc": "Espaço extra em disco, assinatura e preços",
+  "SignInWithNextcloud": "Entrar com Nextcloud",
+  "SignUpWithNextcloud": "Cadastrar-se com o Nextcloud",
+  "SpreadsheetGenerated": "A planilha para {{formName}} é gerada com base em todas as cópias preenchidas",
+  "SpreadsheetUpdated": "A planilha de {{formName}} foi atualizada com base em todas as cópias concluídas",
+  "SyncXlsxData": "Sincronizar respostas para XLSX"
 }

@@ -1502,5 +1502,11 @@
   "YourName": "Emri juaj",
   "YourPrice": "Çmimi juaj",
   "YourTurn": "Radha jote",
-  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës."
+  "YouWillBeContacted": "Ekipi i shitjeve do t'ju kontaktojë pas krijimit të kërkesës.",
+  "BillingAdditionalStorageCardDesc": "Hapësirë shtesë disku, abonimi dhe çmimet",
+  "SignInWithNextcloud": "Identifikohu me Nextcloud",
+  "SignUpWithNextcloud": "Regjistrohu me Nextcloud",
+  "SpreadsheetGenerated": "Fletorja e punës për {{formName}} është gjeneruar bazuar në të gjitha kopjet e plotësuara",
+  "SpreadsheetUpdated": "Tabela për {{formName}} është përditësuar bazuar në të gjitha kopjet e përfunduara",
+  "SyncXlsxData": "Sinkronizo përgjigjet në XLSX"
 }
