@@ -114,8 +114,8 @@ const BillingForm = () => {
     id: d.id,
     // biome-ignore lint/plugin/no-dynamic-i18n-key: titleKey/tKey literals defined on TAB_DEFS entries are captured by the locales scanner
     title: t(d.titleKey, {
-      productName: t("ProductName"),
-      organizationName: t("OrganizationName"),
+      productName: getBrandName("ProductName"),
+      organizationName: getBrandName("OrganizationName"),
     }),
     // biome-ignore lint/plugin/no-dynamic-i18n-key: see above
     description: t(d.tKey),
