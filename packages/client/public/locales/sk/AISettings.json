@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} úspešne deaktivovaný",
   "WebSearchEnabledSuccess": "{{webSearch}} úspešne zapnuté",
   "WebSearchKeyDescription": "Zadajte API kľúč získaný od vášho poskytovateľa {{webSearch}}",
-  "WebSearchKeyHiddenDescription": "Kľúč API sa zobrazí len raz pri uložení a následne je skrytý z dôvodu bezpečnosti."
+  "WebSearchKeyHiddenDescription": "Kľúč API sa zobrazí len raz pri uložení a následne je skrytý z dôvodu bezpečnosti.",
+  "Capabilities": "Schopnosti",
+  "CapabilitiesDescription": "Tieto nastavenia určujú, ktoré funkcie sú pre tento model v chate {{productName}} zobrazené a dostupné.",
+  "CapabilityExtendedThinking": "Rozšírené myslenie",
+  "ListModels": "Zoznam modelov",
+  "ModelNameHint": "Použite názov, ktorý vám pomôže identifikovať tento model.",
+  "OtherModels": "Ostatné modely",
+  "OtherModelsTooltip": "Niektoré modely môžu nepodporovať určité akcie alebo funkcie",
+  "RecommendedModels": "Odporúčané modely",
+  "RecommendedModelsTooltip": "Modely s potvrdenou podporou funkcií a akcií {{productName}}",
+  "SelectModels": "Vybrať modely",
+  "CapabilityToolCalling": "Volanie nástrojov",
+  "CapabilityVision": "Vízia",
+  "ModelName": "Názov modelu",
+  "SelectAtLeastOneModel": "Vyberte aspoň jeden model"
 }

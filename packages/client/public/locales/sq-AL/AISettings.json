@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} u fiksua me sukses",
   "WebSearchEnabledSuccess": "{{webSearch}} uebësuar me sukses",
   "WebSearchKeyDescription": "Vendosni çelësin API të marrë nga furnizuesi juaj {{webSearch}}",
-  "WebSearchKeyHiddenDescription": "Çelësi API shfaqet vetëm një herë pas ruajtjes dhe më pas fshihet për qëllime sigurie."
+  "WebSearchKeyHiddenDescription": "Çelësi API shfaqet vetëm një herë pas ruajtjes dhe më pas fshihet për qëllime sigurie.",
+  "Capabilities": "Aftësitë",
+  "CapabilitiesDescription": "Këto cilësime kontrollojnë cilat funksione shfaqen dhe janë të disponueshme për këtë model në bisedën {{productName}}.",
+  "CapabilityExtendedThinking": "Mendim i zgjeruar",
+  "CapabilityToolCalling": "Thirrja e mjeteve",
+  "CapabilityVision": "Vizioni",
+  "ListModels": "Lista e modeleve",
+  "ModelName": "Emri i modelit",
+  "ModelNameHint": "Përdorni një emër që ju ndihmon të identifikoni këtë model.",
+  "OtherModels": "Modele të tjera",
+  "OtherModelsTooltip": "Disa modele mund të mos mbështesin veprime ose funksione të caktuara",
+  "RecommendedModels": "Modelet e rekomanduara",
+  "RecommendedModelsTooltip": "Modelet me mbështetje të konfirmuar për karakteristikat dhe veprimet e {{productName}}",
+  "SelectAtLeastOneModel": "Zgjidhni të paktën një model",
+  "SelectModels": "Zgjidhni modelët"
 }

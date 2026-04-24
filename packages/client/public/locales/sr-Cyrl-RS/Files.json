@@ -223,5 +223,8 @@
   "WillBeDeletedPermanently": "{{date }} ће бити трајно обрисан",
   "YouLeftTheAgent": "Оставили сте агента",
   "YouLeftTheRoom": "Напустили сте собу",
-  "YourUserTypeHasChanged": "Ваш тип корисника је промењен на <1>“{{userType}}”</1> од стране администратора {{productName}}<1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Ваш тип корисника је промењен на <1>“{{userType}}”</1> од стране администратора {{productName}}<1>{{adminName}}</1>.",
+  "AreYouSureWantLeaveRoom": "Да ли сте сигурни да желите да напустите ову собу?",
+  "LeaveButton": "Напусти",
+  "LeaveRoomFormFillingWarning": "Тренутно сте додељени за попуњавање форма у овој соби. Одлазак ће зауставити те форме на вашем кораку. Можете се поново придружити само путем нове пригласе администратора собе."
 }

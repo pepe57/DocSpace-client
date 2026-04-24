@@ -44,5 +44,6 @@
   "UserName": "Nome do usuário",
   "ViewerInfo": "Informações do visualizador",
   "WatermarkPreview": "Visualização da marca d'água",
-  "WatermarkPreviewHelp": "Esta visualização da imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos."
+  "WatermarkPreviewHelp": "Esta visualização da imagem mostra aproximadamente como a marca d'água será exibida em seus arquivos.",
+  "NoDatabaseConnectionsRoomAdmin": "As conexões de banco de dados são configuradas por um administrador. Assim que um banco de dados for configurado, você poderá ativar a exportação aqui."
 }

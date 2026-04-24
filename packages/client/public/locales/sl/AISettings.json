@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} uspešno onemogočen",
   "WebSearchEnabledSuccess": "{{webSearch}} uspešno omrejen",
   "WebSearchKeyDescription": "Vnesite API ključ, ki ga ste pridobili od vašega {{webSearch}} ponudnika",
-  "WebSearchKeyHiddenDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit iz varnostnih razlogov."
+  "WebSearchKeyHiddenDescription": "Kluč API se prikaže samo enkrat ob shranjevanju in je nato skrit iz varnostnih razlogov.",
+  "Capabilities": "Zmožnosti",
+  "CapabilityExtendedThinking": "Razširjeno razmišljanje",
+  "CapabilityToolCalling": "Klicanje orodij",
+  "CapabilityVision": "Vizija",
+  "ListModels": "Seznam modelov",
+  "ModelName": "Ime modela",
+  "ModelNameHint": "Uporabite ime, ki vam pomaga identificirati ta model.",
+  "OtherModels": "Drugi modeli",
+  "OtherModelsTooltip": "Nekateri modeli morda ne podpirajo določenih operacij ali funkcij",
+  "RecommendedModels": "Priporočeni modeli",
+  "RecommendedModelsTooltip": "Modeli z potrjeno podporo za {{productName}} funkcije in dejanja",
+  "SelectAtLeastOneModel": "Izberite vsaj en model",
+  "SelectModels": "Izberite modele",
+  "CapabilitiesDescription": "Te nastavitve nadzorujejo, katere funkcije so prikazane in na voljo za ta model v klepetu {{productName}}."
 }

@@ -223,5 +223,8 @@
   "WillBeDeletedPermanently": "{{date}} va fi şters definitiv",
   "YouLeftTheAgent": "Dvs ați părăsit agentul",
   "YouLeftTheRoom": "Ați părăsit sala",
-  "YourUserTypeHasChanged": "Tipul de utilizator a fost schimbat în <1>“{{userType}}”</1> de către administratorul  <1>{{adminName}}</1> al {{productName}}."
+  "YourUserTypeHasChanged": "Tipul de utilizator a fost schimbat în <1>“{{userType}}”</1> de către administratorul  <1>{{adminName}}</1> al {{productName}}.",
+  "AreYouSureWantLeaveRoom": "Sunteți sigur că doriți să părăsiți această cameră?",
+  "LeaveButton": "Ieșire",
+  "LeaveRoomFormFillingWarning": "Sunteți în prezent desemnat pentru completarea formularelor în această cameră. Părăsirea acesteia va opri procesarea acestor formulare la etapa dumneavoastră. Vă puteți reconecta doar printr-o nouă invitație de la un administrator al camerei."
 }

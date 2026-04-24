@@ -223,5 +223,8 @@
   "WillBeDeletedPermanently": "{{date}} kalıcı olarak silinecek",
   "YouLeftTheAgent": "Ajanı terk ettiniz.",
   "YouLeftTheRoom": "Odadan ayrıldınız",
-  "YourUserTypeHasChanged": "Kullanıcı türünüz, {{productName}} yöneticisi <1>{{adminName}}</1> tarafından <1>“{{userType}}”</1> olarak değiştirildi."
+  "YourUserTypeHasChanged": "Kullanıcı türünüz, {{productName}} yöneticisi <1>{{adminName}}</1> tarafından <1>“{{userType}}”</1> olarak değiştirildi.",
+  "AreYouSureWantLeaveRoom": "Bu odadan ayrılmak istediğinizden emin misiniz?",
+  "LeaveButton": "Ayrıl",
+  "LeaveRoomFormFillingWarning": "Şu anda bu odada form tamamlama işlemi için görevlendirildiniz. Ayrılmanız, bu formların sizin aşamanızda durmasına neden olacaktır. Odaya ancak bir oda yöneticisinden gelecek yeni bir davet ile yeniden katılabilirsiniz."
 }

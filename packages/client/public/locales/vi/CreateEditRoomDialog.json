@@ -44,5 +44,6 @@
   "UserName": "Tên người dùng",
   "ViewerInfo": "Thông tin người xem",
   "WatermarkPreview": "Xem trước watermark",
-  "WatermarkPreviewHelp": "Bản xem trước hình ảnh này cho thấy gần đúng cách watermark sẽ được hiển thị trong các tập tin của bạn."
+  "WatermarkPreviewHelp": "Bản xem trước hình ảnh này cho thấy gần đúng cách watermark sẽ được hiển thị trong các tập tin của bạn.",
+  "NoDatabaseConnectionsRoomAdmin": "Các kết nối cơ sở dữ liệu được cấu hình bởi quản trị viên. Sau khi cơ sở dữ liệu được thiết lập, bạn sẽ có thể kích hoạt tính năng xuất tại đây."
 }

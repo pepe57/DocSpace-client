@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} dezactivat cu succes",
   "WebSearchEnabledSuccess": "{{webSearch}} activat cu succes",
   "WebSearchKeyDescription": "Introduceți cheia API obținută de la furnizorul dvs. {{webSearch}}",
-  "WebSearchKeyHiddenDescription": "Cheia API se afișează o singură dată la salvare și este ascunsă ulterior din motive de securitate."
+  "WebSearchKeyHiddenDescription": "Cheia API se afișează o singură dată la salvare și este ascunsă ulterior din motive de securitate.",
+  "Capabilities": "Capabilități",
+  "CapabilityExtendedThinking": "Gândire extinsă",
+  "CapabilityVision": "Viziune",
+  "ListModels": "Listă modele",
+  "ModelName": "Nume model",
+  "ModelNameHint": "Folosiți un nume care să vă ajute să identificați acest model.",
+  "OtherModels": "Alte modele",
+  "OtherModelsTooltip": "Unele modele ar putea să nu suporte anumite acțiuni sau funcționalități",
+  "RecommendedModels": "Modele recomandate",
+  "RecommendedModelsTooltip": "Modele cu suport confirmat pentru funcționalitățile și acțiunile {{productName}}",
+  "SelectAtLeastOneModel": "Selectați cel puțin un model",
+  "SelectModels": "Selectați modele",
+  "CapabilitiesDescription": "Aceste setări controlează care funcții sunt afișate și disponibile pentru acest model în chat-ul {{productName}}.",
+  "CapabilityToolCalling": "Apelare instrumente"
 }

@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} 已成功禁用",
   "WebSearchEnabledSuccess": "{{webSearch}} 已成功启用",
   "WebSearchKeyDescription": "输入从您的 {{webSearch}} 提供商处获取的 API 密钥",
-  "WebSearchKeyHiddenDescription": "API 密钥仅在保存时显示一次，随后出于安全目的将被隐藏。"
+  "WebSearchKeyHiddenDescription": "API 密钥仅在保存时显示一次，随后出于安全目的将被隐藏。",
+  "Capabilities": "功能",
+  "CapabilitiesDescription": "这些设置控制此模型在 {{productName}} 聊天中显示及可用的功能。",
+  "CapabilityExtendedThinking": "扩展思维",
+  "CapabilityToolCalling": "工具调用",
+  "CapabilityVision": "视觉",
+  "ListModels": "模型列表",
+  "ModelName": "模型名称",
+  "ModelNameHint": "使用有助于识别此模型的名称。",
+  "OtherModels": "其他模型",
+  "OtherModelsTooltip": "某些模型可能不支持某些操作或功能",
+  "RecommendedModels": "推荐模型",
+  "RecommendedModelsTooltip": "已确认支持 {{productName}} 功能和操作的模型",
+  "SelectAtLeastOneModel": "请至少选择一个模型",
+  "SelectModels": "选择模型"
 }

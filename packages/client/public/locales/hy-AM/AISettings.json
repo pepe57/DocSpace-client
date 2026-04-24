@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} հաջողությամբ անջատվեց",
   "WebSearchEnabledSuccess": "{{webSearch}} հաջողությամբ միացված է",
   "WebSearchKeyDescription": "Մուտքագրեք ձեր {{webSearch}} մատակարարից ստացված API բանալին։",
-  "WebSearchKeyHiddenDescription": "API բանալին պահպանվելուց հետո ցուցադրվում է միայն մեկ անգամ, ապա թաքցվում է անվտանգության նկատառումներից ելնելով։"
+  "WebSearchKeyHiddenDescription": "API բանալին պահպանվելուց հետո ցուցադրվում է միայն մեկ անգամ, ապա թաքցվում է անվտանգության նկատառումներից ելնելով։",
+  "Capabilities": "Հնարավորություններ",
+  "CapabilitiesDescription": "Այս կարգավորումները սահմանում են, թե որ ֆունկցիաները ցուցադրվում են և հասանելի են այս մոդելի համար {{productName}} չաթում:",
+  "CapabilityExtendedThinking": "Ընդլայնված մտածողություն",
+  "CapabilityToolCalling": "Գործիքների կանչ",
+  "CapabilityVision": "Տեսողություն",
+  "ListModels": "Մոդելների ցանկ",
+  "ModelName": "Մոդելի անուն",
+  "ModelNameHint": "Օգտագործեք մի անուն, որը կօգնի ձեզ նույնականացնել այս մոդելը:",
+  "OtherModels": "Այլ մոդելներ",
+  "OtherModelsTooltip": "Որոշ մոդելներ կարող են չաջակցել որոշ գործողությունների կամ գործառույթների",
+  "RecommendedModels": "Առաջարկվող մոդելներ",
+  "RecommendedModelsTooltip": "Մոդելներ {{productName}} գործառույթների և գործողությունների հաստատված աջակցությամբ",
+  "SelectAtLeastOneModel": "Ընտրեք առնվազն մեկ մոդել",
+  "SelectModels": "Ընտրել մոդելներ"
 }

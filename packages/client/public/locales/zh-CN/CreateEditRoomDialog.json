@@ -44,5 +44,6 @@
   "UserName": "用户名称",
   "ViewerInfo": "查看者信息",
   "WatermarkPreview": "水印预览",
-  "WatermarkPreviewHelp": "此图像预览将大致展示水印在您的文件中的显示效果"
+  "WatermarkPreviewHelp": "此图像预览将大致展示水印在您的文件中的显示效果",
+  "NoDatabaseConnectionsRoomAdmin": "数据库连接由管理员进行配置。数据库设置完成后，您将能够在此启用导出功能。"
 }

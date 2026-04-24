@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "ໄດ້ປິດການໃຊ້ງານ {{webSearch}} ຢ່າງສຳເລັດ",
   "WebSearchEnabledSuccess": "ໄດ້ເປີດໃຊ້ {{webSearch}} ຢ່າງສຳເລັດ",
   "WebSearchKeyDescription": "ປ້ອນລະຫັດ API key ທີ່ໄດ້ຮັບຈາກຜູ້ໃຫ້ບໍລິການ {{webSearch}} ຂອງທ່ານ",
-  "WebSearchKeyHiddenDescription": "ລະຫັດ API ຈະສະແດງພຽງຄັ້ງດຽວຫຼັງຈາກບັນທຶກແລ້ວ ແລະ ຫຼັງຈາກນັ້ນຈະຖືກເຊື່ອງໄວ້ເພື່ອຈຸດປະສົງດ້ານຄວາມປອດໄພ."
+  "WebSearchKeyHiddenDescription": "ລະຫັດ API ຈະສະແດງພຽງຄັ້ງດຽວຫຼັງຈາກບັນທຶກແລ້ວ ແລະ ຫຼັງຈາກນັ້ນຈະຖືກເຊື່ອງໄວ້ເພື່ອຈຸດປະສົງດ້ານຄວາມປອດໄພ.",
+  "Capabilities": "ຄວາມສາມາດ",
+  "CapabilityExtendedThinking": "ການຄິດແບບຂະຫຍາຍ",
+  "CapabilityToolCalling": "ການເອີ້ນໃຊ້ເຄື່ອງມື",
+  "CapabilityVision": "ການເບິ່ງເຫັນ",
+  "ListModels": "ລາຍການໂມເດລ",
+  "ModelName": "ຊື່ແບບຈໍາລອງ",
+  "ModelNameHint": "ໃຊ້ຊື່ທີ່ຊ່ວຍໃຫ້ທ່ານລະບຸໂມເດລນີ້ໄດ້.",
+  "OtherModels": "ແບບຈໍາລອງອື່ນໆ",
+  "OtherModelsTooltip": "ບາງໂມເດລອາດຈະບໍ່ຮອງຮັບບາງການກະທຳ ຫຼື ຄຸນສົມບັດ",
+  "RecommendedModels": "ໂມເດລທີ່ແນະນຳ",
+  "RecommendedModelsTooltip": "ແບບຈໍາລອງທີ່ມີການຢືນຢັນການຮອງຮັບຄຸນສົມບັດ ແລະ ການດໍາເນີນການຂອງ {{productName}}",
+  "SelectAtLeastOneModel": "ເລືອກຢ່າງໜ້ອຍໜຶ່ງໂມເດລ",
+  "SelectModels": "ເລືອກໂມເດລ",
+  "CapabilitiesDescription": "ການຕັ້ງຄ່າເຫຼົ່ານີ້ຄວບຄຸມຄຸນສົມບັດໃດໆທີ່ສະແງແລະສາມາດໃຊ້ໄດ້ສຳລັບໂມເດວນີ້ໃນການສົນທະນາຂອງ {{productName}}."
 }

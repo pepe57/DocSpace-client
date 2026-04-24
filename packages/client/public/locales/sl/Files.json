@@ -223,5 +223,8 @@
   "WillBeDeletedPermanently": "{{date}} bo trajno izbrisan",
   "YouLeftTheAgent": "Zapustili ste agenta.",
   "YouLeftTheRoom": "Zapustili ste sobo",
-  "YourUserTypeHasChanged": "Vaš tip uporabnika je spremenil v <1>“{{userType}}”</1> skrbnik za {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Vaš tip uporabnika je spremenil v <1>“{{userType}}”</1> skrbnik za {{productName}} <1>{{adminName}}</1>.",
+  "AreYouSureWantLeaveRoom": "Ali ste prepričani, da želite zapustiti to sobo?",
+  "LeaveButton": "Zapusti",
+  "LeaveRoomFormFillingWarning": "Trenutno ste dodeljeni za izpolnjevanje obrazcev v tej sobi. Odhod bo ustavil te obrazce na vašem koraku. Ponovno se lahko pridružite le s novim vabilom administratorja sobe."
 }

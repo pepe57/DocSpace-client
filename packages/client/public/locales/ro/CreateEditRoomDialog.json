@@ -44,5 +44,6 @@
   "UserName": "Nume de utilizator",
   "ViewerInfo": "Detalii Vizualizator",
   "WatermarkPreview": "Previzualizare incripționare",
-  "WatermarkPreviewHelp": "Previzualizarea imaginii arată cum aproximativ  va fi afișată incripționarea în fișierele dvs."
+  "WatermarkPreviewHelp": "Previzualizarea imaginii arată cum aproximativ  va fi afișată incripționarea în fișierele dvs.",
+  "NoDatabaseConnectionsRoomAdmin": "Conexiunile la baza de date sunt configurate de către un administrator. Odată ce o bază de date este configurată, veți putea activa exportul aici."
 }

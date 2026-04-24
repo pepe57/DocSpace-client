@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} succesvol uitgeschakeld",
   "WebSearchEnabledSuccess": "{{webSearch}} succesvol ingeschakeld",
   "WebSearchKeyDescription": "Voer de API-sleutel in die u heeft verkregen van uw {{webSearch}}-provider",
-  "WebSearchKeyHiddenDescription": "De API-sleutel wordt slechts één keer weergegeven bij het opslaan en daarna verborgen om veiligheidsredenen."
+  "WebSearchKeyHiddenDescription": "De API-sleutel wordt slechts één keer weergegeven bij het opslaan en daarna verborgen om veiligheidsredenen.",
+  "Capabilities": "Mogelijkheden",
+  "CapabilitiesDescription": "Deze instellingen bepalen welke functies worden weergegeven en beschikbaar zijn voor dit model in de {{productName}}-chat.",
+  "CapabilityExtendedThinking": "Uitgebreid denken",
+  "CapabilityToolCalling": "Tool-aanroepen",
+  "CapabilityVision": "Vision",
+  "ListModels": "Lijst met modellen",
+  "ModelName": "Modelnaam",
+  "ModelNameHint": "Gebruik een naam die u helpt dit model te identificeren.",
+  "OtherModels": "Andere modellen",
+  "OtherModelsTooltip": "Sommige modellen ondersteunen bepaalde acties of functies mogelijk niet.",
+  "RecommendedModels": "Aanbevolen modellen",
+  "RecommendedModelsTooltip": "Modellen met bevestigde ondersteuning voor {{productName}}-functies en -acties",
+  "SelectAtLeastOneModel": "Selecteer minstens één model",
+  "SelectModels": "Selecteer modellen"
 }

@@ -223,5 +223,8 @@
   "WillBeDeletedPermanently": "{{date}} sẽ bị xóa vĩnh viễn",
   "YouLeftTheAgent": "Bạn đã rời khỏi tác nhân.",
   "YouLeftTheRoom": "Bạn đã rời khỏi phòng",
-  "YourUserTypeHasChanged": "Loại người dùng của bạn đã được quản trị viên <1>{{adminName}}</1> của {{productName}} thay đổi thành <1>“{{userType}}”</1>."
+  "YourUserTypeHasChanged": "Loại người dùng của bạn đã được quản trị viên <1>{{adminName}}</1> của {{productName}} thay đổi thành <1>“{{userType}}”</1>.",
+  "AreYouSureWantLeaveRoom": "Bạn có chắc chắn muốn rời khỏi phòng này không?",
+  "LeaveButton": "Rời khỏi",
+  "LeaveRoomFormFillingWarning": "Bạn hiện đang được giao nhiệm vụ hoàn thành biểu mẫu trong phòng này. Việc rời đi sẽ làm tạm dừng các biểu mẫu đó tại bước của bạn. Bạn chỉ có thể tham gia lại thông qua một lời mời mới từ quản trị viên phòng."
 }

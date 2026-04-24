@@ -223,5 +223,8 @@
   "WillBeDeletedPermanently": "{{date}} sera supprimé définitivement",
   "YouLeftTheAgent": "Vous avez quitté l'agent",
   "YouLeftTheRoom": "Vous avez quitté la salle",
-  "YourUserTypeHasChanged": "Votre type d'utilisateur a été modifié en <1>“{{userType}}”</1> par l'administrateur de {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Votre type d'utilisateur a été modifié en <1>“{{userType}}”</1> par l'administrateur de {{productName}} <1>{{adminName}}</1>.",
+  "AreYouSureWantLeaveRoom": "Êtes-vous sûr de vouloir quitter cette salle ?",
+  "LeaveButton": "Quitter",
+  "LeaveRoomFormFillingWarning": "Vous êtes actuellement affecté à la complétion des formulaires dans cette salle. Quitter la salle interrompra le processus de ces formulaires à votre étape. Vous ne pourrez rejoindre la salle qu'à l'aide d'une nouvelle invitation de la part d'un administrateur de la salle."
 }

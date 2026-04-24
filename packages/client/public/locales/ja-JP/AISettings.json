@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}}が無効になりました",
   "WebSearchEnabledSuccess": "{{webSearch}} が正常に有効になりました",
   "WebSearchKeyDescription": "{{webSearch}} プロバイダーから取得したAPIキーを入力してください",
-  "WebSearchKeyHiddenDescription": "APIキーは保存時に一度だけ表示され、その後はセキュリティ上の理由で非表示になります。"
+  "WebSearchKeyHiddenDescription": "APIキーは保存時に一度だけ表示され、その後はセキュリティ上の理由で非表示になります。",
+  "Capabilities": "機能",
+  "CapabilitiesDescription": "これらの設定は、{{productName}} チャットにおいて、このモデルでどの機能が表示され、利用可能になるかを制御します。",
+  "CapabilityExtendedThinking": "拡張思考",
+  "CapabilityToolCalling": "ツール呼び出し",
+  "CapabilityVision": "ビジョン",
+  "ListModels": "モデル一覧",
+  "ModelName": "モデル名",
+  "ModelNameHint": "このモデルを識別するのに役立つ名前を使用してください。",
+  "OtherModels": "その他のモデル",
+  "OtherModelsTooltip": "一部のモデルでは、特定の操作や機能がサポートされていない場合があります。",
+  "RecommendedModels": "推奨モデル",
+  "RecommendedModelsTooltip": "{{productName}}の機能およびアクションのサポートが確認されているモデル",
+  "SelectAtLeastOneModel": "少なくとも1つのモデルを選択してください",
+  "SelectModels": "モデルを選択"
 }

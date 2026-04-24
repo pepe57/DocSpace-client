@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "Đã tắt thành công {{webSearch}}",
   "WebSearchEnabledSuccess": "Đã bật thành công {{webSearch}}",
   "WebSearchKeyDescription": "Nhập khóa API nhận được từ nhà cung cấp {{webSearch}} của bạn",
-  "WebSearchKeyHiddenDescription": "API key chỉ hiển thị một lần khi lưu và sau đó sẽ bị ẩn để đảm bảo an toàn."
+  "WebSearchKeyHiddenDescription": "API key chỉ hiển thị một lần khi lưu và sau đó sẽ bị ẩn để đảm bảo an toàn.",
+  "Capabilities": "Khả năng",
+  "CapabilitiesDescription": "Các cài đặt này kiểm soát các tính năng nào được hiển thị và khả dụng cho mô hình này trong chat {{productName}}.",
+  "CapabilityExtendedThinking": "Tư duy mở rộng",
+  "CapabilityToolCalling": "Gọi công cụ",
+  "CapabilityVision": "Thị giác",
+  "ListModels": "Danh sách mô hình",
+  "ModelName": "Tên mô hình",
+  "ModelNameHint": "Sử dụng tên giúp bạn nhận diện mô hình này.",
+  "OtherModels": "Các mô hình khác",
+  "OtherModelsTooltip": "Một số mô hình có thể không hỗ trợ một số thao tác hoặc tính năng nhất định",
+  "RecommendedModels": "Các mô hình được đề xuất",
+  "RecommendedModelsTooltip": "Các mô hình đã được xác nhận hỗ trợ các tính năng và hành động của {{productName}}",
+  "SelectAtLeastOneModel": "Chọn ít nhất một mô hình",
+  "SelectModels": "Chọn mô hình"
 }

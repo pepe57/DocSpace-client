@@ -223,5 +223,8 @@
   "WillBeDeletedPermanently": "{{date}} verrà eliminato definitivamente",
   "YouLeftTheAgent": "Hai lasciato l'agente",
   "YouLeftTheRoom": "Hai lasciato la stanza",
-  "YourUserTypeHasChanged": "Il tuo tipo di utente è stato modificato in <1>“{{userType}}”</1> dall’amministratore di {{productName}}, <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Il tuo tipo di utente è stato modificato in <1>“{{userType}}”</1> dall’amministratore di {{productName}}, <1>{{adminName}}</1>.",
+  "AreYouSureWantLeaveRoom": "Sei sicuro di voler lasciare questa stanza?",
+  "LeaveButton": "Abbandona",
+  "LeaveRoomFormFillingWarning": "Sei attualmente assegnato alla compilazione di moduli in questa stanza. L'uscita interromperà la compilazione di tali moduli al tuo passaggio. Potrai rientrare solo tramite un nuovo invito da parte di un amministratore della stanza."
 }

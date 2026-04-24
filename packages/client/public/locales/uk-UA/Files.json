@@ -223,5 +223,8 @@
   "WillBeDeletedPermanently": "{{date}} буде видалено назавжди",
   "YouLeftTheAgent": "Ви вийшли з агента",
   "YouLeftTheRoom": "Ви залишили кімнату",
-  "YourUserTypeHasChanged": "Ваш тип користувача змінено на <1>“{{userType}}”</1> адміністратором {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Ваш тип користувача змінено на <1>“{{userType}}”</1> адміністратором {{productName}} <1>{{adminName}}</1>.",
+  "AreYouSureWantLeaveRoom": "Ви впевнені, що хочете покинути цю кімнату?",
+  "LeaveButton": "Вийти",
+  "LeaveRoomFormFillingWarning": "Ви наразі призначені для завершення заповнення форм у цій кімнаті. Вихід зупинить процес заповнення цих форм на вашому етапі. Ви зможете приєднатися знову лише за новим запрошенням від адміністратора кімнати."
 }

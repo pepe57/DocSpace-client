@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} успішно вимкнено",
   "WebSearchEnabledSuccess": "{{webSearch}} успішно увімкнено",
   "WebSearchKeyDescription": "Введіть ключ API, отриманий від вашого провайдера {{webSearch}}",
-  "WebSearchKeyHiddenDescription": "Ключ API відображається лише один раз під час збереження, після чого він прихований з міркувань безпеки."
+  "WebSearchKeyHiddenDescription": "Ключ API відображається лише один раз під час збереження, після чого він прихований з міркувань безпеки.",
+  "Capabilities": "Можливості",
+  "CapabilitiesDescription": "Ці налаштування визначають, які функції відображаються та доступні для цієї моделі в чаті {{productName}}.",
+  "CapabilityExtendedThinking": "Розширене мислення",
+  "CapabilityToolCalling": "Виклик інструментів",
+  "CapabilityVision": "Зір",
+  "ListModels": "Список моделей",
+  "ModelName": "Назва моделі",
+  "ModelNameHint": "Використовуйте назву, яка допоможе вам ідентифікувати цю модель.",
+  "OtherModels": "Інші моделі",
+  "OtherModelsTooltip": "Деякі моделі можуть не підтримувати певні дії або функції",
+  "RecommendedModels": "Рекомендовані моделі",
+  "RecommendedModelsTooltip": "Моделі з підтвердженою підтримкою функцій та дій {{productName}}",
+  "SelectAtLeastOneModel": "Виберіть хоча б одну модель",
+  "SelectModels": "Виберіть моделі"
 }

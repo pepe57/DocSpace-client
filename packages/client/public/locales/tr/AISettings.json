@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} başarıyla devre dışı bırakıldı",
   "WebSearchEnabledSuccess": "{{webSearch}} başarıyla etkinleştirildi",
   "WebSearchKeyDescription": "{{webSearch}} sağlayıcınızdan aldığınız API anahtarını girin",
-  "WebSearchKeyHiddenDescription": "API anahtarı yalnızca kaydetme sırasında bir kez görüntülenir ve ardından güvenlik nedeniyle gizlenir."
+  "WebSearchKeyHiddenDescription": "API anahtarı yalnızca kaydetme sırasında bir kez görüntülenir ve ardından güvenlik nedeniyle gizlenir.",
+  "Capabilities": "Yetenekler",
+  "CapabilitiesDescription": "Bu ayarlar, {{productName}} sohbetinde bu model için hangi özelliklerin gösterileceğini ve kullanılabilir olacağını kontrol eder.",
+  "CapabilityExtendedThinking": "Genişletilmiş düşünme",
+  "CapabilityToolCalling": "Araç Çağırma",
+  "CapabilityVision": "Görüntü",
+  "ListModels": "Model listesi",
+  "ModelName": "Model adı",
+  "ModelNameHint": "Bu modeli tanımlamanıza yardımcı olacak bir isim kullanın.",
+  "OtherModels": "Diğer modeller",
+  "OtherModelsTooltip": "Bazı modeller belirli eylemleri veya özellikleri desteklemeyebilir",
+  "RecommendedModels": "Önerilen modeller",
+  "RecommendedModelsTooltip": "{{productName}} özellikleri ve eylemleri için desteği onaylanmış modeller",
+  "SelectAtLeastOneModel": "En az bir model seçiniz",
+  "SelectModels": "Modelleri seçin"
 }

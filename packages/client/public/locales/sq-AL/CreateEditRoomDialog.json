@@ -44,5 +44,6 @@
   "UserName": "Emri i Përdoruesit",
   "ViewerInfo": "Informacione për shikuesin",
   "WatermarkPreview": "Parapri Shumëzimë",
-  "WatermarkPreviewHelp": "Kjo paraqitje e imazhit tregon përafërsisht se si do të shfaqet marka ujësimi në fajljet tuaja."
+  "WatermarkPreviewHelp": "Kjo paraqitje e imazhit tregon përafërsisht se si do të shfaqet marka ujësimi në fajljet tuaja.",
+  "NoDatabaseConnectionsRoomAdmin": "Lidhjet me bazën e të dhënave konfigurohen nga një administrator. Sapo të konfigurohet një bazë të dhënash, do të mund të aktivizoni eksportin këtu."
 }

@@ -44,5 +44,6 @@
   "UserName": "ユーザー名",
   "ViewerInfo": "閲覧者情報",
   "WatermarkPreview": "透かしのプレビュー",
-  "WatermarkPreviewHelp": "この画像プレビューは、ファイルに透かしがどのように表示されるかを大まかに示しています。"
+  "WatermarkPreviewHelp": "この画像プレビューは、ファイルに透かしがどのように表示されるかを大まかに示しています。",
+  "NoDatabaseConnectionsRoomAdmin": "データベース接続は管理者によって設定されます。データベースの設定が完了すると、こちらでエクスポートを有効にできるようになります。"
 }

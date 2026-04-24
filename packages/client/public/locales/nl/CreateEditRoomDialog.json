@@ -44,5 +44,6 @@
   "UserName": "Gebruikersnaam",
   "ViewerInfo": "Kijker info",
   "WatermarkPreview": "Voorbeeld Watermerk",
-  "WatermarkPreviewHelp": "Dit voorbeeld van de afbeelding laat ongeveer zien hoe het watermerk in uw bestanden zal worden weergegeven."
+  "WatermarkPreviewHelp": "Dit voorbeeld van de afbeelding laat ongeveer zien hoe het watermerk in uw bestanden zal worden weergegeven.",
+  "NoDatabaseConnectionsRoomAdmin": "Databaseverbindingen worden door een beheerder geconfigureerd. Zodra een database is ingesteld, kunt u de export hier inschakelen."
 }

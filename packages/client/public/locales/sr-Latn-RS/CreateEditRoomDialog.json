@@ -44,5 +44,6 @@
   "UserName": "Korisničko ime",
   "ViewerInfo": "Informacije o pregledatelju",
   "WatermarkPreview": "Pregled vodenog žiga",
-  "WatermarkPreviewHelp": "Ova slika prikazuje kako će vodeni žig izgledati u vašim fajlovima."
+  "WatermarkPreviewHelp": "Ova slika prikazuje kako će vodeni žig izgledati u vašim fajlovima.",
+  "NoDatabaseConnectionsRoomAdmin": "Povezivanje sa bazom podataka konfiguriše administrator. Kada se baza podataka podesi, moći ćete da omogućite izvoz ovde."
 }

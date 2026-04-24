@@ -223,5 +223,8 @@
   "WillBeDeletedPermanently": "سيتم حذف {{date}} نهائيًا",
   "YouLeftTheAgent": "لقد غادرتم الوكيل",
   "YouLeftTheRoom": "لقد قمت بمغادرة الغرفة",
-  "YourUserTypeHasChanged": "تم تغيير نوع المستخدم الخاص بكم إلى <1>«{{userType}}»</1> من قِبل مسؤول {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "تم تغيير نوع المستخدم الخاص بكم إلى <1>«{{userType}}»</1> من قِبل مسؤول {{productName}} <1>{{adminName}}</1>.",
+  "AreYouSureWantLeaveRoom": "هل أنت متأكد أنك تريد مغادرة هذه الغرفة؟",
+  "LeaveButton": "مغادرة",
+  "LeaveRoomFormFillingWarning": "أنت مكلف حاليًا بإكمال النماذج في هذه الغرفة. ستؤدي المغادرة إلى إيقاف هذه النماذج عند خطوتك. لا يمكنك إعادة الانضمام إلا عبر دعوة جديدة من مسؤول الغرفة."
 }

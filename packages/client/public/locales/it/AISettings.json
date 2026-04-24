@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} disabilitato con successo",
   "WebSearchEnabledSuccess": "{{webSearch}} abilitato con successo",
   "WebSearchKeyDescription": "Inserisci la chiave API ottenuta dal tuo provider {{webSearch}}",
-  "WebSearchKeyHiddenDescription": "La chiave API viene visualizzata solo una volta al momento del salvataggio e viene poi nascosta per motivi di sicurezza."
+  "WebSearchKeyHiddenDescription": "La chiave API viene visualizzata solo una volta al momento del salvataggio e viene poi nascosta per motivi di sicurezza.",
+  "Capabilities": "Capacità",
+  "CapabilitiesDescription": "Queste impostazioni controllano quali funzionalità vengono mostrate e sono disponibili per questo modello nella chat di {{productName}}.",
+  "CapabilityExtendedThinking": "Pensiero esteso",
+  "CapabilityToolCalling": "Chiamata di strumenti",
+  "CapabilityVision": "Visione",
+  "ListModels": "Elenco modelli",
+  "ModelName": "Nome del modello",
+  "ModelNameHint": "Usa un nome che ti aiuti a identificare questo modello.",
+  "OtherModels": "Altri modelli",
+  "OtherModelsTooltip": "Alcuni modelli potrebbero non supportare determinate azioni o funzionalità",
+  "RecommendedModels": "Modelli consigliati",
+  "RecommendedModelsTooltip": "Modelli con supporto confermato per le funzionalità e le azioni di {{productName}}",
+  "SelectAtLeastOneModel": "Seleziona almeno un modello",
+  "SelectModels": "Seleziona modelli"
 }

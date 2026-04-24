@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} pomyślnie wyłączony",
   "WebSearchEnabledSuccess": "{{webSearch}} pomyślnie włączony",
   "WebSearchKeyDescription": "Wprowadź klucz API uzyskany od swojego dostawcy {{webSearch}}",
-  "WebSearchKeyHiddenDescription": "Klucz API jest wyświetlany tylko raz podczas zapisywania, a następnie jest ukrywany ze względów bezpieczeństwa."
+  "WebSearchKeyHiddenDescription": "Klucz API jest wyświetlany tylko raz podczas zapisywania, a następnie jest ukrywany ze względów bezpieczeństwa.",
+  "Capabilities": "Możliwości",
+  "CapabilitiesDescription": "Te ustawienia określają, które funkcje są wyświetlane i dostępne dla tego modelu w czacie {{productName}}.",
+  "CapabilityExtendedThinking": "Rozszerzone myślenie",
+  "CapabilityToolCalling": "Wywoływanie narzędzi",
+  "CapabilityVision": "Wizja",
+  "ListModels": "Lista modeli",
+  "ModelName": "Nazwa modelu",
+  "ModelNameHint": "Użyj nazwy, która pomoże Ci zidentyfikować ten model.",
+  "OtherModels": "Inne modele",
+  "OtherModelsTooltip": "Niektóre modele mogą nie obsługiwać pewnych akcji lub funkcji",
+  "RecommendedModels": "Polecane modele",
+  "RecommendedModelsTooltip": "Modele z potwierdzonym wsparciem funkcji i akcji {{productName}}",
+  "SelectAtLeastOneModel": "Wybierz co najmniej jeden model",
+  "SelectModels": "Wybierz modele"
 }

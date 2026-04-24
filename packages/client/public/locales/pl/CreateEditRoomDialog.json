@@ -44,5 +44,6 @@
   "UserName": "Nazwa użytkownika",
   "ViewerInfo": "Dane osoby przeglądającej",
   "WatermarkPreview": "Podgląd znaku wodnego",
-  "WatermarkPreviewHelp": "Niniejszy podgląd obrazu pokazuje mniej więcej, jak znak wodny będzie wyświetlany w Twoich plikach."
+  "WatermarkPreviewHelp": "Niniejszy podgląd obrazu pokazuje mniej więcej, jak znak wodny będzie wyświetlany w Twoich plikach.",
+  "NoDatabaseConnectionsRoomAdmin": "Połączenia z bazami danych są konfigurowane przez administratora. Po skonfigurowaniu bazy danych będziesz mógł włączyć eksport tutaj."
 }

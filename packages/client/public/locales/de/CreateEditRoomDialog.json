@@ -44,5 +44,6 @@
   "UserName": "Benutzername",
   "ViewerInfo": "Betrachter-Info",
   "WatermarkPreview": "Wasserzeichen-Vorschau",
-  "WatermarkPreviewHelp": "Diese Bildvorschau zeigt ungefähr, wie das Wasserzeichen in Ihren Dateien angezeigt wird."
+  "WatermarkPreviewHelp": "Diese Bildvorschau zeigt ungefähr, wie das Wasserzeichen in Ihren Dateien angezeigt wird.",
+  "NoDatabaseConnectionsRoomAdmin": "Datenbankverbindungen werden von einem Administrator konfiguriert. Sobald eine Datenbank eingerichtet ist, können Sie den Export hier aktivieren."
 }

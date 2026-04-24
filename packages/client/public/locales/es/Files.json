@@ -223,5 +223,8 @@
   "WillBeDeletedPermanently": "{{date}} se eliminará permanentemente",
   "YouLeftTheAgent": "Ha abandonado el agente",
   "YouLeftTheRoom": "Ha salido de la sala",
-  "YourUserTypeHasChanged": "Su tipo de usuario se ha cambiado a <1>“{{userType}}”</1> por el administrador de {{productName}}  <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Su tipo de usuario se ha cambiado a <1>“{{userType}}”</1> por el administrador de {{productName}}  <1>{{adminName}}</1>.",
+  "AreYouSureWantLeaveRoom": "¿Está seguro de que desea salir de esta sala?",
+  "LeaveButton": "Salir",
+  "LeaveRoomFormFillingWarning": "Actualmente tiene asignada la cumplimentación de formularios en esta sala. Al salir, dichos formularios se detendrán en su paso actual. Solo podrá volver a unirse mediante una nueva invitación de un administrador de la sala."
 }

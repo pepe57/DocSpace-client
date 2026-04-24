@@ -44,5 +44,6 @@
   "UserName": "Nome utente",
   "ViewerInfo": "Informzioni sul visualizzatore",
   "WatermarkPreview": "Anteprima della filigrana",
-  "WatermarkPreviewHelp": "Questa anteprima dell'immagine mostra approssimativamente come verrà visualizzata la filigrana nei tuo i file."
+  "WatermarkPreviewHelp": "Questa anteprima dell'immagine mostra approssimativamente come verrà visualizzata la filigrana nei tuo i file.",
+  "NoDatabaseConnectionsRoomAdmin": "Le connessioni al database vengono configurate da un amministratore. Una volta configurato un database, potrai abilitare l'esportazione qui."
 }

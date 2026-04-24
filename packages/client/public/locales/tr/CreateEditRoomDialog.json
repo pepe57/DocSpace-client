@@ -44,5 +44,6 @@
   "UserName": "Kullanıcı Adı",
   "ViewerInfo": "Görüntüleyici bilgisi",
   "WatermarkPreview": "Filigran Ön izlemesi",
-  "WatermarkPreviewHelp": "Bu görüntü ön izlemesi, filigranın dosyalarınızda nasıl görüntüleneceğini kabaca gösterir."
+  "WatermarkPreviewHelp": "Bu görüntü ön izlemesi, filigranın dosyalarınızda nasıl görüntüleneceğini kabaca gösterir.",
+  "NoDatabaseConnectionsRoomAdmin": "Veritabanı bağlantıları bir yönetici tarafından yapılandırılır. Bir veritabanı kurulduğunda, burada dışa aktarmayı etkinleştirebileceksiniz."
 }

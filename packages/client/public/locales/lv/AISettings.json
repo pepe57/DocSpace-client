@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} veiksmīgi deaktivizēts",
   "WebSearchEnabledSuccess": "{{webSearch}} veiksmīgi ienstitizēts",
   "WebSearchKeyDescription": "Ievietojiet API atslēgu, kas saņemta no jūsu {{webSearch}} nodrošinātāja",
-  "WebSearchKeyHiddenDescription": "API atslēga tiek parādīta tikai vienreiz, saglabājot, un pēc tam tā tiek paslēpta drošības nolūkos."
+  "WebSearchKeyHiddenDescription": "API atslēga tiek parādīta tikai vienreiz, saglabājot, un pēc tam tā tiek paslēpta drošības nolūkos.",
+  "Capabilities": "Iespējas",
+  "CapabilitiesDescription": "Šie iestatījumi nosaka, kuras funkcijas tiek parādītas un ir pieejamas šim modelim {{productName}} čatā.",
+  "CapabilityExtendedThinking": "Paplašināta spriedēšana",
+  "CapabilityToolCalling": "Rīku izsaukšana",
+  "CapabilityVision": "Redzespēja",
+  "ListModels": "Modelu saraksts",
+  "ModelName": "Modeļa nosaukums",
+  "ModelNameHint": "Izmantojiet nosaukumu, kas palīdzēs jums identificēt šo modeli.",
+  "OtherModels": "Citi modeļi",
+  "OtherModelsTooltip": "Daži modeļi var neatbalstīt noteiktas darbības vai funkcijas",
+  "RecommendedModels": "Ieteicamie modeļi",
+  "RecommendedModelsTooltip": "Modeli ar apstiprinātu {{productName}} funkciju un darbību atbalstu",
+  "SelectAtLeastOneModel": "Izvēlieties vismaz vienu modeli",
+  "SelectModels": "Izvēlēties modeļus"
 }

@@ -223,5 +223,8 @@
   "WillBeDeletedPermanently": "{{date}} nastąpi trwałe usunięcie",
   "YouLeftTheAgent": "Zostawiłeś agenta.",
   "YouLeftTheRoom": "Opuszczono pokój",
-  "YourUserTypeHasChanged": "Twój rodzaj użytkownika został zmieniony na <1>“{{userType}}”</1> przez administratora {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Twój rodzaj użytkownika został zmieniony na <1>“{{userType}}”</1> przez administratora {{productName}} <1>{{adminName}}</1>.",
+  "AreYouSureWantLeaveRoom": "Czy na pewno chcesz opuścić ten pokój?",
+  "LeaveButton": "Opuść",
+  "LeaveRoomFormFillingWarning": "Obecnie jesteś przypisany do wypełniania formularzy w tym pokoju. Opuszczenie pokoju spowoduje wstrzymanie tych formularzy na Twoim etapie. Możesz dołączyć ponownie tylko poprzez nowe zaproszenie od administratora pokoju."
 }

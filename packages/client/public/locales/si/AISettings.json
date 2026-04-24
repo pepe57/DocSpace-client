@@ -62,5 +62,19 @@
   "WebSearchDisabledSuccess": "{{webSearch}} සාර්ථකව අක්‍රිය කරන ලදී",
   "WebSearchEnabledSuccess": "{{webSearch}} සාර්ථකව සක්‍රීය කරන ලදී",
   "WebSearchKeyDescription": "{{webSearch}} සපයන්නාගෙන් ලබාගත් API key ඇතුළත් කරන්න",
-  "WebSearchKeyHiddenDescription": "සුරැකීමෙන් පසු API යතුර එක් වරක් පමණක් දර්ශනය වන අතර පසුව ආරක්ෂක අරමුණු සඳහා සඟවනු ලැබේ."
+  "WebSearchKeyHiddenDescription": "සුරැකීමෙන් පසු API යතුර එක් වරක් පමණක් දර්ශනය වන අතර පසුව ආරක්ෂක අරමුණු සඳහා සඟවනු ලැබේ.",
+  "Capabilities": "හැකියාවන්",
+  "CapabilitiesDescription": "මෙම සැකසුම් මගින් {{productName}} චැට් එකෙහි මෙම මාදිලිය සඳහා පෙන්වනු ලබන සහ ලබාගත හැකි විශේෂාංග පාලනය කරනු ලැබේ.",
+  "CapabilityExtendedThinking": "දීර්ඝ චින්තනය",
+  "CapabilityToolCalling": "මෙවලම් කැඳවීම",
+  "CapabilityVision": "දෘශ්‍යතාව",
+  "ListModels": "මාදිලි ලැයිස්තුව",
+  "ModelName": "ආකෘතියේ නම",
+  "ModelNameHint": "මෙම මාදිලිය හඳුනා ගැනීමට ඔබට උපකාරී වන නමක් භාවිතා කරන්න.",
+  "OtherModels": "අනෙකුත් මොඩල",
+  "OtherModelsTooltip": "සමහර මාදිලි ඇතැම් ක්‍රියාකාරකම් හෝ විශේෂාංග සඳහා සහය නොදැක්විය හැකිය",
+  "RecommendedModels": "නිර්දේශිත මාදිලි",
+  "RecommendedModelsTooltip": "{{productName}} විශේෂාංග සහ ක්‍රියාකාරකම් සඳහා තහවුරු කරන ලද සහය සහිත මාදිලි",
+  "SelectAtLeastOneModel": "අවම වශයෙන් එක් මාදිලියක් තෝරන්න",
+  "SelectModels": "මාදිලි තෝරාගන්න"
 }

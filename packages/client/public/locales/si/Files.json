@@ -223,5 +223,8 @@
   "WillBeDeletedPermanently": "{{date}} ස්ථිරව මකා දැමෙනු ඇත.",
   "YouLeftTheAgent": "ඔබ නියෝජිතයා හැර ගොස් ඇත.",
   "YouLeftTheRoom": "ඔබ කාමරය හැරගියා",
-  "YourUserTypeHasChanged": "ඔබේ පරිශීලක වර්ගය <1>“{{userType}}”</1> ලෙසින් {{productName}} පරිපාලකයෙකු වන <1>{{adminName}}</1> විසින් වෙනස් කර ඇත."
+  "YourUserTypeHasChanged": "ඔබේ පරිශීලක වර්ගය <1>“{{userType}}”</1> ලෙසින් {{productName}} පරිපාලකයෙකු වන <1>{{adminName}}</1> විසින් වෙනස් කර ඇත.",
+  "AreYouSureWantLeaveRoom": "ඔබ මෙම කාමරයෙන් පිටවීමට බලාපොරොත්තු වන්නේද?",
+  "LeaveButton": "පිටවන්න",
+  "LeaveRoomFormFillingWarning": "ඔබ දැනට මෙම කාමරයේ ආකෘති පත්‍ර සම්පූර්ණ කිරීම සඳහා පත් කර ඇත. ඉන් ඉවත් වීමෙන් එම ආකෘති පත්‍ර ඔබ සිටි පියවරේදී නතර වනු ඇත. ඔබට නැවත සම්බන්ධ විය හැක්කේ කාමර පරිපාලකයෙකුගෙන් ලැබෙන නව ආරාධනයක් මගින් පමණි."
 }
