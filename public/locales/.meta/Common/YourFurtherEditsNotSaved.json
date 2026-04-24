@@ -3,7 +3,7 @@
   "content": "Your further edits may not be saved.",
   "content_en_sha1_hash": "3dbfb8cd57bf68171c29e8fb98b89ce9f2c8182b",
   "created_at": "2026-02-18T14:56:21.766Z",
-  "updated_at": "2026-04-12T08:05:36.454Z",
+  "updated_at": "2026-04-24T09:18:49.947Z",
   "comment": {
     "text": "This is a warning message displayed in a bar at the top of the document editor. It appears when a user's storage quota is exceeded, indicating that subsequent changes might not be saved.",
     "is_auto": true,
@@ -169,67 +169,100 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:16:49.139Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "acc2be28ee296f1b"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:17:13.352Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "1e56243469e7e0d9"
     },
     "sk": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:17:59.636Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "eeb56c813ffbac6a"
     },
     "sl": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:15.441Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "81b650b2b6d47f30"
     },
     "sq-AL": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:20.084Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "ab12a9bce75f2fd1"
     },
     "sr-Cyrl-RS": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:25.712Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "b95f3396df90e699"
     },
     "sr-Latn-RS": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:29.490Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "c99b7e6caa06bd9b"
     },
     "tr": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:34.566Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "07ea910cfda4c9a7"
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:41.805Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "a06e3ecbf241ae3e"
     },
     "vi": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:46.451Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "342342638e225844"
     },
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": null,
+      "ai_spell_check_verified_at": "2026-04-24T09:18:49.946Z",
+      "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
+      "ai_spell_check_verified_hash": "6abe14abdcade1bc"
     }
   }
 }
