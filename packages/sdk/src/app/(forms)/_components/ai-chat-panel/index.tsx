@@ -52,9 +52,10 @@ import styles from "./AiChatPanel.module.scss";
 
 type AiChatPanelProps = {
   rootRef: React.RefObject<HTMLDivElement | null>;
+  headerOffset?: number;
 };
 
-const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
+const AiChatPanel = ({ rootRef, headerOffset = 0 }: AiChatPanelProps) => {
   const { t } = useTranslation(["Common"]);
   const aiAgentStore = useFormsAiAgentStore();
   const {
@@ -175,7 +176,14 @@ const AiChatPanel = ({ rootRef }: AiChatPanelProps) => {
         rootRef={rootRef}
         onResizeEnd={handleResizeEnd}
       />
-      <div className={styles.chatHeader}>
+      <div
+        className={styles.chatHeader}
+        style={
+          headerOffset
+            ? { paddingInlineStart: `${16 + headerOffset}px` }
+            : undefined
+        }
+      >
         <div className={styles.headerTitle}>
           {isMobile && (
             <IconButton

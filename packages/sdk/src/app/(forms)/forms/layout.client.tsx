@@ -158,6 +158,16 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   );
   const headerOffset = sdkConfig?.headerOffset ?? initialHeaderOffset.current;
 
+  const isChatPanelOnLeft =
+    aiStore.isPanelVisible &&
+    !!aiStore.currentAgentId &&
+    hasManagementAccess &&
+    !editingFile &&
+    aiStore.panelPosition === "left";
+
+  const formsHeaderOffset = isChatPanelOnLeft ? 0 : headerOffset;
+  const chatPanelHeaderOffset = isChatPanelOnLeft ? headerOffset : 0;
+
   const uploadFilesDirectRef = React.useRef<(files: File[]) => Promise<void>>(
     async () => {},
   );
@@ -625,7 +635,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           }}
         />
       )}
-      <AiChatPanel rootRef={rootRef} />
+      <AiChatPanel rootRef={rootRef} headerOffset={chatPanelHeaderOffset} />
       <div className={styles.sectionArea}>
         <Section
           withBodyScroll={!isEditing}
@@ -645,7 +655,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
               onUploadFiles={onUploadFiles}
               onCreateBlankForm={onCreateBlankForm}
               showMenu={showMenu}
-              headerOffset={headerOffset}
+              headerOffset={formsHeaderOffset}
             />
           </Section.SectionHeader>
           <Section.SectionBody>
