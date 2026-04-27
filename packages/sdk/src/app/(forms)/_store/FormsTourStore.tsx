@@ -27,16 +27,54 @@
 "use client";
 
 import React from "react";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
+
+import {
+  externalStorageGet,
+  externalStorageSet,
+  isExternalStorageAvailable,
+} from "@/utils/externalStorage";
 
 const TOUR_COMPLETED_KEY = "forms_tour_completed";
+const EXT_TOUR_KEY = "aiforms.tour";
+
+const tourKey = (userKey?: string) =>
+  userKey ? `${TOUR_COMPLETED_KEY}_${userKey}` : TOUR_COMPLETED_KEY;
+
+const safeGet = (key: string): string | null => {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+};
+
+const safeSet = (key: string, value: string): void => {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    /* noop */
+  }
+};
+
+const safeRemove = (key: string): void => {
+  try {
+    localStorage.removeItem(key);
+  } catch {
+    /* noop */
+  }
+};
 
 class FormsTourStore {
   isRunning = false;
   tourCompleted = false;
 
+  private _userKey: string | undefined = undefined;
+
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {
+      _userKey: false,
+    } as Record<string, false>);
   }
 
   get isDemo() {
@@ -52,7 +90,57 @@ class FormsTourStore {
   }
 
   hydrate = () => {
-    this.tourCompleted = localStorage.getItem(TOUR_COMPLETED_KEY) === "true";
+    this.tourCompleted = safeGet(TOUR_COMPLETED_KEY) === "true";
+  };
+
+  hydrateForUser = async (userKey: string): Promise<void> => {
+    if (!userKey) return;
+    this._userKey = userKey;
+
+    if (await isExternalStorageAvailable()) {
+      const ext = await externalStorageGet<boolean>(EXT_TOUR_KEY);
+      if (ext !== null) {
+        runInAction(() => {
+          this.tourCompleted = ext;
+        });
+        return;
+      }
+
+      const scoped = safeGet(tourKey(userKey));
+      if (scoped !== null) {
+        const parsed = scoped === "true";
+        runInAction(() => {
+          this.tourCompleted = parsed;
+        });
+        void externalStorageSet(EXT_TOUR_KEY, parsed);
+        return;
+      }
+
+      const legacy = safeGet(TOUR_COMPLETED_KEY);
+      if (legacy !== null) {
+        const parsed = legacy === "true";
+        runInAction(() => {
+          this.tourCompleted = parsed;
+        });
+        safeSet(tourKey(userKey), legacy);
+        safeRemove(TOUR_COMPLETED_KEY);
+        void externalStorageSet(EXT_TOUR_KEY, parsed);
+      }
+      return;
+    }
+
+    const scoped = safeGet(tourKey(userKey));
+    if (scoped !== null) {
+      this.tourCompleted = scoped === "true";
+      return;
+    }
+
+    const legacy = safeGet(TOUR_COMPLETED_KEY);
+    if (legacy !== null) {
+      this.tourCompleted = legacy === "true";
+      safeSet(tourKey(userKey), legacy);
+      safeRemove(TOUR_COMPLETED_KEY);
+    }
   };
 
   startTour = () => {
@@ -62,12 +150,15 @@ class FormsTourStore {
   completeTour = () => {
     this.isRunning = false;
     this.tourCompleted = true;
-    localStorage.setItem(TOUR_COMPLETED_KEY, "true");
+    safeSet(tourKey(this._userKey), "true");
+    void externalStorageSet(EXT_TOUR_KEY, true);
   };
 
   resetTour = () => {
     this.tourCompleted = false;
-    localStorage.removeItem(TOUR_COMPLETED_KEY);
+    safeRemove(tourKey(this._userKey));
+    safeRemove(TOUR_COMPLETED_KEY);
+    void externalStorageSet(EXT_TOUR_KEY, false);
   };
 }
 

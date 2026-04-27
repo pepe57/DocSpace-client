@@ -372,11 +372,16 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   }, [isLoading, closeEditor]);
 
   React.useEffect(() => {
+    if (!user?.id) return;
+    void tourStore.hydrateForUser(String(user.id));
+  }, [user?.id, tourStore]);
+
+  React.useEffect(() => {
     if (!roomId || !user?.id || !hasManagementAccess) return;
 
-    aiStore.initForRoom(roomId, user.id);
-
-    const runAutoEnable = () => aiStore.autoEnableIfAvailable();
+    let cancelled = false;
+    let idleId: number | undefined;
+    let timeoutId: number | undefined;
     const win = window as Window & {
       requestIdleCallback?: (
         cb: () => void,
@@ -384,12 +389,27 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
       ) => number;
       cancelIdleCallback?: (id: number) => void;
     };
-    if (win.requestIdleCallback) {
-      const id = win.requestIdleCallback(runAutoEnable, { timeout: 2000 });
-      return () => win.cancelIdleCallback?.(id);
-    }
-    const id = window.setTimeout(runAutoEnable, 2000);
-    return () => window.clearTimeout(id);
+
+    (async () => {
+      await aiStore.initForRoom(roomId, user.id);
+      if (cancelled) return;
+
+      const runAutoEnable = () => {
+        if (!cancelled) aiStore.autoEnableIfAvailable();
+      };
+
+      if (win.requestIdleCallback) {
+        idleId = win.requestIdleCallback(runAutoEnable, { timeout: 2000 });
+      } else {
+        timeoutId = window.setTimeout(runAutoEnable, 2000);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+      if (idleId !== undefined) win.cancelIdleCallback?.(idleId);
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+    };
   }, [roomId, user?.id, aiStore, hasManagementAccess]);
 
   React.useEffect(() => {
