@@ -28,6 +28,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import { useSearchParams } from "next/navigation";
 
 import { getFileInfo } from "@docspace/shared/api/files";
 import type { TFile } from "@docspace/ui-kit/types";
@@ -48,7 +49,13 @@ type ChatPageProps = {
 };
 
 const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
-  useSDKConfig();
+  const { sdkConfig } = useSDKConfig();
+  const searchParams = useSearchParams();
+
+  const initialHeaderOffset = useRef(
+    Number(searchParams.get("headerOffset")) || 0,
+  );
+  const headerOffset = sdkConfig?.headerOffset ?? initialHeaderOffset.current;
 
   const [attachmentFile, setAttachmentFile] = useState<Partial<TFile> | null>(
     null,
@@ -153,6 +160,11 @@ const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
       ref={wrapperRef}
       style={{ ...fullSize, position: "relative" }}
     >
+      {headerOffset > 0 && (
+        <style>
+          {`.chat-header { padding-inline-start: ${headerOffset}px; }`}
+        </style>
+      )}
       {!isChatReady && (
         <div
           style={{

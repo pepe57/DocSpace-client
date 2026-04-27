@@ -146,6 +146,7 @@ export type TFrameConfig = {
   filter?: TFrameFilter;
   filterParam?: string;
   frameId: string;
+  headerOffset?: number;
   height?: string;
   id?: string | number | null;
   infoPanelVisible?: boolean;
