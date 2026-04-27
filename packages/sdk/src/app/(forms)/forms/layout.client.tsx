@@ -96,6 +96,10 @@ const CreateFormDialog = dynamic(
   () => import("../_components/create-form-dialog"),
   { ssr: false },
 );
+const DeleteFormDialog = dynamic(
+  () => import("../_components/delete-form-dialog"),
+  { ssr: false },
+);
 const WelcomeTourDialog = dynamic(
   () => import("../_components/welcome-tour-dialog"),
   { ssr: false },
@@ -709,6 +713,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           onSave={onSaveCreateForm}
         />
       )}
+      <DeleteFormDialog />
       {showWelcome && (
         <WelcomeTourDialog
           visible={showWelcome}
