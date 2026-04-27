@@ -44,6 +44,8 @@ import { FormsUserStoreContextProvider } from "./FormsUserStore";
 import { FormsTourStoreContextProvider } from "./FormsTourStore";
 import { FormsCustomActionsStoreContextProvider } from "./FormsCustomActionsStore";
 import { FormsDeleteDialogStoreContextProvider } from "./FormsDeleteDialogStore";
+import { FormsProgressStoreContextProvider } from "./FormsProgressStore";
+import { FormsStopFillingDialogStoreContextProvider } from "./FormsStopFillingDialogStore";
 
 export const FormsStoreProviders = ({
   children,
@@ -66,9 +68,13 @@ export const FormsStoreProviders = ({
                             <FormsListStoreContextProvider>
                               <FormsCustomActionsStoreContextProvider>
                                 <FormsDeleteDialogStoreContextProvider>
-                                  <FormsTourStoreContextProvider>
-                                    {children}
-                                  </FormsTourStoreContextProvider>
+                                  <FormsStopFillingDialogStoreContextProvider>
+                                    <FormsProgressStoreContextProvider>
+                                      <FormsTourStoreContextProvider>
+                                        {children}
+                                      </FormsTourStoreContextProvider>
+                                    </FormsProgressStoreContextProvider>
+                                  </FormsStopFillingDialogStoreContextProvider>
                                 </FormsDeleteDialogStoreContextProvider>
                               </FormsCustomActionsStoreContextProvider>
                             </FormsListStoreContextProvider>

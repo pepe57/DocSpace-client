@@ -33,10 +33,7 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import Section from "@docspace/ui-kit/components/section";
 import { Backdrop } from "@docspace/ui-kit/components/backdrop";
-import {
-  FloatingButton,
-  FloatingButtonIcons,
-} from "@docspace/ui-kit/components/floating-button";
+import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { AnimationEvents } from "@docspace/ui-kit/hooks/useAnimation";
 import { setAuthToken } from "@docspace/shared/api/client";
 import {
@@ -80,6 +77,7 @@ import useEditorGuard from "../_hooks/useEditorGuard";
 import { MIN_SECTION_WIDTH } from "../_api/aiAgentSettings";
 import { useFormsTourStore } from "../_store/FormsTourStore";
 import { useFormsCustomActionsStore } from "../_store/FormsCustomActionsStore";
+import { useFormsProgressStore } from "../_store/FormsProgressStore";
 import useTourSandbox from "../_hooks/useTourSandbox";
 import FormsSidebar from "../_components/sidebar";
 import DualRingSpinner from "../_components/forms-layout/DualRingSpinner";
@@ -98,6 +96,10 @@ const CreateFormDialog = dynamic(
 );
 const DeleteFormDialog = dynamic(
   () => import("../_components/delete-form-dialog"),
+  { ssr: false },
+);
+const StopFillingDialog = dynamic(
+  () => import("../_components/stop-filling-dialog"),
   { ssr: false },
 );
 const WelcomeTourDialog = dynamic(
@@ -562,13 +564,13 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const {
     onUploadFiles,
     uploadFilesToFolder,
-    uploadProgress,
     onCreateBlankForm,
     isCreateFormDialogVisible,
     isCreatingForm,
     onCloseCreateFormDialog,
     onSaveCreateForm,
   } = useFolderActions(fetchSection, refreshAfterMutation);
+  const progressStore = useFormsProgressStore();
   uploadFilesDirectRef.current = uploadFilesToFolder;
 
   const formsDataValue = React.useMemo(
@@ -693,14 +695,14 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
             </FormsDataProvider>
           </Section.SectionBody>
         </Section>
-        <AiChatButton shiftUp={!!uploadProgress} />
-        {uploadProgress && (
+        <AiChatButton shiftUp={progressStore.icon !== null} />
+        {progressStore.icon !== null && (
           <div className={styles.floatingButtonContainer}>
             <FloatingButton
-              icon={FloatingButtonIcons.upload}
-              percent={uploadProgress.percent}
-              completed={uploadProgress.completed}
-              alert={uploadProgress.alert}
+              icon={progressStore.icon}
+              percent={progressStore.percent}
+              completed={progressStore.completed}
+              alert={progressStore.alert}
             />
           </div>
         )}
@@ -714,6 +716,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
         />
       )}
       <DeleteFormDialog />
+      <StopFillingDialog />
       {showWelcome && (
         <WelcomeTourDialog
           visible={showWelcome}
