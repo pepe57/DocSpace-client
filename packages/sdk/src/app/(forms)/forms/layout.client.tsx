@@ -153,6 +153,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   );
   const showMenu = initialShowMenu.current && sdkConfig?.showMenu !== false;
 
+  const initialHeaderOffset = React.useRef(
+    Number(searchParams.get("headerOffset")) || 0,
+  );
+  const headerOffset = sdkConfig?.headerOffset ?? initialHeaderOffset.current;
+
   const uploadFilesDirectRef = React.useRef<(files: File[]) => Promise<void>>(
     async () => {},
   );
@@ -640,6 +645,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
               onUploadFiles={onUploadFiles}
               onCreateBlankForm={onCreateBlankForm}
               showMenu={showMenu}
+              headerOffset={headerOffset}
             />
           </Section.SectionHeader>
           <Section.SectionBody>
