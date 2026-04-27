@@ -65,6 +65,7 @@ import { useFormsNavigationStore } from "../_store/FormsNavigationStore";
 import { useFormsListStore } from "../_store/FormsListStore";
 import { useFormsSettingsStore } from "../_store/FormsSettingsStore";
 import { useFormsAiAgentStore } from "../_store/FormsAiAgentStore";
+import { useFormsDbSettingsStore } from "../_store/FormsDbSettingsStore";
 import { useFormsUserStore } from "../_store/FormsUserStore";
 import useInitCommonStores, {
   type CommonData,
@@ -132,6 +133,8 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   } = formsNavigationStore;
   // libraryNav removed — library uses URL routing now
   const aiStore = useFormsAiAgentStore();
+  const dbSettingsStore = useFormsDbSettingsStore();
+  const { sendToDb } = dbSettingsStore;
   const { user } = useFormsUserStore();
   const formsSettingsStore = useFormsSettingsStore();
   const { roomId, socketUrl, hasManagementAccess } = formsSettingsStore;
@@ -149,6 +152,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     searchParams.get("showMenu") !== "false",
   );
   const showMenu = initialShowMenu.current && sdkConfig?.showMenu !== false;
+
+  const initialHeaderOffset = React.useRef(
+    Number(searchParams.get("headerOffset")) || 0,
+  );
+  const headerOffset = sdkConfig?.headerOffset ?? initialHeaderOffset.current;
 
   const uploadFilesDirectRef = React.useRef<(files: File[]) => Promise<void>>(
     async () => {},
@@ -292,9 +300,16 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const socketFileIds = React.useMemo(() => items.map((f) => f.id), [items]);
 
   const formsData = useFormsData();
-  const { fetchSection, fetchMore, fetchSubfolder } = formsData;
+  const { fetchSection, fetchMore, fetchSubfolder, refreshAfterMutation } =
+    formsData;
 
-  useFormsSocket(socketUrl, socketFolderIds, socketFileIds, fetchSection);
+  useFormsSocket(
+    socketUrl,
+    socketFolderIds,
+    socketFileIds,
+    fetchSection,
+    refreshAfterMutation,
+  );
   useFormEventHooks(hasManagementAccess ? aiStore : null, socketUrl);
 
 
@@ -367,6 +382,11 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     return () => window.clearTimeout(id);
   }, [roomId, user?.id, aiStore, hasManagementAccess]);
 
+  React.useEffect(() => {
+    if (!roomId || !user?.id || !hasManagementAccess || !sendToDb) return;
+    aiStore.initAskFromDBAgent();
+  }, [roomId, user?.id, aiStore, hasManagementAccess, sendToDb]);
+
   const prevPathname = React.useRef(pathname);
   const prevCompletedFolderShell = React.useRef(completedFolder);
   const prevInProgressFolderShell = React.useRef(inProgressFolder);
@@ -432,6 +452,14 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
                 new CustomEvent(AnimationEvents.END_ANIMATION),
               );
             }, 0);
+          } else if (
+            activeSection === FormsSection.MyForms ||
+            activeSection === FormsSection.InProgress ||
+            activeSection === FormsSection.CompletedForms
+          ) {
+            formsListStore.setItems([], 0);
+            formsListStore.setFolders([]);
+            formsListStore.setIsLoading(true);
           }
 
           if (prevSection === FormsSection.Settings) {
@@ -477,10 +505,10 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   const prevEditingFile = React.useRef(editingFile);
   React.useEffect(() => {
     if (prevEditingFile.current && !editingFile && !completedFolder) {
-      fetchSection();
+      refreshAfterMutation();
     }
     prevEditingFile.current = editingFile;
-  }, [editingFile, fetchSection, completedFolder]);
+  }, [editingFile, refreshAfterMutation, completedFolder]);
 
   const prevCompletedForFormCompletion = React.useRef(completedFolder);
   React.useEffect(() => {
@@ -506,12 +534,12 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
     isCreatingForm,
     onCloseCreateFormDialog,
     onSaveCreateForm,
-  } = useFolderActions(fetchSection);
+  } = useFolderActions(fetchSection, refreshAfterMutation);
   uploadFilesDirectRef.current = uploadFilesToFolder;
 
   const formsDataValue = React.useMemo(
-    () => ({ fetchSection, fetchMore, fetchSubfolder }),
-    [fetchSection, fetchMore, fetchSubfolder],
+    () => ({ fetchSection, fetchMore, fetchSubfolder, refreshAfterMutation }),
+    [fetchSection, fetchMore, fetchSubfolder, refreshAfterMutation],
   );
 
   const handleEditorNavigatedAway = React.useCallback(() => {
@@ -617,6 +645,7 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
               onUploadFiles={onUploadFiles}
               onCreateBlankForm={onCreateBlankForm}
               showMenu={showMenu}
+              headerOffset={headerOffset}
             />
           </Section.SectionHeader>
           <Section.SectionBody>

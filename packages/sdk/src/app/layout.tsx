@@ -35,9 +35,15 @@ import {
 
 import "@docspace/shared/styles/theme.scss";
 
+import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
+
 import "@/styles/globals.scss";
 import { getColorTheme, getPortalCultures, getSettings } from "@/api/settings";
-import { LOCALE_HEADER, THEME_HEADER } from "@/utils/constants";
+import {
+  LOCALE_HEADER,
+  STYLES_URL_HEADER,
+  THEME_HEADER,
+} from "@/utils/constants";
 import Providers from "@/providers";
 import { getSelf } from "@/api/people";
 import Scripts from "@/components/Scripts";
@@ -80,6 +86,7 @@ export default async function RootLayout({
     self?.cultureName ||
     (typeof portalSettings === "object" && portalSettings.culture) ||
     "en";
+  const stylesUrl = sanitizeStylesUrl(hdrs.get(STYLES_URL_HEADER));
 
   const initialLocaleNsMap =
     locale && locale !== "en" ? await loadLocale(locale).catch(() => null) : null;
@@ -122,6 +129,14 @@ export default async function RootLayout({
         <meta name="google" content="notranslate" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        {stylesUrl ? (
+          <link
+            id="sdk-custom-styles"
+            rel="stylesheet"
+            href={stylesUrl}
+            referrerPolicy="no-referrer"
+          />
+        ) : null}
       </head>
       <body style={styles} className={`${dirClass} ${themeClass}`}>
         <Providers

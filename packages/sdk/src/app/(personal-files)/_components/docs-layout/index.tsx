@@ -28,7 +28,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import type {
   TFile,
@@ -76,6 +76,7 @@ import useTrashActions from "../../_hooks/useTrashActions";
 import useFileOperations from "../../_hooks/useFileOperations";
 import useRenameActions from "../../_hooks/useRenameActions";
 import type { SelectorMode } from "../../_hooks/useFileOperations";
+import { useDocsFrameBridge } from "../../_hooks/useDocsFrameBridge";
 import DocsSidebar from "../sidebar";
 import DropZone from "../drop-zone";
 import DeleteDialog from "../delete-dialog";
@@ -118,11 +119,19 @@ const DocsLayoutInner = observer(({
   const infoPanelStore = useInfoPanelStore();
   const { sdkConfig } = useSDKConfig();
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const initialHeaderOffset = React.useRef(
+    Number(searchParams.get("headerOffset")) || 0,
+  );
+  const headerOffset = sdkConfig?.headerOffset ?? initialHeaderOffset.current;
 
   const isMyDocuments = rootFolderType === FolderType.USER;
   const showMobileButton = currentDeviceType !== DeviceType.desktop && isMyDocuments;
 
   const { uploadFilesToFolder } = useDocsActions();
+
+  useDocsFrameBridge({ isReady: true, uploadFilesToFolder });
   const {
     isTrash,
     requestDeleteItem,
@@ -216,7 +225,7 @@ const DocsLayoutInner = observer(({
         <RenameContext.Provider value={renameHandler}>
         <FileOperationsContext.Provider value={fileOperationsHandler}>
         <div className={styles.root}>
-          <DocsSidebar />
+          {sdkConfig?.showMenu !== false && <DocsSidebar />}
           <DropZone onFilesDropped={uploadFilesToFolder} disabled={!isMyDocuments}>
             <RootScrollbar>
               <SectionWrapper
@@ -227,6 +236,7 @@ const DocsLayoutInner = observer(({
                     isEmptyList={isEmptyList}
                     isInfoPanelVisible={sdkConfig?.infoPanelVisible ? infoPanelStore.isVisible : false}
                     onToggleInfoPanel={sdkConfig?.infoPanelVisible ? infoPanelStore.toggle : undefined}
+                    headerOffset={headerOffset}
                   />
                 }
                 sectionFilterContent={<Filter filesFilter={filesFilter} />}

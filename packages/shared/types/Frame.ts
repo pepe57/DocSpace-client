@@ -146,6 +146,7 @@ export type TFrameConfig = {
   filter?: TFrameFilter;
   filterParam?: string;
   frameId: string;
+  headerOffset?: number;
   height?: string;
   id?: string | number | null;
   infoPanelVisible?: boolean;
@@ -168,6 +169,7 @@ export type TFrameConfig = {
   showSignOut?: boolean;
   showTitle?: boolean;
   src: string;
+  stylesUrl?: string | null;
   theme?: TFrameTheme;
   type?: TFrameType;
   viewAs?: TFrameViewAs;
