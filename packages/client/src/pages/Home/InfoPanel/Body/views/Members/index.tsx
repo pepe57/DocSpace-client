@@ -129,7 +129,9 @@ const Members = ({
     try {
       if (isPublicRoom || primaryLink) {
         const link = await createExternalLink(roomId, {
-          internal: !isPublicRoom && isExternalShareRestricted,
+          internal:
+            !isPublicRoom &&
+            (isExternalShareRestricted || defaultShareLinkInternal),
         });
         setExternalLink!(link);
       } else {
