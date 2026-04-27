@@ -187,6 +187,7 @@ export const NewFilesPanelComponent = ({
       size={isMobileDevice ? ButtonSize.normal : ButtonSize.small}
       onClick={markAsReadAction}
       isLoading={isMarkAsReadRunning}
+      testId="mark_as_read_button"
     />
   );
 
