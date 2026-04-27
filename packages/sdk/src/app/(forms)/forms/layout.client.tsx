@@ -589,13 +589,20 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   React.useEffect(() => {
     if (
       isReady &&
+      tourStore.isHydrated &&
       !tourStore.tourCompleted &&
       !tourStore.isRunning &&
       activeSection === FormsSection.MyForms
     ) {
       setShowWelcome(true);
     }
-  }, [isReady, tourStore.tourCompleted, tourStore.isRunning, activeSection]);
+  }, [
+    isReady,
+    tourStore.isHydrated,
+    tourStore.tourCompleted,
+    tourStore.isRunning,
+    activeSection,
+  ]);
 
   // Inject mock data when navigating between sections during tour
   React.useEffect(() => {

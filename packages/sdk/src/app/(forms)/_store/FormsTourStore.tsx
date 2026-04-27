@@ -68,6 +68,7 @@ const safeRemove = (key: string): void => {
 class FormsTourStore {
   isRunning = false;
   tourCompleted = false;
+  isHydrated = false;
 
   private _userKey: string | undefined = undefined;
 
@@ -89,57 +90,59 @@ class FormsTourStore {
     return this.isRunning;
   }
 
-  hydrate = () => {
-    this.tourCompleted = safeGet(TOUR_COMPLETED_KEY) === "true";
-  };
-
   hydrateForUser = async (userKey: string): Promise<void> => {
     if (!userKey) return;
     this._userKey = userKey;
 
-    if (await isExternalStorageAvailable()) {
-      const ext = await externalStorageGet<boolean>(EXT_TOUR_KEY);
-      if (ext !== null) {
-        runInAction(() => {
-          this.tourCompleted = ext;
-        });
+    const scopedSync = safeGet(tourKey(userKey));
+    if (scopedSync !== null) {
+      runInAction(() => {
+        this.tourCompleted = scopedSync === "true";
+      });
+    }
+
+    try {
+      if (await isExternalStorageAvailable()) {
+        const ext = await externalStorageGet<boolean>(EXT_TOUR_KEY);
+        if (ext !== null) {
+          runInAction(() => {
+            this.tourCompleted = ext;
+          });
+          return;
+        }
+
+        if (scopedSync !== null) {
+          void externalStorageSet(EXT_TOUR_KEY, scopedSync === "true");
+          return;
+        }
+
+        const legacy = safeGet(TOUR_COMPLETED_KEY);
+        if (legacy !== null) {
+          const parsed = legacy === "true";
+          runInAction(() => {
+            this.tourCompleted = parsed;
+          });
+          safeSet(tourKey(userKey), legacy);
+          safeRemove(TOUR_COMPLETED_KEY);
+          void externalStorageSet(EXT_TOUR_KEY, parsed);
+        }
         return;
       }
 
-      const scoped = safeGet(tourKey(userKey));
-      if (scoped !== null) {
-        const parsed = scoped === "true";
-        runInAction(() => {
-          this.tourCompleted = parsed;
-        });
-        void externalStorageSet(EXT_TOUR_KEY, parsed);
-        return;
-      }
+      if (scopedSync !== null) return;
 
       const legacy = safeGet(TOUR_COMPLETED_KEY);
       if (legacy !== null) {
-        const parsed = legacy === "true";
         runInAction(() => {
-          this.tourCompleted = parsed;
+          this.tourCompleted = legacy === "true";
         });
         safeSet(tourKey(userKey), legacy);
         safeRemove(TOUR_COMPLETED_KEY);
-        void externalStorageSet(EXT_TOUR_KEY, parsed);
       }
-      return;
-    }
-
-    const scoped = safeGet(tourKey(userKey));
-    if (scoped !== null) {
-      this.tourCompleted = scoped === "true";
-      return;
-    }
-
-    const legacy = safeGet(TOUR_COMPLETED_KEY);
-    if (legacy !== null) {
-      this.tourCompleted = legacy === "true";
-      safeSet(tourKey(userKey), legacy);
-      safeRemove(TOUR_COMPLETED_KEY);
+    } finally {
+      runInAction(() => {
+        this.isHydrated = true;
+      });
     }
   };
 
@@ -172,9 +175,6 @@ export const FormsTourStoreContextProvider = ({
   children: React.ReactNode;
 }) => {
   const store = React.useMemo(() => new FormsTourStore(), []);
-  React.useEffect(() => {
-    store.hydrate();
-  }, [store]);
   return (
     <FormsTourStoreContext.Provider value={store}>
       {children}
