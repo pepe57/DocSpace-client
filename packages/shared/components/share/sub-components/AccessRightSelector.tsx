@@ -85,7 +85,12 @@ export const AccessRightSelector: FC<AccessRightSelectorProps> = ({
     const option =
       isRoomsLink || isFolder ? roomSelectedOptions : selectedAccessOption;
 
-    return <IconDisplay option={option ?? ({} as TOption)} />;
+    return (
+      <IconDisplay
+        option={option ?? ({} as TOption)}
+        withMargin={isBlockedByAdmin}
+      />
+    );
   }
 
   if (isRoomsLink || isFolder) {

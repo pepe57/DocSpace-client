@@ -335,6 +335,10 @@
     height: 16px;
   }
 
+  &.withMargin {
+    margin-inline-end: 15px;
+  }
+
   .wrapper {
     position: relative;
   }
