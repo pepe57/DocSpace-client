@@ -58,6 +58,7 @@ type AccessControlProps = {
   blockExistingLinksOnRestrict: boolean;
   setAccessControlSettings: (settings: TAccessControlSettings) => Promise<void>;
   settingsIsLoaded: boolean;
+  getFilesSettings: () => Promise<void>;
 };
 
 const AccessControl = ({
@@ -68,6 +69,7 @@ const AccessControl = ({
   blockExistingLinksOnRestrict,
   setAccessControlSettings,
   settingsIsLoaded,
+  getFilesSettings,
 }: AccessControlProps) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
 
@@ -112,6 +114,7 @@ const AccessControl = ({
   const getSettingsFromDefault = () => {
     const defaultSettings = getFromSessionStorage(STORAGE_KEY_DEFAULT);
     if (defaultSettings) {
+      saveToSessionStorage(STORAGE_KEY_CURRENT, defaultSettings);
       setIsAllowed(defaultSettings.externalShare);
       setIsDefaultInternal(defaultSettings.defaultShareLinkInternal);
       setApplyToDocuments(defaultSettings.externalShareApplyToDocuments);
@@ -121,7 +124,6 @@ const AccessControl = ({
   };
 
   const getSettings = () => {
-    const currentSettings = getFromSessionStorage(STORAGE_KEY_CURRENT);
     const defaultData = buildSettings(
       externalShare,
       defaultShareLinkInternal,
@@ -131,14 +133,19 @@ const AccessControl = ({
     );
 
     saveToSessionStorage(STORAGE_KEY_DEFAULT, defaultData);
-
-    const source = currentSettings ?? defaultData;
-    setIsAllowed(source.externalShare);
-    setIsDefaultInternal(source.defaultShareLinkInternal);
-    setApplyToDocuments(source.externalShareApplyToDocuments);
-    setApplyToRooms(source.externalShareApplyToRooms);
-    setBlockExisting(source.blockExistingLinksOnRestrict);
+    saveToSessionStorage(STORAGE_KEY_CURRENT, defaultData);
+    setIsAllowed(defaultData.externalShare);
+    setIsDefaultInternal(defaultData.defaultShareLinkInternal);
+    setApplyToDocuments(defaultData.externalShareApplyToDocuments);
+    setApplyToRooms(defaultData.externalShareApplyToRooms);
+    setBlockExisting(defaultData.blockExistingLinksOnRestrict);
   };
+
+  useEffect(() => {
+    if (!settingsIsLoaded) {
+      getFilesSettings();
+    }
+  }, []);
 
   useEffect(() => {
     checkWidth();
@@ -167,7 +174,7 @@ const AccessControl = ({
     if (isEqual(currentSettings, defaultSettings)) {
       getSettings();
     }
-  }, [settingsIsLoaded]);
+  }, [settingsIsLoaded, isLoaded]);
 
   useEffect(() => {
     if (!isLoaded) return;
@@ -459,6 +466,7 @@ export const AccessControlSection = inject(({ filesSettingsStore }: TStore) => {
     blockExistingLinksOnRestrict,
     setAccessControlSettings,
     settingsIsLoaded,
+    getFilesSettings,
   } = filesSettingsStore;
 
   return {
@@ -469,5 +477,6 @@ export const AccessControlSection = inject(({ filesSettingsStore }: TStore) => {
     blockExistingLinksOnRestrict,
     setAccessControlSettings,
     settingsIsLoaded,
+    getFilesSettings,
   };
 })(observer(AccessControl));
