@@ -96,7 +96,7 @@ const LinkRow = ({
       "internal" in opt && !opt.internal
         ? {
             ...opt,
-            icon: ExternalLinkWarningIconUrl,
+            // icon: ExternalLinkWarningIconUrl,
             fillIcon: false,
             disabled: true,
             className: "share-external-disabled",
@@ -134,9 +134,22 @@ const LinkRow = ({
       link.sharedTo.primary,
     );
 
-    const shareOption = shareOptions.find(
-      (option) => option.internal === link.sharedTo.internal,
-    )!;
+    const getShareOption = () => {
+      const shareOption = shareOptions.find(
+        (option) => option.internal === link.sharedTo.internal,
+      )!;
+
+      if ("internal" in shareOption && !shareOption.internal) {
+        return {
+          ...shareOption,
+          icon: ExternalLinkWarningIconUrl,
+        };
+      }
+
+      return shareOption;
+    };
+
+    const shareOption = getShareOption();
 
     const selectedAccessOption = accessOptions.find(
       (option) => option && "access" in option && option.access === link.access,
