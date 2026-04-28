@@ -1286,7 +1286,7 @@ export default inject(
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 
-    const showNavigationButton = !!((!security?.CopyLink && !isArchive) ||
+    const showNavigationButton = !!((!security?.CopySharedLink && !isArchive) ||
     isPublicRoom ||
     isSharedWithMeFolderRoot ||
     isArchive ||
