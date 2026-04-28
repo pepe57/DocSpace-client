@@ -103,7 +103,7 @@ export default inject<TStore>(
       setIsScrollLocked,
     } = infoPanelStore;
 
-    const { isExternalShareRestricted, defaultShareLinkInternal } =
+    const { externalShareApplyToDocuments, defaultShareLinkInternal, blockExistingLinksOnRestrict } =
       filesSettingsStore;
 
     return {
@@ -121,7 +121,8 @@ export default inject<TStore>(
       setEditMembersGroup,
       setEditGroupMembersDialogVisible,
 
-      isExternalShareRestricted,
+      isExternalShareRestricted: externalShareApplyToDocuments,
+      blockExistingLinksOnRestrict,
       defaultShareLinkInternal,
     };
   },

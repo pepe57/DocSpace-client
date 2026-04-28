@@ -70,7 +70,10 @@ const LinkRow = (props: LinkRowProps) => {
     setDeleteLinkDialogVisible,
     setEmbeddingPanelData,
     isArchiveFolder,
-    isExternalShareRestricted,
+    externalShareApplyToDocuments,
+    externalShareApplyToRooms,
+    blockExistingLinksOnRestrict,
+
     setIsScrollLocked,
     setExternalLink,
     deleteExternalLink,
@@ -128,7 +131,7 @@ const LinkRow = (props: LinkRowProps) => {
 
   const onCopyExternalLink = () => {
     copyShareLink(item, link, t as TFunction);
-    if (isExternalShareRestricted && !link.sharedTo.internal) {
+    if (isExternalShareRestricted && !link.sharedTo.internal && blockExistingLinksOnRestrict) {
       toastr.error(t("Common:LinkBlockedByAdminWarning"));
     }
     onCloseContextMenu();
@@ -140,7 +143,7 @@ const LinkRow = (props: LinkRowProps) => {
 
   const getData = () => {
     const isBlockedByAdmin =
-      isExternalShareRestricted && !link.sharedTo.internal;
+      isExternalShareRestricted && !link.sharedTo.internal && blockExistingLinksOnRestrict;
 
     if (isBlockedByAdmin) {
       return [
@@ -299,7 +302,7 @@ const LinkRow = (props: LinkRowProps) => {
 
   const onCopyLink = (linkArg: TFileLink) => {
     copyShareLink(item, linkArg, t);
-    if (isExternalShareRestricted && !linkArg.sharedTo.internal) {
+    if (isExternalShareRestricted && !linkArg.sharedTo.internal && blockExistingLinksOnRestrict) {
       toastr.error(t("Common:LinkBlockedByAdminWarning"));
     }
   };
@@ -313,6 +316,7 @@ const LinkRow = (props: LinkRowProps) => {
       loadingLinks={loadingLinks}
       isArchiveFolder={isArchiveFolder!}
       isExternalShareRestricted={isExternalShareRestricted}
+      blockExistingLinksOnRestrict={blockExistingLinksOnRestrict}
       changeShareOption={changeShareOption}
       onOpenContextMenu={onOpenContextMenu}
       onCloseContextMenu={onCloseContextMenu}
@@ -344,11 +348,15 @@ export default inject<TStore>(
 
     const { setExternalLink, deleteExternalLink } = publicRoomStore;
 
-    const { isExternalShareRestricted } = filesSettingsStore;
+    const { externalShareApplyToDocuments, externalShareApplyToRooms, blockExistingLinksOnRestrict } =
+      filesSettingsStore;
 
     return {
       isArchiveFolder: isArchiveFolderRoot,
-      isExternalShareRestricted,
+
+      externalShareApplyToDocuments,
+      externalShareApplyToRooms,
+      blockExistingLinksOnRestrict,
 
       setLinkParams,
       setEditLinkPanelIsVisible,

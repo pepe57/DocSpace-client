@@ -481,7 +481,12 @@ export default function withFileActions(WrappedFileItem) {
       const { startUpload, secondaryProgressDataStore } = uploadDataStore;
       const { withContentSelection } = hotkeyStore;
       const { findOperationById } = secondaryProgressDataStore;
-      const { isExternalShareRestricted } = filesSettingsStore;
+      const {
+        isExternalShareRestricted: isShareRestricted,
+        externalShareApplyToRooms,
+        externalShareApplyToDocuments,
+        blockExistingLinksOnRestrict,
+      } = filesSettingsStore;
 
       const selectedItem = selection.find(
         (x) => x.id === item.id && x.fileExst === item.fileExst,
@@ -558,6 +563,13 @@ export default function withFileActions(WrappedFileItem) {
 
       const showHotkeyBorder =
         hotkeyCaret?.id === item.id && hotkeyCaret?.isFolder === item.isFolder;
+
+      const isExternalShareRestricted =
+        isShareRestricted &&
+        blockExistingLinksOnRestrict &&
+        (item.isRoom
+          ? externalShareApplyToRooms
+          : externalShareApplyToDocuments);
 
       return {
         t,

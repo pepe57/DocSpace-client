@@ -48,6 +48,7 @@ export const useShare = ({
   setEmbeddingPanelData,
   hideLinkTypeSelector,
   isExternalShareRestricted,
+  blockExistingLinksOnRestrict,
   defaultShareLinkInternal,
 }: UseShareProps) => {
   const isFolder = infoPanelSelection.isFolder;
@@ -380,14 +381,14 @@ export const useShare = ({
 
     await copyShareLink(infoPanelSelection, link, t);
 
-    if (isExternalShareRestricted && !link.sharedTo?.internal) {
+    if (isExternalShareRestricted && !link.sharedTo?.internal && blockExistingLinksOnRestrict) {
       toastr.error(t("Common:LinkBlockedByAdminWarning"));
     }
   };
 
   const getData = (link: TFileLink): ContextMenuModel[] => {
     const isBlockedByAdmin =
-      isExternalShareRestricted && !link.sharedTo.internal;
+      isExternalShareRestricted && !link.sharedTo.internal && blockExistingLinksOnRestrict;
 
     if (isBlockedByAdmin) {
       return [
@@ -530,6 +531,7 @@ export const useShare = ({
           onCloseContextMenu={onCloseContextMenu}
           changeExpirationOption={changeExpirationOption}
           availableShareRights={availableShareRights}
+          blockExistingLinksOnRestrict={blockExistingLinksOnRestrict}
           hideLinkTypeSelector={hideLinkTypeSelector}
           isExternalShareRestricted={isExternalShareRestricted}
         />

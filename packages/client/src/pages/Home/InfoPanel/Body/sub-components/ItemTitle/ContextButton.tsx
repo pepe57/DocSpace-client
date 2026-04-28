@@ -64,7 +64,8 @@ type RoomsContextBtnProps = {
   getItemContextOptionsActions?: ContextOptionsStore["getFilesContextOptions"];
 
   getIcon?: FilesSettingsStore["getIcon"];
-  isExternalShareRestricted?: boolean;
+  externalShareApplyToRooms?: boolean;
+  blockExistingLinksOnRestrict?: boolean;
   hasExternalLinks?: boolean;
 };
 
@@ -73,7 +74,8 @@ const RoomsContextBtn = ({
 
   getItemContextOptionsActions,
   getIcon,
-  isExternalShareRestricted,
+  externalShareApplyToRooms,
+  blockExistingLinksOnRestrict,
   hasExternalLinks,
 }: RoomsContextBtnProps) => {
   const { t } = useTranslation([
@@ -101,7 +103,12 @@ const RoomsContextBtn = ({
 
     const isRoom = "isRoom" in selection && selection.isRoom;
     const badgeUrl = isRoom
-      ? getRoomBadgeUrl(selection, 12, isExternalShareRestricted, hasExternalLinks)
+      ? getRoomBadgeUrl(
+          selection,
+          12,
+          externalShareApplyToRooms && blockExistingLinksOnRestrict,
+          hasExternalLinks,
+        )
       : null;
 
     const isFile = "isFile" in selection && selection.isFile;
@@ -117,6 +124,11 @@ const RoomsContextBtn = ({
           "type" in selection ? selection.type : undefined,
         )
       : "";
+
+    const badgeIconColor =
+      externalShareApplyToRooms && blockExistingLinksOnRestrict && hasExternalLinks && badgeUrl
+        ? "var(--info-panel-link-blocked)"
+        : undefined;
 
     return {
       title: selection.title || "",
@@ -177,7 +189,8 @@ export default inject(
   ({ contextOptionsStore, filesSettingsStore, publicRoomStore }: TStore) => ({
     getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
     getIcon: filesSettingsStore.getIcon,
-    isExternalShareRestricted: filesSettingsStore.isExternalShareRestricted,
+    externalShareApplyToRooms: filesSettingsStore.externalShareApplyToRooms,
+    blockExistingLinksOnRestrict: filesSettingsStore.blockExistingLinksOnRestrict,
     hasExternalLinks: publicRoomStore.hasExternalLinks,
   }),
 )(observer(RoomsContextBtn));

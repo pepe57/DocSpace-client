@@ -82,6 +82,7 @@ const LinkRow = ({
   onAccessRightsSelect,
   removedExpiredLink,
   onCopyLink,
+  blockExistingLinksOnRestrict,
   hideLinkTypeSelector,
   isExternalShareRestricted,
 }: LinkRowProps) => {
@@ -89,10 +90,11 @@ const LinkRow = ({
 
   const isMobileViewLink = useIsMobile();
 
+  const baseShareOptions = useMemo(() => getAccessTypeOptions(t), [t]);
+
   const shareOptions = useMemo(() => {
-    const options = getAccessTypeOptions(t);
-    if (!isExternalShareRestricted) return options;
-    return options.map((opt) =>
+    if (!isExternalShareRestricted) return baseShareOptions;
+    return baseShareOptions.map((opt) =>
       "internal" in opt && !opt.internal
         ? {
             ...opt,
@@ -104,7 +106,7 @@ const LinkRow = ({
           }
         : opt,
     );
-  }, [t, isExternalShareRestricted]);
+  }, [t, baseShareOptions, isExternalShareRestricted]);
 
   const changeAccessOptionHandler = (item: TOption, link: TFileLink) => {
     if (isRoomsLink) {
@@ -135,6 +137,12 @@ const LinkRow = ({
     );
 
     const getShareOption = () => {
+      if (!blockExistingLinksOnRestrict) {
+        return baseShareOptions.find(
+          (option) => option.internal === link.sharedTo.internal,
+        )!;
+      }
+
       const shareOption = shareOptions.find(
         (option) => option.internal === link.sharedTo.internal,
       )!;
@@ -143,6 +151,10 @@ const LinkRow = ({
         return {
           ...shareOption,
           icon: ExternalLinkWarningIconUrl,
+          fillIcon: false,
+          disabled: true,
+          className: "share-external-disabled",
+          tooltip: t("Common:ExternalLinksDisabledByAdmin"),
         };
       }
 
@@ -167,7 +179,7 @@ const LinkRow = ({
     const isLoaded = loadingLinks.includes(link.sharedTo.id);
     const canEditInternal = link.canEditInternal;
     const isBlockedByAdmin =
-      isExternalShareRestricted && !link.sharedTo.internal;
+      isExternalShareRestricted && !link.sharedTo.internal && blockExistingLinksOnRestrict;
 
     return (
       <div className={className} key={link.sharedTo.id}>

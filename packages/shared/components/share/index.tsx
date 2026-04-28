@@ -67,6 +67,7 @@ const Share = (props: ShareProps) => {
     isEditor = false,
     onAddUser,
     onClickGroup,
+    blockExistingLinksOnRestrict,
     disabledSharedUser: disabledSharedUserProp,
     hideLinkTypeSelector,
     isExternalShareRestricted,
@@ -102,6 +103,7 @@ const Share = (props: ShareProps) => {
     shareChanged,
     hideLinkTypeSelector,
     isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
     defaultShareLinkInternal,
   });
 

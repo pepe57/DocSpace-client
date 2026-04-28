@@ -75,6 +75,7 @@ const RoomsRowDataComponent = (props) => {
     index,
     t,
     isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
   } = props;
 
   const storageColumns = localStorage.getItem(tableStorageName);
@@ -134,6 +135,7 @@ const RoomsRowDataComponent = (props) => {
             item={item}
             sideColor={theme.filesSection.tableView.row.sideColor}
             isExternalShareRestricted={isExternalShareRestricted}
+            blockExistingLinksOnRestrict={blockExistingLinksOnRestrict}
           />
           {lastColumn === "Type" ? quickButtonsComponentNode : null}
         </TableCell>
@@ -242,7 +244,7 @@ export default inject(
 
     const { showStorageInfo } = currentQuotaStore;
 
-    const { isExternalShareRestricted } = filesSettingsStore;
+    const { externalShareApplyToRooms, blockExistingLinksOnRestrict } = filesSettingsStore;
     return {
       roomQuotaColumnIsEnable,
       roomColumnTypeIsEnabled,
@@ -251,7 +253,8 @@ export default inject(
       roomColumnActivityIsEnabled,
       showStorageInfo,
       tableStorageName,
-      isExternalShareRestricted,
+      isExternalShareRestricted: externalShareApplyToRooms,
+      blockExistingLinksOnRestrict,
     };
   },
 )(observer(RoomsRowDataComponent));
