@@ -103,8 +103,11 @@ export default inject<TStore>(
       setIsScrollLocked,
     } = infoPanelStore;
 
-    const { externalShareApplyToDocuments, defaultShareLinkInternal, blockExistingLinksOnRestrict } =
-      filesSettingsStore;
+    const {
+      externalShareApplyToDocuments,
+      defaultShareLinkInternal,
+      blockExistingLinksOnRestrict,
+    } = filesSettingsStore;
 
     return {
       setView,

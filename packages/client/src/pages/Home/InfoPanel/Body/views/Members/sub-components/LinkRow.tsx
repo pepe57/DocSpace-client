@@ -130,8 +130,15 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyExternalLink = () => {
+    // Intentional: copy the link first, then warn — user sees the data but is
+    // notified the admin has restricted external sharing. The link is still valid
+    // for existing recipients; the restriction only blocks *new* sharing flows.
     copyShareLink(item, link, t as TFunction);
-    if (isExternalShareRestricted && !link.sharedTo.internal && blockExistingLinksOnRestrict) {
+    if (
+      isExternalShareRestricted &&
+      !link.sharedTo.internal &&
+      blockExistingLinksOnRestrict
+    ) {
       toastr.error(t("Common:LinkBlockedByAdminWarning"));
     }
     onCloseContextMenu();
@@ -143,7 +150,9 @@ const LinkRow = (props: LinkRowProps) => {
 
   const getData = () => {
     const isBlockedByAdmin =
-      isExternalShareRestricted && !link.sharedTo.internal && blockExistingLinksOnRestrict;
+      isExternalShareRestricted &&
+      !link.sharedTo.internal &&
+      blockExistingLinksOnRestrict;
 
     if (isBlockedByAdmin) {
       return [
@@ -301,8 +310,13 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyLink = (linkArg: TFileLink) => {
+    // Intentional: same copy-then-warn pattern as onCopyExternalLink above.
     copyShareLink(item, linkArg, t);
-    if (isExternalShareRestricted && !linkArg.sharedTo.internal && blockExistingLinksOnRestrict) {
+    if (
+      isExternalShareRestricted &&
+      !linkArg.sharedTo.internal &&
+      blockExistingLinksOnRestrict
+    ) {
       toastr.error(t("Common:LinkBlockedByAdminWarning"));
     }
   };
@@ -348,8 +362,11 @@ export default inject<TStore>(
 
     const { setExternalLink, deleteExternalLink } = publicRoomStore;
 
-    const { externalShareApplyToDocuments, externalShareApplyToRooms, blockExistingLinksOnRestrict } =
-      filesSettingsStore;
+    const {
+      externalShareApplyToDocuments,
+      externalShareApplyToRooms,
+      blockExistingLinksOnRestrict,
+    } = filesSettingsStore;
 
     return {
       isArchiveFolder: isArchiveFolderRoot,

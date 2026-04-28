@@ -101,7 +101,7 @@ const TypeCell = ({ t, item, sideColor, isExternalShareRestricted = false, block
       ) : null}
       <span className="type">{type}</span>
       {isRestrictedRoom ? (
-        <span style={{ color: "var(--info-panel-link-blocked)" }}>
+        <span className={styles.restrictedLabel}>
           &nbsp;({t("Common:Restricted")})
         </span>
       ) : null}

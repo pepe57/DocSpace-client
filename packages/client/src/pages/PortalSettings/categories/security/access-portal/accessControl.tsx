@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
@@ -91,11 +91,11 @@ const AccessControl = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  const checkWidth = () => {
+  const checkWidth = useCallback(() => {
     window.innerWidth > size.mobile &&
       location.pathname.includes("access-control") &&
       navigate("/portal-settings/security/access-portal");
-  };
+  }, [location.pathname, navigate]);
 
   const buildSettings = (
     allowed: boolean,
@@ -151,7 +151,7 @@ const AccessControl = ({
     checkWidth();
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
-  }, []);
+  }, [checkWidth]);
 
   useEffect(() => {
     const currentSettings = getFromSessionStorage(STORAGE_KEY_CURRENT);

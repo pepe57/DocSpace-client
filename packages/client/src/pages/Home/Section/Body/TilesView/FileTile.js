@@ -100,7 +100,7 @@ const FileTile = (props) => {
     onDragLeave,
     badgeUrl,
     badgeIconColor,
-    isExternalShareRestricted,
+    isExternalShareRestricted, // injected by withFileActions (accounts for blockExistingLinksOnRestrict)
     selectableRef,
     openUser,
     isBlockingOperation,
