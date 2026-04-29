@@ -57,3 +57,15 @@
 		min-width: 0;
 	}
 }
+
+.root :global([class*="Navigation_box"]) {
+	padding-top: var(--nav-dropbox-padding-top, 18px);
+
+	@include mixins.tablet-and-below {
+		padding-top: var(--nav-dropbox-padding-top, 14px);
+	}
+
+	@include mixins.mobile {
+		padding-top: var(--nav-dropbox-padding-top, 10px) !important;
+	}
+}

@@ -111,6 +111,15 @@
 
   :global([class*="Navigation_box"]) {
     min-width: var(--nav-dropdown-min-width, auto);
+    padding-top: var(--nav-dropbox-padding-top, 18px);
+
+    @include mixins.tablet-and-below {
+      padding-top: var(--nav-dropbox-padding-top, 14px);
+    }
+
+    @include mixins.mobile {
+      padding-top: var(--nav-dropbox-padding-top, 10px) !important;
+    }
   }
 
   @include mixins.tablet-and-below {
