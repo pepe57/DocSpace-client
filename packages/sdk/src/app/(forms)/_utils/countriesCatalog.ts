@@ -295,8 +295,5 @@ export function lookupCountryByAlias(value: string): string | undefined {
 }
 
 export function isKnownCountryCode(code: string): boolean {
-  return Object.prototype.hasOwnProperty.call(
-    FLAGS_BY_CODE,
-    code.toUpperCase(),
-  );
+  return Object.hasOwn(FLAGS_BY_CODE, code.toUpperCase());
 }
