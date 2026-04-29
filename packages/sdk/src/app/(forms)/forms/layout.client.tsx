@@ -45,6 +45,7 @@ import {
 import { DeviceType } from "@docspace/shared/enums";
 
 import useDeviceType from "@/hooks/useDeviceType";
+import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 import { useSDKConfig } from "@/providers/SDKConfigProvider";
 import {
   FormsSection,
@@ -159,10 +160,8 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
   );
   const showMenu = initialShowMenu.current && sdkConfig?.showMenu !== false;
 
-  const initialHeaderOffset = React.useRef(
-    Number(searchParams.get("headerOffset")) || 0,
-  );
-  const headerOffset = sdkConfig?.headerOffset ?? initialHeaderOffset.current;
+  const { headerOffset, headerHeight, frameHeaderVars } =
+    useFrameHeaderConfig();
 
   const isChatPanelOnLeft =
     aiStore.isPanelVisible &&
@@ -668,8 +667,12 @@ const FormsShell = ({ commonData, children }: FormsShellProps) => {
           }}
         />
       )}
-      <AiChatPanel rootRef={rootRef} headerOffset={chatPanelHeaderOffset} />
-      <div className={styles.sectionArea}>
+      <AiChatPanel
+        rootRef={rootRef}
+        headerOffset={chatPanelHeaderOffset}
+        headerHeight={headerHeight}
+      />
+      <div className={styles.sectionArea} style={frameHeaderVars}>
         <Section
           withBodyScroll={!isEditing}
           withoutFooter={isEditing}

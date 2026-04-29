@@ -28,13 +28,12 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { useSearchParams } from "next/navigation";
 
 import { getFileInfo } from "@docspace/shared/api/files";
 import type { TFile } from "@docspace/ui-kit/types";
 import { Loader, LoaderTypes } from "@docspace/ui-kit/components/loader";
 import { frameCallEvent, getFrameId } from "@docspace/shared/utils/common";
-import { useSDKConfig } from "@/providers/SDKConfigProvider";
+import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 
 const Chat = dynamic(() => import("@docspace/ui-kit/ai-agent/chat"), {
   ssr: false,
@@ -49,13 +48,7 @@ type ChatPageProps = {
 };
 
 const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
-  const { sdkConfig } = useSDKConfig();
-  const searchParams = useSearchParams();
-
-  const initialHeaderOffset = useRef(
-    Number(searchParams.get("headerOffset")) || 0,
-  );
-  const headerOffset = sdkConfig?.headerOffset ?? initialHeaderOffset.current;
+  const { headerOffset, headerHeight } = useFrameHeaderConfig();
 
   const [attachmentFile, setAttachmentFile] = useState<Partial<TFile> | null>(
     null,
@@ -164,6 +157,9 @@ const ChatPageClient = ({ agentId, fileId, chatId }: ChatPageProps) => {
         <style>
           {`.chat-header { padding-inline-start: ${headerOffset}px; }`}
         </style>
+      )}
+      {headerHeight > 0 && (
+        <style>{`.chat-header { height: ${headerHeight}px; }`}</style>
       )}
       {!isChatReady && (
         <div

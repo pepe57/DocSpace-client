@@ -43,6 +43,7 @@ const FORWARDED_PARAMS = [
   "disableActionButton",
   "downloadToEvent",
   "headerOffset",
+  "headerHeight",
   "sortBy",
   "sortOrder",
   "search",
