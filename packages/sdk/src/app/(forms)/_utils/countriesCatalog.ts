@@ -150,7 +150,7 @@ export const COUNTRIES: readonly CountryEntry[] = [
   {
     code: "ES",
     flagAsset: es,
-    aliases: ["Spain", "Spanish", "España"],
+    aliases: ["Spain", "Spanish", "Espa\u00F1a"],
   },
   {
     code: "FI",
@@ -250,7 +250,7 @@ export const COUNTRIES: readonly CountryEntry[] = [
   {
     code: "TR",
     flagAsset: tr,
-    aliases: ["Turkey", "Türkiye", "Turkiye", "Turkish"],
+    aliases: ["Turkey", "T\u00FCrkiye", "Turkiye", "Turkish"],
   },
   {
     code: "UA",

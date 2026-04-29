@@ -32,10 +32,10 @@ import {
 
 // Bracketed prefix: "[US] United States", "[us]Foo".
 const BRACKET_PREFIX_RE = /^\[([A-Za-z]{2})\]/;
-// Separator-prefix: "US — United States", "US - Foo", "US: Foo", "US | Foo".
+// Separator-prefix: "US - United States", "US - Foo", "US: Foo", "US | Foo".
 // Requires a real separator (em dash, en dash, hyphen, colon, pipe) followed by whitespace
 // to avoid false positives on natural-language titles like "It is what it is".
-const SEPARATOR_PREFIX_RE = /^([A-Za-z]{2})\s*[—\-–:|]\s+/;
+const SEPARATOR_PREFIX_RE = /^([A-Za-z]{2})\s*[\u2014\-\u2013:|]\s+/;
 // Whole-string country code: "US", "us".
 const WHOLE_STRING_RE = /^([A-Za-z]{2})$/;
 
@@ -43,8 +43,8 @@ const WHOLE_STRING_RE = /^([A-Za-z]{2})$/;
  * Resolves a folder title to an ISO 3166-1 alpha-2 country code.
  *
  * Strategy chain (first match wins):
- *   1. Bracketed prefix `[XX]` — explicit override, robust to renames.
- *   2. Inline prefix `XX — ...` (with separator+space) — admin-friendly.
+ *   1. Bracketed prefix `[XX]` - explicit override, robust to renames.
+ *   2. Inline prefix `XX - ...` (with separator+space) - admin-friendly.
  *   3. Whole-string code (`"US"`).
  *   4. Alias match against the catalog (case-insensitive, trimmed).
  *
