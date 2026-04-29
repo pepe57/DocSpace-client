@@ -28,7 +28,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import type {
   TFile,
@@ -120,7 +120,6 @@ const DocsLayoutInner = observer(({
   const infoPanelStore = useInfoPanelStore();
   const { sdkConfig } = useSDKConfig();
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
