@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { http } from "msw";
+import { EmployeeStatus } from "../../../enums";
 import { API_PREFIX, BASE_URL } from "../../e2e/utils";
 
 export const PATH = "people/:userId";
@@ -234,8 +235,15 @@ export const updateUserCultureResolver = (culture: string) => {
   return new Response(JSON.stringify({ response: data }));
 };
 
-export const userExistsResolver = (isUserExist: boolean): Response => {
-  return new Response(JSON.stringify({ response: isUserExist }));
+export const userExistsResolver = (
+  isUserExist: boolean,
+  status?: EmployeeStatus,
+): Response => {
+  const data = {
+    exist: isUserExist,
+    status: isUserExist ? (status ?? EmployeeStatus.Active) : null,
+  };
+  return new Response(JSON.stringify({ response: data }));
 };
 
 export const selfHandler = (
@@ -382,11 +390,15 @@ export const selfHandlerWithCulture = (port: string, culture: string) => {
   });
 };
 
-export const userExistsHandler = (port: string, isUserExist = false) => {
+export const userExistsHandler = (
+  port: string,
+  isUserExist = false,
+  status?: EmployeeStatus,
+) => {
   return http.get(
     `${BASE_URL}:${port}/${API_PREFIX}/${PATH_USER_EXISTS}`,
     () => {
-      return userExistsResolver(isUserExist);
+      return userExistsResolver(isUserExist, status);
     },
   );
 };

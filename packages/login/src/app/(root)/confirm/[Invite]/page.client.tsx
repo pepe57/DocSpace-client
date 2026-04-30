@@ -567,7 +567,9 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const onValidateEmail = (result: TValidate): undefined => {
     setEmailValid(result.isValid);
-    setEmailErrorText(result.errors?.[0] ?? "");
+    const errorKey = result.errors?.[0];
+    // biome-ignore lint/plugin/no-dynamic-i18n-key: errorKey is a runtime-provided i18n key from email validator
+    setEmailErrorText(errorKey ? t(`Common:${errorKey}`) : "");
   };
 
   const onClickBack = () => {
