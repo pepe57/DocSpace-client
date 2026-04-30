@@ -272,7 +272,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       if (userExists.status === EmployeeStatus.Pending) {
         setEmailValid(false);
         setIsEmailErrorShow(true);
-        setEmailErrorText("Confirm:UserAlreadyInvited");
+        setEmailErrorText(t("Confirm:UserAlreadyInvited"));
         setIsContinueBlocked(true);
         setIsLoading(false);
         return;
@@ -325,7 +325,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           typeof knownError === "object"
             ? knownError?.response?.data?.error?.message
             : "";
-        setEmailErrorText(errorInvite);
+        // biome-ignore lint/plugin/no-dynamic-i18n-key: errorInvite is a runtime-provided i18n key from backend
+        setEmailErrorText(errorInvite ? t(`Common:${errorInvite}`) : "");
       }
     }
 
@@ -439,7 +440,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       console.error("confirm error", errorMessage);
       toastr.error(errorMessage);
       setIsEmailErrorShow(true);
-      setEmailErrorText(errorMessage);
+      // biome-ignore lint/plugin/no-dynamic-i18n-key: errorMessage is a runtime-provided i18n key from backend
+      setEmailErrorText(errorMessage ? t(`Common:${errorMessage}`) : "");
       setEmailValid(false);
       setIsLoading(false);
     }

@@ -27,7 +27,6 @@
 "use client";
 
 import { ChangeEvent, KeyboardEvent, Ref } from "react";
-import { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
@@ -50,15 +49,6 @@ type EmailInputFormProps = {
   onValidate(result: TValidate): undefined;
   onBlur(): void;
   onKeyPress(e: KeyboardEvent<HTMLInputElement>): void;
-};
-
-const getErrorMessage = (t: TFunction, emailErrorText?: string) => {
-  if (!emailErrorText) return t("Common:RequiredField");
-  const key = emailErrorText.includes(":")
-    ? emailErrorText
-    : `Common:${emailErrorText}`;
-  // biome-ignore lint/plugin/no-dynamic-i18n-key: emailErrorText is a runtime-provided i18n key (with optional namespace prefix)
-  return t(key);
 };
 
 const EmailInputForm = ({
@@ -90,7 +80,7 @@ const EmailInputForm = ({
         labelVisible={false}
         errorMessageWidth="100%"
         hasError={isEmailErrorShow ? !emailValid : undefined}
-        errorMessage={getErrorMessage(t, emailErrorText)}
+        errorMessage={emailErrorText ?? t("Common:RequiredField")}
         dataTestId="email_field_container"
       >
         <EmailInput
