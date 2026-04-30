@@ -97,6 +97,16 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
+  if (request.nextUrl.pathname.includes("personal-files")) {
+    requestHeaders.set(FILTER_HEADER, searchParams.toString());
+
+    return NextResponse.next({
+      request: {
+        headers: requestHeaders,
+      },
+    });
+  }
+
   if (request.nextUrl.pathname === "/chat") {
     const agentId = searchParams.get("agentId") ?? "";
 
@@ -178,6 +188,8 @@ export const config = {
     "/forms",
     "/forms/:path*",
     "/chat",
+    "/personal-files",
+    "/personal-files/:path*",
   ],
 };
 
