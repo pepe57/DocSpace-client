@@ -42,6 +42,9 @@
   "FormRoomCollectionNotConnectedDescription": "Data collection is not set up. Configure this feature in room settings to automatically save form responses as a table.",
   "FormRoomGoToCompleteFolder": "Go to Complete folder",
   "FormRoomConnectDatabase": "Connect a database in Integrations to analyze form data with Ask AI, create charts, and uncover insights.",
+  "FormRoomAIModalTitle": "Get better insights",
+  "FormRoomAIModalDescription": "Connect a database to analyze all collected responses with Ask AI. You can continue without it and ask about this form only.",
+  "FormRoomAIModalConnect": "Connect database",
   "FilesMovedNotify": "Files moved.",
   "FilesRemovedNotify": "Files removed.",
   "FilesTrashMoveCompleted": "Files moved to {{sectionName}}.",
@@ -116,5 +119,7 @@
   "SubmenuHistory": "History",
   "UserFileUpdated": "File updated.",
   "Users": "Users",
-  "Versions": "Versions"
+  "Versions": "Versions",
+  "FormRoomNoSubmissionsYet": "No submissions yet.",
+  "FormRoomResultsFolderNote": "The results folder will appear after the first form submission."
 }
