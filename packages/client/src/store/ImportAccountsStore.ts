@@ -312,13 +312,13 @@ class ImportAccountsStore {
 
   changeEmail = (key: string, email: string) => {
     checkUserExists(email)
-      .then((userExists) => {
+      .then((res) => {
         runInAction(() => {
           this.users = {
             ...this.users,
             withoutEmail: this.users.withoutEmail.map((user) =>
               user.key === key
-                ? { ...user, email, isDuplicate: userExists }
+                ? { ...user, email, isDuplicate: res.exist }
                 : user,
             ),
           };

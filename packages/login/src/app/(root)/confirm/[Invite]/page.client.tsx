@@ -60,7 +60,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { setCookie } from "@docspace/ui-kit/utils/cookie";
-import { ButtonKeys } from "@docspace/shared/enums";
+import { ButtonKeys, EmployeeStatus } from "@docspace/shared/enums";
 import { TValidate } from "@docspace/ui-kit/components/email-input";
 import { TCreateUserData, TError } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
@@ -151,6 +151,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
 
   const [registrationForm, setRegistrationForm] = useState(!!emailFromLink);
+
+  const [isContinueBlocked, setIsContinueBlocked] = useState(false);
 
   const focusInput = () => {
     if (inputRef.current) {
@@ -261,8 +263,20 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     try {
       const userExists = await checkUserExists(email, headerKey);
 
-      if (!userExists) {
+      if (!userExists.exist) {
         setRegistrationForm(true);
+        setIsLoading(false);
+        return;
+      }
+
+      if (
+        userExists.status === EmployeeStatus.Pending ||
+        userExists.status === EmployeeStatus.Disabled
+      ) {
+        setEmailValid(false);
+        setIsEmailErrorShow(true);
+        setEmailErrorText("Confirm:UserAlreadyInvited");
+        setIsContinueBlocked(true);
         setIsLoading(false);
         return;
       }
@@ -437,6 +451,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     setIsEmailErrorShow(false);
+    setIsContinueBlocked(false);
   };
 
   const onChangeFname = (e: ChangeEvent<HTMLInputElement>) => {
@@ -583,6 +598,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           emailValid={emailValid}
           emailFromLink={emailFromLink}
           emailErrorText={emailErrorText}
+          isContinueDisabled={isContinueBlocked}
           onContinue={onContinue}
           onChange={onChangeEmail}
           onValidate={onValidateEmail}

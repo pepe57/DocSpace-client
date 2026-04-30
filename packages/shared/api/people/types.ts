@@ -108,6 +108,11 @@ export type TChangeTheme = {
   theme: ThemeKeys;
 };
 
+export type TUserExistsResponse = {
+  exist: boolean;
+  status?: EmployeeStatus;
+};
+
 export type TPeopleListItem = {
   id: string;
   status: EmployeeStatus;

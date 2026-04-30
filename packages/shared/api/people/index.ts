@@ -45,7 +45,12 @@ import { TGroup } from "../groups/types";
 import { request } from "../client";
 
 import Filter from "./filter";
-import { TChangeTheme, TGetUserList, TUser } from "./types";
+import {
+  TChangeTheme,
+  TGetUserList,
+  TUser,
+  TUserExistsResponse,
+} from "./types";
 import { TOperation } from "../files/filter";
 
 export async function getUserList(
@@ -160,7 +165,7 @@ export async function checkUserExists(
 
   const res = await request(options);
 
-  return res as boolean;
+  return res as TUserExistsResponse;
 }
 
 export function getUserFromConfirm(userId, confirmKey = null) {

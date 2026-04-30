@@ -27,6 +27,7 @@
 "use client";
 
 import { ChangeEvent, KeyboardEvent, Ref } from "react";
+import { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
@@ -43,11 +44,21 @@ type EmailInputFormProps = {
   emailValid: boolean;
   emailFromLink: string;
   emailErrorText?: string;
+  isContinueDisabled?: boolean;
   onContinue(): Promise<void>;
   onChange(e: ChangeEvent<HTMLInputElement>): void;
   onValidate(result: TValidate): undefined;
   onBlur(): void;
   onKeyPress(e: KeyboardEvent<HTMLInputElement>): void;
+};
+
+const getErrorMessage = (t: TFunction, emailErrorText?: string) => {
+  if (!emailErrorText) return t("Common:RequiredField");
+  const key = emailErrorText.includes(":")
+    ? emailErrorText
+    : `Common:${emailErrorText}`;
+  // biome-ignore lint/plugin/no-dynamic-i18n-key: emailErrorText is a runtime-provided i18n key (with optional namespace prefix)
+  return t(key);
 };
 
 const EmailInputForm = ({
@@ -58,6 +69,7 @@ const EmailInputForm = ({
   emailValid,
   emailErrorText,
   emailFromLink,
+  isContinueDisabled,
 
   onContinue,
   onChange,
@@ -76,13 +88,9 @@ const EmailInputForm = ({
         className="form-field"
         isVertical
         labelVisible={false}
+        errorMessageWidth="100%"
         hasError={isEmailErrorShow ? !emailValid : undefined}
-        errorMessage={
-          emailErrorText
-            // biome-ignore lint/plugin/no-dynamic-i18n-key: errorText is a runtime-provided key fragment composed with "Common:" prefix
-            ? t(`Common:${emailErrorText}`)
-            : t("Common:RequiredField")
-        }
+        errorMessage={getErrorMessage(t, emailErrorText)}
         dataTestId="email_field_container"
       >
         <EmailInput
@@ -113,7 +121,7 @@ const EmailInputForm = ({
         scale
         label={t("Common:ContinueButton")}
         tabIndex={1}
-        isDisabled={isLoading}
+        isDisabled={isLoading || isContinueDisabled}
         isLoading={isLoading}
         onClick={onContinue}
         testId="email_continue_button"
