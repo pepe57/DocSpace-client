@@ -269,6 +269,10 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         return;
       }
 
+      // Backend returns EmployeeStatus (UserExistsResponseDto.Status), not
+      // EmployeeActivationStatus. EmployeeStatus.Pending (4) marks an invited
+      // user who has not completed registration — see the codebase convention
+      // (UsersStore, contacts utils, InfoPanel Users view, etc).
       if (userExists.status === EmployeeStatus.Pending) {
         setEmailValid(false);
         setIsEmailErrorShow(true);
