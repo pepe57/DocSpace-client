@@ -29,6 +29,7 @@ import { FormWrapper } from "@docspace/ui-kit/components/form-wrapper";
 
 import { getColorTheme } from "@/api/settings";
 import LinkClient from "./LinkClient";
+import CreatePortalClient from "../auth/CreatePortalClient";
 
 export default async function LinkPage({
   searchParams,
@@ -68,12 +69,17 @@ export default async function LinkPage({
         }}
       >
         <FormWrapper id="link-form">
-          <LinkClient
-            providerName={providerName}
-            successRedirectURL={successRedirectURL ?? null}
-          />
+          {providerName === "createPortal" ? (
+            <CreatePortalClient />
+          ) : (
+            <LinkClient
+              providerName={providerName}
+              successRedirectURL={successRedirectURL ?? null}
+            />
+          )}
         </FormWrapper>
       </div>
     </div>
   );
 }
+
