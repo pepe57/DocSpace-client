@@ -313,6 +313,8 @@ class ImportAccountsStore {
   changeEmail = (key: string, email: string) => {
     checkUserExists(email)
       .then((res) => {
+        // status is intentionally ignored: an existing email is a duplicate
+        // regardless of the user's activation status (Active/Pending/Disabled).
         runInAction(() => {
           this.users = {
             ...this.users,
