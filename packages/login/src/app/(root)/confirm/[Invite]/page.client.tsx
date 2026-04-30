@@ -269,10 +269,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         return;
       }
 
-      if (
-        userExists.status === EmployeeStatus.Pending ||
-        userExists.status === EmployeeStatus.Disabled
-      ) {
+      if (userExists.status === EmployeeStatus.Pending) {
         setEmailValid(false);
         setIsEmailErrorShow(true);
         setEmailErrorText("Confirm:UserAlreadyInvited");
@@ -658,4 +655,3 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 };
 
 export default CreateUserForm;
-
