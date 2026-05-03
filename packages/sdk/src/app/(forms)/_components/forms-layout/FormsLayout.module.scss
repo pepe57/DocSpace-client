@@ -89,12 +89,17 @@
   }
 }
 
+.root,
+.root * {
+  font-family: var(--font-face);
+}
+
 .root :global([class*="Navigation_item"]:not([class*="itemWrapper"])) {
   column-gap: 10px;
 }
 
 .root :global(.articleItemText) {
-  font-weight: 600;
+  font-weight: var(--article-item-text-weight, 600);
 }
 
 .sectionArea {

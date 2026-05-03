@@ -24,39 +24,28 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-type LibraryUrlOptions = {
-  langId?: number | string;
-  categoryId?: number | string;
-  templateId?: number | string;
-  templateType?: "file" | "folder";
-  roomId?: number | string;
-  libraryId?: number | string;
-  stylesUrl?: string;
-};
+import { readFileSync } from "fs";
+import { join, resolve, normalize } from "path";
 
-export function libraryUrl(opts: LibraryUrlOptions = {}): string {
-  let path = "/forms/library";
+const STYLES_DIR = join(process.cwd(), "src/styles");
 
-  if (opts.langId) {
-    path += `/${opts.langId}`;
+export function readScssFile(name: string): string {
+  if (!name) return "";
 
-    if (opts.categoryId) {
-      path += `/${opts.categoryId}`;
+  try {
+    const fileName =
+      name.endsWith(".scss") || name.endsWith(".css") ? name : `${name}.scss`;
+    const fullPath = resolve(join(STYLES_DIR, fileName));
 
-      if (opts.templateId) {
-        path += `/template/${opts.templateId}`;
-      }
-    }
+    if (!fullPath.startsWith(normalize(STYLES_DIR))) return "";
+
+    const content = readFileSync(fullPath, "utf-8");
+    return content.replace(/\/\/[^\n]*/g, "");
+  } catch {
+    return "";
   }
+}
 
-  const params = new URLSearchParams();
-  if (opts.roomId) params.set("roomId", String(opts.roomId));
-  if (opts.libraryId) params.set("libraryId", String(opts.libraryId));
-  if (opts.stylesUrl) params.set("stylesUrl", opts.stylesUrl);
-  if (opts.templateId && opts.templateType) {
-    params.set("type", opts.templateType);
-  }
-
-  const qs = params.toString();
-  return qs ? `${path}?${qs}` : path;
+export function loadStyles(stylesUrl: string): string {
+  return readScssFile(stylesUrl);
 }
