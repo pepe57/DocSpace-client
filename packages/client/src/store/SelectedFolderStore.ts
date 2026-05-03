@@ -143,8 +143,6 @@ class SelectedFolderStore {
 
   rootFolderId: number = 0;
 
-  private settingsStore: SettingsStore = {} as SettingsStore;
-
   security: TFolderSecurity | TRoomSecurity | null = null;
 
   type: Nullable<FolderType> = null;
@@ -201,9 +199,8 @@ class SelectedFolderStore {
 
   originalFormId: Nullable<number> = null;
 
-  constructor(settingsStore: SettingsStore) {
+  constructor(protected settingsStore: SettingsStore) {
     makeAutoObservable(this);
-    this.settingsStore = settingsStore;
   }
 
   getSelectedFolder: () => TSelectedFolder = () => {
