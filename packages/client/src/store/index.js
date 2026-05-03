@@ -181,6 +181,7 @@ const filesStore = new FilesStore(
   settingsStore,
   indexingStore,
   aiRoomStore,
+  infoPanelStore,
 );
 
 const guidanceStore = new GuidanceStore();
@@ -462,4 +463,3 @@ const store = {
 };
 
 export default store;
-

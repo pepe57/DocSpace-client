@@ -48,4 +48,5 @@ export type ItemType = TRoom;
 
 export type EventType = Event & {
   item?: ItemType;
+  fromInfoPanel?: boolean;
 };

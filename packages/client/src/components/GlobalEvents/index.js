@@ -199,6 +199,7 @@ const GlobalEvents = ({
     setEditRoomDialogProps({
       visible,
       item: e.item,
+      fromInfoPanel: e.fromInfoPanel ?? false,
       onClose: () => {
         setCover();
         setEditRoomDialogProps({

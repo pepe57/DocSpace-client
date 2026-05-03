@@ -80,6 +80,7 @@ function FormInfoComponent({
     const event: EventType = new Event(Events.ROOM_EDIT);
 
     event.item = item;
+    event.fromInfoPanel = true;
     window.dispatchEvent(event);
   };
 

@@ -157,6 +157,8 @@ class FilesStore {
 
   pluginStore;
 
+  infoPanelStore;
+
   privateViewAs =
     !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
 
@@ -291,6 +293,7 @@ class FilesStore {
     settingsStore,
     indexingStore,
     aiRoomStore,
+    infoPanelStore,
   ) {
     const pathname = window.location.pathname.toLowerCase();
     this.isEditor = pathname.indexOf("doceditor") !== -1;
@@ -310,6 +313,7 @@ class FilesStore {
     this.settingsStore = settingsStore;
     this.indexingStore = indexingStore;
     this.aiRoomStore = aiRoomStore;
+    this.infoPanelStore = infoPanelStore;
 
     SocketHelper?.on(SocketEvents.ChangedQuotaUsedValue, (res) => {
       const { isFrame } = this.settingsStore;
@@ -1840,7 +1844,11 @@ class FilesStore {
           filterData.searchArea = SearchArea.Active;
           const newUrl = getCategoryUrl(CategoryType.Chat, folderId);
 
-          history.replaceState(null, "", `${newUrl}?${filterData.toUrlParams()}`);
+          history.replaceState(
+            null,
+            "",
+            `${newUrl}?${filterData.toUrlParams()}`,
+          );
         }
 
         if (newTotal > 0) {
@@ -5222,4 +5230,3 @@ class FilesStore {
 }
 
 export default FilesStore;
-

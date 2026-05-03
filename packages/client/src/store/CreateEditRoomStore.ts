@@ -29,6 +29,8 @@ import { makeAutoObservable, when } from "mobx";
 import isEqual from "lodash/isEqual";
 import { TFunction } from "i18next";
 
+import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
+
 import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
@@ -50,6 +52,7 @@ import {
   addServersForRoom,
   deleteServersForRoom,
 } from "@docspace/shared/api/ai";
+import { externalDbSync } from "@docspace/shared/api/files";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
@@ -220,6 +223,9 @@ class CreateEditRoomStore {
     t: TFunction,
     newParams: TRoomParams,
     room: TRoom,
+    options?: {
+      fromInfoPanel?: boolean;
+    },
   ) => {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
     const { cover, clearCoverProps } = this.dialogsStore!;
@@ -341,8 +347,12 @@ class CreateEditRoomStore {
         toastr.error(e as string);
       }
 
-      if (Object.keys(editRoomParams).length)
-        await api.rooms.editRoom(room.id, editRoomParams);
+      if (Object.keys(editRoomParams).length) {
+        const updatedRoom = await api.rooms.editRoom(room.id, editRoomParams);
+        if (options?.fromInfoPanel) {
+          this.filesStore.infoPanelStore.setInfoPanelRoom(updatedRoom);
+        }
+      }
 
       if (isOwnerChanged) {
         requests.push(changeRoomOwner(t, roomOwner.id));
@@ -366,6 +376,10 @@ class CreateEditRoomStore {
 
       if (room.isTemplate && isAvailable !== undefined) {
         requests.push(setTemplateAvailable(roomId, isAvailable));
+      }
+
+      if (isSendFormToExternalDBChanged && sendFormToExternalDB) {
+        requests.push(this.syncWithDatabase(room.id, t));
       }
 
       if (requests.length) {
@@ -771,6 +785,31 @@ class CreateEditRoomStore {
 
       showInfoPanel();
       openMembersTab();
+    }
+  };
+
+  syncWithDatabase = async (roomId: number, t: TFunction) => {
+    const { setSecondaryProgressBarData } =
+      this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
+
+    console.log("Syncing with database...");
+
+    try {
+      const res = await externalDbSync(roomId);
+
+      console.log({ res });
+
+      setSecondaryProgressBarData({
+        operation: OPERATIONS_NAME.syncDatabase,
+        label: t("Files:SyncWithDatabase"),
+        operationId: roomId,
+        progress: 0,
+      });
+    } catch (error) {
+      toastr.error("Failed to sync with database");
+      console.error(error);
+    } finally {
+      // clearSecondaryProgressData();
     }
   };
 }
