@@ -37,6 +37,8 @@ import { ActionButton } from "@docspace/ui-kit/components/action-button";
 import type { TFile } from "@docspace/ui-kit/types";
 import { Link as LinkButton, LinkType } from "@docspace/ui-kit/components/link";
 
+import { InfoPanelEvents } from "@docspace/shared/enums";
+
 import AIReactSvg from "PUBLIC_DIR/images/icons/16/AI.svg";
 import SpreadsheetReactSvg from "PUBLIC_DIR/images/icons/16/spreadsheet.svg";
 import FolderSvg from "PUBLIC_DIR/images/icons/12/folder.svg";
@@ -80,7 +82,14 @@ function FormInfoComponent({
     const event: EventType = new Event(Events.ROOM_EDIT);
 
     event.item = item;
-    event.fromInfoPanel = true;
+    event.cb = (room) => {
+      const event: EventType = new CustomEvent(
+        InfoPanelEvents.setInfoPanelSelectedRoom,
+        { detail: { room } },
+      );
+
+      window.dispatchEvent(event);
+    };
     window.dispatchEvent(event);
   };
 

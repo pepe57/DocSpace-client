@@ -48,5 +48,5 @@ export type ItemType = TRoom;
 
 export type EventType = Event & {
   item?: ItemType;
-  fromInfoPanel?: boolean;
+  cb?: (room: TRoom) => void;
 };

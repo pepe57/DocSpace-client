@@ -413,6 +413,13 @@ class InfoPanelStore {
     );
   }
 
+  get isDetailsTabActive(): boolean {
+    return (
+      this.roomsView === InfoPanelView.infoDetails ||
+      this.fileView === InfoPanelView.infoDetails
+    );
+  }
+
   inRoom = (): boolean => {
     return (
       this.infoPanelSelection !== null &&

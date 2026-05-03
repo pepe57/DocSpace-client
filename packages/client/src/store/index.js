@@ -181,7 +181,6 @@ const filesStore = new FilesStore(
   settingsStore,
   indexingStore,
   aiRoomStore,
-  infoPanelStore,
 );
 
 const guidanceStore = new GuidanceStore();

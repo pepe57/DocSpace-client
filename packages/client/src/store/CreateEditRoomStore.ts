@@ -224,7 +224,7 @@ class CreateEditRoomStore {
     newParams: TRoomParams,
     room: TRoom,
     options?: {
-      fromInfoPanel?: boolean;
+      cb?: (room: TRoom) => void;
     },
   ) => {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore!;
@@ -349,9 +349,7 @@ class CreateEditRoomStore {
 
       if (Object.keys(editRoomParams).length) {
         const updatedRoom = await api.rooms.editRoom(room.id, editRoomParams);
-        if (options?.fromInfoPanel) {
-          this.filesStore.infoPanelStore.setInfoPanelRoom(updatedRoom);
-        }
+        options?.cb?.(updatedRoom);
       }
 
       if (isOwnerChanged) {
