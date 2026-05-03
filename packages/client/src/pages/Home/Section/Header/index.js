@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AIReactSvg from "PUBLIC_DIR/images/icons/16/AI.svg";
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
@@ -38,8 +37,6 @@ import classnames from "classnames";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router";
-
-import { useIsDesktop } from "@docspace/ui-kit/hooks/use-is-desktop";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import Navigation from "@docspace/ui-kit/components/navigation";
@@ -81,6 +78,7 @@ import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHea
 
 import { useContactsHeader } from "./useContacts";
 import { getWarningText } from "../getWarningText";
+import { AnalyzeResponsesButton } from "./sub-components/AnalyzeResponses";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -214,8 +212,6 @@ const SectionHeaderContent = (props) => {
 
   const location = useLocation();
   const { sectionWidth } = React.use(Context);
-
-  const isDesktopView = useIsDesktop();
 
   const contactsView = getContactsView(location);
   const isContactsPage = !!contactsView;
@@ -848,18 +844,6 @@ const SectionHeaderContent = (props) => {
     ? t("Files:ShareRoom")
     : null;
 
-  const analyzeResponsesButton =
-    selectedFolder?.type === FolderType.SubFolderDone && isDesktopView ? (
-      <Button
-        accent
-        className={styles.analyzeResponsesButton}
-        label={t("Files:AnalyzeResponses")}
-        size={ButtonSize.extraSmall}
-        icon={<AIReactSvg />}
-        onClick={() => {}}
-      />
-    ) : null;
-
   const headerProps = React.useMemo(
     () => (isIndexEditingMode ? { headerLabel: t("Common:SortingIndex") } : {}),
     [isIndexEditingMode, t],
@@ -1051,7 +1035,11 @@ const SectionHeaderContent = (props) => {
               isPlusButtonVisible={isPlusButtonVisible}
               showBackButton={isProfile}
               contextMenuHeader={isProfile ? undefined : contextMenuHeader}
-              analyzeResponsesButton={analyzeResponsesButton}
+              analyzeResponsesButton={
+                <AnalyzeResponsesButton
+                  className={styles.analyzeResponsesButton}
+                />
+              }
             />
             {showSignInButton ? (
               <Button
