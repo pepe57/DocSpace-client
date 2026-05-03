@@ -43,6 +43,7 @@ import AIReactSvg from "PUBLIC_DIR/images/icons/16/AI.svg";
 import SpreadsheetReactSvg from "PUBLIC_DIR/images/icons/16/spreadsheet.svg";
 import FolderSvg from "PUBLIC_DIR/images/icons/12/folder.svg";
 import GridSvg from "PUBLIC_DIR/images/icons/12/grid.svg";
+import TickSvg from "PUBLIC_DIR/images/icons/12/tick.svg";
 import ExternalLinkSvg from "PUBLIC_DIR/images/external.link.react.svg";
 
 import styles from "./FormInfo.module.scss";
@@ -117,7 +118,8 @@ function FormInfoComponent({
 
   const connectedBadge = (
     <Text fontSize="12px" fontWeight={600} className={styles.connectedBadge}>
-      {`✓ ${t("Common:Connected")}`}
+      <TickSvg />
+      {t("Common:Connected")}
     </Text>
   );
 

@@ -43,6 +43,18 @@
   &:last-child {
     margin-bottom: 0;
   }
+
+  .connectedBadge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    color: #{colors.$main-green};
+
+    svg path {
+      fill: currentColor;
+    }
+  }
 }
 
 .cardTitle {
@@ -59,10 +71,6 @@
 
 .cardDescription {
   margin: 0;
-}
-
-.connectedBadge {
-  color: #{colors.$main-green};
 }
 
 .actionButton {
