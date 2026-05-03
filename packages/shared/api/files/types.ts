@@ -195,6 +195,7 @@ export type TFolder = {
   sharedForUser?: boolean;
   isLinkExpired?: boolean;
   external?: boolean;
+  originalFormId?: number;
 };
 
 export type TGetFolderPath = TFolder[];

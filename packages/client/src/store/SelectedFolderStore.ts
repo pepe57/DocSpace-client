@@ -147,7 +147,7 @@ class SelectedFolderStore {
 
   security: TFolderSecurity | TRoomSecurity | null = null;
 
-  type = null;
+  type: Nullable<FolderType> = null;
 
   inRoom = false;
 
@@ -196,7 +196,10 @@ class SelectedFolderStore {
   parentShared: boolean = false;
 
   sendFormToExternalDB: boolean = false;
+
   saveFormAsXLSX: boolean = false;
+
+  originalFormId: Nullable<number> = null;
 
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
@@ -271,6 +274,7 @@ class SelectedFolderStore {
       roomQuotaLimit: this.roomQuotaLimit,
       sendFormToExternalDB: this.sendFormToExternalDB,
       saveFormAsXLSX: this.saveFormAsXLSX,
+      originalFormId: this.originalFormId,
     };
   };
 
@@ -334,6 +338,7 @@ class SelectedFolderStore {
     this.sharedBy = null;
     this.sendFormToExternalDB = false;
     this.saveFormAsXLSX = false;
+    this.originalFormId = null;
   };
 
   setFilesCount = (filesCount: number) => {
