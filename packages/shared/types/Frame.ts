@@ -147,10 +147,12 @@ export type TFrameConfig = {
   filterParam?: string;
   frameId: string;
   headerOffset?: number;
+  headerHeight?: number;
   height?: string;
   id?: string | number | null;
   infoPanelVisible?: boolean;
   init?: boolean | null;
+  integrationUrl?: string;
   isSDK?: boolean;
   locale?: string | null;
   mode?: TFrameMode;

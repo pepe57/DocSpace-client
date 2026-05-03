@@ -28,7 +28,7 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import type {
   TFile,
@@ -51,6 +51,7 @@ import { FloatingButton } from "@docspace/ui-kit/components/floating-button";
 import { SectionWrapper } from "@/app/(docspace)/_components/section";
 import Header from "@/app/(docspace)/_components/header";
 import useDeviceType from "@/hooks/useDeviceType";
+import useFrameHeaderConfig from "@/hooks/useFrameHeaderConfig";
 import { Filter } from "@/app/(docspace)/_components/filter";
 import SelectionArea from "@/app/(docspace)/_components/selection-area";
 import FilesMediaViewer from "@/app/(docspace)/_components/FilesMediaViewer";
@@ -119,12 +120,8 @@ const DocsLayoutInner = observer(({
   const infoPanelStore = useInfoPanelStore();
   const { sdkConfig } = useSDKConfig();
   const router = useRouter();
-  const searchParams = useSearchParams();
 
-  const initialHeaderOffset = React.useRef(
-    Number(searchParams.get("headerOffset")) || 0,
-  );
-  const headerOffset = sdkConfig?.headerOffset ?? initialHeaderOffset.current;
+  const { headerOffset, frameHeaderVars } = useFrameHeaderConfig();
 
   const isMyDocuments = rootFolderType === FolderType.USER;
   const showMobileButton = currentDeviceType !== DeviceType.desktop && isMyDocuments;
@@ -224,7 +221,7 @@ const DocsLayoutInner = observer(({
         <DeleteContext.Provider value={deleteHandler}>
         <RenameContext.Provider value={renameHandler}>
         <FileOperationsContext.Provider value={fileOperationsHandler}>
-        <div className={styles.root}>
+        <div className={styles.root} style={frameHeaderVars}>
           {sdkConfig?.showMenu !== false && <DocsSidebar />}
           <DropZone onFilesDropped={uploadFilesToFolder} disabled={!isMyDocuments}>
             <RootScrollbar>

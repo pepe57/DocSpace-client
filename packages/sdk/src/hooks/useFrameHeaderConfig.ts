@@ -24,39 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-type LibraryUrlOptions = {
-  langId?: number | string;
-  categoryId?: number | string;
-  templateId?: number | string;
-  templateType?: "file" | "folder";
-  roomId?: number | string;
-  libraryId?: number | string;
-  stylesUrl?: string;
+"use client";
+
+import type React from "react";
+import { useRef } from "react";
+import { useSearchParams } from "next/navigation";
+
+import { useSDKConfig } from "@/providers/SDKConfigProvider";
+
+const TITLE_BLOCK_HEIGHT = 33;
+
+const useFrameHeaderConfig = () => {
+  const { sdkConfig } = useSDKConfig();
+  const searchParams = useSearchParams();
+
+  const initialOffset = useRef(
+    Number(searchParams.get("headerOffset")) || 0,
+  );
+  const initialHeight = useRef(
+    Number(searchParams.get("headerHeight")) || 0,
+  );
+
+  const headerOffset = sdkConfig?.headerOffset ?? initialOffset.current;
+  const headerHeight = sdkConfig?.headerHeight ?? initialHeight.current;
+
+  const frameHeaderVars: React.CSSProperties | undefined = headerHeight
+    ? ({
+        "--section-header-height": `${headerHeight}px`,
+        "--section-header-height-tablet": `${headerHeight}px`,
+        "--section-header-height-mobile": `${headerHeight}px`,
+        "--nav-dropbox-padding-top": `${Math.max(
+          0,
+          (headerHeight - TITLE_BLOCK_HEIGHT) / 2,
+        )}px`,
+      } as React.CSSProperties)
+    : undefined;
+
+  return { headerOffset, headerHeight, frameHeaderVars };
 };
 
-export function libraryUrl(opts: LibraryUrlOptions = {}): string {
-  let path = "/forms/library";
-
-  if (opts.langId) {
-    path += `/${opts.langId}`;
-
-    if (opts.categoryId) {
-      path += `/${opts.categoryId}`;
-
-      if (opts.templateId) {
-        path += `/template/${opts.templateId}`;
-      }
-    }
-  }
-
-  const params = new URLSearchParams();
-  if (opts.roomId) params.set("roomId", String(opts.roomId));
-  if (opts.libraryId) params.set("libraryId", String(opts.libraryId));
-  if (opts.stylesUrl) params.set("stylesUrl", opts.stylesUrl);
-  if (opts.templateId && opts.templateType) {
-    params.set("type", opts.templateType);
-  }
-
-  const qs = params.toString();
-  return qs ? `${path}?${qs}` : path;
-}
+export default useFrameHeaderConfig;
