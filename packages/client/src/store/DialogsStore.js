@@ -347,6 +347,13 @@ class DialogsStore {
 
   pauseSubmissionsDialogVisible = false;
 
+  askAIConnectDialogVisible = false;
+
+  /**
+   * @type {((res: string) => void) | null}
+   */
+  askAIConnectDialogCallback = null;
+
   /**
    * @type {(res:boolean)=>void | null}
    */
@@ -1172,6 +1179,11 @@ class DialogsStore {
 
   deleteRoomGroup = async (groupId) => {
     await deleteRoomGroup(groupId);
+  };
+
+  setAskAIConnectDialogVisible = (visible, callback = null) => {
+    this.askAIConnectDialogVisible = visible;
+    this.askAIConnectDialogCallback = callback;
   };
 }
 

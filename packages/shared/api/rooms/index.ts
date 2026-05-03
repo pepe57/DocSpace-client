@@ -196,7 +196,7 @@ export function createRoomInThirdpary(id, data) {
 export function editRoom(id, data) {
   const options = { method: "put", url: `/files/rooms/${id}`, data };
 
-  return request(options).then((res) => {
+  return request<TRoom>(options).then((res) => {
     return res;
   });
 }
