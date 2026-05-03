@@ -804,7 +804,7 @@ class CreateEditRoomStore {
         progress: 0,
       });
     } catch (error) {
-      toastr.error("Failed to sync with database");
+      toastr.error(t("Files:SyncWithDatabaseError"));
       console.error(error);
     } finally {
       // clearSecondaryProgressData();
