@@ -67,6 +67,7 @@ function FormInfoComponent({
   openLocationAction,
   onClickLinkFillForm,
   infoPanelRoomSelection,
+  isAdmin,
 }: FormRoomInfoBlocksProps) {
   const { t } = useTranslation(["InfoPanel", "Common"]);
 
@@ -77,6 +78,9 @@ function FormInfoComponent({
   const aiConnected =
     !!infoPanelRoomSelection?.sendFormToExternalDB && externalDbEnabled;
   const collectionConnected = !!infoPanelRoomSelection?.saveFormAsXLSX;
+
+  const canEditRoom = !!infoPanelRoomSelection?.security?.EditRoom;
+  const canManageExternalDb = isAdmin;
 
   const handleEditRoom = (item: ItemType) => {
     const event: EventType = new Event(Events.ROOM_EDIT);
@@ -167,7 +171,8 @@ function FormInfoComponent({
       return null;
     }
 
-    if (!externalDbEnabled)
+    if (!externalDbEnabled) {
+      if (!canManageExternalDb) return null;
       return (
         <ActionButton
           as={Link}
@@ -177,6 +182,9 @@ function FormInfoComponent({
           to="/portal-settings/integration/third-party-services?consumer=externaldb"
         />
       );
+    }
+
+    if (!canEditRoom) return null;
 
     return (
       <ActionButton
@@ -213,13 +221,13 @@ function FormInfoComponent({
         ) : null}
       </>
     ) : null
-  ) : (
+  ) : canEditRoom ? (
     <ActionButton
       label={t("Common:Connect")}
       icon={<ExternalLinkSvg />}
       onClick={handleConnect}
     />
-  );
+  ) : null;
 
   if (!shouldShow(selection)) return null;
 
@@ -260,12 +268,14 @@ export const FormInfo = inject<
     settingsStore,
     contextOptionsStore,
     infoPanelStore,
+    userStore,
   }) => ({
     askAIAction: filesActionsStore.askAIAction,
     openLocationAction: filesActionsStore.openLocationAction,
     externalDbEnabled: settingsStore.externalDbEnabled,
     onClickLinkFillForm: contextOptionsStore.onClickLinkFillForm,
     infoPanelRoomSelection: infoPanelStore.infoPanelRoomSelection,
+    isAdmin: !!(userStore?.user?.isAdmin || userStore?.user?.isOwner),
   }),
 )(observer(FormInfoComponent as FC<ExternalFormInfoProps>));
 

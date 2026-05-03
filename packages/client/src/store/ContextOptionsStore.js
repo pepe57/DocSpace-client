@@ -1910,7 +1910,7 @@ class ContextOptionsStore {
       const room = await this._resolveRoom();
       if (!room) return;
 
-      if (room.sendFormToExternalDB) {
+      if (room.sendFormToExternalDB || !room.security?.EditRoom) {
         this.filesActionsStore.askAIAction(item);
         return;
       }

@@ -30,12 +30,15 @@ import type { TSelectedFolder } from "SRC_DIR/store/SelectedFolderStore";
 
 export type Selection = TRoom | TFile | TFolder | TSelectedFolder;
 
-export interface InjectedFormInfoProps
-  extends
-    Pick<TStore["infoPanelStore"], "infoPanelRoomSelection">,
-    Pick<TStore["filesActionsStore"], "askAIAction" | "openLocationAction">,
-    Pick<TStore["contextOptionsStore"], "onClickLinkFillForm">,
-    Pick<TStore["settingsStore"], "externalDbEnabled"> {}
+export type InjectedFormInfoProps = Pick<
+  TStore["infoPanelStore"],
+  "infoPanelRoomSelection"
+> &
+  Pick<TStore["filesActionsStore"], "askAIAction" | "openLocationAction"> &
+  Pick<TStore["contextOptionsStore"], "onClickLinkFillForm"> &
+  Pick<TStore["settingsStore"], "externalDbEnabled"> & {
+    isAdmin: boolean;
+  };
 
 export interface ExternalFormInfoProps {
   selection: Selection;
