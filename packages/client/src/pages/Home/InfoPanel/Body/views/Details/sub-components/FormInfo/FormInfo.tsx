@@ -24,21 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { match } from "ts-pattern";
 import { Link } from "react-router";
-import { FC, useMemo, useState } from "react";
+import { FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Events } from "@docspace/ui-kit/enums";
-import { toastr, Tooltip } from "@docspace/ui-kit/components";
+import { Tooltip } from "@docspace/ui-kit/components";
 import { Card } from "@docspace/ui-kit/components/card";
 import { Text } from "@docspace/ui-kit/components/text";
 import { ActionButton } from "@docspace/ui-kit/components/action-button";
 import type { TFile } from "@docspace/ui-kit/types";
 import { Link as LinkButton, LinkType } from "@docspace/ui-kit/components/link";
-
-import { getRoomInfo } from "@docspace/shared/api/rooms";
 
 import AIReactSvg from "PUBLIC_DIR/images/icons/16/AI.svg";
 import SpreadsheetReactSvg from "PUBLIC_DIR/images/icons/16/spreadsheet.svg";
@@ -63,24 +60,21 @@ import type {
 
 function FormInfoComponent({
   selection,
-  infoPanelRoomSelection,
   askAIAction,
-  pathParts,
   externalDbEnabled,
   openLocationAction,
   onClickLinkFillForm,
+  infoPanelRoomSelection,
 }: FormRoomInfoBlocksProps) {
   const { t } = useTranslation(["InfoPanel", "Common"]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const isDone = isDoneFolder(selection);
   const isFile = isFormFile(selection);
   const isRoom = isFormRoom(selection);
 
-  const room = isRoom ? selection : infoPanelRoomSelection;
-
-  const aiConnected = !!room?.sendFormToExternalDB && externalDbEnabled;
-  const collectionConnected = !!room?.saveFormAsXLSX;
+  const aiConnected =
+    !!infoPanelRoomSelection?.sendFormToExternalDB && externalDbEnabled;
+  const collectionConnected = !!infoPanelRoomSelection?.saveFormAsXLSX;
 
   const handleEditRoom = (item: ItemType) => {
     const event: EventType = new Event(Events.ROOM_EDIT);
@@ -102,32 +96,9 @@ function FormInfoComponent({
     if (isFile) onClickLinkFillForm(selection);
   };
 
-  const handleConnect = async () => {
-    try {
-      const item = await match(room)
-        .when(
-          (r) => !!r,
-          (r) => r,
-        )
-        .otherwise(() => {
-          const roomId = pathParts?.find((part) => part.roomType)?.id;
-
-          if (!roomId) return null;
-
-          setIsLoading(true);
-
-          return getRoomInfo(roomId);
-        });
-
-      if (!item) return;
-
-      handleEditRoom(item);
-    } catch (error) {
-      console.error(error);
-      toastr.error(error as Error);
-    } finally {
-      setIsLoading(false);
-    }
+  const handleConnect = () => {
+    if (!infoPanelRoomSelection) return;
+    handleEditRoom(infoPanelRoomSelection);
   };
 
   const connectedBadge = (
@@ -202,7 +173,6 @@ function FormInfoComponent({
         label={t("Common:Connect")}
         icon={<ExternalLinkSvg />}
         onClick={handleConnect}
-        disabled={isLoading}
       />
     );
   };
@@ -221,7 +191,12 @@ function FormInfoComponent({
           <Tooltip anchorSelect="#complete-folder" clickable>
             <Text>{t("InfoPanel:FormRoomNoSubmissionsYet")}</Text>
             <Text>{t("InfoPanel:FormRoomResultsFolderNote")}</Text>
-            <LinkButton onClick={filForm} color="accent" type={LinkType.page}>
+            <LinkButton
+              color="accent"
+              onClick={filForm}
+              type={LinkType.page}
+              className={styles.tooltipLink}
+            >
               {t("Common:FillOutTheForm")}
             </LinkButton>
           </Tooltip>
@@ -233,7 +208,6 @@ function FormInfoComponent({
       label={t("Common:Connect")}
       icon={<ExternalLinkSvg />}
       onClick={handleConnect}
-      disabled={isLoading}
     />
   );
 
@@ -272,18 +246,16 @@ export const FormInfo = inject<
   InjectedFormInfoProps
 >(
   ({
-    infoPanelStore,
     filesActionsStore,
-    selectedFolderStore,
     settingsStore,
     contextOptionsStore,
+    infoPanelStore,
   }) => ({
-    infoPanelRoomSelection: infoPanelStore.infoPanelRoomSelection,
     askAIAction: filesActionsStore.askAIAction,
     openLocationAction: filesActionsStore.openLocationAction,
-    pathParts: selectedFolderStore.pathParts,
     externalDbEnabled: settingsStore.externalDbEnabled,
     onClickLinkFillForm: contextOptionsStore.onClickLinkFillForm,
+    infoPanelRoomSelection: infoPanelStore.infoPanelRoomSelection,
   }),
 )(observer(FormInfoComponent as FC<ExternalFormInfoProps>));
 
