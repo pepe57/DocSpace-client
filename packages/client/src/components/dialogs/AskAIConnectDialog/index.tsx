@@ -38,6 +38,7 @@ import {
 import { useLocalStorage } from "@docspace/shared/hooks/useLocalStorage";
 
 import type { AskAIConnectDialogProps } from "./AskAIConnectDialog.types";
+import styles from "./AskAIConnectDialog.module.scss";
 
 export const SKIP_AI_MODAL_KEY = "formRoom.skipAIConnectModal";
 
@@ -80,7 +81,7 @@ const AskAIConnectDialog = ({
           {t("InfoPanel:FormRoomAIModalDescription")}
         </Text>
         <Checkbox
-          style={{ marginTop: "16px" }}
+          className={styles.checkbox}
           label={t("Common:DontShowAgain")}
           isChecked={skipModal}
           onChange={() => setSkipModal((prev) => !prev)}
