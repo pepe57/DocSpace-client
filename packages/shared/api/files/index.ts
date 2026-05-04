@@ -78,6 +78,7 @@ import type {
   TShareToUser,
   TDefaultTemplate,
   UpdateXlsxResponse,
+  ExternalSyncDB,
 } from "./types";
 
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
@@ -2016,5 +2017,18 @@ export async function getProgressXlsx(itemId: string | number) {
   return request<UpdateXlsxResponse["task"]>({
     method: "GET",
     url: `/files/file/${itemId}/xlsx`,
+  });
+}
+
+export async function externalDbSync(itemId: string | number) {
+  return request<ExternalSyncDB>({
+    method: "GET",
+    url: `/files/rooms/${itemId}/external_db_sync`,
+  });
+}
+export async function startDbSync(itemId: string | number) {
+  return request<ExternalSyncDB>({
+    method: "POST",
+    url: `/files/rooms/${itemId}/external_db_sync`,
   });
 }

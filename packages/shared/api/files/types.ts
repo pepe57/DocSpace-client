@@ -540,3 +540,12 @@ export type UpdateXlsxResponse = {
     error: string;
   };
 };
+
+export type ExternalSyncDB = {
+  id: string;
+  forms: { id: number; title: string; success: boolean; error?: string }[];
+  error?: string;
+  isCompleted: boolean;
+  percentage: number;
+  status: DistributedTaskStatus;
+};

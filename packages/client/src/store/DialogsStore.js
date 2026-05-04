@@ -361,6 +361,13 @@ class DialogsStore {
 
   roomGroups = [];
 
+  syncDbData = {
+    operationId: null,
+    forms: [],
+  };
+
+  isSyncDbPanelVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -1184,6 +1191,14 @@ class DialogsStore {
   setAskAIConnectDialogVisible = (visible, callback = null) => {
     this.askAIConnectDialogVisible = visible;
     this.askAIConnectDialogCallback = callback;
+  };
+
+  setSyncDbForms = (data) => {
+    this.syncDbData = data;
+  };
+
+  setIsSyncDbPanelVisible = (visible) => {
+    this.isSyncDbPanelVisible = visible;
   };
 }
 

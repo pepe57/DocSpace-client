@@ -98,6 +98,7 @@ import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
 import FillingStatusPanel from "../panels/FillingStatusPanel";
+import ExternalSyncDbPanel from "../panels/ExternalSyncDbPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
 import AssignRoles from "../dialogs/AssignRoles";
@@ -452,6 +453,7 @@ const Panels = (props) => {
       <CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
     ),
     <FillingStatusPanel key="filling-status-panel" />,
+    <ExternalSyncDbPanel key="external-sync-db-panel" />,
     deleteVersionDialogVisible && (
       <DeleteVersionDialog key="delete-version-dialog" />
     ),

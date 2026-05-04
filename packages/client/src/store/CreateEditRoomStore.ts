@@ -23,8 +23,6 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
-
 import { makeAutoObservable, when } from "mobx";
 import isEqual from "lodash/isEqual";
 import { TFunction } from "i18next";
@@ -48,11 +46,9 @@ import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { Nullable } from "@docspace/shared/types";
 import { TRoomIconParams, TRoomParams } from "@docspace/shared/utils/rooms";
 import { TRoom, TWatermark } from "@docspace/shared/api/rooms/types";
-import {
-  addServersForRoom,
-  deleteServersForRoom,
-} from "@docspace/shared/api/ai";
-import { externalDbSync } from "@docspace/shared/api/files";
+import { addServersForRoom } from "@docspace/shared/api/ai";
+import { startDbSync } from "@docspace/shared/api/files";
+import { DbSyncService } from "@docspace/shared/services/db-sync.service";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { calculateRoomLogoParams } from "SRC_DIR/helpers/filesUtils";
@@ -787,27 +783,76 @@ class CreateEditRoomStore {
   };
 
   syncWithDatabase = async (roomId: number, t: TFunction) => {
-    const { setSecondaryProgressBarData } =
+    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       this.filesActionsStore.uploadDataStore.secondaryProgressDataStore;
 
-    console.log("Syncing with database...");
-
     try {
-      const res = await externalDbSync(roomId);
+      const res = await startDbSync(roomId);
 
-      console.log({ res });
+      if (!res) return;
 
-      setSecondaryProgressBarData({
+      if (res.isCompleted) {
+        DbSyncService.assertTaskSucceeded(res);
+        toastr.success(t("Files:SyncWithDatabaseSuccess"));
+        return;
+      }
+
+      const basePayload = {
         operation: OPERATIONS_NAME.syncDatabase,
         label: t("Files:SyncWithDatabase"),
         operationId: roomId,
-        progress: 0,
+        showPanel: () => this.dialogsStore.setIsSyncDbPanelVisible(true),
+      };
+
+      setSecondaryProgressBarData({ ...basePayload, percent: 0 });
+
+      const finalTask = await DbSyncService.poll(roomId, (progress) => {
+        setSecondaryProgressBarData({
+          ...basePayload,
+          percent: progress.percentage ?? 0,
+          completed: progress.isCompleted ?? false,
+          alert: false,
+        });
+      }).catch((error) => {
+        clearSecondaryProgressData(roomId, OPERATIONS_NAME.syncDatabase);
+        throw error;
       });
+
+      this.dialogsStore.setSyncDbForms({
+        operationId: roomId,
+        forms: finalTask.forms,
+      });
+
+      const { forms } = finalTask;
+      const successCount = forms.filter((f) => f.success).length;
+      const errorCount = forms.filter((f) => !f.success && !!f.error).length;
+      const total = forms.length;
+      const pendingCount = total - successCount;
+
+      const statusLabel = t("Files:SyncWithDatabaseStatus", {
+        success: successCount,
+        total,
+      });
+      const pendingLabel =
+        pendingCount > 0
+          ? t("Files:SyncWithDatabasePending", { count: pendingCount })
+          : undefined;
+
+      setSecondaryProgressBarData({
+        ...basePayload,
+        label: statusLabel,
+        description: pendingLabel,
+        percent: 100,
+        completed: true,
+        alert: errorCount > 0,
+      });
+
+      if (errorCount === 0) {
+        toastr.success(t("Files:SyncWithDatabaseSuccess"));
+      }
     } catch (error) {
       toastr.error(t("Files:SyncWithDatabaseError"));
       console.error(error);
-    } finally {
-      // clearSecondaryProgressData();
     }
   };
 }
