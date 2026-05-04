@@ -66,6 +66,11 @@ export const useDocsPageInit = ({
     if (initialised.current) return;
     initialised.current = true;
 
+    if (authToken) {
+      document.cookie = `asc_auth_key=${encodeURIComponent(authToken)}; path=/; SameSite=Lax`;
+      setAuthToken(authToken);
+    }
+
     docsSettingsStore.setFilesSettings(filesSettings);
     filesSettingsStore.setFilesSettings(filesSettings);
     settingsStore.setDisplayAbout(portalSettings.displayAbout);
@@ -83,17 +88,12 @@ export const useDocsPageInit = ({
     const prevIsFrame = window.ClientConfig.isFrame;
     window.ClientConfig.isFrame = true;
 
-    if (authToken) {
-      document.cookie = `asc_auth_key=${encodeURIComponent(authToken)}; path=/; SameSite=Lax`;
-      setAuthToken(authToken);
-    }
-
     return () => {
       if (window.ClientConfig) {
         window.ClientConfig.isFrame = prevIsFrame;
       }
     };
-  }, [authToken]);
+  }, []);
 
   return isReady;
 };
