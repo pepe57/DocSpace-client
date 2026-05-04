@@ -75,7 +75,7 @@ export const useDetails = ({
 
     const fetchedRoom = await getRoomInfo(roomPath.id);
     setInfoPanelRoom(fetchedRoom);
-  }, [selection, infoPanelRoomSelection, pathParts]);
+  }, [selection, infoPanelRoomSelection, pathParts, setInfoPanelRoom, getSelectedFolder]);
 
   return { fetchRoom };
 };
