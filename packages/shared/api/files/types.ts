@@ -151,6 +151,7 @@ export type TFolderSecurity = {
   ChangeOwner: boolean;
   IndexExport: boolean;
   UpdateXlsx?: boolean;
+  AnalyzeResponses?: boolean;
 };
 
 export type TFolder = {

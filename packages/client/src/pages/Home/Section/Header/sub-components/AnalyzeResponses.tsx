@@ -58,7 +58,12 @@ const AnalyzeResponsesButtonComponent = ({
   if (
     !isDesktopView ||
     selectedFolder.type !== FolderType.SubFolderDone ||
-    !selectedFolder.originalFormId
+    !selectedFolder.originalFormId ||
+    !(
+      selectedFolder.security &&
+      "AnalyzeResponses" in selectedFolder.security &&
+      selectedFolder.security.AnalyzeResponses
+    )
   )
     return;
 
