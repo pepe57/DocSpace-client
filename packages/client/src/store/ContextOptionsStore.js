@@ -1893,7 +1893,7 @@ class ContextOptionsStore {
   };
 
   askAI = async (item) => {
-    const skipAi = localStorage.getItem(SKIP_AI_MODAL_KEY) === "true";
+    const skipAi = JSON.parse(localStorage.getItem(SKIP_AI_MODAL_KEY) ?? "false");
 
     if (item.parentRoomType !== FolderType.FormRoom || skipAi) {
       this.filesActionsStore.askAIAction(item);
