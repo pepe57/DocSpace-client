@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} tables will be created after the first form submission",
   "SyncWithDatabaseStatus": "Synchronized: {{success}} out of {{total}}",
   "SyncWithDatabaseSuccess": "All forms will synchronized with the external database in the background",
+  "TableSettingsTitle": "Manage displayed columns",
   "Template": "Template",
   "TemplateAvailable": "Template available to everyone",
   "TemplateAvailableDescription": "All {{productName}} and Room admins will be able to create rooms using this template.",
