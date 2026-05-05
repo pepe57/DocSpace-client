@@ -115,8 +115,11 @@ export default inject(({ dialogsStore, uploadDataStore }: TStore) => {
         dialogsStore.syncDbData.operationId,
         OPERATIONS_NAME.syncDatabase,
       );
-      dialogsStore.setSyncDbForms([]);
       dialogsStore.setIsSyncDbPanelVisible(false);
+      dialogsStore.setSyncDbForms({
+        forms: [],
+        operationId: null,
+      });
     },
     data: dialogsStore.syncDbData,
   };
