@@ -372,7 +372,10 @@ class CreateEditRoomStore {
         requests.push(setTemplateAvailable(roomId, isAvailable));
       }
 
-      if (isSendFormToExternalDBChanged && sendFormToExternalDB) {
+      if (
+        (isSendFormToExternalDBChanged && sendFormToExternalDB) ||
+        (isSaveFormAsXLSXChanged && saveFormAsXLSX)
+      ) {
         requests.push(this.syncWithDatabase(room.id, t));
       }
 
