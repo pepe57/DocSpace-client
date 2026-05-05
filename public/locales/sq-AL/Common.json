@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "Regjistrohu me Nextcloud",
   "SpreadsheetGenerated": "Fletorja e punës për {{formName}} është gjeneruar bazuar në të gjitha kopjet e plotësuara",
   "SpreadsheetUpdated": "Tabela për {{formName}} është përditësuar bazuar në të gjitha kopjet e përfunduara",
-  "SyncXlsxData": "Sinkronizo përgjigjet në XLSX"
+  "SyncXlsxData": "Sinkronizo përgjigjet në XLSX",
+  "WhiteLabelLogoSubtitle": "Ngarkoni logove me sfond transparent (PNG, SVG, JPG) për tema të lehta dhe të errëta, ose gjeneroni një menjëherë duke futur logon tuaj më poshtë."
 }

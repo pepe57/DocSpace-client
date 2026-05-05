@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "Nextcloud로 가입하기",
   "SpreadsheetGenerated": "{{formName}}에 대한 스프레드시트가 모든 완료된 복사본을 기반으로 생성되었습니다.",
   "SpreadsheetUpdated": "{{formName}}의 스프레드시트가 모든 완료된 사본을 기반으로 업데이트되었습니다.",
-  "SyncXlsxData": "응답을 XLSX로 동기화"
+  "SyncXlsxData": "응답을 XLSX로 동기화",
+  "WhiteLabelLogoSubtitle": "라이트 및 다크 테마를 위해 투명한 배경의 로고(PNG, SVG, JPG)를 업로드하거나, 아래에 로고를 입력하여 즉시 생성하세요."
 }

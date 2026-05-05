@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "Nextcloud ilə qeydiyyatdan keçin",
   "SpreadsheetGenerated": "{{formName}} üçün elektron cədvəl bütün tamamlanmış surətlər əsasında yaradılır",
   "SpreadsheetUpdated": "{{formName}} üçün elektron cədvəl bütün tamamlanmış surətlər əsasında yeniləndi",
-  "SyncXlsxData": "Cavabları XLSX-ə sinxronlaşdır"
+  "SyncXlsxData": "Cavabları XLSX-ə sinxronlaşdır",
+  "WhiteLabelLogoSubtitle": "Açıq fonlu loqoları (PNG, SVG, JPG) açıq və tünd mövzular üçün yükləyin və ya aşağıda loqonuzu daxil edərək dərhal birini yaradın."
 }
