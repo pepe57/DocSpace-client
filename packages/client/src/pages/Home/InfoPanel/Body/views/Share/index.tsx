@@ -104,6 +104,7 @@ export default inject<TStore>(
     } = infoPanelStore;
 
     const {
+      isExternalShareRestricted: isShareRestricted,
       externalShareApplyToDocuments,
       defaultShareLinkInternal,
       blockExistingLinksOnRestrict,
@@ -124,7 +125,7 @@ export default inject<TStore>(
       setEditMembersGroup,
       setEditGroupMembersDialogVisible,
 
-      isExternalShareRestricted: externalShareApplyToDocuments,
+      isExternalShareRestricted: isShareRestricted && externalShareApplyToDocuments,
       blockExistingLinksOnRestrict,
       defaultShareLinkInternal,
     };

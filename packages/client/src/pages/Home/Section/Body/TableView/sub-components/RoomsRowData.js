@@ -244,7 +244,11 @@ export default inject(
 
     const { showStorageInfo } = currentQuotaStore;
 
-    const { externalShareApplyToRooms, blockExistingLinksOnRestrict } = filesSettingsStore;
+    const {
+      isExternalShareRestricted: isShareRestricted,
+      externalShareApplyToRooms,
+      blockExistingLinksOnRestrict,
+    } = filesSettingsStore;
     return {
       roomQuotaColumnIsEnable,
       roomColumnTypeIsEnabled,
@@ -253,7 +257,7 @@ export default inject(
       roomColumnActivityIsEnabled,
       showStorageInfo,
       tableStorageName,
-      isExternalShareRestricted: externalShareApplyToRooms,
+      isExternalShareRestricted: isShareRestricted && externalShareApplyToRooms,
       blockExistingLinksOnRestrict,
     };
   },
