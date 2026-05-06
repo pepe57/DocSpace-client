@@ -26,9 +26,9 @@
 
 import { pipe, delay, stopWhen } from "@docspace/ui-kit/utils/pipe";
 
-import { externalDbSync } from "../api/files";
+import { externalDbSync } from "../api/rooms";
 import { DistributedTaskStatus } from "../enums";
-import type { ExternalSyncDB } from "../api/files/types";
+import type { ExternalSyncDB } from "../api/rooms/types";
 
 export class DbSyncService {
   static assertTaskSucceeded(task: ExternalSyncDB): void {

@@ -51,6 +51,7 @@ import {
   TRoom,
   TGetRoomMembers,
   TFeed,
+  ExternalSyncDB,
 } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
@@ -749,4 +750,17 @@ export function deleteRoomGroup(groupId) {
   };
 
   return request(options);
+}
+
+export async function externalDbSync(itemId: string | number) {
+  return request<ExternalSyncDB>({
+    method: "GET",
+    url: `/files/rooms/${itemId}/externalDbSync`,
+  });
+}
+export async function startDbSync(itemId: string | number) {
+  return request<ExternalSyncDB>({
+    method: "POST",
+    url: `/files/rooms/${itemId}/externalDbSync`,
+  });
 }

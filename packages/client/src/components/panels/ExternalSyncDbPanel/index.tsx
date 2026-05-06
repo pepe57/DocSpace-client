@@ -41,7 +41,7 @@ import {
 import { Text } from "@docspace/ui-kit/components/text";
 import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
-import type { ExternalSyncDB } from "@docspace/shared/api/files/types";
+import type { ExternalSyncDB } from "@docspace/shared/api/rooms/types";
 
 import styles from "./ExternalSyncDbPanel.module.scss";
 
@@ -124,4 +124,3 @@ export default inject(({ dialogsStore, uploadDataStore }: TStore) => {
     data: dialogsStore.syncDbData,
   };
 })(observer(ExternalSyncDbPanel));
-

@@ -47,7 +47,7 @@ import { Nullable } from "@docspace/shared/types";
 import { TRoomIconParams, TRoomParams } from "@docspace/shared/utils/rooms";
 import { TRoom, TWatermark } from "@docspace/shared/api/rooms/types";
 import { addServersForRoom } from "@docspace/shared/api/ai";
-import { startDbSync } from "@docspace/shared/api/files";
+import { startDbSync } from "@docspace/shared/api/rooms";
 import { DbSyncService } from "@docspace/shared/services/db-sync.service";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
