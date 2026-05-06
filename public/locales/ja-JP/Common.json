@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "Nextcloudで登録",
   "SpreadsheetGenerated": "{{formName}} 用のスプレッドシートが、すべての回答済みコピーに基づいて生成されました。",
   "SpreadsheetUpdated": "{{formName}} のスプレッドシートは、すべての完了したコピーに基づいて更新されました。",
-  "SyncXlsxData": "回答をXLSXに同期"
+  "SyncXlsxData": "回答をXLSXに同期",
+  "WhiteLabelLogoSubtitle": "ライトテーマおよびダークテーマ用に、背景が透明なロゴ（PNG、SVG、JPG）をアップロードするか、下の欄にロゴ名を入力してすぐに作成してください。"
 }

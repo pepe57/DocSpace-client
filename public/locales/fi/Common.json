@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "Rekisteröidy Nextcloudilla",
   "SpreadsheetGenerated": "{{formName}}-lomakkeen taulukko on luotu kaikkien täytettyjen kopioiden perusteella",
   "SpreadsheetUpdated": "{{formName}}-taulukkolaskelma on päivitetty kaikkien täytettyjen kopioiden perusteella",
-  "SyncXlsxData": "Synkronoi vastaukset XLSX-tiedostoon"
+  "SyncXlsxData": "Synkronoi vastaukset XLSX-tiedostoon",
+  "WhiteLabelLogoSubtitle": "Lataa läpinäkyvällä taustalla olevia logoja (PNG, SVG, JPG) vaaleaa ja tummaa teemaa varten tai luo logo välittömästi syöttämällä logosi alla."
 }

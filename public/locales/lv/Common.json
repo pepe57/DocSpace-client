@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "Reģistrēties ar Nextcloud",
   "SpreadsheetGenerated": "Izklātes tabula {{formName}} ir ģenerēta, balstoties uz visām aizpildītajām kopijām",
   "SpreadsheetUpdated": "Tabula {{formName}} ir atjaudināta, balstoties uz visām pabeigtajām kopijām",
-  "SyncXlsxData": "Sinhronizēt atbildes uz XLSX"
+  "SyncXlsxData": "Sinhronizēt atbildes uz XLSX",
+  "WhiteLabelLogoSubtitle": "Augšupielādējiet logotipus ar caurspīdīgu fona krāsu (PNG, SVG, JPG) gaišai un tumšai tēmām vai izveidojiet vienu tūlītēji, ievietojot savu logotipu zemāk."
 }

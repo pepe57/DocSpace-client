@@ -2758,7 +2758,12 @@ class FilesStore {
 
       const extsCustomFilter =
         this.filesSettingsStore?.extsWebCustomFilterEditing || EMPTY_ARRAY;
+      const extsWebEdited =
+        this.filesSettingsStore?.extsWebEdited || EMPTY_ARRAY;
       const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
+      const isExtsWebEdited = extsWebEdited.includes(item.fileExst);
+      const canShowCustomFilter =
+        canSetUpCustomFilter && isExtsCustomFilter && isExtsWebEdited;
 
       const isSharedWithMeFolderSection =
         this.treeFoldersStore.sharedWithMeFolderId === item.rootFolderId &&
@@ -2887,7 +2892,7 @@ class FilesStore {
         ]);
       }
 
-      if (!canSetUpCustomFilter || !isExtsCustomFilter) {
+      if (!canShowCustomFilter) {
         fileOptions = removeOptions(fileOptions, ["custom-filter"]);
       }
 

@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "Registrovať sa pomocou Nextcloud",
   "SpreadsheetGenerated": "Údajnica pre {{formName}} bola vygenerovaná na základe všetkých vyplnených kópií",
   "SpreadsheetUpdated": "Tabuľka pre {{formName}} bola aktualizovaná na základe všetkých vyplnených kópií",
-  "SyncXlsxData": "Synchronizovať odpovede do XLSX"
+  "SyncXlsxData": "Synchronizovať odpovede do XLSX",
+  "WhiteLabelLogoSubtitle": "Nahrajte logá s transparentným pozadím (PNG, SVG, JPG) pre svetlú a tmavú tému alebo si jedno okamžite vygenerujte zadaním vášho loga nižšie."
 }
