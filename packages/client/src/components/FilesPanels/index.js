@@ -38,7 +38,6 @@ import {
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { Guidance } from "@docspace/shared/components/guidance";
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
-import AIAgentsSelector from "@docspace/ui-kit/selectors/AIAgent";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -82,6 +81,7 @@ import {
   AddRoomToGroupDialog,
   PauseSubmissionsDialog,
 } from "../dialogs";
+import { AIAgentsDialog } from "../dialogs/AIAgentsDialog";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
 import RestoreRoomDialog from "../dialogs/RestoreRoomDialog";
@@ -375,7 +375,7 @@ const Panels = (props) => {
       />
     ),
     aiAgentSelectorDialogProps.visible && (
-      <AIAgentsSelector
+      <AIAgentsDialog
         key="ai-agents-selector"
         onClose={() => setAiAgentSelectorDialogProps(false, null)}
         withPadding

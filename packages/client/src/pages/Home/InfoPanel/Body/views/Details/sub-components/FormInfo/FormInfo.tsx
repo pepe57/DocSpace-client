@@ -180,7 +180,7 @@ function FormInfoComponent({
           as={Link}
           reloadDocument
           icon={<GridSvg />}
-          label={t("InfoPanel:FormRoomConnectDatabaseLink")}
+          label={t("Common:ConnectDatabase")}
           to="/portal-settings/integration/third-party-services?consumer=externaldb"
         />
       );
@@ -280,4 +280,3 @@ export const FormInfo = inject<
     isAdmin: !!(userStore?.user?.isAdmin || userStore?.user?.isOwner),
   }),
 )(observer(FormInfoComponent as FC<ExternalFormInfoProps>));
-

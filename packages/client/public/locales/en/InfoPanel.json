@@ -35,7 +35,6 @@
   "FormRoomAIReadyDescriptionFolder": "Responses from forms are stored here in a connected database. To analyze data with AI, open a specific form and click 'Ask AI'.",
   "FormRoomAIReadyDescriptionFile": "Ask AI to explore responses from this form, generate insights, and visualize the data.",
   "FormRoomAINotConnectedDescription": "Store responses as structured data. Enable database sync in room settings to unlock AI-powered analysis with Ask AI.",
-  "FormRoomConnectDatabaseLink": "Connect a database",
   "FormRoomCollectionTitle": "Response collection",
   "FormRoomCollectionConnectedDescription": "Responses are continuously saved to a spreadsheet file.",
   "FormRoomCollectionConnectedDescriptionRoom": "Form responses are automatically saved in the Complete folder as a spreadsheet.",
