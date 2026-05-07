@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, ChangeEvent } from "react";
+import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -48,9 +49,14 @@ import { SelectMembersPanel } from "./sub-components/create-components/SelectMem
 interface CreateGroupDialogProps {
   visible: boolean;
   onClose: () => void;
+  currentUserId?: string;
 }
 
-const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
+const CreateGroupDialog = ({
+  visible,
+  onClose,
+  currentUserId,
+}: CreateGroupDialogProps) => {
   const { t } = useTranslation([
     "Common",
     "PeopleTranslations",
@@ -209,6 +215,7 @@ const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
           onClose={onHideSelectGroupManagerPanel}
           onParentPanelClose={onClose}
           setGroupManager={setGroupManager}
+          currentUserId={currentUserId}
         />
       ) : null}
 
@@ -225,4 +232,8 @@ const CreateGroupDialog = ({ visible, onClose }: CreateGroupDialogProps) => {
   );
 };
 
-export default CreateGroupDialog;
+export default inject(
+  ({ userStore }: { userStore: { user?: { id?: string } } }) => ({
+    currentUserId: userStore.user?.id,
+  }),
+)(observer(CreateGroupDialog));
