@@ -24,238 +24,69 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Link } from "react-router";
-import { FC, useMemo } from "react";
-import { useTranslation } from "react-i18next";
+import { FC } from "react";
 import { inject, observer } from "mobx-react";
 
-import { Events } from "@docspace/ui-kit/enums";
-import { Tooltip } from "@docspace/ui-kit/components";
-import { Card } from "@docspace/ui-kit/components/card";
-import { Text } from "@docspace/ui-kit/components/text";
-import { ActionButton } from "@docspace/ui-kit/components/action-button";
-import type { TFile } from "@docspace/ui-kit/types";
-import { Link as LinkButton, LinkType } from "@docspace/ui-kit/components/link";
+import { AICard } from "./AICard";
 
-import { InfoPanelEvents } from "@docspace/shared/enums";
-
-import AIReactSvg from "PUBLIC_DIR/images/icons/16/AI.svg";
-import SpreadsheetReactSvg from "PUBLIC_DIR/images/icons/16/spreadsheet.svg";
-import FolderSvg from "PUBLIC_DIR/images/icons/12/folder.svg";
-import GridSvg from "PUBLIC_DIR/images/icons/12/grid.svg";
-import TickSvg from "PUBLIC_DIR/images/icons/12/tick.svg";
-import ExternalLinkSvg from "PUBLIC_DIR/images/external.link.react.svg";
+import { CollectionCard } from "./CollectionCard";
+import { useFormInfoActions } from "./hooks/useFormInfoActions";
+import { useFormInfoState } from "./hooks/useFormInfoState";
 
 import styles from "./FormInfo.module.scss";
-import {
-  isDoneFolder,
-  isFormFile,
-  isFormRoom,
-  shouldShow,
-} from "./FormInfo.utils";
+import { shouldShow } from "./FormInfo.utils";
 import type {
-  EventType,
   ExternalFormInfoProps,
   FormRoomInfoBlocksProps,
   InjectedFormInfoProps,
-  ItemType,
 } from "./FormInfo.types";
 
-function FormInfoComponent({
-  selection,
-  askAIAction,
-  externalDbEnabled,
-  openLocationAction,
-  onClickLinkFillForm,
-  infoPanelRoomSelection,
-  isAdmin,
-}: FormRoomInfoBlocksProps) {
-  const { t } = useTranslation(["InfoPanel", "Common"]);
+function FormInfoComponent(props: FormRoomInfoBlocksProps) {
+  const {
+    selection,
+    askAIAction,
+    isAdmin,
+    aiReady,
+    externalDbEnabled,
+    infoPanelRoomSelection,
+    openLocationAction,
+    onClickLinkFillForm,
+  } = props;
 
-  const isDone = isDoneFolder(selection);
-  const isFile = isFormFile(selection);
-  const isRoom = isFormRoom(selection);
+  const state = useFormInfoState({
+    selection,
+    infoPanelRoomSelection,
+    externalDbEnabled,
+    aiReady,
+  });
 
-  const aiConnected =
-    !!infoPanelRoomSelection?.sendFormToExternalDB && externalDbEnabled;
-  const collectionConnected = !!infoPanelRoomSelection?.saveFormAsXLSX;
-
-  const canEditRoom = !!infoPanelRoomSelection?.security?.EditRoom;
-  const canManageExternalDb = isAdmin;
-
-  const handleEditRoom = (item: ItemType) => {
-    const event: EventType = new Event(Events.ROOM_EDIT);
-
-    event.item = item;
-    event.cb = (room) => {
-      const event: EventType = new CustomEvent(
-        InfoPanelEvents.setInfoPanelSelectedRoom,
-        { detail: { room } },
-      );
-
-      window.dispatchEvent(event);
-    };
-    window.dispatchEvent(event);
-  };
-
-  const goToCompleteFolder = (item: TFile) => {
-    if (!item.resultsFolderId) return;
-
-    openLocationAction({
-      id: item.resultsFolderId,
-      rootFolderType: item.rootFolderType,
-    });
-  };
-
-  const filForm = () => {
-    if (isFile) onClickLinkFillForm(selection);
-  };
-
-  const handleConnect = () => {
-    if (!infoPanelRoomSelection) return;
-    handleEditRoom(infoPanelRoomSelection);
-  };
-
-  const connectedBadge = (
-    <Text fontSize="12px" fontWeight={600} className={styles.connectedBadge}>
-      <TickSvg />
-      {t("Common:Connected")}
-    </Text>
-  );
-
-  const aiTitle = (
-    <span className={styles.cardTitle}>
-      <AIReactSvg className={styles.cardIcon} />
-      {aiConnected
-        ? isFile
-          ? t("InfoPanel:FormRoomAIAnalyzeTitle")
-          : t("InfoPanel:FormRoomAIReadyTitle")
-        : t("InfoPanel:FormRoomAIUnlockTitle")}
-    </span>
-  );
-
-  const aiDescription = useMemo(() => {
-    if (aiConnected) {
-      if (isDone) return t("InfoPanel:FormRoomAIReadyDescriptionFolder");
-      if (isFile) return t("InfoPanel:FormRoomAIReadyDescriptionFile");
-      return t("InfoPanel:FormRoomAIReadyDescriptionRoom");
-    }
-
-    if (!externalDbEnabled) return t("InfoPanel:FormRoomConnectDatabase");
-
-    return t("InfoPanel:FormRoomAINotConnectedDescription");
-  }, [t, aiConnected, isFile, isDone, externalDbEnabled]);
-
-  const collectionDescription = useMemo(() => {
-    if (collectionConnected) {
-      if (isRoom)
-        return t("InfoPanel:FormRoomCollectionConnectedDescriptionRoom");
-
-      return t("InfoPanel:FormRoomCollectionConnectedDescription");
-    }
-
-    return t("InfoPanel:FormRoomCollectionNotConnectedDescription");
-  }, [collectionConnected, isRoom, t]);
-
-  const aiAction = () => {
-    if (aiConnected) {
-      if (isFile && selection.security?.AskAi) {
-        return (
-          <ActionButton
-            icon={<AIReactSvg />}
-            label={t("Common:AskAI")}
-            className={styles.actionButton}
-            onClick={() => askAIAction(selection)}
-          />
-        );
-      }
-
-      return null;
-    }
-
-    if (!externalDbEnabled) {
-      if (!canManageExternalDb) return null;
-      return (
-        <ActionButton
-          as={Link}
-          reloadDocument
-          icon={<GridSvg />}
-          label={t("Common:ConnectDatabase")}
-          to="/portal-settings/integration/third-party-services?consumer=externaldb"
-        />
-      );
-    }
-
-    if (!canEditRoom) return null;
-
-    return (
-      <ActionButton
-        label={t("Common:Connect")}
-        icon={<ExternalLinkSvg />}
-        onClick={handleConnect}
-      />
-    );
-  };
-
-  const collectionAction = collectionConnected ? (
-    isFile ? (
-      <>
-        <ActionButton
-          id="complete-folder"
-          label={t("InfoPanel:FormRoomGoToCompleteFolder")}
-          icon={<FolderSvg />}
-          onClick={() => goToCompleteFolder(selection)}
-          disabled={!selection.resultsFolderId}
-        />
-        {!selection.resultsFolderId ? (
-          <Tooltip anchorSelect="#complete-folder" clickable>
-            <Text>{t("InfoPanel:FormRoomNoSubmissionsYet")}</Text>
-            <Text>{t("InfoPanel:FormRoomResultsFolderNote")}</Text>
-            <LinkButton
-              color="accent"
-              onClick={filForm}
-              type={LinkType.page}
-              className={styles.tooltipLink}
-            >
-              {t("Common:FillOutTheForm")}
-            </LinkButton>
-          </Tooltip>
-        ) : null}
-      </>
-    ) : null
-  ) : canEditRoom ? (
-    <ActionButton
-      label={t("Common:Connect")}
-      icon={<ExternalLinkSvg />}
-      onClick={handleConnect}
-    />
-  ) : null;
+  const actions = useFormInfoActions({
+    selection,
+    infoPanelRoomSelection,
+    openLocationAction,
+    onClickLinkFillForm,
+  });
 
   if (!shouldShow(selection)) return null;
 
   return (
     <div className={styles.container}>
-      <Card
-        title={aiTitle}
-        footer={aiAction()}
-        className={styles.block}
-        extra={aiConnected ? connectedBadge : undefined}
-      >
-        <p className={styles.cardDescription}>{aiDescription}</p>
-      </Card>
-      <Card
-        title={
-          <span className={styles.cardTitle}>
-            <SpreadsheetReactSvg className={styles.cardIcon} />
-            {t("InfoPanel:FormRoomCollectionTitle")}
-          </span>
-        }
-        extra={collectionConnected ? connectedBadge : undefined}
-        footer={collectionAction}
-        className={styles.block}
-      >
-        <p className={styles.cardDescription}>{collectionDescription}</p>
-      </Card>
+      <AICard
+        selection={selection}
+        state={state}
+        isAdmin={isAdmin}
+        aiReady={aiReady}
+        externalDbEnabled={externalDbEnabled}
+        askAIAction={askAIAction}
+        onConnect={actions.handleConnect}
+      />
+      <CollectionCard
+        selection={selection}
+        state={state}
+        onGoToCompleteFolder={actions.goToCompleteFolder}
+        onFillForm={actions.fillForm}
+        onConnect={actions.handleConnect}
+      />
     </div>
   );
 }
@@ -275,8 +106,10 @@ export const FormInfo = inject<
     askAIAction: filesActionsStore.askAIAction,
     openLocationAction: filesActionsStore.openLocationAction,
     externalDbEnabled: settingsStore.externalDbEnabled,
+    aiReady: Boolean(settingsStore.aiConfig?.aiReady),
     onClickLinkFillForm: contextOptionsStore.onClickLinkFillForm,
     infoPanelRoomSelection: infoPanelStore.infoPanelRoomSelection,
     isAdmin: !!(userStore?.user?.isAdmin || userStore?.user?.isOwner),
   }),
 )(observer(FormInfoComponent as FC<ExternalFormInfoProps>));
+

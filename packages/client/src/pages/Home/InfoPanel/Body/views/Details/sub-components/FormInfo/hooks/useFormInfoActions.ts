@@ -24,49 +24,64 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TFile, TFolder } from "@docspace/ui-kit/types";
-import type { TSelectedFolder } from "SRC_DIR/store/SelectedFolderStore";
+import type { TFile } from "@docspace/ui-kit/types";
 
-export type Selection = TRoom | TFile | TFolder | TSelectedFolder;
+import { Events } from "@docspace/ui-kit/enums";
+import { InfoPanelEvents } from "@docspace/shared/enums";
 
-export type InjectedFormInfoProps = Pick<
-  TStore["infoPanelStore"],
-  "infoPanelRoomSelection"
-> &
-  Pick<TStore["filesActionsStore"], "askAIAction" | "openLocationAction"> &
-  Pick<TStore["contextOptionsStore"], "onClickLinkFillForm"> &
-  Pick<TStore["settingsStore"], "externalDbEnabled"> & {
-    isAdmin: boolean;
-    aiReady: boolean;
+import { isFormFile } from "../FormInfo.utils";
+import type {
+  EventType,
+  FormInfoActions,
+  FormRoomInfoBlocksProps,
+  ItemType,
+} from "../FormInfo.types";
+
+type Args = Pick<
+  FormRoomInfoBlocksProps,
+  | "selection"
+  | "infoPanelRoomSelection"
+  | "openLocationAction"
+  | "onClickLinkFillForm"
+>;
+
+export function useFormInfoActions({
+  selection,
+  infoPanelRoomSelection,
+  openLocationAction,
+  onClickLinkFillForm,
+}: Args): FormInfoActions {
+  const handleEditRoom = (item: ItemType) => {
+    const event: EventType = new Event(Events.ROOM_EDIT);
+
+    event.item = item;
+    event.cb = (room) => {
+      const cbEvent: EventType = new CustomEvent(
+        InfoPanelEvents.setInfoPanelSelectedRoom,
+        { detail: { room } },
+      );
+      window.dispatchEvent(cbEvent);
+    };
+    window.dispatchEvent(event);
   };
 
-export interface ExternalFormInfoProps {
-  selection: Selection;
-}
+  const handleConnect = () => {
+    if (!infoPanelRoomSelection) return;
+    handleEditRoom(infoPanelRoomSelection);
+  };
 
-export interface FormRoomInfoBlocksProps
-  extends InjectedFormInfoProps, ExternalFormInfoProps {}
+  const goToCompleteFolder = (item: TFile) => {
+    if (!item.resultsFolderId) return;
 
-export type ItemType = TRoom;
+    openLocationAction({
+      id: item.resultsFolderId,
+      rootFolderType: item.rootFolderType,
+    });
+  };
 
-export type EventType = Event & {
-  item?: ItemType;
-  cb?: (room: TRoom) => void;
-};
+  const fillForm = () => {
+    if (isFormFile(selection)) onClickLinkFillForm(selection);
+  };
 
-export interface FormInfoState {
-  isDone: boolean;
-  isFile: boolean;
-  isRoom: boolean;
-  aiConnected: boolean;
-  collectionConnected: boolean;
-  canEditRoom: boolean;
-}
-
-export interface FormInfoActions {
-  handleConnect: () => void;
-  handleEditRoom: (item: TRoom) => void;
-  goToCompleteFolder: (item: TFile) => void;
-  fillForm: () => void;
+  return { handleConnect, handleEditRoom, goToCompleteFolder, fillForm };
 }

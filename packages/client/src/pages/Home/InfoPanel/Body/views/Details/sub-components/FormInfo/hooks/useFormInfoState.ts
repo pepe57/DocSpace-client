@@ -24,49 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TFile, TFolder } from "@docspace/ui-kit/types";
-import type { TSelectedFolder } from "SRC_DIR/store/SelectedFolderStore";
+import { isDoneFolder, isFormFile, isFormRoom } from "../FormInfo.utils";
+import type { FormInfoState, FormRoomInfoBlocksProps } from "../FormInfo.types";
 
-export type Selection = TRoom | TFile | TFolder | TSelectedFolder;
+type Args = Pick<
+  FormRoomInfoBlocksProps,
+  "selection" | "infoPanelRoomSelection" | "externalDbEnabled" | "aiReady"
+>;
 
-export type InjectedFormInfoProps = Pick<
-  TStore["infoPanelStore"],
-  "infoPanelRoomSelection"
-> &
-  Pick<TStore["filesActionsStore"], "askAIAction" | "openLocationAction"> &
-  Pick<TStore["contextOptionsStore"], "onClickLinkFillForm"> &
-  Pick<TStore["settingsStore"], "externalDbEnabled"> & {
-    isAdmin: boolean;
-    aiReady: boolean;
+export function useFormInfoState({
+  selection,
+  infoPanelRoomSelection,
+  externalDbEnabled,
+  aiReady,
+}: Args): FormInfoState {
+  const isDone = isDoneFolder(selection);
+  const isFile = isFormFile(selection);
+  const isRoom = isFormRoom(selection);
+
+  const aiConnected =
+    !!infoPanelRoomSelection?.sendFormToExternalDB &&
+    externalDbEnabled &&
+    aiReady;
+  const collectionConnected = !!infoPanelRoomSelection?.saveFormAsXLSX;
+  const canEditRoom = !!infoPanelRoomSelection?.security?.EditRoom;
+
+  return {
+    isDone,
+    isFile,
+    isRoom,
+    aiConnected,
+    collectionConnected,
+    canEditRoom,
   };
-
-export interface ExternalFormInfoProps {
-  selection: Selection;
 }
 
-export interface FormRoomInfoBlocksProps
-  extends InjectedFormInfoProps, ExternalFormInfoProps {}
-
-export type ItemType = TRoom;
-
-export type EventType = Event & {
-  item?: ItemType;
-  cb?: (room: TRoom) => void;
-};
-
-export interface FormInfoState {
-  isDone: boolean;
-  isFile: boolean;
-  isRoom: boolean;
-  aiConnected: boolean;
-  collectionConnected: boolean;
-  canEditRoom: boolean;
-}
-
-export interface FormInfoActions {
-  handleConnect: () => void;
-  handleEditRoom: (item: TRoom) => void;
-  goToCompleteFolder: (item: TFile) => void;
-  fillForm: () => void;
-}
