@@ -86,6 +86,8 @@ const AnalyzeResponsesButtonComponent = ({
     }
   };
 
+  const label = t("Files:AnalyzeResponses");
+
   return (
     <Button
       accent
@@ -94,7 +96,8 @@ const AnalyzeResponsesButtonComponent = ({
       className={className}
       isLoading={isLoading}
       size={ButtonSize.extraSmall}
-      label={t("Files:AnalyzeResponses")}
+      label={label}
+      title={label}
     />
   );
 };
