@@ -31,11 +31,12 @@
   width: 100%;
   min-height: 33px;
 
-  container: header / inline-size;
-
   .analyzeResponsesButton {
     padding: 6px 10px;
     height: 32px;
+    min-width: 35px;
+    overflow: hidden;
+    box-sizing: border-box;
 
     span {
       font-size: 13px;
@@ -173,19 +174,19 @@
   }
 }
 
-@container header (width < 700px) {
-  .analyzeResponsesButton {
-    min-width: 35px;
+:global(#control-buttons-container) {
+  container: buttons / inline-size;
+}
 
+@container buttons (width < 300px) {
+  .analyzeResponsesButton {
     span {
       display: none;
     }
   }
-  .headerContainer:has(.analyzeResponsesButton) {
-    :global {
-      .header-container .navigation_button {
-        margin: 0px;
-      }
-    }
+
+  .headerContainer:has(.analyzeResponsesButton)
+    :global(.header-container .navigation_button) {
+    margin: 0;
   }
 }
