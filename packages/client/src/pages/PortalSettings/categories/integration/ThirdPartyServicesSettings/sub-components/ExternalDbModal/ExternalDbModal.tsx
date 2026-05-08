@@ -194,6 +194,7 @@ const ExternalDbModal: React.FC<ExternalDbModalProps> = ({
               onClick={handleTestConnection}
               isLoading={isTesting}
               isDisabled={!isValid || externalLoading}
+              tabIndex={0}
             />
             {match(connected)
               .with(true, () => (
