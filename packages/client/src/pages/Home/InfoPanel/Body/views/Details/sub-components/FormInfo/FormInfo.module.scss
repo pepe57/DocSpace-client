@@ -55,22 +55,27 @@
       fill: currentColor;
     }
   }
-}
 
-.cardTitle {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+  .cardTitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
-.cardIcon {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-}
+  .cardIcon {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+  }
 
-.cardDescription {
-  margin: 0;
+  .cardDescription {
+    margin: 0;
+
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0px;
+  }
 }
 
 .actionButton {
@@ -80,4 +85,3 @@
 .tooltipLink {
   text-decoration: underline;
 }
-

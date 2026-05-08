@@ -24,49 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TRoom } from "@docspace/shared/api/rooms/types";
-import type { TFile, TFolder } from "@docspace/ui-kit/types";
-import type { TSelectedFolder } from "SRC_DIR/store/SelectedFolderStore";
+import { useTranslation } from "react-i18next";
 
-export type Selection = TRoom | TFile | TFolder | TSelectedFolder;
+import { Text } from "@docspace/ui-kit/components/text";
 
-export type InjectedFormInfoProps = Pick<
-  TStore["infoPanelStore"],
-  "infoPanelRoomSelection"
-> &
-  Pick<TStore["filesActionsStore"], "askAIAction" | "openLocationAction"> &
-  Pick<TStore["contextOptionsStore"], "onClickLinkFillForm"> &
-  Pick<TStore["settingsStore"], "externalDbEnabled"> & {
-    isAdmin: boolean;
-    aiReady: boolean;
-  };
+import TickSvg from "PUBLIC_DIR/images/icons/12/tick.svg";
 
-export interface ExternalFormInfoProps {
-  selection: Selection;
-}
+import styles from "./FormInfo.module.scss";
 
-export interface FormRoomInfoBlocksProps
-  extends InjectedFormInfoProps, ExternalFormInfoProps {}
+export const ConnectedBadge = () => {
+  const { t } = useTranslation(["Common"]);
 
-export type ItemType = TRoom;
-
-export type EventType = Event & {
-  item?: ItemType;
-  cb?: (room: TRoom) => void;
+  return (
+    <Text fontSize="12px" fontWeight={600} className={styles.connectedBadge}>
+      <TickSvg />
+      {t("Common:Connected")}
+    </Text>
+  );
 };
-
-export interface FormInfoState {
-  isDone: boolean;
-  isFile: boolean;
-  isRoom: boolean;
-  aiConnected: boolean;
-  collectionConnected: boolean;
-  canEditRoom: boolean;
-}
-
-export interface FormInfoActions {
-  handleConnect: () => void;
-  handleEditRoom: (item: TRoom) => void;
-  goToCompleteFolder: (item: TFile) => void;
-  fillForm: () => void;
-}
