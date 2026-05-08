@@ -372,15 +372,15 @@ class CreateEditRoomStore {
         requests.push(setTemplateAvailable(roomId, isAvailable));
       }
 
+      if (requests.length) {
+        await Promise.all(requests);
+      }
+
       if (
         (isSendFormToExternalDBChanged && sendFormToExternalDB) ||
         (isSaveFormAsXLSXChanged && saveFormAsXLSX)
       ) {
-        requests.push(this.syncWithDatabase(room.id, t));
-      }
-
-      if (requests.length) {
-        await Promise.all(requests);
+        this.syncWithDatabase(room.id, t);
       }
     } catch (e) {
       toastr.error(e as string);
