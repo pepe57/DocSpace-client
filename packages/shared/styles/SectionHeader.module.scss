@@ -31,9 +31,12 @@
   width: 100%;
   min-height: 33px;
 
+  container: header / inline-size;
+
   .analyzeResponsesButton {
     padding: 6px 10px;
     height: 32px;
+
     span {
       font-size: 13px;
       @include mixins.truncate;
@@ -165,6 +168,23 @@
             }
           }
         }
+      }
+    }
+  }
+}
+
+@container header (width < 700px) {
+  .analyzeResponsesButton {
+    min-width: 35px;
+
+    span {
+      display: none;
+    }
+  }
+  .headerContainer:has(.analyzeResponsesButton) {
+    :global {
+      .header-container .navigation_button {
+        margin: 0px;
       }
     }
   }
