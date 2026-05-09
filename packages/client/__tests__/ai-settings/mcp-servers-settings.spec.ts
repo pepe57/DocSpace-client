@@ -257,7 +257,7 @@ test.describe("MCP servers", () => {
     const deleteItem = page.getByTestId("delete_item");
     await deleteItem.click();
 
-    const deleteMcpDialog = page.getByRole("dialog");
+    const deleteMcpDialog = page.getByRole("dialog").filter({ hasText: "Delete server" });
     await expect(deleteMcpDialog).toBeVisible();
     await expect(deleteMcpDialog).toContainText("Delete server");
 
