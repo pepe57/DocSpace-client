@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "Registrirajte se z Nextcloud",
   "SpreadsheetUpdated": "Tabela za {{formName}} je posodobljena na podlagi vseh zaključenih kopij",
   "SyncXlsxData": "Sinhroniziraj odgovore v XLSX",
-  "SpreadsheetGenerated": "Preglednica za {{formName}} je ustvarjena na podlagi vseh izpolnjenih kopij."
+  "SpreadsheetGenerated": "Preglednica za {{formName}} je ustvarjena na podlagi vseh izpolnjenih kopij.",
+  "WhiteLabelLogoSubtitle": "Naložite logotipe s transparentno ozadjem (PNG, SVG, JPG) za svetlo in temno temo ali pa hitro ustvarite enega z vnosom vašega logotipa spodaj."
 }

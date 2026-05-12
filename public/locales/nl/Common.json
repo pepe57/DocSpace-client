@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "Registreren met Nextcloud",
   "SpreadsheetGenerated": "Het spreadsheet voor {{formName}} is gegenereerd op basis van alle voltooide kopieën",
   "SpreadsheetUpdated": "Het spreadsheet voor {{formName}} is bijgewerkt op basis van alle voltooide kopieën",
-  "SyncXlsxData": "Antwoorden synchroniseren naar XLSX"
+  "SyncXlsxData": "Antwoorden synchroniseren naar XLSX",
+  "WhiteLabelLogoSubtitle": "Upload logo's met een transparante achtergrond (PNG, SVG, JPG) voor lichte en donkere thema's, of genereer er direct een door uw logo hieronder in te voeren."
 }

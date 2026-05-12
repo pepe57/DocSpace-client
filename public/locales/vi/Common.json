@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "Đăng ký với Nextcloud",
   "SpreadsheetGenerated": "Bảng tính cho {{formName}} được tạo dựa trên tất cả các bản sao đã hoàn thành",
   "SpreadsheetUpdated": "Bảng tính cho {{formName}} đã được cập nhật dựa trên tất cả các bản sao đã hoàn thành",
-  "SyncXlsxData": "Đồng bộ phản hồi sang XLSX"
+  "SyncXlsxData": "Đồng bộ phản hồi sang XLSX",
+  "WhiteLabelLogoSubtitle": "Tải lên logo có nền trong suốt (PNG, SVG, JPG) cho giao diện sáng và tối, hoặc tạo ngay lập tức bằng cách nhập logo của bạn bên dưới."
 }

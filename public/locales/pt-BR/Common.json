@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "Cadastrar-se com o Nextcloud",
   "SpreadsheetGenerated": "A planilha para {{formName}} é gerada com base em todas as cópias preenchidas",
   "SpreadsheetUpdated": "A planilha de {{formName}} foi atualizada com base em todas as cópias concluídas",
-  "SyncXlsxData": "Sincronizar respostas para XLSX"
+  "SyncXlsxData": "Sincronizar respostas para XLSX",
+  "WhiteLabelLogoSubtitle": "Faça o upload de logotipos com fundo transparente (PNG, SVG, JPG) para temas claros e escuros, ou gere um instantaneamente inserindo o seu logotipo abaixo."
 }

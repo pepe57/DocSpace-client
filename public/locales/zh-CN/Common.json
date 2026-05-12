@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "使用 Nextcloud 注册",
   "SpreadsheetGenerated": "{{formName}} 的电子表格已根据所有已完成的副本生成",
   "SpreadsheetUpdated": "{{formName}} 的电子表格已根据所有已完成的副本完成更新",
-  "SyncXlsxData": "同步回复到 XLSX"
+  "SyncXlsxData": "同步回复到 XLSX",
+  "WhiteLabelLogoSubtitle": "上传适用于浅色和深色主题的透明背景徽标 (PNG, SVG, JPG)，或者在下方输入您的徽标以立即生成一个。"
 }

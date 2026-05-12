@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "Nextcloud ile kayıt ol",
   "SpreadsheetGenerated": "{{formName}} için e-tablo, tüm tamamlanmış kopyalar temel alınarak oluşturuldu",
   "SpreadsheetUpdated": "{{formName}} için e-tablo tüm tamamlanmış kopyalar temel alınarak güncellendi",
-  "SyncXlsxData": "Yanıtları XLSX'e eşitle"
+  "SyncXlsxData": "Yanıtları XLSX'e eşitle",
+  "WhiteLabelLogoSubtitle": "Açık ve koyu temalar için şeffaf arka planlı logolar (PNG, SVG, JPG) yükleyin veya aşağıya logonuzu girerek anında bir logo oluşturun."
 }

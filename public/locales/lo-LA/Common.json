@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "ລົງທະບຽນດ້ວຍ Nextcloud",
   "SpreadsheetGenerated": "ແຜ່ນຕາຕະລາງສຳລັບ {{formName}} ຖືກສ້າງຂຶ້ນໂດຍອີງຕາມທຸກໆສຳເນົາທີ່ສຳເລັດແລ້ວ",
   "SpreadsheetUpdated": "ສະເປະດຊີດສຳລັບ {{formName}} ໄດ້ຖືກອັບເດດອີງຕາມທຸກໆສຳເນົາທີ່ສຳເລັດແລ້ວ",
-  "SyncXlsxData": "ຊິງຄ໌ຄຳຕອບໄປຫາ XLSX"
+  "SyncXlsxData": "ຊິງຄ໌ຄຳຕອບໄປຫາ XLSX",
+  "WhiteLabelLogoSubtitle": "ອັບໂຫຼດໂລໂກ້ທີ່ມີພື້ນຫຼັງແບບໂປ່ງໃສ (PNG, SVG, JPG) ສຳລັບທີມແສງ ແລະ ທີມມືດ, ຫຼື ສ້າງໂລໂກ້ໃໝ່ທັນທີໂດຍການປ້ອນຊື່ໂລໂກ້ຂອງທ່ານລົງດ້ານລຸ່ມ."
 }

@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "التسجيل باستخدام Nextcloud",
   "SpreadsheetGenerated": "تم إنشاء جدول البيانات الخاص بـ {{formName}} بناءً على جميع النسخ المكتملة",
   "SpreadsheetUpdated": "تم تحديث جدول البيانات الخاص بـ {{formName}} بناءً على جميع النسخ المكتملة",
-  "SyncXlsxData": "مزامنة الردود إلى XLSX"
+  "SyncXlsxData": "مزامنة الردود إلى XLSX",
+  "WhiteLabelLogoSubtitle": "قم بتحميل شعارات بخلفية شفافة (PNG، SVG، JPG) للمظهرين الفاتح والداكن، أو قم بإنشاء شعار فوراً عن طريق إدخال شعارك أدناه."
 }

@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "Mit Nextcloud registrieren",
   "SpreadsheetGenerated": "Das Tabellenblatt für {{formName}} wurde basierend auf allen ausgefüllten Kopien erstellt",
   "SpreadsheetUpdated": "Die Tabelle für {{formName}} wurde basierend auf allen ausgefüllten Kopien aktualisiert.",
-  "SyncXlsxData": "Antworten nach XLSX synchronisieren"
+  "SyncXlsxData": "Antworten nach XLSX synchronisieren",
+  "WhiteLabelLogoSubtitle": "Laden Sie Logos mit transparentem Hintergrund (PNG, SVG, JPG) für helle und dunkle Themes hoch oder erstellen Sie sofort eines, indem Sie unten Ihr Logo eingeben."
 }

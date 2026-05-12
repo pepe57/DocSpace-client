@@ -1508,5 +1508,6 @@
   "SignUpWithNextcloud": "Региструјте се са Nextcloud",
   "SpreadsheetGenerated": "Табела за {{formName}} је генерисана на основу свих попуњених копија",
   "SpreadsheetUpdated": "Табела за {{formName}} је ажурирана на основу свих завршених копија",
-  "SyncXlsxData": "Синхронизуј одговоре у XLSX"
+  "SyncXlsxData": "Синхронизуј одговоре у XLSX",
+  "WhiteLabelLogoSubtitle": "Отпремите логотипе са провидном позадином (PNG, SVG, JPG) за светлу и тамну тему или их одмах генеришите тако што ћете унети свој лого испод."
 }
