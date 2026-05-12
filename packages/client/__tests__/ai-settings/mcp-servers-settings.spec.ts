@@ -412,7 +412,7 @@ test.describe("MCP servers", () => {
     const toggleButton = firstCustomMcpTile.getByTestId("mcp-toggle-button");
     await toggleButton.click();
 
-    const disableDialog = page.getByRole("dialog");
+    const disableDialog = page.getByRole("dialog").filter({ hasText: "Disable server" });
     await expect(disableDialog).toBeVisible();
 
     const dialogConfirmButton = disableDialog.getByTestId("disable-mcp-button");
