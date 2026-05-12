@@ -3,7 +3,7 @@
   "content": "Create",
   "content_en_sha1_hash": "6e157c5da4410b7e9de85f5c93026b9176e69064",
   "created_at": "2025-05-19T21:30:43.828Z",
-  "updated_at": "2026-05-08T13:10:45.508Z",
+  "updated_at": "2026-05-12T08:51:58.396Z",
   "comment": {
     "text": "This is a dialog title for creating various entities like agents, groups, or rooms. It appears at the top of the respective creation dialogs.",
     "is_auto": true,
@@ -20,7 +20,7 @@
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/CreateGroupDialog.tsx",
       "line_number": 189,
-      "context": "<ModalDialog.Footer>\n <Button\n id=\"create-group-modal_submit\"\n testId=\"create_edit_group_create_button\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onCreateGroup}\n isDisabled={",
+      "context": "<ModalDialog.Footer>\n <Button\n id=\"create-group-modal_submit\"\n testId=\"create_edit_group_create_button\"\n tabIndex={5}\n label={t(\"Common:Create\")}\n size={ButtonSize.normal}\n primary\n scale\n onClick={onCreateGroup}\n isDisabled={!groupParams.groupName || !groupParams.groupManager}",
       "module": "/packages/client"
     },
     {

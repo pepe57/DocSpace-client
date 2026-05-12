@@ -3,7 +3,7 @@
   "content": "Cancel",
   "content_en_sha1_hash": "77dfd2135f4db726c47299bb55be26f7f4525a46",
   "created_at": "2025-05-19T21:30:43.360Z",
-  "updated_at": "2026-05-08T13:10:45.510Z",
+  "updated_at": "2026-05-12T08:51:58.396Z",
   "comment": {
     "text": "This is the label for a button that dismisses a dialog or cancels an action, such as deleting a chat, renaming a chat, or adding an attachment.",
     "is_auto": true,
@@ -241,7 +241,7 @@
     },
     {
       "file_path": "/packages/client/src/components/dialogs/CreateEditGroupDialog/CreateGroupDialog.tsx",
-      "line_number": 204,
+      "line_number": 201,
       "context": "/>\n <Button\n id=\"create-group-modal_cancel\"\n testId=\"create_edit_group_cancel_button\"\n tabIndex={5}\n label={t(\"Common:CancelButton\")}\n size={ButtonSize.normal}\n scale\n isDisabled={isLoading}\n onClick={onClose}\n />",
       "module": "/packages/client"
     },
