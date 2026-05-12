@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} tabel zostanie utwor po przesłaniu pierws formularza",
   "SyncWithDatabaseStatus": "Zsynchronizowano: {{success}} z {{total}}",
   "SyncWithDatabaseSuccess": "Wszystkie formularze zostaną zsynchronizowane z zewnętrzną bazą danych w tle",
+  "TableName": "Nazwa tabeli",
   "TableSettingsTitle": "Zarządzaj wyświetlanymi kolumnami",
   "Template": "Szablon",
   "TemplateAvailable": "Szablon dostępny dla wszystkich",

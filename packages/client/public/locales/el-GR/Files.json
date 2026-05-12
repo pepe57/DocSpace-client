@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} πίνακες θα δημιουργηθούν μετά την πρώτη υποβολή φόρμας",
   "SyncWithDatabaseStatus": "Συγχρονισμένα: {{success}} από τα {{total}}",
   "SyncWithDatabaseSuccess": "Όλα τα φόρμα θα συγχρονιστούν με την εξωτερική βάση δεδομένων στο παρασκήνιο",
+  "TableName": "Όνομα πίνακα",
   "TableSettingsTitle": "Διαχείριση εμφανιζόμενων στηλών",
   "Template": "Πρότυπο",
   "TemplateAvailable": "Πρότυπο διαθέσιμο σε όλους",

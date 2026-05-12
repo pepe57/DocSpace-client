@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "İlk form gönderiminden sonra {{count}} tablo oluşturulacak",
   "SyncWithDatabaseStatus": "Senkronize edildi: {{total}} öğeden {{success}} tanesi",
   "SyncWithDatabaseSuccess": "Tüm arka planda har veritabanı ile senkronize edilecektir",
+  "TableName": "Tablo adı",
   "TableSettingsTitle": "Görüntülenen sütunları yönet",
   "Template": "Şablon",
   "TemplateAvailable": "Şablon herkes tarafından kullanılabilir  ",

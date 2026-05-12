@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "첫 번째 양식 제출 후 {{count}}개의 테이블이 생성됩니다",
   "SyncWithDatabaseStatus": "동기화됨: {{total}} 개 중 {{success}} 개",
   "SyncWithDatabaseSuccess": "모든 양식이 백그라운드에서 외부 데이터베이스와 동기화됩니다.",
+  "TableName": "테이블 이름",
   "TableSettingsTitle": "표시된 열 관리",
   "Template": "템플릿",
   "TemplateAvailable": "누구나 사용할 수 있는 템플릿",

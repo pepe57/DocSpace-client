@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} cədvəl ilk forma göndərildikdən sonra yaradılacaq",
   "SyncWithDatabaseStatus": "Sinxronlaşdırıldı: {{total}}-dən {{success}}",
   "SyncWithDatabaseSuccess": "Bütün formlar arxa fonda xarici verilənlər bazası ilə sinxronlaşdırılacaq",
+  "TableName": "Cədvəl adı",
   "TableSettingsTitle": "Göstərilən sütunları idarə edin",
   "Template": "Şablon",
   "TemplateAvailable": "Şablon hər kəs üçün əlçatandır",

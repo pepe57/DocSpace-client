@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "පළමු පෝමය ඉදිරිපත් කිරීම පසු වු {{count}} නිර්මාණයනු ඇත",
   "SyncWithDatabaseStatus": "සමමුර්ත කරන ලදී {{total}} {{success}}ක්",
   "SyncWithDatabaseSuccess": "සියලුම පෝරම පසුබිමින් බාහිර දත්ත සමුදාය සමඟ සමමුහුර්ත කරනු ඇත",
+  "TableName": "වගු නාමය",
   "TableSettingsTitle": "දිස්වන තීරු කළමනාකරණය",
   "Template": "සැකිල්ල",
   "TemplateAvailable": "සමස්ථ ජනයාටදීම ලබාගත හැකි සැකිල්ල",

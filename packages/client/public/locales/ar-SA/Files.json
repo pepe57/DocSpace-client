@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} جداول سيتم إنشاؤها بعد أول عملية إرسال للنموذج",
   "SyncWithDatabaseStatus": "تمت المزامنة: {{success}} من أصل {{total}}",
   "SyncWithDatabaseSuccess": "ستتم مزامنة جميع النماذج مع قاعدة البيانات الخارجية في الخلفية",
+  "TableName": "اسم الجدول",
   "TableSettingsTitle": "إدارة الأعمدة المعروضة",
   "Template": "قالب",
   "TemplateAvailable": "القالب متاح للجميع",

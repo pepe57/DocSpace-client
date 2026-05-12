@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} աղյուսակ կստեղծվեն առաջին ձևաթղթի ուղարկումից հետո",
   "SyncWithDatabaseStatus": "Համայնված՝ {{success}} {{total}}-ից",
   "SyncWithDatabaseSuccess": "Բոլոր ձևաթղթերը կսինխրոնացվեն արտաքին տվյալների բազայի հետ ֆոնային ռեժիմում",
+  "TableName": "Աղյուսակի անուն",
   "TableSettingsTitle": "Կառավարեք ցուցադրված սյունակները",
   "Template": "Կաղապար",
   "TemplateAvailable": "Կաղապարները հասանելի են բոլորի համար",

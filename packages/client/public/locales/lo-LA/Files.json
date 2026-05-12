@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} ຕາຕະລາງຈະຖືກສ້າງຂຶ້ນຫຼັງຈາກການສົ່ງຟອມຄັ້ງທຳອິດ",
   "SyncWithDatabaseStatus": "ຊິງໂຄຣໄນສ໌ແລ້ວ: {{success}} ອອກຈາກ {{total}}",
   "SyncWithDatabaseSuccess": "ແບບຟມທັງໝົດຈະຖືກຊິງໂຄໄສ໌ກັບຖານຂໍ້ມູນພາຍນອກໃນື້ນຫຼັງ",
+  "TableName": "ຊື່ຕາຕະລາງ",
   "TableSettingsTitle": "ຈັດການຖັນທີ່ສະແດງ",
   "Template": "ແມ່ແບບ",
   "TemplateAvailable": "ແມ່ແບບມີໃຫ້ທຸກຄົນ",

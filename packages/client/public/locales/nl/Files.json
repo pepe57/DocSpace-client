@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} tabellen worden aangemaakt na de eerste formulierverzending",
   "SyncWithDatabaseStatus": "Gesynchroniseerd: {{success}} van de {{total}}",
   "SyncWithDatabaseSuccess": "Alle formulieren worden op de achtergrond gesynchroniseerd met de externe database",
+  "TableName": "Tabelnaam",
   "TableSettingsTitle": "Weergegeven kolommen beheren",
   "Template": "Sjabloon",
   "TemplateAvailable": "Sjabloon beschikbaar voor iedereen",

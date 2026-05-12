@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} tabelas serão criadas após o envio do primeiro formulário",
   "SyncWithDatabaseStatus": "Sincronizado: {{success}} de {{total}}",
   "SyncWithDatabaseSuccess": "Todos osários serão sincronizados com banco de dados em segundo plano",
+  "TableName": "Nome da tabela",
   "TableSettingsTitle": "Gerenciar colunas exibidas",
   "Template": "Template",
   "TemplateAvailable": "Template disponível para todos",

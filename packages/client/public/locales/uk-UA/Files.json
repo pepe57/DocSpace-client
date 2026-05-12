@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} таблиць будуть створені після першого надсилання форми",
   "SyncWithDatabaseStatus": "Синхронізовано: {{success}} із {{total}}",
   "SyncWithDatabaseSuccess": "Усі форми будуть синхронізовані із зовнішньою базою даних у фоновому режимі",
+  "TableName": "Назва таблиці",
   "TableSettingsTitle": "Керувати відображеними стовпцями",
   "Template": "Шаблон",
   "TemplateAvailable": "Шаблон доступний усім",

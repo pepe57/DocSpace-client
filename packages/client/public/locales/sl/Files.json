@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} tabel bo ustvarjenih po prvem oddaji obrazca",
   "SyncWithDatabaseStatus": "Sinhronizirano: {{success}} {{total}}",
   "SyncWithDatabaseSuccess": "Vse obrazci bodo v ozadju sinhronvano zunanjimi b podatkov",
+  "TableName": "Ime tabele",
   "TableSettingsTitle": "Upravljanje prikazanih stolpcev",
   "Template": "Predloga",
   "TemplateAvailable": "Predloga na voljo vsem",

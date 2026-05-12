@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} Tabellen werden nach dem ersten Absenden des Formulars erstellt",
   "SyncWithDatabaseStatus": "Synchronisiert: {{success}} von {{total}}",
   "SyncWithDatabaseSuccess": "Alle Formulare werden im Hintergrund mit der externen Datenbank synchronisiert.",
+  "TableName": "Tabellenname",
   "TableSettingsTitle": "Angezeigte Spalten verwalten",
   "Template": "Vorlage",
   "TemplateAvailable": "Vorlage für alle verfügbar",

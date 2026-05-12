@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} tabulek bude vytvořeno po prvním odeslání formuláře",
   "SyncWithDatabaseStatus": "Synchronizováno: {{success}} z {{total}}",
   "SyncWithDatabaseSuccess": "Všechny formuláře budou synchronizovány s externí databází na pozadí",
+  "TableName": "Název tabulky",
   "TableSettingsTitle": "Správa zobrazených sloupců",
   "Template": "Šablona",
   "TemplateAvailable": "Šablona je k dispozici všem",

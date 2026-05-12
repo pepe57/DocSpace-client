@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} tabele vor fi create după prima trimitere a formularului",
   "SyncWithDatabaseStatus": "Sincronizat: {{success}} din {{total}}",
   "SyncWithDatabaseSuccess": "Toate formularele vor fi sincronizate cu baza de date externă în fundal",
+  "TableName": "Numele tabelului",
   "TableSettingsTitle": "Gestionează coloane afișate",
   "Template": "Șablon",
   "TemplateAvailable": "Șablonul este disponibil tuturor",

@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} табела ће бити креирано након првог слања форме",
   "SyncWithDatabaseStatus": "Синхронизовано: {{success}} од {{total}}",
   "SyncWithDatabaseSuccess": "Све форме ће бити синхронизоване са спољном базом података у позадини",
+  "TableName": "Назив табеле",
   "TableSettingsTitle": "Управљај приказаним колонама",
   "Template": "Шаблон",
   "TemplateAvailable": "Шаблон доступан свима",

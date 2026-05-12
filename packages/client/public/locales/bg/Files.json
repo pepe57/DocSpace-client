@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} таблици ще бъдат създадени след първото изпращане на формата",
   "SyncWithDatabaseStatus": "Синхронизирано: {{success}} от {{total}}",
   "SyncWithDatabaseSuccess": "Всички форми ще бъдат синхронизирани с външната база данни на заден план",
+  "TableName": "Име на таблица",
   "TableSettingsTitle": "Управлявай показаните колони",
   "Template": "Шаблон",
   "TemplateAvailable": "Шаблонът е наличен за всички",

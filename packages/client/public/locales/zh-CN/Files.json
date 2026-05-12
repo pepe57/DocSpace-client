@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} 个表格将在首次提交表单后创建",
   "SyncWithDatabaseStatus": "已同步：{{success}} / {{total}}",
   "SyncWithDatabaseSuccess": "所有单后台与外部数据库同步",
+  "TableName": "表名",
   "TableSettingsTitle": "管理显示的列",
   "Template": "模板",
   "TemplateAvailable": "模板可供所有人使用",

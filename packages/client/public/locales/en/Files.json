@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} tables will be created after the first form submission",
   "SyncWithDatabaseStatus": "Synchronized: {{success}} out of {{total}}",
   "SyncWithDatabaseSuccess": "All forms will synchronized with the external database in the background",
+  "TableName": "Table name",
   "TableSettingsTitle": "Manage displayed columns",
   "Template": "Template",
   "TemplateAvailable": "Template available to everyone",
@@ -232,6 +233,5 @@
   "WillBeDeletedPermanently": "{{date}} will be deleted permanently",
   "YouLeftTheAgent": "You have left the agent",
   "YouLeftTheRoom": "You have left the room",
-  "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>.",
-  "TableName": "Table name"
+  "YourUserTypeHasChanged": "Your user type has been changed to <1>“{{userType}}”</1> by the {{productName}} admin <1>{{adminName}}</1>."
 }

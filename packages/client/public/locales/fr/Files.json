@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} tableaux seront cré après première soumission du",
   "SyncWithDatabaseStatus": "Synchron :{{success}} sur {{total}}",
   "SyncWithDatabaseSuccess": "Tous les formulaires seront synchronisés avec la base de données externe en arrière-plan",
+  "TableName": "Nom de la table",
   "TableSettingsTitle": "Gérer les colonnes affichées",
   "Template": "Modèle",
   "TemplateAvailable": "Modèle disponible pour tous",

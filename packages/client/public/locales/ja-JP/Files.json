@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "最初の送信 {{count}}のテーブルが作成されます",
   "SyncWithDatabaseStatus": "同期済み: {{total}} 件中 {{success}} 件",
   "SyncWithDatabaseSuccess": "すべてのフォームはバックグラウンドで外部データベースと同期されます",
+  "TableName": "テーブル名",
   "TableSettingsTitle": "表示列の管理",
   "Template": "テンプレート",
   "TemplateAvailable": "全員に利用可能なテンプレート",

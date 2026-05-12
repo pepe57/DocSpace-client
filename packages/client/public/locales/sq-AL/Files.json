@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} tabela do të krijohen pas dorëzimit të formularit të parë",
   "SyncWithDatabaseStatus": "Sinkronizuar: {{success}} nga {{total}}",
   "SyncWithDatabaseSuccess": "Të gj formularët do të sinkronizohen me databën e jashtme sfond",
+  "TableName": "Emri i tabelës",
   "TableSettingsTitle": "Menaxhoni kolonat e shfaqura",
   "Template": "Шаблон",
   "TemplateAvailable": "Modelo i disponueshëm për të gjithë.",

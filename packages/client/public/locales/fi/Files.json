@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}}ulukodaan ensimmäisenakkeen lähettämisen",
   "SyncWithDatabaseStatus": "Synronoitu: {{success}} / {{total}}",
   "SyncWithDatabaseSuccess": "Kaikki lomakkeet synkronoidaan taustalla ulkoisen tietokannan kanssa",
+  "TableName": "Taulukon nimi",
   "TableSettingsTitle": "Hallitse näytettyjä kolumneja",
   "Template": "Malli",
   "TemplateAvailable": "Malli saatavilla kaikille",

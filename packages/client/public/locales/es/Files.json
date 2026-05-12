@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} tablas se crearán después del primer envío del formulario",
   "SyncWithDatabaseStatus": "Sincronizado: {{success}} de {{total}}",
   "SyncWithDatabaseSuccess": "Todos los formularios se sincronizarán con la base de datos externa en segundo plano",
+  "TableName": "Nombre de tabla",
   "TableSettingsTitle": "Gestionar las columnas mostradas",
   "Template": "Plantilla",
   "TemplateAvailable": "Plantilla disponible para todos",

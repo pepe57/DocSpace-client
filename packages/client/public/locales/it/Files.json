@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} tabelle verranno create dopo l'invio del primo modulo",
   "SyncWithDatabaseStatus": "Sincronizzato: {{success}} di {{total}}",
   "SyncWithDatabaseSuccess": "Tutti i moduli verranno sincronizzati con il database esterno in background",
+  "TableName": "Nome tabella",
   "TableSettingsTitle": "Gestisci le colonne visualizzate",
   "Template": "Modello",
   "TemplateAvailable": "Modello disponibile per tutti",

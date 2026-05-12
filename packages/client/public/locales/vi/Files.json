@@ -196,6 +196,7 @@
   "SyncWithDatabasePending": "{{count}} bảng sẽ được tạo sau khi gửi biểu mẫu đầu tiên",
   "SyncWithDatabaseStatus": "Đã đồng bộ hóa: {{success}} trên {{total}}",
   "SyncWithDatabaseSuccess": "Tất cả mẫu được bộ với cơ sở dữ liệu ngoài dưới nền",
+  "TableName": "Tên bảng",
   "TableSettingsTitle": "Quản lý các cột được hiển thị",
   "Template": "Mẫu",
   "TemplateAvailable": "Mẫu khả dụng cho tất cả mọi người",
