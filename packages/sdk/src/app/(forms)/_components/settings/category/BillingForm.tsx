@@ -32,7 +32,6 @@ import { observer } from "mobx-react";
 import { MemoryRouter } from "react-router";
 
 import { BillingRoot } from "@docspace/ui-kit/billing";
-import AiPage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPage";
 import AiPaywallPage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPaywallPage";
 import { useServicesStore } from "@docspace/ui-kit/billing/store/ServicesStoreProvider";
 import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
@@ -40,14 +39,17 @@ import { useFormsUserStore } from "../../../_store/FormsUserStore";
 import { useFormsTourStore } from "../../../_store/FormsTourStore";
 
 import styles from "./SettingsPanel.module.scss";
-import { useSDKConfig } from "@/providers/SDKConfigProvider";
+
+import AiBillingDashboard from "./AiBillingDashboard";
+
+const PAYMENT_CALLBACK_PATH = "/billing/payment-complete";
 
 const AiBillingContent = observer(
   ({ integrationUrl }: { integrationUrl?: string }) => {
     const { wasFirstAiServiceTopUp, isInitServicesData } = useServicesStore();
 
-    if (isInitServicesData && wasFirstAiServiceTopUp) {
-      return <AiPage integrationUrl={integrationUrl} />;
+    if (wasFirstAiServiceTopUp && isInitServicesData) {
+      return <AiBillingDashboard integrationUrl={integrationUrl} />;
     }
 
     return <AiPaywallPage integrationUrl={integrationUrl} />;
@@ -73,8 +75,10 @@ const BillingForm = () => {
     [i18n.language, user],
   );
 
-  const { sdkConfig } = useSDKConfig();
-  const integrationUrl = sdkConfig?.integrationUrl;
+  const integrationUrl =
+    typeof window !== "undefined"
+      ? `${window.location.origin}${PAYMENT_CALLBACK_PATH}`
+      : undefined;
 
   return (
     <div className={styles.billingWrapper}>
