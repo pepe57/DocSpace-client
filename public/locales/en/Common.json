@@ -87,7 +87,6 @@
   "AIModelPrice": "{{inputPrice}}/M input tokens | {{outputPrice}}/M output tokens",
   "AIModelsIntro": "Pick the right model for your task — from budget-friendly to advanced. <1>OpenRouter pricing</1> shown. A 20% service fee applies to usage.",
   "AINewChat": "New chat",
-  "AIPaywallBalanceLabel": "Your AI balance",
   "AIPaywallCompletedHint": "Loading your usage, transactions, and service controls...",
   "AIPaywallCompletedTitle": "Setting up your AI service",
   "AIPaywallCallbackError": "Something went wrong",
