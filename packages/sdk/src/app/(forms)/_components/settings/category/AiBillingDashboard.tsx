@@ -100,7 +100,7 @@ const AiBillingDashboard = ({ integrationUrl }: AiBillingDashboardProps) => {
 
       <div key={activeTab} className={styles.billingContent}>
         {activeTab === "ai" ? (
-          <AiPage integrationUrl={integrationUrl} withoutWallet />
+          <AiPage integrationUrl={integrationUrl} withoutWallet simpleTopUp />
         ) : null}
         {activeTab === "payment-method" ? (
           <PaymentMethod integrationUrl={integrationUrl} />
@@ -111,3 +111,4 @@ const AiBillingDashboard = ({ integrationUrl }: AiBillingDashboardProps) => {
 };
 
 export default AiBillingDashboard;
+

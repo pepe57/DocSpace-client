@@ -33,7 +33,9 @@ import { MemoryRouter } from "react-router";
 
 import { BillingRoot } from "@docspace/ui-kit/billing";
 import AiPaywallPage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPaywallPage";
+import AiPageLoader from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPageLoader";
 import { useServicesStore } from "@docspace/ui-kit/billing/store/ServicesStoreProvider";
+import { AI_TOOLS, AI_ENUM } from "@docspace/ui-kit/billing/constants";
 import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
 import { useFormsUserStore } from "../../../_store/FormsUserStore";
 import { useFormsTourStore } from "../../../_store/FormsTourStore";
@@ -44,15 +46,67 @@ import AiBillingDashboard from "./AiBillingDashboard";
 
 const PAYMENT_CALLBACK_PATH = "/billing/payment-complete";
 
+type RenderTarget = "loading" | "paywall" | "dashboard";
+
 const AiBillingContent = observer(
   ({ integrationUrl }: { integrationUrl?: string }) => {
-    const { wasFirstAiServiceTopUp, isInitServicesData } = useServicesStore();
+    const { t } = useTranslation();
+    const servicesStore = useServicesStore();
 
-    if (wasFirstAiServiceTopUp && isInitServicesData) {
+    const [renderTarget, setRenderTarget] =
+      React.useState<RenderTarget>("loading");
+
+    React.useEffect(() => {
+      let cancelled = false;
+
+      (async () => {
+        try {
+          const hadTopUp = await servicesStore.aiPaywallInit(t);
+
+          if (cancelled) return;
+
+          if (hadTopUp) {
+            await servicesStore.initServiceData(
+              t,
+              AI_TOOLS,
+              AI_ENUM,
+              integrationUrl,
+            );
+
+            if (cancelled) return;
+            setRenderTarget("dashboard");
+          } else {
+            setRenderTarget("paywall");
+          }
+        } catch (e) {
+          console.error("[ai-billing-content] bootstrap failed", e);
+          if (!cancelled) setRenderTarget("paywall");
+        }
+      })();
+
+      return () => {
+        cancelled = true;
+      };
+    }, []);
+
+    const onPaywallCompleted = React.useCallback(() => {
+      setRenderTarget("dashboard");
+    }, []);
+
+    if (renderTarget === "loading") {
+      return <AiPageLoader />;
+    }
+
+    if (renderTarget === "dashboard") {
       return <AiBillingDashboard integrationUrl={integrationUrl} />;
     }
 
-    return <AiPaywallPage integrationUrl={integrationUrl} />;
+    return (
+      <AiPaywallPage
+        integrationUrl={integrationUrl}
+        onCompleted={onPaywallCompleted}
+      />
+    );
   },
 );
 
