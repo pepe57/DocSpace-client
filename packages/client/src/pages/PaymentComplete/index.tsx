@@ -24,25 +24,40 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { getBgPattern } from "@docspace/shared/utils/common";
+import { TColorScheme } from "@docspace/ui-kit/providers/theme/themes";
 import AiPaywallCompletePage from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPaywallCompletePage";
 
 import styles from "./PaymentComplete.module.scss";
 
-const PaymentComplete = ({ currentColorScheme }) => {
+type PaymentCompleteProps = {
+  currentColorScheme?: TColorScheme;
+};
+
+const PaymentComplete = ({ currentColorScheme }: PaymentCompleteProps) => {
   const bgPattern = getBgPattern(currentColorScheme?.id);
 
   return (
-    <div className={styles.wrapper} style={{ "--bg-pattern": bgPattern }}>
+    <div
+      className={styles.wrapper}
+      style={{ "--bg-pattern": bgPattern } as React.CSSProperties}
+    >
       <AiPaywallCompletePage />
     </div>
   );
 };
 
-export const Component = inject(({ settingsStore }) => ({
-  currentColorScheme: settingsStore.currentColorScheme,
-}))(observer(PaymentComplete));
+export const Component = inject(
+  ({
+    settingsStore,
+  }: {
+    settingsStore: { currentColorScheme?: TColorScheme };
+  }) => ({
+    currentColorScheme: settingsStore.currentColorScheme,
+  }),
+)(observer(PaymentComplete));
 
 export default PaymentComplete;
