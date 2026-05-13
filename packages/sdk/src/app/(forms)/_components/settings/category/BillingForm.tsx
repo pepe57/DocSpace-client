@@ -37,6 +37,7 @@ import AiPageLoader from "@docspace/ui-kit/billing/services/pages/ai-tools/AiPag
 import { useServicesStore } from "@docspace/ui-kit/billing/store/ServicesStoreProvider";
 import { AI_TOOLS, AI_ENUM } from "@docspace/ui-kit/billing/constants";
 import type { TPaymentConfig } from "@docspace/ui-kit/billing/types";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { useFormsUserStore } from "../../../_store/FormsUserStore";
 import { useFormsTourStore } from "../../../_store/FormsTourStore";
 
@@ -80,13 +81,19 @@ const AiBillingContent = observer(
           }
         } catch (e) {
           console.error("[ai-billing-content] bootstrap failed", e);
-          if (!cancelled) setRenderTarget("paywall");
+          if (!cancelled) {
+            toastr.error(t("UnexpectedError"));
+            setRenderTarget("paywall");
+          }
         }
       })();
 
       return () => {
         cancelled = true;
       };
+      // integrationUrl is derived from window.location.origin and is stable
+      // across the component's lifetime; bootstrap intentionally runs once on mount.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const onPaywallCompleted = React.useCallback(() => {
