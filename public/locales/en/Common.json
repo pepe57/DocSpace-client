@@ -102,7 +102,6 @@
   "AIPaywallCallbackSuccess": "You're all set",
   "AIPaywallCallbackSuccessHint": "{{price}} in credits is ready on your AI balance. Head back to your workspace to start using AI.",
   "AIPaywallEnableButton": "Top up AI balance — ${{price}}",
-  "AIPaywallHeroSubtitle": "Pay-as-you-go — no subscription, and credits never expire.",
   "AIPaywallHeroTitle": "Add AI to your workspace — ${{price}} to get started.",
   "AIPaywallHeroTitleCompleted": "Adding AI to your workspace — almost ready...",
   "AIPaywallIncludedFeaturesLine1": "Chat & agents · Text & image generation · Translation · Summaries",
