@@ -41,7 +41,6 @@ import {
 } from "./types";
 import { Nullable } from "../../types";
 import { Encoder } from "@docspace/ui-kit/utils/encoder";
-import { AI_TOOLS } from "@docspace/ui-kit/billing/constants";
 
 const baseURL = "/apisystem";
 
@@ -432,7 +431,6 @@ export function getPaymentTariff() {
 }
 
 export async function getServiceQuotaBalance(
-  serviceName: string = AI_TOOLS,
   refresh?: boolean,
   signal?: AbortSignal,
 ) {
@@ -440,7 +438,7 @@ export async function getServiceQuotaBalance(
 
   return request({
     method: "get",
-    url: `/portal/payment/customer/servicequota?serviceName=${serviceName}`,
+    url: `/portal/payment/customer/aibalance`,
     params,
     signal,
   }) as TBalance;
