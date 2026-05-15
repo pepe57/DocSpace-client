@@ -94,7 +94,6 @@
   "AIPricingAndBilling": "Preise und Abrechnung",
   "AIPricingAvailableCredits": "Verfügbare Credits: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Verfügbare Credits: {{price}}. Geringer Saldo",
-  "AIPricingBilledPerUsage": "Nutzungsbasiertes Abrechnung",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter pricing</1> + 20% Servicegebühr wird bei Nutzung erhoben",
   "AIPricingFeeNoteWithoutLink": "* + 20% Servicegebühr wird bei Nutzung erhoben",
   "AIPricingInputTokens": "Eingabe-Tokens",

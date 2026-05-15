@@ -94,7 +94,6 @@
   "AIPricingAndBilling": "Prijzen en facturering",
   "AIPricingAvailableCredits": "Beschikbare credits: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Beschikbare credits: {{price}}. Laag saldo",
-  "AIPricingBilledPerUsage": "Gebruiksgebaseerde facturering",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter prijzen</1> + 20% servicekosten zijn van toepassing bij gebruik",
   "AIPricingFeeNoteWithoutLink": "* + 20% servicekosten bij gebruik",
   "AIPricingInputTokens": "Invoer tokens",

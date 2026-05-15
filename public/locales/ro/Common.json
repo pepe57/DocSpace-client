@@ -94,7 +94,6 @@
   "AIPricingAndBilling": "Prețuri și facturare",
   "AIPricingAvailableCredits": "Credite disponibile: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Credite disponibile: {{price}}. Soldi redus",
-  "AIPricingBilledPerUsage": "Facturare bazată pe utilizare",
   "AIPricingFeeNoteUsage": "* Se aplică o taxă de serviciu de 20% la <1>prețurile OpenRouter</1> în funcție de utilizare",
   "AIPricingFeeNoteWithoutLink": "* Se aplică o taxă de serviciu de 20% la utilizare",
   "AIPricingInputTokens": "Tokeni de intrare",

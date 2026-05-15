@@ -94,7 +94,6 @@
   "AIPricingAndBilling": "Cenoviranje i naplata",
   "AIPricingAvailableCredits": "Dostupni krediti: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Dostupni krediti: {{price}}. Nizak saldo",
-  "AIPricingBilledPerUsage": "Naplata na osnovu korišćenja",
   "AIPricingFeeNoteUsage": "* <1>Cenovnik OpenRouter</1> + 20% naknada za uslugu važi pri korišćenju",
   "AIPricingFeeNoteWithoutLink": "* + 20% naknada za uslugu primjenjuje se pri korištenju",
   "AIPricingInputTokens": "Unos tokena",

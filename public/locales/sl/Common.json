@@ -94,7 +94,6 @@
   "AIPricingAndBilling": "Cenik in obračun",
   "AIPricingAvailableCredits": "Razpoložljivi krediti: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Razpoložljivi krediti: {{price}}. Nizk raven",
-  "AIPricingBilledPerUsage": "Fakturiranje na podlagi uporabe",
   "AIPricingFeeNoteUsage": "* <1>Cenik OpenRouter</1> + 20% stroškov za storitev se nanaša na uporabo",
   "AIPricingFeeNoteWithoutLink": "* + 20% stroški storitve se nanašajo na uporabo",
   "AIPricingInputTokens": "Tokenji vstopanja",

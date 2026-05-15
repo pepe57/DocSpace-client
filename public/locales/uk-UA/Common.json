@@ -94,7 +94,6 @@
   "AIPricingAndBilling": "Ціни та оплата",
   "AIPricingAvailableCredits": "Доступні кредити: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Доступні кредити: {{price}}. Низький баланс",
-  "AIPricingBilledPerUsage": "Виставлення рахунків на основі використання",
   "AIPricingFeeNoteUsage": "* <1>Ціни OpenRouter</1> + 20% комісія за послуги застосовується при використанні",
   "AIPricingFeeNoteWithoutLink": "* + 20% комісія за послуги застосовується при використанні",
   "AIPricingInputTokens": "Введення токенів",

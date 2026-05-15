@@ -94,7 +94,6 @@
   "AIPricingAndBilling": "Cena a fakturácia",
   "AIPricingAvailableCredits": "Dostupné kredity: {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Dostupné kredity: {{price}}. Nízky balíček",
-  "AIPricingBilledPerUsage": "Fakturácia na základe využitia",
   "AIPricingFeeNoteUsage": "* <1>Cenotvorba OpenRouter</1> + 20% poplatok za služby sa uplatní pri používaní",
   "AIPricingFeeNoteWithoutLink": "* + 20% poplatok za služby pri používaní",
   "AIPricingInputTokens": "Tokeny vstupu",

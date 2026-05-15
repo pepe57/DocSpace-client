@@ -94,7 +94,6 @@
   "AIPricingAndBilling": "Գնային և հաշվարկային հարցեր",
   "AIPricingAvailableCredits": "Հասանելի վարկային միավորներ՝ {{price}}",
   "AIPricingAvailableCreditsLowBalance": "Հասանելի վարկային միավորներ՝ {{price}}։ Ցածր մակարդակ",
-  "AIPricingBilledPerUsage": "Օգտագործման հիման վրա գանձում",
   "AIPricingFeeNoteUsage": "* <1>OpenRouter-ի գնային քաղաքականություն</1> + 20% ծառայության վճար կիրառվում է օգտագործման ժամանակ",
   "AIPricingFeeNoteWithoutLink": "* + 20% Ծառայության վճար կիրառվում է օգտագործման դեպքում",
   "AIPricingInputTokens": "Մուտքային տոքեններ",
