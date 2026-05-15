@@ -102,9 +102,24 @@
             "tooltip": "🛠️ Start the \"frontend update dependencies\" task"
           },
           {
+            "label": "Update all lock files",
+            "task": "Frontend | update all lock files",
+            "tooltip": "🛠️ Update pnpm-lock.yaml + ui-kit lock + translation-app lock"
+          },
+          {
             "label": "Update pnpm-lock.yaml",
             "task": "Frontend | update pnpm-lock.yaml",
             "tooltip": "🛠️ Start the \"frontend update pnpm-lock.yaml\" task"
+          },
+          {
+            "label": "Update ui-kit lock",
+            "task": "Frontend | update ui-kit lock",
+            "tooltip": "🛠️ Update libs/ui-kit pnpm lock file"
+          },
+          {
+            "label": "Update translation-app lock",
+            "task": "Frontend | update translation-app lock",
+            "tooltip": "🛠️ Update common/translation-app frontend & backend npm lock files"
           },
           {
             "label": "Build",
