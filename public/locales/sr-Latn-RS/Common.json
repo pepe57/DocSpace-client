@@ -86,7 +86,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Lista modela",
   "AIModelPrice": "{{inputPrice}}/M ulaznih tokena | {{outputPrice}}/M izlaznih tokena",
-  "AIModelsIntro": "Izaberite pravi model za vaš zadatak — od povoljnog do naprednog. Prikazana je <1>OpenRouter cena</1>. Na korišćenje se naplaćuje naknada usluge od 20%.",
   "AINewChat": "Novi razgovor",
   "AIPricingAdditionalFeaturesTitle": "Dodatne funkcije",
   "AIPricingAdditionalTooltipVectorization": "<1>Vektorisacija</1> — Dokumenti se obrađuju i indeksiraju kada ih učitate u Bazu znanja u AI agentima.",

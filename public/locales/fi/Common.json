@@ -86,7 +86,6 @@
   "AIModel": "Malli",
   "AIModelListTitle": "Mallilista",
   "AIModelPrice": "{{inputPrice}}/M syöte-tokenit | {{outputPrice}}/M tulostokenit",
-  "AIModelsIntro": "Valitse sopiva malli tehtävääsi — edullisista edistyneisiin. Näytetään <1>OpenRouter pricing</1>. Käyttöön veloitetaan 20 % palvelumaksu.",
   "AINewChat": "Uusi chat",
   "AIPricingAdditionalFeaturesTitle": "Lisäominaisuudet",
   "AIPricingAdditionalTooltipVectorization": "<1>Vektorisointi</1> — Dokumentit käsitellään ja indeksoidaan, kun ne ladataan Tietokantaan AI-agenttien yhteyteen.",

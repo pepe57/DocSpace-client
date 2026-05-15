@@ -86,7 +86,6 @@
   "AIModel": "模型",
   "AIModelListTitle": "模型列表",
   "AIModelPrice": "{{inputPrice}}/M 输入令牌 | {{outputPrice}}/M 输出令牌",
-  "AIModelsIntro": "为您的任务选择合适的模型——从经济型到高级的。<1>OpenRouter 定价</1> 显示。使用费将收取 20% 的服务费。",
   "AINewChat": "新对话",
   "AIPricingAdditionalFeaturesTitle": "附加功能",
   "AIPricingAdditionalTooltipVectorization": "<1>向量化</1> — 上传到知识库的文档会在AI代理中进行处理和索引。",

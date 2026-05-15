@@ -86,7 +86,6 @@
   "AIModel": "Մոդել",
   "AIModelListTitle": "Մոդելների ցանկ",
   "AIModelPrice": "{{inputPrice}}/M մուտքային տոքեններ | {{outputPrice}}/M ելքային տոքեններ",
-  "AIModelsIntro": "Ընտրեք ճիշտ մոդելը ձեր խնդրի համար՝ բյուջեին ընկածից մինչև առաջադեմ։ <1>OpenRouter pricing</1> ցուցադրված է։ Օգտագործման վրա գործում է 20% ծառայության վճար։",
   "AINewChat": "Նոր չատ",
   "AIPricingAdditionalFeaturesTitle": "Լրացուցիչ հնարավորություններ",
   "AIPricingAdditionalTooltipVectorization": "<1>Վեկտորիզացիա</1> — Փաստաթղթերը մշակվում և ինդեքսավորվում են, երբ դրանք վերբեռնում եք Գիտելիքների բազա AI գործակիցներում։",

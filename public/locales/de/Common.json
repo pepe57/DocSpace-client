@@ -86,7 +86,6 @@
   "AIModel": "Modell",
   "AIModelListTitle": "Modellliste",
   "AIModelPrice": "{{inputPrice}}/M Input-Tokens | {{outputPrice}}/M Ausgabe-Tokens",
-  "AIModelsIntro": "Wählen Sie das richtige Modell für Ihre Aufgabe – von kostengünstig bis fortgeschritten. <1>OpenRouter pricing</1> wird angezeigt. Auf den Verbrauch fällt eine Servicegebühr von 20 % an.",
   "AINewChat": "Neuer Chat",
   "AIPricingAdditionalFeaturesTitle": "Zusätzliche Funktionen",
   "AIPricingAdditionalTooltipVectorization": "<1>Vektorisierung</1> — Dokumente werden verarbeitet und indiziert, wenn Sie sie in die Wissensdatenbank in KI-Agenten hochladen.",

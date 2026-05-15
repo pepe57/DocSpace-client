@@ -86,7 +86,6 @@
   "AIModel": "نموذج",
   "AIModelListTitle": "قائمة النماذج",
   "AIModelPrice": "{{inputPrice}}/M رموز الإدخال | {{outputPrice}}/M رموز الإخراج",
-  "AIModelsIntro": "اختر النموذج المناسب لمهمتك — بدءاً من الاقتصادي وصولاً إلى المتقدم. `<1>OpenRouter pricing</1>` معروض. تُطبق رسوم خدمة بنسبة 20% على الاستخدام.",
   "AINewChat": "دردشة جديدة",
   "AIPricingAdditionalFeaturesTitle": "الميزات الإضافية",
   "AIPricingAdditionalTooltipVectorization": "<1>Vectorization</1> — تتم معالجة المستندات وفهرسة محتوياتها عند تحميلها في قاعدة المعرفة ضمن وكلاء الذكاء الاصطناعي.",

@@ -86,7 +86,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Model siyahısı",
   "AIModelPrice": "{{inputPrice}}/M giriş tokenləri | {{outputPrice}}/M çıxış tokenləri",
-  "AIModelsIntro": "Tapşırığınız üçün ən uyğun modeli seçin — büdcə dostundan qabaqcıl səviyyəyə qədər. `<1>OpenRouter pricing</1>` göstərilir. İstifadəyə 20% xidmət haqqı tətbiq edilir.",
   "AINewChat": "Yeni söhbət",
   "AIPricingAdditionalFeaturesTitle": "Əlavə xüsusiyyətlər",
   "AIPricingAdditionalTooltipVectorization": "<1>Vektorlaşdırma</1> — Sənədlər, onları AI agentlərində Bilik Bazasına yüklədiyiniz zaman emal edilir və indekslənir.",

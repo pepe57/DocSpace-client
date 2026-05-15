@@ -86,7 +86,6 @@
   "AIModel": "Mô hình",
   "AIModelListTitle": "Danh sách mô hình",
   "AIModelPrice": "{{inputPrice}}/Triệu token đầu vào | {{outputPrice}}/Triệu token đầu ra",
-  "AIModelsIntro": "Chọn mô hình phù hợp cho tác vụ của bạn — từ tiết kiệm chi phí đến nâng cao. <1>Giá OpenRouter</1> được hiển thị. Áp dụng phí dịch vụ 20% cho việc sử dụng.",
   "AINewChat": "Trò chuyện mới",
   "AIPricingAdditionalFeaturesTitle": "Tính năng bổ sung",
   "AIPricingAdditionalTooltipVectorization": "<1>Vector hóa</1> — Tài liệu được xử lý và lập chỉ mục khi bạn tải chúng lên Knowledge Base trong các tác nhân AI.",

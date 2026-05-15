@@ -86,7 +86,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Seznam modelů",
   "AIModelPrice": "{{inputPrice}}/M vstupní tokeny | {{outputPrice}}/M výstupní tokeny",
-  "AIModelsIntro": "Vyberte si správný model pro váš úkol — od ekonomického po pokročilý. `<1>OpenRouter pricing</1>` je zobrazeno. Použití je zdaněno poplatkem za službu ve výši 20%.",
   "AINewChat": "Nová konverzace",
   "AIPricingAdditionalFeaturesTitle": "Doplňkové funkce",
   "AIPricingAdditionalTooltipVectorization": "<1>Vectorization</1> — Dokumenty jsou zpracovány a indexovány, když je nahrajete do Databáze znalostí v AI agentích.",

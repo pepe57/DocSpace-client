@@ -86,7 +86,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Lista de modele",
   "AIModelPrice": "{{inputPrice}}/M tokeni de intrare | {{outputPrice}}/M tokeni de ieșire",
-  "AIModelsIntro": "Alegeți modelul potrivit pentru sarcina dvs. — de la prietenos bugetului la avansat. <1>Prețuri OpenRouter</1> afișate. Se aplică o taxă de serviciu de 20% la utilizare.",
   "AINewChat": "Chat nou",
   "AIPricingAdditionalFeaturesTitle": "Funcționalități suplimentare",
   "AIPricingAdditionalTooltipVectorization": "<1>Vectorizare</1> — Documentele sunt procesate și indexate atunci când le încărcați în Baza de Cunoștințe în agenții AI.",
