@@ -33,6 +33,9 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+import { readFile } from "fs/promises";
+import path from "path";
+
 import { cookies, headers } from "next/headers";
 
 import { Toast } from "@docspace/ui-kit/components/toast";
@@ -41,9 +44,10 @@ import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
 import {
-	getDirectionByLanguage,
-	getFontFamilyDependingOnLanguage,
+  getDirectionByLanguage,
+  getFontFamilyDependingOnLanguage,
 } from "@docspace/ui-kit/providers/theme/rtl-utils";
+import type { TTranslations } from "@docspace/ui-kit/providers/translation";
 
 import { Providers } from "@/providers";
 import {
@@ -52,6 +56,62 @@ import {
   getSettings,
   getUser,
 } from "@/utils/actions";
+
+const LOGIN_NAMESPACES = [
+  "Login",
+  "Confirm",
+  "Consent",
+  "Errors",
+  "TenantList",
+  "Wizard",
+] as const;
+
+async function loadTranslationsForLocale(
+  locale: string,
+): Promise<TTranslations> {
+  const loginLocalesDir = path.join(process.cwd(), "public/locales");
+  const sharedLocalesDir = path.join(process.cwd(), "../../public/locales");
+
+  const tryReadJson = async (filePath: string) => {
+    try {
+      return JSON.parse(await readFile(filePath, "utf-8")) as Record<
+        string,
+        string
+      >;
+    } catch {
+      return null;
+    }
+  };
+
+  const loadNs = async (ns: string, dir: string, lng: string) => {
+    const data =
+      (await tryReadJson(path.join(dir, lng, `${ns}.json`))) ??
+      (await tryReadJson(path.join(dir, "en", `${ns}.json`))) ??
+      {};
+    return [ns, data] as const;
+  };
+
+  const loadAllNsForLng = async (lng: string) => {
+    const [loginEntries, commonEntry] = await Promise.all([
+      Promise.all(
+        LOGIN_NAMESPACES.map((ns) => loadNs(ns, loginLocalesDir, lng)),
+      ),
+      loadNs("Common", sharedLocalesDir, lng),
+    ]);
+    return new Map([...loginEntries, commonEntry]);
+  };
+
+  const translations: TTranslations = new Map();
+
+  const effectiveLng = locale || "en";
+  translations.set(effectiveLng, await loadAllNsForLng(effectiveLng));
+
+  if (effectiveLng !== "en") {
+    translations.set("en", await loadAllNsForLng("en"));
+  }
+
+  return translations;
+}
 
 import "../styles/globals.scss";
 import "@docspace/shared/styles/theme.scss";
@@ -150,6 +210,8 @@ export default async function RootLayout({
     queryParams?.culture ||
     (settings && typeof settings !== "string" ? settings.culture : "en");
 
+  const translations = await loadTranslationsForLocale(locale || "en");
+
   const dirClass = getDirectionByLanguage(locale || "en");
   const themeClass =
     systemTheme?.value === ThemeKeys.DarkStr ? "dark" : "light";
@@ -200,6 +262,7 @@ export default async function RootLayout({
           redirectURL={redirectUrl}
           user={user}
           locale={locale}
+          translations={translations}
         >
           <Toast isSSR />
           {children}
