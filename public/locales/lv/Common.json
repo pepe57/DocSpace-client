@@ -86,7 +86,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Modelu saraksts",
   "AIModelPrice": "{{inputPrice}}/M ielietotājiem tokeniem | {{outputPrice}}/M izplatītiem tokeniem",
-  "AIModelsIntro": "Izvēlieties pareizo modeli savai uzdienai — no budžetam draudzīgai līdz avancētai. <1>OpenRouter cenotne</1> parādīta. Uz lietojumu piemērojama 20% pakalpojuma maksa.",
   "AINewChat": "Jauns čats",
   "AIPricingAdditionalFeaturesTitle": "Papildu funkcijas",
   "AIPricingAdditionalTooltipVectorization": "<1>Vektoralizācija</1> — Dokumenti tiek apstrādāti un indeksēti, kad jūs tos apkāpjat Kaitības bāzē AI agentos.",

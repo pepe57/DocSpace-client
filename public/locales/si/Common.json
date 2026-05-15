@@ -86,7 +86,6 @@
   "AIModel": "ආකෘතිය",
   "AIModelListTitle": "මෝඩල් ලැයිස්තුව",
   "AIModelPrice": "{{inputPrice}}/M ආදාන ටෝකන | {{outputPrice}}/M ප්‍රතිදාන ටෝකන",
-  "AIModelsIntro": "ඔබේ කාර්යය සඳහා නිවැරදි මාදිලිය තෝරන්න — අයවැය-හිතකාමීයේ සිට උසස් දක්වා. <1>OpenRouter pricing</1> පෙන්වා ඇත. භාවිතයට 20% සේවා ගාස්තුවක් අදාළ වේ.",
   "AINewChat": "නව කතාබහ",
   "AIPricingAdditionalFeaturesTitle": "අමතර අංග",
   "AIPricingAdditionalTooltipVectorization": "<1>වෙක්ටරකරණය</1> — ඔබ ලේඛන AI agents හි Knowledge Base වෙත උඩුගත කරන විට ඒවා ක්‍රියාවලි කර දර්ශකගත කරයි.",

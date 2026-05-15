@@ -86,7 +86,6 @@
   "AIModel": "モデル",
   "AIModelListTitle": "モデル一覧",
   "AIModelPrice": "{{inputPrice}}/M 入力トークン | {{outputPrice}}/M 出力トークン",
-  "AIModelsIntro": "タスクに合ったモデルを選択してください。予算重視から高度なものまで。<1>OpenRouterの料金</1>が表示されています。ご利用には20%のサービス料がかかります。",
   "AINewChat": "新規チャット",
   "AIPricingAdditionalFeaturesTitle": "追加機能",
   "AIPricingAdditionalTooltipVectorization": "<1>ベクトル化</1> — ドキュメントは、AIエージェントにアップロードされる際に処理およびインデックス化されます。",

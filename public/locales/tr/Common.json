@@ -86,7 +86,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Model list",
   "AIModelPrice": "{{inputPrice}}/M giriş belirteçleri | {{outputPrice}}/M çıkış belirteçleri",
-  "AIModelsIntro": "Göreviniz için doğru modeli seçin — bütçe dostu'dan gelişmişe. <1>OpenRouter fiyatlandırması</1> gösterilmiştir. Kullanıma %20 hizmet ücreti uygulanır.",
   "AINewChat": "Yeni sohbet",
   "AIPricingAdditionalFeaturesTitle": "Ek özellikler",
   "AIPricingAdditionalTooltipVectorization": "<1>Vektörleştirme</1> — Belgeler, Bilgi Tabanı'na yapıldığında yapay zeka ajanlarında işlenir ve dizinlenir.",

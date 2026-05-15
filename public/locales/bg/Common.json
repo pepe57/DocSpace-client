@@ -86,7 +86,6 @@
   "AIModel": "Модел",
   "AIModelListTitle": "Списък с модели",
   "AIModelPrice": "{{inputPrice}}/M входни токени | {{outputPrice}}/M изходни токени",
-  "AIModelsIntro": "Изберете правилния модел за вашата задача — от икономичен до напреднал. Показва се <1>OpenRouter pricing</1>. Прилага се такса за услуга от 20% към използването.",
   "AINewChat": "Нов чат",
   "AIPricingAdditionalFeaturesTitle": "Допълнителни функции",
   "AIPricingAdditionalTooltipVectorization": "<1>Vectorization</1> — Документите се обработват и индексират, когато ги качите в Knowledge Base в AI agents.",

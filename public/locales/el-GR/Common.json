@@ -86,7 +86,6 @@
   "AIModel": "Μοντέλο",
   "AIModelListTitle": "Λίστα Μοντέλων",
   "AIModelPrice": "{{inputPrice}}/M tokens εισόδου | {{outputPrice}}/M tokens εξόδου",
-  "AIModelsIntro": "Επιλέξτε το κατάλληλο μοντέλο για την εργασία σας — από οικονομικά φιλικό έως προηγμένο. <1>OpenRouter pricing</1> εμφανίζεται. Εφαρμόζεται μια προμήθεια υπηρεσιών 20% στην χρήση.",
   "AINewChat": "Νέα συνομιλία",
   "AIPricingAdditionalFeaturesTitle": "Πρόσθετες λειτουργίες",
   "AIPricingAdditionalTooltipVectorization": "<1>Διανυσμοποίηση</1> — Τα έγγραφα επεξεργάζονται και indexάρονται όταν τα ανεβάζετε στη Βάση Γνώσεων στους AI agents.",

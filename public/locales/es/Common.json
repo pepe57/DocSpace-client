@@ -86,7 +86,6 @@
   "AIModel": "Modelo",
   "AIModelListTitle": "Lista de modelos",
   "AIModelPrice": "{{inputPrice}}/M tokens de entrada | {{outputPrice}}/M tokens de salida",
-  "AIModelsIntro": "Seleccione el modelo adecuado para su tarea — desde económico hasta avanzado. <1>OpenRouter pricing</1> mostrado. Se aplica una tarifa de servicio del 20% al uso.",
   "AINewChat": "Nuevo chat",
   "AIPricingAdditionalFeaturesTitle": "Funcionalidades adicionales",
   "AIPricingAdditionalTooltipVectorization": "<1>Vectorización</1> — Los documentos se procesan e indexan cuando los sube a la Base de Conocimiento en los agentes de IA.",

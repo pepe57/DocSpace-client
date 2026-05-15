@@ -86,7 +86,6 @@
   "AIModel": "Model",
   "AIModelListTitle": "Lista e modeleve",
   "AIModelPrice": "{{inputPrice}}/M tokenë hyrëse | {{outputPrice}}/M tokenë dalëse",
-  "AIModelsIntro": "Zgjidhni modelin e duhur për detyrën tuaj — nga i qartë për buxhetot e vogla deri te i avancuar. <1>Çmimet e OpenRouter</1> tregohen. Një tarifë shërbimi prej 20% aplikohet përdorimit.",
   "AINewChat": "Bisedë e re",
   "AIPricingAdditionalFeaturesTitle": "Funksione shtesë",
   "AIPricingAdditionalTooltipVectorization": "<1>Vektërizimi</1> — Dokumentet përpunohen dhe indeksohen kur i ngarkoni në Bazën e Dijes në agjentët e AI.",

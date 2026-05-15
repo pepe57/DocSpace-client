@@ -86,7 +86,6 @@
   "AIModel": "모델",
   "AIModelListTitle": "모델 목록",
   "AIModelPrice": "{{inputPrice}}/M 입력 토큰 | {{outputPrice}}/M 출력 토큰",
-  "AIModelsIntro": "작업에 맞는 적절한 모델을 선택하세요. 예산 친화적인 것부터 고급 모델까지. <1>OpenRouter 가격 책정</1>이 표시됩니다. 사용량에 대해 20% 서비스 수수료가 부과됩니다.",
   "AINewChat": "새로운 채팅",
   "AIPricingAdditionalFeaturesTitle": "추가 기능",
   "AIPricingAdditionalTooltipVectorization": "<1>벡터화</1> — 문서를 AI 에이전트에 업로드하면 지식 기반에서 처리 및 인덱싱됩니다.",
