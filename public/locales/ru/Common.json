@@ -1453,7 +1453,7 @@
   "UseSSL": "Использовать SSL",
   "UseTemplate": "Используйте этот шаблон",
   "Version": "Версия",
-  "VersionBadge": "V.{{version}}",
+  "VersionBadge": "В.{{version}}",
   "ViaLink": "По ссылке",
   "Video": "Видео",
   "View": "Просмотр",
