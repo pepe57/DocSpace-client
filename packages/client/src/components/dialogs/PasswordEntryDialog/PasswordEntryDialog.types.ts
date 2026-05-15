@@ -31,7 +31,11 @@
  * Public License v3.
  *
  * SPDX-License-Identifier: AGPL-3.0-only
- */export interface InjectedPasswordEntryDialogProps {
+ */
+
+import type { TRoom } from "@docspace/shared/api/rooms/types";
+
+export interface InjectedPasswordEntryDialogProps {
   onClose: VoidFunction;
   openItemAction: TStore["filesActionsStore"]["openItemAction"];
   onClickDownload: TStore["contextOptionsStore"]["onClickDownload"];
