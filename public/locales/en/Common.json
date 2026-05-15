@@ -86,7 +86,7 @@
   "AIModel": "Model",
   "AIModelListTitle": "Model list",
   "AIModelPrice": "{{inputPrice}}/M input tokens | {{outputPrice}}/M output tokens",
-  "AIModelsIntroduction": "Pick the right model for your task — from budget-friendly to advanced. Prices shown are <1>OpenRouter base rates</1> . A 20% service fee is added to each charge based on token consumption.",
+  "AIModelsIntroduction": "Pick the right model for your task — from budget-friendly to advanced. Prices shown are <1>OpenRouter base rates</1>. A 20% service fee is added to each charge based on token consumption.",
   "AINewChat": "New chat",
   "AIPaywallCallbackError": "Something went wrong",
   "AIPaywallCallbackErrorHint": "Your card was saved, but we couldn't top up your AI balance. You can retry from AI services.",
