@@ -209,7 +209,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null,
+      "approved_at": "2026-05-15T15:04:54.259137Z",
       "ai_spell_check_verified_at": "2026-04-24T09:39:33.641Z",
       "ai_spell_check_verified_by": "openrouter/tencent/hy3-preview:free",
       "ai_spell_check_verified_hash": "91e89b9f5ff610bb"
