@@ -329,7 +329,7 @@ class ImportAccountsStore {
             ...this.users,
             withoutEmail: this.users.withoutEmail.map((user) =>
               user.key === key
-                ? { ...user, email, isDuplicate: res.exist }
+                ? { ...user, email, isDuplicate: res.exists }
                 : user,
             ),
           };
@@ -589,3 +589,4 @@ class ImportAccountsStore {
 }
 
 export default ImportAccountsStore;
+

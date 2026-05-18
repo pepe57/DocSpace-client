@@ -118,7 +118,7 @@ export type TChangeTheme = {
 };
 
 export type TUserExistsResponse = {
-  exist: boolean;
+  exists: boolean;
   status?: EmployeeStatus;
 };
 
@@ -154,3 +154,4 @@ export type TPeopleListItem = {
   registrationDate: string | undefined;
   tfaAppEnabled: boolean | undefined;
 };
+

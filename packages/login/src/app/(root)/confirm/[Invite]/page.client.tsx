@@ -272,7 +272,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     try {
       const userExists = await checkUserExists(email, headerKey);
 
-      if (!userExists.exist) {
+      if (!userExists.exists) {
         setRegistrationForm(true);
         setIsLoading(false);
         return;
@@ -672,3 +672,4 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 };
 
 export default CreateUserForm;
+
