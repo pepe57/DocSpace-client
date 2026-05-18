@@ -158,7 +158,7 @@ export default async function RootLayout({
 
   const locale =
     user?.cultureName ??
-    (typeof settings === "object" && settings?.culture) ??
+    (typeof settings === "object" ? settings?.culture : undefined) ??
     "en";
 
   const translations = await loadTranslationsForLocale(locale);
