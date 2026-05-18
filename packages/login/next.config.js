@@ -72,6 +72,7 @@ const nextConfig = {
     "winston-cloudwatch",
     "winston-daily-rotate-file",
     "@aws-sdk/client-cloudwatch-logs",
+    "@onlyoffice/docspace-api-sdk",
   ],
   compiler: {
     styledComponents: true,
@@ -88,8 +89,26 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
     const isProduction = config.mode === productionMode;
+
+    if (isServer) {
+      const existingExternals = Array.isArray(config.externals)
+        ? config.externals
+        : config.externals
+          ? [config.externals]
+          : [];
+      config.externals = [
+        ...existingExternals,
+        ({ request }, callback) => {
+          if (request === "@onlyoffice/docspace-api-sdk") {
+            return callback(null, `commonjs ${request}`);
+          }
+          callback();
+        },
+      ];
+    }
+
     // Add resolve configuration for shared package
     config.resolve = {
       ...config.resolve,
