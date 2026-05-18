@@ -58,7 +58,7 @@
   "FormRoomAIReadyDescriptionFile": "Fragen Sie die KI, um Antworten aus diesem Formular zu untersuchen, Erkenntnisse zu gewinnen und die Daten zu visualisieren.",
   "FormRoomAIReadyDescriptionFolder": "Antworten aus Formularen werden hier in einer verknüpften Datenbank gespeichert. Um Daten mit KI zu analysieren, öffnen Sie ein bestimmtes Formular und klicken Sie auf 'KI fragen'.",
   "FormRoomAIReadyDescriptionRoom": "Analysieren Sie Daten mit Ask AI, erstellen Sie Diagramme und gewinnen Sie Erkenntnisse. Wählen Sie ein Formular aus und klicken Sie auf 'Ask AI', um zu beginnen.",
-  "FormRoomAIReadyTitle": "AI-Analyse ist bereit",
+  "FormRoomAIReadyTitle": "KI-Analyse ist bereit",
   "FormRoomAIUnlockTitle": "Entfesseln Sie die Kraft der KI",
   "FormRoomCollectionConnectedDescription": "Antworten werden kontinuierlich in einer Tabellenkalkulationsdatei gespeichert.",
   "FormRoomCollectionConnectedDescriptionRoom": "Formularantworten werden automatisch als Tabellenkalkulation im Ordner Complete gespeichert.",

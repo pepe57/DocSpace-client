@@ -57,7 +57,7 @@
   "FormRoomAIProviderNotConnectedAskAdmin": "Peça ao <1>administrador do {{productName}}</1> para ligar e ativar um fornecedor de IA nas configurações do {{productName}} para analisar dados de formulários com o Ask AI, criar gráficos e descobrir insights.",
   "FormRoomAIReadyDescriptionFile": "Peça à IA para explorar as respostas deste formulário, gerar insights e visualizar os dados.",
   "FormRoomAIReadyDescriptionFolder": "As respostas dos formulários são armazenadas aqui em um banco de dados conectado. Para analisar os dados com IA, abra um formulário específico e clique em 'Ask AI'.",
-  "FormRoomAIReadyDescriptionRoom": "Analise dados com Ask AI, crie e descubra insights.cione um formulário e clique emAsk' para começar",
+  "FormRoomAIReadyDescriptionRoom": "Analise dados com 'Perguntar à IA', crie e descubra insights.cione um formulário e clique em 'Perguntar à IA' para começar",
   "FormRoomAIReadyTitle": "A análise de IA está pronta",
   "FormRoomAIUnlockTitle": "Desie o poder da IA",
   "FormRoomCollectionConnectedDescription": "As respostas são salvas continuamente em um de planilha",
