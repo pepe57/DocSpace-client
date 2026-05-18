@@ -249,7 +249,7 @@ export const userExistsResolver = (
   status?: EmployeeStatus,
 ): Response => {
   const data = {
-    exist: isUserExist,
+    exists: isUserExist,
     status: isUserExist ? (status ?? EmployeeStatus.Active) : null,
   };
   return new Response(JSON.stringify({ response: data }));
