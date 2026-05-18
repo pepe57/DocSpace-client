@@ -226,6 +226,51 @@
       }
     },
     {
+      "label": "Frontend | update ui-kit lock",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run update-ui-kit-lock",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | update translation-app lock",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run update-translation-app-lock",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | update all lock files",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run wipe ; pnpm install ; pnpm run update-ui-kit-lock ; pnpm run update-translation-app-lock",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | update deps",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm update --recursive",
@@ -364,6 +409,21 @@
       "label": "Frontend | deploy",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run deploy",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | storybook (ui-kit)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm run storybook",
       "group": {
         "kind": "build",
         "isDefault": true

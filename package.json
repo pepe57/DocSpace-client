@@ -15,10 +15,10 @@
     "deploy:lite": "shx rm -rf ../publish/web && pnpm nx run-many -t deploy -p @docspace/client @docspace/login @docspace/doceditor && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
     "deploy:preview": "shx rm -rf ../publish/web && pnpm nx run-many -t build:deploy -p @docspace/login @docspace/doceditor @docspace/management @docspace/sdk && pnpm nx deploy @docspace/client && node common/scripts/preview/deploy.js && shx cp -r public ../publish/web/ && node common/scripts/minify-common-locales.js",
     "start": "pnpm nx run-many -t start -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
-    "start:sdk": "pnpm nx run-many -t start -p @docspace/client @docspace/doceditor @docspace/sdk",
+    "start:sdk": "pnpm nx run-many -t start -p @docspace/client @docspace/doceditor @docspace/sdk @docspace/login",
     "start:lite": "pnpm nx run-many -t start -p @docspace/client @docspace/login @docspace/doceditor",
     "start-prod": "pnpm nx run-many -t start-prod -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk",
-    "start-prod:sdk": "pnpm nx run-many -t start-prod -p @docspace/client @docspace/doceditor @docspace/sdk",
+    "start-prod:sdk": "pnpm nx run-many -t start-prod -p @docspace/client @docspace/doceditor @docspace/sdk @docspace/login",
     "start-prod:lite": "pnpm nx run-many -t start-prod -p @docspace/client @docspace/login @docspace/doceditor",
     "storybook": "pnpm nx storybook @docspace/shared",
     "storybook-build": "pnpm nx storybook-build @docspace/shared",
@@ -38,7 +38,8 @@
     "format:fix": "pnpm nx run-many -t format:fix -p @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
     "tsc": "pnpm nx run-many -t tsc @docspace/client @docspace/login @docspace/doceditor @docspace/management @docspace/sdk @docspace/shared",
     "prepare": "node -e \"if (!process.env.CI) { try { require('child_process').execSync('git --version', {stdio: 'ignore'}); require('child_process').execSync('lefthook install', {stdio: 'inherit'}); } catch (e) { console.error('Lefthook installation skipped:', e.message); } }\" && npm --prefix ./common/tests ci",
-    "update-ui-kit-lock": "mv pnpm-workspace.yaml pnpm-workspace.yaml.bak && cd libs/ui-kit && pnpm install --lockfile-only; cd ../.. && mv pnpm-workspace.yaml.bak pnpm-workspace.yaml"
+    "update-ui-kit-lock": "mv pnpm-workspace.yaml pnpm-workspace.yaml.bak && cd libs/ui-kit && pnpm install --lockfile-only; cd ../.. && mv pnpm-workspace.yaml.bak pnpm-workspace.yaml",
+    "update-translation-app-lock": "npm --prefix common/translation-app/frontend install --package-lock-only && npm --prefix common/translation-app/backend install --package-lock-only"
   },
   "devDependencies": {
     "@types/node": "24.10.7",
@@ -73,7 +74,7 @@
       "qs": ">=6.14.2",
       "node-fetch": ">=2.6.7",
       "ajv": ">=8.18.0",
-      "fast-xml-parser": ">=5.5.7",
+      "fast-xml-parser": ">=5.7.0",
       "minimatch": ">=10.2.1",
       "serialize-javascript": ">=7.0.3",
       "immutable": ">=5.1.5",
@@ -86,7 +87,9 @@
       "yaml@^1": "^1.10.3",
       "yaml@^2": "^2.8.3",
       "brace-expansion": ">=5.0.5",
-      "axios": ">=1.15.0",
+      "axios": ">=1.15.2",
+      "postcss": ">=8.5.10",
+      "protobufjs": ">=7.5.5",
       "follow-redirects": ">=1.16.0"
     }
   }

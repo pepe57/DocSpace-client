@@ -1,21 +1,21 @@
 {
-  "key_path": "AIPricingBilledPerUsage",
-  "content": "Usage-based billing",
-  "content_en_sha1_hash": "4ffaad3abe39b74d187676c8855c97154a556cae",
-  "created_at": "2026-04-10T13:53:44.464Z",
-  "updated_at": "2026-04-23T17:24:02.177Z",
+  "key_path": "WhiteLabelLogoSubtitle",
+  "content": "Upload logos with a transparent background (PNG, SVG, JPG) for light and dark themes, or generate one instantly by entering your Your logo below.",
+  "content_en_sha1_hash": "e61d8428cf859d3858fc88a9afffb78e6116a9dd",
+  "created_at": "2026-05-08T13:10:39.273Z",
+  "updated_at": "2026-05-15T14:00:06.952Z",
   "comment": {
-    "text": "This is a short label indicating that pricing for a service is determined by its usage. It appears in the billing section.",
+    "text": "Instructional helper text in the WhiteLabel branding settings providing guidance on uploading or generating logos for light and dark themes.",
     "is_auto": true,
-    "updated_at": "2026-04-11T20:59:58.082Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-05-08T13:11:09.405Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
-      "file_path": "/libs/ui-kit/billing/services/ServicesItems.tsx",
-      "line_number": 215,
-      "context": "return t(\"AIPricingAvailableCredits\", {\n price: formatAiServiceCurrency(),\n });\n }\n \n return t(\"AIPricingBilledPerUsage\");\n default:\n return \"\";\n }\n };",
-      "module": "/libs/ui-kit"
+      "file_path": "/packages/shared/pages/Branding/WhiteLabel/WhiteLabelHeader.tsx",
+      "line_number": 103,
+      "context": "styles.wlHelperLabel,\n \"wl-helper-label\",\n )}\n fontSize=\"13px\"\n >\n {t(\"WhiteLabelLogoSubtitle\")}\n <HelpButton\n tooltipContent={\n <Text fontSize=\"12px\">{t(\"Common:WhiteLabelTooltip\")}</Text>\n }\n place=\"right\"",
+      "module": "/packages/shared"
     }
   ],
   "languages": {
