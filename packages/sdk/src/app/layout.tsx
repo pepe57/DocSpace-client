@@ -32,6 +32,9 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
+import { readFile } from "fs/promises";
+import path from "path";
+
 import { headers, cookies } from "next/headers";
 import type { Metadata } from "next";
 
@@ -58,7 +61,22 @@ import Providers from "@/providers";
 import { getSelf } from "@/api/people";
 import Scripts from "@/components/Scripts";
 import { logger } from "@/../logger.mjs";
-import { loadLocale } from "@/utils/translationLoaders";
+
+async function loadLocaleCommon(
+  locale: string,
+): Promise<Record<string, string> | null> {
+  const localesDir = path.join(process.cwd(), "../../public/locales");
+  const tryRead = async (lng: string) => {
+    try {
+      return JSON.parse(
+        await readFile(path.join(localesDir, lng, "Common.json"), "utf-8"),
+      ) as Record<string, string>;
+    } catch {
+      return null;
+    }
+  };
+  return (await tryRead(locale)) ?? (await tryRead("en")) ?? null;
+}
 
 export const metadata: Metadata = {
   title: "ONLYOFFICE",
@@ -102,11 +120,10 @@ export default async function RootLayout({
     (typeof portalSettings === "object" && portalSettings.culture) ||
     "en";
 
-  const initialLocaleNsMap =
+  const initialLocaleResources =
     locale && locale !== "en"
-      ? await loadLocale(locale).catch(() => null)
-      : null;
-  const initialLocaleResources = initialLocaleNsMap?.get("Common");
+      ? (await loadLocaleCommon(locale)) ?? undefined
+      : undefined;
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
     | ThemeKeys
