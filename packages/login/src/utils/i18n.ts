@@ -35,27 +35,12 @@
 
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+
+import { createFetchBackend } from "@docspace/shared/utils/i18n-fetch-backend";
+
 // Fetch-based backend - loads translation JSON at runtime so no static imports
 // end up in the Next.js bundle (used only by global-error.tsx error boundary).
-const fetchBackend = {
-  type: "backend" as const,
-  init() {},
-  read(
-    language: string,
-    namespace: string,
-    callback: (err: unknown, data: Record<string, string> | false) => void,
-  ) {
-    const url =
-      namespace === "Common"
-        ? `/locales/${language}/${namespace}.json`
-        : `/login/locales/${language}/${namespace}.json`;
-
-    fetch(url)
-      .then((r) => (r.ok ? r.json() : {}))
-      .then((data) => callback(null, data as Record<string, string>))
-      .catch(() => callback(null, {}));
-  },
-};
+const fetchBackend = createFetchBackend("login");
 
 export const getI18NInstance = (portalLng: string) => {
   if (!i18n.isInitialized) {
