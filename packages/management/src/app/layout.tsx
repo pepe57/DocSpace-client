@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { readFile } from "fs/promises";
 import path from "path";
 
 import { cookies } from "next/headers";
@@ -42,7 +41,7 @@ import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { ThemeKeys } from "@docspace/ui-kit/enums";
 import { SYSTEM_THEME_KEY } from "@docspace/ui-kit/providers/theme/themes/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
-import type { TTranslations } from "@docspace/ui-kit/providers/translation";
+import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
 
 import { Toast } from "@docspace/ui-kit/components/toast";
 
@@ -65,54 +64,6 @@ import { logger } from "../../logger.mjs";
 
 const MANAGEMENT_NAMESPACES = ["Management"] as const;
 
-async function loadTranslationsForLocale(
-  locale: string,
-): Promise<TTranslations> {
-  const managementLocalesDir = path.join(process.cwd(), "public/locales");
-  const sharedLocalesDir = path.join(process.cwd(), "../../public/locales");
-
-  const tryReadJson = async (filePath: string) => {
-    try {
-      return JSON.parse(await readFile(filePath, "utf-8")) as Record<
-        string,
-        string
-      >;
-    } catch {
-      return null;
-    }
-  };
-
-  const loadNs = async (ns: string, dir: string, lng: string) => {
-    const data =
-      (await tryReadJson(path.join(dir, lng, `${ns}.json`))) ??
-      (await tryReadJson(path.join(dir, "en", `${ns}.json`))) ??
-      {};
-    return [ns, data] as const;
-  };
-
-  const loadAllNsForLng = async (lng: string) => {
-    const [managementEntries, commonEntry] = await Promise.all([
-      Promise.all(
-        MANAGEMENT_NAMESPACES.map((ns) =>
-          loadNs(ns, managementLocalesDir, lng),
-        ),
-      ),
-      loadNs("Common", sharedLocalesDir, lng),
-    ]);
-    return new Map([...managementEntries, commonEntry]);
-  };
-
-  const translations: TTranslations = new Map();
-
-  const effectiveLng = locale || "en";
-  translations.set(effectiveLng, await loadAllNsForLng(effectiveLng));
-
-  if (effectiveLng !== "en") {
-    translations.set("en", await loadAllNsForLng("en"));
-  }
-
-  return translations;
-}
 
 export default async function RootLayout({
   children,
@@ -161,7 +112,11 @@ export default async function RootLayout({
     (typeof settings === "object" ? settings?.culture : undefined) ??
     "en";
 
-  const translations = await loadTranslationsForLocale(locale);
+  const translations = await loadTranslationsForLocale(locale, {
+    namespaces: MANAGEMENT_NAMESPACES,
+    appLocalesDir: path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir: path.join(process.cwd(), "../../public/locales"),
+  });
 
   const { openSource } = portalTariff;
 

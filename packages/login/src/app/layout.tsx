@@ -33,7 +33,6 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { readFile } from "fs/promises";
 import path from "path";
 
 import { cookies, headers } from "next/headers";
@@ -47,7 +46,7 @@ import {
   getDirectionByLanguage,
   getFontFamilyDependingOnLanguage,
 } from "@docspace/ui-kit/providers/theme/rtl-utils";
-import type { TTranslations } from "@docspace/ui-kit/providers/translation";
+import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
 
 import { Providers } from "@/providers";
 import {
@@ -66,52 +65,6 @@ const LOGIN_NAMESPACES = [
   "Wizard",
 ] as const;
 
-async function loadTranslationsForLocale(
-  locale: string,
-): Promise<TTranslations> {
-  const loginLocalesDir = path.join(process.cwd(), "public/locales");
-  const sharedLocalesDir = path.join(process.cwd(), "../../public/locales");
-
-  const tryReadJson = async (filePath: string) => {
-    try {
-      return JSON.parse(await readFile(filePath, "utf-8")) as Record<
-        string,
-        string
-      >;
-    } catch {
-      return null;
-    }
-  };
-
-  const loadNs = async (ns: string, dir: string, lng: string) => {
-    const data =
-      (await tryReadJson(path.join(dir, lng, `${ns}.json`))) ??
-      (await tryReadJson(path.join(dir, "en", `${ns}.json`))) ??
-      {};
-    return [ns, data] as const;
-  };
-
-  const loadAllNsForLng = async (lng: string) => {
-    const [loginEntries, commonEntry] = await Promise.all([
-      Promise.all(
-        LOGIN_NAMESPACES.map((ns) => loadNs(ns, loginLocalesDir, lng)),
-      ),
-      loadNs("Common", sharedLocalesDir, lng),
-    ]);
-    return new Map([...loginEntries, commonEntry]);
-  };
-
-  const translations: TTranslations = new Map();
-
-  const effectiveLng = locale || "en";
-  translations.set(effectiveLng, await loadAllNsForLng(effectiveLng));
-
-  if (effectiveLng !== "en") {
-    translations.set("en", await loadAllNsForLng("en"));
-  }
-
-  return translations;
-}
 
 import "../styles/globals.scss";
 import "@docspace/shared/styles/theme.scss";
@@ -210,7 +163,11 @@ export default async function RootLayout({
     queryParams?.culture ||
     (settings && typeof settings !== "string" ? settings.culture : "en");
 
-  const translations = await loadTranslationsForLocale(locale || "en");
+  const translations = await loadTranslationsForLocale(locale || "en", {
+    namespaces: LOGIN_NAMESPACES,
+    appLocalesDir: path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir: path.join(process.cwd(), "../../public/locales"),
+  });
 
   const dirClass = getDirectionByLanguage(locale || "en");
   const themeClass =
