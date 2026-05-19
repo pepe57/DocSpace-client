@@ -29,6 +29,23 @@ import path from "path";
 
 import type { TTranslations } from "@docspace/ui-kit/providers/translation";
 
+const fileCache = new Map<string, Promise<Record<string, string> | null>>();
+
+const tryReadJson = (filePath: string): Promise<Record<string, string> | null> => {
+  const cached = fileCache.get(filePath);
+  if (cached) return cached;
+
+  const promise = readFile(filePath, "utf-8")
+    .then((content) => JSON.parse(content) as Record<string, string>)
+    .catch((err) => {
+      console.warn(`Failed to load translation ${filePath}:`, err);
+      return null;
+    });
+
+  fileCache.set(filePath, promise);
+  return promise;
+};
+
 export async function loadTranslationsForLocale(
   locale: string,
   config: {
@@ -38,18 +55,6 @@ export async function loadTranslationsForLocale(
   },
 ): Promise<TTranslations> {
   const { namespaces, appLocalesDir, sharedLocalesDir } = config;
-
-  const tryReadJson = async (filePath: string) => {
-    try {
-      return JSON.parse(await readFile(filePath, "utf-8")) as Record<
-        string,
-        string
-      >;
-    } catch (err) {
-      console.warn(`Failed to load translation ${filePath}:`, err);
-      return null;
-    }
-  };
 
   const loadNs = async (ns: string, dir: string, lng: string) => {
     const data =
