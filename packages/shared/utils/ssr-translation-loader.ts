@@ -45,7 +45,8 @@ export async function loadTranslationsForLocale(
         string,
         string
       >;
-    } catch {
+    } catch (err) {
+      console.warn(`Failed to load translation ${filePath}:`, err);
       return null;
     }
   };
