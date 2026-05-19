@@ -32,7 +32,6 @@
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
-import { readFile } from "fs/promises";
 import path from "path";
 
 import { headers, cookies } from "next/headers";
@@ -48,6 +47,7 @@ import {
 import "@docspace/shared/styles/theme.scss";
 
 import { sanitizeStylesUrl } from "@docspace/shared/utils/customStyles";
+import { loadTranslationsForLocale } from "@docspace/shared/utils/ssr-translation-loader";
 
 import "@/styles/globals.scss";
 import { getColorTheme, getPortalCultures, getSettings } from "@/api/settings";
@@ -61,22 +61,6 @@ import Providers from "@/providers";
 import { getSelf } from "@/api/people";
 import Scripts from "@/components/Scripts";
 import { logger } from "@/../logger.mjs";
-
-async function loadLocaleCommon(
-  locale: string,
-): Promise<Record<string, string> | null> {
-  const localesDir = path.join(process.cwd(), "../../public/locales");
-  const tryRead = async (lng: string) => {
-    try {
-      return JSON.parse(
-        await readFile(path.join(localesDir, lng, "Common.json"), "utf-8"),
-      ) as Record<string, string>;
-    } catch {
-      return null;
-    }
-  };
-  return (await tryRead(locale)) ?? (await tryRead("en")) ?? null;
-}
 
 export const metadata: Metadata = {
   title: "ONLYOFFICE",
@@ -120,10 +104,11 @@ export default async function RootLayout({
     (typeof portalSettings === "object" && portalSettings.culture) ||
     "en";
 
-  const initialLocaleResources =
-    locale && locale !== "en"
-      ? (await loadLocaleCommon(locale)) ?? undefined
-      : undefined;
+  const initialLocaleResources = await loadTranslationsForLocale(locale, {
+    namespaces: [],
+    appLocalesDir: path.join(process.cwd(), "public/locales"),
+    sharedLocalesDir: path.join(process.cwd(), "../../public/locales"),
+  });
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
     | ThemeKeys
