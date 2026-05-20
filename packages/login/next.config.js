@@ -72,7 +72,6 @@ const nextConfig = {
     "winston-cloudwatch",
     "winston-daily-rotate-file",
     "@aws-sdk/client-cloudwatch-logs",
-    "@onlyoffice/docspace-api-sdk",
   ],
   compiler: {
     styledComponents: true,
