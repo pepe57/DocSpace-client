@@ -8,7 +8,7 @@
   "InviteMembersManuallyDescription": "Приглашайте новых участников в {{productName}} лично по электронной почте",
   "InviteMembersSearchPlaceholder": "Пригласить участников по электронной почте",
   "InviteToRoomAddPlaceholder": "Добавьте людей по имени или email",
-  "InviteToRoomManuallyInfoGuest": "Добавьте существующие контакты {{productName}}. Или пригласите новых пользователей по email. Новые пользователи будут добавлены в ваш список гостей.",
+  "InviteToRoomManuallyInfoGuest": "Добавьте существующие контакты {{productName}}. Или пригласите новых пользователей по электронной почте. Новые пользователи будут добавлены в ваш список гостей.",
   "InviteToRoomManuallyInfoMembers": "Добавьте существующих участников {{productName}} в комнату.",
   "InviteToRoomSearchPlaceholder": "Поиск и приглашение по имени или адресу электронной почты",
   "InviteViaLink": "Пригласить по ссылке",
