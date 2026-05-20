@@ -37,8 +37,10 @@ const tryReadJson = (filePath: string): Promise<Record<string, string> | null> =
 
   const promise = readFile(filePath, "utf-8")
     .then((content) => JSON.parse(content) as Record<string, string>)
-    .catch((err) => {
-      console.warn(`Failed to load translation ${filePath}:`, err);
+    .catch((err: NodeJS.ErrnoException) => {
+      if (err.code !== "ENOENT") {
+        console.warn(`Failed to load translation ${filePath}:`, err);
+      }
       return null;
     });
 
