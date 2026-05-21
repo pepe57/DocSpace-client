@@ -32,7 +32,7 @@
   "KnowledgeDisabledSuccess": "Znanje je bilo uspešno onemogočeno.",
   "KnowledgeEnabledSuccess": "Znanje je bilo uspešno omogočeno",
   "KnowledgeKeyDescription": "Vnesite ključ API, pridobljen od ponudnika vaše baze znanja.",
-  "KnowledgeSettingsDescription": "Omomknižnico znanja za {{aiAgents}}. Sistem bo indeksiral vaš dokumente z uporabo modela {{modelName}} za podporo iskanju na podlagi vprašanj v vaših podatkih. Ta funkcija se osredotoča na ugotavljanje relevantnih informacij, vendar ne generira povzetkov niti izvaja globalne analize.",
+  "KnowledgeSettingsDescription": "Omomknižnico znanja za razdelek »{{aiAgents}}«. Sistem bo indeksiral vaš dokumente z uporabo modela {{modelName}} za podporo iskanju na podlagi vprašanj v vaših podatkih. Ta funkcija se osredotoča na ugotavljanje relevantnih informacij, vendar ne generira povzetkov niti izvaja globalne analize.",
   "ListModels": "Seznam modelov",
   "MCPProductDescription": "{{organizationName}} {{productName}} {{mcpServer}} optimizira AI-pognjene delovne procese z integracijo LLM-jev z zunanjimi sistemi za učinkovito in varno upravljanje dokumentov.",
   "MCPServerAdvancedSettingsHint": "Uporabite ta razdelek za pošiljanje dodatnih HTTP glavic, kot so avtorizacijski žetoni.",

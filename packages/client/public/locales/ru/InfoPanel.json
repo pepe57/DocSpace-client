@@ -2,7 +2,7 @@
   "AddedRoomTags": "Теги добавлены.",
   "Administration": "Администраторы",
   "AgentRenamed": "Агент <1>«{{oldRoomTitle}}»</1> переименован в <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Узнайте подробную информацию о {{aiAgents}} здесь",
+  "AIAgentsEmptyScreenTent": "Узнайте подробную информацию о разделе «{{aiAgents}}» здесь",
   "AndMoreLabel": "и <1>еще {{count}}</1>",
   "CreationDate": "Дата создания",
   "Data": "Данные",

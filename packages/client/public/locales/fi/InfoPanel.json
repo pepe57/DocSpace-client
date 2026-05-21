@@ -2,7 +2,7 @@
   "AddedRoomTags": "Tägit lisätty.",
   "Administration": "Hallinto",
   "AgentRenamed": "Agentti <1>«{{oldRoomTitle}}»</1> nimennettiin uudelleen <2>«{{roomTitle}}»</2>",
-  "AIAgentsEmptyScreenTent": "Katso {{aiAgents}} tiedot täältä",
+  "AIAgentsEmptyScreenTent": "Katso \"{{aiAgents}}\"-osion tiedot täältä",
   "AndMoreLabel": "ja <1>{{count}} enemmän</1>",
   "CreationDate": "Luontipäivä",
   "Data": "Tiedot",

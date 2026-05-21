@@ -15,7 +15,7 @@
   "AgentsRemoved": "Գործակալները հեռացվել են",
   "AIAgentNotificationsDisabled": "{{aiAgent}} ծանուցումները անջատված են",
   "AIAgentNotificationsEnabled": "{{aiAgent}} ծանուցումներ միացված",
-  "AIAgentPinLimitMessage": "Դուք չեք կարող 10-ից ավելի {{aiAgents}} վերևում «պինել»։ Հանեք մի քանիսը, որոնք ներկայումս «պինված» են։",
+  "AIAgentPinLimitMessage": "Դուք չեք կարող «{{aiAgents}}» բաժնում վերևում ամրացնել 10-ից ավելի տարր։ Հանեք մի քանիսը, որոնք ներկայումս «պինված» են։",
   "AIAgentPinned": "{{aiAgent}} ֆիքսված",
   "AIAgentsPinned": "{{aiAgents}} կցված",
   "AIAgentsUnpinned": "{{aiAgents}} չմուտքագրված",

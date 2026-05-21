@@ -32,7 +32,7 @@
   "KnowledgeDisabledSuccess": "Bilgi bazası uğurla deaktivləşdirilib.",
   "KnowledgeEnabledSuccess": "Bilgi bazası uğurla aktivləşdirilib",
   "KnowledgeKeyDescription": "Bilgi bazası sağlayıcınızdan aldığınız API açısını daxil edin.",
-  "KnowledgeSettingsDescription": "{{aiAgents}} üçün bir bilik bazası aktivləşdirin. Sistem sənədlərinizi məlumatlarınız vasitəsilə suala əsaslanan axtarışı dəstəkləmək üçün {{modelName}} modelindən istifadə edərək indeksləyəcək. Bu xüsusiyyət müvafiq məlumat tapmağa fokuslanır, lakin xülasələr yaratmır və ya ümumi analiz etmir.",
+  "KnowledgeSettingsDescription": "\"{{aiAgents}}\" bölməsi üçün bilik bazasını aktivləşdirin. Sistem sənədlərinizi məlumatlarınız vasitəsilə suala əsaslanan axtarışı dəstəkləmək üçün {{modelName}} modelindən istifadə edərək indeksləyəcək. Bu xüsusiyyət müvafiq məlumat tapmağa fokuslanır, lakin xülasələr yaratmır və ya ümumi analiz etmir.",
   "ListModels": "Modellərin siyahısı",
   "MCPProductDescription": "{{organizationName}} {{productName}} {{mcpServer}} yapay intellektə əsaslanan iş axınlarını rasolaşdırır, LLM-ləri xarici sistemlərlə inteqrasiya edərək effektiv və təhlükəsiz sənəd idarəetməsi təmin edir.",
   "MCPServerAdvancedSettingsHint": "Bu hissəni əlavə HTTP başliqlarını, məsələn, səlahiyyət lövhələrini ötürmək üçün istifadə edin.",
