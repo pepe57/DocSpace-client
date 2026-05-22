@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "Vítejte v místnosti pro spolupráci",
   "CollaboratorEmptyTitle": "Místnost je prázdná.",
-  "CreateAIAgentDescription": "Začněte vytvářet svého prvního {{aiAgent}}",
+  "CreateAIAgentDescription": "Začněte budovat svého prvního AI agenta",
   "CreateDocument": "Vytvoření nového dokumentu",
   "CreateDocumentDescription": "Využijte rozsáhlé funkce pro zpracování textu.",
   "CreateForm": "Vytvoření nového formuláře PDF",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} nejsou ještě dostupné",
   "EmptyAIAgentsAIEnabledUserDescription": "Jakmile vás váš tým pozve k spolupráci, se zde objeví {{aiAgents}}, připravený k pomoci s dokumenty, správou znalostí a každodenními úkoly.",
   "EmptyAIAgentsDescription": "Nastavte personalizovaného asistenta pro váš tým přidáním znalostní báze, výběrem ideálního modelu a připojením {{mcpServer}}. Pozvěte své kolegy na spolupráci a plně využijte chatovací schopnosti agenta.",
-  "EmptyAIAgentsTitle": "Vytvořte si svého {{aiAgent}}",
+  "EmptyAIAgentsTitle": "Vytvořte svého AI agenta",
   "EmptyAIAgentsUserTitle": "{{aiAgents}}: žádné dostupné zatím",
   "EmptyFavoritesDescription": "Označte soubory a složky, abyste je měli snadno dostupné a na dosah ruky.",
   "EmptyFavoritesTitle": "Ještě žádné oblíbené položky.",

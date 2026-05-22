@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "Tervetuloa yhteistyöhuoneseen",
   "CollaboratorEmptyTitle": "Huone on tyhjä. ",
-  "CreateAIAgentDescription": "Aloita ensimmäisen {{aiAgent}}in rakentaminen",
+  "CreateAIAgentDescription": "Aloita ensimmäisen AI-agenttisi rakentaminen",
   "CreateDocument": "Luo uusi asiakirja",
   "CreateDocumentDescription": "Hyödynnä laaja tekstinkäsittelytoiminto.",
   "CreateForm": "Luo uusi PDF-lomake",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}}: ei ole vielä saatavilla",
   "EmptyAIAgentsAIEnabledUserDescription": "Kun tiimisi kutsuu sinut yhteistyöhön, {{aiAgents}} ilmestyy tähän, valmiina auttamaan asiakirjoissa, tietopohjassa ja arjen tehtävissä.",
   "EmptyAIAgentsDescription": "Määritä henkilökohtainen avustaja tiimillesi lisäämällä tietopankin, valitsemalla ihanteellisen mallin ja yhdistämällä {{mcpServer}}:n. Kutsu kollegasi yhteistyöhön ja hyödynnä agentin chat-ominaisuudet parhaiten.",
-  "EmptyAIAgentsTitle": "Luo {{aiAgent}}-agenttisi",
+  "EmptyAIAgentsTitle": "Luo AI-agenttisi",
   "EmptyAIAgentsUserTitle": "{{aiAgents}}: ei  saatavilla vielä",
   "EmptyFavoritesDescription": "Tähdellä voit merkitä tiedostot ja kansiot, jotta ne pysyvät helposti saatavilla ja ulottuvilla.",
   "EmptyFavoritesTitle": "Ei suosikkeja vielä",

@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "Добродошли у Колаборативну собу",
   "CollaboratorEmptyTitle": "Просторија је празна.",
-  "CreateAIAgentDescription": "Почните да градите свог првог {{aiAgent}}",
+  "CreateAIAgentDescription": "Почните да градите свог првог AI агента",
   "CreateDocument": "Креирајте нови документ",
   "CreateDocumentDescription": "Искористите широке могућности за обраду текста.",
   "CreateForm": "Креирајте нови PDF образац",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} још нису доступни",
   "EmptyAIAgentsAIEnabledUserDescription": "Када вас ваш тим позове да сарађујете, {{aiAgents}} ће се овде појавити, спремни да помогну са документима, управљањем знањем и свакодневним задацима.",
   "EmptyAIAgentsDescription": "Поустановите персонализираног асистента за ваш тим путем додавања базе знања, избора идеалног модела и повезивања {{mcpServer}}. Позовите своје колеге да сарађују и највише искористе чат могућности агента.",
-  "EmptyAIAgentsTitle": "Креирајте свог {{aiAgent}}",
+  "EmptyAIAgentsTitle": "Креирајте свог AI агента",
   "EmptyAIAgentsUserTitle": "{{aiAgents}}: још увек није доступно",
   "EmptyFavoritesDescription": "Означи фајлове и фолдере звездицом да их задржиш лако доступним и при руци.",
   "EmptyFavoritesTitle": "Још нема омиљених",

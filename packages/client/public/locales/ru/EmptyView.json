@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "Добро пожаловать в комнату для совместной работы!",
   "CollaboratorEmptyTitle": "Комната пуста.",
-  "CreateAIAgentDescription": "Начните создавать своего первого {{aiAgent}}",
+  "CreateAIAgentDescription": "Начните создавать своего первого ИИ-агента",
   "CreateDocument": "Создать новый документ",
   "CreateDocumentDescription": "Воспользуйтесь широкими функциональными возможностями обработки текста.",
   "CreateForm": "Создать новую PDF-форму",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} пока недоступны",
   "EmptyAIAgentsAIEnabledUserDescription": "Как только ваша команда пригласит вас к совместной работе, здесь появятся {{aiAgents}}, которые помогут с документами, управлением знаниями и решением повседневных задач.",
   "EmptyAIAgentsDescription": "Настройте персонализированного помощника для своей команды: добавьте базу знаний, выберите оптимальную модель и подключите {{mcpServer}}. Пригласите коллег к совместной работе и используйте возможности общения с агентом по максимуму.",
-  "EmptyAIAgentsTitle": "Создайте своего {{aiAgent}}",
+  "EmptyAIAgentsTitle": "Создайте своего ИИ-агента",
   "EmptyAIAgentsUserTitle": "{{aiAgents}}: пока нет доступных",
   "EmptyFavoritesDescription": "Отмечайте файлы и папки звездочками, чтобы всегда легко находить их.",
   "EmptyFavoritesTitle": "Избранных пока нет",

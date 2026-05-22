@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "Καλώς ήρθατε στο δωμάτιο Συνεργασίας",
   "CollaboratorEmptyTitle": "Το δωμάτιο είναι άδειο.",
-  "CreateAIAgentDescription": "Ξεκινήστε να δημιουργείτε τον πρώτο σας {{aiAgent}}",
+  "CreateAIAgentDescription": "Ξεκινήστε να δημιουργείτε τον πρώτο σας AI πράκτορα",
   "CreateDocument": "Δημιουργία νέου εγγράφου",
   "CreateDocumentDescription": "Επωφεληθείτε από τις απεριόριστες λειτουργίες επεξεργασίας κειμένου.",
   "CreateForm": "Δημιουργήστε μια νέα φόρμα PDF",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "Οι {{aiAgents}} δεν είναι ακόμη διαθέσιμοι",
   "EmptyAIAgentsAIEnabledUserDescription": "Μόλις η ομάδα σας σας προσκαλέσει να συνεργαστείτε, το {{aiAgents}} θα εμφανιστεί εδώ, έτοιμο να βοηθήσει με έγγραφα, διαχείριση γνώσης και καθημερινές εργασίες.",
   "EmptyAIAgentsDescription": "Ρυθμίστε έναν εξατομικευμένο βοηθό για την ομάδα σας προσθέτοντας μια βάση γνώσης, επιλέγοντας το ιδανικό μοντέλο και συνδέοντας ένα {{mcpServer}}. Εγκάλεστε τους συναδέλφους σας να συνεργαστούν και να αξιοποιήσουν πλήρως τις δυνατότητες συνομιλίας του agent.",
-  "EmptyAIAgentsTitle": "Δημιουργήστε το {{aiAgent}} σας",
+  "EmptyAIAgentsTitle": "Δημιουργήστε τον AI πράκτορά σας",
   "EmptyAIAgentsUserTitle": " {{aiAgents}}: δεν υπάρχουν διαθέσιμοι ακόμα",
   "EmptyFavoritesDescription": "Αστερίσκος σε αρχεία και φακέλους για να τα διατηρείτε εύκολα προσβάσιμα και στα χέρια σας.",
   "EmptyFavoritesTitle": "Δεν υπάρχουν ακόμα αγαπημένα",

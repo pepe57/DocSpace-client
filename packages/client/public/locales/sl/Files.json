@@ -13,13 +13,13 @@
   "AfterFilesWillBeDeletedPermanently": "Po tem bodo datoteke trajno izbrisane.",
   "AgentRemoved": "Agent odstranjen",
   "AgentsRemoved": "Agenti odstranjeni",
-  "AIAgentNotificationsDisabled": "Obvestila za {{aiAgent}} je onemogočena",
-  "AIAgentNotificationsEnabled": "Uključene obvestila za {{aiAgent}}",
+  "AIAgentNotificationsDisabled": "Obvestila AI agenta so onemogočena",
+  "AIAgentNotificationsEnabled": "Obvestila AI agenta so omogočena",
   "AIAgentPinLimitMessage": "V razdelku »{{aiAgents}}« na vrh ne morete pripeti več kot 10 elementov. Odprtje nekaj, ki so trenutno pritrdinjene.",
-  "AIAgentPinned": "{{aiAgent}} priкрепljen",
+  "AIAgentPinned": "AI agent je pripet",
   "AIAgentsPinned": "{{aiAgents}}: prišpiljeno",
   "AIAgentsUnpinned": "{{aiAgents}}: brez prikritja",
-  "AIAgentUnpinned": "{{aiAgent}} odprto",
+  "AIAgentUnpinned": "AI agent je odpet",
   "AllLinksAreDisabled": "Vse povezave so onemogočene",
   "AnalyzeResponses": "Analiziraj odzive",
   "AppointNewOwner": "Imenovali ste novega lastnika.",
@@ -233,5 +233,5 @@
   "WillBeDeletedPermanently": "{{date}} bo trajno izbrisan",
   "YouLeftTheAgent": "Zapustili ste agenta.",
   "YouLeftTheRoom": "Zapustili ste sobo",
-  "YourUserTypeHasChanged": "Vaš tip uporabnika je spremenil v <1>“{{userType}}”</1> skrbnik za {{productName}} <1>{{adminName}}</1>."
+  "YourUserTypeHasChanged": "Vaš tip uporabnika je spremenil v <1>»{{userType}}«</1> skrbnik za {{productName}} <1>{{adminName}}</1>."
 }

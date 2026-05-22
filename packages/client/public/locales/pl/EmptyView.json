@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "Witaj w pokoju do współpracy",
   "CollaboratorEmptyTitle": "Pokój jest pusty.",
-  "CreateAIAgentDescription": "Rozpocznij budowanie swojego pierwszego {{aiAgent}}",
+  "CreateAIAgentDescription": "Zacznij budować swojego pierwszego agenta AI",
   "CreateDocument": "Utwórz nowy dokument",
   "CreateDocumentDescription": "Wykorzystaj rozbudowaną funkcjonalność edytora tekstów.",
   "CreateForm": "Utwórz nowy formularz PDF",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} nie są jeszcze dostępne",
   "EmptyAIAgentsAIEnabledUserDescription": "Gdy Twój zespół zaprosi Cię do współpracy, {{aiAgents}} pojawi się tutaj i będzie gotowy do pomocy przy dokumentach, zarządzaniu wiedzą i codziennych zadaniach.",
   "EmptyAIAgentsDescription": "Ustaw spersonalisanego asystenta dla swojego zespołu, dodając bazę wiedzy, wybierając idealny model i łącząc {{mcpServer}}. Zaproś swoich współpracowników do współpracy i zmaksymalizuj możliwości czatu agenta.",
-  "EmptyAIAgentsTitle": "Stwórz swojego {{aiAgent}}",
+  "EmptyAIAgentsTitle": "Utwórz swojego agenta AI",
   "EmptyAIAgentsUserTitle": "{{aiAgents}}: niedostępne jeszcze",
   "EmptyFavoritesDescription": "Oznacz gwiazdką pliki i foldery, aby utrzymać je w łatwo dostępnym miejscu i na wyciągnięcie ręki.",
   "EmptyFavoritesTitle": "Nie ma jeszcze ulubionych.",
