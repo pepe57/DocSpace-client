@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "공동 작업 룸에 오신 것을 환영합니다",
   "CollaboratorEmptyTitle": "룸이 비어 있습니다.",
-  "CreateAIAgentDescription": "첫 번째 {{aiAgent}} 구축을 시작하세요.",
+  "CreateAIAgentDescription": "첫 번째 AI 에이전트 구축을 시작하세요",
   "CreateDocument": "새 문서 만들기",
   "CreateDocumentDescription": "다양한 워드 프로세싱 기능을 활용하세요.",
   "CreateForm": "새 PDF 양식 만들기",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}}는 아직 사용할 수 없습니다",
   "EmptyAIAgentsAIEnabledUserDescription": "팀에서 협업을 초대하면, {{aiAgents}}가 여기에 나타나 문서, 지식 관리 및 일상 업무를 지원할 준비가 될 것입니다.",
   "EmptyAIAgentsDescription": "지식 기반을 추가하고, 이상적인 모델을 선택하고, {{mcpServer}}를 연결하여 팀을 위한 개인화된 비서를 설정하세요. 동료를 초대하여 협업하고 에이전트의 채팅 기능을 최대한 활용하세요.",
-  "EmptyAIAgentsTitle": "{{aiAgent}}를 생성하세요.",
+  "EmptyAIAgentsTitle": "AI 에이전트를 만드세요",
   "EmptyAIAgentsUserTitle": "아직 {{aiAgents}}를 사용할 수 없습니다",
   "EmptyFavoritesDescription": "별표를 사용하여 파일과 폴더를 쉽게 접근하고 가까이에 둘 수 있습니다.",
   "EmptyFavoritesTitle": "아직 즐겨찾기가 없습니다.",

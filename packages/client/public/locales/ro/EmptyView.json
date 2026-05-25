@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "Bun venit în Sala de colaborare",
   "CollaboratorEmptyTitle": "Această sală este vidă.",
-  "CreateAIAgentDescription": "Începe să construiești primul tău {{aiAgent}}",
+  "CreateAIAgentDescription": "Începeți să construiți primul dvs. agent de IA",
   "CreateDocument": "Crearea unui document nou",
   "CreateDocumentDescription": "Profitați de o gamă vastă de instrumente de procesare de text.",
   "CreateForm": "Crearea unui formular PDF nou",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} nu sunt încă disponibile",
   "EmptyAIAgentsAIEnabledUserDescription": "După ce echipa dumneavoastră vă invită să colaborați, {{aiAgents}} va apărea aici, pregătit să vă asiste cu documente, managementul cunoștințelor și sarcinile de zi cu zi.",
   "EmptyAIAgentsDescription": "Configurați un asistent personalizat pentru echipa dumneavoastră adăugând o bază de cunoștințe, selectând modelul ideal și conectând un {{mcpServer}}. Invitați colegii să colaboreze și să maximizeze capacitățile de chat ale agentului.",
-  "EmptyAIAgentsTitle": "Creează-ți {{aiAgent}}",
+  "EmptyAIAgentsTitle": "Creați agentul dvs. IA",
   "EmptyAIAgentsUserTitle": "Nu există încă {{aiAgents}} disponibile",
   "EmptyFavoritesDescription": "Marcați fișiere și foldere cu stea încât acestea să fie ușor accesibile și la îndemână.",
   "EmptyFavoritesTitle": "Lista de favorite este goală",

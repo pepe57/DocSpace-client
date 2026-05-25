@@ -32,7 +32,7 @@
   "KnowledgeDisabledSuccess": "Tietokanta poistettu käytöstä onnistuneesti",
   "KnowledgeEnabledSuccess": "Tietokanta otettu käyttöön onnistuneesti",
   "KnowledgeKeyDescription": "Syötä API-avain, jonka olet saanut tietopohjapalveluntarjoajaltasi.",
-  "KnowledgeSettingsDescription": "Ota käyttöön tietopohja {{aiAgents}}ille. Järjestelmä indeksoi asiakirjasi käyttäen {{modelName}}-mallia tukemaan kysymysperäistä hakua tietojasi läpi. Tämä ominaisuus keskittyy relevantin tiedon löytämiseen, mutta se ei luo yhteenvetoja eikä suorita globaalia analyysiä.",
+  "KnowledgeSettingsDescription": "Ota tietämyskanta käyttöön \"{{aiAgents}}\"-osiossa. Järjestelmä indeksoi asiakirjasi käyttäen {{modelName}}-mallia tukemaan kysymysperäistä hakua tietojasi läpi. Tämä ominaisuus keskittyy relevantin tiedon löytämiseen, mutta se ei luo yhteenvetoja eikä suorita globaalia analyysiä.",
   "ListModels": "Mallien lista",
   "MCPProductDescription": "{{organizationName}} {{productName}} {{mcpServer}} tehostaa tekoälyohjautuvia työnkulkuja integroimalla LLMs ulkoisiin järjestelmiin tehokkaan ja turvallisen asiakirjanhallinnan saavuttamiseksi.",
   "MCPServerAdvancedSettingsHint": "Käytä tätä osiota lisä-HTTP-otsakkeiden, kuten tunnistetietojen, välittämiseen.",

@@ -32,7 +32,7 @@
   "KnowledgeDisabledSuccess": "Baza wiedzy została pomyślnie wyłączona.",
   "KnowledgeEnabledSuccess": "Baza wiedzy została pomyślnie włączona",
   "KnowledgeKeyDescription": "Wprowadź klucz API uzyskany od dostawcy bazy wiedzy.",
-  "KnowledgeSettingsDescription": "Włącz bazę wiedzy dla {{aiAgents}}. System będzie indeksował Twoje dokumenty przy użyciu modelu {{modelName}}, aby wspierać wyszukiwanie oparte na pytaniach w Twoich danych. Ta funkcja koncentruje się na znajdowaniu odpowiednich informacji, ale nie generuje podsumowań ani nie przeprowadza globalnej analizy.",
+  "KnowledgeSettingsDescription": "Włącz bazę wiedzy dla sekcji „{{aiAgents}}”. System będzie indeksował Twoje dokumenty przy użyciu modelu {{modelName}}, aby wspierać wyszukiwanie oparte na pytaniach w Twoich danych. Ta funkcja koncentruje się na znajdowaniu odpowiednich informacji, ale nie generuje podsumowań ani nie przeprowadza globalnej analizy.",
   "ListModels": "Lista modeli",
   "MCPProductDescription": "{{organizationName}} {{productName}} {{mcpServer}} optymalizuje procesy robocze oparte na AI, integrując LLM-y z zewnętrznymi systemami w celu wydajnego i bezpiecznego zarządzania dokumentami.",
   "MCPServerAdvancedSettingsHint": "Użyj tej sekcji, aby przekazywać dodatkowe nagłówki HTTP, takie jak tokeny autoryzacyjne.",

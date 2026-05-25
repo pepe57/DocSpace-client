@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "ຍິນດີຕ້ອນຮັບສູ່ຫ້ອງຮ່ວມມື",
   "CollaboratorEmptyTitle": "ຫ້ອງນັ້ນຫວ່າງເປົ່າ.",
-  "CreateAIAgentDescription": "ເລີ່ມຕົ້ນສ້າງ {{aiAgent}} ທຳອິດຂອງເຈົ້າ",
+  "CreateAIAgentDescription": "ເລີ່ມສ້າງ AI agent ຄັ້ງທຳອິດຂອງທ່ານ",
   "CreateDocument": "ສ້າງເອກະສານໃໝ່",
   "CreateDocumentDescription": "ໃຊ້ປະໂຫຍດຈາກຟັງຊັນການປະສົມສຽງຄໍາທີ່ມີຂອບເຂດວັດຂື້ນ.",
   "CreateForm": "ສ້າງແບບຟອມ PDF ໃໝ່",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} ຍັງບໍ່ທັນພ້ອມ",
   "EmptyAIAgentsAIEnabledUserDescription": "ເມື່ອທີມງານຂອງທ່ານເຊີນໃຫ້ທ່ານຮ່ວມມື, {{aiAgents}} ຈະປາກົດຢູ່ທີ່ນີ້, ພ້ອມທີ່ຈະຊ່ວຍເຫຼືອໃນເອກະສານ, ການຄຸ້ມຄອງຄວາມຮູ້, ແລະ ວຽກງານປະຈຳວັນ.",
   "EmptyAIAgentsDescription": "ສ້າງຜູ້ຊ່ວຍສ່ວນຕົວສຳລັບທີມຂອງທ່ານໂດຍການເພີ່ມຖານຄວາມຮູ້, ເລືອກຮູບແບບທີ່ເໝາະສົມ, ແລະເຊື່ອມຕໍ່ກັບ {{mcpServer}}. ເຊີນເພື່ອນຮ່ວມງານຂອງທ່ານມາຮ່ວມມື ແລະໃຊ້ປະໂຫຍດຈາກຄວາມສາມາດການສົນທະນາຂອງຕົວແທນໃຫ້ໄດ້ຫຼາຍທີ່ສຸດ.",
-  "EmptyAIAgentsTitle": "ສ້າງ{{aiAgent}}ຂອງເຈົ້າເອງ",
+  "EmptyAIAgentsTitle": "ສ້າງ AI agent ຂອງທ່ານ",
   "EmptyAIAgentsUserTitle": "ຍັງບໍ່ມີ {{aiAgents}} ໃຫ້ໃຊ້ເທື່ອ",
   "EmptyFavoritesDescription": "ຕິດດາວໄຟລ໌ ແລະໂຟນເດີ້ຕ່າງໆເພື່ອຮັກສາໃຫ້ເຂົາເຈົ້າເຂົ້າເຖິງໄດ້ງ່າຍ ແລະຢູ່ໃນການເຂົ້າເຖິງ.",
   "EmptyFavoritesTitle": "ບໍ່ມີລາຍການທີ່ມັກເທື່ອ",
