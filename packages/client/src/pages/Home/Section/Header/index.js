@@ -576,7 +576,12 @@ const SectionHeaderContent = (props) => {
   ]);
 
   const titleTooltip = React.useMemo(() => {
-    if (isRoom && selectedFolder?.shared && isExternalShareRestricted && hasExternalLinks)
+    if (
+      isRoom &&
+      selectedFolder?.shared &&
+      isExternalShareRestricted &&
+      hasExternalLinks
+    )
       return t("Common:ExternalAccessDisabledByAdmin");
 
     return undefined;
@@ -1327,7 +1332,16 @@ export default inject(
     const { showProfileLoader } = clientLoadingStore;
 
     const { enabledHotkeys } = filesStore;
-    const { getIcon, isExternalShareRestricted } = filesStore.filesSettingsStore;
+    const {
+      getIcon,
+      isExternalShareRestricted: isShareRestricted,
+      externalShareApplyToRooms,
+      externalShareApplyToDocuments,
+    } = filesStore.filesSettingsStore;
+
+    const isExternalShareRestricted =
+      isShareRestricted &&
+      (isRoom ? externalShareApplyToRooms : externalShareApplyToDocuments);
 
     return {
       currentClientView,

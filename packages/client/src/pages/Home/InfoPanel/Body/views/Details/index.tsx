@@ -91,8 +91,6 @@ type DetailsProps = {
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
 
   roomLifetime?: TRoomLifetime;
-  isExternalShareRestricted?: boolean;
-  hasExternalLinks?: boolean;
 };
 
 const Details = ({
@@ -112,8 +110,6 @@ const Details = ({
   onChangeFile,
   roomLifetime,
   onCreateRoomFromTemplate,
-  isExternalShareRestricted,
-  hasExternalLinks,
 }: DetailsProps) => {
   const { t } = useTranslation([
     "InfoPanel",
@@ -193,19 +189,7 @@ const Details = ({
         : getInfoPanelItemIcon?.(selection, 96);
 
   const badgeUrl =
-    "external" in selection
-      ? getRoomBadgeUrl(
-          selection,
-          24,
-          isExternalShareRestricted,
-          hasExternalLinks,
-        )
-      : undefined;
-
-  const badgeIconColor =
-    isExternalShareRestricted && hasExternalLinks && badgeUrl
-      ? "var(--info-panel-link-blocked)"
-      : undefined;
+    "external" in selection ? getRoomBadgeUrl(selection, 24) : undefined;
 
   const isLoadedRoomIcon =
     "logo" in selection && !!(selection.logo?.cover || selection.logo?.large);
@@ -300,7 +284,6 @@ const Details = ({
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
             badgeUrl={badgeUrl ?? undefined}
-            badgeIconColor={badgeIconColor}
             tooltipContent={tooltipContent ?? undefined}
             tooltipId="info-panel-details_icon-tooltip"
             withEditing={
@@ -341,7 +324,6 @@ export default inject(
     settingsStore,
     filesStore,
     filesActionsStore,
-    filesSettingsStore,
     infoPanelStore,
     userStore,
     currentQuotaStore,
@@ -349,7 +331,6 @@ export default inject(
     avatarEditorDialogStore,
     selectedFolderStore,
     treeFoldersStore,
-    publicRoomStore,
   }: TStore) => {
     const { getInfoPanelItemIcon, openUser, infoPanelRoomSelection } =
       infoPanelStore;
@@ -367,7 +348,6 @@ export default inject(
       currentQuotaStore;
 
     const { isAIAgentsFolderRoot } = treeFoldersStore;
-    const { isExternalShareRestricted } = filesSettingsStore;
 
     return {
       culture,
@@ -384,8 +364,6 @@ export default inject(
       roomLifetime:
         infoPanelRoomSelection?.lifetime ?? selectedFolderStore?.lifetime,
       onCreateRoomFromTemplate,
-      isExternalShareRestricted,
-      hasExternalLinks: publicRoomStore.hasExternalLinks,
     };
   },
 )(observer(Details));
