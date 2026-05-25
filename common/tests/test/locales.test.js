@@ -876,7 +876,7 @@ describe("Locales Tests", () => {
             translation.value,
           )
         )
-          return; // ✓ intentional (same as EN = brand/tech term)
+          return; // intentional (same as EN = brand/tech term)
 
         message +=
           `${++i}. path='${cyrillicFile.path}' key='${translation.key}'\r\n` +
