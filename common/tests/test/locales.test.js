@@ -868,7 +868,7 @@ describe("Locales Tests", () => {
     cyrillicFiles.forEach((cyrillicFile) => {
       cyrillicFile.translations.forEach((translation) => {
         if (!translation.value) return;
-        if (hasCyrillic(translation.value)) return; // ✓ has Cyrillic
+        if (hasCyrillic(translation.value)) return; // has Cyrillic
         if (
           matchesEnglish(
             cyrillicFile.namespace,
