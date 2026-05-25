@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { inject, observer } from "mobx-react";
 import isEqual from "lodash/isEqual";
@@ -233,56 +233,65 @@ const AccessControl = ({
     setShowReminder(false);
   };
 
+  const externalSharingOptions = useMemo(
+    () => [
+      {
+        id: "external-sharing-allowed",
+        label: t("Settings:ExternalSharingAllowed"),
+        value: "true",
+        dataTestId: "external_sharing_allowed",
+      },
+      {
+        id: "external-sharing-restricted",
+        label: t("Settings:ExternalSharingRestricted", {
+          productName: getBrandName("ProductName"),
+        }),
+        value: "false",
+        dataTestId: "external_sharing_restricted",
+      },
+    ],
+    [t],
+  );
+
+  const defaultLinkTypeOptions = useMemo(
+    () => [
+      {
+        id: "default-link-type-anyone",
+        label: t("Common:AnyoneWithLink"),
+        value: "false",
+        dataTestId: "default_link_type_anyone",
+      },
+      {
+        id: "default-link-type-docspace",
+        label: t("Settings:DefaultLinkTypeInternal", {
+          productName: getBrandName("ProductName"),
+        }),
+        value: "true",
+        dataTestId: "default_link_type_docspace",
+      },
+    ],
+    [t],
+  );
+
+  const linksBeforeRestrictionOptions = useMemo(
+    () => [
+      {
+        id: "links-block-access",
+        label: t("Settings:BlockAccessRecommended"),
+        value: "true",
+        dataTestId: "links_block_access",
+      },
+      {
+        id: "links-allow-existing",
+        label: t("Settings:AllowExistingUntilRemoved"),
+        value: "false",
+        dataTestId: "links_allow_existing",
+      },
+    ],
+    [t],
+  );
+
   if (!ready || !isLoaded) return <AccessControlLoader />;
-
-  const externalSharingOptions = [
-    {
-      id: "external-sharing-allowed",
-      label: t("Settings:ExternalSharingAllowed"),
-      value: "true",
-      dataTestId: "external_sharing_allowed",
-    },
-    {
-      id: "external-sharing-restricted",
-      label: t("Settings:ExternalSharingRestricted", {
-        productName: getBrandName("ProductName"),
-      }),
-      value: "false",
-      dataTestId: "external_sharing_restricted",
-    },
-  ];
-
-  const defaultLinkTypeOptions = [
-    {
-      id: "default-link-type-anyone",
-      label: t("Common:AnyoneWithLink"),
-      value: "false",
-      dataTestId: "default_link_type_anyone",
-    },
-    {
-      id: "default-link-type-docspace",
-      label: t("Settings:DefaultLinkTypeInternal", {
-        productName: getBrandName("ProductName"),
-      }),
-      value: "true",
-      dataTestId: "default_link_type_docspace",
-    },
-  ];
-
-  const linksBeforeRestrictionOptions = [
-    {
-      id: "links-block-access",
-      label: t("Settings:BlockAccessRecommended"),
-      value: "true",
-      dataTestId: "links_block_access",
-    },
-    {
-      id: "links-allow-existing",
-      label: t("Settings:AllowExistingUntilRemoved"),
-      value: "false",
-      dataTestId: "links_allow_existing",
-    },
-  ];
 
   return (
     <MainContainer>
