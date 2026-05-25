@@ -17,7 +17,7 @@
   "AdminsMessage": "管理员消息设置",
   "AdminsMessageMobileDescription": "您可通过“管理员留言设置”联系门户管理员",
   "AdminsMessageSettingDescription": "启用此选项可在登录页面上显示{{productName}}管理员联系表。",
-  "AIAgentQuotaDisabled": "没有 AI 代理",
+  "AIAgentQuotaDisabled": "没有 AI 代理。",
   "AIAgentQuotaEnabled": "AI 代理配额已成功禁用。",
   "AiServicesManagement": "{{aiServices}} 管理",
   "AiServicesManagementDescription": "控制 {{productName}} 和 {{organizationName}} 编辑器中的 AI 功能的激活。禁用后，{{aiSettings}} 部分将隐藏，所有用户将无法使用 {{aiAgents}}（历史记录将保留），并且付费的 {{organizationName}} {{aiServices}} 将无法访问。但是，所有与 AI 的交互历史记录都将安全保存，并在重新启用 {{aiServices}} 后完全恢复。",

@@ -535,7 +535,7 @@
   "EmptyTemplatesRoomsDescription": "Cree su primera plantilla de sala y luego podrá crear nuevas salas basadas en ella.",
   "EmptyTemplatesRoomsHeader": "No se han encontrado plantillas",
   "Enable": "Habilitar",
-  "EnableAIAgent": "Habilitar Agente de IA",
+  "EnableAIAgent": "Habilitar agente de IA",
   "EnableAIDescription": "El uso de IA se factura con su saldo prepagado. Si el saldo es insuficiente, las solicitudes de IA no se procesarán.",
   "EnableAutomaticBackup": "Activar copia de seguridad automática.",
   "EnableAutomaticBackupDescription": "Utilice esta opción para hacer una copia de seguridad de los datos del espacio.",

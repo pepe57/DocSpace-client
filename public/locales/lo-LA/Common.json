@@ -535,7 +535,7 @@
   "EmptyTemplatesRoomsDescription": "ສ້າງແມ່ແບບຫ້ອງທຳອິດຂອງທ່ານ ແລະ ຫຼັງຈາກນັ້ນທ່ານສາມາດສ້າງຫ້ອງໃໝ່ໂດຍອີງຕາມມັນໄດ້.",
   "EmptyTemplatesRoomsHeader": "ບໍ່ພົບແມ່ແບບໃດໆ",
   "Enable": "ເປີດ",
-  "EnableAIAgent": "ເປີດໃຊ້ AI Agent",
+  "EnableAIAgent": "ເປີດໃຊ້ AI agent",
   "EnableAIDescription": "ການນຳໃຊ້ AI ຈະຖືກເກັບຄ່າທຳນຽມຈາກຍອດເງິນທີ່ຈ່າຍລ່ວງໜ້າຂອງທ່ານ. ຖ້າຍອດເງິນຕໍ່າເກີນໄປ, ຄຳຮ້ອງຂໍ AI ຈະບໍ່ຖືກປະມວນຜົນ.",
   "EnableAutomaticBackup": "ເປີດໃຊ້ການສຳຮອງຂໍ້ມູນແບບອັດຕະໂນມັດ.",
   "EnableAutomaticBackupDescription": "ໃຊ້ຕົວເລືອກນີ້ເພື່ອສຳຮອງຂໍ້ມູນສະເປສ໌.",

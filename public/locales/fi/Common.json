@@ -535,7 +535,7 @@
   "EmptyTemplatesRoomsDescription": "Luo ensimmäinen huoneesi malli ja sen jälkeen voit luoda uusia huoneita sen perusteella.",
   "EmptyTemplatesRoomsHeader": "Malleja ei löytynyt",
   "Enable": "Ota käyttöön",
-  "EnableAIAgent": "Ota käyttöön AI Agentti",
+  "EnableAIAgent": "Ota käyttöön AI agentti",
   "EnableAIDescription": "AI-käyttö veloitetaan ennakkomaksuosuutesi saldosta. Jos saldo on liian alhainen, AI-pyynnöt eivät käsitellä.",
   "EnableAutomaticBackup": "Ota automaattinen varmuuskopiointi käyttöön.",
   "EnableAutomaticBackupDescription": "Tämän vaihtoehdon avulla voit varmuuskopioida tilan tiedot.",

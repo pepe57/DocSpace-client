@@ -535,7 +535,7 @@
   "EmptyTemplatesRoomsDescription": "Vytvorte prvú šablónu miestnosti a potom na základe nej môžete vytvárať nové miestnosti.",
   "EmptyTemplatesRoomsHeader": "Neboli nájdené žiadne šablóny",
   "Enable": "Zapnúť",
-  "EnableAIAgent": "Zapnúť AI Agent",
+  "EnableAIAgent": "Zapnúť AI agent",
   "EnableAIDescription": "Použitie AI je fakturované z vášho predplateného balíka. Ak je saldo príliš nízke, žiadosti AI nebudú spracované.",
   "EnableAutomaticBackup": "Povoliť automatické zálohovanie údajov.",
   "EnableAutomaticBackupDescription": "Použiť túto voľbu na zálohovanie údajov priestoru.",

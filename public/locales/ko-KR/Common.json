@@ -1131,7 +1131,7 @@
   "RevokeLink": "링크 취소",
   "Role": "역할",
   "RoleAIAgentContentCreatorDescription": "콘텐츠 제작자는 채팅을 사용하고 결과 저장소에서 파일을 작업할 수 있습니다.\n그들은 지식 기반에 파일을 업로드할 수 있지만 사용자 관리나 에이전트 설정에 접근할 수는 없습니다.",
-  "RoleAIAgentManagerDescription": " 에이전트 관리자는 지정된 AI 에이전트를 관리하고, 새 사용자를 초대하고, 자신보다 낮은 수준의 역할을 할당할 수 있습니다. \n채팅 사용, 지식 파일 업로드, 결과 저장소 작업, 채팅 설정 관리가 가능합니다.\n",
+  "RoleAIAgentManagerDescription": " 에이전트 관리자는 지정된 AI 에이전트를 관리하고, 새 사용자를 초대하고, 자신보다 낮은 수준의 역할을 할당할 수 있습니다. \n채팅 사용, 지식 파일 업로드, 결과 저장소 작업, 채팅 설정 관리가 가능합니다.",
   "RoleAIAgentViewerDescription": "시청자는 다른 사람이 생성한 출력 결과 저장소의 파일만 볼 수 있습니다.\n그들은 채팅이나 지식 베이스에 접근할 수 없습니다.",
   "RoleCommentator": "주석자",
   "RoleCommentatorDescription": "기존 파일 작업: 보기, 주석 달기.",

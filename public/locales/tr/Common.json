@@ -535,7 +535,7 @@
   "EmptyTemplatesRoomsDescription": "İlk oda şablonunuzu oluşturun, ardından bunu baz alarak yeni odalar oluşturabilirsiniz.",
   "EmptyTemplatesRoomsHeader": "Şablon bulunamadı",
   "Enable": "Etkinleştir",
-  "EnableAIAgent": "AI Agent'ı Etkinleştir",
+  "EnableAIAgent": "AI agent'ı Etkinleştir",
   "EnableAIDescription": "AI kullanımı ön ödemeli bakiyenizden faturalandırılır. Bakiye çok düşükse, yapay zeka istekleri işlenmeyecektir.",
   "EnableAutomaticBackup": "Otomatik yedeklemeyi etkinleştir.",
   "EnableAutomaticBackupDescription": "Alan verilerini yedeklemek için bu seçeneği kullanın.",

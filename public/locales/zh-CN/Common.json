@@ -535,7 +535,7 @@
   "EmptyTemplatesRoomsDescription": "请先创建第一个房间模板，然后可基于该模板创建新的房间。",
   "EmptyTemplatesRoomsHeader": "未找到模板",
   "Enable": "启用",
-  "EnableAIAgent": "启用 AI Agent",
+  "EnableAIAgent": "启用 AI agent",
   "EnableAIDescription": "AI 使用会从您的预付费余额中扣费。如果余额过低，AI 请求将无法处理。",
   "EnableAutomaticBackup": "启用自动备份",
   "EnableAutomaticBackupDescription": "使用该选项备份协作空间的数据。",

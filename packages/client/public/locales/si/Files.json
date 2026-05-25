@@ -231,7 +231,7 @@
   "WarningMoveToFormRoom": "මෙම කාමරයට ගොනුව තල්ලු කිරීමට හැකියාවක් නැත. කරුණාකර {{ organizationName }} PDF ආකෘතියක් තල්ලු කිරීමට උත්සාහ කරන්න.",
   "WarningMoveToFormRoomServal": "පෝරම් පිරවුම් කාමරයට බොහෝ ගොනු යැවීම සහය නොදක්වයි. එක {{ organizationName }} PDF ආකෘතියක් පමණක් එකවරක් යවන්න.",
   "WillBeDeletedPermanently": "{{date}} ස්ථිරව මකා දැමෙනු ඇත.",
-  "YouLeftTheAgent": "ඔබ නියෝජිතයා හැර ගොස් ඇත.",
+  "YouLeftTheAgent": "ඔබ නියෝජිතයා හැර ගොස් ඇත",
   "YouLeftTheRoom": "ඔබ කාමරය හැරගියා",
   "YourUserTypeHasChanged": "ඔබේ පරිශීලක වර්ගය <1>“{{userType}}”</1> ලෙසින් {{productName}} පරිපාලකයෙකු වන <1>{{adminName}}</1> විසින් වෙනස් කර ඇත."
 }
