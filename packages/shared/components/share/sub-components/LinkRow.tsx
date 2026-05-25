@@ -98,7 +98,7 @@ const LinkRow = ({
       "internal" in opt && !opt.internal
         ? {
             ...opt,
-            // icon: ExternalLinkWarningIconUrl,
+            icon: ExternalLinkWarningIconUrl,
             fillIcon: false,
             disabled: true,
             className: "share-external-disabled",
@@ -147,17 +147,6 @@ const LinkRow = ({
         (option) => option.internal === link.sharedTo.internal,
       )!;
 
-      if ("internal" in shareOption && !shareOption.internal) {
-        return {
-          ...shareOption,
-          icon: ExternalLinkWarningIconUrl,
-          fillIcon: false,
-          disabled: true,
-          className: "share-external-disabled",
-          tooltip: t("Common:ExternalLinksDisabledByAdmin"),
-        };
-      }
-
       return shareOption;
     };
 
@@ -179,7 +168,9 @@ const LinkRow = ({
     const isLoaded = loadingLinks.includes(link.sharedTo.id);
     const canEditInternal = link.canEditInternal;
     const isBlockedByAdmin =
-      isExternalShareRestricted && !link.sharedTo.internal && blockExistingLinksOnRestrict;
+      isExternalShareRestricted &&
+      !link.sharedTo.internal &&
+      blockExistingLinksOnRestrict;
 
     return (
       <div className={className} key={link.sharedTo.id}>
