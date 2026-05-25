@@ -126,7 +126,10 @@ const RoomsContextBtn = ({
       : "";
 
     const badgeIconColor =
-      externalShareApplyToRooms && blockExistingLinksOnRestrict && hasExternalLinks && badgeUrl
+      externalShareApplyToRooms &&
+      blockExistingLinksOnRestrict &&
+      hasExternalLinks &&
+      badgeUrl
         ? "var(--info-panel-link-blocked)"
         : undefined;
 
@@ -146,8 +149,9 @@ const RoomsContextBtn = ({
             : selection.logo.cover
           : undefined,
       badgeUrl: badgeUrl ?? undefined,
+      badgeIconColor,
     };
-  }, [selection, isExternalShareRestricted, hasExternalLinks]);
+  }, [selection, externalShareApplyToRooms, hasExternalLinks]);
 
   const onHideContextMenu = () => {
     // Callback is called when the context menu is closed.
@@ -179,6 +183,7 @@ const RoomsContextBtn = ({
         ignoreChangeView={isMobile()}
         header={contextMenuHeader}
         badgeUrl={contextMenuHeader?.badgeUrl}
+        badgeIconColor={contextMenuHeader?.badgeIconColor}
         onHide={onHideContextMenu}
       />
     </div>
@@ -190,8 +195,8 @@ export default inject(
     getItemContextOptionsActions: contextOptionsStore.getFilesContextOptions,
     getIcon: filesSettingsStore.getIcon,
     externalShareApplyToRooms: filesSettingsStore.externalShareApplyToRooms,
-    blockExistingLinksOnRestrict: filesSettingsStore.blockExistingLinksOnRestrict,
+    blockExistingLinksOnRestrict:
+      filesSettingsStore.blockExistingLinksOnRestrict,
     hasExternalLinks: publicRoomStore.hasExternalLinks,
   }),
 )(observer(RoomsContextBtn));
-

@@ -80,6 +80,10 @@ const LinkRow = (props: LinkRowProps) => {
     item,
   } = props;
 
+  const isExternalShareRestricted = item.isRoom
+    ? externalShareApplyToRooms
+    : externalShareApplyToDocuments;
+
   const availableShareRights = item.availableShareRights;
 
   const { t } = useTranslation(["Files", "Settings", "Translations"]);
