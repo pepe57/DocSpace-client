@@ -134,9 +134,9 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyExternalLink = () => {
-    // Intentional: copy the link first, then warn — user sees the data but is
-    // notified the admin has restricted external sharing. The link is still valid
-    // for existing recipients; the restriction only blocks *new* sharing flows.
+    // Intentional: copy first, then warn. The link still works for authenticated
+    // DocSpace users; the toast ("won't work for external users") informs the
+    // sharer of the restriction. toastr.error severity is a design decision.
     copyShareLink(item, link, t as TFunction);
     if (
       isExternalShareRestricted &&

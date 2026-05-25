@@ -160,6 +160,8 @@ const AccessControl = ({
     if (isEqual(currentSettings, defaultSettings)) {
       getSettings();
     } else {
+      // Unsaved edits from a previous navigation are intentionally discarded;
+      // restoring server defaults is the expected UX on re-mount.
       getSettingsFromDefault();
     }
 
