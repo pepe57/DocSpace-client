@@ -2880,7 +2880,12 @@ class FilesStore {
           "copy-general-link",
           "mark-as-favorite",
           "remove-from-favorites",
+          "copy-to",
         ]);
+
+        if (!canMove && !canDuplicate) {
+          fileOptions = removeOptions(fileOptions, ["move"]);
+        }
       }
 
       if (!item.security?.FillingStatus) {
@@ -3514,7 +3519,12 @@ class FilesStore {
         "create-room",
         "mark-as-favorite",
         "remove-from-favorites",
+        "copy-to",
       ]);
+
+      if (!canMove && !canDuplicate) {
+        folderOptions = removeOptions(folderOptions, ["move"]);
+      }
     }
 
     if (!canDownload) {
