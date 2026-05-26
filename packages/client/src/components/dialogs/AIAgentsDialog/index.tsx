@@ -89,7 +89,7 @@ const AIAgentsDialogComponent = ({
 
     const event = new CustomEvent(Events.ROOM_EDIT, {
       detail: { context: "dialog" },
-    }) as RoomEditEvent;
+    }) as unknown as RoomEditEvent;
     event.item = room;
     event.cb = (updatedRoom) => {
       window.dispatchEvent(
