@@ -601,6 +601,12 @@ class FilesStore {
 
       if (foundIndex > -1) return;
 
+      window.dispatchEvent(
+        new CustomEvent("file_created", {
+          detail: { id: file.id, folderId: file.folderId },
+        }),
+      );
+
       this.selectedFolderStore.setFilesCount(
         this.selectedFolderStore.filesCount + 1,
       );

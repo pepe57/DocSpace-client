@@ -1198,6 +1198,12 @@ class FilesActionStore {
       this.updateFilesAfterDelete(operationId, operation);
       this.filesStore.removeFiles(null, [itemId], null, destFolderId);
 
+      window.dispatchEvent(
+        new CustomEvent("folder_deleted", {
+          detail: { id: itemId },
+        }),
+      );
+
       getIsEmptyTrash();
     });
   };

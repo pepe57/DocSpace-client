@@ -139,6 +139,14 @@ const CreateEvent = ({
 						createdFolderId = folder.id;
 						addActiveItems(null, [folder.id]);
 						setCreatedItem({ id: createdFolderId, type: "folder" });
+						window.dispatchEvent(
+							new CustomEvent("folder_created", {
+								detail: {
+									id: folder.id,
+									parentId: folder.parentId,
+								},
+							}),
+						);
 					})
 					.then(() => completeAction(item, type, true))
 					.then(() => {
