@@ -194,6 +194,7 @@ const Dialog = ({
       displayType="modal"
       scale
       onClose={onCloseAction}
+      onSubmit={withForm ? onSaveAction : undefined}
       zIndex={405}
     >
       <ModalDialog.Header>{title}</ModalDialog.Header>
@@ -266,7 +267,7 @@ const Dialog = ({
           primary
           isLoading={isDisabled}
           isDisabled={isCreateDisabled || isDisabled || isError}
-          onClick={onSaveAction}
+          onClick={withForm ? undefined : onSaveAction}
           testId={`${getTestIdPrefix()}_save_button`}
         />
         <Button
