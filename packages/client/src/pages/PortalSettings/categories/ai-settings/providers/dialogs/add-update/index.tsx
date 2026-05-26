@@ -607,6 +607,11 @@ const AddUpdateDialogComponent = ({
 
         <ModalDialog.Footer>
           <Button
+            id={
+              variant === "add"
+                ? "shared_create-ai-provider-modal_submit"
+                : undefined
+            }
             primary
             size={ButtonSize.normal}
             label={t("Common:SaveButton")}
@@ -617,6 +622,11 @@ const AddUpdateDialogComponent = ({
             testId="provider-save-button"
           />
           <Button
+            id={
+              variant === "add"
+                ? "shared_create-ai-provider-modal_cancel"
+                : undefined
+            }
             size={ButtonSize.normal}
             label={t("Common:CancelButton")}
             scale

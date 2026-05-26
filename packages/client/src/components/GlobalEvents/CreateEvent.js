@@ -208,6 +208,14 @@ const CreateEvent = ({
 						gallerySelected?.id,
 					)
 						.then((data) => {
+							window.dispatchEvent(
+								new CustomEvent("file_created", {
+									detail: {
+										id: data.id,
+										folderId: data.folderId,
+									},
+								}),
+							);
 							if (isFrame && frameConfig?.events?.onEditorOpen) {
 								frameCallEvent({
 									event: "onEditorOpen",

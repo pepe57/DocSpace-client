@@ -698,6 +698,17 @@ class CreateEditRoomStore {
       }
 
       await this.onOpenNewRoom(room);
+
+      window.dispatchEvent(
+        new CustomEvent("room_created", {
+          detail: {
+            id: room.id,
+            roomType: room.roomType,
+            parentId: room.parentId,
+          },
+        }),
+      );
+
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);
     } catch (err) {

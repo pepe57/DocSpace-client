@@ -45,6 +45,7 @@ import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
 
 import { removeEmojiCharacters } from "@docspace/shared/utils";
+import { getCreateModalEntityType } from "SRC_DIR/helpers/filesUtils";
 
 const Dialog = ({
   t,
@@ -68,6 +69,10 @@ const Dialog = ({
   withForm,
   errorText,
 }) => {
+  const createEntityType = isCreateDialog
+    ? getCreateModalEntityType(extension)
+    : null;
+
   const [value, setValue] = useState("");
 
   const [isError, setIsError] = useState(false);
@@ -249,6 +254,11 @@ const Dialog = ({
         <Button
           className="submit"
           key="GlobalSendBtn"
+          id={
+            createEntityType
+              ? `shared_create-${createEntityType}-modal_submit`
+              : undefined
+          }
           label={isCreateDialog ? t("Common:Create") : t("Common:SaveButton")}
           size="normal"
           type="submit"
@@ -262,6 +272,11 @@ const Dialog = ({
         <Button
           className="cancel-button"
           key="CloseBtn"
+          id={
+            createEntityType
+              ? `shared_create-${createEntityType}-modal_cancel`
+              : undefined
+          }
           label={t("Common:CancelButton")}
           size="normal"
           scale

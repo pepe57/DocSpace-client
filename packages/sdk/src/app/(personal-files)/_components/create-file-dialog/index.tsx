@@ -74,6 +74,14 @@ const getTitle = (
   }
 };
 
+const ENTITY_TYPES: Record<CreateFileDialogType, string> = {
+  docx: "document",
+  xlsx: "spreadsheet",
+  pptx: "presentation",
+  pdf: "pdf-form",
+  folder: "folder",
+};
+
 const DEFAULT_NAMES: Record<CreateFileDialogType, string> = {
   docx: "New document",
   xlsx: "New spreadsheet",
@@ -157,6 +165,7 @@ const CreateFileDialog = ({
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
+          id={`shared_create-${ENTITY_TYPES[type]}-modal_submit`}
           label={t("Common:Create")}
           size={ButtonSize.normal}
           primary
@@ -166,6 +175,7 @@ const CreateFileDialog = ({
           isDisabled={hasError}
         />
         <Button
+          id={`shared_create-${ENTITY_TYPES[type]}-modal_cancel`}
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           scale

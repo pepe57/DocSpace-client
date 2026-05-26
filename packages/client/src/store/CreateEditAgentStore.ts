@@ -382,6 +382,15 @@ class CreateEditRoomStore {
 
       this.onOpenNewAgent(agent);
 
+      window.dispatchEvent(
+        new CustomEvent("agent_created", {
+          detail: {
+            id: agent.id,
+            parentId: agent.parentId,
+          },
+        }),
+      );
+
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);
 

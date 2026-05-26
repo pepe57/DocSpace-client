@@ -112,6 +112,25 @@ export const getDefaultFileTestIdPrefix = (format) => {
   }
 };
 
+export const getCreateModalEntityType = (extension) => {
+  switch (extension) {
+    case "docx":
+      return "document";
+    case "xlsx":
+      return "spreadsheet";
+    case "pptx":
+      return "presentation";
+    case "pdf":
+      return "pdf-form";
+    case "":
+    case null:
+    case undefined:
+      return "folder";
+    default:
+      return null;
+  }
+};
+
 export const getUnexpectedErrorText = () => {
   return i18n.t("Common:UnexpectedError");
 };
