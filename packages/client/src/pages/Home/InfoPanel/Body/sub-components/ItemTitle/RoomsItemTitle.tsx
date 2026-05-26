@@ -80,9 +80,8 @@ type RoomsItemHeaderProps = {
   onChangeFile?: AvatarEditorDialogStore["onChangeFile"];
   getIcon?: FilesSettingsStore["getIcon"];
   isRoomMembersPanel?: boolean;
-  externalShareApplyToRooms?: boolean;
-  blockExistingLinksOnRestrict?: boolean;
   hasExternalLinks?: boolean;
+  isExternalShareRestricted?: boolean;
 } & (
   | {
       roomsView: InfoPanelView.infoMembers;
@@ -108,9 +107,8 @@ const RoomsItemHeader = ({
   getIcon,
   searchProps,
   isRoomMembersPanel,
-  externalShareApplyToRooms,
-  blockExistingLinksOnRestrict,
   hasExternalLinks,
+  isExternalShareRestricted,
 }: RoomsItemHeaderProps) => {
   const { t } = useTranslation([
     "Files",
@@ -148,13 +146,13 @@ const RoomsItemHeader = ({
       ? getRoomBadgeUrl(
           selection,
           12,
-          externalShareApplyToRooms && blockExistingLinksOnRestrict,
+          isExternalShareRestricted,
           hasExternalLinks,
         )
       : null;
 
   const badgeIconColor =
-    externalShareApplyToRooms && blockExistingLinksOnRestrict && hasExternalLinks && badgeUrl
+    isExternalShareRestricted && hasExternalLinks && badgeUrl
       ? "var(--info-panel-link-blocked)"
       : undefined;
 
@@ -318,12 +316,22 @@ export default inject(
   }: TStore) => {
     const { roomsView, setIsMobileHidden } = infoPanelStore;
 
-    const { displayFileExtension, getIcon, externalShareApplyToRooms, blockExistingLinksOnRestrict } =
-      filesSettingsStore;
+    const {
+      displayFileExtension,
+      getIcon,
+      externalShareApplyToRooms,
+      blockExistingLinksOnRestrict,
+      isExternalShareRestricted: isShareRestricted,
+    } = filesSettingsStore;
     const { externalLinks, hasExternalLinks } = publicRoomStore;
     const { setTemplateAccessSettingsVisible } = dialogsStore;
 
     const { onChangeFile } = avatarEditorDialogStore;
+
+    const isExternalShareRestricted =
+      externalShareApplyToRooms &&
+      blockExistingLinksOnRestrict &&
+      isShareRestricted;
 
     return {
       roomsView,
@@ -342,9 +350,10 @@ export default inject(
       onChangeFile,
       setTemplateAccessSettingsVisible,
       getIcon,
-      externalShareApplyToRooms,
-      blockExistingLinksOnRestrict,
+      isShareRestricted,
       hasExternalLinks,
+
+      isExternalShareRestricted,
     };
   },
 )(observer(RoomsItemHeader));

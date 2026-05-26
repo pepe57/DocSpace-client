@@ -164,8 +164,7 @@ export type LinkRowProps = {
 
   isArchiveFolder?: boolean;
   isShareLink?: boolean;
-  externalShareApplyToDocuments?: boolean;
-  externalShareApplyToRooms?: boolean;
+  isExternalShareRestricted?: boolean;
   blockExistingLinksOnRestrict?: boolean;
   setIsScrollLocked?: InfoPanelStore["setIsScrollLocked"];
   isPublicRoomType: boolean;

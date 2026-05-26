@@ -70,19 +70,14 @@ const LinkRow = (props: LinkRowProps) => {
     setDeleteLinkDialogVisible,
     setEmbeddingPanelData,
     isArchiveFolder,
-    externalShareApplyToDocuments,
-    externalShareApplyToRooms,
     blockExistingLinksOnRestrict,
 
     setIsScrollLocked,
     setExternalLink,
     deleteExternalLink,
     item,
+    isExternalShareRestricted,
   } = props;
-
-  const isExternalShareRestricted = item.isRoom
-    ? externalShareApplyToRooms
-    : externalShareApplyToDocuments;
 
   const availableShareRights = item.availableShareRights;
 
@@ -346,14 +341,17 @@ const LinkRow = (props: LinkRowProps) => {
   );
 };
 
-export default inject<TStore>(
-  ({
-    dialogsStore,
-    treeFoldersStore,
-    infoPanelStore,
-    publicRoomStore,
-    filesSettingsStore,
-  }) => {
+export default inject<TStore, Pick<LinkRowProps, "item">>(
+  (
+    {
+      dialogsStore,
+      treeFoldersStore,
+      infoPanelStore,
+      publicRoomStore,
+      filesSettingsStore,
+    },
+    { item },
+  ) => {
     const { setIsScrollLocked } = infoPanelStore;
 
     const {
@@ -367,14 +365,21 @@ export default inject<TStore>(
     const { setExternalLink, deleteExternalLink } = publicRoomStore;
 
     const {
+      isExternalShareRestricted: isShareRestricted,
       externalShareApplyToDocuments,
       externalShareApplyToRooms,
       blockExistingLinksOnRestrict,
     } = filesSettingsStore;
 
+    const isExternalShareRestricted =
+      isShareRestricted &&
+      blockExistingLinksOnRestrict &&
+      (item.isRoom ? externalShareApplyToRooms : externalShareApplyToDocuments);
+
     return {
       isArchiveFolder: isArchiveFolderRoot,
 
+      isExternalShareRestricted,
       externalShareApplyToDocuments,
       externalShareApplyToRooms,
       blockExistingLinksOnRestrict,
