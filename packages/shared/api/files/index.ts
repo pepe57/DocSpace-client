@@ -1258,7 +1258,7 @@ export async function setAccessControlSettings(
 ) {
   const res = (await request({
     method: "put",
-    url: "/files/settings/external-sharing",
+    url: "/files/settings/externalsharingsettings",
     data: settings,
   })) as TAccessControlSettings;
 

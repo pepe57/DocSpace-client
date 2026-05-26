@@ -57,6 +57,7 @@ import {
 } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
 import i18n from "../i18n";
 
 class FilesSettingsStore {
@@ -197,6 +198,15 @@ class FilesSettingsStore {
     this.pluginStore = pluginStore;
     this.authStore = authStore;
     this.settingsStore = settingsStore;
+
+    SocketHelper?.on(SocketEvents.UpdateExternalShareSettings, (settings) => {
+      this.externalShare = settings.externalShare;
+      this.defaultShareLinkInternal = settings.defaultShareLinkInternal;
+      this.externalShareApplyToDocuments =
+        settings.externalShareApplyToDocuments;
+      this.externalShareApplyToRooms = settings.externalShareApplyToRooms;
+      this.blockExistingLinksOnRestrict = settings.blockExistingLinksOnRestrict;
+    });
   }
 
   setIsLoaded = (isLoaded) => {
