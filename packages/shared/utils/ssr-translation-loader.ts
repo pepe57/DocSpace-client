@@ -41,6 +41,7 @@ const tryReadJson = (filePath: string): Promise<Record<string, string> | null> =
       if (err.code !== "ENOENT") {
         console.warn(`Failed to load translation ${filePath}:`, err);
       }
+      fileCache.delete(filePath);
       return null;
     });
 
