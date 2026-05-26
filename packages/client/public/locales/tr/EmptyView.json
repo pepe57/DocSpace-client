@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "İş birliği odasına hoş geldiniz",
   "CollaboratorEmptyTitle": "Oda boş.",
-  "CreateAIAgentDescription": "İlk {{aiAgent}}'inizi oluşturmaya başlayın",
+  "CreateAIAgentDescription": "İlk AI ajanınızı oluşturmaya başlayın",
   "CreateDocument": "Yeni bir belge oluşturun",
   "CreateDocumentDescription": "Geniş kelime işlemci işlevselliğinden yararlanın.",
   "CreateForm": "Yeni bir PDF formu oluşturma",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} henüz mevcut değil",
   "EmptyAIAgentsAIEnabledUserDescription": "Ekibiniz sizi işbirliğine davet ettiğinde, {{aiAgents}} burada belirecek ve belgeler, bilgi yönetimi ve günlük görevlerde size yardımcı olmaya hazır olacaktır.",
   "EmptyAIAgentsDescription": "Ekibiniz için kişiselleştirilmiş bir asistan kurmak üzere bir bilgi tabanı ekleyin, ideal modeli seçin ve bir {{mcpServer}} bağlayın. Meslektaşlarınızı davet ederek işbirliği yapın ve ajanın sohbet özelliklerinden en iyi şekilde yararlanın.",
-  "EmptyAIAgentsTitle": "{{aiAgent}}’ınızı oluşturun",
+  "EmptyAIAgentsTitle": "AI ajanınızı oluşturun",
   "EmptyAIAgentsUserTitle": "Henüz {{aiAgents}} mevcut değil",
   "EmptyFavoritesDescription": "Yıldız işaretli dosyaları ve klasörleri, kolayca erişilebilir ve elinizin altında tutmak için kullanın.",
   "EmptyFavoritesTitle": "Henüz favori yok",

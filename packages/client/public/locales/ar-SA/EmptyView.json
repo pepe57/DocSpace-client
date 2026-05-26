@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "مرحبًا بك في غرفة التعاون",
   "CollaboratorEmptyTitle": "الغرفة فارغة.",
-  "CreateAIAgentDescription": "ابدأ في بناء أول {{aiAgent}} لديك",
+  "CreateAIAgentDescription": "ابدأ في بناء أول وكيل ذكاء اصطناعي لك",
   "CreateDocument": "إنشاء مستند جديد",
   "CreateDocumentDescription": "استفد من إمكانيات معالجة النصوص الواسعة.",
   "CreateForm": "إنشاء نموذج PDF جديد",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} غير متوفرة بعد",
   "EmptyAIAgentsAIEnabledUserDescription": "بمجرد أن يدعوك فريقك للتعاون، ستظهر {{aiAgents}} هنا، وجاهزة للمساعدة في المستندات، وإدارة المعرفة، والمهام اليومية.",
   "EmptyAIAgentsDescription": "قم بإعداد مساعد شخصي لفريقك عن طريق إضافة قاعدة معرفية، واختيار النموذج المثالي، وربط {{mcpServer}}. ادعُ زملائك للتعاون والاستفادة القصوى من قدرات الدردشة الخاصة بالوكيل.",
-  "EmptyAIAgentsTitle": "أنشئ {{aiAgent}} الخاص بك",
+  "EmptyAIAgentsTitle": "أنشئ وكيل الذكاء الاصطناعي الخاص بك",
   "EmptyAIAgentsUserTitle": "لا يتوفر أي {{aiAgents}} بعد",
   "EmptyFavoritesDescription": "قوموا بتمييز الملفات والمجلدات بنجمة لإبقائها في متناول أيديكم ويسهل الوصول إليها. ",
   "EmptyFavoritesTitle": "لا توجد مفضلات بعد ",

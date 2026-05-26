@@ -32,7 +32,7 @@
   "KnowledgeDisabledSuccess": "Baza znanja je uspešno onemogućena",
   "KnowledgeEnabledSuccess": "Baza znanja je uspešno omogućena",
   "KnowledgeKeyDescription": "Unesite API ključ dobijen od vašeg provajdera baze znanja",
-  "KnowledgeSettingsDescription": "Omogućite bazu znanja za {{aiAgents}}. Sistem će indeksirati vaše dokumente koristeći model {{modelName}} kako bi podržao pretragu baziranu na pitanjima kroz vaše podatke. Ova funkcija se fokusira na pronalaženje relevantnih informacija, ali ne generiše sažetnike niti obavlja globalnu analizu.",
+  "KnowledgeSettingsDescription": "Omogućite bazu znanja za odeljak „{{aiAgents}}“. Sistem će indeksirati vaše dokumente koristeći model {{modelName}} kako bi podržao pretragu baziranu na pitanjima kroz vaše podatke. Ova funkcija se fokusira na pronalaženje relevantnih informacija, ali ne generiše sažetnike niti obavlja globalnu analizu.",
   "ListModels": "Lista modela",
   "MCPProductDescription": "{{organizationName}} {{productName}} {{mcpServer}} pojednostavljuje radni tok vođen AI, integrisujući LLM-ove sa eksternim sistemima za efikasno i sigurno upravljanje dokumentima.",
   "MCPServerAdvancedSettingsHint": "Ovaj odeljak vam omogućava da prosledite dodatne HTTP zaglavlja, kao što su autorizacioni tokeni.",

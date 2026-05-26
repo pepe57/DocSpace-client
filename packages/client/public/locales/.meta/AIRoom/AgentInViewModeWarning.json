@@ -1,14 +1,14 @@
 {
   "key_path": "AgentInViewModeWarning",
-  "content": "You’re in <strong>view-only</strong> mode for this {{aiAgent}}. You can see the results of {{aiChat}} activity from other users.",
-  "content_en_sha1_hash": "44007c7eff90339c377f5cc1d75060284f1d1103",
-  "created_at": "2025-12-22T14:24:56.488Z",
-  "updated_at": "2026-05-15T14:00:06.755Z",
+  "content": "You’re in <strong>view-only</strong> mode for this IA agent. You can see the results of {{aiChat}} activity from other users.",
+  "content_en_sha1_hash": "4db78f779fd217bbdeda15fc74b9e4ff8178a263",
+  "created_at": "2026-05-25T18:26:21.352Z",
+  "updated_at": "2026-05-25T18:35:44.079Z",
   "comment": {
-    "text": "This is a toast message informing the user they are in view-only mode for an AI Agent. It appears when a user accesses an AI Agent in view-only mode, explaining they can see others' activity. `{{aiAgent}}` and `{{aiChat}}` are placeholders for localized terms like \"AI Agent\" and \"AI Chat\".",
+    "text": "Info toast message appearing when a user has view-only access to an AI agent; includes an HTML tag for emphasis and a variable representing AI Chat activity.",
     "is_auto": true,
-    "updated_at": "2026-04-11T21:02:11.381Z",
-    "model": "google/gemini-2.5-flash"
+    "updated_at": "2026-05-25T18:35:44.079Z",
+    "model": "gemma4:26b"
   },
   "usage": [
     {
@@ -149,7 +149,7 @@
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": "2026-05-15T15:04:53.938772Z"
+      "approved_at": null
     },
     "si": {
       "ai_translated": false,

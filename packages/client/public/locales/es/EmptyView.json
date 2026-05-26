@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "Bienvenido/a a la Sala de colaboración",
   "CollaboratorEmptyTitle": "La sala está vacía.",
-  "CreateAIAgentDescription": "Comienza a construir tu primer {{aiAgent}}",
+  "CreateAIAgentDescription": "Empieza a construir tu primer agente de IA",
   "CreateDocument": "Crear un nuevo documento",
   "CreateDocumentDescription": "Aproveche las amplias funciones de procesamiento de textos.",
   "CreateForm": "Crear un nuevo formulario PDF",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} aún no están disponibles",
   "EmptyAIAgentsAIEnabledUserDescription": "Una vez que su equipo lo invite a colaborar, {{aiAgents}} aparecerá aquí, listo para ayudar con documentos, gestión del conocimiento y tareas cotidianas.",
   "EmptyAIAgentsDescription": "Configure un asistente personalizado para su equipo añadiendo una base de conocimiento, seleccionando el modelo ideal y conectando un {{mcpServer}}. Invite a sus colegas a colaborar y aprovechar al máximo las capacidades de chat del agente.",
-  "EmptyAIAgentsTitle": "Crea tu {{aiAgent}}",
+  "EmptyAIAgentsTitle": "Crea tu agente de IA",
   "EmptyAIAgentsUserTitle": "No hay {{aiAgents}} disponibles aún",
   "EmptyFavoritesDescription": "Marque con estrellas los archivos y carpetas para tenerlos fácilmente accesibles y a mano.",
   "EmptyFavoritesTitle": "Aún no hay favoritos",
