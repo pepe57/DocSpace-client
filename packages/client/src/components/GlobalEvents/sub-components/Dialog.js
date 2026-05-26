@@ -49,6 +49,7 @@ import { removeEmojiCharacters } from "@docspace/shared/utils";
 const Dialog = ({
   t,
   title,
+  testIdPrefix,
   startValue,
   visible,
   folderFormValidation,
@@ -76,11 +77,11 @@ const Dialog = ({
 
   const hasError = Boolean(errorText) || isError;
 
-  // Generate test ID prefix based on dialog title
   const getTestIdPrefix = useCallback(() => {
+    if (testIdPrefix) return testIdPrefix;
     if (!title) return "dialog";
     return title.toLowerCase().replace(/\s+/g, "_");
-  }, [title]);
+  }, [testIdPrefix, title]);
 
   const onCancelAction = useCallback(
     (e) => {

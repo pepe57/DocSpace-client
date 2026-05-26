@@ -97,6 +97,21 @@ export const getDefaultFileName = (format) => {
   }
 };
 
+export const getDefaultFileTestIdPrefix = (format) => {
+  switch (format) {
+    case "docx":
+      return "new_document";
+    case "xlsx":
+      return "new_spreadsheet";
+    case "pptx":
+      return "new_presentation";
+    case "pdf":
+      return "new_pdf_form";
+    default:
+      return "new_folder";
+  }
+};
+
 export const getUnexpectedErrorText = () => {
   return i18n.t("Common:UnexpectedError");
 };

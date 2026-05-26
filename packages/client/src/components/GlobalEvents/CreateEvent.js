@@ -44,7 +44,10 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { showSuccessCreateFolder } from "SRC_DIR/helpers/toast-helpers";
 import config from "PACKAGE_FILE";
 
-import { getDefaultFileName } from "SRC_DIR/helpers/filesUtils";
+import {
+  getDefaultFileName,
+  getDefaultFileTestIdPrefix,
+} from "SRC_DIR/helpers/filesUtils";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { frameCallEvent } from "@docspace/shared/utils/common";
@@ -274,6 +277,7 @@ const CreateEvent = ({
 			withForm
 			visible={eventDialogVisible}
 			title={headerTitle}
+			testIdPrefix={getDefaultFileTestIdPrefix(extension)}
 			startValue={startValue}
 			onSave={onSave}
 			onCancel={onCloseAction}
