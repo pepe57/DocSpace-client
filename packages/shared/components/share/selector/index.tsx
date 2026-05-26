@@ -90,7 +90,9 @@ export const ShareSelector: FC<ShareSelectorProps> = ({
 
 			window.dataLayer = window.dataLayer || [];
 			window.dataLayer.push({
-				event: AnalyticsEvents.FileShared,
+				event: "roomType" in item && item.roomType !== undefined
+					? AnalyticsEvents.RoomShared
+					: AnalyticsEvents.FileShared,
 				id: item.id,
 				count: share.length,
 			});

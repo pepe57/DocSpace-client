@@ -532,8 +532,6 @@ class ContextOptionsStore {
 
     const isSystemFolder = systemFolders.includes(item.type);
 
-    console.log(isShared && !isArchive && !isSystemFolder && item.canShare);
-
     if (isShared && !isArchive && !isSystemFolder && item.canShare) {
       try {
         const itemLink = item.isFolder
@@ -640,7 +638,7 @@ class ContextOptionsStore {
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
-        event: AnalyticsEvents.FileShared,
+        event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
         id: item.id,
         folderId: item.folderId,
       });
@@ -1892,7 +1890,7 @@ class ContextOptionsStore {
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
-        event: AnalyticsEvents.FileShared,
+        event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
         id: item.id,
         folderId: item.folderId,
       });

@@ -375,7 +375,9 @@ export const useShare = ({
 
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
-      event: AnalyticsEvents.FileShared,
+      event: "roomType" in infoPanelSelection && infoPanelSelection.roomType !== undefined
+        ? AnalyticsEvents.RoomShared
+        : AnalyticsEvents.FileShared,
       id: infoPanelSelection.id,
       linkId: link.sharedTo?.id,
     });
