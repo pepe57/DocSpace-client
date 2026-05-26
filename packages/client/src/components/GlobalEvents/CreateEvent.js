@@ -37,6 +37,7 @@ import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import api from "@docspace/shared/api";
+import { AnalyticsEvents } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -216,14 +217,12 @@ const CreateEvent = ({
 						gallerySelected?.id,
 					)
 						.then((data) => {
-							window.dispatchEvent(
-								new CustomEvent("file_created", {
-									detail: {
-										id: data.id,
-										folderId: data.folderId,
-									},
-								}),
-							);
+							window.dataLayer = window.dataLayer || [];
+							window.dataLayer.push({
+								event: AnalyticsEvents.FileCreated,
+								id: data.id,
+								folderId: data.folderId,
+							});
 							if (isFrame && frameConfig?.events?.onEditorOpen) {
 								frameCallEvent({
 									event: "onEditorOpen",

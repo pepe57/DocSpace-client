@@ -40,6 +40,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import {
+  AnalyticsEvents,
   FileType,
   FilterType,
   FolderType,
@@ -601,11 +602,12 @@ class FilesStore {
 
       if (foundIndex > -1) return;
 
-      window.dispatchEvent(
-        new CustomEvent("file_created", {
-          detail: { id: file.id, folderId: file.folderId },
-        }),
-      );
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: AnalyticsEvents.FileCreated,
+        id: file.id,
+        folderId: file.folderId,
+      });
 
       this.selectedFolderStore.setFilesCount(
         this.selectedFolderStore.filesCount + 1,

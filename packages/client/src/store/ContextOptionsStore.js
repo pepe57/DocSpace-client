@@ -131,6 +131,7 @@ import {
 import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
 import { OPERATIONS_NAME } from "@docspace/ui-kit/constants";
 import {
+  AnalyticsEvents,
   RoomsType,
   Events,
   FolderType,
@@ -540,11 +541,12 @@ class ContextOptionsStore {
         copyToBuffer(itemLink.sharedTo.shareLink);
 
         if (!item.isRoom) {
-          window.dispatchEvent(
-            new CustomEvent("file_shared", {
-              detail: { id: item.id, folderId: item.folderId },
-            }),
-          );
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: AnalyticsEvents.FileShared,
+            id: item.id,
+            folderId: item.folderId,
+          });
         }
 
         item.customFilterEnabled

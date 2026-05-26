@@ -42,7 +42,7 @@ import api from "@docspace/shared/api";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { AnalyticsEvents, FolderType, RoomsType } from "@docspace/shared/enums";
 import { CategoryType } from "@docspace/shared/constants";
 import {
   createTemplate,
@@ -705,16 +705,14 @@ class CreateEditRoomStore {
 
       await this.onOpenNewRoom(room);
 
-      window.dispatchEvent(
-        new CustomEvent("room_created", {
-          detail: {
-            id: room.id,
-            roomType: room.roomType,
-            parentId: room.parentId,
-            context: this.openContext,
-          },
-        }),
-      );
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: AnalyticsEvents.RoomCreated,
+        id: room.id,
+        roomType: room.roomType,
+        parentId: room.parentId,
+        context: this.openContext,
+      });
 
       if (successToast)
         toastr.success(successToast as unknown as React.ReactNode);

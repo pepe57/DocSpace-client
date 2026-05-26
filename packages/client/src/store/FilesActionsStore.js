@@ -57,6 +57,7 @@ import {
   enableCustomFilter,
 } from "@docspace/shared/api/files";
 import {
+  AnalyticsEvents,
   Events,
   ExportRoomIndexTaskStatus,
   FileAction,
@@ -858,14 +859,12 @@ class FilesActionStore {
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
 
-            window.dispatchEvent(
-              new CustomEvent("file_downloaded", {
-                detail: {
-                  fileIds: fileConvertIds.map((f) => f.key ?? f),
-                  folderIds,
-                },
-              }),
-            );
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: AnalyticsEvents.FileDownloaded,
+              fileIds: fileConvertIds.map((f) => f.key ?? f),
+              folderIds,
+            });
           }
 
           setSecondaryProgressBarData({
@@ -1123,11 +1122,8 @@ class FilesActionStore {
         this.updateFilesAfterDelete(operationId, operation);
         this.filesStore.removeFiles([itemId], null, null, destFolderId);
 
-        window.dispatchEvent(
-          new CustomEvent("file_deleted", {
-            detail: { id: itemId },
-          }),
-        );
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: AnalyticsEvents.FileDeleted, id: itemId });
       });
     }
     if (isRoom) {
@@ -1159,11 +1155,11 @@ class FilesActionStore {
           const categoryType = getCategoryTypeByFolderType(rootFolderType, 0);
           const isAgentDeletion = categoryType === CategoryType.AIAgents;
 
-          window.dispatchEvent(
-            new CustomEvent(isAgentDeletion ? "agent_deleted" : "room_deleted", {
-              detail: { ids: items },
-            }),
-          );
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: isAgentDeletion ? AnalyticsEvents.AgentDeleted : AnalyticsEvents.RoomDeleted,
+            ids: items,
+          });
 
           const currentFolderId = this.selectedFolderStore.id;
           if (items.includes(currentFolderId)) {
@@ -1571,11 +1567,8 @@ class FilesActionStore {
 
             toastr.success(successTranslation);
 
-            window.dispatchEvent(
-              new CustomEvent("room_archived", {
-                detail: { ids: items },
-              }),
-            );
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: AnalyticsEvents.RoomArchived, ids: items });
           })
           .then(() => {
             const clearBuffer =

@@ -12,7 +12,7 @@ import { Badge } from "@docspace/ui-kit/components/badge";
 import { Button } from "@docspace/ui-kit/components/button";
 import { Text } from "@docspace/ui-kit/components/text";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
-import { DeviceType } from "@docspace/shared/enums";
+import { AnalyticsEvents, DeviceType } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import WelcomeAuthSocial from "PUBLIC_DIR/images/welcome-social_auth.svg?url";
 import WelcomeAuthSocialDark from "PUBLIC_DIR/images/welcome-social_auth_dark.svg?url";
@@ -66,7 +66,8 @@ const SocialAuthWelcomeDialogComponent = ({
     : WelcomeAuthSocialDark;
 
   const onContinueClick = (): void => {
-    window.dispatchEvent(new CustomEvent("welcome_modal_completed"));
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: AnalyticsEvents.WelcomeModalCompleted });
     onClose();
   };
 
