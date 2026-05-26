@@ -486,6 +486,7 @@ const AddUpdateDialogComponent = ({
               <TextInput
                 size={InputSize.base}
                 type={InputType.text}
+                name="provider_title"
                 value={providerTitle}
                 onChange={(e) => setProviderTitle(e.target.value)}
                 scale
@@ -508,6 +509,7 @@ const AddUpdateDialogComponent = ({
               <TextInput
                 size={InputSize.base}
                 type={InputType.text}
+                name="provider_url"
                 value={providerUrl}
                 onChange={(e) => setProviderUrl(e.target.value)}
                 scale
@@ -548,6 +550,7 @@ const AddUpdateDialogComponent = ({
                 <>
                   <PasswordInput
                     size={InputSize.base}
+                    inputName="provider_key"
                     inputValue={providerKey}
                     onChange={(_, value) => setProviderKey(value ?? "")}
                     isFullWidth

@@ -152,6 +152,7 @@ const CreateFileDialog = ({
         <TextInput
           forwardedRef={inputRef}
           type={InputType.text}
+          name="file_name"
           scale
           value={name}
           hasError={hasError}
