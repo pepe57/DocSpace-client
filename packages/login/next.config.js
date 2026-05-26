@@ -228,6 +228,10 @@ const nextConfig = {
 
 if (process.env.DEPLOY) {
   nextConfig.output = "standalone";
+  nextConfig.env = {
+    NEXT_APP_LOCALES_DIR: path.resolve(__dirname, "public/locales"),
+    NEXT_SHARED_LOCALES_DIR: path.resolve(__dirname, "../../public/locales"),
+  };
 }
 
 if (isDev) {
