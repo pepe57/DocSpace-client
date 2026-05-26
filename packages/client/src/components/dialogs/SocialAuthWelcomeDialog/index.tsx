@@ -66,6 +66,7 @@ const SocialAuthWelcomeDialogComponent = ({
     : WelcomeAuthSocialDark;
 
   const onContinueClick = (): void => {
+    window.dispatchEvent(new CustomEvent("welcome_modal_completed"));
     onClose();
   };
 

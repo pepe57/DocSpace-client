@@ -432,6 +432,21 @@ const InvitePanel = ({
 
       if (!isRooms) {
         setIsNewUserByCurrentUser(true);
+        window.dispatchEvent(
+          new CustomEvent("user_invited", {
+            detail: { count: invitations.length, context: "invite_panel" },
+          }),
+        );
+      } else {
+        window.dispatchEvent(
+          new CustomEvent("room_shared", {
+            detail: {
+              roomId,
+              count: invitations.length,
+              context: "invite_panel",
+            },
+          }),
+        );
       }
       setIsLoading(false);
 

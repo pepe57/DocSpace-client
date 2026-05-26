@@ -1351,6 +1351,15 @@ class UploadDataStore {
         }
       });
 
+      window.dispatchEvent(
+        new CustomEvent("file_uploaded", {
+          detail: {
+            id: fileInfo.id,
+            folderId: fileInfo.folderId,
+          },
+        }),
+      );
+
       if (fileInfo.version > 2) {
         this.filesStore.setHighlightFile({
           highlightFileId: fileInfo.id,

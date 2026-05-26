@@ -538,6 +538,15 @@ class ContextOptionsStore {
           : await getFileLink(item.id);
 
         copyToBuffer(itemLink.sharedTo.shareLink);
+
+        if (!item.isRoom) {
+          window.dispatchEvent(
+            new CustomEvent("file_shared", {
+              detail: { id: item.id, folderId: item.folderId },
+            }),
+          );
+        }
+
         item.customFilterEnabled
           ? toastr.success(
               <Trans t={t} i18nKey="Common:LinkCopySuccessWithCustomFilter" />,
@@ -760,7 +769,9 @@ class ContextOptionsStore {
   };
 
   onClickRename = (item) => {
-    const event = new Event(Events.RENAME);
+    const event = new CustomEvent(Events.RENAME, {
+      detail: { parentId: this.selectedFolderStore.id, context: "context_menu" },
+    });
 
     event.item = item;
 
@@ -996,19 +1007,25 @@ class ContextOptionsStore {
   };
 
   onClickEditRoom = (item) => {
-    const event = new Event(Events.ROOM_EDIT);
+    const event = new CustomEvent(Events.ROOM_EDIT, {
+      detail: { context: "context_menu" },
+    });
     event.item = item;
     window.dispatchEvent(event);
   };
 
   onClickEditAgent = (item) => {
-    const event = new Event(Events.AGENT_EDIT);
+    const event = new CustomEvent(Events.AGENT_EDIT, {
+      detail: { context: "context_menu" },
+    });
     event.item = item;
     window.dispatchEvent(event);
   };
 
   onSaveAsTemplate = (item) => {
-    const event = new Event(Events.SAVE_AS_TEMPLATE);
+    const event = new CustomEvent(Events.SAVE_AS_TEMPLATE, {
+      detail: { parentId: this.selectedFolderStore.id, context: "context_menu" },
+    });
     event.item = item;
     window.dispatchEvent(event);
   };
@@ -1018,7 +1035,9 @@ class ContextOptionsStore {
   };
 
   onEditRoomTemplate = (item, cb) => {
-    const event = new Event(Events.ROOM_EDIT);
+    const event = new CustomEvent(Events.ROOM_EDIT, {
+      detail: { context: "context_menu" },
+    });
     event.item = { ...item, isEdit: true };
     event.cb = cb;
     window.dispatchEvent(event);
@@ -1444,10 +1463,18 @@ class ContextOptionsStore {
   onCreateTemplate = async () => {
     this.oformsStore.setIsVisibleInfoPanelTemplateGallery(false);
 
-    const event = new Event(Events.CREATE);
+    const extension = this.oformsStore.currentExtensionGallery.replace(".", "");
+
+    const event = new CustomEvent(Events.CREATE, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "template",
+        extension,
+      },
+    });
 
     const payload = {
-      extension: this.oformsStore.currentExtensionGallery.replace(".", ""),
+      extension,
       id: -1,
       fromTemplate: true,
       title: this.oformsStore.gallerySelected.attributes.name_form,
@@ -3492,7 +3519,9 @@ class ContextOptionsStore {
       this.filesActionsStore.setProcessCreatingRoomFromData(true);
     }
 
-    const event = new Event(Events.ROOM_CREATE);
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: { parentId: this.selectedFolderStore.id, context: "context_menu" },
+    });
 
     if (item && item.isFolder) {
       event.title = item.title;
@@ -3509,20 +3538,28 @@ class ContextOptionsStore {
     //   return;
     // }
 
-    const event = new Event(Events.AGENT_CREATE);
+    const event = new CustomEvent(Events.AGENT_CREATE, {
+      detail: { parentId: this.selectedFolderStore.id, context: "context_menu" },
+    });
 
     window.dispatchEvent(event);
   };
 
   onCreate = (format, t) => {
-    const event = new Event(Events.CREATE);
-
     const isPDf = format === FileExtensions.PDF;
 
     if (isMobile && isPDf) {
       toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
       return;
     }
+
+    const event = new CustomEvent(Events.CREATE, {
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+        extension: format,
+      },
+    });
 
     const payload = {
       extension: format,

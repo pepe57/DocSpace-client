@@ -108,6 +108,12 @@ class CreateEditRoomStore {
 
   selectedRoomType: Nullable<RoomsType> = null;
 
+  openContext: string = "";
+
+  setOpenContext = (context: string) => {
+    this.openContext = context;
+  };
+
   constructor(
     filesStore: FilesStore,
     filesActionsStore: FilesActionsStore,
@@ -387,6 +393,7 @@ class CreateEditRoomStore {
           detail: {
             id: agent.id,
             parentId: agent.parentId,
+            context: this.openContext,
           },
         }),
       );

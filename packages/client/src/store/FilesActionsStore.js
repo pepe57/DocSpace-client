@@ -857,6 +857,15 @@ class FilesActionStore {
 
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
+
+            window.dispatchEvent(
+              new CustomEvent("file_downloaded", {
+                detail: {
+                  fileIds: fileConvertIds.map((f) => f.key ?? f),
+                  folderIds,
+                },
+              }),
+            );
           }
 
           setSecondaryProgressBarData({
@@ -1113,6 +1122,12 @@ class FilesActionStore {
 
         this.updateFilesAfterDelete(operationId, operation);
         this.filesStore.removeFiles([itemId], null, null, destFolderId);
+
+        window.dispatchEvent(
+          new CustomEvent("file_deleted", {
+            detail: { id: itemId },
+          }),
+        );
       });
     }
     if (isRoom) {
@@ -1140,12 +1155,19 @@ class FilesActionStore {
                 : translations?.successRemoveRoom,
           );
 
+          const { rootFolderType } = this.selectedFolderStore;
+          const categoryType = getCategoryTypeByFolderType(rootFolderType, 0);
+          const isAgentDeletion = categoryType === CategoryType.AIAgents;
+
+          window.dispatchEvent(
+            new CustomEvent(isAgentDeletion ? "agent_deleted" : "room_deleted", {
+              detail: { ids: items },
+            }),
+          );
+
           const currentFolderId = this.selectedFolderStore.id;
           if (items.includes(currentFolderId)) {
-            const { rootFolderType } = this.selectedFolderStore;
-            const categoryType = getCategoryTypeByFolderType(rootFolderType, 0);
-
-            if (categoryType === CategoryType.AIAgents) {
+            if (isAgentDeletion) {
               this.moveToAIAgentsPage();
             } else {
               this.moveToRoomsPage();
@@ -1542,6 +1564,12 @@ class FilesActionStore {
                   : t("Common:ArchivedRoomAction", { name: folders.title });
 
             toastr.success(successTranslation);
+
+            window.dispatchEvent(
+              new CustomEvent("room_archived", {
+                detail: { ids: items },
+              }),
+            );
           })
           .then(() => {
             const clearBuffer =
@@ -2255,9 +2283,11 @@ class FilesActionStore {
     this.processCreatingRoomFromData = processCreatingRoomFromData;
   };
 
-  onClickCreateRoom = (item) => {
+  onClickCreateRoom = (item, context = "sidebar") => {
     this.setProcessCreatingRoomFromData(true);
-    const event = new Event(Events.ROOM_CREATE);
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: { parentId: this.selectedFolderStore.id, context },
+    });
     if (item && item.isFolder) {
       event.title = item.title;
     }
@@ -3283,7 +3313,9 @@ class FilesActionStore {
   };
 
   onCreateRoomFromTemplate = (item, addSelection) => {
-    const event = new Event(Events.ROOM_CREATE);
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: { parentId: this.selectedFolderStore.id, context: "template" },
+    });
     event.item = item;
     window.dispatchEvent(event);
 

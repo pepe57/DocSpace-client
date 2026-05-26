@@ -181,6 +181,12 @@ class AISettingsStore {
 
     this.aiProviders.push(newProvider);
 
+    window.dispatchEvent(
+      new CustomEvent("ai_provider_added", {
+        detail: { id: newProvider.id, type: newProvider.type },
+      }),
+    );
+
     if (this.aiProviders.length === 1) {
       await this.initDefaultProvider();
     }
