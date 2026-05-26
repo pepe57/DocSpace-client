@@ -55,6 +55,11 @@ import {
   getSettings,
   getUser,
 } from "@/utils/actions";
+import "../styles/globals.scss";
+import "@docspace/shared/styles/theme.scss";
+import Scripts from "@/components/Scripts";
+import { TConfirmLinkParams } from "@/types";
+import { logger } from "@/../logger.mjs";
 
 const LOGIN_NAMESPACES = [
   "Login",
@@ -64,13 +69,6 @@ const LOGIN_NAMESPACES = [
   "TenantList",
   "Wizard",
 ] as const;
-
-
-import "../styles/globals.scss";
-import "@docspace/shared/styles/theme.scss";
-import Scripts from "@/components/Scripts";
-import { TConfirmLinkParams } from "@/types";
-import { logger } from "@/../logger.mjs";
 
 export default async function RootLayout({
   children,

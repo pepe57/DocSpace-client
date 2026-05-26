@@ -49,7 +49,6 @@ import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
 import { getColorTheme, getSettings, getUser } from "@/utils/actions";
 import { logger } from "@/../logger.mjs";
-
 import "@/styles/globals.scss";
 
 const DOCEDITOR_NAMESPACES = [
@@ -58,7 +57,6 @@ const DOCEDITOR_NAMESPACES = [
   "ChangeLinkTypeDialog",
   "CompletedForm",
 ] as const;
-
 
 export default async function RootLayout({
   children,
@@ -155,4 +153,3 @@ export default async function RootLayout({
     </html>
   );
 }
-
