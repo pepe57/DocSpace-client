@@ -532,6 +532,8 @@ class ContextOptionsStore {
 
     const isSystemFolder = systemFolders.includes(item.type);
 
+    console.log(isShared && !isArchive && !isSystemFolder && item.canShare);
+
     if (isShared && !isArchive && !isSystemFolder && item.canShare) {
       try {
         const itemLink = item.isFolder
@@ -635,6 +637,13 @@ class ContextOptionsStore {
       //   : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
 
       this.publicRoomStore.setExternalLink(primaryLink);
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: AnalyticsEvents.FileShared,
+        id: item.id,
+        folderId: item.folderId,
+      });
     }
   };
 
@@ -772,7 +781,10 @@ class ContextOptionsStore {
 
   onClickRename = (item) => {
     const event = new CustomEvent(Events.RENAME, {
-      detail: { parentId: this.selectedFolderStore.id, context: "context_menu" },
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+      },
     });
 
     event.item = item;
@@ -1026,7 +1038,10 @@ class ContextOptionsStore {
 
   onSaveAsTemplate = (item) => {
     const event = new CustomEvent(Events.SAVE_AS_TEMPLATE, {
-      detail: { parentId: this.selectedFolderStore.id, context: "context_menu" },
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+      },
     });
     event.item = item;
     window.dispatchEvent(event);
@@ -1874,6 +1889,13 @@ class ContextOptionsStore {
     if (primaryLink) {
       copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));
       this.infoPanelStore?.setShareChanged(true);
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: AnalyticsEvents.FileShared,
+        id: item.id,
+        folderId: item.folderId,
+      });
     }
   };
 
@@ -1931,7 +1953,9 @@ class ContextOptionsStore {
   };
 
   askAI = async (item) => {
-    const skipAi = JSON.parse(localStorage.getItem(SKIP_AI_MODAL_KEY) ?? "false");
+    const skipAi = JSON.parse(
+      localStorage.getItem(SKIP_AI_MODAL_KEY) ?? "false",
+    );
 
     if (item.parentRoomType !== FolderType.FormRoom || skipAi) {
       this.filesActionsStore.askAIAction(item);
@@ -3522,7 +3546,10 @@ class ContextOptionsStore {
     }
 
     const event = new CustomEvent(Events.ROOM_CREATE, {
-      detail: { parentId: this.selectedFolderStore.id, context: "context_menu" },
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+      },
     });
 
     if (item && item.isFolder) {
@@ -3541,7 +3568,10 @@ class ContextOptionsStore {
     // }
 
     const event = new CustomEvent(Events.AGENT_CREATE, {
-      detail: { parentId: this.selectedFolderStore.id, context: "context_menu" },
+      detail: {
+        parentId: this.selectedFolderStore.id,
+        context: "context_menu",
+      },
     });
 
     window.dispatchEvent(event);
