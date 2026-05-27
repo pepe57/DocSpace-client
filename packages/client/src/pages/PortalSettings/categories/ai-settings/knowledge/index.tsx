@@ -330,6 +330,7 @@ const KnowledgeComponent = ({
                 <>
                   <PasswordInput
                     className={styles.passwordInput}
+                    inputName="knowledge_key"
                     placeholder={t("AISettings:EnterKey")}
                     inputValue={currentValue}
                     onChange={onChange}

@@ -34,6 +34,7 @@
  */
 
 import { makeAutoObservable, runInAction } from "mobx";
+import { AnalyticsEvents } from "@docspace/shared/enums";
 import axios from "axios";
 
 import {
@@ -180,6 +181,13 @@ class AISettingsStore {
     const newProvider = await createProvider(provider);
 
     this.aiProviders.push(newProvider);
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: AnalyticsEvents.AiProviderAdded,
+      id: newProvider.id,
+      type: newProvider.type,
+    });
 
     if (this.aiProviders.length === 1) {
       await this.initDefaultProvider();

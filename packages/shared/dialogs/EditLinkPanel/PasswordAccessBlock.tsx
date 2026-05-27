@@ -139,6 +139,7 @@ const PasswordAccessBlock: FC<PasswordAccessBlockProps> = ({
             >
               <PasswordInput
                 id="conversion-password"
+                inputName="link_password"
                 className="edit-link_password-input"
                 ref={passwordInputRef}
                 isDisabled={isLoading}

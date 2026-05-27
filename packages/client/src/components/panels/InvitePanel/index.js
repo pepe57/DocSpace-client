@@ -34,6 +34,7 @@
  */
 
 import { useEffect, useState, useMemo, useRef } from "react";
+import { AnalyticsEvents } from "@docspace/shared/enums";
 import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router";
@@ -432,6 +433,21 @@ const InvitePanel = ({
 
       if (!isRooms) {
         setIsNewUserByCurrentUser(true);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: AnalyticsEvents.UserInvited,
+          count: invitations.length,
+          context: "invite_panel",
+        });
+      } else {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: AnalyticsEvents.RoomShared,
+          roomId,
+          count: invitations.length,
+          context: "invite_panel",
+          parentId: selectedRoom?.parentId,
+        });
       }
       setIsLoading(false);
 

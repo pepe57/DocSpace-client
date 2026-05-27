@@ -155,6 +155,7 @@ export const useAdvancedSettings = (
                   <TextInput
                     type={InputType.text}
                     size={InputSize.base}
+                    name={`header_name_${index}`}
                     value={headerNames[index]}
                     onChange={(e) => onChangeHeaderName(index, e.target.value)}
                     placeholder={t("AISettings:EnterLabel")}
@@ -172,6 +173,7 @@ export const useAdvancedSettings = (
                   <TextInput
                     type={InputType.text}
                     size={InputSize.base}
+                    name={`header_value_${index}`}
                     value={headerValues[index]}
                     onChange={(e) => onChangeHeaderValue(index, e.target.value)}
                     placeholder={t("AISettings:EnterValue")}

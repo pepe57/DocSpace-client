@@ -174,6 +174,7 @@ const SectionHeaderContent = (props) => {
     deviceType,
     isNotPaidPeriod,
     isBackupPaid,
+    isFreeTariff,
   } = props;
 
   const navigate = useNavigate();
@@ -232,13 +233,13 @@ const SectionHeaderContent = (props) => {
     const arrayOfParams = getArrayOfParams();
 
     const serviceSubPageHeaders = {
-      "backup": "Common:Backup",
+      backup: isFreeTariff ? "Common:Backup" : t("Common:AdditionalBackup"),
       "ai-services": "Common:OrganizationAI",
       "disk-storage": "Common:AdditionalDiskStorage",
     };
 
     let number = 1;
-    if ( window.location.href.indexOf("disk-storage")) number=2
+    if (window.location.href.indexOf("disk-storage")) number = 2;
     const serviceSubPageHeader = serviceSubPageHeaders[arrayOfParams[number]];
 
     if (serviceSubPageHeader) {
@@ -291,6 +292,7 @@ const SectionHeaderContent = (props) => {
     state.header,
     state.isCategoryOrHeader,
     location.pathname,
+    isFreeTariff,
   ]);
 
   const onBackToParent = () => {
@@ -383,8 +385,8 @@ const SectionHeaderContent = (props) => {
             : t("DataImport")
       : !standalone && isPaymentPage
         ? t("Common:Billing")
-        // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites
-        : t(header, {
+        : // biome-ignore lint/plugin/no-dynamic-i18n-key: header is passed from route config; underlying keys are declared as literals at callsites
+          t(header, {
             organizationName: logoText,
             license: t("Common:EnterpriseLicense"),
             productName: getBrandName("ProductName"),
@@ -488,6 +490,7 @@ export default inject(
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
       isBackupPaid,
+      isFreeTariff,
     } = currentQuotaStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
     const { addUsers, removeAdmins } = setup.headerAction;
@@ -537,6 +540,7 @@ export default inject(
       deviceType,
       isNotPaidPeriod,
       isBackupPaid,
+      isFreeTariff,
     };
   },
 )(
