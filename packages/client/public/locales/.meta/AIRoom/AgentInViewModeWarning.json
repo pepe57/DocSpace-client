@@ -1,13 +1,13 @@
 {
   "key_path": "AgentInViewModeWarning",
-  "content": "You’re in <strong>view-only</strong> mode for this IA agent. You can see the results of {{aiChat}} activity from other users.",
-  "content_en_sha1_hash": "4db78f779fd217bbdeda15fc74b9e4ff8178a263",
-  "created_at": "2026-05-25T18:26:21.352Z",
-  "updated_at": "2026-05-25T18:35:44.079Z",
+  "content": "You’re in <strong>view-only</strong> mode for this AI agent. You can see the results of {{aiChat}} activity from other users.",
+  "content_en_sha1_hash": "c77a4b058698563aad2e6983c45e8f7c7ae61b26",
+  "created_at": "2026-05-26T17:09:23.365Z",
+  "updated_at": "2026-05-26T17:09:57.339Z",
   "comment": {
-    "text": "Info toast message appearing when a user has view-only access to an AI agent; includes an HTML tag for emphasis and a variable representing AI Chat activity.",
+    "text": "Info toast message appearing when a user has view-only access to an AI agent. It includes an HTML tag for emphasis and a variable representing the AI chat activity.",
     "is_auto": true,
-    "updated_at": "2026-05-25T18:35:44.079Z",
+    "updated_at": "2026-05-26T17:09:57.339Z",
     "model": "gemma4:26b"
   },
   "usage": [

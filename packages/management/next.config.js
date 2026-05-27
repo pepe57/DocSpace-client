@@ -88,6 +88,10 @@ const nextConfig = {
 
 if (process.env.DEPLOY) {
   nextConfig.output = "standalone";
+  nextConfig.env = {
+    NEXT_APP_LOCALES_DIR: path.resolve(__dirname, "public/locales"),
+    NEXT_SHARED_LOCALES_DIR: path.resolve(__dirname, "../../public/locales"),
+  };
 }
 
 if (isDev) {
@@ -100,8 +104,26 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 module.exports = withBundleAnalyzer({
-  webpack(config) {
+  webpack(config, { isServer }) {
     const isProduction = config.mode === "production";
+
+    if (isServer) {
+      const existingExternals = Array.isArray(config.externals)
+        ? config.externals
+        : config.externals
+          ? [config.externals]
+          : [];
+      config.externals = [
+        ...existingExternals,
+        ({ request }, callback) => {
+          if (request === "@onlyoffice/docspace-api-sdk") {
+            return callback(null, `commonjs ${request}`);
+          }
+          callback();
+        },
+      ];
+    }
+
     // Add resolve configuration for shared package
     config.resolve = {
       ...config.resolve,

@@ -220,6 +220,7 @@ const CSP = ({
       ) : null}
       <Container className="input-holder">
         <TextInput
+          name="allowed_domain"
           onChange={onChangeDomain}
           value={domain}
           placeholder={t("CSPInputPlaceholder")}

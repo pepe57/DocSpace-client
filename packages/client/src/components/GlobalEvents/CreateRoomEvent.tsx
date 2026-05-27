@@ -62,6 +62,7 @@ type CreateRoomEventProps = {
   visible: boolean;
   startRoomType: RoomsType;
   item: TFolder;
+  context: string;
   onClose: VoidFunction;
 
   processCreatingRoomFromData: FilesActionStore["processCreatingRoomFromData"];
@@ -74,6 +75,7 @@ type CreateRoomEventProps = {
   setSelectedRoomType: CreateEditRoomStore["setSelectedRoomType"];
   setIsLoading: CreateEditRoomStore["setIsLoading"];
   setOnClose: CreateEditRoomStore["setOnClose"];
+  setOpenContext: CreateEditRoomStore["setOpenContext"];
   isCorrectWatermark: CreateEditRoomStore["isCorrectWatermark"];
   confirmDialogIsLoading: CreateEditRoomStore["confirmDialogIsLoading"];
   isLoading: CreateEditRoomStore["isLoading"];
@@ -100,6 +102,7 @@ const CreateRoomEvent = ({
   title,
   visible,
   onClose,
+  context,
 
   fetchTags,
   setRoomParams,
@@ -112,6 +115,7 @@ const CreateRoomEvent = ({
   isLoading,
   setIsLoading,
   setOnClose,
+  setOpenContext,
   setCreateRoomDialogVisible,
   setCover,
 
@@ -179,6 +183,7 @@ const CreateRoomEvent = ({
   }, [fetchTagsAction]);
 
   useEffect(() => {
+    setOpenContext(context ?? "");
     setCreateRoomDialogVisible(true);
     return () => {
       setCreateRoomDialogVisible(false);
@@ -261,6 +266,7 @@ export default inject(
       isLoading,
       setIsLoading,
       setOnClose,
+      setOpenContext,
       confirmDialogIsLoading,
 
       isCorrectWatermark,
@@ -281,6 +287,7 @@ export default inject(
       isLoading,
       setIsLoading,
       setOnClose,
+      setOpenContext,
       confirmDialogIsLoading,
       setCreateRoomDialogVisible,
       fetchThirdPartyProviders,

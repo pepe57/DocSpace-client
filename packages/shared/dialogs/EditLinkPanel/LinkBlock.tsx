@@ -60,6 +60,7 @@ const LinkBlock: FC<LinkBlockProps> = (props) => {
 				scale
 				withBorder
 				isAutoFocussed
+				name="link_name"
 				size={InputSize.base}
 				type={InputType.text}
 				value={linkNameValue}

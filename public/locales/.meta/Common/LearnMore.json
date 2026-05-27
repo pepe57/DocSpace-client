@@ -3,7 +3,7 @@
   "content": "Learn more",
   "content_en_sha1_hash": "824d76b124e6289f372e2ff6bcba91e8939343bd",
   "created_at": "2025-05-19T21:30:46.111Z",
-  "updated_at": "2026-05-15T14:00:06.760Z",
+  "updated_at": "2026-05-27T14:11:50.681Z",
   "comment": {
     "text": "This is a link label that, when clicked, directs the user to a help page or settings page for more information about the current feature or setting.",
     "is_auto": true,
@@ -13,7 +13,7 @@
   "usage": [
     {
       "file_path": "/libs/ui-kit/billing/wallet/WalletContainer.tsx",
-      "line_number": 181,
+      "line_number": 188,
       "context": "fontWeight={600}\n href={walletHelpUrl}\n className={styles.learnMoreLink}\n dataTestId=\"wallet_learn_more_link\"\n >\n {t(\"LearnMore\")}\n </Link>\n ) : null}\n \n <div className={styles.balanceWrapper}>\n <BalanceAmount",
       "module": "/libs/ui-kit"
     },
@@ -85,7 +85,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/common/Customization/portal-renaming.js",
-      "line_number": 377,
+      "line_number": 408,
       "context": "target=\"_blank\"\n isHovered\n href={renamingSettingsUrl}\n dataTestId=\"portal_renaming_learn_more\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </div>\n {settingsBlock}\n <SaveCancelButtons",
       "module": "/packages/client"
     },
@@ -115,8 +115,8 @@
     },
     {
       "file_path": "/packages/client/src/pages/PortalSettings/categories/developer-tools/Main/index.tsx",
-      "line_number": 92,
-      "context": "icon={<DevToolsSvg />}\n title={t(\"Settings:RestAPI\")}\n description={t(\"Settings:RestAPIDescription\", { organizationName: getBrandName(\"OrganizationName\"), productName: getBrandName(\"ProductName\") })}\n url={apiBasicLink}\n color={globalColors.lightBlueMain}\n linkTitle={t(\"Common:LearnMore\")}\n isBlank\n />\n <Card\n icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}",
+      "line_number": 109,
+      "context": "organizationName: getBrandName(\"OrganizationName\"),\n productName: getBrandName(\"ProductName\"),\n })}\n url={apiBasicLink}\n color={globalColors.lightBlueMain}\n linkTitle={t(\"Common:LearnMore\")}\n isBlank\n />\n <Card\n icon={<EmbedSvg />}\n title={t(\"Settings:EmbedSDK\")}",
       "module": "/packages/client"
     },
     {
@@ -259,7 +259,7 @@
     },
     {
       "file_path": "/packages/client/src/pages/Profile/Section/Body/sub-components/main-profile/index.tsx",
-      "line_number": 326,
+      "line_number": 338,
       "context": "fontSize=\"13px\"\n href={becometranslatorUrl}\n target={LinkTarget.blank}\n dataTestId=\"language_becometranslator_link\"\n >\n {t(\"Common:LearnMore\")}\n </Link>\n ) : null}\n </Text>\n );",
       "module": "/packages/client"
     },
