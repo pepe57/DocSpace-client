@@ -38,7 +38,7 @@ import { getI18n, Trans } from "react-i18next";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
-import { ConflictResolveType } from "@docspace/shared/enums";
+import { AnalyticsEvents, ConflictResolveType } from "@docspace/shared/enums";
 import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   getFileInfo,
@@ -1349,6 +1349,13 @@ class UploadDataStore {
         if (nextFileIndex !== -1) {
           this.startSessionFunc(nextFileIndex, t, createNewIfExist);
         }
+      });
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: AnalyticsEvents.FileUploaded,
+        id: fileInfo.id,
+        parentId: fileInfo.folderId,
       });
 
       if (fileInfo.version > 2) {
