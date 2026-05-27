@@ -326,7 +326,6 @@ export enum AnalyticsEvents {
   FileDeleted = "file_deleted",
   UserInvited = "user_invited",
   AiProviderAdded = "ai_provider_added",
-  WelcomeModalCompleted = "welcome_modal_completed",
 }
 
 /**
