@@ -3081,6 +3081,7 @@ class FilesStore {
               item.fileExst,
               security,
               item.security,
+              item.id,
             );
 
             pluginFilesKeys &&
@@ -3096,6 +3097,7 @@ class FilesStore {
               item.fileExst,
               security,
               item.security,
+              item.id,
             );
 
             pluginFilesKeys &&
@@ -3111,6 +3113,7 @@ class FilesStore {
               item.fileExst,
               security,
               item.security,
+              item.id,
             );
 
             pluginFilesKeys &&
@@ -3440,6 +3443,7 @@ class FilesStore {
             null,
             security,
             item.security,
+            item.id,
           );
 
           pluginRoomsKeys &&
@@ -3588,6 +3592,7 @@ class FilesStore {
           null,
           security,
           item.security,
+          item.id,
         );
 
         pluginFoldersKeys &&
