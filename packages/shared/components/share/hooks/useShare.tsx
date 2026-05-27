@@ -373,14 +373,17 @@ export const useShare = ({
 
     copyShareLink(infoPanelSelection, link, t);
 
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: "roomType" in infoPanelSelection && infoPanelSelection.roomType !== undefined
-        ? AnalyticsEvents.RoomShared
-        : AnalyticsEvents.FileShared,
-      id: infoPanelSelection.id,
-      linkId: link.sharedTo?.id,
-    });
+    const isRoomItem = "roomType" in infoPanelSelection && infoPanelSelection.roomType !== undefined;
+    const isFileItem = "folderId" in infoPanelSelection;
+    if (isRoomItem || isFileItem) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: isRoomItem ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+        id: infoPanelSelection.id,
+        linkId: link.sharedTo?.id,
+        parentId: isFileItem ? infoPanelSelection.folderId : infoPanelSelection.parentId,
+      });
+    }
   };
 
   const getData = (link: TFileLink): ContextMenuModel[] => {

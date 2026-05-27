@@ -540,12 +540,12 @@ class ContextOptionsStore {
 
         copyToBuffer(itemLink.sharedTo.shareLink);
 
-        if (!item.isRoom) {
+        if (!item.isFolder && !item.isRoom) {
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
             event: AnalyticsEvents.FileShared,
             id: item.id,
-            folderId: item.folderId,
+            parentId: item.folderId,
           });
         }
 
@@ -636,12 +636,14 @@ class ContextOptionsStore {
 
       this.publicRoomStore.setExternalLink(primaryLink);
 
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
-        id: item.id,
-        folderId: item.folderId,
-      });
+      if (item.isRoom || !item.isFolder) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+          id: item.id,
+          parentId: item.isRoom ? item.parentId : item.folderId,
+        });
+      }
     }
   };
 
@@ -1888,12 +1890,14 @@ class ContextOptionsStore {
       copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));
       this.infoPanelStore?.setShareChanged(true);
 
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
-        id: item.id,
-        folderId: item.folderId,
-      });
+      if (item.isRoom || !item.isFolder) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: item.isRoom ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+          id: item.id,
+          parentId: item.isRoom ? item.parentId : item.folderId,
+        });
+      }
     }
   };
 

@@ -606,7 +606,7 @@ class FilesStore {
       window.dataLayer.push({
         event: AnalyticsEvents.FileCreated,
         id: file.id,
-        folderId: file.folderId,
+        parentId: file.folderId,
       });
 
       this.selectedFolderStore.setFilesCount(

@@ -221,7 +221,7 @@ const CreateEvent = ({
 							window.dataLayer.push({
 								event: AnalyticsEvents.FileCreated,
 								id: data.id,
-								folderId: data.folderId,
+								parentId: data.folderId,
 							});
 							if (isFrame && frameConfig?.events?.onEditorOpen) {
 								frameCallEvent({

@@ -580,6 +580,19 @@ class FilesActionStore {
             if (currentFolderId) {
               SocketHelper?.emit(SocketCommands.RefreshFolder, currentFolderId);
             }
+
+            if (fileIds.length) {
+              window.dataLayer = window.dataLayer || [];
+              selection
+                .filter((item) => fileIds.includes(item.id))
+                .forEach((file) => {
+                  window.dataLayer.push({
+                    event: AnalyticsEvents.FileDeleted,
+                    id: file.id,
+                    parentId: file.folderId,
+                  });
+                });
+            }
           })
           .finally(() => {
             clearActiveOperations(fileIds, folderIds);
@@ -859,12 +872,13 @@ class FilesActionStore {
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
 
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-              event: AnalyticsEvents.FileDownloaded,
-              fileIds: fileConvertIds.map((f) => f.key ?? f),
-              folderIds,
-            });
+            if (fileConvertIds.length) {
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                event: AnalyticsEvents.FileDownloaded,
+                fileIds: fileConvertIds.map((f) => f.key ?? f),
+              });
+            }
           }
 
           setSecondaryProgressBarData({
@@ -1107,6 +1121,9 @@ class FilesActionStore {
     const destFolderId = isRecycleBinFolder ? null : recycleBinFolderId;
 
     if (isFile) {
+      const fileParentId = this.filesStore.files.find(
+        (x) => x.id === itemId,
+      )?.folderId;
       addActiveItems([itemId], null, destFolderId);
       return deleteFile(itemId).then(async (res) => {
         const result = res[0];
@@ -1123,11 +1140,18 @@ class FilesActionStore {
         this.filesStore.removeFiles([itemId], null, null, destFolderId);
 
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: AnalyticsEvents.FileDeleted, id: itemId });
+        window.dataLayer.push({
+          event: AnalyticsEvents.FileDeleted,
+          id: itemId,
+          parentId: fileParentId,
+        });
       });
     }
     if (isRoom) {
       const items = Array.isArray(itemId) ? itemId : [itemId];
+      const roomParentId = this.filesStore.folders.find(
+        (x) => x.id === items[0],
+      )?.parentId;
       addActiveItems(null, items);
 
       this.setGroupMenuBlocked(true);
@@ -1157,8 +1181,11 @@ class FilesActionStore {
 
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
-            event: isAgentDeletion ? AnalyticsEvents.AgentDeleted : AnalyticsEvents.RoomDeleted,
+            event: isAgentDeletion
+              ? AnalyticsEvents.AgentDeleted
+              : AnalyticsEvents.RoomDeleted,
             ids: items,
+            parentId: roomParentId,
           });
 
           const currentFolderId = this.selectedFolderStore.id;
@@ -1502,6 +1529,9 @@ class FilesActionStore {
     const items = Array.isArray(folders)
       ? folders.map((x) => (x?.id ? x.id : x))
       : [folders.id];
+    const archiveParentId = Array.isArray(folders)
+      ? folders[0]?.parentId
+      : folders?.parentId;
 
     const operation = OPERATIONS_NAME.move;
 
@@ -1568,7 +1598,11 @@ class FilesActionStore {
             toastr.success(successTranslation);
 
             window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({ event: AnalyticsEvents.RoomArchived, ids: items });
+            window.dataLayer.push({
+              event: AnalyticsEvents.RoomArchived,
+              ids: items,
+              parentId: archiveParentId,
+            });
           })
           .then(() => {
             const clearBuffer =

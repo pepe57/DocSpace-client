@@ -88,14 +88,16 @@ export const ShareSelector: FC<ShareSelectorProps> = ({
 
 			onSubmit?.(list);
 
-			window.dataLayer = window.dataLayer || [];
-			window.dataLayer.push({
-				event: "roomType" in item && item.roomType !== undefined
-					? AnalyticsEvents.RoomShared
-					: AnalyticsEvents.FileShared,
-				id: item.id,
-				count: share.length,
-			});
+			const isRoomItem = "roomType" in item && item.roomType !== undefined;
+			const isFileItem = isFile(item);
+			if (isRoomItem || isFileItem) {
+				window.dataLayer = window.dataLayer || [];
+				window.dataLayer.push({
+					event: isRoomItem ? AnalyticsEvents.RoomShared : AnalyticsEvents.FileShared,
+					id: item.id,
+					parentId: isFileItem ? item.folderId : item.parentId,
+				});
+			}
 
 			toastr.success(t("Common:RoomCreateUser"));
 		} catch (error) {

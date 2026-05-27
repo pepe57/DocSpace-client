@@ -1355,7 +1355,7 @@ class UploadDataStore {
       window.dataLayer.push({
         event: AnalyticsEvents.FileUploaded,
         id: fileInfo.id,
-        folderId: fileInfo.folderId,
+        parentId: fileInfo.folderId,
       });
 
       if (fileInfo.version > 2) {

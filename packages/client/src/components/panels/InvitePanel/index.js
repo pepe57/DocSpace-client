@@ -446,6 +446,7 @@ const InvitePanel = ({
           roomId,
           count: invitations.length,
           context: "invite_panel",
+          parentId: selectedRoom?.parentId,
         });
       }
       setIsLoading(false);
