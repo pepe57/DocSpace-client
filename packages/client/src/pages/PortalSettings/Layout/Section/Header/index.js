@@ -174,6 +174,7 @@ const SectionHeaderContent = (props) => {
     deviceType,
     isNotPaidPeriod,
     isBackupPaid,
+    isFreeTariff,
   } = props;
 
   const navigate = useNavigate();
@@ -232,7 +233,7 @@ const SectionHeaderContent = (props) => {
     const arrayOfParams = getArrayOfParams();
 
     const serviceSubPageHeaders = {
-      "backup": "Common:Backup",
+      backup: isFreeTariff ? "Common:Backup" : "Common:AdditionalBackup",
       "ai-services": "Common:OrganizationAI",
       "disk-storage": "Common:AdditionalDiskStorage",
     };
@@ -291,6 +292,7 @@ const SectionHeaderContent = (props) => {
     state.header,
     state.isCategoryOrHeader,
     location.pathname,
+    isFreeTariff,
   ]);
 
   const onBackToParent = () => {
@@ -488,6 +490,7 @@ export default inject(
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
       isBackupPaid,
+      isFreeTariff,
     } = currentQuotaStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
     const { addUsers, removeAdmins } = setup.headerAction;
@@ -537,6 +540,7 @@ export default inject(
       deviceType,
       isNotPaidPeriod,
       isBackupPaid,
+      isFreeTariff,
     };
   },
 )(
