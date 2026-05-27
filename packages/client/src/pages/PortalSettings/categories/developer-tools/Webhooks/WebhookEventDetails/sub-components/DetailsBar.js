@@ -25,75 +25,27 @@
  * Creative Commons Attribution-ShareAlike 4.0 International License:
  * https://creativecommons.org/licenses/by-sa/4.0/legalcode
  *
- * This license applies only to such non-code elements and does not
- * modify or replace the licensing terms applicable to the Program's
- * source code, which remains licensed under the GNU Affero General
- * Public License v3.
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
  *
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
 import React from "react";
-import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/ui-kit/components/text";
-import {
-  mobile,
-  injectDefaultTheme,
-} from "@docspace/shared/utils";
+import { ColumnarInfoBar } from "@docspace/ui-kit/components/columnar-info-bar";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 
 import StatusBadge from "../../sub-components/StatusBadge";
 import { getTriggerTranslate } from "../../Webhooks.helpers";
 
-const BarWrapper = styled.div.attrs(injectDefaultTheme)`
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-
-  margin-top: 25px;
-
-  background: ${(props) => props.theme.client.settings.webhooks.barBackground};
-  border-radius: 3px;
-
-  .barItemHeader {
-    margin-bottom: 10px;
-    color: ${(props) => props.theme.client.settings.webhooks.color};
-  }
-`;
-
-const BarItem = styled.div`
-  box-sizing: border-box;
-  min-height: 76px;
-  padding: 16px;
-
-  @media ${mobile} {
-    flex-basis: 100%;
-  }
-`;
-
-const BarItemHeader = ({ children }) => (
-  <Text as="h3" fontSize="12px" fontWeight={600} className="barItemHeader">
-    {children}
-  </Text>
-);
-
-const FlexWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 const DetailsBar = ({ eventDetails }) => {
   const { t, i18n } = useTranslation(["Webhooks", "People"]);
 
-  const formattedDelivery = getCorrectDate(
-    i18n.language,
-    eventDetails.delivery,
-  );
+  const formattedDelivery = getCorrectDate(i18n.language, eventDetails.delivery);
   const formattedCreationTime = getCorrectDate(
     i18n.language,
     eventDetails.creationTime,
@@ -101,40 +53,18 @@ const DetailsBar = ({ eventDetails }) => {
 
   const trigger = getTriggerTranslate(eventDetails.trigger, t);
 
-  return (
-    <BarWrapper>
-      <BarItem>
-        <BarItemHeader>{t("People:UserStatus")}</BarItemHeader>
-        <FlexWrapper>
-          <StatusBadge status={eventDetails.status} />
-        </FlexWrapper>
-      </BarItem>
-      <BarItem>
-        <BarItemHeader>{t("EventID")}</BarItemHeader>
-        <Text isInline fontWeight={600}>
-          {eventDetails.id}
-        </Text>
-      </BarItem>
-      <BarItem>
-        <BarItemHeader>{t("EventType")}</BarItemHeader>
-        <Text isInline fontWeight={600}>
-          {trigger}
-        </Text>
-      </BarItem>
-      <BarItem>
-        <BarItemHeader>{t("EventTime")}</BarItemHeader>
-        <Text isInline fontWeight={600}>
-          {formattedCreationTime}
-        </Text>
-      </BarItem>
-      <BarItem>
-        <BarItemHeader>{t("DeliveryTime")}</BarItemHeader>
-        <Text isInline fontWeight={600}>
-          {formattedDelivery}
-        </Text>
-      </BarItem>
-    </BarWrapper>
-  );
+  const columns = [
+    {
+      label: t("People:UserStatus"),
+      value: <StatusBadge status={eventDetails.status} />,
+    },
+    { label: t("EventID"), value: eventDetails.id },
+    { label: t("EventType"), value: trigger },
+    { label: t("EventTime"), value: formattedCreationTime },
+    { label: t("DeliveryTime"), value: formattedDelivery },
+  ];
+
+  return <ColumnarInfoBar columns={columns} variant="neutral" />;
 };
 
 export default inject(({ webhooksStore }) => {
