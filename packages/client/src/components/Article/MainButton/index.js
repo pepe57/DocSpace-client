@@ -176,14 +176,16 @@ const ArticleMainButtonContent = (props) => {
     (e) => {
       const format = e.action || null;
 
-      const event = new Event(Events.CREATE);
-
       const isPDF = format === "pdf";
 
       if (isPDF && isMobile) {
         toastr.info(t("Common:MobileEditPdfNotAvailableInfo"));
         return;
       }
+
+      const event = new CustomEvent(Events.CREATE, {
+        detail: { parentId: currentFolderId, context: "sidebar", extension: format },
+      });
 
       const payload = {
         extension: format,
@@ -194,7 +196,7 @@ const ArticleMainButtonContent = (props) => {
 
       window.dispatchEvent(event);
     },
-    [setAction],
+    [setAction, currentFolderId],
   );
 
   const onCreateRoom = React.useCallback(() => {
@@ -203,9 +205,11 @@ const ArticleMainButtonContent = (props) => {
       return;
     }
 
-    const event = new Event(Events.ROOM_CREATE);
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: { parentId: currentFolderId, context: "sidebar" },
+    });
     window.dispatchEvent(event);
-  }, [isWarningRoomsDialog]);
+  }, [isWarningRoomsDialog, currentFolderId]);
 
   const onCreateAgent = React.useCallback(() => {
     if (isWarningRoomsDialog) {
@@ -213,9 +217,11 @@ const ArticleMainButtonContent = (props) => {
       return;
     }
 
-    const event = new Event(Events.AGENT_CREATE);
+    const event = new CustomEvent(Events.AGENT_CREATE, {
+      detail: { parentId: currentFolderId, context: "sidebar" },
+    });
     window.dispatchEvent(event);
-  }, [isWarningRoomsDialog]);
+  }, [isWarningRoomsDialog, currentFolderId]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
     if (isMobile) {
@@ -677,7 +683,7 @@ const ArticleMainButtonContent = (props) => {
   const onMainButtonClick = () => {
     if (isAIAgentsFolder) return onCreateAgent();
     if (!isAccountsPage) return onCreateRoom();
-    if (isContactsGroupsPage) return createGroup();
+    if (isContactsGroupsPage) return createGroup(currentFolderId, "sidebar");
   };
 
   const mainButtonText =

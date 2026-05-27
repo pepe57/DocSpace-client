@@ -283,6 +283,7 @@ const SearchComponent = ({
                 <>
                   <PasswordInput
                     className={styles.passwordInput}
+                    inputName="web_search_key"
                     placeholder={t("AISettings:EnterKey")}
                     inputValue={value}
                     onChange={onChange}
