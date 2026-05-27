@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "ආදරයෙන් පිළිගන්නවා, සහයෝගිතා පරියේෂයට!",
   "CollaboratorEmptyTitle": "කාමරය හිස් ය.",
-  "CreateAIAgentDescription": "ඔබේ පළමු {{aiAgent}} ගොඩනැගීම ආරම්භ කරන්න",
+  "CreateAIAgentDescription": "ඔබේ පළමු AI නියෝජිතයා ගොඩනැගීම ආරම්භ කරන්න",
   "CreateDocument": "නව ලේඛනයක් සාදන්න",
   "CreateDocumentDescription": "විශාල වචන සැකසීමේ හැකියාවන් උපයෝගි කර ගන්න.",
   "CreateForm": "නව PDF ආකෘතියක් සාදන්න",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} තවමත් ලබා ගත නොහැක",
   "EmptyAIAgentsAIEnabledUserDescription": "ඔබේ කණ්ඩායම ඔබව සහයෝගී වීමට ආරාධනා කළ පසු, {{aiAgents}} ලේඛන, දැනුම කළමනාකරණය සහ එදිනෙදා කාර්යයන් සමඟ උපකාර කිරීමට සූදානම්ව මෙහි දිස් වනු ඇත.",
   "EmptyAIAgentsDescription": "ඔබගේ කණ්ඩායම සඳහා පුද්ගලික සහායකයෙකු සකස් කිරීමට දැනුම පදනමක් එකතු කිරීමෙන්, වඩාත් සුදුසු මාදිලියක් තෝරා ගැනීමෙන්, සහ {{mcpServer}} සම්බන්ධ කිරීමෙන් කරන්න. ඔබේ සගයන් අරභයා සහයෝගයෙන් කටයුතු කිරීමට සහ නියෝජිතයාගේ chat හැකියාවන් උපරිමයෙන් භාවිතා කිරීමට ආරාධනා කරන්න.",
-  "EmptyAIAgentsTitle": "ඔබේ {{aiAgent}} සාදන්න",
+  "EmptyAIAgentsTitle": "ඔබේ AI නියෝජිතයා සාදන්න",
   "EmptyAIAgentsUserTitle": "{{aiAgents}} තවමත් ලබා ගත නොහැක",
   "EmptyFavoritesDescription": "ගොනු සහ ෆෝල්ඩර පහසුවෙන් ප්‍රවේශ විය හැකි සහ ළඟා විය හැකිව තබා ගැනීමට ඒවා තරු ලකුණු කරන්න.",
   "EmptyFavoritesTitle": "තවමත් ප්‍රියතමයන් නැත",

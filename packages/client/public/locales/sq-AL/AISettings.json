@@ -32,7 +32,7 @@
   "KnowledgeDisabledSuccess": "Baza e njohurive u çaktivizua me sukses",
   "KnowledgeEnabledSuccess": "Baza e njohurive u aktivizua me sukses",
   "KnowledgeKeyDescription": "Futni çelësin API të marrë nga ofruesi i bazës së njohurive.",
-  "KnowledgeSettingsDescription": "Aktivizoni një bazë të dijeve për {{aiAgents}}. Sistemi do të indeksojë dokumentet tuaja duke përdorur modelin {{modelName}} për të mbështetur kërkimin e bazuar në pyetje përmes të dhënave tuaja. Kjo veçori fokusohet në gjetjen e informacionit relevant, por nuk gjeneron përmbledhje apo nuk kryهن analiza globale.",
+  "KnowledgeSettingsDescription": "Aktivizoni një bazë të dijeve për seksionin \"{{aiAgents}}\". Sistemi do të indeksojë dokumentet tuaja duke përdorur modelin {{modelName}} për të mbështetur kërkimin e bazuar në pyetje përmes të dhënave tuaja. Kjo veçori fokusohet në gjetjen e informacionit relevant, por nuk gjeneron përmbledhje apo nuk kryهن analiza globale.",
   "ListModels": "Lista e modeleve",
   "MCPProductDescription": "{{organizationName}} {{productName}} {{mcpServer}} rregullon rrjedhët e punës të drejtuara nga IA, duke integruar LLM-t me sistemet e jashtme për menaxhim dokumentash efikas dhe të sigurt.",
   "MCPServerAdvancedSettingsHint": "Përdorni këtë seksion për të kaluar headers shtesë HTTP, si tokena autorizimi.",

@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "コラボレーションルームへようこそ",
   "CollaboratorEmptyTitle": "ルームは空です。",
-  "CreateAIAgentDescription": "最初の{{aiAgent}}の構築を開始しましょう。",
+  "CreateAIAgentDescription": "最初のAIエージェントの構築を始めましょう",
   "CreateDocument": "新規ドキュメントを作成する",
   "CreateDocumentDescription": "豊富なワープロ機能を活用しましょう。",
   "CreateForm": "新規PDFフォームを作成する",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} はまだご利用いただけません",
   "EmptyAIAgentsAIEnabledUserDescription": "チームがコラボレーションに招待すると、{{aiAgents}} がここに表示され、ドキュメント、ナレッジマネジメント、日常のタスクをサポートする準備が整います。",
   "EmptyAIAgentsDescription": "ナレッジベースを追加し、最適なモデルを選択し、{{mcpServer}}を接続することで、チーム用のパーソナライズされたアシスタントを設定します。同僚を招待して共同作業を行い、エージェントのチャット機能を最大限に活用しましょう。",
-  "EmptyAIAgentsTitle": "{{aiAgent}}を作成してください。",
+  "EmptyAIAgentsTitle": "AIエージェントを作成してください",
   "EmptyAIAgentsUserTitle": "{{aiAgents}} はまだ利用できません",
   "EmptyFavoritesDescription": "スターを付けたファイルやフォルダは、簡単にアクセスできるように手の届く範囲に保ちます。",
   "EmptyFavoritesTitle": "お気に入りはまだありません",

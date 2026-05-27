@@ -3,7 +3,7 @@
   "content": "Change",
   "content_en_sha1_hash": "64fbd995d3b6b156ee26ae3c03e6516434c34c12",
   "created_at": "2025-05-19T21:30:43.398Z",
-  "updated_at": "2026-05-15T14:00:06.589Z",
+  "updated_at": "2026-05-26T17:09:24.524Z",
   "comment": {
     "text": "This is a button label. It allows users to confirm a change, such as changing a room owner, portal owner, or user type.",
     "is_auto": true,
@@ -33,6 +33,24 @@
       "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
       "line_number": 140,
       "context": "type={LinkType.page}\n fontWeight={600}\n fontSize=\"13px\"\n onClick={onChangeDomainClick}\n >\n {t(\"Common:ChangeButton\")}\n </Link>\n <Badge\n className=\"paid-badge\"\n fontWeight=\"700\"\n backgroundColor={",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/dialogs/SocialAuthWelcomeDialog/index.tsx",
+      "line_number": 140,
+      "context": "type={LinkType.page}\n fontWeight={600}\n fontSize=\"13px\"\n onClick={onChangeDomainClick}\n >\n {t(\"Common:ChangeButton\")}\n </Link>\n <Badge\n className=\"paid-badge\"\n fontWeight=\"700\"\n backgroundColor={",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/MainBar/SocialAuthWelcomeBar.jsx",
+      "line_number": 71,
+      "context": "type={LinkType.page}\n fontSize=\"12px\"\n fontWeight=\"400\"\n onClick={onChangeDomainClick}\n >\n {t(\"Common:ChangeButton\")}\n </Link>\n </>\n ),\n },\n {",
+      "module": "/packages/client"
+    },
+    {
+      "file_path": "/packages/client/src/components/MainBar/SocialAuthWelcomeBar.jsx",
+      "line_number": 71,
+      "context": "type={LinkType.page}\n fontSize=\"12px\"\n fontWeight=\"400\"\n onClick={onChangeDomainClick}\n >\n {t(\"Common:ChangeButton\")}\n </Link>\n </>\n ),\n },\n {",
       "module": "/packages/client"
     },
     {

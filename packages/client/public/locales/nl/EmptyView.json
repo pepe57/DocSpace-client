@@ -1,7 +1,7 @@
 {
   "CollaborationRoomEmptyTitle": "Welkom in de Samenwerkingskamer",
   "CollaboratorEmptyTitle": "De kamer is leeg.",
-  "CreateAIAgentDescription": "Begin met het bouwen van je eerste {{aiAgent}}",
+  "CreateAIAgentDescription": "Begin met het bouwen van uw eerste AI-agent",
   "CreateDocument": "Maak een nieuw document",
   "CreateDocumentDescription": "Profiteer van de uitgebreide tekstverwerkingsfuncties.",
   "CreateForm": "Maak een nieuw PDF formulier",
@@ -23,7 +23,7 @@
   "EmptyAIAgentsAIDisabledUserTitle": "{{aiAgents}} zijn nog niet beschikbaar",
   "EmptyAIAgentsAIEnabledUserDescription": "Zodra uw team u uitnodigt om samen te werken, verschijnen hier {{aiAgents}}, klaar om te assisteren bij documenten, kennisbeheer en dagelijkse taken.",
   "EmptyAIAgentsDescription": "Stel een gepersonaliseerde assistent in voor uw team door een kennisbank toe te voegen, het ideale model te selecteren en een {{mcpServer}} te verbinden. Nodig uw collega's uit om samen te werken en de chatmogelijkheden van de agent optimaal te benutten.",
-  "EmptyAIAgentsTitle": "Maak je {{aiAgent}} aan",
+  "EmptyAIAgentsTitle": "Maak uw AI-agent aan",
   "EmptyAIAgentsUserTitle": "Geen {{aiAgents}} beschikbaar",
   "EmptyFavoritesDescription": "Sterren bestanden en mappen om ze gemakkelijk toegankelijk en binnen handbereik te houden.",
   "EmptyFavoritesTitle": "Nog geen favorieten",

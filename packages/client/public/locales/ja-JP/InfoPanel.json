@@ -85,7 +85,7 @@
   "LastUpdateInfo": "最終更新日",
   "LifetimeEnds": "有効期限が近づいています",
   "MembersEmptyScreenText": "メンバーの詳細はここをクリックしてご覧ください",
-  "NoAgent": "いいえ {{aiAgent}}",
+  "NoAgent": "AIエージェントなし",
   "NoRecordsFound": "レコードが見つかりません",
   "Properties": "プロパティ",
   "Resolution": "解像度",
