@@ -71,10 +71,9 @@ export async function loadTranslationsForLocale(
   config: {
     namespaces: readonly string[];
     appLocalesDir: string;
-    sharedLocalesDir: string;
   },
 ): Promise<TTranslations> {
-  const { namespaces, appLocalesDir, sharedLocalesDir } = config;
+  const { namespaces, appLocalesDir } = config;
 
   const loadNs = async (ns: string, dir: string, lng: string) => {
     const data =
@@ -87,7 +86,7 @@ export async function loadTranslationsForLocale(
   const loadAllNsForLng = async (lng: string) => {
     const [appEntries, commonEntry] = await Promise.all([
       Promise.all(namespaces.map((ns) => loadNs(ns, appLocalesDir, lng))),
-      loadNs("Common", sharedLocalesDir, lng),
+      loadNs("Common", appLocalesDir, lng),
     ]);
     return new Map([...appEntries, commonEntry]);
   };

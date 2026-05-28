@@ -33,42 +33,38 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+const fs = require("fs");
 const path = require("path");
 
-// Set custom environment variables here before requiring server.js
-process.env.NODE_ENV = process.env.NODE_ENV || "production";
-process.env.PORT = process.env.PORT || "5099";
+/**
+ * Copies Common.json from a single source workspace locales directory into a
+ * target app's public/locales/<lng>/ tree for every locale that exists in the
+ * source. SSR apps need their own copy of Common.json so that the runtime
+ * loader can read it from appLocalesDir without depending on the deploy layout.
+ */
+function copyCommonLocales(sourceLocalesDir, targetLocalesDir) {
+  if (!fs.existsSync(sourceLocalesDir)) {
+    console.warn(
+      `[copyCommonLocales] Source dir not found: ${sourceLocalesDir}`,
+    );
+    return 0;
+  }
 
-process.env.NEXT_APP_LOCALES_DIR ||= path.join(
-  __dirname,
-  "packages/sdk/public/locales",
-);
+  const locales = fs
+    .readdirSync(sourceLocalesDir, { withFileTypes: true })
+    .filter((d) => d.isDirectory() && !d.name.startsWith("."))
+    .map((d) => d.name);
 
-// You can pass command line arguments to the server.js process
-// by setting them before requiring the file
-const argv = (key) => {
-  if (process.argv.includes(`--${key}`)) return true;
-
-  return (
-    process.argv.find((arg) => arg.startsWith(`--${key}=`))?.split("=")[1] ||
-    null
-  );
-};
-
-// Set port from command line arguments if provided
-if (argv("app.port")) {
-  process.env.PORT = argv("app.port");
+  let copied = 0;
+  for (const lng of locales) {
+    const src = path.join(sourceLocalesDir, lng, "Common.json");
+    if (!fs.existsSync(src)) continue;
+    const destDir = path.join(targetLocalesDir, lng);
+    fs.mkdirSync(destDir, { recursive: true });
+    fs.copyFileSync(src, path.join(destDir, "Common.json"));
+    copied += 1;
+  }
+  return copied;
 }
 
-// Set hostname from command line arguments if provided
-if (argv("app.hostname")) {
-  process.env.HOSTNAME = argv("app.hostname");
-}
-
-console.log(
-  `Starting server with environment: NODE_ENV=${process.env.NODE_ENV}, PORT=${process.env.PORT}` +
-    (process.env.HOSTNAME ? `, HOSTNAME=${process.env.HOSTNAME}` : ""),
-);
-
-// Now require server.js which will use the environment variables we just set
-require("./packages/sdk/server.js");
+module.exports = copyCommonLocales;

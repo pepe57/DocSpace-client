@@ -164,7 +164,6 @@ export default async function RootLayout({
   const translations = await loadTranslationsForLocale(locale || "en", {
     namespaces: LOGIN_NAMESPACES,
     appLocalesDir: process.env.NEXT_APP_LOCALES_DIR ?? path.join(process.cwd(), "public/locales"),
-    sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
   });
 
   const dirClass = getDirectionByLanguage(locale || "en");
