@@ -1,5 +1,6 @@
 {
-  "GeneratedPassword": "Contraseña generada\n",
   "ProductNameDetail": "Nombre de {{productName}}",
+  "SetEmailPassword": "Establecer contraseña",
+  "WelcomeSubtitle": "Su espacio se ha creado correctamente. Revise los detalles de su perfil y empiece a trabajar.",
   "YourProfileDetails": "Los detalles de su perfil"
 }

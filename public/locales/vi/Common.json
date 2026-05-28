@@ -80,6 +80,7 @@
   "AIDisabledInfoBlockUserDescription": "Các khả năng AI hiện đang bị tắt, điều này có nghĩa là agent này không thể xử lý các cuộc trò chuyện hoặc tác vụ. Để quay trở lại hoạt động, hãy yêu cầu quản trị viên {{productName}} của bạn bật lại các tính năng AI.",
   "AIFeature": "Tính năng AI",
   "AIFeaturesAreCurrentlyDisabled": "Các tính năng AI hiện đang bị tắt.",
+  "AIGenerateDocumentDescription": "Một tài liệu mới sẽ được tạo và mở trong trình soạn thảo. AI sau đó sẽ viết nội dung được tạo trực tiếp vào tài liệu.",
   "AIGetStartedStep1Description": "Chuyển tín dụng từ ví {{productName}} của bạn sang AI {{organizationName}}. Nếu ví của bạn trống, vui lòng nạp tiền trước. Tín dụng không bao giờ hết hạn.",
   "AIGetStartedStep1Title": "Nạp tiền vào số dư AI của bạn",
   "AIGetStartedStep2Description": "Sau khi thêm tín dụng, tất cả các tính năng AI sẽ khả dụng ngay lập tức. Không yêu cầu thiết lập bổ sung.",

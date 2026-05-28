@@ -1,5 +1,6 @@
 {
-  "GeneratedPassword": "Parolă generată\n",
   "ProductNameDetail": "Denumire {{productName}}",
+  "SetEmailPassword": "Setare parolă",
+  "WelcomeSubtitle": "Spațiul dvs. a fost creat cu succes. Examinați detaliile profilului dvs. și începeți să lucrați.",
   "YourProfileDetails": "Detaliile profilului dvs"
 }

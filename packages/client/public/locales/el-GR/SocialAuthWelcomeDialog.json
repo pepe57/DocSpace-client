@@ -1,4 +1,6 @@
 {
-  "GeneratedPassword": "Δημιουργημένος κωδικός πρόσβασης",
-  "ProductNameDetail": "{{productName}} όνομα"
+  "ProductNameDetail": "{{productName}} όνομα",
+  "SetEmailPassword": "Ορισμός κωδικού πρόσβασης",
+  "WelcomeSubtitle": "Ο χώρος σας δημιουργήθηκε με επιτυχία. Ελέγξτε τα στοιχεία του προφίλ σας και ξεκινήστε να εργάζεστε.",
+  "YourProfileDetails": "Λεπτομέρειες προφίλ σας"
 }
