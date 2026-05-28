@@ -1,4 +1,6 @@
 {
   "ProductNameDetail": "Emri i {{productName}}",
-  "SetEmailPassword": "Set password"
+  "SetEmailPassword": "Vendos fjalëkalimin",
+  "WelcomeSubtitle": "Hapësira juaj u krijua me sukses. Rishikoni detajet e profilit tuaj dhe filloni të punoni.",
+  "YourProfileDetails": "Detajet e profilit tuaj"
 }

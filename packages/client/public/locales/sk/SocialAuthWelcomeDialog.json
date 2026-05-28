@@ -1,4 +1,6 @@
 {
   "ProductNameDetail": "{{productName}} meno",
-  "SetEmailPassword": "Set password"
+  "SetEmailPassword": "Nastaviť heslo",
+  "WelcomeSubtitle": "Váš priestor bol úspešne vytvorený. Skontrolujte podrobnosti svojho profilu a začnite pracovať.",
+  "YourProfileDetails": "Podrobnosti profilu"
 }

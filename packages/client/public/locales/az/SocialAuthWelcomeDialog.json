@@ -1,4 +1,6 @@
 {
   "ProductNameDetail": "{{productName}} adı",
-  "SetEmailPassword": "Set password"
+  "SetEmailPassword": "Şifrə təyin et",
+  "WelcomeSubtitle": "Sahəniz uğurla yaradıldı. Profil məlumatlarınızı nəzərdən keçirin və işə başlayın.",
+  "YourProfileDetails": "Profil məlumatlarınız"
 }

@@ -1,4 +1,6 @@
 {
   "ProductNameDetail": "اسم {{productName}}",
-  "SetEmailPassword": "Set password"
+  "SetEmailPassword": "تعيين كلمة المرور",
+  "WelcomeSubtitle": "تم إنشاء مساحتك بنجاح. راجع تفاصيل ملفك الشخصي وابدأ العمل.",
+  "YourProfileDetails": "تفاصيل ملفك الشخصي"
 }

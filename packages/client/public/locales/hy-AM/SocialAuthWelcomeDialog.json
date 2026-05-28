@@ -1,5 +1,6 @@
 {
   "ProductNameDetail": "{{productName}} անուն",
-  "SetEmailPassword": "Set password",
+  "SetEmailPassword": "Սահմանել գաղտնաբառ",
+  "WelcomeSubtitle": "Ձեր տարածքը հաջողությամբ ստեղծվել է: Ստուգեք ձեր հաշվի մանրամասները և սկսեք աշխատել:",
   "YourProfileDetails": "Ձեր հաշվի մանրամասները"
 }

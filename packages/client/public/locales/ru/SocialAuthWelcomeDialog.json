@@ -1,5 +1,6 @@
 {
   "ProductNameDetail": "{{productName}} имя",
-  "SetEmailPassword": "Set password",
+  "SetEmailPassword": "Задать пароль",
+  "WelcomeSubtitle": "Ваше пространство успешно создано. Ознакомьтесь с данными профиля и приступите к работе.",
   "YourProfileDetails": "Данные вашего профиля"
 }

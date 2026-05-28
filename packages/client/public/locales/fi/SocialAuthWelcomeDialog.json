@@ -1,4 +1,6 @@
 {
   "ProductNameDetail": "{{productName}} nimi",
-  "SetEmailPassword": "Set password"
+  "SetEmailPassword": "Aseta salasana",
+  "WelcomeSubtitle": "Tilasi on luotu onnistuneesti. Tarkista profiilitietosi ja aloita työskentely.",
+  "YourProfileDetails": "Profiilitietosi"
 }

@@ -1,5 +1,6 @@
 {
   "ProductNameDetail": "Име {{productName}}",
-  "SetEmailPassword": "Set password",
+  "SetEmailPassword": "Поставите лозинку",
+  "WelcomeSubtitle": "Ваш простор је успешно креиран. Прегледајте детаље вашег профила и почните да радите.",
   "YourProfileDetails": "Детаљи вашег профила"
 }

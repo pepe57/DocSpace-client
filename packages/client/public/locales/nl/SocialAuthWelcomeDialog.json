@@ -1,4 +1,6 @@
 {
   "ProductNameDetail": "{{productName}} naam",
-  "SetEmailPassword": "Set password"
+  "SetEmailPassword": "Wachtwoord instellen",
+  "WelcomeSubtitle": "Uw ruimte is succesvol aangemaakt. Bekijk uw profielgegevens en begin met werken.",
+  "YourProfileDetails": "Uw profielgegevens"
 }
