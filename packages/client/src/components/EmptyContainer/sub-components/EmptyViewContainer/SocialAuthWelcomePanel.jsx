@@ -37,6 +37,7 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 
 import { ColumnarInfoBar } from "@docspace/ui-kit/components/columnar-info-bar";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { Link, LinkType } from "@docspace/ui-kit/components/link";
 import { getBrandName } from "@docspace/shared/constants/brands";
 import PencilSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
@@ -61,35 +62,13 @@ const SocialAuthWelcomePanel = ({
       value: (
         <>
           <span>{domain}</span>
-          <button
-            type="button"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: 0,
-              flexShrink: 0,
-            }}
+          <IconButton
+            iconName={PencilSvgUrl}
+            size={12}
             onClick={onChangeDomainClick}
             aria-label={t("Common:ChangeButton")}
-          >
-            <span
-              style={{
-                display: "inline-block",
-                width: "12px",
-                height: "12px",
-                flexShrink: 0,
-                backgroundColor: "var(--gray)",
-                maskImage: `url(${PencilSvgUrl})`,
-                WebkitMaskImage: `url(${PencilSvgUrl})`,
-                maskSize: "contain",
-                maskRepeat: "no-repeat",
-                maskPosition: "center",
-              }}
-            />
-          </button>
+            isFill
+          />
         </>
       ),
     },
