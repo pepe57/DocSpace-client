@@ -33,20 +33,30 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
+const fs = require("fs");
 const path = require("path");
 
 // Set custom environment variables here before requiring server.js
 process.env.NODE_ENV = process.env.NODE_ENV || "production";
 process.env.PORT = process.env.PORT || "5015";
 
+const pickExistingDir = (candidates) => {
+  for (const dir of candidates) {
+    try {
+      if (fs.statSync(dir).isDirectory()) return dir;
+    } catch {}
+  }
+  return candidates[0];
+};
+
 process.env.NEXT_APP_LOCALES_DIR ||= path.join(
   __dirname,
   "packages/management/public/locales",
 );
-process.env.NEXT_SHARED_LOCALES_DIR ||= path.join(
-  __dirname,
-  "../public/locales",
-);
+process.env.NEXT_SHARED_LOCALES_DIR ||= pickExistingDir([
+  path.join(__dirname, "../../../public/locales"),
+  path.join(__dirname, "../public/locales"),
+]);
 
 // You can pass command line arguments to the server.js process
 // by setting them before requiring the file
