@@ -1,4 +1,6 @@
 {
   "GeneratedPassword": "Ģenerēta parole",
-  "ProductNameDetail": "{{productName}} nosaukums"
+  "ProductNameDetail": "{{productName}} nosaukums",
+  "SetEmailPassword": "Set password",
+  "WelcomeSubtitle": "Your space has been created successfully. Review your profile details and start working."
 }
