@@ -309,26 +309,6 @@ export const enum Events {
 }
 
 /**
- * Enum for GTM dataLayer analytics events.
- * @readonly
- */
-export enum AnalyticsEvents {
-  RoomCreated = "room_created",
-  RoomDeleted = "room_deleted",
-  RoomShared = "room_shared",
-  RoomArchived = "room_archived",
-  AgentCreated = "agent_created",
-  AgentDeleted = "agent_deleted",
-  FileCreated = "file_created",
-  FileUploaded = "file_uploaded",
-  FileDownloaded = "file_downloaded",
-  FileShared = "file_shared",
-  FileDeleted = "file_deleted",
-  UserInvited = "user_invited",
-  AiProviderAdded = "ai_provider_added",
-}
-
-/**
  * Enum for feed action types.
  * @readonly
  */
@@ -362,7 +342,6 @@ export const enum TariffState {
   Delay = 2,
   NotPaid = 3,
 }
-
 
 /**
  * Enum for payment method status.
@@ -705,3 +684,4 @@ export enum VectorizationStatus {
   Completed,
   Failed,
 }
+
