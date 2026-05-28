@@ -1,7 +1,5 @@
 {
-  "GeneratedPassword": "Mot de passe généré\n",
   "ProductNameDetail": "Nom de {{productName}}",
   "SetEmailPassword": "Set password",
-  "WelcomeSubtitle": "Your space has been created successfully. Review your profile details and start working.",
   "YourProfileDetails": "Les détails de votre profil"
 }

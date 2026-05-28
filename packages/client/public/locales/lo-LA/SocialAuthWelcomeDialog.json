@@ -1,6 +1,4 @@
 {
-  "GeneratedPassword": "ລະຫັດຜ່ານທີ່ສ້າງຂຶ້ນ",
   "ProductNameDetail": "ຊື່ຜະລິດຕະພັນ {{productName}}",
-  "SetEmailPassword": "Set password",
-  "WelcomeSubtitle": "Your space has been created successfully. Review your profile details and start working."
+  "SetEmailPassword": "Set password"
 }
