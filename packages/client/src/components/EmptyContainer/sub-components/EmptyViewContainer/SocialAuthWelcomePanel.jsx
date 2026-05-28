@@ -75,7 +75,20 @@ const SocialAuthWelcomePanel = ({
             onClick={onChangeDomainClick}
             aria-label={t("Common:ChangeButton")}
           >
-            <img src={PencilSvgUrl} width="12" height="12" alt="" />
+            <span
+              style={{
+                display: "inline-block",
+                width: "12px",
+                height: "12px",
+                flexShrink: 0,
+                backgroundColor: "var(--gray)",
+                maskImage: `url(${PencilSvgUrl})`,
+                WebkitMaskImage: `url(${PencilSvgUrl})`,
+                maskSize: "contain",
+                maskRepeat: "no-repeat",
+                maskPosition: "center",
+              }}
+            />
           </button>
         </>
       ),
@@ -94,10 +107,11 @@ const SocialAuthWelcomePanel = ({
       label: t("Common:Password"),
       value: (
         <Link
-          type={LinkType.page}
+          type={LinkType.action}
           fontSize="13px"
           fontWeight="600"
-          textDecoration="underline dashed"
+          textDecoration="underline"
+          color="var(--accent-main)"
           onClick={onChangePasswordClick}
         >
           {t("SocialAuthWelcomeDialog:SetEmailPassword")}
@@ -119,3 +133,4 @@ const SocialAuthWelcomePanel = ({
 export default withTranslation(["SocialAuthWelcomeDialog", "Common"])(
   SocialAuthWelcomePanel,
 );
+
