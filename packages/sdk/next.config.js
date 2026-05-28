@@ -91,25 +91,8 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_E2E_TEST: process.env.E2E_TEST,
   },
-  webpack: (config, { isServer }) => {
+  webpack: (config) => {
     const isProduction = config.mode === "production";
-
-    if (isServer) {
-      const existingExternals = Array.isArray(config.externals)
-        ? config.externals
-        : config.externals
-          ? [config.externals]
-          : [];
-      config.externals = [
-        ...existingExternals,
-        ({ request }, callback) => {
-          if (request === "@onlyoffice/docspace-api-sdk") {
-            return callback(null, `commonjs ${request}`);
-          }
-          callback();
-        },
-      ];
-    }
 
     // Add resolve configuration for shared package
     config.resolve = {
@@ -281,11 +264,6 @@ const nextConfig = {
 
 if (process.env.DEPLOY) {
   nextConfig.output = "standalone";
-  nextConfig.env = {
-    ...nextConfig.env,
-    NEXT_APP_LOCALES_DIR: path.resolve(__dirname, "public/locales"),
-    NEXT_SHARED_LOCALES_DIR: path.resolve(__dirname, "../../public/locales"),
-  };
 }
 
 if (isDev) {
