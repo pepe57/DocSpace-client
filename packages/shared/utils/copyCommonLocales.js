@@ -64,6 +64,11 @@ function copyCommonLocales(sourceLocalesDir, targetLocalesDir) {
     fs.copyFileSync(src, path.join(destDir, "Common.json"));
     copied += 1;
   }
+
+  console.log(
+    `[copyCommonLocales] Copied Common.json for ${copied} locale(s) into ${targetLocalesDir}`,
+  );
+
   return copied;
 }
 
