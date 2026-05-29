@@ -503,8 +503,13 @@ export default inject(
     const isPublicRoomType = isPublicRoom || isCustomRoom || isFormRoom;
 
     const { isRootFolder } = selectedFolderStore;
-    const { isExternalShareRestricted, defaultShareLinkInternal } =
-      filesStore.filesSettingsStore;
+    const {
+      isExternalShareRestricted: isExternalShareRestrictedRaw,
+      externalShareApplyToRooms,
+      defaultShareLinkInternal,
+    } = filesStore.filesSettingsStore;
+    const isExternalShareRestricted =
+      isExternalShareRestrictedRaw && externalShareApplyToRooms;
 
     return {
       infoPanelSelection: { ...infoPanelRoomSelection, isRoom: true },
