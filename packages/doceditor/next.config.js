@@ -75,7 +75,7 @@ const nextConfig = {
   basePath: "/doceditor",
   outputFileTracingRoot: monorepoRoot,
   outputFileTracingIncludes: {
-    "/*": [docspaceApiSdkTraceGlob],
+    "/*": [docspaceApiSdkTraceGlob, "public/locales/*/*.json", "../../public/locales/*/Common.json"],
   },
   typescript: {
     ignoreBuildErrors: true,
