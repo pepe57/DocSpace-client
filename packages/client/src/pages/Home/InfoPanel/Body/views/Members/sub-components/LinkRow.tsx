@@ -373,7 +373,9 @@ export default inject<TStore, Pick<LinkRowProps, "item">>(
     const isExternalShareRestricted =
       isShareRestricted &&
       blockExistingLinksOnRestrict &&
-      (item.isRoom ? externalShareApplyToRooms : externalShareApplyToDocuments);
+      (item.isRoom || item.inRoom
+        ? externalShareApplyToRooms
+        : externalShareApplyToDocuments);
 
     return {
       isArchiveFolder: isArchiveFolderRoot,

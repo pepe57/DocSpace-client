@@ -567,7 +567,7 @@ export default function withFileActions(WrappedFileItem) {
       const isExternalShareRestricted =
         isShareRestricted &&
         blockExistingLinksOnRestrict &&
-        (item.isRoom
+        (item.isRoom || item.inRoom
           ? externalShareApplyToRooms
           : externalShareApplyToDocuments);
 
