@@ -250,7 +250,11 @@ export default inject(
     const { deleteThirdParty, fetchThirdPartyProviders, getThirdPartyIcon } =
       filesSettingsStore.thirdPartyStore;
 
-    const { enableThirdParty, isExternalShareRestricted } = filesSettingsStore;
+    const {
+      enableThirdParty,
+      isExternalShareRestricted,
+      externalShareApplyToRooms,
+    } = filesSettingsStore;
 
     const {
       createRoomConfirmDialogVisible,
@@ -302,7 +306,7 @@ export default inject(
       setProcessCreatingRoomFromData,
       getThirdPartyIcon,
       isDefaultRoomsQuotaSet,
-      isExternalShareRestricted,
+      isExternalShareRestricted: isExternalShareRestricted && externalShareApplyToRooms,
     };
   },
 )(observer(CreateRoomEvent));
