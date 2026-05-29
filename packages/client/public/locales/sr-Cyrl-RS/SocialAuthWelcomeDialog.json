@@ -1,5 +1,6 @@
 {
-  "GeneratedPassword": "Генерисана лозинка",
   "ProductNameDetail": "Име {{productName}}",
+  "SetEmailPassword": "Поставите лозинку",
+  "WelcomeSubtitle": "Ваш простор је успешно креиран. Прегледајте детаље вашег профила и почните да радите.",
   "YourProfileDetails": "Детаљи вашег профила"
 }

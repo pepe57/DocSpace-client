@@ -1,4 +1,6 @@
 {
-  "GeneratedPassword": "Oluşturulan şifre",
-  "ProductNameDetail": "{{productName}} adı"
+  "ProductNameDetail": "{{productName}} adı",
+  "SetEmailPassword": "Şifre belirle",
+  "WelcomeSubtitle": "Alanınız başarıyla oluşturuldu. Profil bilgilerinizi inceleyin ve çalışmaya başlayın.",
+  "YourProfileDetails": "Profil bilgileriniz"
 }

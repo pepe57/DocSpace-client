@@ -1,4 +1,6 @@
 {
-  "GeneratedPassword": "Mật khẩu đã tạo",
-  "ProductNameDetail": "Tên {{productName}}"
+  "ProductNameDetail": "Tên {{productName}}",
+  "SetEmailPassword": "Đặt mật khẩu",
+  "WelcomeSubtitle": "Không gian của bạn đã được tạo thành công. Xem lại thông tin hồ sơ của bạn và bắt đầu làm việc.",
+  "YourProfileDetails": "Thông tin hồ sơ của bạn"
 }

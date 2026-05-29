@@ -107,7 +107,6 @@ export default async function RootLayout({
   const initialLocaleResources = await loadTranslationsForLocale(locale, {
     namespaces: [],
     appLocalesDir: process.env.NEXT_APP_LOCALES_DIR ?? path.join(process.cwd(), "public/locales"),
-    sharedLocalesDir: process.env.NEXT_SHARED_LOCALES_DIR ?? path.join(process.cwd(), "../../public/locales"),
   });
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as

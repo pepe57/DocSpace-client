@@ -24,12 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { readFile } from "fs/promises";
+import { readFile, stat } from "fs/promises";
 import path from "path";
 
 import type { TTranslations } from "@docspace/ui-kit/providers/translation";
 
 const fileCache = new Map<string, Promise<Record<string, string> | null>>();
+const warnedMissingDirs = new Set<string>();
+
+const warnIfDirMissing = async (filePath: string) => {
+  const dir = path.dirname(filePath);
+  if (warnedMissingDirs.has(dir)) return;
+  const exists = await stat(dir)
+    .then((s) => s.isDirectory())
+    .catch(() => false);
+  if (!exists) {
+    warnedMissingDirs.add(dir);
+    console.warn(
+      `[ssr-translation-loader] Locale directory does not exist: ${dir}`,
+    );
+  }
+};
 
 const tryReadJson = (filePath: string): Promise<Record<string, string> | null> => {
   const cached = fileCache.get(filePath);
@@ -37,8 +52,10 @@ const tryReadJson = (filePath: string): Promise<Record<string, string> | null> =
 
   const promise = readFile(filePath, "utf-8")
     .then((content) => JSON.parse(content) as Record<string, string>)
-    .catch((err: NodeJS.ErrnoException) => {
-      if (err.code !== "ENOENT") {
+    .catch(async (err: NodeJS.ErrnoException) => {
+      if (err.code === "ENOENT") {
+        await warnIfDirMissing(filePath);
+      } else {
         console.warn(`Failed to load translation ${filePath}:`, err);
       }
       fileCache.delete(filePath);
@@ -54,10 +71,9 @@ export async function loadTranslationsForLocale(
   config: {
     namespaces: readonly string[];
     appLocalesDir: string;
-    sharedLocalesDir: string;
   },
 ): Promise<TTranslations> {
-  const { namespaces, appLocalesDir, sharedLocalesDir } = config;
+  const { namespaces, appLocalesDir } = config;
 
   const loadNs = async (ns: string, dir: string, lng: string) => {
     const data =
@@ -70,7 +86,7 @@ export async function loadTranslationsForLocale(
   const loadAllNsForLng = async (lng: string) => {
     const [appEntries, commonEntry] = await Promise.all([
       Promise.all(namespaces.map((ns) => loadNs(ns, appLocalesDir, lng))),
-      loadNs("Common", sharedLocalesDir, lng),
+      loadNs("Common", appLocalesDir, lng),
     ]);
     return new Map([...appEntries, commonEntry]);
   };

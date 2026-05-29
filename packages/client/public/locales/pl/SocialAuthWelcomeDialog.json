@@ -1,4 +1,6 @@
 {
-  "GeneratedPassword": "Wygenerowane hasło",
-  "ProductNameDetail": "{{productName}} nazwa"
+  "ProductNameDetail": "{{productName}} nazwa",
+  "SetEmailPassword": "Ustaw hasło",
+  "WelcomeSubtitle": "Twoja przestrzeń została pomyślnie utworzona. Sprawdź szczegóły swojego profilu i zacznij pracować.",
+  "YourProfileDetails": "Szczegóły profilu"
 }

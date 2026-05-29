@@ -1,4 +1,6 @@
 {
-  "GeneratedPassword": "كلمة مرور مُنشأة",
-  "ProductNameDetail": "اسم {{productName}}"
+  "ProductNameDetail": "اسم {{productName}}",
+  "SetEmailPassword": "تعيين كلمة المرور",
+  "WelcomeSubtitle": "تم إنشاء مساحتك بنجاح. راجع تفاصيل ملفك الشخصي وابدأ العمل.",
+  "YourProfileDetails": "تفاصيل ملفك الشخصي"
 }

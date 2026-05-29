@@ -1,4 +1,6 @@
 {
-  "GeneratedPassword": "Gegenereerd wachtwoord",
-  "ProductNameDetail": "{{productName}} naam"
+  "ProductNameDetail": "{{productName}} naam",
+  "SetEmailPassword": "Wachtwoord instellen",
+  "WelcomeSubtitle": "Uw ruimte is succesvol aangemaakt. Bekijk uw profielgegevens en begin met werken.",
+  "YourProfileDetails": "Uw profielgegevens"
 }

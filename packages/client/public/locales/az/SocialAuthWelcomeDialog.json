@@ -1,4 +1,6 @@
 {
-  "GeneratedPassword": "Yaranmış şifrə",
-  "ProductNameDetail": "{{productName}} adı"
+  "ProductNameDetail": "{{productName}} adı",
+  "SetEmailPassword": "Şifrə təyin et",
+  "WelcomeSubtitle": "Sahəniz uğurla yaradıldı. Profil məlumatlarınızı nəzərdən keçirin və işə başlayın.",
+  "YourProfileDetails": "Profil məlumatlarınız"
 }

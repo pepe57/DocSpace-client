@@ -60,8 +60,23 @@ const banner = getBanner(version);
 
 const isDev = process.env.NODE_ENV !== productionMode;
 
+const monorepoRoot = path.resolve(__dirname, "../..");
+const docspaceApiSdkDir = path.dirname(
+  require.resolve("@onlyoffice/docspace-api-sdk/package.json", {
+    paths: [path.resolve(__dirname, "../../libs/ui-kit")],
+  }),
+);
+const docspaceApiSdkTraceGlob = `${path
+  .relative(__dirname, docspaceApiSdkDir)
+  .split(path.sep)
+  .join("/")}/**`;
+
 const nextConfig = {
   basePath: "/doceditor",
+  outputFileTracingRoot: monorepoRoot,
+  outputFileTracingIncludes: {
+    "/*": [docspaceApiSdkTraceGlob],
+  },
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -72,6 +87,7 @@ const nextConfig = {
     "winston-cloudwatch",
     "winston-daily-rotate-file",
     "@aws-sdk/client-cloudwatch-logs",
+    "@onlyoffice/docspace-api-sdk",
   ],
   compiler: {
     styledComponents: true,
@@ -94,10 +110,6 @@ const nextConfig = {
 
 if (process.env.DEPLOY) {
   nextConfig.output = "standalone";
-  nextConfig.env = {
-    NEXT_APP_LOCALES_DIR: path.resolve(__dirname, "public/locales"),
-    NEXT_SHARED_LOCALES_DIR: path.resolve(__dirname, "../../public/locales"),
-  };
 }
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
@@ -110,25 +122,8 @@ if (isDev) {
 }
 
 module.exports = withBundleAnalyzer({
-  webpack(config, { isServer }) {
+  webpack(config) {
     const isProduction = config.mode === productionMode;
-
-    if (isServer) {
-      const existingExternals = Array.isArray(config.externals)
-        ? config.externals
-        : config.externals
-          ? [config.externals]
-          : [];
-      config.externals = [
-        ...existingExternals,
-        ({ request }, callback) => {
-          if (request === "@onlyoffice/docspace-api-sdk") {
-            return callback(null, `commonjs ${request}`);
-          }
-          callback();
-        },
-      ];
-    }
 
     // Add resolve configuration for shared package
     config.resolve = {

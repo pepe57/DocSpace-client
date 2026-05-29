@@ -1,4 +1,6 @@
 {
-  "GeneratedPassword": "생성된 비밀번호",
-  "ProductNameDetail": "{{productName}} 이름"
+  "ProductNameDetail": "{{productName}} 이름",
+  "SetEmailPassword": "비밀번호 설정",
+  "WelcomeSubtitle": "공간이 성공적으로 생성되었습니다. 프로필 세부 정보를 검토하고 작업을 시작하세요.",
+  "YourProfileDetails": "프로필 세부 정보"
 }
