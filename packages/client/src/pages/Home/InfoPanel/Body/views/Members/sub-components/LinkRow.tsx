@@ -129,17 +129,16 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyExternalLink = () => {
-    // Intentional: copy first, then warn. The link still works for authenticated
-    // DocSpace users; the toast ("won't work for external users") informs the
-    // sharer of the restriction. toastr.error severity is a design decision.
-    copyShareLink(item, link, t as TFunction);
     if (
       isExternalShareRestricted &&
       !link.sharedTo.internal &&
       blockExistingLinksOnRestrict
     ) {
       toastr.error(t("Common:LinkBlockedByAdminWarning"));
+      onCloseContextMenu();
+      return;
     }
+    copyShareLink(item, link, t as TFunction);
     onCloseContextMenu();
   };
 
@@ -309,15 +308,15 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyLink = (linkArg: TFileLink) => {
-    // Intentional: same copy-then-warn pattern as onCopyExternalLink above.
-    copyShareLink(item, linkArg, t);
     if (
       isExternalShareRestricted &&
       !linkArg.sharedTo.internal &&
       blockExistingLinksOnRestrict
     ) {
       toastr.error(t("Common:LinkBlockedByAdminWarning"));
+      return;
     }
+    copyShareLink(item, linkArg, t);
   };
 
   return (
