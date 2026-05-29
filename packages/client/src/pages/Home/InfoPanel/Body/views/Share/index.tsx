@@ -39,8 +39,6 @@ import { inject, observer } from "mobx-react";
 import Share from "@docspace/shared/components/share";
 import { ShareEventName } from "@docspace/shared/components/share/Share.constants";
 
-import { FolderType } from "@docspace/shared/enums";
-
 import type { ShareProps } from "@docspace/shared/components/share/Share.types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TGroup } from "@docspace/shared/api/groups/types";
@@ -84,7 +82,7 @@ const WrapperShare: FC<WrapperShareProps> = (props) => {
 };
 
 export default inject<TStore>(
-  ({ infoPanelStore, userStore, dialogsStore, filesSettingsStore, selectedFolderStore }) => {
+  ({ infoPanelStore, userStore, dialogsStore, filesSettingsStore }) => {
     const selfId = userStore.user?.id ?? "";
 
     const {
@@ -113,6 +111,13 @@ export default inject<TStore>(
       blockExistingLinksOnRestrict,
     } = filesSettingsStore;
 
+    const selection = infoPanelStore.infoPanelSelection;
+    const isInRoom =
+      !Array.isArray(selection) &&
+      selection !== null &&
+      "inRoom" in selection &&
+      selection.inRoom;
+
     return {
       setView,
 
@@ -130,9 +135,7 @@ export default inject<TStore>(
 
       isExternalShareRestricted:
         isShareRestricted &&
-        (selectedFolderStore.rootFolderType === FolderType.Rooms
-          ? externalShareApplyToRooms
-          : externalShareApplyToDocuments),
+        (isInRoom ? externalShareApplyToRooms : externalShareApplyToDocuments),
       blockExistingLinksOnRestrict,
       defaultShareLinkInternal,
     };
