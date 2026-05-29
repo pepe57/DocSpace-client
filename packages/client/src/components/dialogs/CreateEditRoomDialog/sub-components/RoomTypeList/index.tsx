@@ -38,6 +38,7 @@ import { useTranslation } from "react-i18next";
 import RoomType from "@docspace/shared/components/room-type";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { RoomsType } from "@docspace/shared/enums";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import styles from "./RoomTypeList.module.scss";
 
@@ -84,8 +85,7 @@ const RoomTypeList = ({
         const isPublicRoom = roomType === RoomsType.PublicRoom;
 
         const showFormRoomTooltip = isFormRoom && disabledFormRoom;
-        const showPublicRoomTooltip =
-          isPublicRoom && isExternalShareRestricted;
+        const showPublicRoomTooltip = isPublicRoom && isExternalShareRestricted;
         const showTooltip = showFormRoomTooltip || showPublicRoomTooltip;
 
         const tooltipContent = showFormRoomTooltip
@@ -106,14 +106,18 @@ const RoomTypeList = ({
           />
         );
 
+        const tooltipId = `room-type-disabled-tooltip-${roomType}`;
+
         return showTooltip ? (
-          <div
-            key={roomType}
-            data-tooltip-id="system-tooltip"
-            data-tooltip-content={tooltipContent}
-            data-tooltip-place="bottom"
-          >
+          <div key={roomType} id={tooltipId}>
             {roomTypeElement}
+            <Tooltip
+              id={`${tooltipId}-instance`}
+              anchorSelect={`#${tooltipId}`}
+              place="bottom"
+              float
+              getContent={() => tooltipContent as string}
+            />
           </div>
         ) : (
           roomTypeElement
