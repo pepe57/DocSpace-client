@@ -14,7 +14,7 @@ import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 
 import { isDesktop } from "../../../utils";
-import { AnalyticsEvents, ShareAccessRights } from "../../../enums";
+import { AnalyticsEvents, FolderType, ShareAccessRights } from "../../../enums";
 import type { TFileLink } from "../../../api/files/types";
 import { ShareLinkService } from "../../../services/share-link.service";
 import { getExternalFolderLinks, getExternalLinks } from "../../../api/files";
@@ -379,13 +379,12 @@ export const useShare = ({
   const onCopyLink = async (link: TFileLink) => {
     if (link.sharedTo?.isExpired) return;
 
-    await copyShareLink(infoPanelSelection, link, t);
-
-    if (
+    const isBlockedByAdmin =
       isExternalShareRestricted &&
       !link.sharedTo?.internal &&
-      blockExistingLinksOnRestrict
-    ) {
+      blockExistingLinksOnRestrict;
+
+    if (isBlockedByAdmin) {
       toastr.error(t("Common:LinkBlockedByAdminWarning"));
 
       const isRoomItem =
@@ -405,7 +404,10 @@ export const useShare = ({
             : infoPanelSelection.parentId,
         });
       }
+      return;
     }
+
+    await copyShareLink(infoPanelSelection, link, t);
   };
 
   const getData = (link: TFileLink): ContextMenuModel[] => {
@@ -484,6 +486,12 @@ export const useShare = ({
 
   const canAddLink = (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
 
+  const isInRoomContext =
+    "rootFolderType" in infoPanelSelection &&
+    infoPanelSelection.rootFolderType === FolderType.Rooms;
+
+  const blockLinkCreation = !!isExternalShareRestricted && isInRoomContext;
+
   const getTextTooltip = () => {
     return (
       <Text fontSize="12px" noSelect>
@@ -494,7 +502,7 @@ export const useShare = ({
 
   const getLinkElements = () => {
     const options =
-      fileLinks.length > 0 && !onlyOneLink && canAddLink ? (
+      fileLinks.length > 0 && !onlyOneLink && canAddLink && !blockLinkCreation ? (
         <div data-tooltip-id="file-links-tooltip" data-tip="tooltip">
           <IconButton
             className={styles.linkToViewingIcon}
@@ -525,7 +533,7 @@ export const useShare = ({
     );
 
     if (fileLinks.length === 0) {
-      if (!canAddLink) return [];
+      if (!canAddLink || blockLinkCreation) return [];
 
       return [
         header,

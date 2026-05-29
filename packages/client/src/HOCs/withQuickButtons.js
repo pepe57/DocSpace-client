@@ -44,6 +44,7 @@ import { LANGUAGE } from "@docspace/shared/constants";
 import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import { getCookie } from "@docspace/ui-kit/utils/cookie";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
+import { FolderType } from "@docspace/shared/enums";
 
 import { openShareTab } from "SRC_DIR/helpers/info-panel";
 
@@ -89,23 +90,64 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     onClickShare = async () => {
-      const { t, item, setShareChanged, getManageLinkOptions } = this.props;
+      const {
+        t,
+        item,
+        setShareChanged,
+        getManageLinkOptions,
+        isExternalShareRestricted,
+        externalShareApplyToRooms,
+        externalShareApplyToDocuments,
+        blockExistingLinksOnRestrict,
+      } = this.props;
 
       const primaryLink = await ShareLinkService.getPrimaryLink(item);
 
       if (primaryLink) {
+        const isInRoom = item.rootFolderType === FolderType.Rooms;
+        const appliesToItem = isInRoom
+          ? externalShareApplyToRooms
+          : externalShareApplyToDocuments;
+
+        const isBlockedByAdmin =
+          isExternalShareRestricted &&
+          appliesToItem &&
+          !primaryLink.sharedTo.internal &&
+          blockExistingLinksOnRestrict;
+
+        if (isBlockedByAdmin) {
+          toastr.error(t("Common:LinkBlockedByAdminWarning"));
+          return;
+        }
+
         copyShareLink(item, primaryLink, t, getManageLinkOptions(item));
         setShareChanged(true);
       }
     };
 
     onCopyPrimaryLink = async () => {
-      const { t, item, getManageLinkOptions } = this.props;
+      const {
+        t,
+        item,
+        getManageLinkOptions,
+        isExternalShareRestricted,
+        externalShareApplyToRooms,
+        blockExistingLinksOnRestrict,
+      } = this.props;
       const primaryLink = await ShareLinkService.getPrimaryLink(item);
       if (primaryLink) {
+        const isBlockedByAdmin =
+          isExternalShareRestricted &&
+          externalShareApplyToRooms &&
+          !primaryLink.sharedTo.internal &&
+          blockExistingLinksOnRestrict;
+
+        if (isBlockedByAdmin) {
+          toastr.error(t("Common:LinkBlockedByAdminWarning"));
+          return;
+        }
+
         copyShareLink(item, primaryLink, t, getManageLinkOptions(item));
-        // copyShareLink(primaryLink.sharedTo.shareLink);
-        // toastr.success(t("Common:LinkSuccessfullyCopied"));
       }
     };
 
@@ -247,6 +289,7 @@ export default function withQuickButtons(WrappedComponent) {
       indexingStore,
       contextOptionsStore,
       selectedFolderStore,
+      filesSettingsStore,
     }) => {
       const {
         setFavoriteAction,
@@ -301,6 +344,12 @@ export default function withQuickButtons(WrappedComponent) {
         retryVectorization,
         isTrashFolder,
         showForcedInfoPanelLoader,
+        isExternalShareRestricted: filesSettingsStore.isExternalShareRestricted,
+        externalShareApplyToRooms: filesSettingsStore.externalShareApplyToRooms,
+        externalShareApplyToDocuments:
+          filesSettingsStore.externalShareApplyToDocuments,
+        blockExistingLinksOnRestrict:
+          filesSettingsStore.blockExistingLinksOnRestrict,
       };
     },
   )(observer(WithQuickButtons));

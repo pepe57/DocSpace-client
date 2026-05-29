@@ -538,6 +538,28 @@ class ContextOptionsStore {
           ? await getFolderLink(item.id)
           : await getFileLink(item.id);
 
+        const {
+          isExternalShareRestricted,
+          externalShareApplyToRooms,
+          externalShareApplyToDocuments,
+          blockExistingLinksOnRestrict,
+        } = this.filesSettingsStore;
+
+        const isInRoom = item.rootFolderType === FolderType.Rooms;
+        const appliesToItem = isInRoom
+          ? externalShareApplyToRooms
+          : externalShareApplyToDocuments;
+
+        if (
+          isExternalShareRestricted &&
+          appliesToItem &&
+          !itemLink.sharedTo.internal &&
+          blockExistingLinksOnRestrict
+        ) {
+          toastr.error(t("Common:LinkBlockedByAdminWarning"));
+          return;
+        }
+
         copyToBuffer(itemLink.sharedTo.shareLink);
 
         if (!item.isFolder && !item.isRoom) {
@@ -628,11 +650,23 @@ class ContextOptionsStore {
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {
+      const {
+        isExternalShareRestricted,
+        externalShareApplyToRooms,
+        blockExistingLinksOnRestrict,
+      } = this.filesSettingsStore;
+
+      if (
+        isExternalShareRestricted &&
+        externalShareApplyToRooms &&
+        !primaryLink.sharedTo.internal &&
+        blockExistingLinksOnRestrict
+      ) {
+        toastr.error(t("Common:LinkBlockedByAdminWarning"));
+        return;
+      }
+
       copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));
-      // copyShareLink(primaryLink.sharedTo.shareLink);
-      // item.shared
-      //   ? toastr.success(t("Common:LinkSuccessfullyCopied"))
-      //   : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
 
       this.publicRoomStore.setExternalLink(primaryLink);
 
@@ -1887,6 +1921,28 @@ class ContextOptionsStore {
     const primaryLink = await ShareLinkService.getPrimaryLink(item);
 
     if (primaryLink) {
+      const {
+        isExternalShareRestricted,
+        externalShareApplyToRooms,
+        externalShareApplyToDocuments,
+        blockExistingLinksOnRestrict,
+      } = this.filesSettingsStore;
+
+      const isInRoom = item.rootFolderType === FolderType.Rooms;
+      const appliesToItem = isInRoom
+        ? externalShareApplyToRooms
+        : externalShareApplyToDocuments;
+
+      if (
+        isExternalShareRestricted &&
+        appliesToItem &&
+        !primaryLink.sharedTo.internal &&
+        blockExistingLinksOnRestrict
+      ) {
+        toastr.error(t("Common:LinkBlockedByAdminWarning"));
+        return;
+      }
+
       copyShareLink(item, primaryLink, t, this.getManageLinkOptions(item));
       this.infoPanelStore?.setShareChanged(true);
 

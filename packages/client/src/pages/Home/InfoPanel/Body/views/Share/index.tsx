@@ -39,6 +39,8 @@ import { inject, observer } from "mobx-react";
 import Share from "@docspace/shared/components/share";
 import { ShareEventName } from "@docspace/shared/components/share/Share.constants";
 
+import { FolderType } from "@docspace/shared/enums";
+
 import type { ShareProps } from "@docspace/shared/components/share/Share.types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
 import type { TGroup } from "@docspace/shared/api/groups/types";
@@ -115,8 +117,8 @@ export default inject<TStore>(
     const isInRoom =
       !Array.isArray(selection) &&
       selection !== null &&
-      "inRoom" in selection &&
-      selection.inRoom;
+      "rootFolderType" in selection &&
+      selection.rootFolderType === FolderType.Rooms;
 
     return {
       setView,
