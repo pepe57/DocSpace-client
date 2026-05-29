@@ -372,7 +372,6 @@ export default inject<TStore, Pick<LinkRowProps, "item">>(
 
     const isExternalShareRestricted =
       isShareRestricted &&
-      blockExistingLinksOnRestrict &&
       (item.isRoom || item.inRoom
         ? externalShareApplyToRooms
         : externalShareApplyToDocuments);
