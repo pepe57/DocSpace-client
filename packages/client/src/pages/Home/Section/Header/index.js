@@ -219,6 +219,7 @@ const SectionHeaderContent = (props) => {
     isCollaborator,
     isVisitor,
     isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
     hasExternalLinks,
   } = props;
 
@@ -550,7 +551,9 @@ const SectionHeaderContent = (props) => {
         isInPublicRoom ||
         (isShared && (isArchive ? selectedFolder?.isRoom : isRoom))
       ) {
-        return isExternalShareRestricted && hasExternalLinks
+        return isExternalShareRestricted &&
+          blockExistingLinksOnRestrict &&
+          hasExternalLinks
           ? PublicRoomRestrictedIconUrl
           : PublicRoomIconUrl;
       } else if (!isRootRooms && !isArchive && !isSharedWithMeFolderRoot)
@@ -572,6 +575,7 @@ const SectionHeaderContent = (props) => {
     isSharedWithMeFolderRoot,
     isLifetimeEnabled,
     isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
     hasExternalLinks,
   ]);
 
@@ -580,12 +584,20 @@ const SectionHeaderContent = (props) => {
       isRoom &&
       selectedFolder?.shared &&
       isExternalShareRestricted &&
+      blockExistingLinksOnRestrict &&
       hasExternalLinks
     )
       return t("Common:ExternalAccessDisabledByAdmin");
 
     return undefined;
-  }, [isRoom, selectedFolder, isExternalShareRestricted, hasExternalLinks, t]);
+  }, [
+    isRoom,
+    selectedFolder,
+    isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
+    hasExternalLinks,
+    t,
+  ]);
 
   const titleIconTooltip = React.useMemo(() => {
     if (sharedType) return t("Files:RecentlyOpenedTooltip");
@@ -1305,14 +1317,6 @@ export default inject(
 
     const isShared = shared || navigationPath.find((r) => r.shared);
 
-    const showNavigationButton = !!((!security?.CopySharedLink && !isArchive) ||
-    isPublicRoom ||
-    isSharedWithMeFolderRoot ||
-    isArchive ||
-    !isRootRooms
-      ? false
-      : security?.Read && isShared);
-
     const rootFolderId = navigationPath.length
       ? navigationPath[navigationPath.length - 1]?.id
       : selectedFolder.id;
@@ -1337,11 +1341,24 @@ export default inject(
       isExternalShareRestricted: isShareRestricted,
       externalShareApplyToRooms,
       externalShareApplyToDocuments,
+      blockExistingLinksOnRestrict,
     } = filesStore.filesSettingsStore;
 
     const isExternalShareRestricted =
       isShareRestricted &&
       (isRoom ? externalShareApplyToRooms : externalShareApplyToDocuments);
+
+    const showNavigationButton = !!((!security?.CopySharedLink && !isArchive) ||
+    isPublicRoom ||
+    isSharedWithMeFolderRoot ||
+    isArchive ||
+    !isRootRooms
+      ? false
+      : security?.Read &&
+        isShared &&
+        (!isExternalShareRestricted ||
+          !blockExistingLinksOnRestrict ||
+          hasExternalLinks));
 
     return {
       currentClientView,
@@ -1470,6 +1487,7 @@ export default inject(
       setChangeNameVisible,
       getIcon,
       isExternalShareRestricted,
+      blockExistingLinksOnRestrict,
       hasExternalLinks,
 
       isRootRooms,
