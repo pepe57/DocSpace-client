@@ -76,7 +76,7 @@ const nextConfig = {
   outputFileTracingRoot: monorepoRoot,
   outputFileTracingIncludes: {
     "/forms/**": ["./src/app/(forms)/_styles/*.scss"],
-    "/*": [docspaceApiSdkTraceGlob],
+    "/*": [docspaceApiSdkTraceGlob, "public/locales/*/*.json", "../../public/locales/*/Common.json"],
   },
   serverExternalPackages: [
     "nconf",

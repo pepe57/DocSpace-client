@@ -173,13 +173,7 @@ beforeAll(() => {
         filePath.endsWith(".json") &&
         filePath.includes(convertPathToOS("public/locales")) &&
         // Exclude .constants/ directory (brand names, cultures — not per-language translations)
-        !filePath.includes(convertPathToOS("locales/.constants/")) &&
-        // Exclude Common.json copied into per-app public/locales at build time;
-        // the source of truth is the root public/locales/<lng>/Common.json
-        !(
-          path.basename(filePath) === "Common.json" &&
-          filePath.includes(`${path.sep}packages${path.sep}`)
-        ),
+        !filePath.includes(convertPathToOS("locales/.constants/")),
     );
   });
 

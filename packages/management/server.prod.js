@@ -43,6 +43,7 @@ process.env.NEXT_APP_LOCALES_DIR ||= path.join(
   __dirname,
   "packages/management/public/locales",
 );
+process.env.NEXT_SHARED_LOCALES_DIR ||= path.join(__dirname, "public/locales");
 
 // You can pass command line arguments to the server.js process
 // by setting them before requiring the file

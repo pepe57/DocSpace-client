@@ -74,7 +74,7 @@ const nextConfig = {
   basePath: "/management",
   outputFileTracingRoot: monorepoRoot,
   outputFileTracingIncludes: {
-    "/*": [docspaceApiSdkTraceGlob],
+    "/*": [docspaceApiSdkTraceGlob, "public/locales/*/*.json", "../../public/locales/*/Common.json"],
   },
   typescript: {
     ignoreBuildErrors: true,

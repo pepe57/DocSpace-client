@@ -37,14 +37,6 @@ const path = require("path");
 const beforeBuild = require(
   path.join(__dirname, "../../shared/utils/beforeBuild.js")
 );
-const copyCommonLocales = require(
-  path.join(__dirname, "../../shared/utils/copyCommonLocales.js")
-);
-
-copyCommonLocales(
-  path.join(__dirname, "../../../public/locales"),
-  path.join(__dirname, "../public/locales"),
-);
 
 beforeBuild(
   [
