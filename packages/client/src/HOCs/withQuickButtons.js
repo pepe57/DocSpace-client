@@ -95,27 +95,13 @@ export default function withQuickButtons(WrappedComponent) {
         item,
         setShareChanged,
         getManageLinkOptions,
-        isExternalShareRestricted,
-        externalShareApplyToRooms,
-        externalShareApplyToDocuments,
-        blockExistingLinksOnRestrict,
+        isLinkBlockedByAdmin,
       } = this.props;
 
       const primaryLink = await ShareLinkService.getPrimaryLink(item);
 
       if (primaryLink) {
-        const isInRoom = item.rootFolderType === FolderType.Rooms;
-        const appliesToItem = isInRoom
-          ? externalShareApplyToRooms
-          : externalShareApplyToDocuments;
-
-        const isBlockedByAdmin =
-          isExternalShareRestricted &&
-          appliesToItem &&
-          !primaryLink.sharedTo.internal &&
-          blockExistingLinksOnRestrict;
-
-        if (isBlockedByAdmin) {
+        if (isLinkBlockedByAdmin(item, primaryLink)) {
           toastr.error(t("Common:LinkBlockedByAdminWarning"));
           return;
         }
@@ -126,23 +112,12 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     onCopyPrimaryLink = async () => {
-      const {
-        t,
-        item,
-        getManageLinkOptions,
-        isExternalShareRestricted,
-        externalShareApplyToRooms,
-        blockExistingLinksOnRestrict,
-      } = this.props;
+      const { t, item, getManageLinkOptions, isLinkBlockedByAdmin } =
+        this.props;
+
       const primaryLink = await ShareLinkService.getPrimaryLink(item);
       if (primaryLink) {
-        const isBlockedByAdmin =
-          isExternalShareRestricted &&
-          externalShareApplyToRooms &&
-          !primaryLink.sharedTo.internal &&
-          blockExistingLinksOnRestrict;
-
-        if (isBlockedByAdmin) {
+        if (isLinkBlockedByAdmin(item, primaryLink)) {
           toastr.error(t("Common:LinkBlockedByAdminWarning"));
           return;
         }
@@ -344,12 +319,7 @@ export default function withQuickButtons(WrappedComponent) {
         retryVectorization,
         isTrashFolder,
         showForcedInfoPanelLoader,
-        isExternalShareRestricted: filesSettingsStore.isExternalShareRestricted,
-        externalShareApplyToRooms: filesSettingsStore.externalShareApplyToRooms,
-        externalShareApplyToDocuments:
-          filesSettingsStore.externalShareApplyToDocuments,
-        blockExistingLinksOnRestrict:
-          filesSettingsStore.blockExistingLinksOnRestrict,
+        isLinkBlockedByAdmin: filesSettingsStore.isLinkBlockedByAdmin,
       };
     },
   )(observer(WithQuickButtons));

@@ -36,7 +36,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, FolderType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/ui-kit/components/toast";
 import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { isMobile } from "react-device-detect";
@@ -564,7 +564,7 @@ export default function withFileActions(WrappedFileItem) {
       const isExternalShareRestricted =
         isShareRestricted &&
         blockExistingLinksOnRestrict &&
-        (item.isRoom || item.inRoom
+        (item.rootFolderType === FolderType.Rooms
           ? externalShareApplyToRooms
           : externalShareApplyToDocuments);
 

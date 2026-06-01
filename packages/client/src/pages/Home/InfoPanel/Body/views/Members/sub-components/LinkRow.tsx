@@ -49,7 +49,7 @@ import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/trash.react.svg?url";
 
 import { toastr } from "@docspace/ui-kit/components/toast";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import { FolderType, ShareAccessRights } from "@docspace/shared/enums";
 import { ShareLinkService } from "@docspace/shared/services/share-link.service";
 import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
 import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
@@ -77,6 +77,7 @@ const LinkRow = (props: LinkRowProps) => {
     deleteExternalLink,
     item,
     isExternalShareRestricted,
+    isLinkBlockedByAdmin,
   } = props;
 
   const availableShareRights = item.availableShareRights;
@@ -129,11 +130,7 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyExternalLink = () => {
-    if (
-      isExternalShareRestricted &&
-      !link.sharedTo.internal &&
-      blockExistingLinksOnRestrict
-    ) {
+    if (isLinkBlockedByAdmin!(item, link)) {
       toastr.error(t("Common:LinkBlockedByAdminWarning"));
       onCloseContextMenu();
       return;
@@ -147,10 +144,7 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const getData = () => {
-    const isBlockedByAdmin =
-      isExternalShareRestricted &&
-      !link.sharedTo.internal &&
-      blockExistingLinksOnRestrict;
+    const isBlockedByAdmin = isLinkBlockedByAdmin!(item, link);
 
     if (isBlockedByAdmin) {
       return [
@@ -308,11 +302,7 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyLink = (linkArg: TFileLink) => {
-    if (
-      isExternalShareRestricted &&
-      !linkArg.sharedTo.internal &&
-      blockExistingLinksOnRestrict
-    ) {
+    if (isLinkBlockedByAdmin!(item, linkArg)) {
       toastr.error(t("Common:LinkBlockedByAdminWarning"));
       return;
     }
@@ -372,7 +362,7 @@ export default inject<TStore, Pick<LinkRowProps, "item">>(
 
     const isExternalShareRestricted =
       isShareRestricted &&
-      (item.isRoom || item.inRoom
+      (item.rootFolderType === FolderType.Rooms
         ? externalShareApplyToRooms
         : externalShareApplyToDocuments);
 
@@ -380,9 +370,8 @@ export default inject<TStore, Pick<LinkRowProps, "item">>(
       isArchiveFolder: isArchiveFolderRoot,
 
       isExternalShareRestricted,
-      externalShareApplyToDocuments,
-      externalShareApplyToRooms,
       blockExistingLinksOnRestrict,
+      isLinkBlockedByAdmin: filesSettingsStore.isLinkBlockedByAdmin,
 
       setLinkParams,
       setEditLinkPanelIsVisible,

@@ -538,24 +538,7 @@ class ContextOptionsStore {
           ? await getFolderLink(item.id)
           : await getFileLink(item.id);
 
-        const {
-          isExternalShareRestricted,
-          externalShareApplyToRooms,
-          externalShareApplyToDocuments,
-          blockExistingLinksOnRestrict,
-        } = this.filesSettingsStore;
-
-        const isInRoom = item.rootFolderType === FolderType.Rooms;
-        const appliesToItem = isInRoom
-          ? externalShareApplyToRooms
-          : externalShareApplyToDocuments;
-
-        if (
-          isExternalShareRestricted &&
-          appliesToItem &&
-          !itemLink.sharedTo.internal &&
-          blockExistingLinksOnRestrict
-        ) {
+        if (this.filesSettingsStore.isLinkBlockedByAdmin(item, itemLink)) {
           toastr.error(t("Common:LinkBlockedByAdminWarning"));
           return;
         }
@@ -650,18 +633,7 @@ class ContextOptionsStore {
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {
-      const {
-        isExternalShareRestricted,
-        externalShareApplyToRooms,
-        blockExistingLinksOnRestrict,
-      } = this.filesSettingsStore;
-
-      if (
-        isExternalShareRestricted &&
-        externalShareApplyToRooms &&
-        !primaryLink.sharedTo.internal &&
-        blockExistingLinksOnRestrict
-      ) {
+      if (this.filesSettingsStore.isLinkBlockedByAdmin(item, primaryLink)) {
         toastr.error(t("Common:LinkBlockedByAdminWarning"));
         return;
       }
@@ -1921,24 +1893,7 @@ class ContextOptionsStore {
     const primaryLink = await ShareLinkService.getPrimaryLink(item);
 
     if (primaryLink) {
-      const {
-        isExternalShareRestricted,
-        externalShareApplyToRooms,
-        externalShareApplyToDocuments,
-        blockExistingLinksOnRestrict,
-      } = this.filesSettingsStore;
-
-      const isInRoom = item.rootFolderType === FolderType.Rooms;
-      const appliesToItem = isInRoom
-        ? externalShareApplyToRooms
-        : externalShareApplyToDocuments;
-
-      if (
-        isExternalShareRestricted &&
-        appliesToItem &&
-        !primaryLink.sharedTo.internal &&
-        blockExistingLinksOnRestrict
-      ) {
+      if (this.filesSettingsStore.isLinkBlockedByAdmin(item, primaryLink)) {
         toastr.error(t("Common:LinkBlockedByAdminWarning"));
         return;
       }

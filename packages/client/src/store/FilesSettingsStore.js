@@ -39,7 +39,7 @@ import {
   setRecentSetting,
   setOrganizeGrouping,
 } from "@docspace/shared/api/files";
-import { RoomsType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { presentInArray } from "@docspace/shared/utils";
@@ -220,6 +220,20 @@ class FilesSettingsStore {
   get isExternalShareRestricted() {
     return !this.externalShare;
   }
+
+  isLinkBlockedByAdmin = (item, link) => {
+    const isInRoom = item.rootFolderType === FolderType.Rooms;
+    const appliesToItem = isInRoom
+      ? this.externalShareApplyToRooms
+      : this.externalShareApplyToDocuments;
+
+    return (
+      this.isExternalShareRestricted &&
+      appliesToItem &&
+      !link.sharedTo.internal &&
+      this.blockExistingLinksOnRestrict
+    );
+  };
 
   get isLoadedSettingsTree() {
     return (
