@@ -106,8 +106,7 @@ export const LinkTypeSelector: FC<AccessOptionProps> = ({
         <Tooltip
           id={`share-link-type-tooltip-${uid}`}
           anchorSelect={`.${anchorClass}`}
-          place="bottom"
-          offset={60}
+          place="bottom-start"
         >
           {disabledExternalTooltip}
         </Tooltip>
