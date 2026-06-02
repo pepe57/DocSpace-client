@@ -1442,6 +1442,8 @@
   "UnsavedChanges": "Unsaved changes",
   "UnsavedChangesDescription": "You have unsaved changes. If you leave now, your updates will be lost. Are you sure you want to leave?",
   "UntilDate": "until {{date}}",
+  "TopUpAndUpgrade": "Top up & Upgrade",
+  "TopUpAndUpgradeHint": "Your wallet will be topped up by <1>{{currency}}</1> and the selected storage will be purchased automatically. Top-up amounts are rounded up to the next whole dollar.",
   "Update": "Update",
   "UpgradeNow": "Upgrade now",
   "UpgradePlan": "Upgrade plan",
