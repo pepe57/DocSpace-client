@@ -34,13 +34,14 @@
  */
 
 import React from "react";
-import { FileType } from "@docspace/shared/enums";
+import { FileType, RoomsType } from "@docspace/shared/enums";
 import { getSinglePDFTitle } from "@docspace/shared/utils/getPDFTite";
 
+import styles from "./CellStyles.module.scss";
 import { StyledTypeCell } from "./CellStyles";
 import { getRoomTypeName } from "../../../../../../helpers/filesUtils";
 
-const TypeCell = ({ t, item, sideColor }) => {
+const TypeCell = ({ t, item, sideColor, isExternalShareRestricted = false, blockExistingLinksOnRestrict = true }) => {
   const { fileExst, fileTypeName, fileType, roomType, isPDFForm } = item;
   const getItemType = () => {
     switch (fileType) {
@@ -76,6 +77,13 @@ const TypeCell = ({ t, item, sideColor }) => {
   const Exst = fileExst ? fileExst.slice(1).toUpperCase() : "";
   const data = Exst ? `${Exst} ${type}` : type;
 
+  const isRestrictedRoom =
+    isExternalShareRestricted &&
+    blockExistingLinksOnRestrict &&
+    item.isRoom &&
+    item.shared &&
+    roomType === RoomsType.PublicRoom;
+
   return (
     <StyledTypeCell
       fontSize="12px"
@@ -93,6 +101,11 @@ const TypeCell = ({ t, item, sideColor }) => {
         </>
       ) : null}
       <span className="type">{type}</span>
+      {isRestrictedRoom ? (
+        <span className={styles.restrictedLabel}>
+          &nbsp;({t("Common:Restricted")})
+        </span>
+      ) : null}
     </StyledTypeCell>
   );
 };
