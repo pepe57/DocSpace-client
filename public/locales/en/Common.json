@@ -244,6 +244,7 @@
   "BillingPaymentMethodCardDesc": "Linked card and payer details",
   "BillingPortalNotice": "For full billing and subscription management, please visit the portal.",
   "BillingWalletCardDesc": "Balance, top-up, and transaction history",
+  "BlockedByAdmin": "Blocked by admin",
   "BlockFile": "Block",
   "Bonus": "Bonus",
   "BookTraining": "Book a training",
@@ -587,7 +588,10 @@
   "ExtendedThinking": "Extended thinking",
   "ExtendedThinkingIncreasedCosts": "This model uses advanced reasoning, which may increase costs",
   "ExtendedThinkingNotSupported": "This option is not supported by the currently selected AI model for this chat.",
+  "ExternalAccessDisabledByAdmin": "External access is disabled by administrator policy.",
   "ExternalLink": "External link",
+  "ExternalLinksDisabledByAdmin": "External links are disabled by your administrator.",
+  "ExternalLinksDisabledForGuests": "Guests cannot access this room because external links are disabled by your administrator.",
   "Favorites": "Favorites",
   "FeeAppliesToEachBackup": "Please note: A fee applies to each backup",
   "FeedbackAndSupport": "Feedback & Support",
@@ -786,6 +790,7 @@
   "LimitTimeBlockPublicRoomDescription": "In a Public room, the main link is valid for an unlimited time period. You can create additional links with time limit.",
   "LinkAccessDenied": "Access to the link has been denied",
   "LinkAccessFile": "<1>{{accessType}}</1> can <3>{{accessRights}}</3>.",
+  "LinkBlockedByAdminWarning": "This link is blocked by admin and won't work for external users",
   "LinkCopiedToClipboard": "Link copied to clipboard",
   "LinkCopySuccess": "Link has been copied to the clipboard",
   "LinkCopySuccessWithCustomFilter": "The link to the file with the enabled <strong>Custom filter</strong> is successfully copied to the clipboard.",
@@ -1554,10 +1559,5 @@
   "YourName": "Your name",
   "YourPrice": "Your price",
   "YourTurn": "Your turn",
-  "YouWillBeContacted": "The sales team will contact you after creating the request.",
-  "BlockedByAdmin": "Blocked by admin",
-  "ExternalAccessDisabledByAdmin": "External access is disabled by administrator policy.",
-  "ExternalLinksDisabledByAdmin": "External links are disabled by your administrator.",
-  "ExternalLinksDisabledForGuests": "Guests cannot access this room because external links are disabled by your administrator.",
-  "LinkBlockedByAdminWarning": "This link is blocked by admin and won't work for external users"
+  "YouWillBeContacted": "The sales team will contact you after creating the request."
 }
