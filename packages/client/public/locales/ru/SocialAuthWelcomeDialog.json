@@ -1,5 +1,5 @@
 {
-  "ProductNameDetail": "{{productName}} имя",
+  "ProductNameDetail": "Имя {{productName}}",
   "SetEmailPassword": "Задать пароль",
   "WelcomeSubtitle": "Ваше пространство успешно создано. Ознакомьтесь с данными профиля и приступите к работе.",
   "YourProfileDetails": "Данные вашего профиля"
