@@ -145,6 +145,7 @@ const FilesSelectorWrapper = ({
   setBackupToPublicRoomVisible,
   setInfoPanelIsMobileHidden,
   currentDeviceType,
+  isExternalShareEnabled,
 
   embedded,
   withHeader = true,
@@ -311,7 +312,7 @@ const FilesSelectorWrapper = ({
           }),
         };
 
-        if (showMoveToPublicDialog) {
+        if (showMoveToPublicDialog && isExternalShareEnabled) {
           setMoveToPublicRoomVisible(true, operationData);
           return;
         }
@@ -601,7 +602,7 @@ export default inject(
       setSelected,
       filesSettingsStore,
     } = filesStore;
-    const { getIcon, filesSettings } = filesSettingsStore;
+    const { getIcon, filesSettings, externalShare } = filesSettingsStore;
     const { isVisible: infoPanelIsVisible, infoPanelSelection } =
       infoPanelStore;
 
@@ -705,6 +706,7 @@ export default inject(
       setMoveToPublicRoomVisible,
       setBackupToPublicRoomVisible,
       currentDeviceType,
+      isExternalShareEnabled: externalShare,
       getIcon,
 
       roomsFolderId,

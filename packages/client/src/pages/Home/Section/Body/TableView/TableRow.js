@@ -96,6 +96,7 @@ const FilesTableRow = memo((props) => {
     onDragOver,
     onDragLeave,
     badgeUrl,
+    badgeIconColor,
     isRecentFolder,
     isFavoritesFolder,
     isSharedWithMeFolder,
@@ -136,6 +137,7 @@ const FilesTableRow = memo((props) => {
       isArchive={item.isArchive}
       isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
+      badgeIconColor={badgeIconColor}
       className={classNames({
         "icon-with-index-column": isIndexing,
       })}
