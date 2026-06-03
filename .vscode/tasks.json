@@ -163,6 +163,7 @@
       "type": "shell",
       "options": {
         "env": {
+          "APP_EDITION": "developer",
           "SKIP_CLIENT": "true"
         }
       },
