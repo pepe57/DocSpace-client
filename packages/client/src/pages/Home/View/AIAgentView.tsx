@@ -196,7 +196,7 @@ const AIAgentViewComponent = ({
             onCloseRecomendation={onCloseRecomendation}
             aiReady={aiConfig?.aiReady || false}
             modelAliases={aiConfig?.modelAliases}
-            recomendedModelForForms={aiConfig?.recomendedModelForForms}
+            recommendedModelForForms={aiConfig?.recommendedModelForForms}
             standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
             getResultStorageId={getResultStorageId}
             multimodal={
@@ -277,3 +277,4 @@ export const AIAgentView = inject(
     };
   },
 )(observer(AIAgentViewComponent));
+
