@@ -15,7 +15,7 @@
   "AgentsRemoved": "Агенты удалены",
   "AIAgentNotificationsDisabled": "Уведомления ИИ-агента отключены",
   "AIAgentNotificationsEnabled": "Уведомления ИИ-агента включены",
-  "AIAgentPinLimitMessage": "Вы не можете закрепить более 10 элементов в разделе «{{aiAgents}}». Открепите некоторые из закрепленных.",
+  "AIAgentPinLimitMessage": "Вы не можете закрепить более 10 {{aiAgents}}. Открепите некоторых из закрепленных.",
   "AIAgentPinned": "ИИ-агент закреплен",
   "AIAgentsPinned": "{{aiAgents}} закреплены",
   "AIAgentsUnpinned": "{{aiAgents}} откреплены",
