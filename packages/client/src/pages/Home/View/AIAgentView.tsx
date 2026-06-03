@@ -33,7 +33,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { Activity, useCallback } from "react";
+import { Activity, useCallback, useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router";
 
@@ -42,7 +42,11 @@ import type useToolsSettings from "@docspace/ui-kit/ai-agent/chat/hooks/useTools
 import type useInitChats from "@docspace/ui-kit/ai-agent/chat/hooks/useInitChats";
 import type useInitMessages from "@docspace/ui-kit/ai-agent/chat/hooks/useInitMessages";
 import Chat from "@docspace/ui-kit/ai-agent/chat";
-import { getAIAgent } from "@docspace/shared/api/ai";
+import {
+  getAIAgent,
+  getAIUserConfig,
+  updateAIUserConfig,
+} from "@docspace/shared/api/ai";
 import type { TAgent } from "@docspace/shared/api/ai/types";
 import { Events } from "@docspace/shared/enums";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
@@ -117,6 +121,22 @@ const AIAgentViewComponent = ({
   const navigate = useNavigate();
   const scrollRef = useScroll();
 
+  const [chatRecomendedModelVisible, setChatRecomendedModelVisible] =
+    useState<boolean | undefined>(undefined);
+
+  useEffect(() => {
+    getAIUserConfig()
+      .then((config) =>
+        setChatRecomendedModelVisible(config.chatRecomendedModelVisible),
+      )
+      .catch(() => {});
+  }, []);
+
+  const onCloseRecomendation = useCallback(() => {
+    setChatRecomendedModelVisible(false);
+    updateAIUserConfig({ chatRecomendedModelVisible: false }).catch(() => {});
+  }, []);
+
   const goToWebSearchSettings = useCallback(() => {
     navigate("/portal-settings/ai-settings/search");
   }, [navigate]);
@@ -172,6 +192,8 @@ const AIAgentViewComponent = ({
             messagesSettings={messagesSettings}
             isAdmin={isAdmin}
             canEditAgent={canEditAgent}
+            chatRecomendedModelVisible={chatRecomendedModelVisible}
+            onCloseRecomendation={onCloseRecomendation}
             aiReady={aiConfig?.aiReady || false}
             modelAliases={aiConfig?.modelAliases}
             recomendedModelForForms={aiConfig?.recomendedModelForForms}
