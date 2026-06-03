@@ -42,6 +42,9 @@ import type useToolsSettings from "@docspace/ui-kit/ai-agent/chat/hooks/useTools
 import type useInitChats from "@docspace/ui-kit/ai-agent/chat/hooks/useInitChats";
 import type useInitMessages from "@docspace/ui-kit/ai-agent/chat/hooks/useInitMessages";
 import Chat from "@docspace/ui-kit/ai-agent/chat";
+import { getAIAgent } from "@docspace/shared/api/ai";
+import type { TAgent } from "@docspace/shared/api/ai/types";
+import { Events } from "@docspace/shared/enums";
 import type { AuthStore } from "@docspace/shared/store/AuthStore";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { TUser } from "@docspace/shared/api/people/types";
@@ -79,6 +82,7 @@ type Props = {
   getIcon?: FilesSettingsStore["getIcon"];
   chatSettings?: SelectedFolderStore["chatSettings"];
   isAdmin?: AuthStore["isAdmin"];
+  canEditAgent?: boolean;
   aiConfig?: SettingsStore["aiConfig"];
   canUseChat?: AccessRightsStore["canUseChat"];
 
@@ -103,6 +107,7 @@ const AIAgentViewComponent = ({
   initChats,
   messagesSettings,
   isAdmin,
+  canEditAgent,
   aiConfig,
   getResultStorageId,
   canUseChat,
@@ -119,6 +124,19 @@ const AIAgentViewComponent = ({
   const goToAISettings = useCallback(() => {
     navigate("/portal-settings/ai-settings/providers");
   }, [navigate]);
+
+  const onOpenEdit = useCallback(async () => {
+    if (!roomId) return;
+
+    const agent = await getAIAgent(roomId as unknown as TAgent["id"]);
+
+    const event = new CustomEvent(Events.AGENT_EDIT, {
+      detail: { context: "chat_view" },
+    }) as unknown as CustomEvent & { item: TAgent };
+    event.item = agent;
+
+    window.dispatchEvent(event);
+  }, [roomId]);
 
   if (
     currentView === "chat" &&
@@ -153,8 +171,10 @@ const AIAgentViewComponent = ({
             initChats={initChats}
             messagesSettings={messagesSettings}
             isAdmin={isAdmin}
+            canEditAgent={canEditAgent}
             aiReady={aiConfig?.aiReady || false}
             modelAliases={aiConfig?.modelAliases}
+            recomendedModelForForms={aiConfig?.recomendedModelForForms}
             standalone // NOTE: AI SaaS same as AI Standalone in v.4.0
             getResultStorageId={getResultStorageId}
             multimodal={
@@ -166,6 +186,7 @@ const AIAgentViewComponent = ({
             setAiPlaylistImages={setAiPlaylistImages}
             goToWebSearchSettings={goToWebSearchSettings}
             goToAISettings={goToAISettings}
+            onOpenEdit={onOpenEdit}
             allowAttachFiles
             allowManageTools
             allowSelectChat
@@ -204,9 +225,11 @@ export const AIAgentView = inject(
 
     const { getIcon } = filesSettingsStore;
 
-    const { chatSettings } = selectedFolderStore;
+    const { chatSettings, security } = selectedFolderStore;
 
     const { isAdmin } = authStore;
+
+    const canEditAgent = !!security?.EditRoom;
 
     const { aiConfig } = settingsStore;
 
@@ -223,6 +246,7 @@ export const AIAgentView = inject(
       getIcon,
       chatSettings,
       isAdmin,
+      canEditAgent,
       aiConfig,
       canUseChat,
 

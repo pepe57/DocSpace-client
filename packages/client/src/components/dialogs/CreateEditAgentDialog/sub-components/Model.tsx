@@ -64,16 +64,15 @@ import { ProviderType } from "@docspace/shared/api/ai/enums";
 type ModelSettingsProps = {
   agentParams: TAgentParams;
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
+  recomendedModelForForms?: TAIConfig["recomendedModelForForms"];
   isAdmin?: boolean;
   setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
-// TODO: source the recommended models for form processing from the API.
-const RECOMENDED_MODELS: string[] = [];
-
 const ModelSettings = ({
   agentParams,
   systemAiEnabled,
+  recomendedModelForForms,
   isAdmin,
   setAgentParams,
 }: ModelSettingsProps) => {
@@ -212,8 +211,8 @@ const ModelSettings = ({
 
       pendingRecomendedRef.current = false;
 
-      const recomended = list.find((mo) =>
-        RECOMENDED_MODELS.includes(mo.modelId),
+      const recomended = list.find(
+        (mo) => mo.modelId === recomendedModelForForms,
       );
 
       if (recomended) {
@@ -376,10 +375,10 @@ const ModelSettings = ({
   );
 
   const onSelectRecomendedModel = React.useCallback(() => {
-    // Current provider is OpenRouter — pick its first recommended model.
+    // Current provider is OpenRouter — pick the recommended model.
     if (selectedProvider?.type === ProviderType.OpenRouter) {
-      const recomended = models.find((model) =>
-        RECOMENDED_MODELS.includes(model.modelId),
+      const recomended = models.find(
+        (model) => model.modelId === recomendedModelForForms,
       );
 
       if (recomended) setSelectedModel(recomended);
@@ -404,7 +403,7 @@ const ModelSettings = ({
     setIsModelsLoading(true);
     setIsModelsFetched(false);
     setHasProviderBeenSwitched(true);
-  }, [selectedProvider, providers, models]);
+  }, [selectedProvider, providers, models, recomendedModelForForms]);
 
   React.useEffect(() => {
     if (!selectedModel && !error) return;
@@ -492,7 +491,7 @@ const ModelSettings = ({
             providerType={selectedProvider?.type}
             availableProviders={availableProviders}
             modelList={modelIds}
-            recomendedModel={RECOMENDED_MODELS}
+            recomendedModel={recomendedModelForForms ?? ""}
             onOpenSettings={onOpenSettings}
             onSelectModel={onSelectRecomendedModel}
           />

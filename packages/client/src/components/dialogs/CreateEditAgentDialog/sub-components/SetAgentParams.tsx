@@ -175,6 +175,7 @@ type setAgentParamsProps = {
   isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
   infoPanelSelection?: TRoom;
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
+  recomendedModelForForms?: TAIConfig["recomendedModelForForms"];
   isUserAdmin?: boolean;
 };
 
@@ -213,6 +214,7 @@ const setAgentParams = ({
   selectedServers,
   setSelectedServers,
   systemAiEnabled,
+  recomendedModelForForms,
   isUserAdmin,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
@@ -539,6 +541,7 @@ const setAgentParams = ({
       <ModelSettings
         agentParams={agentParams}
         systemAiEnabled={systemAiEnabled}
+        recomendedModelForForms={recomendedModelForForms}
         isAdmin={!!isUserAdmin}
         setAgentParams={setAgentParams}
       />
@@ -646,6 +649,7 @@ export default inject(
       infoPanelSelection,
 
       systemAiEnabled: aiConfig?.systemAiEnabled,
+      recomendedModelForForms: aiConfig?.recomendedModelForForms,
       isUserAdmin:
         !!userStore?.user &&
         (userStore.user.isOwner || userStore.user.isAdmin),
