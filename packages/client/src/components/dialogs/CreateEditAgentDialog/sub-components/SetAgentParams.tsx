@@ -175,6 +175,7 @@ type setAgentParamsProps = {
   isDefaultAIAgentsQuotaSet?: CurrentQuotasStore["isDefaultAIAgentsQuotaSet"];
   infoPanelSelection?: TRoom;
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
+  isUserAdmin?: boolean;
 };
 
 const setAgentParams = ({
@@ -212,6 +213,7 @@ const setAgentParams = ({
   selectedServers,
   setSelectedServers,
   systemAiEnabled,
+  isUserAdmin,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -537,6 +539,7 @@ const setAgentParams = ({
       <ModelSettings
         agentParams={agentParams}
         systemAiEnabled={systemAiEnabled}
+        isAdmin={!!isUserAdmin}
         setAgentParams={setAgentParams}
       />
       <InstructionsSettings
@@ -594,6 +597,7 @@ export default inject(
     infoPanelStore,
     avatarEditorDialogStore,
     currentQuotaStore,
+    userStore,
   }: TStore) => {
     const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
     const { folderFormValidation, maxImageUploadSize, aiConfig } =
@@ -642,6 +646,9 @@ export default inject(
       infoPanelSelection,
 
       systemAiEnabled: aiConfig?.systemAiEnabled,
+      isUserAdmin:
+        !!userStore?.user &&
+        (userStore.user.isOwner || userStore.user.isAdmin),
     };
   },
 )(observer(setAgentParams));

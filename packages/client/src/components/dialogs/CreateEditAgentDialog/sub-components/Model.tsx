@@ -34,6 +34,7 @@
  */
 
 import React from "react";
+import { useNavigate } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 import axios from "axios";
 import classNames from "classnames";
@@ -54,6 +55,7 @@ import { toastr } from "@docspace/ui-kit/components/toast";
 import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
 import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { RecomendedModel } from "@docspace/ui-kit/ai-agent/recomended-model";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 import { modelCache } from "./modelCache";
@@ -62,15 +64,25 @@ import { ProviderType } from "@docspace/shared/api/ai/enums";
 type ModelSettingsProps = {
   agentParams: TAgentParams;
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
+  isAdmin?: boolean;
   setAgentParams: (value: Partial<TAgentParams>) => void;
 };
+
+// TODO: source the recommended models for form processing from the API.
+const RECOMENDED_MODELS: string[] = [];
 
 const ModelSettings = ({
   agentParams,
   systemAiEnabled,
+  isAdmin,
   setAgentParams,
 }: ModelSettingsProps) => {
   const { t } = useTranslation(["AIRoom", "Common"]);
+  const navigate = useNavigate();
+
+  const onOpenSettings = React.useCallback(() => {
+    navigate("/portal-settings/ai-settings/providers");
+  }, [navigate]);
 
   const [providers, setProviders] = React.useState<TAiProvider[]>([]);
   const [models, setModels] = React.useState<TModel[]>([]);
@@ -98,6 +110,9 @@ const ModelSettings = ({
     React.useState(false);
 
   const prevSelectedModel = React.useRef<TModel | null>(null);
+
+  // When set, the next loaded model list should preselect a recommended model.
+  const pendingRecomendedRef = React.useRef(false);
 
   React.useEffect(() => {
     const defaultProvider = modelCache.getDefaultProvider();
@@ -191,11 +206,31 @@ const ModelSettings = ({
   React.useEffect(() => {
     const defaultModel = modelCache.getDefaultProvider()?.defaultModel;
 
+    // If a recommended model was requested, preselect it from the loaded list.
+    const pickRecomendedIfPending = (list: TModel[]) => {
+      if (!pendingRecomendedRef.current) return false;
+
+      pendingRecomendedRef.current = false;
+
+      const recomended = list.find((mo) =>
+        RECOMENDED_MODELS.includes(mo.modelId),
+      );
+
+      if (recomended) {
+        setSelectedModel(recomended);
+        return true;
+      }
+
+      return false;
+    };
+
     const fetchModels = async () => {
       try {
         const m = await getModels(selectedProvider?.id);
         setModels(m);
         modelCache.setModels(selectedProvider.id, m);
+
+        if (pickRecomendedIfPending(m)) return;
 
         if (selectedModel?.modelId) {
           const model = m.find((mo) => mo.modelId === selectedModel.modelId);
@@ -227,6 +262,12 @@ const ModelSettings = ({
 
     if (cachedModels) {
       setModels(cachedModels);
+
+      if (pickRecomendedIfPending(cachedModels)) {
+        setIsModelsLoading(false);
+        setIsModelsFetched(true);
+        return;
+      }
 
       if (selectedModel?.modelId) {
         const model = cachedModels.find(
@@ -334,6 +375,37 @@ const ModelSettings = ({
     [models],
   );
 
+  const onSelectRecomendedModel = React.useCallback(() => {
+    // Current provider is OpenRouter — pick its first recommended model.
+    if (selectedProvider?.type === ProviderType.OpenRouter) {
+      const recomended = models.find((model) =>
+        RECOMENDED_MODELS.includes(model.modelId),
+      );
+
+      if (recomended) setSelectedModel(recomended);
+
+      return;
+    }
+
+    // Otherwise switch to the first available OpenRouter provider; the models
+    // effect loads its model list and then preselects a recommended one (if
+    // present), falling back to the provider's default model otherwise.
+    const openRouterProvider = providers.find(
+      (provider) => provider.type === ProviderType.OpenRouter,
+    );
+
+    if (!openRouterProvider || openRouterProvider.id === selectedProvider?.id)
+      return;
+
+    pendingRecomendedRef.current = true;
+    setSelectedProvider(openRouterProvider);
+    setSelectedModel(null);
+    setError(null);
+    setIsModelsLoading(true);
+    setIsModelsFetched(false);
+    setHasProviderBeenSwitched(true);
+  }, [selectedProvider, providers, models]);
+
   React.useEffect(() => {
     if (!selectedModel && !error) return;
 
@@ -365,6 +437,14 @@ const ModelSettings = ({
       !selectedModel?.modelId &&
       !error &&
       !hasProviderBeenSwitched);
+
+  const availableProviders = providers.map((provider) => provider.type);
+  const modelIds = models.map((model) => model.modelId);
+
+  // Don't show the recommendation banner until providers and models are loaded,
+  // otherwise it briefly flashes the wrong (not-available) state.
+  const isRecomendationReady =
+    isProvidersFetched && !isProvidersLoading && !isModelLoading;
 
   return (
     <StyledParam increaseGap>
@@ -403,6 +483,21 @@ const ModelSettings = ({
             />
           </Text>
         </div>
+
+        {isRecomendationReady ? (
+          <RecomendedModel
+            isAdmin={!!isAdmin}
+            isChat={false}
+            selectedModel={selectedModel?.modelId ?? ""}
+            providerType={selectedProvider?.type}
+            availableProviders={availableProviders}
+            modelList={modelIds}
+            recomendedModel={RECOMENDED_MODELS}
+            onOpenSettings={onOpenSettings}
+            onSelectModel={onSelectRecomendedModel}
+          />
+        ) : null}
+
         {isProvidersLoading ? (
           <RectangleSkeleton width="100%" height="32px" />
         ) : (
