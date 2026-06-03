@@ -189,7 +189,7 @@ export type TUpdateDefaultProviderData = {
 };
 
 export type TAIUserConfig = {
-  chatRecomendedModelVisible: boolean;
+  chatRecommendedModelVisible: boolean;
 };
 
 export type TModelSettingsItem = {

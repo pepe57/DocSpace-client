@@ -121,20 +121,20 @@ const AIAgentViewComponent = ({
   const navigate = useNavigate();
   const scrollRef = useScroll();
 
-  const [chatRecomendedModelVisible, setChatRecomendedModelVisible] =
+  const [chatRecommendedModelVisible, setChatRecommendedModelVisible] =
     useState<boolean | undefined>(undefined);
 
   useEffect(() => {
     getAIUserConfig()
       .then((config) =>
-        setChatRecomendedModelVisible(config.chatRecomendedModelVisible),
+        setChatRecommendedModelVisible(config.chatRecommendedModelVisible),
       )
       .catch(() => {});
   }, []);
 
   const onCloseRecomendation = useCallback(() => {
-    setChatRecomendedModelVisible(false);
-    updateAIUserConfig({ chatRecomendedModelVisible: false }).catch(() => {});
+    setChatRecommendedModelVisible(false);
+    updateAIUserConfig({ chatRecommendedModelVisible: false }).catch(() => {});
   }, []);
 
   const goToWebSearchSettings = useCallback(() => {
@@ -192,7 +192,7 @@ const AIAgentViewComponent = ({
             messagesSettings={messagesSettings}
             isAdmin={isAdmin}
             canEditAgent={canEditAgent}
-            chatRecomendedModelVisible={chatRecomendedModelVisible}
+            chatRecommendedModelVisible={chatRecommendedModelVisible}
             onCloseRecomendation={onCloseRecomendation}
             aiReady={aiConfig?.aiReady || false}
             modelAliases={aiConfig?.modelAliases}
