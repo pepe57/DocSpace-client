@@ -64,7 +64,7 @@ import { ProviderType } from "@docspace/shared/api/ai/enums";
 type ModelSettingsProps = {
   agentParams: TAgentParams;
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
-  recomendedModelForForms?: TAIConfig["recomendedModelForForms"];
+  recommendedModelForForms?: TAIConfig["recommendedModelForForms"];
   isAdmin?: boolean;
   setAgentParams: (value: Partial<TAgentParams>) => void;
 };
@@ -72,7 +72,7 @@ type ModelSettingsProps = {
 const ModelSettings = ({
   agentParams,
   systemAiEnabled,
-  recomendedModelForForms,
+  recommendedModelForForms,
   isAdmin,
   setAgentParams,
 }: ModelSettingsProps) => {
@@ -109,9 +109,6 @@ const ModelSettings = ({
     React.useState(false);
 
   const prevSelectedModel = React.useRef<TModel | null>(null);
-
-  // When set, the next loaded model list should preselect a recommended model.
-  const pendingRecomendedRef = React.useRef(false);
 
   React.useEffect(() => {
     const defaultProvider = modelCache.getDefaultProvider();
@@ -205,31 +202,11 @@ const ModelSettings = ({
   React.useEffect(() => {
     const defaultModel = modelCache.getDefaultProvider()?.defaultModel;
 
-    // If a recommended model was requested, preselect it from the loaded list.
-    const pickRecomendedIfPending = (list: TModel[]) => {
-      if (!pendingRecomendedRef.current) return false;
-
-      pendingRecomendedRef.current = false;
-
-      const recomended = list.find(
-        (mo) => mo.modelId === recomendedModelForForms,
-      );
-
-      if (recomended) {
-        setSelectedModel(recomended);
-        return true;
-      }
-
-      return false;
-    };
-
     const fetchModels = async () => {
       try {
         const m = await getModels(selectedProvider?.id);
         setModels(m);
         modelCache.setModels(selectedProvider.id, m);
-
-        if (pickRecomendedIfPending(m)) return;
 
         if (selectedModel?.modelId) {
           const model = m.find((mo) => mo.modelId === selectedModel.modelId);
@@ -261,12 +238,6 @@ const ModelSettings = ({
 
     if (cachedModels) {
       setModels(cachedModels);
-
-      if (pickRecomendedIfPending(cachedModels)) {
-        setIsModelsLoading(false);
-        setIsModelsFetched(true);
-        return;
-      }
 
       if (selectedModel?.modelId) {
         const model = cachedModels.find(
@@ -374,11 +345,11 @@ const ModelSettings = ({
     [models],
   );
 
-  const onSelectRecomendedModel = React.useCallback(() => {
+  const onSelectRecomendedModel = React.useCallback(async () => {
     // Current provider is OpenRouter — pick the recommended model.
     if (selectedProvider?.type === ProviderType.OpenRouter) {
       const recomended = models.find(
-        (model) => model.modelId === recomendedModelForForms,
+        (model) => model.modelId === recommendedModelForForms,
       );
 
       if (recomended) setSelectedModel(recomended);
@@ -386,9 +357,10 @@ const ModelSettings = ({
       return;
     }
 
-    // Otherwise switch to the first available OpenRouter provider; the models
-    // effect loads its model list and then preselects a recommended one (if
-    // present), falling back to the provider's default model otherwise.
+    // Otherwise switch to the first available OpenRouter provider and select
+    // its recommended model (loading the model list if needed). Caching the
+    // models before switching lets the models effect keep our selection
+    // instead of falling back to the provider's default.
     const openRouterProvider = providers.find(
       (provider) => provider.type === ProviderType.OpenRouter,
     );
@@ -396,14 +368,27 @@ const ModelSettings = ({
     if (!openRouterProvider || openRouterProvider.id === selectedProvider?.id)
       return;
 
-    pendingRecomendedRef.current = true;
+    let providerModels = modelCache.getModels(openRouterProvider.id);
+
+    if (!providerModels) {
+      try {
+        providerModels = await getModels(openRouterProvider.id);
+        modelCache.setModels(openRouterProvider.id, providerModels);
+      } catch {
+        providerModels = [];
+      }
+    }
+
+    const recomended =
+      providerModels.find(
+        (model) => model.modelId === recommendedModelForForms,
+      ) ?? null;
+
     setSelectedProvider(openRouterProvider);
-    setSelectedModel(null);
+    setSelectedModel(recomended);
     setError(null);
-    setIsModelsLoading(true);
-    setIsModelsFetched(false);
     setHasProviderBeenSwitched(true);
-  }, [selectedProvider, providers, models, recomendedModelForForms]);
+  }, [selectedProvider, providers, models, recommendedModelForForms]);
 
   React.useEffect(() => {
     if (!selectedModel && !error) return;
@@ -491,7 +476,7 @@ const ModelSettings = ({
             providerType={selectedProvider?.type}
             availableProviders={availableProviders}
             modelList={modelIds}
-            recomendedModel={recomendedModelForForms ?? ""}
+            recomendedModel={recommendedModelForForms ?? ""}
             onOpenSettings={onOpenSettings}
             onSelectModel={onSelectRecomendedModel}
           />
@@ -544,3 +529,4 @@ const ModelSettings = ({
 };
 
 export default ModelSettings;
+
