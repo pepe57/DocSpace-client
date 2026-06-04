@@ -377,7 +377,10 @@ export const useShare = ({
   };
 
   const onCopyLink = async (link: TFileLink) => {
-    if (link.sharedTo?.isExpired) return;
+    if (link.sharedTo?.isExpired) {
+      toastr.error(t("Common:LinkExpired"));
+      return;
+    }
 
     const isBlockedByAdmin =
       isExternalShareRestricted &&
@@ -448,7 +451,7 @@ export const useShare = ({
         key: "copy-link-settings-key",
         label: t("Common:CopySharedLink"),
         icon: CopyToReactSvgUrl,
-        onClick: () => copyShareLink(infoPanelSelection, link, t),
+        onClick: () => onCopyLink(link),
       },
       {
         key: "embedding-settings-key",
