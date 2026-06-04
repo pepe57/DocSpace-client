@@ -669,7 +669,7 @@ const ArticleMainButtonContent = (props) => {
 
     if (isAIRoom && (isChatTab || isResultTab)) visibilityValue = false;
 
-    if (isAIAgentsFolder && aiConfig.aiReadyNeedReset) visibilityValue = false;
+    if (isAIAgentsFolder && aiConfig?.aiReadyNeedReset) visibilityValue = false;
 
     return visibilityValue;
   };
@@ -748,7 +748,7 @@ const ArticleMainButtonContent = (props) => {
           label={t("Common:NewAgent")}
           onClick={onCreateAgent}
           $currentColorScheme={currentColorScheme}
-          isDisabled={isDisabled || aiConfig.aiReadyNeedReset}
+          isDisabled={isDisabled || aiConfig?.aiReadyNeedReset}
           size="small"
           primary
           scale
