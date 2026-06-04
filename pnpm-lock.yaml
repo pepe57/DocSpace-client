@@ -689,9 +689,6 @@ importers:
       react-i18next:
         specifier: 14.0.1
         version: 14.0.1(i18next@23.7.19)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      sass:
-        specifier: 1.79.6
-        version: 1.79.6
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
@@ -753,6 +750,9 @@ importers:
       prettier:
         specifier: ^3.8.1
         version: 3.8.3
+      sass:
+        specifier: 1.79.6
+        version: 1.79.6
       shx:
         specifier: 0.4.0
         version: 0.4.0
@@ -813,9 +813,6 @@ importers:
       resize-image:
         specifier: 0.1.0
         version: 0.1.0
-      sass:
-        specifier: 1.79.6
-        version: 1.79.6
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
@@ -868,6 +865,9 @@ importers:
       prettier:
         specifier: ^3.8.1
         version: 3.8.3
+      sass:
+        specifier: 1.79.6
+        version: 1.79.6
       shx:
         specifier: 0.4.0
         version: 0.4.0
@@ -918,7 +918,7 @@ importers:
         version: 0.12.1
       next:
         specifier: 16.2.6
-        version: 16.2.6(@babel/core@7.25.8)(@playwright/test@1.58.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.97.3)
+        version: 16.2.6(@babel/core@7.25.8)(@playwright/test@1.58.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.79.6)
       react:
         specifier: 19.2.4
         version: 19.2.4
@@ -937,9 +937,6 @@ importers:
       resize-image:
         specifier: 0.1.0
         version: 0.1.0
-      sass:
-        specifier: 1.97.3
-        version: 1.97.3
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
@@ -1013,6 +1010,9 @@ importers:
       prettier:
         specifier: ^3.8.1
         version: 3.8.3
+      sass:
+        specifier: 1.79.6
+        version: 1.79.6
       shx:
         specifier: 0.4.0
         version: 0.4.0
@@ -1076,9 +1076,6 @@ importers:
       react-virtualized:
         specifier: ^9.22.6
         version: 9.22.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      sass:
-        specifier: 1.79.6
-        version: 1.79.6
       ts-pattern:
         specifier: 5.5.0
         version: 5.5.0
@@ -1137,6 +1134,9 @@ importers:
       prettier:
         specifier: ^3.8.1
         version: 3.8.3
+      sass:
+        specifier: 1.79.6
+        version: 1.79.6
       shx:
         specifier: 0.4.0
         version: 0.4.0
@@ -8051,11 +8051,6 @@ packages:
 
   sass@1.79.6:
     resolution: {integrity: sha512-PVVjeeiUGx6Nj4PtEE/ecwu8ltwfPKzHxbbVmmLj4l1FYHhOyfA0scuVF8sVaa+b+VY4z7BVKjKq0cPUQdUU3g==}
-    engines: {node: '>=14.0.0'}
-    hasBin: true
-
-  sass@1.97.3:
-    resolution: {integrity: sha512-fDz1zJpd5GycprAbu4Q2PV/RprsRtKC/0z82z0JLgdytmcq0+ujJbJ/09bPGDxCLkKY3Np5cRAOcWiVkLXJURg==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -15094,33 +15089,6 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@16.2.6(@babel/core@7.25.8)(@playwright/test@1.58.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.97.3):
-    dependencies:
-      '@next/env': 16.2.6
-      '@swc/helpers': 0.5.15
-      baseline-browser-mapping: 2.10.29
-      caniuse-lite: 1.0.30001792
-      postcss: 8.5.14
-      react: 19.2.4
-      react-dom: 19.2.4(react@19.2.4)
-      styled-jsx: 5.1.6(@babel/core@7.25.8)(react@19.2.4)
-    optionalDependencies:
-      '@next/swc-darwin-arm64': 16.2.6
-      '@next/swc-darwin-x64': 16.2.6
-      '@next/swc-linux-arm64-gnu': 16.2.6
-      '@next/swc-linux-arm64-musl': 16.2.6
-      '@next/swc-linux-x64-gnu': 16.2.6
-      '@next/swc-linux-x64-musl': 16.2.6
-      '@next/swc-win32-arm64-msvc': 16.2.6
-      '@next/swc-win32-x64-msvc': 16.2.6
-      '@playwright/test': 1.58.1
-      babel-plugin-react-compiler: 1.0.0
-      sass: 1.97.3
-      sharp: 0.34.5
-    transitivePeerDependencies:
-      - '@babel/core'
-      - babel-plugin-macros
-
   nice-try@1.0.5: {}
 
   no-case@3.0.4:
@@ -16440,14 +16408,6 @@ snapshots:
       chokidar: 4.0.3
       immutable: 5.1.5
       source-map-js: 1.2.1
-
-  sass@1.97.3:
-    dependencies:
-      chokidar: 4.0.3
-      immutable: 5.1.5
-      source-map-js: 1.2.1
-    optionalDependencies:
-      '@parcel/watcher': 2.5.6
 
   sax@1.6.0: {}
 
