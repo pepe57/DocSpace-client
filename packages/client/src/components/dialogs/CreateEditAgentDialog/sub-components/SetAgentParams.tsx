@@ -64,6 +64,8 @@ import { TAgent, TAIConfig } from "@docspace/shared/api/ai/types";
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import AvatarEditorDialogStore from "SRC_DIR/store/AvatarEditorDialogStore";
+import CreateEditAgentStore from "SRC_DIR/store/CreateEditAgentStore";
+import { AgentDialogContext } from "SRC_DIR/helpers/enums";
 import { TLogo } from "@docspace/ui-kit/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import ChangeRoomOwner from "SRC_DIR/components/ChangeRoomOwner";
@@ -177,6 +179,7 @@ type setAgentParamsProps = {
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
   recommendedModelForForms?: TAIConfig["recommendedModelForForms"];
   isUserAdmin?: boolean;
+  openContext?: CreateEditAgentStore["openContext"];
 };
 
 const setAgentParams = ({
@@ -216,6 +219,7 @@ const setAgentParams = ({
   systemAiEnabled,
   recommendedModelForForms,
   isUserAdmin,
+  openContext,
 }: setAgentParamsProps) => {
   const { t } = useTranslation([
     "CreateEditRoomDialog",
@@ -543,6 +547,7 @@ const setAgentParams = ({
         systemAiEnabled={systemAiEnabled}
         recommendedModelForForms={recommendedModelForForms}
         isAdmin={!!isUserAdmin}
+        openedFromChat={openContext === AgentDialogContext.Chat}
         setAgentParams={setAgentParams}
       />
       <InstructionsSettings
@@ -601,8 +606,10 @@ export default inject(
     avatarEditorDialogStore,
     currentQuotaStore,
     userStore,
+    createEditAgentStore,
   }: TStore) => {
     const { isDefaultAIAgentsQuotaSet } = currentQuotaStore;
+    const { openContext } = createEditAgentStore;
     const { folderFormValidation, maxImageUploadSize, aiConfig } =
       settingsStore;
 
@@ -652,6 +659,7 @@ export default inject(
       recommendedModelForForms: aiConfig?.recommendedModelForForms,
       isUserAdmin:
         !!userStore?.user && (userStore.user.isOwner || userStore.user.isAdmin),
+      openContext,
     };
   },
 )(observer(setAgentParams));
