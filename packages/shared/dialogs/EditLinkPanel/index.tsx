@@ -323,7 +323,7 @@ const EditLinkPanel: FC<EditLinkPanelProps> = ({
         password: passwordAccessIsChecked ? passwordValue : undefined,
         denyDownload,
         internal: selectedLinkAccess.internal,
-        ...(!isSameDate && expirationDate && { expirationDate }),
+        ...(!isSameDate && { expirationDate }),
         title: deferredLinkTitle,
       },
     };
