@@ -22,6 +22,8 @@
     "common/translation-app/**",
     "common/screenshot-comparison-app/**"
   ],
+  // Peer dependencies not imported directly in source code — consumed internally by their dependents
+  "ignoreDependencies": ["linkifyjs"],
   // Don't flag an export that is also referenced within the same file
   "ignoreExportsUsedInFile": true,
   "duplicates": {
