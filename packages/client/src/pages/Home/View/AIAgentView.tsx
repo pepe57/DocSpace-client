@@ -56,6 +56,7 @@ import type { TUser } from "@docspace/shared/api/people/types";
 import NoAccessContainer, {
   NoAccessContainerType,
 } from "SRC_DIR/components/EmptyContainer/NoAccessContainer";
+import { AgentDialogContext } from "SRC_DIR/helpers/enums";
 import { SectionBodyContent } from "SRC_DIR/pages/Home/Section";
 import type FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
 import type SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
@@ -151,7 +152,7 @@ const AIAgentViewComponent = ({
     const agent = await getAIAgent(roomId as unknown as TAgent["id"]);
 
     const event = new CustomEvent(Events.AGENT_EDIT, {
-      detail: { context: "chat_view" },
+      detail: { context: AgentDialogContext.Chat },
     }) as unknown as CustomEvent & { item: TAgent };
     event.item = agent;
 

@@ -66,6 +66,7 @@ type ModelSettingsProps = {
   systemAiEnabled?: TAIConfig["systemAiEnabled"];
   recommendedModelForForms?: TAIConfig["recommendedModelForForms"];
   isAdmin?: boolean;
+  openedFromChat?: boolean;
   setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
@@ -74,6 +75,7 @@ const ModelSettings = ({
   systemAiEnabled,
   recommendedModelForForms,
   isAdmin,
+  openedFromChat,
   setAgentParams,
 }: ModelSettingsProps) => {
   const { t } = useTranslation(["AIRoom", "Common"]);
@@ -425,10 +427,14 @@ const ModelSettings = ({
   const availableProviders = providers.map((provider) => provider.type);
   const modelIds = models.map((model) => model.modelId);
 
-  // Don't show the recommendation banner until providers and models are loaded,
-  // otherwise it briefly flashes the wrong (not-available) state.
+  // Show the recommendation banner only when the dialog was opened from the
+  // chat recommendation banner, and not until providers and models are loaded
+  // (otherwise it briefly flashes the wrong, not-available state).
   const isRecomendationReady =
-    isProvidersFetched && !isProvidersLoading && !isModelLoading;
+    openedFromChat &&
+    isProvidersFetched &&
+    !isProvidersLoading &&
+    !isModelLoading;
 
   return (
     <StyledParam increaseGap>
