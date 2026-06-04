@@ -88,6 +88,12 @@ export default async function RootLayout({
     redirect(`${baseURL}/${settings}`);
   }
 
+  if (settings && !settings.standalone) {
+    logger.info("Management layout not available: SaaS mode");
+
+    redirect(`${baseURL}/error/403`);
+  }
+
   if (
     (user && !user.isAdmin && !user.isOwner) ||
     (settings && settings.limitedAccessSpace) ||
@@ -152,7 +158,7 @@ export default async function RootLayout({
         >
           <Toast isSSR />
           <ManagementDialogs settings={settings!} user={user!} />
-          <LayoutWrapper portals={portals!} isCommunity={openSource}>
+          <LayoutWrapper portals={portals} isCommunity={openSource}>
             {children}
           </LayoutWrapper>
         </Providers>
