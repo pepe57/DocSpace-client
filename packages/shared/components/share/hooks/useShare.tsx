@@ -486,11 +486,10 @@ export const useShare = ({
 
   const canAddLink = (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
 
-  const isInRoomContext =
-    "rootFolderType" in infoPanelSelection &&
-    infoPanelSelection.rootFolderType === FolderType.Rooms;
-
-  const blockLinkCreation = !!isExternalShareRestricted && isInRoomContext;
+  const blockLinkCreation =
+    isExternalShareRestricted &&
+    blockExistingLinksOnRestrict &&
+    infoPanelSelection.parentRoomType === FolderType.PublicRoom;
 
   const getTextTooltip = () => {
     return (
@@ -502,7 +501,10 @@ export const useShare = ({
 
   const getLinkElements = () => {
     const options =
-      fileLinks.length > 0 && !onlyOneLink && canAddLink && !blockLinkCreation ? (
+      fileLinks.length > 0 &&
+      !onlyOneLink &&
+      canAddLink &&
+      !blockLinkCreation ? (
         <div data-tooltip-id="file-links-tooltip" data-tip="tooltip">
           <IconButton
             className={styles.linkToViewingIcon}
@@ -573,4 +575,3 @@ export const useShare = ({
 
   return { getLinkElements };
 };
-
