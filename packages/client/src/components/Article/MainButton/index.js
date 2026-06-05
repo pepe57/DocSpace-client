@@ -184,7 +184,11 @@ const ArticleMainButtonContent = (props) => {
       }
 
       const event = new CustomEvent(Events.CREATE, {
-        detail: { parentId: currentFolderId, context: "sidebar", extension: format },
+        detail: {
+          parentId: currentFolderId,
+          context: "sidebar",
+          extension: format,
+        },
       });
 
       const payload = {
@@ -212,11 +216,6 @@ const ArticleMainButtonContent = (props) => {
   }, [isWarningRoomsDialog, currentFolderId]);
 
   const onCreateAgent = React.useCallback(() => {
-    if (isWarningRoomsDialog) {
-      setQuotaWarningDialogVisible(true);
-      return;
-    }
-
     const event = new CustomEvent(Events.AGENT_CREATE, {
       detail: { parentId: currentFolderId, context: "sidebar" },
     });
@@ -323,7 +322,9 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-from-docspace",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("Common:FromPortal", { productName: getBrandName("ProductName") }),
+        label: t("Common:FromPortal", {
+          productName: getBrandName("ProductName"),
+        }),
         key: "actions_upload-from-docspace",
         disabled: false,
         onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),
