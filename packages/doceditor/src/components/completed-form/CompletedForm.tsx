@@ -162,11 +162,7 @@ export const CompletedForm = ({
                 : t("CompletedForm:DescriptionForRegisteredUser")}
             </Text>
           </section>
-          <main
-            className={classNames(styles.mainContent, {
-              [styles.mainOutWithManager]: !manager,
-            })}
-          >
+          <main className={styles.mainContent}>
             <div
               className={classNames(
                 styles.completedFormBox,
