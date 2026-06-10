@@ -134,8 +134,11 @@ const InjectedEmptyViewContainer = inject<
     peopleStore,
     settingsStore,
     authStore,
+    currentTariffStatusStore,
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
+    const { isGracePeriod } = currentTariffStatusStore;
+
     const { isPublicRoom } = publicRoomStore;
     const { isFrame, logoText, aiConfig, standalone, tenantAlias, baseDomain } =
       settingsStore;
@@ -214,8 +217,10 @@ const InjectedEmptyViewContainer = inject<
       tenantAlias,
       baseDomain,
       socialAuthUser: userStore?.user,
+      isGracePeriod,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);
 
 export default InjectedEmptyViewContainer;
+
