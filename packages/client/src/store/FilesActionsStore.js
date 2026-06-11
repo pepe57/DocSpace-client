@@ -1713,10 +1713,10 @@ class FilesActionStore {
       }
 
       if (tag.roomType) {
-        if (!!newFilter.type && +newFilter.type === tag.roomType) return;
+        if (newFilter.type && +newFilter.type === tag.roomType) return;
         newFilter.type = tag.roomType;
       } else if (tag.providerType) {
-        if (!!newFilter.provider && +newFilter.provider === tag.providerType)
+        if (newFilter.provider && +newFilter.provider === tag.providerType)
           return;
         newFilter.provider = tag.providerType;
       } else {

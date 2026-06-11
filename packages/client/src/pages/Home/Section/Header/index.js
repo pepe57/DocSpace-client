@@ -1302,7 +1302,7 @@ export default inject(
 
     let folderPath = navigationPath;
 
-    if (isFrame && !!pathParts) {
+    if (isFrame && pathParts) {
       folderPath = navigationPath.filter((item) => !item.isRootRoom);
     }
 
