@@ -2604,12 +2604,12 @@ class FilesActionStore {
       .set("downloadAs", downloadAs)
       .set("copy", copy)
       /* .set("delete", {
-        label: t("RemoveFromFavorites"),
-        alt: t("RemoveFromFavorites"),
+        label: t("Common:RemoveFromFavorites"),
+        alt: t("Common:RemoveFromFavorites"),
         iconUrl: FavoritesFillReactSvgUrl,
         onClick: () => {
           this.setFavoriteAction("remove", selection)
-            .then(() => toastr.success(t("RemovedFromFavorites")))
+            .then(() => toastr.success(t("Common:RemovedFromFavorites")))
             .catch((err) => toastr.error(err));
         },
       }) */

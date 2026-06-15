@@ -3435,7 +3435,7 @@ class ContextOptionsStore {
     const options = [
       /* {
         key: "mark-as-favorite",
-        label: t("MarkAsFavorite"),
+        label: t("Common:MarkAsFavorite"),
         icon: FavoritesReactSvgUrl,
         onClick: (e) => this.onClickFavorite("mark", favoriteItems, t),
         disabled: !favoriteItems.length,
@@ -3510,7 +3510,7 @@ class ContextOptionsStore {
       },
       /* {
         key: "remove-from-favorites",
-        label: t("RemoveFromFavorites"),
+        label: t("Common:RemoveFromFavorites"),
         icon: FavoritesFillReactSvgUrl,
         onClick: (e) => this.onClickFavorite("remove", removeFromFavoriteItems, t),
         disabled: favoriteItems.length || !removeFromFavoriteItems.length,

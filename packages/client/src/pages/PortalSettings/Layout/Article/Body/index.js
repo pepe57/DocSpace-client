@@ -202,7 +202,7 @@ const ArticleBodyContent = (props) => {
       case "Customization":
         return t("Customization");
       case "SettingsGeneral":
-        return t("SettingsGeneral");
+        return t("Common:SettingsGeneral");
       case "StudioTimeLanguageSettings":
         return t("StudioTimeLanguageSettings");
       case "CustomTitlesWelcome":
