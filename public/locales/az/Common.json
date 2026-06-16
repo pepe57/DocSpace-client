@@ -1173,6 +1173,7 @@
   "RoomAdmin": "Otaq admini",
   "RoomCreateUser": "İstifadəçilər əlavə edildi.",
   "RoomEmptyAtTheMoment": "Bu otaq hazırda boşdur.",
+  "RoomFilesLifetime": "Bu otaqda faylın istifadə müddəti {{days}} {{period}} olaraq təyin edilib",
   "RoomGroups": "Otaq qrupları",
   "RoomInfo": "Otaq məlumatları",
   "RoomLinkExpired": "Açmağa çalışdığınız otaq linki mövcud deyil və ya vaxtı keçib.",
