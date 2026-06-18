@@ -241,7 +241,7 @@ export async function getAllPortals() {
 
     const portals = await portalsRes.json();
 
-    return portals as TGetAllPortals;
+    return portals.response as TGetAllPortals;
   } catch (error) {
     if (isDynamicServerError(error)) {
       throw error;
