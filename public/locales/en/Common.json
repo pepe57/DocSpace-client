@@ -1014,6 +1014,7 @@
   "PaymentsTitle": "Payments",
   "PDFs": "PDFs",
   "People": "People",
+  "PeopleSelectorInfo": "Only a room admin or a {{productName}} admin can become the owner of the room",
   "PerBackup": "{{currency}} per 1 backup",
   "Permissions": "Permissions",
   "PerStorage": "{{currency}} per {{amount}}/month",
