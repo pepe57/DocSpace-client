@@ -1,7 +1,6 @@
 {
   "AccountLoginType": "Type de connexion au compte",
   "AddMembers": "Ajouter des membres",
-  "CreateGroup": "Créer un groupe",
   "DeleteSelfProfile": "Désactiver le compte",
   "DisabledEmployeeStatus": "Désactivé",
   "DisableUserButton": "Désactiver",
@@ -24,7 +23,7 @@
   "RemoveGuestsDescription": "Les invités sélectionnés seront retirés de toutes les salles dans lesquelles vous les avez invités. Cette action ne peut être annulée.",
   "ResetAuth": "Réinitialiser l’authentification",
   "SendInviteAgain": "Envoyer une nouvelle invitation",
-  "ShareGuest": "Partager l'invité",
+  "ShareGuest": "Partager les infos de l'invité",
   "SSOAccountTooltip": "Ce compte d'utilisateur est chargé depuis le SSO. Si vous devez modifier le nom d'utilisateur et l'adresse e-mail, reportez-vous au serveur SSO.",
   "StandardLogin": "Connexion standard",
   "SuccessChangeGuestStatus": "Le statut de l'invité a été modifié avec succès",

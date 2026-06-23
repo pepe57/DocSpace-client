@@ -1,0 +1,171 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/mixins";
+
+.wizardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  @include mixins.tablet {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  @include mixins.mobile {
+    max-width: 100%;
+  }
+
+  :global(.logo-wrapper) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 40px;
+    max-width: 386px;
+  }
+
+  .formHeader {
+    padding-bottom: 24px;
+  }
+
+  :global(.password-field-wrapper) {
+    width: 100% !important;
+  }
+
+  .wizardField {
+    width: 100%;
+  }
+
+  .passwordField {
+    margin: 0px !important;
+  }
+
+  .licenseField {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.linkWrapper {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding-bottom: 16px;
+  padding-top: 8px;
+
+  .generatePasswordLink {
+    color: var(--login-wizard-generate-password-color);
+  }
+
+  :global(.icon-button_svg) {
+    svg {
+      path {
+        fill: var(--login-wizard-generate-password-color) !important;
+      }
+    }
+  }
+}
+
+.infoWrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 59px 1fr;
+  align-items: center;
+  gap: 16px;
+
+  margin-bottom: 4px;
+
+  .text {
+    color: var(--login-text-color);
+  }
+
+  .machineName {
+    padding-bottom: 4px;
+    padding-top: 4px;
+    padding-inline-start: 8px;
+    line-height: 20px;
+  }
+
+  .wrapperLanguageSelector {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  :global(.combo-button) {
+    padding-inline-start: 8px !important;
+  }
+
+  :global(.combo-button-label) {
+    max-width: 220px !important;
+
+    @include mixins.tablet {
+      max-width: 300px !important;
+    }
+
+    @include mixins.mobile {
+      max-width: 220px !important;
+    }
+  }
+}
+
+.acceptTerms {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  padding-top: 20px;
+  padding-bottom: 24px;
+
+  .wizardCheckbox > svg {
+    margin-inline-end: 8px;
+  }
+
+  .licenseLink {
+    color: var(--accent-main);
+
+    &.hasErrorAgree {
+      color: var(--login-error-color);
+    }
+  }
+
+  :global(.wrapper) {
+    height: auto !important;
+  }
+}

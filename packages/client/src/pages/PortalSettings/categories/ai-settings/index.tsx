@@ -1,49 +1,62 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 
-import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
+import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
 
 import { DeviceType } from "@docspace/shared/enums";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
+import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 
-import { AIProvider } from "./providers";
-import { MCPServers } from "./servers";
-import { Search } from "./search";
-import { Knowledge } from "./knowledge";
+import { AIProvider, ProvidersLoader } from "./providers";
+import { MCPServers, ServersLoader } from "./servers";
+import { Search, SearchLoader } from "./search";
+import { Knowledge, KnowledgeLoader } from "./knowledge";
 
 import useAiSettings from "./useAiSettings";
+
+import styles from "./AISettings.module.scss";
 
 const detectCurrentTabId = (standalone: boolean) => {
   const path = window.location.pathname;
@@ -61,6 +74,13 @@ const detectCurrentTabId = (standalone: boolean) => {
   return "";
 };
 
+const loaders: Record<string, React.ReactNode> = {
+  providers: <ProvidersLoader />,
+  servers: <ServersLoader />,
+  search: <SearchLoader />,
+  knowledge: <KnowledgeLoader />,
+};
+
 type TAiSettingsProps = {
   currentDeviceType?: DeviceType;
   standalone?: boolean;
@@ -69,6 +89,9 @@ type TAiSettingsProps = {
   fetchAIProviders?: AISettingsStore["fetchAIProviders"];
   fetchMCPServers?: AISettingsStore["fetchMCPServers"];
   fetchWebSearch?: AISettingsStore["fetchWebSearch"];
+  initDefaultProvider?: AISettingsStore["initDefaultProvider"];
+
+  showPortalSettingsLoader?: ClientLoadingStore["showPortalSettingsLoader"];
 };
 
 // TODO: add standalone flag from store for hide ai providers
@@ -79,8 +102,10 @@ const AiSettings = ({
   fetchAIProviders,
   fetchMCPServers,
   fetchWebSearch,
+  initDefaultProvider,
+  showPortalSettingsLoader,
 }: TAiSettingsProps) => {
-  const { t } = useTranslation(["Common", "AISettings", "AIRoom"]);
+  const { t, ready } = useTranslation(["Common", "AISettings", "AIRoom"]);
 
   const { initAIProviders, initMCPServers, initWebSearch, initKnowledge } =
     useAiSettings({
@@ -88,6 +113,7 @@ const AiSettings = ({
       fetchMCPServers,
       fetchWebSearch,
       fetchKnowledge,
+      initDefaultProvider,
       standalone,
     });
 
@@ -109,21 +135,21 @@ const AiSettings = ({
   }, [standalone]);
 
   React.useEffect(() => {
-    const titleKey =
+    const title =
       currentTabId === "providers"
-        ? "AISettings:AIProvider"
+        ? t("Common:AIProvider")
         : currentTabId === "search"
-          ? "AISettings:Search"
+          ? t("Common:WebSearchAI")
           : currentTabId === "knowledge"
-            ? "AIRoom:Knowledge"
-            : "AISettings:MCPSettingTitle";
-    setDocumentTitle(t(titleKey));
+            ? t("AIRoom:Knowledge")
+            : t("Common:MCPSettingTitle");
+    setDocumentTitle(title);
   }, [t, currentTabId]);
 
   const serversData = [
     {
       id: "servers",
-      name: t("AISettings:MCPSettingTitle"),
+      name: t("Common:MCPSettingTitle"),
       content: <MCPServers standalone={standalone} />,
       onClick: initMCPServers,
     },
@@ -133,14 +159,14 @@ const AiSettings = ({
     ? [
         {
           id: "providers",
-          name: t("AISettings:AIProvider"),
+          name: t("Common:AIProvider"),
           content: <AIProvider />,
           onClick: initAIProviders,
         },
         ...serversData,
         {
           id: "search",
-          name: t("AISettings:Search"),
+          name: t("Common:WebSearchAI"),
           content: <Search />,
           onClick: initWebSearch,
         },
@@ -152,6 +178,15 @@ const AiSettings = ({
         },
       ]
     : serversData;
+
+  if (showPortalSettingsLoader || !ready) {
+    return (
+      <>
+        <RectangleSkeleton className={styles.tabsLoader} />
+        {loaders[currentTabId]}
+      </>
+    );
+  }
 
   return (
     <Tabs
@@ -165,7 +200,7 @@ const AiSettings = ({
 };
 
 export const Component = inject(
-  ({ settingsStore, aiSettingsStore }: TStore) => {
+  ({ settingsStore, aiSettingsStore, clientLoadingStore }: TStore) => {
     const { currentDeviceType } = settingsStore;
 
     const {
@@ -173,7 +208,10 @@ export const Component = inject(
       fetchMCPServers,
       fetchWebSearch,
       fetchKnowledge,
+      initDefaultProvider,
     } = aiSettingsStore;
+
+    const { showPortalSettingsLoader } = clientLoadingStore;
 
     return {
       currentDeviceType,
@@ -181,6 +219,8 @@ export const Component = inject(
       fetchMCPServers,
       fetchWebSearch,
       fetchKnowledge,
+      initDefaultProvider,
+      showPortalSettingsLoader,
     };
   },
 )(observer(AiSettings));

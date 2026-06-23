@@ -1,43 +1,53 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
+import classNames from "classnames";
 
 import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg";
 import EyeIcon from "PUBLIC_DIR/images/eye.react.svg";
 import FormFillIcon from "PUBLIC_DIR/images/form.fill.rect.svg";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/icons/16/copy.react.svg?url";
 
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 import {
   FileFillingFormStatus,
   FileStatus,
@@ -48,34 +58,27 @@ import {
   mobile,
   mobileMore,
 } from "@docspace/shared/utils";
-import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
-import { Text } from "@docspace/shared/components/text";
+import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
+import { Text } from "@docspace/ui-kit/components/text";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { InputBlock } from "@docspace/shared/components/input-block";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { InputBlock } from "@docspace/ui-kit/components/input-block";
+import { InputSize, InputType } from "@docspace/ui-kit/components/text-input";
 import {
   RoleStep,
   StatusIndicator,
 } from "@docspace/shared/components/filling-role-process";
 import { copyShareLink } from "@docspace/shared/utils/copy";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 import type { TFile } from "@docspace/shared/api/files/types";
+import type { TEditFileData } from "@docspace/ui-kit/utils/socket";
 import { getFolderUrl } from "./CompletedForm.helper";
 import type { CompletedVDRFormProps } from "./CompletedForm.types";
-import {
-  Box,
-  CompletedFormLayout,
-  ContainerCompletedForm,
-  Footer,
-  Header,
-  TextWrapper,
-  VDRMainContent,
-} from "./CompletedForm.styled";
+import styles from "./completed-form.module.scss";
 
 export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
   const { user, file, roomId, isStartFilling, formFillingStatus, settings } =
@@ -86,11 +89,11 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
 
   const isInitSocket = useRef(false);
 
-  const theme = useTheme();
+  const { isBase, currentColorScheme } = useTheme();
 
-  const bgPattern = getBgPattern(theme.currentColorScheme?.id);
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
-  const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+  const bgPattern = getBgPattern(currentColorScheme?.id);
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !isBase);
+  const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !isBase);
 
   const isYournTurn = form.formFillingStatus === FileFillingFormStatus.YourTurn;
   const completed = form.formFillingStatus === FileFillingFormStatus.Completed;
@@ -114,8 +117,9 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
         individual: true,
       });
 
-    const stopEditFileHandler = (id: number | string) => {
-      if (Number(id) === formId) {
+    const stopEditFileHandler = (data: TEditFileData) => {
+      const fileId = typeof data === "object" ? data.fileId : data;
+      if (Number(fileId) === formId) {
         setForm((prev) => ({
           ...prev,
           fileStatus: prev.fileStatus & ~FileStatus.IsEditing,
@@ -188,24 +192,45 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
 
   const isEditing = form.fileStatus === FileStatus.IsEditing;
 
+  const bgBlockStyle = {
+    "--bg-pattern": bgPattern,
+  } as React.CSSProperties;
+
   return (
-    <ContainerCompletedForm bgPattern={bgPattern}>
+    <section
+      className={styles.container}
+      style={bgBlockStyle}
+      data-testid="completed_form_vdr_container"
+    >
       <Scrollbar fixedSize>
-        <CompletedFormLayout className="completed-form__vdr-layout">
-          <Header>
+        <div
+          className={classNames(
+            styles.completedFormLayout,
+            "completed-form__vdr-layout",
+          )}
+        >
+          <header className={styles.header}>
             <picture className="completed-form__logo">
               <source media={mobile} srcSet={smallLogoUrl} />
               <source media={mobileMore} srcSet={logoUrl} />
               <img src={logoUrl} alt="logo" />
             </picture>
-            <TextWrapper className="completed-form__text-wrapper">
+            <section
+              className={classNames(
+                styles.textWrapper,
+                "completed-form__text-wrapper",
+              )}
+            >
               <Heading level={HeadingLevel.h1}>{header}</Heading>
               <Text>{headerDescription}</Text>
-            </TextWrapper>
-          </Header>
-          <VDRMainContent>
-            <Box
-              className="completed-form__file"
+            </section>
+          </header>
+          <main className={styles.vdrMainContent}>
+            <div
+              className={classNames(
+                styles.completedFormBox,
+                "completed-form__file",
+              )}
               onClick={handleClickFile}
               data-testid="completed_form_file_container"
             >
@@ -216,7 +241,7 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
               ) : (
                 <EyeIcon className="completed-form_icon" />
               )}
-            </Box>
+            </div>
             <label htmlFor="form-link" className="completed-form__form-link">
               {label}
               <InputBlock
@@ -232,7 +257,12 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
                 dataTestId="copy_link_input_block"
               />
             </label>
-            <Box className="completed-form__roles">
+            <div
+              className={classNames(
+                styles.completedFormBox,
+                "completed-form__roles",
+              )}
+            >
               {formFillingStatus.map(
                 ({ user: useRole, roleName, roleStatus }, index, arr) => {
                   return (
@@ -251,9 +281,9 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
               {completed ? (
                 <StatusIndicator status={FileFillingFormStatus.Completed} />
               ) : null}
-            </Box>
-          </VDRMainContent>
-          <Footer>
+            </div>
+          </main>
+          <footer className={styles.footer}>
             <Button
               className="primary-button"
               scale
@@ -287,9 +317,9 @@ export const CompletedVDRForm = (props: CompletedVDRFormProps) => {
                 {t("Common:GoToRoom")}
               </Link>
             ) : null}
-          </Footer>
-        </CompletedFormLayout>
+          </footer>
+        </div>
       </Scrollbar>
-    </ContainerCompletedForm>
+    </section>
   );
 };

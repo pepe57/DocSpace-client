@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 "use server";
 
@@ -47,7 +56,7 @@ import {
   TVersionBuild,
   TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
-import { Encoder } from "@docspace/shared/utils/encoder";
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
 import {
   TConfirmLinkParams,
   TConfirmLinkResult,
@@ -55,30 +64,7 @@ import {
 } from "@/types";
 import { TScope } from "@docspace/shared/utils/oauth/types";
 import { transformToClientProps } from "@docspace/shared/utils/oauth";
-import {
-  licenseRequiredHandler,
-  settingsHandler,
-  colorThemeHandler,
-  portalCulturesHandler,
-  portalPasswordSettingHandler,
-  machineNameHandler,
-  portalTimeZoneHandler,
-  capabilitiesHandler,
-  ssoHandler,
-  selfHandler,
-  thirdPartyProviderHandler,
-  getClientHandler,
-  confirmHandler,
-  tfaAppHandler,
-  scopesHandler,
-  companyInfoHandler,
-  oauthSignInHelper,
-  invitationSettingsHandler,
-} from "@docspace/shared/__mocks__/e2e";
-
 import { logger } from "@/../logger.mjs";
-
-const IS_TEST = process.env.E2E_TEST;
 
 export const checkIsAuthenticated = async () => {
   logger.debug(`Start GET /authentication`);
@@ -115,9 +101,7 @@ export async function getSettings() {
       "GET",
     );
 
-    const settingsRes = IS_TEST
-      ? settingsHandler(await headers())
-      : await fetch(getSettingsRes);
+    const settingsRes = await fetch(getSettingsRes);
 
     if (settingsRes.status === 403) {
       logger.error(`GET /settings?withPassword=true failed: access-restricted`);
@@ -183,7 +167,7 @@ export async function getColorTheme() {
       "GET",
     );
 
-    const res = IS_TEST ? colorThemeHandler() : await fetch(getColorThemeRes);
+    const res = await fetch(getColorThemeRes);
 
     if (!res.ok) {
       logger.error(`GET /settings/colortheme failed: ${res.status}`);
@@ -213,9 +197,7 @@ export async function getThirdPartyProviders(inviteView: boolean = false) {
       "GET",
     );
 
-    const res = IS_TEST
-      ? thirdPartyProviderHandler(await headers())
-      : await fetch(getThirdPartyRes);
+    const res = await fetch(getThirdPartyRes);
 
     if (!res.ok) {
       logger.error(
@@ -242,9 +224,7 @@ export async function getCapabilities() {
       "GET",
     );
 
-    const res = IS_TEST
-      ? capabilitiesHandler(await headers())
-      : await fetch(getCapabilitiesRes);
+    const res = await fetch(getCapabilitiesRes);
 
     if (!res.ok) {
       logger.error(`GET /capabilities failed: ${res.status}`);
@@ -269,7 +249,7 @@ export async function getSSO() {
       "GET",
     );
 
-    const res = IS_TEST ? ssoHandler() : await fetch(getSSORes);
+    const res = await fetch(getSSORes);
 
     if (!res.ok) {
       logger.error(`GET /settings/ssov2 failed: ${res.status}`);
@@ -298,7 +278,7 @@ export async function getUser() {
     );
 
     if (!cookie?.includes("asc_auth_key")) return undefined;
-    const userRes = IS_TEST ? selfHandler() : await fetch(getUserRes);
+    const userRes = await fetch(getUserRes);
 
     if (userRes.status === 401) {
       logger.error(`GET /people/@self failed: ${userRes.status}`);
@@ -332,7 +312,7 @@ export async function getUserByName() {
     );
 
     if (!cookie?.includes("asc_auth_key")) return undefined;
-    const userRes = IS_TEST ? selfHandler() : await fetch(getUserRes);
+    const userRes = await fetch(getUserRes);
 
     if (userRes.status === 401) return undefined;
 
@@ -361,9 +341,14 @@ export async function getUserByEncEmail(
       "GET",
     );
 
-    const res = IS_TEST
-      ? selfHandler(null, await headers())
-      : await fetch(getUserByEmai);
+    const res = await fetch(getUserByEmai);
+
+    if (res.status === 403) {
+      logger.error(
+        `GET /people/email?encemail=${userEncEmail} failed: access-restricted`,
+      );
+      return "access-restricted";
+    }
 
     if (!res.ok) {
       logger.error(
@@ -396,9 +381,7 @@ export async function getUserByEmail(
       "GET",
     );
 
-    const res = IS_TEST
-      ? selfHandler(null, await headers())
-      : await fetch(getUserByEmai);
+    const res = await fetch(getUserByEmai);
 
     if (!res.ok) {
       logger.error(
@@ -420,19 +403,23 @@ export async function getUserByEmail(
 }
 
 export async function getScopeList(token?: string) {
-  logger.debug(`Start GET /scopes`);
+  logger.debug(`Start GET /oauth2/scopes`);
 
   try {
     const hdrs: [string, string][] = token
       ? [["Cookie", `x-signature=${token}`]]
       : [["", ""]];
 
-    const [getScopeListRes] = await createRequest([`/scopes`], hdrs, "GET");
+    const [getScopeListRes] = await createRequest(
+      [`/oauth2/scopes`],
+      hdrs,
+      "GET",
+    );
 
-    const scopeList = IS_TEST ? scopesHandler() : await fetch(getScopeListRes);
+    const scopeList = await fetch(getScopeListRes);
 
     if (!scopeList.ok) {
-      logger.error(`GET /scopes failed: ${scopeList.status}`);
+      logger.error(`GET /oauth2/scopes failed: ${scopeList.status}`);
       return;
     }
 
@@ -445,18 +432,18 @@ export async function getScopeList(token?: string) {
 }
 
 export async function getOAuthClient(clientId: string) {
-  logger.debug(`Start GET /clients/${clientId}/public/info`);
+  logger.debug(`Start GET /oauth2/clients/${clientId}/public/info`);
 
   try {
-    const route = `/clients/${clientId}/public/info`;
+    const route = `/oauth2/clients/${clientId}/public/info`;
 
     const request = await createRequest([route], [["", ""]], "GET");
 
-    const oauthClient = IS_TEST ? getClientHandler() : await fetch(request[0]);
+    const oauthClient = await fetch(request[0]);
 
     if (!oauthClient) {
       logger.error(
-        `GET /clients/${clientId}/public/info failed: missing oauthClient`,
+        `GET /oauth2/clients/${clientId}/public/info failed: missing oauthClient`,
       );
       return;
     }
@@ -480,9 +467,7 @@ export async function getPortalCultures() {
       "GET",
     );
 
-    const res = IS_TEST
-      ? portalCulturesHandler()
-      : await fetch(getPortalCulturesRes);
+    const res = await fetch(getPortalCulturesRes);
 
     if (!res.ok) {
       logger.error(`GET /settings/cultures failed: ${res.statusText}`);
@@ -503,11 +488,9 @@ export async function getConfig() {
   try {
     const baseUrl = await getBaseUrl();
 
-    const config = IS_TEST
-      ? new Response(JSON.stringify({}))
-      : await (await fetch(`${baseUrl}/static/scripts/config.json`)).json();
+    const config = await fetch(`${baseUrl}/static/scripts/config.json`);
 
-    return config;
+    return await config.json();
   } catch (error) {
     logger.error(`Error in getConfig: ${error}`);
   }
@@ -523,9 +506,7 @@ export async function getCompanyInfoSettings() {
       "GET",
     );
 
-    const res = IS_TEST
-      ? companyInfoHandler()
-      : await fetch(getCompanyInfoSettingsRes);
+    const res = await fetch(getCompanyInfoSettingsRes);
 
     if (!res.ok) {
       logger.error(`GET /settings/rebranding/company failed: ${res.status}`);
@@ -554,9 +535,12 @@ export async function getPortalPasswordSettings(
       [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
       "GET",
     );
-    const res = IS_TEST
-      ? portalPasswordSettingHandler()
-      : await fetch(getPortalPasswordSettingsRes);
+    const res = await fetch(getPortalPasswordSettingsRes);
+
+    if (res.status === 403) {
+      logger.error(`GET /settings/security/password failed: access-restricted`);
+      return "access-restricted";
+    }
 
     if (!res.ok) {
       logger.error(`GET /settings/security/password failed: ${res.statusText}`);
@@ -584,9 +568,12 @@ export async function getUserFromConfirm(
       "GET",
     );
 
-    const res = IS_TEST
-      ? selfHandler(null, await headers())
-      : await fetch(getUserFromConfirmRes);
+    const res = await fetch(getUserFromConfirmRes);
+
+    if (res.status === 403) {
+      logger.error(`GET /people/${userId} failed: access-restricted`);
+      return "access-restricted";
+    }
 
     if (!res.ok) {
       logger.error(`GET /people/${userId} failed: ${res.status}`);
@@ -595,7 +582,7 @@ export async function getUserFromConfirm(
 
     const user = await res.json();
 
-    if (user.response && user.response.displayName) {
+    if (user.response?.displayName) {
       user.response.displayName = Encoder.htmlDecode(user.response.displayName);
     }
 
@@ -615,7 +602,7 @@ export async function getMachineName(confirmKey: string | null = null) {
       "GET",
     );
 
-    const res = IS_TEST ? machineNameHandler() : await fetch(getMachineNameRes);
+    const res = await fetch(getMachineNameRes);
 
     if (!res.ok) {
       logger.error(`GET /settings/machine failed: ${res.statusText}`);
@@ -641,9 +628,7 @@ export async function getIsLicenseRequired() {
       "GET",
     );
 
-    const res = IS_TEST
-      ? licenseRequiredHandler(await headers())
-      : await fetch(getIsLicenseRequiredRes);
+    const res = await fetch(getIsLicenseRequiredRes);
 
     if (!res.ok) {
       logger.error(`GET /settings/license/required failed: ${res.statusText}`);
@@ -669,9 +654,7 @@ export async function getPortalTimeZones(confirmKey: string | null = null) {
       "GET",
     );
 
-    const res = IS_TEST
-      ? portalTimeZoneHandler()
-      : await fetch(getPortalTimeZonesRes);
+    const res = await fetch(getPortalTimeZonesRes);
 
     if (!res.ok) {
       logger.error(`GET /settings/timezones failed: ${res.statusText}`);
@@ -693,7 +676,7 @@ export async function getPortal() {
   try {
     const [getPortalRes] = await createRequest([`/portal`], [["", ""]], "GET");
 
-    const res = IS_TEST ? portalTimeZoneHandler() : await fetch(getPortalRes);
+    const res = await fetch(getPortalRes);
 
     if (!res.ok) {
       logger.error(`GET /portal failed: ${res.status}`);
@@ -719,9 +702,7 @@ export async function getTfaSecretKeyAndQR(confirmKey: string | null = null) {
       "GET",
     );
 
-    const res = IS_TEST
-      ? tfaAppHandler()
-      : await fetch(getTfaSecretKeyAndQRRes);
+    const res = await fetch(getTfaSecretKeyAndQRRes);
 
     if (!res.ok) {
       logger.error(`GET /settings/tfaapp/setup failed: ${res.status}`);
@@ -748,9 +729,7 @@ export async function checkConfirmLink(data: TConfirmLinkParams) {
       JSON.stringify(data),
     );
 
-    const response = IS_TEST
-      ? confirmHandler(await headers())
-      : await fetch(checkConfirmLinkRes);
+    const response = await fetch(checkConfirmLinkRes);
 
     if (!response.ok) {
       logger.error(`POST /authentication/confirm failed: ${response.status}`);
@@ -768,10 +747,11 @@ export async function checkConfirmLink(data: TConfirmLinkParams) {
 }
 
 export async function getAvailablePortals(data: {
-  Email: string;
-  PasswordHash: string;
+  Email?: string;
+  PasswordHash?: string;
   recaptchaResponse?: string | null | undefined;
   recaptchaType?: unknown | undefined;
+  ThirdPartyProfile?: string;
 }) {
   logger.debug(`Start POST /portal/signin`);
 
@@ -785,7 +765,7 @@ export async function getAvailablePortals(data: {
       true,
     );
 
-    const portalsRes = IS_TEST ? oauthSignInHelper() : await fetch(request[0]);
+    const portalsRes = await fetch(request[0]);
 
     const portals = await portalsRes.json();
 
@@ -808,9 +788,7 @@ export async function getOauthJWTToken() {
       "GET",
     );
 
-    const res = IS_TEST
-      ? new Response(JSON.stringify({ response: "123456" }))
-      : await fetch(getJWTToken);
+    const res = await fetch(getJWTToken);
 
     if (!res.ok) {
       logger.error(`GET /security/oauth2/token failed: ${res.statusText}`);
@@ -836,9 +814,12 @@ export async function getInvitationSettings() {
       "GET",
     );
 
-    const res = IS_TEST
-      ? invitationSettingsHandler()
-      : await fetch(getInvitationSettingsRes);
+    const res = await fetch(getInvitationSettingsRes);
+
+    if (res.status === 403) {
+      logger.error(`GET /settings/invitationsettings failed: access-restricted`);
+      return "access-restricted";
+    }
 
     if (!res.ok) {
       logger.error(`GET /settings/invitationsettings failed: ${res.status}`);

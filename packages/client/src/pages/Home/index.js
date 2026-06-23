@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { useCallback } from "react";
 import { useLocation, Outlet } from "react-router";
@@ -36,9 +45,9 @@ import {
   createTag,
 } from "@docspace/shared/api/rooms";
 import { createFolder } from "@docspace/shared/api/files";
-import Section from "@docspace/shared/components/section";
+import Section from "@docspace/ui-kit/components/section";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
@@ -63,7 +72,7 @@ import {
 
 import MediaViewer from "./MediaViewer";
 
-import { useSDK, useOperations } from "./Hooks";
+import { useSDK, useOperations, usePluginOperations } from "./Hooks";
 import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
 
 const PureHome = (props) => {
@@ -114,10 +123,10 @@ const PureHome = (props) => {
     showFilter,
     frameConfig,
     isEmptyPage,
+    roomsFilterGroupId,
 
+    contactsTab,
     contactsViewAs,
-
-    onClickBack,
 
     showFilterLoader,
     showHeaderLoader,
@@ -146,6 +155,7 @@ const PureHome = (props) => {
     clearUploadedFiles,
     mainButtonVisible,
     primaryOperationsAlert,
+    primaryOperationsCanceled,
     clearConversionData,
     isErrorChecking,
     setOperationCancelVisible,
@@ -167,6 +177,11 @@ const PureHome = (props) => {
     aiConfig,
     currentTab,
     setIsAboutDialogVisible,
+
+    pluginFloatingOperationsArray,
+    removePluginFloatingOperations,
+    dispatchMessage,
+    getPluginIconUrl,
   } = props;
 
   const [shouldShowFilter, setShouldShowFilter] = React.useState(false);
@@ -228,6 +243,20 @@ const PureHome = (props) => {
     clearConversionData,
   });
 
+  const {
+    pluginOperations,
+    pluginOperationsCompleted,
+    pluginOperationsAlert,
+    pluginShowCancelButton,
+    handlePluginCancelOperation,
+    handlePluginClearOperation,
+  } = usePluginOperations({
+    pluginFloatingOperationsArray,
+    dispatchMessage,
+    getPluginIconUrl,
+    removePluginFloatingOperations,
+  });
+
   useSDK({
     frameConfig,
     setFrameConfig,
@@ -259,25 +288,63 @@ const PureHome = (props) => {
 
     if (isContactsPage) return getContactsModel(t, true);
     return getFolderModel(t, true);
-  }, [isFrame, isProfile, isContactsPage, getContactsModel, getFolderModel]);
+  }, [
+    isFrame,
+    isProfile,
+    isContactsPage,
+    getContactsModel,
+    getFolderModel,
+    contactsTab,
+  ]);
 
   const onCancelUpload = useCallback(() => {
+    if (pluginShowCancelButton) {
+      handlePluginCancelOperation();
+      return;
+    }
+
     if (hideConfirmCancelOperation) {
-      cancelUpload(t);
+      cancelUpload();
       return;
     }
 
     setOperationCancelVisible(true);
-  }, [hideConfirmCancelOperation, cancelUpload, setOperationCancelVisible]);
+  }, [
+    hideConfirmCancelOperation,
+    cancelUpload,
+    setOperationCancelVisible,
+    handlePluginCancelOperation,
+    pluginOperations,
+    pluginShowCancelButton,
+  ]);
+
+  const onClearSecondaryProgressData = useCallback(
+    (operationId, operation, operationItem) => {
+      // When button is hidden, clear progress data
+      if (!operationItem && !operationId && !operation) {
+        clearSecondaryProgressData?.();
+        handlePluginClearOperation();
+        return;
+      }
+
+      const isPluginOperation = pluginOperations.find(
+        (item) => item.id === operationItem?.id,
+      );
+
+      if (isPluginOperation) {
+        handlePluginClearOperation(operationItem.id);
+      } else {
+        clearSecondaryProgressData?.(operationId, operation);
+      }
+    },
+    [clearSecondaryProgressData, handlePluginClearOperation],
+  );
 
   React.useEffect(() => {
-    window.addEventListener("popstate", onClickBack);
-
     return () => {
       setSelectedFolder(null);
-      window.removeEventListener("popstate", onClickBack);
     };
-  }, []);
+  }, [setSelectedFolder]);
 
   let sectionProps = {};
 
@@ -357,7 +424,7 @@ const PureHome = (props) => {
   sectionProps.secondaryActiveOperations = secondaryActiveOperations;
   sectionProps.secondaryOperationsCompleted = secondaryOperationsCompleted;
   sectionProps.dropTargetPreview = dropTargetPreview;
-  sectionProps.clearSecondaryProgressData = clearSecondaryProgressData;
+  sectionProps.clearSecondaryProgressData = onClearSecondaryProgressData;
   sectionProps.primaryOperationsArray = primaryOperationsArray;
   sectionProps.clearPrimaryProgressData = clearPrimaryProgressData;
   sectionProps.clearDropPreviewLocation = clearDropPreviewLocation;
@@ -365,6 +432,7 @@ const PureHome = (props) => {
   sectionProps.cancelUpload = onCancelUpload;
   sectionProps.secondaryOperationsAlert = secondaryOperationsAlert;
   sectionProps.primaryOperationsAlert = primaryOperationsAlert;
+  sectionProps.primaryOperationsCanceled = primaryOperationsCanceled;
   sectionProps.needErrorChecking = isErrorChecking;
   sectionProps.mainButtonVisible = mainButtonVisible;
   sectionProps.withTabs = sectionWithTabs;
@@ -373,11 +441,18 @@ const PureHome = (props) => {
   sectionProps.dragging = dragging;
   sectionProps.startDropPreview = startDropPreview;
 
+  // Plugin operations
+  sectionProps.pluginOperations = pluginOperations;
+  sectionProps.pluginOperationsCompleted = pluginOperationsCompleted;
+  sectionProps.pluginOperationsAlert = pluginOperationsAlert;
+  sectionProps.pluginShowCancelButton = pluginShowCancelButton;
+
   const hasVisibleContent =
     !isEmptyPage ||
     welcomeFormFillingTipsVisible ||
     formFillingTipsVisible ||
-    showFilterLoader;
+    showFilterLoader ||
+    roomsFilterGroupId;
 
   const isValidMainContent = hasVisibleContent && !isErrorRoomNotAvailable;
   const isValidContactsContent = !isContactsEmptyView && isContactsPage;
@@ -468,7 +543,6 @@ export const Component = inject(
     mediaViewerDataStore,
     peopleStore,
     filesActionsStore,
-    oformsStore,
     selectedFolderStore,
     clientLoadingStore,
     userStore,
@@ -479,11 +553,13 @@ export const Component = inject(
     filesSettingsStore,
     aiRoomStore,
     profileActionsStore,
+    pluginStore,
   }) => {
     const {
       setSelectedFolder,
       security: folderSecurity,
       title: selectedFolderTitle,
+      chatSettings: selectedFolderChatSettings,
     } = selectedFolderStore;
 
     const canCreateSecurity = folderSecurity?.Create;
@@ -535,6 +611,7 @@ export const Component = inject(
       refreshFiles,
       setViewAs,
       isEmptyPage,
+      roomsFilter,
 
       disableDrag,
       isErrorRoomNotAvailable,
@@ -547,8 +624,6 @@ export const Component = inject(
 
       removeActiveItem,
     } = filesStore;
-
-    const { gallerySelected } = oformsStore;
 
     const {
       isRecycleBinFolder,
@@ -568,6 +643,7 @@ export const Component = inject(
       primaryOperationsArray,
       primaryOperationsCompleted,
       primaryOperationsAlert,
+      primaryOperationsCanceled,
       isErrorChecking,
       isPrimaryProgressVisbile,
       dropTargetPreview,
@@ -586,7 +662,7 @@ export const Component = inject(
 
     const { startUpload } = uploadDataStore;
 
-    const { createFoldersTree, onClickBack } = filesActionsStore;
+    const { createFoldersTree } = filesActionsStore;
 
     const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
@@ -610,8 +686,13 @@ export const Component = inject(
       viewAs: contactsViewAs,
     } = peopleStore;
     const { updateProfileCulture } = targetUserStore;
-    const { getUsersList, setContactsTab, isUsersEmptyView, isFiltered } =
-      usersStore;
+    const {
+      getUsersList,
+      setContactsTab,
+      contactsTab,
+      isUsersEmptyView,
+      isFiltered,
+    } = usersStore;
     const { getGroups, updateCurrentGroup, groups, groupsIsFiltered } =
       groupsStore;
 
@@ -622,6 +703,13 @@ export const Component = inject(
       dialogsStore;
 
     const { isRoomAdmin, isAdmin } = authStore;
+
+    const {
+      pluginFloatingOperationsArray,
+      dispatchMessage,
+      getPluginIconUrl,
+      removePluginFloatingOperations,
+    } = pluginStore;
 
     const withRoomsTabs =
       (isRoomsFolderRoot || isTemplatesFolder) && (isRoomAdmin || isAdmin);
@@ -680,7 +768,6 @@ export const Component = inject(
       playlist,
 
       getFileInfo,
-      gallerySelected,
       setIsUpdatingRowItem,
 
       setFrameConfig,
@@ -699,9 +786,9 @@ export const Component = inject(
       refreshFiles,
       setViewAs,
       isEmptyPage,
+      roomsFilterGroupId: roomsFilter?.groupId,
 
       setSelectedNode,
-      onClickBack,
 
       showFilterLoader,
       showHeaderLoader,
@@ -720,6 +807,7 @@ export const Component = inject(
 
       // contacts store
       setContactsTab,
+      contactsTab,
       contactsViewAs,
       getUsersList,
       getGroups,
@@ -741,6 +829,7 @@ export const Component = inject(
       clearUploadedFiles,
       mainButtonVisible,
       primaryOperationsAlert,
+      primaryOperationsCanceled,
       clearConversionData,
       isErrorChecking,
       setOperationCancelVisible,
@@ -754,6 +843,7 @@ export const Component = inject(
       dropTargetPreview,
       setDropTargetPreview,
       selectedFolderTitle,
+      selectedFolderChatSettings,
       clearDropPreviewLocation,
       canCreateSecurity,
       startDropPreview,
@@ -763,6 +853,12 @@ export const Component = inject(
       aiConfig: settingsStore.aiConfig,
 
       setIsAboutDialogVisible: profileActionsStore.setIsAboutDialogVisible,
+
+      pluginFloatingOperationsArray,
+      removePluginFloatingOperations,
+      dispatchMessage,
+      getPluginIconUrl,
     };
   },
 )(observer(Home));
+

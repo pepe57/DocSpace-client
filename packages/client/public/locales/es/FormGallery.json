@@ -3,11 +3,12 @@
   "EmptyFormGalleryScreenDescription": "No se han encontrado resultados que coincidan con la búsqueda",
   "ErrorViewDescription": "Vuelva a intentarlo más tarde",
   "ErrorViewDescriptionNetworkError": "Parece que no hay conexión a Internet",
-  "ErrorViewHeader": "La galería de formularios no está disponible temporalmente ",
-  "SelectForm": "Seleccionar formulario",
-  "SubmitToGalleryDialogGuideInfo": "Aprenda a crear formularios perfectos y a aumentar sus posibilidades de obtener la aprobación en nuestra <1>guía</1>.",
-  "SubmitToGalleryDialogMainInfo": "Envíe su formulario a la galería pública para que otros puedan utilizarlo en su trabajo. Una vez que el formulario pase la moderación, recibirá una notificación y una recompensa por su contribución.",
+  "ErrorViewHeader": "La galería está temporalmente no disponible",
+  "GalleryTitle": "Galería de plantillas de {{organizationName}}",
+  "SelectTemplate": "Seleccionar plantilla",
+  "SubmitToGalleryDialogMainInfo": "Envíe su plantilla a la galería pública para que otros puedan usarla en su trabajo. Una vez que la plantilla pase la moderación, recibirá una notificación y una recompensa por su contribución.",
   "SuggestChanges": "Sugerir cambios",
   "TemplateInfo": "Información sobre la plantilla",
+  "UploadGallery": "Subir a la Galería",
   "ViewAllTemplates": "Ver todas las plantillas"
 }

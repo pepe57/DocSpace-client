@@ -1,31 +1,39 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { makeAutoObservable, runInAction } from "mobx";
-import moment from "moment-timezone";
 import axios from "axios";
 
 import api from "../api";
@@ -35,7 +43,14 @@ import { PaymentMethodStatus, QuotaState, TariffState } from "../enums";
 
 import { TCustomerInfo, TPortalTariff, TQuotas } from "../api/portal/types";
 import { isValidDate } from "../utils";
-import { getDaysLeft, getDaysRemaining } from "../utils/common";
+import { getDaysLeft, getDaysRemaining, isAdmin } from "../utils/common";
+import {
+  parseToDateTime,
+  formatDateLocalized,
+  getAppTimezone,
+  isAfter,
+  now,
+} from "@docspace/ui-kit/utils/date";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
 import { SettingsStore } from "./SettingsStore";
@@ -61,6 +76,8 @@ class CurrentTariffStatusStore {
     email: null,
     payer: null,
   };
+
+  isPayerInfoLoaded = false;
 
   constructor(userStore: UserStore, settingsStore: SettingsStore) {
     makeAutoObservable(this);
@@ -105,68 +122,10 @@ class CurrentTariffStatusStore {
     return this.portalTariffStatus ? this.portalTariffStatus.dueDate : null;
   }
 
-  get storageSubscriptionExpiryDate() {
-    return this.walletQuotas[0]?.dueDate;
-  }
-
-  get hasStorageSubscription() {
-    return this.walletQuotas?.length > 0;
-  }
-
-  get hasPreviousStorageSubscription() {
-    return this.previousWalletQuota?.length > 0;
-  }
-
-  get currentStoragePlanSize() {
-    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return 0;
-    return this.walletQuotas[0].quantity || 0;
-  }
-
-  get previousStoragePlanSize() {
-    if (!this.hasPreviousStorageSubscription || !this.previousWalletQuota[0])
-      return 0;
-    return this.previousWalletQuota[0].quantity || 0;
-  }
-
-  get hasScheduledStorageChange() {
-    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return false;
-
-    return (this.walletQuotas[0].nextQuantity ?? -1) >= 0;
-  }
-
-  get nextStoragePlanSize() {
-    if (!this.hasStorageSubscription || !this.walletQuotas[0]) return undefined;
-    return this.walletQuotas[0].nextQuantity;
-  }
-
-  get storageExpiryDate() {
-    if (!this.storageSubscriptionExpiryDate) return "";
-
-    return moment(this.storageSubscriptionExpiryDate)
-      .tz(window.timezone)
-      .format("LL");
-  }
-
-  get daysUntilStorageExpiry() {
-    if (!this.storageSubscriptionExpiryDate) return 0;
-
-    const today = moment();
-    const dueDate = moment(this.storageSubscriptionExpiryDate);
-    return dueDate.diff(today, "days");
-  }
-
   get delayDueDate() {
     return this.portalTariffStatus
       ? this.portalTariffStatus.delayDueDate
       : null;
-  }
-
-  get customerId() {
-    return this.portalTariffStatus?.customerId;
-  }
-
-  get portalStatus() {
-    return this.portalTariffStatus?.portalStatus;
   }
 
   get licenseDate() {
@@ -174,10 +133,12 @@ class CurrentTariffStatusStore {
   }
 
   get paymentDate() {
-    moment.locale(this.language);
     if (this.dueDate === null) return "";
 
-    return moment(this.dueDate).tz(window.timezone).format("LL");
+    return formatDateLocalized(this.dueDate, "DATE_FULL", {
+      locale: this.language,
+      timezone: getAppTimezone(),
+    });
   }
 
   get isPaymentDateValid() {
@@ -188,28 +149,32 @@ class CurrentTariffStatusStore {
   get isLicenseDateExpired() {
     if (!this.isPaymentDateValid) return;
 
-    return moment() > moment(this.dueDate).tz(window.timezone);
+    const dueDateDt = parseToDateTime(this.dueDate);
+    if (!dueDateDt) return;
+
+    return isAfter(now(), dueDateDt.setZone(getAppTimezone()));
   }
 
   get gracePeriodEndDate() {
-    moment.locale(this.language);
     if (this.delayDueDate === null) return "";
 
     const endDate = isValidDate(this.delayDueDate)
       ? this.delayDueDate
       : this.dueDate;
 
-    return moment(endDate).tz(window.timezone).format("LL");
+    return formatDateLocalized(endDate, "DATE_FULL", {
+      locale: this.language,
+      timezone: getAppTimezone(),
+    });
   }
 
   get delayDaysCount() {
-    moment.locale(this.language);
     if (this.delayDueDate === null) return "";
     return getDaysRemaining(this.delayDueDate);
   }
 
   get isLicenseExpiring() {
-    if (!this.dueDate || !this.isEnterprise) return;
+    if (!this.dueDate) return false;
 
     const days = getDaysLeft(this.dueDate);
 
@@ -249,11 +214,8 @@ class CurrentTariffStatusStore {
   }
 
   fetchPayerInfo = async (isRefresh?: boolean) => {
-    const abortController = new AbortController();
-    this.settingsStore.addAbortControllers(abortController);
-
     try {
-      const res = await getWalletPayer(isRefresh, abortController.signal);
+      const res = await getWalletPayer(isRefresh);
 
       if (!res) return;
 
@@ -261,11 +223,10 @@ class CurrentTariffStatusStore {
 
       return res;
     } catch (e) {
-      if (axios.isCancel(e)) {
-        return;
-      }
       console.error(e);
       throw e;
+    } finally {
+      this.isPayerInfoLoaded = true;
     }
   };
 
@@ -283,7 +244,7 @@ class CurrentTariffStatusStore {
         runInAction(() => {
           this.portalTariffStatus = res;
 
-          if (user?.isAdmin) {
+          if (user && isAdmin(user)) {
             const quota = res.quotas.find((q) => q.wallet === true);
 
             if (quota) {
@@ -316,3 +277,4 @@ class CurrentTariffStatusStore {
 }
 
 export { CurrentTariffStatusStore };
+

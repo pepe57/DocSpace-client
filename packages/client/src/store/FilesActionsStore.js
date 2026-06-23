@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import MoveReactSvgUrl from "PUBLIC_DIR/images/icons/16/move.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
@@ -48,6 +57,7 @@ import {
   enableCustomFilter,
 } from "@docspace/shared/api/files";
 import {
+  AnalyticsEvents,
   Events,
   ExportRoomIndexTaskStatus,
   FileAction,
@@ -63,7 +73,7 @@ import {
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
@@ -97,7 +107,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { createLoader } from "@docspace/shared/utils/createLoader";
 
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   getEmptyPersonalProgress,
   startEmptyPersonal,
@@ -396,6 +406,7 @@ class FilesActionStore {
 
         const error = isAIAgentsFolderRoot
           ? t("Common:AIAgentSpaceQuotaExceeded", {
+              aiAgent: t("Common:AIAgent"),
               size,
             })
           : t("Common:RoomSpaceQuotaExceeded", {
@@ -415,6 +426,10 @@ class FilesActionStore {
 
     const filesList = [];
     await this.createFolderTree(tree, toFolderId, filesList);
+
+    if (withoutHiddenFiles.length) {
+      setPrimaryProgressBarData({ ...pbData, completed: uploaded });
+    }
 
     if (filesList.length) {
       setPrimaryProgressBarData({ ...pbData });
@@ -565,6 +580,19 @@ class FilesActionStore {
             if (currentFolderId) {
               SocketHelper?.emit(SocketCommands.RefreshFolder, currentFolderId);
             }
+
+            if (fileIds.length) {
+              window.dataLayer = window.dataLayer || [];
+              selection
+                .filter((item) => fileIds.includes(item.id))
+                .forEach((file) => {
+                  window.dataLayer.push({
+                    event: AnalyticsEvents.FileDeleted,
+                    id: file.id,
+                    parentId: file.folderId,
+                  });
+                });
+            }
           })
           .finally(() => {
             clearActiveOperations(fileIds, folderIds);
@@ -583,6 +611,10 @@ class FilesActionStore {
         this.setGroupMenuBlocked(false);
       }
     }
+  };
+
+  askAIAction = (item) => {
+    this.dialogsStore.setAiAgentSelectorDialogProps(true, item);
   };
 
   emptyTrash = async (translations) => {
@@ -839,6 +871,14 @@ class FilesActionStore {
 
           if (item.url) {
             openUrl(item.url, UrlActionType.Download, true);
+
+            if (fileConvertIds.length) {
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                event: AnalyticsEvents.FileDownloaded,
+                fileIds: fileConvertIds.map((f) => f.key ?? f),
+              });
+            }
           }
 
           setSecondaryProgressBarData({
@@ -1081,6 +1121,9 @@ class FilesActionStore {
     const destFolderId = isRecycleBinFolder ? null : recycleBinFolderId;
 
     if (isFile) {
+      const fileParentId = this.filesStore.files.find(
+        (x) => x.id === itemId,
+      )?.folderId;
       addActiveItems([itemId], null, destFolderId);
       return deleteFile(itemId).then(async (res) => {
         const result = res[0];
@@ -1095,10 +1138,20 @@ class FilesActionStore {
 
         this.updateFilesAfterDelete(operationId, operation);
         this.filesStore.removeFiles([itemId], null, null, destFolderId);
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: AnalyticsEvents.FileDeleted,
+          id: itemId,
+          parentId: fileParentId,
+        });
       });
     }
     if (isRoom) {
       const items = Array.isArray(itemId) ? itemId : [itemId];
+      const roomParentId = this.filesStore.folders.find(
+        (x) => x.id === items[0],
+      )?.parentId;
       addActiveItems(null, items);
 
       this.setGroupMenuBlocked(true);
@@ -1113,15 +1166,37 @@ class FilesActionStore {
             operationId,
           });
         })
-        .then(() =>
+        .then(() => {
           toastr.success(
             translations?.successRemoveTemplate
               ? translations.successRemoveTemplate
               : items.length > 1
                 ? translations?.successRemoveRooms
                 : translations?.successRemoveRoom,
-          ),
-        )
+          );
+
+          const { rootFolderType } = this.selectedFolderStore;
+          const categoryType = getCategoryTypeByFolderType(rootFolderType, 0);
+          const isAgentDeletion = categoryType === CategoryType.AIAgents;
+
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: isAgentDeletion
+              ? AnalyticsEvents.AgentDeleted
+              : AnalyticsEvents.RoomDeleted,
+            ids: items,
+            parentId: roomParentId,
+          });
+
+          const currentFolderId = this.selectedFolderStore.id;
+          if (items.includes(currentFolderId)) {
+            if (isAgentDeletion) {
+              this.moveToAIAgentsPage();
+            } else {
+              this.moveToRoomsPage();
+            }
+          }
+        })
         .finally(() => {
           this.setGroupMenuBlocked(false);
           setSecondaryProgressBarData({
@@ -1145,6 +1220,12 @@ class FilesActionStore {
 
       this.updateFilesAfterDelete(operationId, operation);
       this.filesStore.removeFiles(null, [itemId], null, destFolderId);
+
+      window.dispatchEvent(
+        new CustomEvent("folder_deleted", {
+          detail: { id: itemId },
+        }),
+      );
 
       getIsEmptyTrash();
     });
@@ -1326,11 +1407,11 @@ class FilesActionStore {
 
       if (isAIAgent) {
         translationForOneItem = isPin
-          ? t("AIAgentPinned")
-          : t("AIAgentUnpinned");
+          ? t("AIAgentPinned", { aiAgent: t("Common:AIAgent") })
+          : t("AIAgentUnpinned", { aiAgent: t("Common:AIAgent") });
         translationForSeverals = isPin
-          ? t("AIAgentsPinned")
-          : t("AIAgentsUnpinned");
+          ? t("AIAgentsPinned", { aiAgents: t("Common:AIAgents") })
+          : t("AIAgentsUnpinned", { aiAgents: t("Common:AIAgents") });
       } else {
         translationForOneItem = isPin ? t("RoomPinned") : t("RoomUnpinned");
         translationForSeverals = isPin
@@ -1365,7 +1446,9 @@ class FilesActionStore {
 
       if (isError) {
         isAIAgent
-          ? toastr.error(t("AIAgentPinLimitMessage"))
+          ? toastr.error(
+              t("AIAgentPinLimitMessage", { aiAgents: t("Common:AIAgents") }),
+            )
           : toastr.error(t("RoomsPinLimitMessage"));
       }
 
@@ -1409,8 +1492,12 @@ class FilesActionStore {
     let notificationsEnabled = t("RoomNotificationsEnabled");
 
     if (isAIAgent) {
-      notificationsDisabled = t("AIAgentNotificationsDisabled");
-      notificationsEnabled = t("AIAgentNotificationsEnabled");
+      notificationsDisabled = t("AIAgentNotificationsDisabled", {
+        aiAgent: t("Common:AIAgent"),
+      });
+      notificationsEnabled = t("AIAgentNotificationsEnabled", {
+        aiAgent: t("Common:AIAgent"),
+      });
     }
 
     muteRoomNotification(id, muteStatus)
@@ -1442,6 +1529,9 @@ class FilesActionStore {
     const items = Array.isArray(folders)
       ? folders.map((x) => (x?.id ? x.id : x))
       : [folders.id];
+    const archiveParentId = Array.isArray(folders)
+      ? folders[0]?.parentId
+      : folders?.parentId;
 
     const operation = OPERATIONS_NAME.move;
 
@@ -1506,6 +1596,13 @@ class FilesActionStore {
                   : t("Common:ArchivedRoomAction", { name: folders.title });
 
             toastr.success(successTranslation);
+
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+              event: AnalyticsEvents.RoomArchived,
+              ids: items,
+              parentId: archiveParentId,
+            });
           })
           .then(() => {
             const clearBuffer =
@@ -1616,10 +1713,10 @@ class FilesActionStore {
       }
 
       if (tag.roomType) {
-        if (!!newFilter.type && +newFilter.type === tag.roomType) return;
+        if (newFilter.type && +newFilter.type === tag.roomType) return;
         newFilter.type = tag.roomType;
       } else if (tag.providerType) {
-        if (!!newFilter.provider && +newFilter.provider === tag.providerType)
+        if (newFilter.provider && +newFilter.provider === tag.providerType)
           return;
         newFilter.provider = tag.providerType;
       } else {
@@ -1696,6 +1793,17 @@ class FilesActionStore {
     }
   };
 
+  /**
+   * @param {{
+   *  id: number | string,
+   *  isRoom?: boolean,
+   *  isTemplate?: boolean,
+   *  isAIAgent?: boolean,
+   *  title?: string,
+   *  rootFolderType : import("@docspace/ui-kit/enums/index").FolderType
+   * }} item
+   * @returns {void}
+   */
   openLocationAction = async (item) => {
     if (this.publicRoomStore.isPublicRoom)
       return this.moveToPublicRoom(item.id);
@@ -2015,7 +2123,11 @@ class FilesActionStore {
 
         return canUnArchive;
       }
-      case "delete-room":
+      case "delete-room": {
+        const canDelete = selection.some((s) => s.security?.Delete);
+
+        return canDelete;
+      }
       case "delete-agent": {
         const canRemove =
           selection.length === 1 && selection[0]?.security?.Delete;
@@ -2030,6 +2142,37 @@ class FilesActionStore {
       case "create-room": {
         const canCreateRoom = selection.some((s) => s.security?.CreateRoomFrom);
         return canCreateRoom;
+      }
+      case "create-group": {
+        const { organizeRoomsGrouping } = this.filesSettingsStore;
+        const { isRoomsFolder } = this.treeFoldersStore;
+        return organizeRoomsGrouping && isRoomsFolder && hasSelection;
+      }
+      case "add-to-group": {
+        const { organizeRoomsGrouping } = this.filesSettingsStore;
+        const { isRoomsFolder } = this.treeFoldersStore;
+        const { roomGroups } = this.dialogsStore;
+        return (
+          organizeRoomsGrouping &&
+          isRoomsFolder &&
+          hasSelection &&
+          roomGroups &&
+          roomGroups.length > 0
+        );
+      }
+      case "remove-from-group": {
+        const { organizeRoomsGrouping } = this.filesSettingsStore;
+        const { isRoomsFolder } = this.treeFoldersStore;
+        const { roomGroups } = this.dialogsStore;
+        const currentGroupId = this.filesStore.roomsFilter?.groupId;
+        return (
+          organizeRoomsGrouping &&
+          isRoomsFolder &&
+          hasSelection &&
+          roomGroups &&
+          roomGroups.length > 0 &&
+          !!currentGroupId
+        );
       }
       case "change-quota":
         return hasRoomsToChangeQuota;
@@ -2173,9 +2316,11 @@ class FilesActionStore {
     this.processCreatingRoomFromData = processCreatingRoomFromData;
   };
 
-  onClickCreateRoom = (item) => {
+  onClickCreateRoom = (item, context = "sidebar") => {
     this.setProcessCreatingRoomFromData(true);
-    const event = new Event(Events.ROOM_CREATE);
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: { parentId: this.selectedFolderStore.id, context },
+    });
     if (item && item.isFolder) {
       event.title = item.title;
     }
@@ -2295,6 +2440,9 @@ class FilesActionStore {
     });
 
     const pin = this.getOption(pinName, t);
+    const createGroup = this.getOption("create-group", t);
+    const addToGroup = this.getOption("add-to-group", t);
+    const removeFromGroup = this.getOption("remove-from-group", t);
     const archive = this.getOption("archive", t);
     const changeQuota = this.getOption("change-quota", t);
     const disableQuota = this.getOption("disable-quota", t);
@@ -2303,6 +2451,11 @@ class FilesActionStore {
 
     itemsCollection
       .set(pinName, pin)
+      .set("create-group", createGroup)
+      .set("add-to-group", addToGroup)
+      .set("remove-from-group", removeFromGroup);
+
+    itemsCollection
       .set("archive", archive)
       .set("change-quota", changeQuota)
       .set("default-quota", defaultQuota)
@@ -2409,6 +2562,8 @@ class FilesActionStore {
       .set("downloadAs", downloadAs)
       .set("copy", copy)
       .set("delete", {
+        id: "menu-remove-from-shared-with-me",
+        key: "remove-from-shared-with-me",
         label: t("Common:RemoveFromList"),
         onClick: () => {
           setUnsubscribe(true);
@@ -2449,12 +2604,12 @@ class FilesActionStore {
       .set("downloadAs", downloadAs)
       .set("copy", copy)
       /* .set("delete", {
-        label: t("RemoveFromFavorites"),
-        alt: t("RemoveFromFavorites"),
+        label: t("Common:RemoveFromFavorites"),
+        alt: t("Common:RemoveFromFavorites"),
         iconUrl: FavoritesFillReactSvgUrl,
         onClick: () => {
           this.setFavoriteAction("remove", selection)
-            .then(() => toastr.success(t("RemovedFromFavorites")))
+            .then(() => toastr.success(t("Common:RemovedFromFavorites")))
             .catch((err) => toastr.error(err));
         },
       }) */
@@ -2768,7 +2923,7 @@ class FilesActionStore {
   onClickBack = (fromHotkeys = true) => {
     const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
-    const { clearFiles, setBufferSelection } = this.filesStore;
+    const { clearFiles, setBufferSelection, setSelection } = this.filesStore;
     const { insideGroupBackUrl } = this.peopleStore.groupsStore;
     const { isLoading, setIsSectionBodyLoading } = this.clientLoadingStore;
     if (isLoading) return;
@@ -2778,6 +2933,7 @@ class FilesActionStore {
     }
 
     setBufferSelection(null);
+    setSelection([]);
 
     const categoryType = getCategoryType(window.DocSpace.location);
 
@@ -3078,8 +3234,8 @@ class FilesActionStore {
     return this.uploadDataStore.itemOperationToFolder(operationData);
   };
 
-  onLeaveRoom = (t, isOwner = false) => {
-    const { selection, bufferSelection } = this.filesStore;
+  onLeaveRoom = (t, isOwner = false, force = false) => {
+    const { selection, setSelected, bufferSelection } = this.filesStore;
     const { user } = this.userStore;
 
     const room = selection.length
@@ -3105,6 +3261,7 @@ class FilesActionStore {
     return api.rooms
       .updateRoomMemberRole(roomId, {
         invitations: [{ id: user?.id, access: ShareAccessRights.None }],
+        force,
       })
       .then(() => {
         if (!isAdmin) {
@@ -3126,6 +3283,9 @@ class FilesActionStore {
         }
 
         toastr.success(successText);
+      })
+      .finally(() => {
+        setSelected("none");
       });
   };
 
@@ -3170,22 +3330,25 @@ class FilesActionStore {
       });
   };
 
-  onClickRemoveFromRecent = (selection) => {
+  onClickRemoveFromRecent = (selection, t) => {
     const { setSelected } = this.filesStore;
     const ids = selection.map((item) => item.id);
-    this.removeFilesFromRecent(ids);
+    this.removeFilesFromRecent(ids, t);
     setSelected("none");
   };
 
-  removeFilesFromRecent = async (fileIds) => {
+  removeFilesFromRecent = async (fileIds, t) => {
     const { refreshFiles } = this.filesStore;
 
     await deleteFilesFromRecent(fileIds);
     await refreshFiles();
+    toastr.success(t("Files:RemovedFromRecent"));
   };
 
   onCreateRoomFromTemplate = (item, addSelection) => {
-    const event = new Event(Events.ROOM_CREATE);
+    const event = new CustomEvent(Events.ROOM_CREATE, {
+      detail: { parentId: this.selectedFolderStore.id, context: "template" },
+    });
     event.item = item;
     window.dispatchEvent(event);
 

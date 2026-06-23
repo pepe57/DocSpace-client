@@ -1,51 +1,49 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
 
 import { getDialogContent } from "./DeleteDialog.helper";
-
-const StyledModalWrapper = styled(ModalDialog)`
-  strong {
-    display: inline-block;
-    max-width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: top;
-  }
-`;
+import styles from "./DeleteDialog.module.scss";
 
 const DeleteDialogComponent = (props) => {
   const {
@@ -62,10 +60,8 @@ const DeleteDialogComponent = (props) => {
     isPrivacyFolder,
     isRecycleBinFolder,
     isRoomDelete,
-    isAIAgentChatDelete,
 
     setIsRoomDelete,
-    setIsAIAgentChatDelete,
     deleteRoomsAction,
     isPersonalRoom,
     isSharedWithMeFolderRoot,
@@ -101,11 +97,6 @@ const DeleteDialogComponent = (props) => {
     setBufferSelection(null);
     setRemoveMediaItem(null);
     setIsRoomDelete(false);
-    setIsAIAgentChatDelete({
-      visible: false,
-      itemName: "",
-      onDeleteAction: null,
-    });
     setDeleteDialogVisible(false);
     setUnsubscribe(false);
   };
@@ -158,17 +149,7 @@ const DeleteDialogComponent = (props) => {
     await deleteRoomsAction(itemsIdDeleteHaveRights, translations);
   };
 
-  const onDeleteAIAgentChat = () => {
-    isAIAgentChatDelete.onDeleteAction();
-    onClose();
-  };
-
   const onDeleteAction = useCallback(() => {
-    if (isAIAgentChatDelete.visible) {
-      onDeleteAIAgentChat();
-      return;
-    }
-
     if (isRoomDelete || isTemplate || isAIAgent) {
       if (!isChecked) return;
       onDeleteRoom();
@@ -217,8 +198,8 @@ const DeleteDialogComponent = (props) => {
       return t("Common:DeletePermanently");
     }
 
-    if (isRecycleBinFolder || isAIAgentChatDelete.visible)
-      return t("EmptyTrashDialog:DeleteForeverButton");
+    if (isRecycleBinFolder)
+      return t("Common:DeleteForeverButton");
 
     if (isPrivacyFolder || selection[0]?.providerKey)
       return t("Common:OKButton");
@@ -229,19 +210,16 @@ const DeleteDialogComponent = (props) => {
   };
 
   const getDialogTitle = () => {
-    if (isAIAgentChatDelete.visible) {
-      return t("DeleteDialog:DeleteAIAgentChatTitle");
-    }
-
     if (isAIAgent) {
       return t("DeleteDialog:DeleteAIAgentTitle");
     }
 
     if (isTemplate) {
-      return `${t("Files:DeleteTemplate")}?`;
+      return `${t("Files:DeleteTemplateAction")}?`;
     }
 
     if (isRoomDelete) {
+      if (selection.length > 1) return t("DeleteRoomsTitle");
       return t("DeleteRoomTitle");
     }
 
@@ -270,7 +248,6 @@ const DeleteDialogComponent = (props) => {
     isAIAgent,
     isAIAgentsFolderRoot,
     unsubscribe,
-    isAIAgentChatDelete,
   );
 
   const title = getDialogTitle();
@@ -280,7 +257,13 @@ const DeleteDialogComponent = (props) => {
     isRoomDelete || isTemplate || isAIAgent ? !isChecked : !selection.length;
 
   return (
-    <StyledModalWrapper isLoading={!tReady} visible={visible} onClose={onClose}>
+    <ModalDialog
+      className={styles.modalWrapper}
+      isLoading={!tReady}
+      visible={visible}
+      onClose={onClose}
+      dataTestId="delete-dialog"
+    >
       <ModalDialog.Header>{title}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{noteText}</Text>
@@ -294,6 +277,7 @@ const DeleteDialogComponent = (props) => {
                   ? t("DeleteTemplateWarning")
                   : t("DeleteRoomWarning")
             }
+            dataTestId="delete_warning_checkbox"
             isChecked={isChecked}
             onChange={() => setIsChecked(!isChecked)}
           />
@@ -323,7 +307,7 @@ const DeleteDialogComponent = (props) => {
           testId="delete_dialog_modal_cancel"
         />
       </ModalDialog.Footer>
-    </StyledModalWrapper>
+    </ModalDialog>
   );
 };
 
@@ -370,8 +354,6 @@ export default inject(
       isRoomDelete,
       setIsRoomDelete,
       setUnsubscribe,
-      isAIAgentChatDelete,
-      setIsAIAgentChatDelete,
     } = dialogsStore;
 
     const { onRemoveSharedFilesOrFolder } = contextOptionsStore;
@@ -405,8 +387,6 @@ export default inject(
       onRemoveSharedFilesOrFolder,
       setUnsubscribe,
       isAIAgentsFolderRoot,
-      isAIAgentChatDelete,
-      setIsAIAgentChatDelete,
     };
   },
 )(observer(DeleteDialog));

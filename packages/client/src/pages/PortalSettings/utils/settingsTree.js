@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { PageType } from "@docspace/shared/enums";
 
@@ -47,7 +56,7 @@ export const settingsTree = [
         key: "0-0",
         icon: "",
         link: "general",
-        tKey: "SettingsGeneral",
+        tKey: "Common:SettingsGeneral",
         isCategory: true,
         children: [
           {
@@ -91,6 +100,13 @@ export const settingsTree = [
             icon: "",
             link: "ad-management",
             tKey: "AdManagement",
+          },
+          {
+            id: "portal-settings_catalog-ai-services-management",
+            key: "0-0-6",
+            icon: "",
+            link: "ai-services-management",
+            tKey: "AiServicesManagement",
           },
         ],
       },
@@ -146,6 +162,23 @@ export const settingsTree = [
             icon: "",
             link: "appearance",
             tKey: "Appearance",
+          },
+        ],
+      },
+      {
+        id: "portal-settings_catalog-default-templates",
+        key: "0-3",
+        icon: "",
+        link: "default-templates",
+        tKey: "DefaultTemplates",
+        isCategory: true,
+        children: [
+          {
+            id: "portal-settings_catalog-default-templates_subLink",
+            key: "0-3-0",
+            icon: "",
+            link: "default-templates",
+            tKey: "DefaultTemplates",
           },
         ],
       },
@@ -230,6 +263,13 @@ export const settingsTree = [
             link: "lifetime",
             tKey: "SessionLifetime",
           },
+          {
+            id: "portal-settings_catalog-access-control",
+            key: "1-0-9",
+            icon: "",
+            link: "access-control",
+            tKey: "AccessControl",
+          },
         ],
       },
       {
@@ -237,7 +277,7 @@ export const settingsTree = [
         key: "1-1",
         icon: "",
         link: "access-rights",
-        tKey: "AccessRights",
+        tKey: "Common:AccessRights",
         isCategory: true,
         children: [
           {
@@ -271,7 +311,7 @@ export const settingsTree = [
     key: "2",
     type: PageType.backup,
     link: "backup",
-    tKey: "Backup",
+    tKey: "Common:Backup",
     isHeader: true,
     children: [
       {
@@ -279,7 +319,7 @@ export const settingsTree = [
         key: "2-0",
         icon: "",
         link: "data-backup",
-        tKey: "Backup",
+        tKey: "Common:Backup",
         isCategory: true,
       },
       {
@@ -287,7 +327,7 @@ export const settingsTree = [
         key: "2-1",
         icon: "",
         link: "auto-backup",
-        tKey: "AutoBackup",
+        tKey: "Common:AutoBackup",
         isCategory: true,
       },
     ],
@@ -378,7 +418,7 @@ export const settingsTree = [
         key: "4-3",
         icon: "",
         link: "plugins",
-        tKey: "Plugins",
+        tKey: "Common:Plugins",
         isCategory: true,
       },
       {
@@ -496,115 +536,6 @@ export const settingsTree = [
     ],
   },
   {
-    id: "portal-settings_catalog-developer-tools",
-    key: "8",
-    type: PageType.developerTools,
-    link: "developer-tools",
-    tKey: "Common:DeveloperTools",
-    isHeader: true,
-    children: [
-      {
-        id: "portal-settings_catalog-api",
-        key: "8-0",
-        icon: "",
-        link: "api",
-        tKey: "Api",
-        isCategory: true,
-      },
-      {
-        id: "portal-settings_catalog-javascript-sdk",
-        key: "8-1",
-        icon: "",
-        link: "javascript-sdk",
-        tKey: "Common:DeveloperTools",
-        isCategory: true,
-        children: [
-          {
-            id: "portal-settings_catalog-javascript-sdk_public-room",
-            key: "8-1-0",
-            icon: "",
-            link: "public-room",
-            tKey: "Common:PublicRoom",
-          },
-          {
-            id: "portal-settings_catalog-javascript-sdk_custom",
-            key: "8-1-1",
-            icon: "",
-            link: "custom",
-            tKey: "Common:Custom",
-          },
-          {
-            id: "portal-settings_catalog-javascript-sdk_room-selector",
-            key: "8-1-2",
-            icon: "",
-            link: "room-selector",
-            tKey: "Common:RoomSelector",
-          },
-          {
-            id: "portal-settings_catalog-javascript-sdk_file-selector",
-            key: "8-1-3",
-            icon: "",
-            link: "file-selector",
-            tKey: "Common:FileSelector",
-          },
-          {
-            id: "portal-settings_catalog-javascript-sdk_editor",
-            key: "8-1-4",
-            icon: "",
-            link: "editor",
-            tKey: "Common:Editor",
-          },
-          {
-            id: "portal-settings_catalog-javascript-sdk_viewer",
-            key: "8-1-5",
-            icon: "",
-            link: "viewer",
-            tKey: "Common:Viewer",
-          },
-          {
-            id: "portal-settings_catalog-javascript-sdk_portal",
-            key: "8-1-6",
-            icon: "",
-            link: "docspace",
-            tKey: "Common:ProductName",
-          },
-        ],
-      },
-      {
-        id: "portal-settings_catalog-plugin-sdk",
-        key: "8-2",
-        icon: "",
-        link: "plugin-sdk",
-        tKey: "PluginSDK",
-        isCategory: true,
-      },
-      {
-        id: "portal-settings_catalog-webhooks",
-        key: "8-3",
-        icon: "",
-        link: "webhooks",
-        tKey: "Common:DeveloperTools",
-        isCategory: true,
-      },
-      {
-        id: "portal-settings_catalog-oauth",
-        key: "8-4",
-        icon: "",
-        link: "oauth",
-        tKey: "OAuth:OAuth",
-        isCategory: true,
-      },
-      {
-        id: "portal-settings_catalog-api-keys",
-        key: "8-5",
-        icon: "",
-        link: "api-keys",
-        tKey: "Settings:ApiKeys",
-        isCategory: true,
-      },
-    ],
-  },
-  {
     id: "portal-settings_catalog-delete",
     key: "9",
     type: PageType.portalDeletion,
@@ -645,28 +576,26 @@ export const settingsTree = [
         isCategory: true,
       },
       {
-        id: "portal-settings_catalog-wallet",
+        id: "portal-settings_catalog-payment-method",
         key: "10-1",
         icon: "",
-        link: "wallet",
-        tKey: "Wallet",
+        link: "payment-method",
+        tKey: "Common:PaymentMethod",
         isCategory: true,
       },
-    ],
-  },
-  {
-    id: "portal-settings_catalog-services",
-    key: "11",
-    type: PageType.services,
-    link: "services",
-    tKey: "Services",
-    isHeader: true,
-    children: [
+      {
+        id: "portal-settings_catalog-wallet",
+        key: "10-2",
+        icon: "",
+        link: "wallet",
+        tKey: "Common:Wallet",
+        isCategory: true,
+      },
       {
         id: "portal-settings_catalog-services",
-        key: "11-0",
+        key: "10-3",
         icon: "",
-        link: "",
+        link: "services",
         tKey: "Services",
         isCategory: true,
       },
@@ -674,7 +603,7 @@ export const settingsTree = [
   },
   {
     id: "portal-settings_catalog-bonus",
-    key: "12",
+    key: "11",
     type: PageType.bonus,
     link: "bonus",
     tKey: "Common:Bonus",
@@ -682,7 +611,7 @@ export const settingsTree = [
     children: [
       {
         id: "portal-settings_catalog-portal-bonus",
-        key: "12-0",
+        key: "11-0",
         icon: "",
         link: "",
         tKey: "Common:FreeAccessToLicensedVersion",
@@ -816,3 +745,4 @@ export const settingsTreeFull = [
     link: "statistics",
   },
 ];
+

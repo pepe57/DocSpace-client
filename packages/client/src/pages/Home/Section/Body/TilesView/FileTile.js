@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import classNames from "classnames";
 import { use, useRef, useEffect, useState, useCallback, useMemo } from "react";
@@ -31,19 +40,18 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
-import { DragAndDrop } from "@docspace/shared/components/drag-and-drop";
-import { FolderType } from "@docspace/shared/enums";
+import { DragAndDrop } from "@docspace/ui-kit/components/drag-and-drop";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 
-import {
-  FileTile as FileTileComponent,
-  FolderTile,
-  RoomTile,
-  TemplateTile,
-} from "@docspace/shared/components/tiles";
+import { FileTile as FileTileComponent } from "@docspace/ui-kit/components/tiles/file-tile";
+import { FolderTile } from "@docspace/ui-kit/components/tiles/folder-tile";
+import { RoomTile } from "@docspace/ui-kit/components/tiles/room-tile";
+import { TemplateTile } from "@docspace/ui-kit/components/tiles/template-tile";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+import { TagManagement } from "SRC_DIR/components/TagManagement";
 
 import FilesTileContent from "./FilesTileContent";
 import { FileTileContext } from "./FileTile.provider";
@@ -91,6 +99,8 @@ const FileTile = (props) => {
     onDragOver,
     onDragLeave,
     badgeUrl,
+    badgeIconColor,
+    isExternalShareRestricted, // injected by withFileActions (accounts for blockExistingLinksOnRestrict)
     selectableRef,
     openUser,
     isBlockingOperation,
@@ -178,6 +188,7 @@ const FileTile = (props) => {
       isArchive={item.isArchive}
       isTemplate={item.isTemplate}
       badgeUrl={badgeUrl}
+      badgeIconColor={badgeIconColor}
     />
   );
 
@@ -238,50 +249,75 @@ const FileTile = (props) => {
     badgeUrl,
   };
 
-  const fileTile = (
-    <FileTileComponent
-      {...commonProps}
-      key={item.id}
-      temporaryIcon={temporaryIcon}
-      thumbnail={!providerItem && thumbnailUrl ? thumbnailUrl : ""}
-      thumbSize={thumbSize}
-      contentElement={quickButtonsComponent}
-      thumbnailClick={onFilesClick}
-    />
-  );
-
-  const folderTile = (
-    <FolderTile {...commonProps} temporaryIcon={temporaryIcon} />
-  );
-
-  const roomTile = (
-    <RoomTile
-      {...commonProps}
-      key={item.id}
-      selectTag={onSelectTag}
-      selectOption={onSelectOption}
-      columnCount={columnCount}
-      thumbnailClick={onFilesClick}
-      getRoomTypeName={getRoomTypeName}
-    />
-  );
-
-  const remplateTile = (
-    <TemplateTile
-      {...commonProps}
-      key={item.id}
-      thumbnailClick={onFilesClick}
-      openUser={onOpenUser}
-      showStorageInfo={showStorageInfo}
-      SpaceQuotaComponent={SpaceQuota}
-    />
-  );
-
   const renderTile = () => {
-    if (item.isTemplate) return remplateTile;
-    if (item.isRoom) return roomTile;
-    if (item.isFolder) return folderTile;
-    return fileTile;
+    if (item.isTemplate)
+      return (
+        <TemplateTile
+          {...commonProps}
+          key={item.id}
+          thumbnailClick={onFilesClick}
+          openUser={onOpenUser}
+          showStorageInfo={showStorageInfo}
+          SpaceQuotaComponent={SpaceQuota}
+        />
+      );
+    if (item.isRoom)
+      return (
+        <RoomTile
+          {...commonProps}
+          t={t}
+          key={item.id}
+          selectTag={onSelectTag}
+          selectOption={onSelectOption}
+          columnCount={columnCount}
+          thumbnailClick={onFilesClick}
+          getRoomTypeName={getRoomTypeName}
+          customBottomContent={(isHovered, tags) => {
+            const isRestrictedPublicRoom =
+              isExternalShareRestricted &&
+              item.shared &&
+              item.roomType === RoomsType.PublicRoom;
+
+            const patchedTags = isRestrictedPublicRoom
+              ? tags.map((tag) =>
+                  typeof tag === "object" && tag.isDefault
+                    ? {
+                        ...tag,
+                        labelSuffix: ` (${t("Common:Restricted")})`,
+                        labelSuffixColor: "var(--info-panel-link-blocked)",
+                      }
+                    : tag,
+                )
+              : tags;
+
+            return (
+              <TagManagement
+                tags={patchedTags}
+                id={item.id}
+                access={item.access}
+                roomName={item.title}
+                columnCount={columnCount}
+                onSelectTag={onSelectTag}
+                isActive={isActive || isHovered || checkedProps}
+              />
+            );
+          }}
+        />
+      );
+    if (item.isFolder)
+      return <FolderTile {...commonProps} temporaryIcon={temporaryIcon} />;
+
+    return (
+      <FileTileComponent
+        {...commonProps}
+        key={item.id}
+        temporaryIcon={temporaryIcon}
+        thumbnail={!providerItem && thumbnailUrl ? thumbnailUrl : ""}
+        thumbSize={thumbSize}
+        contentElement={quickButtonsComponent}
+        thumbnailClick={onFilesClick}
+      />
+    );
   };
 
   const droppableClassName = isDragging ? "droppable" : "";
@@ -358,7 +394,11 @@ export default inject(
     };
   },
 )(
-  withTranslation(["Files", "InfoPanel", "Notifications"])(
-    withFileActions(withBadges(withQuickButtons(observer(FileTile)))),
-  ),
+  withTranslation([
+    "Files",
+    "InfoPanel",
+    "Notifications",
+    "Common",
+    "GroupingRooms",
+  ])(withFileActions(withBadges(withQuickButtons(observer(FileTile))))),
 );

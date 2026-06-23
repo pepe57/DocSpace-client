@@ -1,75 +1,84 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 "use client";
 
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { ChangeEvent, MouseEvent, useRef, useState, useMemo } from "react";
+import classNames from "classnames";
 
 import {
   createPasswordHash,
   getSelectZone,
-  mapCulturesToArray,
   mapTimezonesToArray,
   setLanguageForUnauthorized,
   setTimezoneForUnauthorized,
 } from "@docspace/shared/utils/common";
-import { Text } from "@docspace/shared/components/text";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { EmailInput, TValidate } from "@docspace/shared/components/email-input";
+import { mapCulturesToArray } from "@docspace/shared/utils/cultures";
+import { Text } from "@docspace/ui-kit/components/text";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { EmailInput, TValidate } from "@docspace/ui-kit/components/email-input";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
   TIMEZONE,
 } from "@docspace/shared/constants";
-import { EmailSettings } from "@docspace/shared/utils";
+import { EmailSettings } from "@docspace/ui-kit/utils/email";
 import {
   PasswordInput,
   PasswordInputHandle,
-} from "@docspace/shared/components/password-input";
-import { FileInput } from "@docspace/shared/components/file-input";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+} from "@docspace/ui-kit/components/password-input";
+import { FileInput } from "@docspace/ui-kit/components/file-input";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
 import { setLicense } from "@docspace/shared/api/settings";
 import {
   ComboBox,
   ComboBoxSize,
   TOption,
-} from "@docspace/shared/components/combobox";
+} from "@docspace/ui-kit/components/combobox";
 import { BetaBadge } from "@docspace/shared/components/beta-badge";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import api from "@docspace/shared/api";
-import { setCookie, deleteCookie } from "@docspace/shared/utils/cookie";
+import { setCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
 import {
   InputSize,
   InputType,
   TextInput,
-} from "@docspace/shared/components/text-input";
+} from "@docspace/ui-kit/components/text-input";
 import useDeviceType from "@/hooks/useDeviceType";
 import { DeviceType } from "@docspace/shared/enums";
 import { Nullable } from "@docspace/shared/types";
@@ -83,13 +92,9 @@ import {
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 
 import { TError, TTimeZoneOption } from "@/types";
-import { toastr } from "@docspace/shared/components/toast";
-import {
-  StyledAcceptTerms,
-  StyledInfo,
-  StyledLink,
-  WizardContainer,
-} from "./page.styled";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import styles from "./wizard.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type WizardFormProps = {
   passwordSettings?: TPasswordSettings;
@@ -148,7 +153,6 @@ function WizardForm(props: WizardFormProps) {
 
   const { t, i18n } = useTranslation(["Wizard", "Common"]);
 
-  const theme = useTheme();
   const { currentDeviceType } = useDeviceType();
 
   const refPassInput = useRef<Nullable<PasswordInputHandle>>(null);
@@ -158,7 +162,7 @@ function WizardForm(props: WizardFormProps) {
   const currCulture = i18n.language;
 
   const cultureNames = useMemo(() => {
-    if (portalCultures) return mapCulturesToArray(portalCultures, true, i18n);
+    if (portalCultures) return mapCulturesToArray(portalCultures, true);
     return [];
   }, [portalCultures, i18n]);
   const currentCulture = cultureNames?.find((item) => item.key === currCulture);
@@ -198,14 +202,18 @@ function WizardForm(props: WizardFormProps) {
   };
 
   const onLanguageSelect = (lang: TOption) => {
-    setLanguageForUnauthorized(lang.key.toString(), false);
-    i18n.changeLanguage(lang.key.toString());
+    // The login app's TranslationProvider has no client backend — only the
+    // current locale's bundles are loaded (SSR), so i18n.changeLanguage() can't
+    // fetch another language and t() would fall back to English. Persist the
+    // choice in the cookie and reload so the server re-renders in the new
+    // language (same approach as LanguageCombobox).
+    setLanguageForUnauthorized(lang.key.toString());
   };
 
   const onTimezoneSelect = (timezone: TOption) => {
     setSelectedTimezone({
       key: timezone.key,
-      label: timezone.label ?? "",
+      label: (timezone.label as string) ?? "",
     });
     setTimezoneForUnauthorized(timezone.key.toString());
   };
@@ -328,12 +336,12 @@ function WizardForm(props: WizardFormProps) {
   };
 
   return (
-    <WizardContainer>
-      <Text fontWeight={600} fontSize="16px" className="form-header">
-        {t("Wizard:Desc", { productName: t("Common:ProductName") })}
+    <div className={styles.wizardContainer}>
+      <Text fontWeight={600} fontSize="16px" className={styles.formHeader}>
+        {t("Wizard:Desc", { productName: getBrandName("ProductName") })}
       </Text>
       <FieldContainer
-        className="wizard-field"
+        className={styles.wizardField}
         isVertical
         labelVisible={false}
         hasError={hasErrorEmail}
@@ -357,7 +365,7 @@ function WizardForm(props: WizardFormProps) {
       </FieldContainer>
 
       <FieldContainer
-        className="wizard-field password-field"
+        className={classNames(styles.wizardField, styles.passwordField)}
         isVertical
         labelVisible={false}
         hasError={hasErrorPass}
@@ -369,6 +377,7 @@ function WizardForm(props: WizardFormProps) {
           tabIndex={2}
           size={InputSize.large}
           scale
+          inputName="password"
           inputValue={password}
           inputType={InputType.password}
           passwordSettings={passwordSettings}
@@ -382,7 +391,7 @@ function WizardForm(props: WizardFormProps) {
         />
       </FieldContainer>
 
-      <StyledLink>
+      <div className={styles.linkWrapper}>
         <IconButton
           size={12}
           iconNode={<RefreshReactSvgUrl />}
@@ -390,7 +399,7 @@ function WizardForm(props: WizardFormProps) {
           dataTestId="generate_password_icon_button"
         />
         <Link
-          className="generate-password-link"
+          className={styles.generatePasswordLink}
           type={LinkType.action}
           fontWeight={600}
           isHovered
@@ -399,11 +408,11 @@ function WizardForm(props: WizardFormProps) {
         >
           {t("Common:GeneratePassword")}
         </Link>
-      </StyledLink>
+      </div>
 
       {isAmi ? (
         <FieldContainer
-          className="wizard-field instance-id-field"
+          className={classNames(styles.wizardField, "instance-id-field")}
           isVertical
           labelVisible={false}
           hasError={hasErrorInstanceId}
@@ -429,7 +438,7 @@ function WizardForm(props: WizardFormProps) {
 
       {isRequiredLicense ? (
         <FieldContainer
-          className="license-filed"
+          className={styles.licenseField}
           isVertical
           labelVisible={false}
           hasError={hasErrorLicense}
@@ -451,20 +460,20 @@ function WizardForm(props: WizardFormProps) {
         </FieldContainer>
       ) : null}
 
-      <StyledInfo>
-        <Text className="text" fontWeight={400}>
+      <div className={styles.infoWrapper}>
+        <Text className={styles.text} fontWeight={400}>
           {t("Common:Domain")}
         </Text>
-        <Text fontWeight={600} className="machine-name">
+        <Text fontWeight={600} className={styles.machineName}>
           {machineName}
         </Text>
-      </StyledInfo>
+      </div>
 
-      <StyledInfo>
-        <Text className="text" fontWeight={400}>
+      <div className={styles.infoWrapper}>
+        <Text className={styles.text} fontWeight={400}>
           {t("Common:Language")}
         </Text>
-        <div className="wrapper__language-selector">
+        <div className={styles.wrapperLanguageSelector}>
           <ComboBox
             withoutPadding
             directionY="both"
@@ -497,10 +506,10 @@ function WizardForm(props: WizardFormProps) {
             />
           ) : null}
         </div>
-      </StyledInfo>
+      </div>
 
-      <StyledInfo>
-        <Text className="text" fontWeight={400}>
+      <div className={styles.infoWrapper}>
+        <Text className={styles.text} fontWeight={400}>
           {t("Timezone")}
         </Text>
         <ComboBox
@@ -524,11 +533,11 @@ function WizardForm(props: WizardFormProps) {
           dataTestId="timezone_combobox"
           dropDownTestId="timezone_dropdown"
         />
-      </StyledInfo>
+      </div>
 
-      <StyledAcceptTerms>
+      <div className={styles.acceptTerms}>
         <Checkbox
-          className="wizard-checkbox"
+          className={styles.wizardCheckbox}
           id="license"
           name="confirm"
           label={t("License")}
@@ -540,12 +549,10 @@ function WizardForm(props: WizardFormProps) {
           dataTestId="agree_terms_checkbox"
         />
         <Link
+          className={classNames(styles.licenseLink, {
+            [styles.hasErrorAgree]: hasErrorAgree,
+          })}
           type={LinkType.page}
-          color={
-            hasErrorAgree
-              ? theme.checkbox.errorColor
-              : theme.currentColorScheme?.main.accent
-          }
           fontSize="13px"
           target={LinkTarget.blank}
           href={licenseUrl}
@@ -553,7 +560,7 @@ function WizardForm(props: WizardFormProps) {
         >
           {t("LicenseLink")}
         </Link>
-      </StyledAcceptTerms>
+      </div>
 
       <Button
         size={ButtonSize.medium}
@@ -564,8 +571,9 @@ function WizardForm(props: WizardFormProps) {
         onClick={onContinueClick}
         testId="wizard_continue_button"
       />
-    </WizardContainer>
+    </div>
   );
 }
 
 export default WizardForm;
+

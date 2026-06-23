@@ -1,0 +1,207 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/variables/colors" as *;
+
+/* DropDown styles */
+
+.linkRolesDropdownContainer {
+  max-width: 100%;
+  position: relative;
+  visibility: visible;
+
+  &:not(.isOpen) {
+    visibility: hidden;
+  }
+
+  .dropdownContent {
+    border: var(--link-settings-dropdown-border);
+    margin-top: 4px;
+    overflow: visible;
+    z-index: 400;
+    top: 0;
+    inset-inline-start: 0;
+    box-sizing: border-box;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    padding: 6px 0;
+    box-shadow: 0px 12px 40px #{$popup-shadow};
+    border-radius: 6px;
+    background-color: var(--room-type-dropdown-item-background);
+  }
+}
+
+.linkRolesDropdown {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .backdrop-active {
+    top: -64px;
+  }
+
+  .linkRoles {
+    cursor: pointer;
+    outline: 0;
+
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    :global {
+      .choose_access-info_wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 4px;
+
+        .choose_access-title {
+          display: flex;
+          flex-direction: row;
+          gap: 6px;
+          align-items: center;
+
+          .choose_access-title-text {
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 16px;
+          }
+        }
+        .choose_access-description {
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 16px;
+          color: var(--room-type-dropdown-item-description-text);
+        }
+      }
+    }
+  }
+
+  .chooseAccessButton {
+    transform: rotate(90deg);
+    max-width: 17px;
+    max-height: 17px;
+    min-width: 17px;
+    min-height: 17px;
+
+    &.isOpen {
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+.dropDownButton {
+  background-color: var(--room-type-dropdown-button-background);
+  border-radius: 6px;
+  border: 1px solid var(--room-type-dropdown-button-border);
+
+  &:not(.isOpen):hover:not(:active) {
+    background-color: var(--room-type-dropdown-button-hover-background);
+  }
+
+  &.isOpen,
+  &:active {
+    border-color: var(--accent-main);
+  }
+}
+
+/* DropDown Mobile styles */
+
+.linkRolesDropdownMobileContainer {
+  visibility: visible;
+  position: fixed;
+  bottom: 0;
+  z-index: 500;
+  padding-top: 6px;
+  border-radius: 6px 6px 0px 0px;
+  background-color: var(--room-type-dropdown-item-background);
+  box-shadow: 0px -4px 60px #{$popup-shadow};
+
+  &:not(.isOpen) {
+    visibility: hidden;
+  }
+}
+
+/* DropDownItem styles */
+
+.dropDownItem {
+  background-color: var(--room-type-dropdown-item-background);
+
+  &:hover {
+    background-color: var(--room-type-dropdown-item-hover-background);
+  }
+}
+
+.item {
+  width: auto;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-content: center;
+  gap: 8px;
+
+  padding: 7px 0;
+
+  line-height: 16px;
+  font-style: normal;
+}
+
+.itemContent {
+  width: 100%;
+  white-space: normal;
+}
+
+.itemTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.itemDescription {
+  margin: 1px 0;
+
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--access-right-select-description-color);
+}

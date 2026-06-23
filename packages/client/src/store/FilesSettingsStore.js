@@ -1,35 +1,45 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import api from "@docspace/shared/api";
 import {
   setFavoritesSetting,
   setRecentSetting,
+  setOrganizeGrouping,
 } from "@docspace/shared/api/files";
-import { RoomsType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { presentInArray } from "@docspace/shared/utils";
@@ -45,8 +55,10 @@ import {
   isPublicPreview,
   insertEditorPreloadFrame,
 } from "@docspace/shared/utils/common";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { isAIAgents } from "SRC_DIR/helpers/plugins/utils";
+import SocketHelper, { SocketEvents } from "@docspace/ui-kit/utils/socket";
+import i18n from "../i18n";
 
 class FilesSettingsStore {
   thirdPartyStore;
@@ -154,7 +166,19 @@ class FilesSettingsStore {
 
   hideConfirmCancelOperation = false;
 
+  organizeRoomsGrouping = false;
+
   extsFilesVectorized = [];
+
+  externalShare = true;
+
+  defaultShareLinkInternal = false;
+
+  externalShareApplyToDocuments = true;
+
+  externalShareApplyToRooms = true;
+
+  blockExistingLinksOnRestrict = true;
 
   documentServiceLocation = null;
 
@@ -174,6 +198,15 @@ class FilesSettingsStore {
     this.pluginStore = pluginStore;
     this.authStore = authStore;
     this.settingsStore = settingsStore;
+
+    SocketHelper?.on(SocketEvents.UpdateExternalShareSettings, (settings) => {
+      this.externalShare = settings.externalShare;
+      this.defaultShareLinkInternal = settings.defaultShareLinkInternal;
+      this.externalShareApplyToDocuments =
+        settings.externalShareApplyToDocuments;
+      this.externalShareApplyToRooms = settings.externalShareApplyToRooms;
+      this.blockExistingLinksOnRestrict = settings.blockExistingLinksOnRestrict;
+    });
   }
 
   setIsLoaded = (isLoaded) => {
@@ -183,6 +216,30 @@ class FilesSettingsStore {
   get uploadThreadCount() {
     return this.maxUploadThreadCount / this.maxUploadFilesCount;
   }
+
+  get isExternalShareRestricted() {
+    return !this.externalShare;
+  }
+
+  isLinkRestrictedByAdmin = (item, link) => {
+    const isInRoom = item.rootFolderType === FolderType.Rooms;
+    const appliesToItem = isInRoom
+      ? this.externalShareApplyToRooms
+      : this.externalShareApplyToDocuments;
+
+    return (
+      this.isExternalShareRestricted &&
+      appliesToItem &&
+      !link.sharedTo.internal
+    );
+  };
+
+  isLinkBlockedByAdmin = (item, link) => {
+    return (
+      this.isLinkRestrictedByAdmin(item, link) &&
+      this.blockExistingLinksOnRestrict
+    );
+  };
 
   get isLoadedSettingsTree() {
     return (
@@ -257,6 +314,16 @@ class FilesSettingsStore {
     this[setting] = val;
   };
 
+  setAccessControlSettings = async (settings) => {
+    const res = await api.files.setAccessControlSettings(settings);
+    this.externalShare = res.externalShare;
+    this.defaultShareLinkInternal = res.defaultShareLinkInternal;
+    this.externalShareApplyToDocuments = res.externalShareApplyToDocuments;
+    this.externalShareApplyToRooms = res.externalShareApplyToRooms;
+    this.blockExistingLinksOnRestrict = res.blockExistingLinksOnRestrict;
+    return res;
+  };
+
   setStoreOriginal = (data, setting) =>
     api.files
       .storeOriginal(data)
@@ -300,6 +367,23 @@ class FilesSettingsStore {
       .changeOpenEditorInSameTab(data)
       .then((res) => this.setFilesSetting("openEditorInSameTab", res))
       .catch((e) => toastr.error(e));
+  };
+
+  setOrganizeRoomsGrouping = async (data) => {
+    try {
+      const res = await setOrganizeGrouping(data);
+      this.setFilesSetting("organizeRoomsGrouping", res);
+
+      const message = res
+        ? i18n.t("GroupingRooms:RoomGroupingEnabled")
+        : i18n.t("GroupingRooms:RoomGroupingDisabled");
+      toastr.success(message);
+
+      return res;
+    } catch (e) {
+      toastr.error(e);
+      throw e;
+    }
   };
 
   setEnableThirdParty = async (data, setting) => {
@@ -534,10 +618,13 @@ class FilesSettingsStore {
   };
 
   getIconUrl = (extension, size) => {
+    const path = `${extension.replace(/^\./, "")}.svg`;
+    return this.getIconBySize(path, size);
+  };
+
+  getPluginFileIconUrl = (extension) => {
     const { enablePlugins } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
-
-    const path = `${extension.replace(/^\./, "")}.svg`;
 
     if (!isAIAgents() && enablePlugins && fileItemsList) {
       const fileItem = fileItemsList.find(
@@ -547,8 +634,6 @@ class FilesSettingsStore {
         return fileItem.value.fileIcon;
       }
     }
-
-    return this.getIconBySize(path, size);
   };
 
   getFileIcon = (
@@ -561,6 +646,10 @@ class FilesSettingsStore {
     ebook = false,
   ) => {
     let path = "";
+
+    const pluginIconUrl = this.getPluginFileIconUrl(extension);
+
+    if (pluginIconUrl) return pluginIconUrl;
 
     if (archive) path = "archive.svg";
 

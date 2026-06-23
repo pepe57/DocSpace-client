@@ -1,43 +1,56 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * Copyright (C) Ascensio System SIA, 2009-2026
  *
- * This program is a free software product.
- * You can redistribute it and/or modify it under the terms
- * of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
- * Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
- * to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
- * any third-party rights.
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
  *
- * This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
- * the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
  *
- * You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
  *
- * The  interactive user interfaces in modified source and object code versions of the Program must
- * display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
  *
- * Pursuant to Section 7(b) of the License you must retain the original Product logo when
- * distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
- * trademark law for use of our trademarks.
+ * No trademark rights are granted under this License.
  *
- * All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
- * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
- * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
 
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import type {
   TAiProvider,
+  TModelSettingsDto,
   TProviderTypeWithUrl,
 } from "@docspace/shared/api/ai/types";
-import { getAvailableProviderUrls } from "@docspace/shared/api/ai";
+import {
+  getAvailableProviderUrls,
+  getProviderModelSettings,
+} from "@docspace/shared/api/ai";
+import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -47,26 +60,32 @@ import { AddUpdateProviderDialog } from "./dialogs/add-update";
 import { DeleteAIProviderDialog } from "./dialogs/delete";
 
 import { AiProviderTile } from "./Tile";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { ProvidersLoader } from "./ProvidersLoader";
+import { DefaultProvider } from "./DefaultProvider";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type TDeleteDialogData =
   | {
       visible: false;
       providerId: null;
+      showDefaultProviderWarning?: false;
     }
   | {
       visible: true;
       providerId: TAiProvider["id"];
+      showDefaultProviderWarning?: boolean;
     };
 
 type TUpdateDialogData =
   | {
       visible: false;
       provider: null;
+      models: null;
     }
   | {
       visible: true;
       provider: TAiProvider;
+      models: TModelSettingsDto[];
     };
 
 type AIProviderProps = {
@@ -75,7 +94,9 @@ type AIProviderProps = {
   checkUnavailableProviders?: AISettingsStore["checkUnavailableProviders"];
   isProviderAvailable?: AISettingsStore["isProviderAvailable"];
   cancelAvailabilityCheck?: AISettingsStore["cancelAvailabilityCheck"];
-  aiSettingsUrl?: string;
+  aiProviderSettingsUrl?: SettingsStore["aiProviderSettingsUrl"];
+  hasAIProviders?: AISettingsStore["hasAIProviders"];
+  aiConfig?: SettingsStore["aiConfig"];
 };
 
 const AIProviderComponent = ({
@@ -84,13 +105,16 @@ const AIProviderComponent = ({
   checkUnavailableProviders,
   isProviderAvailable,
   cancelAvailabilityCheck,
-  aiSettingsUrl,
+  aiProviderSettingsUrl,
+  hasAIProviders,
+  aiConfig,
 }: AIProviderProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setaddDialogVisible] = useState(false);
   const [updateDialogData, setUpdateDialogData] = useState<TUpdateDialogData>({
     visible: false,
     provider: null,
+    models: null,
   });
   const [deleteDialogData, setDeleteDialogData] = useState<TDeleteDialogData>({
     visible: false,
@@ -104,17 +128,29 @@ const AIProviderComponent = ({
 
   const hideAddProviderDialog = () => setaddDialogVisible(false);
   const hideUpdateDialog = () =>
-    setUpdateDialogData({ visible: false, provider: null });
+    setUpdateDialogData({ visible: false, provider: null, models: null });
 
   const hideDeleteProviderDialog = () =>
     setDeleteDialogData({ visible: false, providerId: null });
 
   const onDeleteAIProvider = async (id: TAiProvider["id"]) => {
-    setDeleteDialogData({ visible: true, providerId: id });
+    const isDefaultProvider = aiProviders?.find((p) => p.id === id)?.isDefault;
+    const isLastProvider = aiProviders && aiProviders.length === 1;
+
+    setDeleteDialogData({
+      visible: true,
+      providerId: id,
+      showDefaultProviderWarning: isDefaultProvider && !isLastProvider,
+    });
   };
 
   const onUpdateAIProvider = async (provider: TAiProvider) => {
-    setUpdateDialogData({ visible: true, provider });
+    try {
+      const models = await getProviderModelSettings(provider.id);
+      setUpdateDialogData({ visible: true, provider, models });
+    } catch (e) {
+      toastr.error(e as string);
+    }
   };
 
   useEffect(() => {
@@ -139,57 +175,45 @@ const AIProviderComponent = ({
     };
   }, [cancelAvailabilityCheck]);
 
-  if (!aiProvidersInitied)
-    return (
-      <div className={styles.aiProvider}>
-        <RectangleSkeleton
-          className={styles.description}
-          width="700px"
-          height="36px"
-        />
-        <RectangleSkeleton
-          className={styles.learnMoreLink}
-          width="100px"
-          height="19px"
-        />
-        <RectangleSkeleton
-          className={styles.addProviderButton}
-          width="155px"
-          height="32px"
-        />
-      </div>
-    );
+  if (!aiProvidersInitied) return <ProvidersLoader />;
 
   return (
     <div className={styles.aiProvider}>
-      <Text className={styles.description}>
+      <Text
+        className={styles.description}
+        dataTestId="provider-section-description"
+      >
         {t("AISettings:AIProviderSettingDescription", {
-          productName: t("Common:ProductName"),
+          productName: getBrandName("ProductName"),
+          aiChats: t("Common:AIChats"),
         })}
       </Text>
-      {aiSettingsUrl ? (
+      {aiProviderSettingsUrl ? (
         <Link
           className={styles.learnMoreLink}
           target={LinkTarget.blank}
           type={LinkType.page}
           fontWeight={600}
           isHovered
-          href={aiSettingsUrl}
+          href={aiProviderSettingsUrl}
           color="accent"
         >
           {t("Common:LearnMore")}
         </Link>
       ) : null}
       <Button
+        testId="add-provider-button"
         primary
         size={ButtonSize.small}
-        label={t("AISettings:AddAIProvider")}
+        label={t("AISettings:AddAIProvider", {
+          aiProvider: t("Common:AIProvider"),
+        })}
         scale={false}
         className={styles.addProviderButton}
         onClick={showAddProviderDialog}
       />
 
-      <div className={styles.providerList}>
+      <div data-testid="ai-provider-list" className={styles.providerList}>
         {aiProviders?.map((provider) => (
           <AiProviderTile
             key={provider.id}
@@ -199,9 +223,14 @@ const AIProviderComponent = ({
             isAvailable={
               isProviderAvailable?.(provider.id) && !provider.needReset
             }
+            enabled={aiConfig?.systemAiEnabled}
           />
         ))}
       </div>
+
+      {aiProviders && aiProviders.length > 0 ? (
+        <DefaultProvider aiConfig={aiConfig} />
+      ) : null}
 
       {addDialogVisible ? (
         <AddUpdateProviderDialog
@@ -217,6 +246,7 @@ const AIProviderComponent = ({
           onClose={hideUpdateDialog}
           aiProviderTypesWithUrls={aiProviderTypesWithUrls}
           providerData={updateDialogData.provider}
+          initialModels={updateDialogData.models}
         />
       ) : null}
 
@@ -224,6 +254,9 @@ const AIProviderComponent = ({
         <DeleteAIProviderDialog
           onClose={hideDeleteProviderDialog}
           providerId={deleteDialogData.providerId}
+          showDefaultProviderWarning={
+            deleteDialogData.showDefaultProviderWarning
+          }
         />
       ) : null}
     </div>
@@ -238,7 +271,12 @@ export const AIProvider = inject(
       checkUnavailableProviders: aiSettingsStore.checkUnavailableProviders,
       isProviderAvailable: aiSettingsStore.isProviderAvailable,
       cancelAvailabilityCheck: aiSettingsStore.cancelAvailabilityCheck,
-      aiSettingsUrl: settingsStore.aiSettingsUrl,
+      aiProviderSettingsUrl: settingsStore.aiProviderSettingsUrl,
+      aiConfig: settingsStore.aiConfig,
+      hasAIProviders: aiSettingsStore.hasAIProviders,
     };
   },
 )(observer(AIProviderComponent));
+
+export { ProvidersLoader };
+

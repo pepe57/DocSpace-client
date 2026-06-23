@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { useCallback } from "react";
 import { inject, observer } from "mobx-react";
@@ -32,7 +41,7 @@ import { withTranslation } from "react-i18next";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
-import FilterInput from "@docspace/shared/components/filter";
+import FilterInput from "@docspace/ui-kit/components/filter";
 import { withLayoutSize } from "@docspace/shared/HOC/withLayoutSize";
 import { getUser } from "@docspace/shared/api/people";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
@@ -40,19 +49,19 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 
 import {
   getFilterType,
-  getSubjectFilter,
   getAuthorType,
   getRoomId,
   getSearchParams,
   getType,
   getProviderType,
   getSubjectId,
+  getSubjectOwnerId,
   getFilterContent,
   getTags,
   getQuotaFilter,
   getFilterLocation,
   getSharedBy,
-} from "@docspace/shared/components/filter/Filter.utils";
+} from "@docspace/ui-kit/components/filter/Filter.utils";
 
 import {
   DeviceType,
@@ -76,7 +85,8 @@ import ViewRowsReactSvgUrl from "PUBLIC_DIR/images/view-rows.react.svg?url";
 import ViewTilesReactSvgUrl from "PUBLIC_DIR/images/view-tiles.react.svg?url";
 
 import { getRoomInfo } from "@docspace/shared/api/rooms";
-import { FilterLoader } from "@docspace/shared/skeletons/filter";
+import { FilterLoader } from "@docspace/ui-kit/components/filter/skeletons";
+import renderFilterSelector from "@docspace/shared/utils/renderFilterSelector";
 
 import { useContactsFilter } from "./useContacts";
 
@@ -143,6 +153,11 @@ const SectionFilterContent = ({
   filesStore,
   groupsStore,
   usersStore,
+  setEditRoomGroupsDialogVisible,
+  getAllRoomGroups,
+  roomGroups,
+  isRoomsFolder,
+  organizeRoomsGrouping,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -153,6 +168,32 @@ const SectionFilterContent = ({
   const isContactsInsideGroupPage = contactsTab === "inside_group";
   const isContactsGroupsPage = contactsTab === "groups";
   const isContactsGuestsPage = contactsTab === "guests";
+
+  // Check if any filter or search is active (excluding sorting and groupId)
+  // Room grouping should be hidden when filters/search are active
+  const isFilterOrSearchActive = React.useMemo(() => {
+    if (!isRooms) return false;
+    return !!(
+      roomsFilter.filterValue ||
+      roomsFilter.type ||
+      roomsFilter.subjectId ||
+      roomsFilter.subjectOwnerId ||
+      roomsFilter.provider ||
+      roomsFilter.quotaFilter ||
+      (roomsFilter.tags && roomsFilter.tags.length > 0) ||
+      roomsFilter.withoutTags
+    );
+  }, [
+    isRooms,
+    roomsFilter.filterValue,
+    roomsFilter.type,
+    roomsFilter.subjectId,
+    roomsFilter.subjectOwnerId,
+    roomsFilter.provider,
+    roomsFilter.quotaFilter,
+    roomsFilter.tags,
+    roomsFilter.withoutTags,
+  ]);
 
   const {
     onContactsFilter,
@@ -199,7 +240,7 @@ const SectionFilterContent = ({
 
         const subjectId = getSubjectId(data) || null;
 
-        const subjectFilter = getSubjectFilter(data) || null;
+        const subjectOwnerId = getSubjectOwnerId(data) || null;
 
         const providerType = getProviderType(data) || null;
         const tags = getTags(data) || null;
@@ -210,9 +251,12 @@ const SectionFilterContent = ({
         newFilter.page = 0;
         newFilter.provider = providerType || null;
         newFilter.type = type || null;
+        // Clear groupId when filter is applied - grouping doesn't work with filters
+        newFilter.groupId = null;
 
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
+        newFilter.subjectOwnerId = null;
 
         newFilter.quotaFilter = quota;
 
@@ -222,10 +266,11 @@ const SectionFilterContent = ({
           if (subjectId === FilterKeys.me) {
             newFilter.subjectId = `${userId}`;
           }
+        }
 
-          newFilter.subjectFilter = subjectFilter?.toString()
-            ? subjectFilter.toString()
-            : FilterSubject.Member;
+        if (subjectOwnerId) {
+          newFilter.subjectOwnerId =
+            subjectOwnerId === FilterKeys.me ? `${userId}` : subjectOwnerId;
         }
 
         if (tags) {
@@ -252,7 +297,7 @@ const SectionFilterContent = ({
       } else if (isAIAgentsFolder) {
         const subjectId = getSubjectId(data) || null;
 
-        const subjectFilter = getSubjectFilter(data) || null;
+        const subjectOwnerId = getSubjectOwnerId(data) || null;
 
         const tags = getTags(data) || null;
 
@@ -262,6 +307,7 @@ const SectionFilterContent = ({
 
         newFilter.subjectFilter = null;
         newFilter.subjectId = null;
+        newFilter.subjectOwnerId = null;
 
         if (subjectId) {
           newFilter.subjectId = subjectId;
@@ -269,10 +315,11 @@ const SectionFilterContent = ({
           if (subjectId === FilterKeys.me) {
             newFilter.subjectId = `${userId}`;
           }
+        }
 
-          newFilter.subjectFilter = subjectFilter?.toString()
-            ? subjectFilter.toString()
-            : FilterSubject.Member;
+        if (subjectOwnerId) {
+          newFilter.subjectOwnerId =
+            subjectOwnerId === FilterKeys.me ? `${userId}` : subjectOwnerId;
         }
 
         if (tags) {
@@ -422,6 +469,8 @@ const SectionFilterContent = ({
 
         newFilter.page = 0;
         newFilter.filterValue = searchValue;
+        // Clear groupId when search is applied - grouping doesn't work with filters
+        newFilter.groupId = null;
 
         const path =
           newFilter.searchArea === RoomSearchArea.Active ||
@@ -442,6 +491,9 @@ const SectionFilterContent = ({
         const newFilter = currentFilter.clone();
         newFilter.page = 0;
         newFilter.search = searchValue;
+
+        // Search must traverse the current folder and all nested subfolders.
+        if (searchValue) newFilter.withSubfolders = "true";
 
         const path = location.pathname.split("/filter")[0];
 
@@ -624,6 +676,20 @@ const SectionFilterContent = ({
         }
       }
 
+      if (roomsFilter.subjectOwnerId) {
+        const owner = await getUser(roomsFilter.subjectOwnerId);
+        const isMe = userId === roomsFilter.subjectOwnerId;
+
+        const label = isMe ? t("Common:MeLabel") : owner.displayName;
+
+        filterValues.push({
+          key: isMe ? FilterKeys.me : roomsFilter.subjectOwnerId,
+          group: FilterGroups.roomFilterOwner,
+          label,
+          selectedLabel: `${t("Common:Owner")}: ${label}`,
+        });
+      }
+
       if (roomsFilter.type) {
         const key = +roomsFilter.type;
 
@@ -696,6 +762,20 @@ const SectionFilterContent = ({
         } else {
           filterValues.push(subject);
         }
+      }
+
+      if (roomsFilter.subjectOwnerId) {
+        const owner = await getUser(roomsFilter.subjectOwnerId);
+        const isMe = userId === roomsFilter.subjectOwnerId;
+
+        const label = isMe ? t("Common:MeLabel") : owner.displayName;
+
+        filterValues.push({
+          key: isMe ? FilterKeys.me : roomsFilter.subjectOwnerId,
+          group: FilterGroups.roomFilterOwner,
+          label,
+          selectedLabel: `${t("Common:Owner")}: ${label}`,
+        });
       }
 
       if (roomsFilter?.tags?.length > 0) {
@@ -828,6 +908,7 @@ const SectionFilterContent = ({
     roomsFilter.type,
     roomsFilter.subjectId,
     roomsFilter.subjectFilter,
+    roomsFilter.subjectOwnerId,
     roomsFilter.tags,
     roomsFilter.tags?.length,
     roomsFilter.excludeSubject,
@@ -1159,9 +1240,9 @@ const SectionFilterContent = ({
       {
         key: FilterGroups.roomFilterSubject,
         group: FilterGroups.roomFilterSubject,
-        label: isTemplatesFolder ? t("TemplateOwner") : t("Common:Member"),
+        label: isTemplatesFolder ? t("TemplateOwner") : t("Common:Contacts"),
         isHeader: true,
-        withoutSeparator: true,
+        isLast: isAIAgentsFolder && !tags?.length,
         withMultiItems: true,
       },
       {
@@ -1184,7 +1265,7 @@ const SectionFilterContent = ({
         id: "filter_author-other",
         key: FilterKeys.other,
         group: FilterGroups.roomFilterSubject,
-        label: t("Common:OtherLabel"),
+        label: t("Common:SelectAction"),
       });
     }
 
@@ -1192,19 +1273,33 @@ const SectionFilterContent = ({
       {
         key: FilterGroups.roomFilterOwner,
         group: FilterGroups.roomFilterOwner,
+        label: t("Common:Owners"),
         isHeader: true,
-        withoutHeader: true,
-        isLast: isAIAgentsFolder && !tags?.length,
+        withoutSeparator: true,
+        withMultiItems: true,
       },
       {
-        id: "filter_author-user",
-        key: FilterSubject.Owner,
+        id: "filter_owner-me",
+        key: FilterKeys.me,
         group: FilterGroups.roomFilterOwner,
-        label: t("Translations:SearchByOwner"),
-        isCheckbox: true,
-        isDisabled: false,
+        label: t("Common:MeLabel"),
+      },
+      {
+        id: "filter_owner-user",
+        key: FilterKeys.user,
+        group: FilterGroups.roomFilterOwner,
+        displaySelectorType: "link",
       },
     ];
+
+    if (!isCollaborator && !isVisitor) {
+      ownerOptions.push({
+        id: "filter_owner-other",
+        key: FilterKeys.other,
+        group: FilterGroups.roomFilterOwner,
+        label: t("Common:SelectAction"),
+      });
+    }
 
     // const foldersOptions = [
     //   {
@@ -1247,8 +1342,8 @@ const SectionFilterContent = ({
       // filterOptions.push(...foldersOptions);
       // filterOptions.push(...contentOptions);
 
-      filterOptions.push(...subjectOptions);
       filterOptions.push(...ownerOptions);
+      filterOptions.push(...subjectOptions);
 
       filterOptions.push(...typeOptions);
 
@@ -1586,7 +1681,11 @@ const SectionFilterContent = ({
         if (group === FilterGroups.roomFilterSubject) {
           newFilter.subjectId = null;
           newFilter.excludeSubject = false;
-          newFilter.filterSubject = null;
+          newFilter.subjectFilter = null;
+        }
+
+        if (group === FilterGroups.roomFilterOwner) {
+          newFilter.subjectOwnerId = null;
         }
 
         if (group === FilterGroups.roomFilterTags) {
@@ -1631,7 +1730,11 @@ const SectionFilterContent = ({
         if (group === FilterGroups.roomFilterSubject) {
           newFilter.subjectId = null;
           newFilter.excludeSubject = false;
-          newFilter.filterSubject = null;
+          newFilter.subjectFilter = null;
+        }
+
+        if (group === FilterGroups.roomFilterOwner) {
+          newFilter.subjectOwnerId = null;
         }
 
         if (group === FilterGroups.roomFilterTags) {
@@ -1741,6 +1844,20 @@ const SectionFilterContent = ({
     }
   };
 
+  const onFilterByGroup = (groupId) => {
+    if (!isRooms) return;
+
+    setIsLoading(true);
+
+    const newFilter = roomsFilter.clone();
+    newFilter.page = 0;
+    newFilter.groupId = groupId;
+
+    const path = "rooms/shared";
+
+    navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
+  };
+
   if (showFilterLoader) return <FilterLoader />;
 
   return (
@@ -1782,6 +1899,17 @@ const SectionFilterContent = ({
       isContactsInsideGroupPage={isContactsInsideGroupPage}
       isContactsGuestsPage={isContactsGuestsPage}
       isRecentFolder={isRecentFolder}
+      renderSelector={renderFilterSelector}
+      setEditRoomGroupsDialogVisible={setEditRoomGroupsDialogVisible}
+      getAllRoomGroups={getAllRoomGroups}
+      roomGroups={roomGroups}
+      onFilterByGroup={onFilterByGroup}
+      currentGroupId={(() => {
+        return roomsFilter?.groupId;
+      })()}
+      isRoomsFolder={isRoomsFolder}
+      organizeRoomsGrouping={organizeRoomsGrouping}
+      isFilterOrSearchActive={isFilterOrSearchActive}
     />
   );
 };
@@ -1790,6 +1918,7 @@ export default inject(
   ({
     authStore,
     filesStore,
+    filesSettingsStore,
     treeFoldersStore,
     clientLoadingStore,
     tagsStore,
@@ -1801,6 +1930,7 @@ export default inject(
     currentQuotaStore,
     indexingStore,
     selectedFolderStore,
+    dialogsStore,
   }) => {
     const {
       filter,
@@ -1845,7 +1975,12 @@ export default inject(
     const { isIndexEditingMode } = indexingStore;
     const { isIndexedFolder, getSelectedFolder } = selectedFolderStore;
 
-    const { usersStore, groupsStore, viewAs: contactsViewAs } = peopleStore;
+    const {
+      usersStore,
+      groupsStore,
+
+      viewAs: contactsViewAs,
+    } = peopleStore;
 
     const { groups, groupsFilter, setGroupsFilter } = groupsStore;
 
@@ -1856,6 +1991,11 @@ export default inject(
     } = usersStore;
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
+
+    const { setEditRoomGroupsDialogVisible, getAllRoomGroups, roomGroups } =
+      dialogsStore;
+
+    const { organizeRoomsGrouping } = filesSettingsStore;
 
     return {
       isRoomAdmin,
@@ -1922,6 +2062,11 @@ export default inject(
       filesStore,
       groupsStore,
       usersStore,
+      setEditRoomGroupsDialogVisible,
+      getAllRoomGroups,
+      roomGroups,
+      isRoomsFolder,
+      organizeRoomsGrouping,
     };
   },
 )(
@@ -1934,7 +2079,6 @@ export default inject(
       "InfoPanel",
       "People",
       "PeopleTranslations",
-      "ConnectDialog",
       "SmartBanner",
     ])(observer(SectionFilterContent)),
   ),

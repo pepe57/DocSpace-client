@@ -1,31 +1,40 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
-import moment from "moment-timezone";
 import React, { useEffect } from "react";
+import { now, parseToDateTime, formatDate, formatDateLocalized, isBefore, isAfter } from "@docspace/ui-kit/utils/date";
 import { Outlet, useLocation } from "react-router";
 import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
@@ -36,18 +45,22 @@ import { toast as toastify } from "react-toastify";
 import SocketHelper, {
   SocketEvents,
   SocketCommands,
-} from "@docspace/shared/utils/socket";
-import { Portal } from "@docspace/shared/components/portal";
-import { SnackBar } from "@docspace/shared/components/snackbar";
-import { Toast, toastr } from "@docspace/shared/components/toast";
-import { ToastType } from "@docspace/shared/components/toast/Toast.enums";
+} from "@docspace/ui-kit/utils/socket";
+import { Portal } from "@docspace/ui-kit/components/portal";
+import { SnackBar } from "@docspace/ui-kit/components/snackbar";
+import { Toast, toastr, ToastType } from "@docspace/ui-kit/components/toast";
+import { RootTooltip } from "@docspace/ui-kit/components/tooltip";
 import { updateTempContent } from "@docspace/shared/utils/common";
-import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
+import {
+  AnalyticsEvents,
+  DeviceType,
+  IndexedDBStores,
+} from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
+import { getCookie, deleteCookie } from "@docspace/ui-kit/utils/cookie";
 import { handleCopy } from "@docspace/shared/utils/copy";
 
 import "@docspace/shared/styles/theme.scss";
@@ -63,8 +76,10 @@ import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import useCreateFileError from "./Hooks/useCreateFileError";
+import { SectionNavigationProvider } from "./contexts/SectionNavigationContext";
 
 import ReactSmartBanner from "./components/SmartBanner";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const Shell = ({ page = "home", ...rest }) => {
   const {
@@ -97,6 +112,7 @@ const Shell = ({ page = "home", ...rest }) => {
     standalone,
     isGuest,
     setSocialAuthWelcomeDialogVisible,
+    getAIConfig,
   } = rest;
 
   const theme = useTheme();
@@ -110,7 +126,7 @@ const Shell = ({ page = "home", ...rest }) => {
   const { t, ready } = useTranslation(["Common", "SmartBanner"]);
 
   useEffect(() => {
-    if (!logoText) setLogoText(t("Common:OrganizationName"));
+    if (!logoText) setLogoText(getBrandName("OrganizationName"));
   }, [logoText, setLogoText]);
 
   useEffect(() => {
@@ -121,20 +137,7 @@ const Shell = ({ page = "home", ...rest }) => {
     }
   }, []);
 
-  useEffect(() => {
-    moment.updateLocale("ar-sa", {
-      longDateFormat: {
-        LT: "h:mm a",
-        LTS: "h:mm:ss a",
-        L: "YYYY/MM/DD",
-        LL: "YYYY MMMM D",
-        LLL: "h:mm a YYYY MMMM D",
-        LLLL: "h:mm a YYYY MMMM D dddd",
-      },
-    });
-
-    moment.locale(language);
-  }, []);
+  // Locale is handled by Luxon date utilities - no global locale setup needed
 
   useEffect(() => {
     SocketHelper?.emit(SocketCommands.Subscribe, {
@@ -154,6 +157,14 @@ const Shell = ({ page = "home", ...rest }) => {
     SocketHelper?.emit(SocketCommands.Subscribe, {
       roomParts: "QUOTA",
       individual: true,
+    });
+
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "change-web-plugin",
+    });
+
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "change-ai-config",
     });
   }, []);
 
@@ -242,11 +253,23 @@ const Shell = ({ page = "home", ...rest }) => {
     };
   }, [userLoginEventId, userId]);
 
+  useEffect(() => {
+    const handleAiConfigChanged = () => {
+      getAIConfig?.();
+    };
+
+    SocketHelper?.on(SocketEvents.ChangeAiConfig, handleAiConfigChanged);
+
+    return () => {
+      SocketHelper?.off(SocketEvents.ChangeAiConfig, handleAiConfigChanged);
+    };
+  }, [getAIConfig]);
+
   let snackTimer = null;
   let fbInterval = null;
   // let lastCampaignStr = null;
   const LS_CAMPAIGN_DATE = "maintenance_to_date";
-  const DATE_FORMAT = "YYYY-MM-DD";
+  const DATE_FORMAT = "yyyy-MM-dd";
   const SNACKBAR_TIMEOUT = 10000;
 
   const clearSnackBarTimer = () => {
@@ -278,29 +301,29 @@ const Shell = ({ page = "home", ...rest }) => {
       skipMaintenance = true;
     }
 
-    const to = moment(toDate).local();
+    const to = parseToDateTime(toDate)?.toLocal();
 
     const watchedCampaignDateStr = localStorage.getItem(LS_CAMPAIGN_DATE);
 
-    const campaignDateStr = to.format(DATE_FORMAT);
+    const campaignDateStr = to ? formatDate(to, DATE_FORMAT) : null;
     if (campaignDateStr == watchedCampaignDateStr) {
       console.log("Skip snackBar by already watched");
       skipMaintenance = true;
     }
 
-    const from = moment(fromDate).local();
-    const now = moment();
+    const from = parseToDateTime(fromDate)?.toLocal();
+    const currentTime = now();
 
-    if (now.isBefore(from)) {
+    if (from && isBefore(currentTime, from)) {
       setSnackBarTimer(campaign);
 
       SnackBar.close();
-      console.log(`Show snackBar has been delayed for 1 minute`, now);
+      console.log(`Show snackBar has been delayed for 1 minute`, currentTime);
       skipMaintenance = true;
     }
 
-    if (now.isAfter(to)) {
-      console.log("Skip snackBar by current date", now);
+    if (to && isAfter(currentTime, to)) {
+      console.log("Skip snackBar by current date", currentTime);
       SnackBar.close();
       skipMaintenance = true;
     }
@@ -329,21 +352,21 @@ const Shell = ({ page = "home", ...rest }) => {
 
     // lastCampaignStr = campaignStr;
 
-    const targetDate = to.locale(language).format("LL");
+    const targetDate = to ? formatDateLocalized(to, "DATE_MED", { locale: language }) : "";
 
     const barConfig = {
       parentElementId: "main-bar",
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
         targetDate,
-        productName: `${logoText} ${t("Common:ProductName")}`,
+        productName: `${logoText} ${getBrandName("ProductName")}`,
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
       onAction: () => {
         setMaintenanceExist(false);
         setSnackbarExist(false);
         SnackBar.close();
-        localStorage.setItem(LS_CAMPAIGN_DATE, to.format(DATE_FORMAT));
+        localStorage.setItem(LS_CAMPAIGN_DATE, to ? formatDate(to, DATE_FORMAT) : "");
       },
       opacity: 1,
       onLoad: () => {
@@ -458,10 +481,18 @@ const Shell = ({ page = "home", ...rest }) => {
   useEffect(() => {
     if (
       isLoaded &&
-      localStorage.getItem("showSocialAuthWelcomeDialog") === "true"
+      localStorage.getItem("socialAuthWelcomeBar") === "true"
     ) {
-      localStorage.removeItem("showSocialAuthWelcomeDialog");
       setSocialAuthWelcomeDialogVisible(true);
+
+      if (localStorage.getItem("portalCreatedEventSent") !== "true") {
+        localStorage.setItem("portalCreatedEventSent", "true");
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: AnalyticsEvents.PortalCreated,
+        });
+      }
     }
   }, [isLoaded]);
 
@@ -519,26 +550,29 @@ const Shell = ({ page = "home", ...rest }) => {
   const isMobileOnly = currentDeviceType === DeviceType.mobile;
 
   return (
-    <Layout>
-      {toast}
-      {isMobileOnly && !isFrame ? (
-        <ReactSmartBanner t={t} ready={ready} />
-      ) : null}
-      {withoutNavMenu ? null : <NavMenu />}
-      <IndicatorLoader />
-      <ScrollToTop />
-      <DialogsWrapper t={t} />
-
-      <Main isDesktop={isDesktop}>
-        {!isMobileOnly && !isFrame ? (
+    <SectionNavigationProvider>
+      <Layout>
+        {toast}
+        <RootTooltip />
+        {isMobileOnly && !isFrame ? (
           <ReactSmartBanner t={t} ready={ready} />
         ) : null}
-        {barTypeInFrame !== "none" ? <MainBar /> : null}
-        <div className="main-container">
-          <Outlet />
-        </div>
-      </Main>
-    </Layout>
+        {withoutNavMenu ? null : <NavMenu />}
+        <IndicatorLoader />
+        <ScrollToTop />
+        <DialogsWrapper t={t} />
+
+        <Main isDesktop={isDesktop}>
+          {!isMobileOnly && !isFrame ? (
+            <ReactSmartBanner t={t} ready={ready} />
+          ) : null}
+          {barTypeInFrame !== "none" ? <MainBar /> : null}
+          <div className="main-container">
+            <Outlet />
+          </div>
+        </Main>
+      </Layout>
+    </SectionNavigationProvider>
   );
 };
 
@@ -580,6 +614,7 @@ const ShellWrapper = inject(
       logoText,
       setLogoText,
       standalone,
+      getAIConfig,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -640,7 +675,7 @@ const ShellWrapper = inject(
       userId: userStore?.user?.id,
       userLoginEventId: userStore?.user?.loginEventId,
       isOwner: userStore?.user?.isOwner,
-      isAdmin: userStore?.user?.isAdmin,
+      isAdmin: userStore?.user?.isAdmin || userStore?.user?.isOwner,
       isGuest: userStore?.user?.isVisitor,
       registrationDate: userStore?.user?.registrationDate,
 
@@ -657,6 +692,7 @@ const ShellWrapper = inject(
       setLogoText,
       standalone,
       setSocialAuthWelcomeDialogVisible,
+      getAIConfig,
     };
   },
 )(observer(Shell));

@@ -1,52 +1,72 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
 import {
-  HEADER_ENABLED_JOIN_SETTINGS,
-  HEADER_ENABLE_ADM_MESS_SETTINGS,
-  HEADER_HCAPTCHA_SETTINGS,
-  HEADER_LIST_CAPABILITIES,
-  HEADER_LIST_THIRD_PARTY_PROVIDERS,
-  endpoints,
-} from "@docspace/shared/__mocks__/e2e";
+  capabilitiesHandler,
+  loginHandler,
+  settingsHandler,
+  TypeSettings,
+} from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
+import { thirdPartyProvidersHandler } from "@docspace/shared/__mocks__/handlers/people/thirdPartyProviders";
 
-test("login render", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders("/login", [
-    HEADER_LIST_CAPABILITIES,
-    HEADER_LIST_THIRD_PARTY_PROVIDERS,
-  ]);
-  await page.goto("/login");
+test("login render", async ({
+  page,
+  serverRequestInterceptor,
+  port,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(
+    capabilitiesHandler(port, true),
+    thirdPartyProvidersHandler(port, true),
+  );
+  await page.goto(`${baseUrl}/login`);
 
-  await expect(page).toHaveScreenshot(["desktop", "login", "login-render.png"]);
+  await expectScreenshot(page,["desktop", "login", "login-render.png"]);
 });
 
-test("login error authentication failed", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.loginError]);
+test("login error authentication failed", async ({
+  page,
+  port,
+  clientRequestInterceptor,
+  baseUrl,
+}) => {
+  clientRequestInterceptor.use(loginHandler(port, 401));
 
-  await page.goto("/login");
+  await page.goto(`${baseUrl}/login`);
 
   await page.getByTestId("email-input").fill("email@mail.ru");
 
@@ -54,15 +74,15 @@ test("login error authentication failed", async ({ page, mockRequest }) => {
 
   await page.getByTestId("login_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "login",
     "login-error-authentication-failed.png",
   ]);
 });
 
-test("login error not validated", async ({ page }) => {
-  await page.goto("/login");
+test("login error not validated", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}/login`);
 
   await page.getByTestId("email-input").fill("");
 
@@ -70,15 +90,15 @@ test("login error not validated", async ({ page }) => {
 
   await page.getByTestId("login_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "login",
     "login-error-not-validated.png",
   ]);
 });
 
-test("login error incorrect email", async ({ page }) => {
-  await page.goto("/login");
+test("login error incorrect email", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}/login`);
 
   await page.getByTestId("email-input").fill("email");
 
@@ -86,15 +106,15 @@ test("login error incorrect email", async ({ page }) => {
 
   await page.getByTestId("login_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "login",
     "login-error-incorrect-email.png",
   ]);
 });
 
-test("login error incorrect email domain", async ({ page }) => {
-  await page.goto("/login");
+test("login error incorrect email domain", async ({ page, baseUrl }) => {
+  await page.goto(`${baseUrl}/login`);
 
   await page.getByTestId("email-input").fill("email@mail.com2");
 
@@ -102,19 +122,24 @@ test("login error incorrect email domain", async ({ page }) => {
 
   await page.getByTestId("login_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "login",
     "login-error-incorrect-email-domain.png",
   ]);
 });
 
-test("login with with a registration button", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders("/login", [HEADER_ENABLED_JOIN_SETTINGS]);
+test("login with with a registration button", async ({
+  page,
+  port,
+  baseUrl,
+  serverRequestInterceptor,
+}) => {
+  serverRequestInterceptor.use(settingsHandler(port, TypeSettings.EnabledJoin));
 
-  await page.goto("/login");
+  await page.goto(`${baseUrl}/login`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "login",
     "login-with-registration-button.png",
@@ -122,19 +147,26 @@ test("login with with a registration button", async ({ page, mockRequest }) => {
 
   await page.locator("#login_register").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "login",
     "login-with-registration-button-modal.png",
   ]);
 });
 
-test("login with with access recovery", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders("/login", [HEADER_ENABLE_ADM_MESS_SETTINGS]);
+test("login with with access recovery", async ({
+  page,
+  serverRequestInterceptor,
+  port,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.EnableAdmMess),
+  );
 
-  await page.goto("/login");
+  await page.goto(`${baseUrl}/login`);
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "login",
     "login-with-access-recovery.png",
@@ -142,18 +174,26 @@ test("login with with access recovery", async ({ page, mockRequest }) => {
 
   await page.getByTestId("recover_access_link").click();
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "login",
     "login-with-access-recovery-modal.png",
   ]);
 });
 
-test("login with with hcaptcha", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders("/login", [HEADER_HCAPTCHA_SETTINGS]);
-  await mockRequest.router([endpoints.loginError403]);
+test("login with hcaptcha", async ({
+  page,
+  port,
+  clientRequestInterceptor,
+  serverRequestInterceptor,
+  baseUrl,
+}) => {
+  serverRequestInterceptor.use(
+    settingsHandler(port, TypeSettings.WithHCaptcha),
+  );
+  clientRequestInterceptor.use(loginHandler(port, 403));
 
-  await page.goto("/login");
+  await page.goto(`${baseUrl}/login`);
 
   await page.getByTestId("email-input").fill("email@mail.com");
 
@@ -161,7 +201,9 @@ test("login with with hcaptcha", async ({ page, mockRequest }) => {
 
   await page.getByTestId("login_button").click();
 
-  await expect(page).toHaveScreenshot([
+  await expect(page.getByTestId("captcha-container")).toBeVisible();
+
+  await expectScreenshot(page,[
     "desktop",
     "login",
     "login-with-hcaptcha.png",

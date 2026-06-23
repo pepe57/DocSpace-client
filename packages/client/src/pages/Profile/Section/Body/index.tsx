@@ -1,42 +1,50 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import styled from "styled-components";
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router";
 import { TFunction } from "i18next";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
-import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
+import { Tabs, TTabItem } from "@docspace/ui-kit/components/tabs";
 import { DeviceType } from "@docspace/shared/enums";
-import { tablet } from "@docspace/shared/utils";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 
-import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { SECTION_HEADER_HEIGHT } from "@docspace/ui-kit/components/section/Section.constants";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { AuthStore } from "@docspace/shared/store/AuthStore";
 
@@ -56,26 +64,7 @@ import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 import AuthorizedApps from "./sub-components/authorized-apps";
 import useProfileBody from "./useProfileBody";
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-
-  margin-top: -19px;
-
-  @media ${tablet} {
-    margin-top: 0;
-    width: 100%;
-    max-width: 100%;
-  }
-`;
-
-const StyledTabs = styled(Tabs)`
-  > .sticky {
-    z-index: 201;
-  }
-`;
+import styles from "./body.module.scss";
 
 type SectionBodyContentProps = {
   showProfileLoader?: boolean;
@@ -129,6 +118,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
+  const tabsRef = useRef<HTMLDivElement>(null);
 
   const checkEmailChangeParam = () => {
     const search = window.location.search;
@@ -192,7 +182,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     },
     {
       id: "file-management",
-      name: t?.("FileManagement"),
+      name: t?.("Common:FileManagement"),
       content: <FileManagement />,
       onClick: async () => {
         await getFileManagementData();
@@ -200,7 +190,7 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     },
     {
       id: "interface-theme",
-      name: t?.("InterfaceTheme"),
+      name: t?.("Common:InterfaceTheme"),
       content: <InterfaceTheme />,
       onClick: () => {},
     },
@@ -232,21 +222,29 @@ const SectionBodyContent = (props: SectionBodyContentProps) => {
     navigate(`${path}/${e.id}`, {
       state: { disableScrollToTop: true, fromUrl: location?.state?.fromUrl },
     });
+
+    if (tabsRef.current && currentDeviceType === DeviceType.mobile) {
+      setTimeout(() => {
+        tabsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
   };
 
   if (showProfileLoader) return <ProfileViewLoader />;
 
   return (
-    <Wrapper>
+    <div className={styles.wrapper}>
       <MainProfile />
-      <StyledTabs
-        items={data}
-        selectedItemId={currentTabId}
-        onSelect={onSelect}
-        stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType as DeviceType]}
-        withAnimation
-      />
-    </Wrapper>
+      <div ref={tabsRef}>
+        <Tabs
+          items={data}
+          selectedItemId={currentTabId}
+          onSelect={onSelect}
+          stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType as DeviceType]}
+          withAnimation
+        />
+      </div>
+    </div>
   );
 };
 
@@ -328,7 +326,6 @@ export default inject(
       "BackupCodesDialog",
       "DeleteSelfProfileDialog",
       "Notifications",
-      "ConnectDialog",
       "OAuth",
     ])(SectionBodyContent),
   ),

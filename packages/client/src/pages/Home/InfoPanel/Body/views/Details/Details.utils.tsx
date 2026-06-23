@@ -1,41 +1,51 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React from "react";
 import { decode } from "he";
 import type { TFunction } from "i18next";
 
-import { getCorrectDate } from "@docspace/shared/utils";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
-import { Tag } from "@docspace/shared/components/tag";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+
 import { isRoom } from "@docspace/shared/utils/typeGuards";
 import { getFileTypeName } from "@docspace/shared/utils/getFileType";
 import { getAccessLabel } from "@docspace/shared/components/share/Share.helpers";
 
+import type { ShareAccessRights } from "@docspace/shared/enums";
 import type { TCreatedBy, TTranslation } from "@docspace/shared/types";
 import type { TRoom, TRoomLifetime } from "@docspace/shared/api/rooms/types";
 import type { TFile, TFolder } from "@docspace/shared/api/files/types";
@@ -44,6 +54,7 @@ import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
   getRoomTypeName,
 } from "SRC_DIR/helpers/filesUtils";
+import { TagManagement } from "SRC_DIR/components/TagManagement";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getPropertyClassName } from "SRC_DIR/helpers/infopanel";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
@@ -70,19 +81,20 @@ const link = (txt: React.ReactNode, onClick: () => void) => (
 
 const tagList = (
   tags: string[],
-  selectTag: (tag: { label: string }) => void,
+  id: number,
+  access: ShareAccessRights,
+  title: string,
 ) => (
   <div className="property-tag_list" data-testid="info_panel_details_tag_list">
-    {tags.map((tag, index) => (
-      <Tag
-        key={tag}
-        className="property-tag"
-        label={tag}
-        tag={tag}
-        onClick={() => selectTag({ label: tag })}
-        dataTestId={`info_panel_details_tag_${index}`}
-      />
-    ))}
+    <TagManagement
+      id={id}
+      isActive
+      tags={tags}
+      className="tags"
+      columnCount={-1}
+      access={access}
+      roomName={title}
+    />
   </div>
 );
 
@@ -104,7 +116,6 @@ type DetailsHelperProps = {
   culture: string;
   isVisitor: boolean;
   isCollaborator: boolean;
-  selectTag: (tag: { label: string }) => void;
   isDefaultRoomsQuotaSet: boolean;
   isDefaultAIAgentsQuotaSet: boolean;
   isAIAgentsFolder: boolean;
@@ -124,8 +135,6 @@ class DetailsHelper {
 
   isCollaborator: boolean;
 
-  selectTag: (tag: { label: string }) => void;
-
   isDefaultRoomsQuotaSet: boolean;
 
   isDefaultAIAgentsQuotaSet: boolean;
@@ -141,7 +150,6 @@ class DetailsHelper {
     this.culture = props.culture;
     this.isVisitor = props.isVisitor;
     this.isCollaborator = props.isCollaborator;
-    this.selectTag = props.selectTag;
     this.isDefaultRoomsQuotaSet = props.isDefaultRoomsQuotaSet;
     this.isDefaultAIAgentsQuotaSet = props.isDefaultAIAgentsQuotaSet;
     this.isAIAgentsFolder = props.isAIAgentsFolder;
@@ -209,6 +217,9 @@ class DetailsHelper {
                 "Author",
               "sharedBy" in this.item && this.item.sharedBy && "Shared by",
               this.item.access && "Access level",
+              "externalDbTableName" in this.item &&
+                this.item.externalDbTableName &&
+                "externalDbTableName",
               "Comments",
             ]
     ).filter((nP) => nP) as string[];
@@ -261,6 +272,8 @@ class DetailsHelper {
         return this.t("Files:SharedBy");
       case "Access level":
         return this.t("Files:AccessLevel");
+      case "externalDbTableName":
+        return this.t("Files:TableName");
 
       case "Storage":
         if ("usedSpace" in this.item && this.item.usedSpace !== undefined) {
@@ -330,9 +343,16 @@ class DetailsHelper {
         return this.getAuthorDecoration("sharedBy");
       case "Access level":
         return this.getItemAccessLevel();
+      case "externalDbTableName":
+        return this.getExternalDbTableName();
       default:
         break;
     }
+  };
+
+  getExternalDbTableName = () => {
+    if (!("externalDbTableName" in this.item)) return null;
+    return text(this.item.externalDbTableName);
   };
 
   getItemAccessLevel = () => {
@@ -446,7 +466,13 @@ class DetailsHelper {
   };
 
   getItemTags = () => {
-    if ("tags" in this.item) return tagList(this.item.tags, this.selectTag);
+    if ("tags" in this.item)
+      return tagList(
+        this.item.tags,
+        this.item.id,
+        this.item.access,
+        this.item.title,
+      );
   };
 
   getQuotaItem = () => {

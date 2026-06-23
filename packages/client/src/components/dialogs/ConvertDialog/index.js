@@ -1,58 +1,50 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { useState } from "react";
-import styled from "styled-components";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import classNames from "classnames";
 
-const StyledFooterContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
 
-  .convert_dialog_checkboxes {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .convert_dialog_buttons {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-  }
-`;
+import styles from "./ConvertDialog.module.scss";
 
 const ConvertDialogComponent = (props) => {
   const {
@@ -80,11 +72,11 @@ const ConvertDialogComponent = (props) => {
 
   const options = [
     {
-      label: t("Document"),
+      label: t("Common:Document"),
       value: ".docx",
     },
     {
-      label: t("Spreadsheet"),
+      label: t("Common:Spreadsheet"),
       value: ".xlsx",
     },
   ];
@@ -184,18 +176,20 @@ const ConvertDialogComponent = (props) => {
               onClick={onChangeRadioButton}
               spacing="12px"
               style={{ marginTop: "12px" }}
+              dataTestId="convert_dialog_file_type_radio"
             />
           </div>
         ) : null}
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <StyledFooterContent className="convert_dialog_footer">
-          <div className="convert_dialog_checkboxes">
+        <div className={classNames(styles.footer, "convert_dialog_footer")}>
+          <div className={styles.convertDialogCheckboxes}>
             <Checkbox
               className="convert_dialog_checkbox"
               label={t("SaveOriginalFormatMessage")}
               isChecked={storeOriginalFiles}
               onChange={onChangeFormat}
+              dataTestId="convert_dialog_save_original_checkbox"
             />
             {convertSingleFile && sortedFolder ? (
               <div
@@ -219,10 +213,11 @@ const ConvertDialogComponent = (props) => {
                 label={t("HideMessage")}
                 isChecked={hideMessage}
                 onChange={onChangeMessageVisible}
+                dataTestId="convert_dialog_hide_message_checkbox"
               />
             ) : null}
           </div>
-          <div className="convert_dialog_buttons">
+          <div className={styles.convertDialogButtons}>
             <Button
               key="ContinueButton"
               label={t("Common:ContinueButton")}
@@ -230,6 +225,7 @@ const ConvertDialogComponent = (props) => {
               primary
               scale
               onClick={onConvert}
+              testId="convert_dialog_continue_button"
             />
             <Button
               key="CloseButton"
@@ -237,9 +233,10 @@ const ConvertDialogComponent = (props) => {
               size="normal"
               scale
               onClick={onCloseDialog}
+              testId="convert_dialog_close_button"
             />
           </div>
-        </StyledFooterContent>
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );

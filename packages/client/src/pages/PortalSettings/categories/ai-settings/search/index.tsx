@@ -1,45 +1,51 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * Copyright (C) Ascensio System SIA, 2009-2026
  *
- * This program is a free software product.
- * You can redistribute it and/or modify it under the terms
- * of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
- * Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
- * to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
- * any third-party rights.
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
  *
- * This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
- * the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
  *
- * You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
  *
- * The  interactive user interfaces in modified source and object code versions of the Program must
- * display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
  *
- * Pursuant to Section 7(b) of the License you must retain the original Product logo when
- * distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
- * trademark law for use of our trademarks.
+ * No trademark rights are granted under this License.
  *
- * All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
- * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
- * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
 
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
-import { WebSearchType } from "@docspace/shared/api/ai/enums";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import { PasswordInput } from "@docspace/shared/components/password-input";
-import { Tooltip } from "@docspace/shared/components/tooltip";
-import { toastr } from "@docspace/shared/components/toast";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
+import { ProviderType, WebSearchType } from "@docspace/shared/api/ai/enums";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
@@ -48,6 +54,8 @@ import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Search.module.scss";
 import { ResetWebSearchDialog } from "./dialogs/reset";
+import { SearchLoader } from "./SearchLoader";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type TSearchProps = {
   webSearchInitied?: AISettingsStore["webSearchInitied"];
@@ -55,8 +63,10 @@ type TSearchProps = {
   restoreWebSearch?: AISettingsStore["restoreWebSearch"];
   updateWebSearch?: AISettingsStore["updateWebSearch"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
-  aiSettingsUrl?: string;
+  aiProviders?: AISettingsStore["aiProviders"];
+  webSearchSettingsUrl?: SettingsStore["webSearchSettingsUrl"];
   getAIConfig?: SettingsStore["getAIConfig"];
+  aiConfig?: SettingsStore["aiConfig"];
 };
 
 const FAKE_KEY_VALUE = "0000000000000000";
@@ -66,8 +76,10 @@ const SearchComponent = ({
   webSearchConfig,
   updateWebSearch,
   hasAIProviders,
-  aiSettingsUrl,
+  aiProviders,
+  webSearchSettingsUrl,
   getAIConfig,
+  aiConfig,
 }: TSearchProps) => {
   const { t } = useTranslation(["Common", "AISettings", "Settings"]);
 
@@ -81,6 +93,8 @@ const SearchComponent = ({
   const [selectedOption, setSelectedOption] = React.useState<WebSearchType>(
     () => {
       if (webSearchConfig?.type === WebSearchType.Exa) return WebSearchType.Exa;
+      if (webSearchConfig?.type === WebSearchType.PortalAi)
+        return WebSearchType.PortalAi;
 
       return WebSearchType.None;
     },
@@ -112,7 +126,11 @@ const SearchComponent = ({
     try {
       await updateWebSearch?.(true, selectedOption, value);
 
-      toastr.success(t("AISettings:WebSearchEnabledSuccess"));
+      toastr.success(
+        t("AISettings:WebSearchEnabledSuccess", {
+          webSearch: t("Common:WebSearchAI"),
+        }),
+      );
     } catch (e) {
       console.error(e);
       toastr.error(e as string);
@@ -121,14 +139,40 @@ const SearchComponent = ({
     getAIConfig?.();
   };
 
+  const hasSystemProvider = aiProviders?.some(
+    (p) => p.type === ProviderType.PortalAi,
+  );
+  const isSystemProviderDisabled =
+    hasSystemProvider && !aiConfig?.systemAiEnabled;
+
   const items = React.useMemo(() => {
-    return [
-      {
-        key: WebSearchType.Exa,
-        label: "Exa",
-      },
-    ];
-  }, []);
+    const options: TOption[] = [];
+
+    if (hasSystemProvider) {
+      options.push({
+        key: WebSearchType.PortalAi,
+        label: isSystemProviderDisabled
+          ? `ONLYOFFICE AI (${t("Common:ActivationRequired")})`
+          : "ONLYOFFICE AI",
+        disabled: isSystemProviderDisabled,
+        withExternalLink: isSystemProviderDisabled,
+        externalLinkPath: isSystemProviderDisabled
+          ? "/portal-settings/payments/services"
+          : undefined,
+        onExternalLinkClick: isSystemProviderDisabled
+          ? () =>
+              window.DocSpace?.navigate("/portal-settings/payments/services")
+          : undefined,
+      });
+    }
+
+    options.push({
+      key: WebSearchType.Exa,
+      label: "Exa",
+    });
+
+    return options;
+  }, [hasSystemProvider, isSystemProviderDisabled, t]);
 
   const selectedItem = React.useMemo(() => {
     return items.find((item) => item.key === selectedOption);
@@ -142,51 +186,19 @@ const SearchComponent = ({
 
     setSelectedOption(() => {
       if (webSearchConfig?.type === WebSearchType.Exa) return WebSearchType.Exa;
+      if (webSearchConfig?.type === WebSearchType.PortalAi)
+        return WebSearchType.PortalAi;
 
       return WebSearchType.None;
     });
   }, [webSearchConfig]);
 
-  if (!webSearchInitied)
-    return (
-      <div className={generalStyles.search}>
-        <RectangleSkeleton
-          className={generalStyles.description}
-          width="700px"
-          height="36px"
-        />
-        <RectangleSkeleton
-          className={generalStyles.learnMoreLink}
-          width="100px"
-          height="19px"
-        />
-        <div className={styles.searchForm}>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="119px" height="20px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="48px" height="32px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-        </div>
-        <div className={styles.buttonContainer}>
-          <RectangleSkeleton
-            className={styles.addProviderButton}
-            width="128px"
-            height="32px"
-          />
-          <RectangleSkeleton
-            className={styles.learnMoreLink}
-            width="322px"
-            height="32px"
-          />
-        </div>
-      </div>
-    );
+  if (!webSearchInitied) return <SearchLoader />;
 
-  const isSaveDisabled =
-    !value || selectedOption === WebSearchType.None || isKeyHidden;
+  const isPortalAiSelected = selectedOption === WebSearchType.PortalAi;
+  const isSaveDisabled = isPortalAiSelected
+    ? webSearchConfig?.type === WebSearchType.PortalAi
+    : !value || selectedOption === WebSearchType.None || isKeyHidden;
 
   const tooltipId = "tooltip-web-search";
 
@@ -198,38 +210,45 @@ const SearchComponent = ({
         data-tooltip-content={
           !hasAIProviders
             ? t("AISettings:ToUseAddProvider", {
-                value: t("AISettings:Search"),
+                value: t("Common:WebSearchAI"),
+                aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }
       >
         <Text className={generalStyles.description}>
           {t("AISettings:SearchDescription", {
-            productName: t("Common:ProductName"),
+            webSearch: t("Common:WebSearchAI"),
+            productName: getBrandName("ProductName"),
+            aiChats: t("Common:AIChats"),
           })}
         </Text>
-        {aiSettingsUrl ? (
+        {webSearchSettingsUrl ? (
           <Link
             className={generalStyles.learnMoreLink}
             target={LinkTarget.blank}
             type={LinkType.page}
             fontWeight={600}
             isHovered
-            href={aiSettingsUrl}
+            href={webSearchSettingsUrl}
             color="accent"
           >
             {t("Common:LearnMore")}
           </Link>
         ) : null}
-        <div className={styles.searchForm}>
+        <div className={styles.searchForm} data-testid="web-search-form">
           <FieldContainer
             labelVisible
             isVertical
-            labelText={t("AISettings:SearchEngine")}
+            labelText={t("AISettings:SearchEngine", {
+              webSearch: t("Common:WebSearchAI"),
+            })}
             removeMargin
           >
             <ComboBox
               options={items}
+              showDisabledItems
+              scaledOptions={hasSystemProvider}
               selectedOption={
                 selectedItem ?? ({ label: t("Common:SelectAction") } as TOption)
               }
@@ -240,42 +259,53 @@ const SearchComponent = ({
               }
               displaySelectedOption
               isDisabled={!hasAIProviders || isKeyHidden}
+              dataTestId="web-search-engine-combobox"
+              dropDownTestId="web-search-engine-dropdown"
             />
           </FieldContainer>
-          <FieldContainer
-            labelVisible
-            isVertical
-            labelText={t("AISettings:APIKey")}
-            removeMargin
-          >
-            {isKeyHidden ? (
-              <div className={styles.aiBanner}>
-                <Text fontSize="12px" fontWeight={400} lineHeight="16px">
-                  {t("AISettings:WebSearchKeyHiddenDescription")}
-                </Text>
-              </div>
-            ) : (
-              <>
-                <PasswordInput
-                  className={styles.passwordInput}
-                  placeholder={t("AISettings:EnterKey")}
-                  inputValue={value}
-                  onChange={onChange}
-                  scale
-                  isSimulateType
-                  isFullWidth
-                  isDisableTooltip
-                  isDisabled={
-                    isKeyHidden || selectedOption === WebSearchType.None
-                  }
-                  autoComplete="off"
-                />
-                <Text className={styles.hiddenKeyDescription}>
-                  {t("AISettings:WebSearchKeyDescription")}
-                </Text>
-              </>
-            )}
-          </FieldContainer>
+          {selectedOption !== WebSearchType.PortalAi ? (
+            <FieldContainer
+              labelVisible
+              isVertical
+              labelText={t("AISettings:APIKey")}
+              removeMargin
+            >
+              {isKeyHidden ? (
+                <div
+                  className={styles.aiBanner}
+                  data-testid="web-search-key-hidden-banner"
+                >
+                  <Text fontSize="12px" fontWeight={400} lineHeight="16px">
+                    {t("AISettings:WebSearchKeyHiddenDescription")}
+                  </Text>
+                </div>
+              ) : (
+                <>
+                  <PasswordInput
+                    className={styles.passwordInput}
+                    inputName="web_search_key"
+                    placeholder={t("AISettings:EnterKey")}
+                    inputValue={value}
+                    onChange={onChange}
+                    scale
+                    isSimulateType
+                    isFullWidth
+                    isDisableTooltip
+                    isDisabled={
+                      isKeyHidden || selectedOption === WebSearchType.None
+                    }
+                    autoComplete="off"
+                    testId="web-search-key-input"
+                  />
+                  <Text className={styles.hiddenKeyDescription}>
+                    {t("AISettings:WebSearchKeyDescription", {
+                      webSearch: t("Common:WebSearchAI"),
+                    })}
+                  </Text>
+                </>
+              )}
+            </FieldContainer>
+          ) : null}
         </div>
         <div className={styles.buttonContainer}>
           <Button
@@ -286,6 +316,7 @@ const SearchComponent = ({
             onClick={onSave}
             isLoading={saveRequestRunning}
             isDisabled={isSaveDisabled}
+            testId="web-search-save-button"
           />
           <Button
             size={ButtonSize.small}
@@ -298,6 +329,7 @@ const SearchComponent = ({
               saveRequestRunning ||
               webSearchConfig.needReset
             }
+            testId="web-search-reset-button"
           />
         </div>
       </div>
@@ -317,7 +349,11 @@ export const Search = inject(({ aiSettingsStore, settingsStore }: TStore) => {
     webSearchConfig: aiSettingsStore.webSearchConfig,
     updateWebSearch: aiSettingsStore.updateWebSearch,
     hasAIProviders: aiSettingsStore.hasAIProviders,
-    aiSettingsUrl: settingsStore.aiSettingsUrl,
+    aiProviders: aiSettingsStore.aiProviders,
+    webSearchSettingsUrl: settingsStore.webSearchSettingsUrl,
     getAIConfig: settingsStore.getAIConfig,
+    aiConfig: settingsStore.aiConfig,
   };
 })(observer(SearchComponent));
+
+export { SearchLoader };

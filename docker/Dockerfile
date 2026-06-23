@@ -1,4 +1,4 @@
-# (c) Copyright Ascensio System SIA 2009-2025
+# (c) Copyright Ascensio System SIA 2009-2026
 # 
 # This program is a free software product.
 # You can redistribute it and/or modify it under the terms
@@ -24,14 +24,14 @@
 # content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 # International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-FROM node:22-bookworm-slim
+FROM node:24-bookworm-slim
 
 # Install required dependencies
 RUN apt-get -y update && \
     apt-get install -yq
     
 # Install PNPM
-RUN npm install -g pnpm@10.20.0
+RUN npm install -g pnpm@10.33.0
 
 WORKDIR /app
 
@@ -45,6 +45,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY ../common/ ./common/
 COPY ../packages/ ./packages/
 COPY ../public/ ./public/
+COPY ../libs/ ./libs/
 
 # ENV NODE_OPTIONS="--max-old-space-size=8192"
 

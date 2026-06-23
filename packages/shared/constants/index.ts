@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import ShareAppleReactSvg from "PUBLIC_DIR/images/share.apple.react.svg";
 import ShareGoogleReactSvg from "PUBLIC_DIR/images/share.google.react.svg";
@@ -32,35 +41,16 @@ import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
 import ShareWeixinReactSvg from "PUBLIC_DIR/images/share.weixin.react.svg";
-import { globalColors } from "../themes/globalColors";
+import ShareNextCloudReactSvg from "PUBLIC_DIR/images/share.nextcloud.react.svg";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { FileFillingFormStatus } from "../enums";
 
-export const LOADER_STYLE = Object.freeze({
-  title: "",
-  width: "100%",
-  height: "32",
-  backgroundColor: globalColors.darkBlack,
-  foregroundColor: globalColors.darkBlack,
-  backgroundOpacity: 0.1,
-  foregroundOpacity: 0.15,
-  borderRadius: "3",
-  radius: "3",
-  speed: 2,
-  animate: true,
-});
+export { LOADER_STYLE } from "@docspace/ui-kit/constants";
 
 export const TOAST_FOLDER_PUBLIC_KEY = "toast_folder_public_key";
-export const MANAGER = "manager";
-export const TOTAL_SIZE = "total_size";
 export const FILE_SIZE = "file_size";
-export const ROOM = "room";
 export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
-export const YEAR_KEY = "year";
-export const BACKUP_SERVICE = "backup";
-export const AI_TOOLS = "aitools";
-export const WEB_SEARCH = "websearch";
-export const FREE_BACKUP = "free_backup";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
 export const PUBLIC_STORAGE_KEY = "public-auth";
@@ -71,7 +61,6 @@ export const OPEN_BACKUP_CODES_DIALOG = "openBackupCodesDialog";
 export const COUNT_FOR_SHOWING_BAR = 2;
 export const PERCENTAGE_FOR_SHOWING_BAR = 90;
 
-export const LANGUAGE = "asc_language";
 export const TIMEZONE = "timezone";
 
 export const MOBILE_FOOTER_HEIGHT = "64px";
@@ -154,6 +143,11 @@ export const PROVIDERS_DATA = Object.freeze({
     icon: ShareWeixinReactSvg,
     iconOptions: undefined,
   },
+  nextcloud: {
+    label: "nextcloud",
+    icon: ShareNextCloudReactSvg,
+    iconOptions: undefined,
+  },
 });
 
 export const PASSWORD_LIMIT_SPECIAL_CHARACTERS = "!@#$%^&*";
@@ -165,38 +159,17 @@ export const FILLING_STATUS_ID = "fillingStatusDialog" as const;
 export const MEDIA_VIEW_URL = "/media/view/";
 export const PUBLIC_MEDIA_VIEW_URL = "/rooms/share/media/view";
 
-export const RTL_LANGUAGES = Object.freeze([
-  "ar",
-  "arc",
-  "dv",
-  "fa",
-  "ha",
-  "he",
-  "khw",
-  "ks",
-  "ku",
-  "ps",
-  "ur",
-  "yi",
-]);
-
 export const DEFAULT_FONT_FAMILY = "Open Sans, sans-serif, Arial";
 
 export const ONE_MEGABYTE = 1024 * 1024;
 export const COMPRESSION_RATIO = 2;
 export const NO_COMPRESSION_RATIO = 1;
 
-// Contains system fonts used in mac, ios, windows, android and linux
-export const SYSTEM_FONT_FAMILY =
-  "-apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Arial, sans-serif, Roboto, Noto Sans Arabic, Geeza Pro, Traditional Arabic, Noto Sans";
-
 export const HTML_EXST = [".htm", ".mht", ".html", ".mhtml"];
 
 export const EBOOK_EXST = [".fb2", ".pb2", ".ibk", ".prc", ".epub", ".djvu"];
 
-export const SYSTEM_THEME_KEY = "system_theme";
-
-const SDK_VERSION = "2.1.0";
+const SDK_VERSION = "2.2.0";
 
 export const SDK_SCRIPT_URL =
   typeof window !== "undefined"
@@ -206,8 +179,7 @@ export const SDK_SCRIPT_URL =
 export const ALLOWED_PASSWORD_CHARACTERS =
   "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";
 
-export const ALLOWED_MCP_CHARACTERS =
-  "A-Z, a-z, 0-9, _, -.";
+export const ALLOWED_MCP_CHARACTERS = "A-Z, a-z, 0-9, _, -.";
 
 export const ThirdPartyServicesUrlName = Object.freeze({
   GoogleDrive: "google",
@@ -246,6 +218,7 @@ export const OPERATIONS_NAME = Object.freeze({
   upload: "upload",
   deleteVersionFile: "deleteVersionFile",
   backup: "backup",
+  syncDatabase: "syncDatabase",
 });
 
 export const thumbnailStatuses = {
@@ -257,8 +230,6 @@ export const thumbnailStatuses = {
 
 export const THIRD_PARTY_SERVICES_URL =
   "/portal-settings/integration/third-party-services?service=";
-
-export const STORAGE_TARIFF_DEACTIVATED = "storageTariffDeactivated";
 
 // any unicode letters are allowed, characters are prohibited
 export const BRAND_NAME_REGEX =
@@ -288,20 +259,13 @@ export const CategoryType = Object.freeze({
   AIAgent: 16,
 });
 
-export const AVATAR_ACTION_KEYS = {
-  PROFILE_AVATAR_UPLOAD: "profile_avatar_upload",
-  PROFILE_AVATAR_DELETE: "profile_avatar_delete",
-} as const;
-
-export const ROOM_ACTION_KEYS = {
-  CREATE_EDIT_ROOM_UPLOAD: "create_edit_room_upload",
-  CREATE_EDIT_ROOM_DELETE: "create_edit_room_delete",
-  CREATE_EDIT_ROOM_CUSTOMIZE_COVER: "create_edit_room_customize_cover",
-} as const;
-
 export const SHARED_MEMBERS_COUNT = 100;
 export const SHARED_WITH_ME_PATH = "shared-with-me";
 
 export const EMPTY_ARRAY = Object.freeze([]) as [];
 export const EMPTY_OBJECT = Object.freeze({});
 export const FUNCTION_EMPTY = (): void => {};
+
+export const TEMPLATE_GALLERY_FORMATS = [".docx", ".xlsx", ".pptx", ".pdf"];
+
+export * from "@docspace/ui-kit/constants";

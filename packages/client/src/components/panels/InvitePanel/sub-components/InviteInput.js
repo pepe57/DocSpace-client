@@ -1,45 +1,58 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import debounce from "lodash.debounce";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useMemo, useState, useCallback, useEffect, useRef } from "react";
+import classNames from "classnames";
 
-import { Avatar } from "@docspace/shared/components/avatar";
-import { Text } from "@docspace/shared/components/text";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { Avatar } from "@docspace/ui-kit/components/avatar";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Text } from "@docspace/ui-kit/components/text";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
-import { toastr } from "@docspace/shared/components/toast";
+import { Heading } from "@docspace/ui-kit/components/heading";
+import { DropDown } from "@docspace/ui-kit/components/drop-down";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   parseAddresses,
   getParts,
   isBetaLanguage,
 } from "@docspace/shared/utils";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
 
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
@@ -56,22 +69,15 @@ import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import BackupIcon from "PUBLIC_DIR/images/icons/16/backup.svg?url";
+import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import EveryoneIconUrl from "PUBLIC_DIR/images/icons/16/departments.react.svg?url";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 import { getUserType } from "@docspace/shared/utils/common";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import {
-  StyledSubHeader,
-  StyledLink,
-  StyledInviteInput,
-  StyledInviteInputContainer,
-  StyledDropDown,
-  SearchItemText,
-  StyledDescription,
-  StyledInviteLanguage,
-  StyledCrossIcon,
-} from "../StyledInvitePanel";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+
+import styles from "../InvitePanel.module.scss";
+
 import AccessSelector from "../../../AccessSelector";
 import {
   fixAccess,
@@ -81,6 +87,7 @@ import {
   makeFreeRole,
   makeViewerRole,
 } from "../utils";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const minSearchValue = 2;
 const filterSeparator = ";";
@@ -316,6 +323,59 @@ const InviteInput = ({
     onChangeInput(value);
   };
 
+  const addUser = (item) => {
+    const {
+      shared,
+      status,
+      roomType,
+      access,
+      isVisitor,
+      isGroup = false,
+    } = item;
+    const isDisabled = status === EmployeeStatus.Disabled;
+
+    if (isDisabled) {
+      toastr.warning(t("UsersCannotBeAdded"));
+    } else if (shared) {
+      toastr.warning(t("UsersAlreadyAdded"));
+    } else {
+      const guestWrongRoleInAgent =
+        isVisitor &&
+        roomType === RoomsType.AIRoom &&
+        access !== ShareAccessRights.ReadOnly;
+
+      if (isGroup && checkIfAccessPaid(access)) {
+        item = fixAccess(item, t, roomType);
+      }
+
+      if (guestWrongRoleInAgent) {
+        item = makeViewerRole(item, t, getViewerRole(t, roomType));
+      }
+
+      if (
+        !guestWrongRoleInAgent &&
+        isPaidUserRole(access) &&
+        (item.isVisitor || item.isCollaborator)
+      ) {
+        const topFreeRole = getTopFreeRole(t, roomType);
+
+        if (access !== topFreeRole.access) {
+          item = makeFreeRole(item, t, topFreeRole);
+
+          if (isUserTariffLimit) {
+            toastr.error(<PaidQuotaLimitError />);
+          }
+        }
+      }
+      const items = removeExist([item, ...inviteItems]);
+      setInviteItems(items);
+    }
+
+    setInputValue("");
+    setUsersList([]);
+    setIsAddEmailPanelBlocked(true);
+  };
+
   const getItemContent = (item) => {
     const {
       displayName,
@@ -326,7 +386,6 @@ const InviteInput = ({
       isGroup = false,
       status,
       isSystem,
-      isVisitor,
     } = item;
 
     const isDisabled = status === EmployeeStatus.Disabled;
@@ -339,56 +398,13 @@ const InviteInput = ({
         ? EveryoneIconUrl
         : null;
 
-    const addUser = () => {
-      if (isDisabled) {
-        toastr.warning(t("UsersCannotBeAdded"));
-      } else if (shared) {
-        toastr.warning(t("UsersAlreadyAdded"));
-      } else {
-        const guestWrongRoleInAgent =
-          isVisitor &&
-          roomType === RoomsType.AIRoom &&
-          item.access !== ShareAccessRights.ReadOnly;
-
-        if (isGroup && checkIfAccessPaid(item.access)) {
-          item = fixAccess(item, t, roomType);
-        }
-
-        if (guestWrongRoleInAgent) {
-          item = makeViewerRole(item, t, getViewerRole(t, roomType));
-        }
-
-        if (
-          !guestWrongRoleInAgent &&
-          isPaidUserRole(item.access) &&
-          (item.isVisitor || item.isCollaborator)
-        ) {
-          const topFreeRole = getTopFreeRole(t, roomType);
-
-          if (item.access !== topFreeRole.access) {
-            item = makeFreeRole(item, t, topFreeRole);
-
-            if (isUserTariffLimit) {
-              toastr.error(<PaidQuotaLimitError />);
-            }
-          }
-        }
-        const items = removeExist([item, ...inviteItems]);
-        setInviteItems(items);
-      }
-
-      setInputValue("");
-      setUsersList([]);
-      setIsAddEmailPanelBlocked(true);
-    };
-
     return (
       <DropDownItem
         key={id}
-        onClick={addUser}
+        onClick={() => addUser(item)}
         height={48}
         heightTablet={48}
-        className="list-item"
+        className={styles.listItem}
       >
         <Avatar
           size="min"
@@ -396,22 +412,39 @@ const InviteInput = ({
           source={avatar}
           userName={groupName}
           isGroup={isGroup}
-          className={isDisabled ? "avatar-disabled" : "item-avatar"}
+          className={isDisabled ? styles.avatarDisabled : styles.itemAvatar}
         />
-        <div className="list-item_content">
-          <div className="list-item_content-box">
-            <SearchItemText $primary disabled={shared || isDisabled}>
+        <div className={styles.listItemContent}>
+          <div className={styles.listItemContentBox}>
+            <Text
+              className={classNames(styles.searchItemText, {
+                [styles.isPrimary]: true,
+                [styles.isDisabled]: shared || isDisabled,
+              })}
+            >
               {displayName || groupName}
-            </SearchItemText>
+            </Text>
             {status === EmployeeStatus.Pending ? <StyledSendClockIcon /> : null}
           </div>
-          <SearchItemText>{email}</SearchItemText>
+          <Text lineHeight="16px">{email}</Text>
         </div>
         {shared ? (
-          <SearchItemText $info>{t("Common:Invited")}</SearchItemText>
+          <Text
+            className={classNames(styles.searchItemText, {
+              [styles.isInfo]: true,
+            })}
+          >
+            {t("Common:Invited")}
+          </Text>
         ) : null}
         {isDisabled ? (
-          <SearchItemText info>{t("Common:Disabled")}</SearchItemText>
+          <Text
+            className={classNames(styles.searchItemText, {
+              [styles.isInfo]: true,
+            })}
+          >
+            {t("Common:Disabled")}
+          </Text>
         ) : null}
       </DropDownItem>
     );
@@ -419,6 +452,12 @@ const InviteInput = ({
 
   const addEmail = () => {
     if (!inputValue.trim() || searchRequestRunning) return;
+
+    const existUser = usersList.find((u) => u.email === inputValue);
+    if (existUser) {
+      addUser(existUser);
+      return;
+    }
 
     const items = toUserItems(inputValue);
 
@@ -518,13 +557,13 @@ const InviteInput = ({
       return prevDropDownContent.current;
     }
 
-    if (partsLength === 1 && !!usersList.length) {
+    if (partsLength === 1 && usersList.length) {
       prevDropDownContent.current = usersList.map((user) =>
         getItemContent(user),
       );
     } else if (roomId !== -1 && !allowInvitingGuests)
       prevDropDownContent.current = (
-        <DropDownItem disabled className="no-users-list">
+        <DropDownItem disabled className={styles.noUsersList}>
           <Text truncate fontSize="13px" fontWeight={400} lineHeight="20px">
             {t("Common:NotFoundUsers")}
           </Text>
@@ -533,7 +572,7 @@ const InviteInput = ({
     else {
       prevDropDownContent.current = (
         <DropDownItem
-          className="list-item"
+          className={styles.listItem}
           style={{
             width: "inherit",
           }}
@@ -541,14 +580,14 @@ const InviteInput = ({
           onClick={addEmail}
           height={53}
         >
-          <div className="email-list_avatar">
+          <div className={styles.emailListAvatar}>
             <Avatar size="min" role="user" source={AtReactSvgUrl} />
             {roomId == -1 ? (
               <Text truncate fontSize="14px" fontWeight={600}>
                 {inputValue}
               </Text>
             ) : (
-              <div className="email-list_email-container">
+              <div className={styles.emailListContainer}>
                 <Text truncate fontSize="14px" fontWeight={600}>
                   {inputValue}
                 </Text>
@@ -556,14 +595,14 @@ const InviteInput = ({
                   truncate
                   fontSize="12px"
                   fontWeight={400}
-                  className="email-list_invite-as-guest"
+                  className={styles.emailListInviteAsGuest}
                 >
                   {t("Common:InviteAsGuest")}
                 </Text>
               </div>
             )}
           </div>{" "}
-          <div className="email-list_add-button">
+          <div className={styles.emailListAddButton}>
             <ArrowIcon />
           </div>
         </DropDownItem>
@@ -600,11 +639,11 @@ const InviteInput = ({
 
   return (
     <>
-      <StyledSubHeader>
+      <Heading className={styles.subHeader}>
         {t("AddManually")}
         {!hideSelector ? (
-          <StyledLink
-            className="link-list"
+          <Link
+            className={classNames(styles.styledLink, "link-list")}
             fontWeight="600"
             type="action"
             isHovered
@@ -612,32 +651,35 @@ const InviteInput = ({
             dataTestId="invite_panel_choose_from_list_link"
           >
             {t("Translations:ChooseFromList")}
-          </StyledLink>
+          </Link>
         ) : null}
-      </StyledSubHeader>
-      <StyledDescription
-        noAllowInvitingGuests={roomId !== -1 ? !allowInvitingGuests : null}
+      </Heading>
+      <Text
+        className={classNames(styles.description, {
+          [styles.noAllowInvitingGuests]:
+            roomId !== -1 ? !allowInvitingGuests : null,
+        })}
       >
         {roomId === -1
           ? t("InviteMembersManuallyDescription", {
-              productName: t("Common:ProductName"),
+              productName: getBrandName("ProductName"),
             })
           : !allowInvitingGuests
             ? t("InviteToRoomManuallyInfoMembers", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })
             : t("InviteToRoomManuallyInfoGuest", {
-                productName: t("Common:ProductName"),
+                productName: getBrandName("ProductName"),
               })}
-      </StyledDescription>
+      </Text>
       {roomId === -1 || allowInvitingGuests ? (
-        <StyledInviteLanguage>
-          <Text className="invitation-language">
+        <div className={styles.inviteLanguage}>
+          <Text className={styles.invitationLanguage}>
             {t("InvitationLanguage")}:
           </Text>
-          <div className="language-combo-box-wrapper">
+          <div className={styles.languageComboBoxWrapper}>
             <ComboBox
-              className="language-combo-box"
+              className={styles.languageComboBox}
               directionY="both"
               options={cultureNamesNew}
               selectedOption={culture}
@@ -661,18 +703,23 @@ const InviteInput = ({
           </div>
           {isChangeLangMail ? (
             <IconButton
-              className="list-link"
+              className={styles.linkList}
               iconName={BackupIcon}
               onClick={onResetLangMail}
               size={12}
               dataTestId="invite_panel_reset_language_button"
             />
           ) : null}
-        </StyledInviteLanguage>
+        </div>
       ) : null}
 
-      <StyledInviteInputContainer ref={inputsRef}>
-        <StyledInviteInput ref={searchRef} isShowCross={!!inputValue}>
+      <div className={styles.inviteInputContainer} ref={inputsRef}>
+        <div
+          className={classNames(styles.inviteInput, {
+            [styles.isShowCross]: !!inputValue,
+          })}
+          ref={searchRef}
+        >
           <TextInput
             className="invite-input"
             scale
@@ -691,13 +738,12 @@ const InviteInput = ({
             testId="invite_panel_search_input"
           />
 
-          <div className="append" onClick={() => onChangeInput("")}>
-            <StyledCrossIcon />
+          <div className={styles.append} onClick={() => onChangeInput("")}>
+            <CrossIcon className={styles.rowIcons} />
           </div>
-        </StyledInviteInput>
+        </div>
         {isAddEmailPanelBlocked ? null : (
-          <StyledDropDown
-            width={dropDownWidth}
+          <DropDown
             isDefaultMode={false}
             open
             manualX="16px"
@@ -705,31 +751,36 @@ const InviteInput = ({
             eventTypes="click"
             withBackdrop={false}
             zIndex={399}
-            className="add-manually-dropdown"
+            style={{ "--custom-width": `${dropDownWidth}px` }}
+            className={classNames(
+              styles.addManuallyDropdown,
+              styles.emailDropdown,
+              {
+                [styles.isRequestRunning]: searchRequestRunning,
+                [styles.customWidth]: !!dropDownWidth,
+              },
+            )}
             {...dropDownMaxHeight}
-            isRequestRunning={searchRequestRunning}
           >
             {dropDownContent}
-          </StyledDropDown>
+          </DropDown>
         )}
 
-        <AccessSelector
-          className="add-manually-access"
-          t={t}
-          roomType={roomType}
-          defaultAccess={selectedAccess}
-          onSelectAccess={onSelectAccess}
-          containerRef={inputsRef}
-          isOwner={isOwner}
-          isAdmin={isAdmin}
-          isMobileView={isMobileView}
-          dataTestId="invite_panel_access_selector"
-          {...(roomId === -1 && {
-            isSelectionDisabled: isUserTariffLimit,
-            selectionErrorText: <PaidQuotaLimitError />,
-          })}
-        />
-      </StyledInviteInputContainer>
+        {roomId !== -1 ? (
+          <AccessSelector
+            className="add-manually-access"
+            t={t}
+            roomType={roomType}
+            defaultAccess={selectedAccess}
+            onSelectAccess={onSelectAccess}
+            containerRef={inputsRef}
+            isOwner={isOwner}
+            isAdmin={isAdmin}
+            isMobileView={isMobileView}
+            dataTestId="invite_panel_access_selector"
+          />
+        ) : null}
+      </div>
     </>
   );
 };

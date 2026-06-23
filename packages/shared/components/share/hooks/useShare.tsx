@@ -1,5 +1,7 @@
-import moment from "moment";
 import axios, { AxiosError } from "axios";
+import type { DateTime } from "luxon";
+
+import { now, addToDate, toISOString } from "@docspace/ui-kit/utils/date";
 import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
@@ -12,16 +14,16 @@ import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 
 import { isDesktop } from "../../../utils";
-import { ShareAccessRights } from "../../../enums";
+import { AnalyticsEvents, FolderType, ShareAccessRights } from "../../../enums";
 import type { TFileLink } from "../../../api/files/types";
 import { ShareLinkService } from "../../../services/share-link.service";
 import { getExternalFolderLinks, getExternalLinks } from "../../../api/files";
 
-import { TOption } from "../../combobox";
-import { TData, toastr } from "../../toast";
-import { Text } from "../../text";
-import { IconButton } from "../../icon-button";
-import { Tooltip } from "../../tooltip";
+import { TOption } from "@docspace/ui-kit/components/combobox";
+import { TData, toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
 
 import LinkRow from "../sub-components/LinkRow";
 import ShareHeader from "../sub-components/ShareHeader";
@@ -44,6 +46,10 @@ export const useShare = ({
   setIsScrollLocked,
   setEditLinkPanelIsVisible,
   setEmbeddingPanelData,
+  hideLinkTypeSelector,
+  isExternalShareRestricted,
+  blockExistingLinksOnRestrict,
+  defaultShareLinkInternal,
 }: UseShareProps) => {
   const isFolder = infoPanelSelection.isFolder;
 
@@ -114,7 +120,10 @@ export const useShare = ({
     try {
       addLoaderLink();
 
-      const link = await ShareLinkService.getPrimaryLink(infoPanelSelection);
+      const link = await ShareLinkService.getPrimaryLink(
+        infoPanelSelection,
+        defaultShareLinkInternal,
+      );
 
       if (link) {
         setFileLinks((links) => {
@@ -157,8 +166,10 @@ export const useShare = ({
     addLoaderLink();
 
     try {
-      const newLink =
-        await ShareLinkService.addExternalLink(infoPanelSelection);
+      const newLink = await ShareLinkService.addExternalLink(
+        infoPanelSelection,
+        defaultShareLinkInternal,
+      );
 
       setFileLinks((links) => {
         const newLinks: TLink[] = [...links];
@@ -216,6 +227,11 @@ export const useShare = ({
   };
 
   const changeShareOption = async (item: TOption, link: TFileLink) => {
+    if (link.sharedTo.isExpired) {
+      link.sharedTo.expirationDate =
+        addToDate(now(), 7, "days")?.toISO() ?? null;
+    }
+
     try {
       setLoadingLinks((val) => [...val, link.sharedTo.id]);
 
@@ -237,6 +253,11 @@ export const useShare = ({
   const changeAccessOption = async (item: AccessItem, link: TFileLink) => {
     const updateAccessLink = async () => {
       setLoadingLinks([...loadingLinks, link.sharedTo.id]);
+
+      if (link.sharedTo.isExpired) {
+        link.sharedTo.expirationDate =
+          addToDate(now(), 7, "days")?.toISO() ?? null;
+      }
 
       try {
         const res = await ShareLinkService.editLink(infoPanelSelection, {
@@ -260,7 +281,13 @@ export const useShare = ({
       }
     };
 
-    if (item.access === ShareAccessRights.FormFilling && onOpenPanel) {
+    const isRooms = infoPanelSelection?.rootFolderType === FolderType.Rooms;
+
+    if (
+      item.access === ShareAccessRights.FormFilling &&
+      !isRooms &&
+      onOpenPanel
+    ) {
       onOpenPanel({
         visible: true,
         updateAccessLink,
@@ -272,16 +299,20 @@ export const useShare = ({
     updateAccessLink();
   };
 
-  const removeLink = async (link: TFileLink) => {
+  const removeLink = async (link: TFileLink, isReactivate: boolean = false) => {
     try {
       setLoadingLinks((val) => [...val, link.sharedTo.id]);
 
       const newLink = await ShareLinkService.editLink(infoPanelSelection, {
         ...link,
-        access: ShareAccessRights.None,
+        access: isReactivate ? link.access : ShareAccessRights.None,
+        sharedTo: {
+          ...link.sharedTo,
+          expirationDate: addToDate(now(), 7, "days")?.toISO() ?? null,
+        },
       });
 
-      if (link.canRevoke) {
+      if (link.canRevoke || isReactivate) {
         setLoadingLinks((prev) => prev.filter((l) => l !== link.sharedTo.id));
 
         if (newLink)
@@ -292,7 +323,8 @@ export const useShare = ({
                 : l,
             ),
           );
-        toastr.success(t("Common:GeneralLinkRevokedAndCreatedSuccessfully"));
+        if (!isReactivate)
+          toastr.success(t("Common:GeneralLinkRevokedAndCreatedSuccessfully"));
       } else {
         deleteLink(link.sharedTo.id);
         toastr.success(t("Common:LinkRemoved"));
@@ -330,18 +362,16 @@ export const useShare = ({
 
   const changeExpirationOption = async (
     link: TFileLink,
-    expirationDate: moment.Moment | null,
+    expirationDate: DateTime | null,
   ) => {
     try {
       setLoadingLinks([...loadingLinks, link.sharedTo.id]);
-
-      const expDate = moment(expirationDate);
 
       const res = await ShareLinkService.editLink(infoPanelSelection, {
         ...link,
         sharedTo: {
           ...link.sharedTo,
-          expirationDate: expirationDate ? expDate.toISOString() : null,
+          expirationDate: expirationDate ? toISOString(expirationDate) : null,
         },
       });
 
@@ -352,13 +382,68 @@ export const useShare = ({
     }
   };
 
-  const onCopyLink = (link: TFileLink) => {
-    if (link.sharedTo?.isExpired) return;
+  const onCopyLink = async (link: TFileLink) => {
+    if (link.sharedTo?.isExpired) {
+      toastr.error(t("Common:LinkExpired"));
+      return;
+    }
 
-    copyShareLink(infoPanelSelection, link, t);
+    const isBlockedByAdmin =
+      isExternalShareRestricted &&
+      !link.sharedTo?.internal &&
+      blockExistingLinksOnRestrict;
+
+    if (isBlockedByAdmin) {
+      toastr.error(t("Common:LinkBlockedByAdminWarning"));
+
+      const isRoomItem =
+        "roomType" in infoPanelSelection &&
+        infoPanelSelection.roomType !== undefined;
+      const isFileItem = "folderId" in infoPanelSelection;
+      if (isRoomItem || isFileItem) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: isRoomItem
+            ? AnalyticsEvents.RoomShared
+            : AnalyticsEvents.FileShared,
+          id: infoPanelSelection.id,
+          linkId: link.sharedTo?.id,
+          parentId: isFileItem
+            ? infoPanelSelection.folderId
+            : infoPanelSelection.parentId,
+        });
+      }
+      return;
+    }
+
+    await copyShareLink(infoPanelSelection, link, t);
   };
 
   const getData = (link: TFileLink): ContextMenuModel[] => {
+    const isRestrictedByAdmin =
+      isExternalShareRestricted && !link.sharedTo.internal;
+
+    if (isRestrictedByAdmin) {
+      return [
+        {
+          key: "copy-link-settings-key",
+          label: t("Common:CopyLink"),
+          icon: CopyToReactSvgUrl,
+          onClick: () => onCopyLink(link),
+        },
+        {
+          key: "delete-link-separator",
+          isSeparator: true,
+        },
+        {
+          key: "delete-link-key",
+          label: link.canRevoke ? t("Common:RevokeLink") : t("Common:Delete"),
+          icon: link.canRevoke ? OutlineReactSvgUrl : TrashReactSvgUrl,
+          onClick: () => removeLink(link),
+        },
+      ];
+    }
+
     return [
       {
         key: "edit-link-key",
@@ -370,7 +455,7 @@ export const useShare = ({
         key: "copy-link-settings-key",
         label: t("Common:CopySharedLink"),
         icon: CopyToReactSvgUrl,
-        onClick: () => copyShareLink(infoPanelSelection, link, t),
+        onClick: () => onCopyLink(link),
       },
       {
         key: "embedding-settings-key",
@@ -408,6 +493,11 @@ export const useShare = ({
 
   const canAddLink = (infoPanelSelection?.shareSettings?.ExternalLink ?? 0) > 0;
 
+  const blockLinkCreation =
+    isExternalShareRestricted &&
+    blockExistingLinksOnRestrict &&
+    infoPanelSelection.parentRoomType === FolderType.PublicRoom;
+
   const getTextTooltip = () => {
     return (
       <Text fontSize="12px" noSelect>
@@ -418,7 +508,10 @@ export const useShare = ({
 
   const getLinkElements = () => {
     const options =
-      fileLinks.length > 0 && !onlyOneLink && canAddLink ? (
+      fileLinks.length > 0 &&
+      !onlyOneLink &&
+      canAddLink &&
+      !blockLinkCreation ? (
         <div data-tooltip-id="file-links-tooltip" data-tip="tooltip">
           <IconButton
             className={styles.linkToViewingIcon}
@@ -449,7 +542,7 @@ export const useShare = ({
     );
 
     if (fileLinks.length === 0) {
-      if (!canAddLink) return [];
+      if (!canAddLink || blockLinkCreation) return [];
 
       return [
         header,
@@ -479,6 +572,8 @@ export const useShare = ({
           onCloseContextMenu={onCloseContextMenu}
           changeExpirationOption={changeExpirationOption}
           availableShareRights={availableShareRights}
+          hideLinkTypeSelector={hideLinkTypeSelector}
+          isExternalShareRestricted={isExternalShareRestricted}
         />
       )),
     ];

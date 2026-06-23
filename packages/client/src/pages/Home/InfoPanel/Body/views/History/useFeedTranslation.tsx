@@ -1,33 +1,42 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { Trans } from "react-i18next";
 import { TFunction } from "i18next";
-import moment from "moment";
 import { FeedActionKeys } from "@docspace/shared/api/rooms/types";
+import { humanizeDuration, type DurationUnit } from "@docspace/ui-kit/utils/date";
 import { TTranslation } from "@docspace/shared/types";
 
 import { HistoryText } from "./HistoryText";
@@ -42,19 +51,19 @@ export const useFeedTranslation = (
 
   switch (feed.action.key) {
     case FeedActionKeys.FileCreated:
-      return t("InfoPanel:FileCreated");
+      return t("InfoPanel:FileCreatedNotify");
     case FeedActionKeys.FileUploaded:
       if (hasRelatedItems)
         return t("InfoPanel:FileUploadedCount", {
           count,
         });
-      return t("InfoPanel:FileUploaded");
+      return t("InfoPanel:FilesAddedNotify");
     case FeedActionKeys.UserFileUpdated:
       return t("InfoPanel:UserFileUpdated");
     case FeedActionKeys.FileConverted:
       return t("InfoPanel:FileConverted");
     case FeedActionKeys.FileRenamed:
-      return t("InfoPanel:FileRenamed");
+      return t("InfoPanel:FileRenamedNotify");
     case FeedActionKeys.FileMoved:
       if (feed.data.fromParentTitle) {
         return t("InfoPanel:FileMovedTo", {
@@ -65,7 +74,7 @@ export const useFeedTranslation = (
         return t("InfoPanel:FileMovedCount", {
           count,
         });
-      return t("InfoPanel:FileMoved");
+      return t("InfoPanel:FilesMovedNotify");
     case FeedActionKeys.FileMovedToTrash:
       if (hasRelatedItems)
         return t("InfoPanel:FilesTrashMoveCompletedCount", {
@@ -85,13 +94,13 @@ export const useFeedTranslation = (
         return t("InfoPanel:FileCopiedCount", {
           count,
         });
-      return t("InfoPanel:FileCopied");
+      return t("InfoPanel:FilesCopiedNotify");
     case FeedActionKeys.FileDeleted:
       if (hasRelatedItems)
         return t("InfoPanel:FileDeletedCount", {
           count,
         });
-      return t("InfoPanel:FileDeleted");
+      return t("InfoPanel:FilesRemovedNotify");
     case FeedActionKeys.FileLocked:
       return `${t("Translations:FileLocked")}.`;
     case FeedActionKeys.FileUnlocked:
@@ -108,15 +117,15 @@ export const useFeedTranslation = (
     case FeedActionKeys.FolderIndexReordered:
       return t("InfoPanel:FolderIndexReordered");
     case FeedActionKeys.FolderCreated:
-      return t("InfoPanel:FolderCreated");
+      return t("InfoPanel:FolderCreatedNotify");
     case FeedActionKeys.FolderRenamed:
-      return t("InfoPanel:FolderRenamed");
+      return t("InfoPanel:FolderRenamedNotify");
     case FeedActionKeys.FolderMoved:
       if (hasRelatedItems)
         return t("InfoPanel:FolderMovedCount", {
           count,
         });
-      return t("InfoPanel:FolderMoved");
+      return t("InfoPanel:FoldersMovedNotify");
     case FeedActionKeys.FolderMovedToTrash:
       if (hasRelatedItems)
         return t("InfoPanel:FoldersTrashMoveCompletedCount", {
@@ -131,13 +140,13 @@ export const useFeedTranslation = (
         return t("InfoPanel:FolderCopiedCount", {
           count,
         });
-      return t("InfoPanel:FolderCopied");
+      return t("InfoPanel:FoldersCopiedNotify");
     case FeedActionKeys.FolderDeleted:
       if (hasRelatedItems)
         return t("InfoPanel:FolderDeletedCount", {
           count,
         });
-      return t("InfoPanel:FolderDeleted");
+      return t("InfoPanel:FoldersRemovedNotify");
     case FeedActionKeys.AgentCreated:
       return (
         <Trans
@@ -292,23 +301,15 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomIndexingDisabled");
     case FeedActionKeys.RoomLifeTimeSet: {
       const periodLifeTime = feed.data.lifeTime?.period;
-      const value = feed.data.lifeTime?.value;
-      const maxValue = 9999;
-      const period =
+      const value = feed.data.lifeTime?.value ?? 0;
+      const period: DurationUnit =
         periodLifeTime === 0
           ? "days"
           : periodLifeTime === 1
             ? "months"
             : "years";
 
-      const thresholds =
-        periodLifeTime === 0
-          ? { d: maxValue }
-          : periodLifeTime === 1
-            ? { M: maxValue }
-            : { y: maxValue };
-
-      const data = moment.duration(value, period).humanize(false, thresholds);
+      const data = humanizeDuration(value, period);
 
       return (
         <Trans
@@ -359,7 +360,7 @@ export const useFeedTranslation = (
       return t("InfoPanel:FormCompletelyFilled");
 
     case FeedActionKeys.FormStopped:
-      return t("InfoPanel:FormStopped");
+      return t("InfoPanel:FormStoppedNotify");
 
     default:
       return null;

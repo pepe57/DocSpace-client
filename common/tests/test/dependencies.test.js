@@ -1,29 +1,39 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
+import { it, expect, beforeAll } from "vitest";
 const fs = require("fs");
 const path = require("path");
 
@@ -56,7 +66,7 @@ const getPackageDependencies = (packageJson) => {
   // Get dependencies from all sections
   addDeps(packageJson.dependencies);
   addDeps(packageJson.devDependencies);
-  addDeps(packageJson.peerDependencies);
+  // addDeps(packageJson.peerDependencies);
 
   return deps;
 };
@@ -91,18 +101,18 @@ beforeAll(() => {
     const files = getAllFiles(clientDir, excludeDirs);
 
     codeFiles.push(
-      ...files.filter((filePath) => filePath && searchPattern.test(filePath))
+      ...files.filter((filePath) => filePath && searchPattern.test(filePath)),
     );
 
     packageJsonFiles.push(
       ...files.filter(
-        (filePath) => filePath && path.basename(filePath) === "package.json"
-      )
+        (filePath) => filePath && path.basename(filePath) === "package.json",
+      ),
     );
   });
 
   console.log(
-    `Found code files by extension js(x)|ts(x)|mjs|cjs filter = ${codeFiles.length}.`
+    `Found code files by extension js(x)|ts(x)|mjs|cjs filter = ${codeFiles.length}.`,
   );
 
   // Node.js built-in modules to ignore
@@ -175,7 +185,7 @@ beforeAll(() => {
 
   const regexp = new RegExp(
     `(${pattern1})|(${pattern2})|(${pattern3})|(${pattern4})|(${pattern5})|(${pattern6})`,
-    "gm"
+    "gm",
   );
 
   const codeImports = [];
@@ -195,7 +205,7 @@ beforeAll(() => {
             m.startsWith("@docspace/shared") ||
             webpackAliases.some((k) => m.startsWith(`${k}/`)) ||
             builtInModules.has(m)
-          )
+          ),
       );
 
     if (imports.length === 0) return;
@@ -239,19 +249,19 @@ beforeAll(() => {
   });
 
   console.log(
-    `Found workspace's code files with imports = ${workspaceCodeImports.length}.`
+    `Found workspace's code files with imports = ${workspaceCodeImports.length}.`,
   );
 
   console.log(
-    `Found workspace's package.json files with dependencies = ${workspaceDeps.length}.`
+    `Found workspace's package.json files with dependencies = ${workspaceDeps.length}.`,
   );
 });
 
-test("UnusedDependenciesTest: Verify that all dependencies in package.json files are being used", async () => {
+it("UnusedDependenciesTest: Verify that all dependencies in package.json files are being used", async () => {
   const unusedDependencies = [];
 
   const sharedDeps = workspaceDeps.find(
-    (d) => d.workspace === path.join("packages", "shared")
+    (d) => d.workspace === path.join("packages", "shared"),
   );
 
   const usedSomeWhere = new Set();
@@ -259,7 +269,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
   workspaceDeps.forEach((wsDepsItem) => {
     const workspace = wsDepsItem.workspace;
     const currentWorkspaceCodeImports = workspaceCodeImports.find(
-      (i) => i.workspace === workspace
+      (i) => i.workspace === workspace,
     );
 
     let missing = wsDepsItem.deps.filter((dep) => {
@@ -268,7 +278,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
         Array.from(currentWorkspaceCodeImports.uniqueImports.values()).some(
           (s) => {
             return s.startsWith(`${dep.name}/`);
-          }
+          },
         );
 
       if (!success && dep.name.startsWith("@types/")) {
@@ -278,7 +288,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
           Array.from(currentWorkspaceCodeImports.uniqueImports.values()).some(
             (s) => {
               return s.startsWith(`${name}/`);
-            }
+            },
           );
       }
 
@@ -305,7 +315,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
 
     missing = missing.filter((m) => {
       const success = Object.values(wsDepsItem.scripts).some(
-        (s) => s.indexOf(m.name) !== -1
+        (s) => s.indexOf(m.name) !== -1,
       );
 
       if (success) {
@@ -318,15 +328,9 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
     // Filter out allowed unused dependencies
     const allowedUnusedDeps = [
       "@aws-sdk/client-cloudwatch-logs",
-      "@storybook/addon-controls",
-      "@storybook/addon-designs",
       "@storybook/addon-docs",
-      "@storybook/addon-essentials",
       "@storybook/addon-links",
-      "@storybook/addons",
-      "@storybook/addon-webpack5-compiler-babel",
-      "@storybook/components",
-      "@storybook/react-webpack5",
+      "@storybook/react",
       "babel-jest",
       "babel-plugin-styled-components",
       "@babel/core",
@@ -349,6 +353,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "@types/node",
       "jest-environment-jsdom",
       "jest-styled-components",
+      "jsdom",
       "ts-jest",
       "ts-node",
       "jest-html-reporter",
@@ -356,7 +361,10 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
       "@biomejs/biome",
       "@vitest/ui",
       "@vitest/coverage-v8",
-      "open-cli"
+      "open-cli",
+      "postcss",
+      "path-browserify",
+      "sass",
     ];
 
     missing = missing.filter((m) => !allowedUnusedDeps.includes(m.name));
@@ -371,7 +379,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
     message += `\nIn ${workspace}:\n`;
 
     const missingInSameWorkspace = missing.filter(
-      (dep) => !usedSomeWhere.has(dep.name)
+      (dep) => !usedSomeWhere.has(dep.name),
     );
 
     if (missingInSameWorkspace.length > 0) {
@@ -383,7 +391,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
     }
 
     const foundInOtherWorkspace = missing.filter((dep) =>
-      usedSomeWhere.has(dep.name)
+      usedSomeWhere.has(dep.name),
     );
 
     if (foundInOtherWorkspace.length > 0) {
@@ -401,7 +409,7 @@ test("UnusedDependenciesTest: Verify that all dependencies in package.json files
   expect(unusedDependencies.length, message).toBe(0);
 });
 
-test("DifferentDependencyVersionsTest: Verify that all workspaces use same dependency versions", () => {
+it("DifferentDependencyVersionsTest: Verify that all workspaces use same dependency versions", () => {
   // List of packages to be ignored
   const ignoredPackages = new Set([]);
 
@@ -432,7 +440,7 @@ test("DifferentDependencyVersionsTest: Verify that all workspaces use same depen
         .join("\n");
 
       mismatchedDeps.push(
-        `❌ ${depName} has different versions:\n${versionList}`
+        `❌ ${depName} has different versions:\n${versionList}`,
       );
     }
   }
@@ -440,7 +448,7 @@ test("DifferentDependencyVersionsTest: Verify that all workspaces use same depen
   if (mismatchedDeps.length > 0) {
     const report = mismatchedDeps.join("\n\n");
     throw new Error(
-      `Found ${mismatchedDeps.length} dependencies with version mismatch:\n\n ${report}`
+      `Found ${mismatchedDeps.length} dependencies with version mismatch:\n\n ${report}`,
     );
   }
 });

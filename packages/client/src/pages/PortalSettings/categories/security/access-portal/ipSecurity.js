@@ -1,38 +1,46 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { size, isMobileDevice } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -45,35 +53,7 @@ import useSecurity from "../useSecurity";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
 
 import IpSecurityLoader from "../sub-components/loaders/ip-security-loader";
-
-const MainContainer = styled.div`
-  width: 100%;
-
-  .ip-security_warning {
-    max-width: 700px;
-  }
-
-  .page-subtitle {
-    margin-bottom: 10px;
-  }
-
-  .user-fields {
-    margin-bottom: 18px;
-  }
-
-  .box {
-    margin-bottom: 11px;
-  }
-
-  .warning-text {
-    margin-bottom: 9px;
-    color: ${(props) => props.theme.client.settings.security.ip.errorColor};
-  }
-
-  .save-cancel-buttons {
-    margin-top: 24px;
-  }
-`;
+import styles from "./ipSecurity.module.scss";
 
 const IpSecurity = (props) => {
   const {
@@ -95,6 +75,7 @@ const IpSecurity = (props) => {
   const location = useLocation();
 
   const regexp = /^(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}$/; // check ip valid
+  const isValidIp = (input) => regexp.test(input);
 
   const [enable, setEnable] = useState(false);
   const [ips, setIps] = useState();
@@ -102,6 +83,7 @@ const IpSecurity = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [autoFocus, setAutoFocus] = useState(false);
+  const [errorMessages, setErrorMessages] = useState([]);
 
   const defaultProps = createDefaultHookSettingsProps({
     settingsStore,
@@ -194,30 +176,60 @@ const IpSecurity = (props) => {
     setIps(newInputs);
   };
 
+  const onClickAdd = () => {
+    if (!autoFocus) setAutoFocus(true);
+    setIps([...ips, ""]);
+    setErrorMessages((prev) => [...prev, null]);
+  };
+
+  const checkDuplicate = (ips, input, index) => {
+    const firstIndex = ips.findIndex((d) => d === input && d !== "");
+    return firstIndex !== -1 && firstIndex !== index;
+  };
+
+  const getErrorMessage = (ip, index, ipsArray = ips) => {
+    const isDuplicate = checkDuplicate(ipsArray, ip, index);
+    const isValidFormat = isValidIp(ip) && ip !== "";
+
+    if (isDuplicate) return t("Common:IpAlreadyAdded");
+    if (!isValidFormat) return t("Common:IncorrectIp");
+    return null;
+  };
+
+  const validateAllIps = (ipsArray) => {
+    return ipsArray.map((ip, index) => getErrorMessage(ip, index, ipsArray));
+  };
+
   const onDeleteInput = (index) => {
     const newInputs = Array.from(ips);
     newInputs.splice(index, 1);
     setIps(newInputs);
+    setErrorMessages(validateAllIps(newInputs));
   };
 
-  const onClickAdd = () => {
-    if (!autoFocus) setAutoFocus(true);
-    setIps([...ips, ""]);
+  const onCheckValid = (ip, index) => {
+    const errorMessage = getErrorMessage(ip, index);
+
+    setErrorMessages((prev) => {
+      const newErrors = [...prev];
+      newErrors[index] = errorMessage;
+      return newErrors;
+    });
+    return !errorMessage;
   };
 
   const onSaveClick = async () => {
-    const newIps = ips.filter((ip) => ip.trim() !== "");
-
-    setIps(newIps);
     setIsSaving(true);
-    const valid = newIps.map((ip) => regexp.test(ip));
 
-    if (valid.includes(false)) {
+    const errors = validateAllIps(ips);
+    setErrorMessages(errors);
+
+    if (errors.some((e) => e !== null)) {
       setIsSaving(false);
       return;
     }
 
-    const ipsObjectArr = newIps.map((ip) => {
+    const ipsObjectArr = ips.map((ip) => {
       return { ip };
     });
 
@@ -226,11 +238,11 @@ const IpSecurity = (props) => {
 
       saveToSessionStorage("currentIPSettings", {
         enable,
-        ips: newIps,
+        ips,
       });
       saveToSessionStorage("defaultIPSettings", {
         enable,
-        ips: newIps,
+        ips,
       });
       setShowReminder(false);
       toastr.success(t("Common:SuccessfullySaveSettingsMessage"));
@@ -246,6 +258,7 @@ const IpSecurity = (props) => {
     setEnable(defaultSettings?.enable);
     setIps(defaultSettings?.ips);
     setShowReminder(false);
+    setErrorMessages([]);
   };
 
   if ((currentDeviceType === DeviceType.mobile && !isLoaded) || !tReady) {
@@ -253,9 +266,9 @@ const IpSecurity = (props) => {
   }
 
   return (
-    <MainContainer>
+    <div className={styles.container}>
       <LearnMoreWrapper withoutExternalLink={!ipSettingsUrl}>
-        <Text className="page-subtitle">
+        <Text className={styles.pageSubtitle}>
           {t("IPSecuritySettingDescription")}
         </Text>
         {ipSettingsUrl ? (
@@ -273,7 +286,7 @@ const IpSecurity = (props) => {
       </LearnMoreWrapper>
 
       <RadioButtonGroup
-        className="box"
+        className={styles.box}
         fontSize="13px"
         fontWeight="400"
         name="group"
@@ -300,13 +313,16 @@ const IpSecurity = (props) => {
 
       {enable ? (
         <UserFields
-          className="user-fields"
+          className={styles.userFields}
           inputs={ips}
           buttonLabel={t("AddAllowedIP")}
           onChangeInput={onChangeInput}
           onDeleteInput={onDeleteInput}
           onClickAdd={onClickAdd}
-          regexp={regexp}
+          onBlurAction={(index) => onCheckValid(ips[index], index)}
+          validateFunc={isValidIp}
+          errorMessages={errorMessages}
+          hideDeleteIcon={ips.length === 1}
           classNameAdditional="add-allowed-ip-address"
           isAutoFocussed={autoFocus}
           inputDataTestId="ip_security_ip_input"
@@ -317,17 +333,17 @@ const IpSecurity = (props) => {
 
       {enable ? (
         <>
-          <Text fontSize="16px" fontWeight="700" className="warning-text">
+          <Text fontSize="16px" fontWeight="700" className={styles.warningText}>
             {t("Common:Warning")}
           </Text>
-          <Text className="ip-security_warning">
+          <Text className={styles.ipSecurityWarning}>
             {t("IPSecurityWarningHelper")}
           </Text>
         </>
       ) : null}
 
       <SaveCancelButtons
-        className="save-cancel-buttons"
+        className={styles.saveCancelButtons}
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
@@ -337,12 +353,13 @@ const IpSecurity = (props) => {
         displaySettings
         hasScroll={false}
         isSaving={isSaving}
+        saveButtonDisabled={errorMessages.some((e) => e !== null)}
         additionalClassSaveButton="ip-security-save"
         additionalClassCancelButton="ip-security-cancel"
         saveButtonDataTestId="ip_security_save_button"
         cancelButtonDataTestId="ip_security_cancel_button"
       />
-    </MainContainer>
+    </div>
   );
 };
 

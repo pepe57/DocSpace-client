@@ -1,0 +1,157 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/mixins";
+
+.registerContainer {
+  height: 100%;
+  width: 100%;
+
+  .orLabel {
+    color: var(--login-invite-text-color);
+    margin: 0 8px;
+  }
+
+  .line {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    color: var(--login-invite-border-color);
+    padding: 32px 0;
+
+    p {
+      line-height: 20px;
+    }
+  }
+
+  .line:before,
+  .line:after {
+    content: "";
+    flex-grow: 1;
+    background: var(--login-invite-border-color);
+    height: 1px;
+    font-size: 0px;
+    line-height: 0px;
+    margin: 0px;
+  }
+
+  .authFormFields {
+    width: 100%;
+
+    :global(.password-field) {
+      margin-bottom: 24px;
+    }
+      
+    &.registrationForm {
+      :global(.email-container) {
+        display: none !important;
+      }
+    }
+
+    :global(.login-continue-button) {
+      margin-top: 8px;
+    }
+
+    :global(.terms-conditions) {
+      margin: 20px 0;
+    }
+
+    @include mixins.tablet {
+      width: 100%;
+    }
+    @include mixins.mobile {
+      width: 100%;
+    }
+  }
+
+  :global(.password-field-wrapper) {
+    min-width: 100%;
+  }
+
+  :global(.social-buttons-group) {
+    button {
+      margin-top: 1px;
+      margin-bottom: 0px;
+    }
+
+    @include mixins.mobile {
+      :global(.buttonWrapper) {
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+  :global(.invitation-info-container) {
+    p {
+      line-height: 20px;
+    }
+  }
+
+  :global(.news-subscription) {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 4px;
+
+    label {
+      align-items: flex-start;
+
+      svg {
+        padding-top: 1px;
+      }
+    }
+
+    span {
+      line-height: 20px !important;
+    }
+
+    :global(.checkbox-news) {
+      padding-top: 2px;
+
+      svg {
+        margin-inline-end: 8px;
+      }
+    }
+  }
+
+  :global(.login-button) {
+    margin-top: 4px;
+  }
+
+  :global(.sign-in-container) {
+    p {
+      line-height: 22px !important;
+    }
+  }
+}

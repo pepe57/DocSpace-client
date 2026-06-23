@@ -1,40 +1,53 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+export * from "@docspace/ui-kit/types";
 
 import type { TFile, TFileLink, TFolder } from "../api/files/types";
-import type { TBreadCrumb } from "../components/selector/Selector.types";
+import type { TBreadCrumb } from "@docspace/ui-kit/components/selector";
 import type {
   FolderType,
   RoomsType,
   ShareAccessRights,
   ShareRights,
 } from "../enums";
-import type { TTheme, TColorScheme } from "../themes";
+import type { TTheme, TColorScheme } from "@docspace/ui-kit/providers/theme";
 import type FirebaseHelper from "../utils/firebase";
 import type { TRoom } from "../api/rooms/types";
+
+export type { TDirectionX, TDirectionY } from "@docspace/ui-kit/types";
 
 export type Option = {
   key: string;
@@ -44,10 +57,13 @@ export type Option = {
 
 export type TWeekdaysLabel = Pick<Option, "key" | "label">;
 
-export type TDirectionX = "left" | "right";
-export type TDirectionY = "bottom" | "top" | "both";
-
-export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
+export type TViewAs =
+  | "tile"
+  | "table"
+  | "row"
+  | "settings"
+  | "profile"
+  | "tileDynamicHeight";
 
 export type ProviderType = {
   provider_id: unknown;
@@ -201,16 +217,6 @@ export interface LinkParamsType {
   updateLink?: (newLink: TFileLink) => void;
 }
 
-export type TShareRightsType =
-  | "ExternalLink"
-  | "Group"
-  | "PrimaryExternalLink"
-  | "User";
-
-export type TAvailableShareRights = Partial<
-  Record<TShareRightsType, ShareRights[]>
->;
-
 export type TShareLinkAccessRightOption = {
   key: string;
   icon: string;
@@ -238,10 +244,14 @@ declare global {
     zE: {
       apply: (...args: unknown[]) => void;
     };
-    i18n: {
-      loaded: {
-        [key: string]: { data: { [key: string]: string }; namespaces: string };
-      };
+    i18n?: {
+      t?: (key: string, options?: Record<string, string | number>) => string;
+      inLoad: { url: string; callbacks: Function[] }[];
+      loaded: Record<
+        string,
+        { data: Record<string, string>; namespaces: string }
+      >;
+      instance?: import("i18next").i18n;
     };
     timezone: string;
     snackbar?: object;
@@ -292,13 +302,14 @@ declare global {
         loaderTime: number;
       };
     };
-    AscDesktopEditor: {
+    AscDesktopEditor?: {
       execCommand: (key: string, value: string) => void;
       cloudCryptoCommand: (
         key: string,
         value: unknown,
         callback: unknown,
       ) => void;
+      getCloudKeys?: (domain: string) => Array<{ id: string }>;
       getViewportSettings?: () => {
         widgetType: "window" | "tab";
         captionHeight: number;
@@ -316,12 +327,10 @@ declare global {
       opMessage?: string;
       opType: number;
     }) => void;
-    RendererProcessVariable: {
+    RendererProcessVariable?: {
       theme?: { id: string; system: string; type: string; addlocal: string };
     };
-    Tiff: new (
-      arg: object,
-    ) => {
+    Tiff: new (arg: object) => {
       toDataURL: () => string;
     };
     dataLayer?: Record<string, unknown>[];
@@ -330,8 +339,18 @@ declare global {
   }
 
   export type ContextMenuModel =
-    import("../components/context-menu/ContextMenu.types").ContextMenuModel;
+    import("@docspace/ui-kit/components/context-menu").ContextMenuModel;
 
   export type SeparatorType =
-    import("../components/context-menu/ContextMenu.types").SeparatorType;
+    import("@docspace/ui-kit/components/context-menu").SeparatorType;
 }
+
+export type TDefaultTemplateItem = {
+  id: number | null;
+  title?: string;
+  isModified?: boolean;
+  lastModified?: string;
+  fileExst: string;
+  fileSize: number;
+  viewUrl: string;
+};

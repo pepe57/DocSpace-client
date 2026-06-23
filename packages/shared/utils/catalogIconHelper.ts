@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 // import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
@@ -47,6 +56,11 @@ import CatalogSettingsRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalo
 import CatalogSettingsIntegrationReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
 import CatalogSettingsDataReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.import.react.svg?url";
 import CatalogSettingsDeveloperReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.developer.react.svg?url";
+import CatalogDevToolsJavascriptSdkReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-javascript-sdk.react.svg?url";
+import CatalogDevToolsPluginSdkReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-plugin-sdk.react.svg?url";
+import CatalogDevToolsWebhooksReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-webhooks.react.svg?url";
+import CatalogDevToolsOAuthReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-oauth.react.svg?url";
+import CatalogDevToolsApiKeysReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.devtools-api-keys.react.svg?url";
 import CatalogSettingsPaymentReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
 import CatalogSettingsGiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 import CatalogSettingsStorageManagementReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-storage-management.svg?url";
@@ -73,13 +87,18 @@ import CatalogSettingsRestore20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/cata
 import CatalogSettingsIntegration20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-integration.svg?url";
 import CatalogSettingsData20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-import.svg?url";
 import CatalogSettingsDeveloper20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-developer.svg?url";
+import CatalogDevToolsJavascriptSdk20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.devtools-javascript-sdk.react.svg?url";
+import CatalogDevToolsPluginSdk20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.devtools-plugin-sdk.react.svg?url";
+import CatalogDevToolsWebhooks20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.devtools-webhooks.react.svg?url";
+import CatalogDevToolsOAuth20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.devtools-oauth.react.svg?url";
+import CatalogDevToolsApiKeys20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.devtools-api-keys.react.svg?url";
 import CatalogSettingsPayment20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-payment.svg?url";
 import CatalogSettingsGift20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-gift.svg?url";
 import CatalogSettingsStorageManagement20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-storage-management.svg?url";
 import CatalogSettingsServices20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog-settings-services.svg?url";
 
 import { FolderType, PageType } from "../enums";
-import { isMobile, isTablet } from "./device";
+import { isMobile, isTablet } from "@docspace/ui-kit/utils/device";
 
 type FolderUnionType = (typeof FolderType)[keyof typeof FolderType];
 type SettingsPageUnionType = (typeof PageType)[keyof typeof PageType];
@@ -118,6 +137,12 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.integration]: CatalogSettingsIntegrationReactSvgUrl,
     [PageType.dataImport]: CatalogSettingsDataReactSvgUrl,
     [PageType.developerTools]: CatalogSettingsDeveloperReactSvgUrl,
+    [PageType.devToolsOverview]: CatalogSettingsIntegrationReactSvgUrl,
+    [PageType.devToolsJavascriptSdk]: CatalogDevToolsJavascriptSdkReactSvgUrl,
+    [PageType.devToolsPluginSdk]: CatalogDevToolsPluginSdkReactSvgUrl,
+    [PageType.devToolsWebhooks]: CatalogDevToolsWebhooksReactSvgUrl,
+    [PageType.devToolsOAuth]: CatalogDevToolsOAuthReactSvgUrl,
+    [PageType.devToolsApiKeys]: CatalogDevToolsApiKeysReactSvgUrl,
     [PageType.portalDeletion]: CatalogTrashReactSvgUrl,
     [PageType.payments]: CatalogSettingsPaymentReactSvgUrl,
     [PageType.services]: CatalogSettingsServicesReactSvgUrl,
@@ -147,6 +172,12 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.integration]: CatalogSettingsIntegration20ReactSvgUrl,
     [PageType.dataImport]: CatalogSettingsData20ReactSvgUrl,
     [PageType.developerTools]: CatalogSettingsDeveloper20ReactSvgUrl,
+    [PageType.devToolsOverview]: CatalogSettingsIntegration20ReactSvgUrl,
+    [PageType.devToolsJavascriptSdk]: CatalogDevToolsJavascriptSdk20ReactSvgUrl,
+    [PageType.devToolsPluginSdk]: CatalogDevToolsPluginSdk20ReactSvgUrl,
+    [PageType.devToolsWebhooks]: CatalogDevToolsWebhooks20ReactSvgUrl,
+    [PageType.devToolsOAuth]: CatalogDevToolsOAuth20ReactSvgUrl,
+    [PageType.devToolsApiKeys]: CatalogDevToolsApiKeys20ReactSvgUrl,
     [PageType.portalDeletion]: CatalogTrash20ReactSvgUrl,
     [PageType.payments]: CatalogSettingsPayment20ReactSvgUrl,
     [PageType.services]: CatalogSettingsServices20ReactSvgUrl,

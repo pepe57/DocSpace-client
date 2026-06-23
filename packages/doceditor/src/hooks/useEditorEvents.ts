@@ -1,30 +1,40 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { useCallback } from "react";
+import { match, Pattern } from "ts-pattern";
 import isUndefined from "lodash/isUndefined";
 import { useSearchParams } from "next/navigation";
 
@@ -41,24 +51,40 @@ import {
   sendEditorNotify,
   markAsFavorite,
   removeFromFavorite,
+  manageFormFilling,
 } from "@docspace/shared/api/files";
-import {
+import type {
   TEditHistory,
   TGetReferenceData,
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
-import { EDITOR_ID, FILLING_STATUS_ID } from "@docspace/shared/constants";
+import {
+  getProviders,
+  getModels,
+  getDefaultProvider,
+} from "@docspace/shared/api/ai";
+import type {
+  TAiProvider,
+  TDefaultProvider,
+} from "@docspace/shared/api/ai/types";
+import {
+  CREATED_FORM_KEY,
+  EDITOR_ID,
+  FILLING_STATUS_ID,
+} from "@docspace/shared/constants";
 import {
   assign,
   frameCallCommand,
   frameCallEvent,
 } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { StartFillingMode } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { Nullable } from "@docspace/shared/types";
-
+import {
+  FormFillingManageAction,
+  StartFillingMode,
+} from "@docspace/shared/enums";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import { FolderType } from "@docspace/ui-kit/enums";
+import type { Nullable } from "@docspace/shared/types";
 import { IS_DESKTOP_EDITOR } from "@/utils/constants";
 
 import { isMobile } from "react-device-detect";
@@ -69,14 +95,17 @@ import {
   setDocumentTitle,
 } from "@/utils";
 
-import {
+import type {
   TCatchError,
   TDocEditor,
   TEvent,
   THistoryData,
   UseEventsProps,
+  TEditorAIEvent,
 } from "@/types";
 import { onSDKInfo } from "@/utils/events";
+import externalAIFetch, { abortAllRequests } from "@/utils/aiProxy";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 let docEditor: TDocEditor | null = null;
 
@@ -92,9 +121,11 @@ const useEditorEvents = ({
   sdkConfig,
   organizationName,
   shareKey,
+  generationToolCallState,
   setFillingStatusDialogVisible,
   openShareFormDialog,
-  onStartFillingVDRPanel,
+  onOpenRoleMappingPanel,
+  disconnectUsers,
 }: UseEventsProps) => {
   const searchParams = useSearchParams();
 
@@ -234,11 +265,11 @@ const useEditorEvents = ({
     }
   }, [config?.Error, errorMessage, isSkipError, searchParams, t, fixSize]);
 
-  const onDocumentReady = React.useCallback(() => {
-    // console.log("onDocumentReady", { docEditor });
+  const onDocumentReady = React.useCallback(async () => {
     setDocumentReady(true);
 
     frameCallCommand("setIsLoaded");
+
     checkAndRequestRoles();
 
     frameCallEvent({
@@ -248,19 +279,121 @@ const useEditorEvents = ({
 
     if (config?.errorMessage) docEditor?.showMessage?.(config.errorMessage);
 
-    // if (config?.file?.canShare) {
-    //   loadUsersRightsList(docEditor);
-    // }
+    const connector = docEditor?.createConnector?.();
 
+    if (connector && successAuth) {
+      try {
+        const defaultPortalProvider = (await getDefaultProvider()) as
+          | TDefaultProvider
+          | undefined;
+
+        if (defaultPortalProvider) {
+          const DEFAULT_MODEL = "gpt-5.2";
+          let provider: TAiProvider | undefined;
+          let model = defaultPortalProvider.defaultModel || DEFAULT_MODEL;
+
+          if (defaultPortalProvider.providerId === -1) {
+            provider = {
+              id: defaultPortalProvider.providerId,
+              title: defaultPortalProvider.providerTitle,
+            } as TAiProvider;
+          } else {
+            const providers = await getProviders();
+
+            provider = providers.find(
+              (p: TAiProvider) =>
+                p.id === defaultPortalProvider?.providerId && !p.needReset,
+            );
+
+            if (provider) {
+              const models = await getModels(provider.id);
+              provider.title = `${getBrandName("ProductName")} [${provider.title}]`;
+              model = models[0]?.modelId || model;
+            }
+          }
+
+          if (provider) {
+            const providerTitle = provider.title;
+            const modelName = `${providerTitle} [${model}]`;
+            const providerId = provider.id;
+
+            const sendProviders = () => {
+              connector.sendEvent("ai_onCustomProviders", [
+                { name: providerTitle },
+              ]);
+
+              connector.sendEvent("ai_onCustomInit", {
+                settingsLock: undefined,
+                actionsOverride: true,
+                actions: {
+                  Chat: { model },
+                  Summarization: { model },
+                  Translation: { model },
+                  TextAnalyze: { model },
+                },
+                models: [
+                  {
+                    capabilities: 255,
+                    provider: providerTitle,
+                    name: modelName,
+                    id: model,
+                  },
+                ],
+              });
+
+              if (generationToolCallState) {
+                connector.sendEvent("ai_onCallTool", {
+                  name: generationToolCallState.toolName,
+                  arguments: {
+                    ...generationToolCallState.parameters,
+                  },
+                });
+
+                const url = new URL(window.location.href);
+                url.searchParams.delete("withTool");
+                window.history.replaceState(null, "", url.toString());
+              }
+            };
+
+            connector.executeMethod("AI", [{ type: "Actions" }], (data) => {
+              if (
+                data &&
+                typeof data === "object" &&
+                "error" in data &&
+                data.error
+              ) {
+                connector.attachEvent("ai_onInit", sendProviders);
+              } else {
+                sendProviders();
+              }
+            });
+
+            connector.attachEvent("ai_onExternalFetch", (e: unknown) =>
+              externalAIFetch(connector, e as TEditorAIEvent, providerId),
+            );
+          }
+        }
+      } catch (error) {
+        console.error("Failed to initialize AI provider:", error);
+      }
+    }
+
+    // Do not remove: it's for Back button on Mobile App
     if (docEditor) {
-      // console.log("call assign for asc files editor doceditor");
       assign(
         window as unknown as { [key: string]: object },
         ["ASC", "Files", "Editor", "docEditor"],
         docEditor,
-      ); // Do not remove: it's for Back button on Mobile App
+      );
     }
-  }, [config?.errorMessage, sdkConfig?.frameId, checkAndRequestRoles]);
+  }, [
+    config?.errorMessage,
+    sdkConfig?.frameId,
+    checkAndRequestRoles,
+    t,
+    successAuth,
+    generationToolCallState,
+  ]);
 
   const onUserActionRequired = React.useCallback(() => {
     frameCallCommand("setIsLoaded");
@@ -751,6 +884,13 @@ const useEditorEvents = ({
     };
   }, [onOrientationChange]);
 
+  React.useEffect(() => {
+    return () => {
+      abortAllRequests();
+      docEditor = null;
+    };
+  }, []);
+
   const onSubmit = useCallback(() => {
     const origin = window.location.origin;
 
@@ -799,26 +939,33 @@ const useEditorEvents = ({
 
   const onRequestStartFilling = useCallback(
     (event: object) => {
-      switch (config?.startFillingMode) {
-        case StartFillingMode.ShareToFillOut:
-          openShareFormDialog?.();
-          break;
-
-        case StartFillingMode.StartFilling:
+      match(config?.startFillingMode)
+        .with(StartFillingMode.ShareToFillOut, () => openShareFormDialog?.())
+        .with(StartFillingMode.StartFilling, () => {
           if (
             typeof event === "object" &&
             event !== null &&
             "data" in event &&
             isFormRole(event.data)
-          ) {
-            onStartFillingVDRPanel?.(event.data);
-          }
-          break;
-        default:
-          break;
-      }
+          )
+            onOpenRoleMappingPanel?.(event.data);
+        })
+        .with(StartFillingMode.StartFillingRoomForm, async () => {
+          await manageFormFilling(fileInfo!.id, FormFillingManageAction.Start);
+
+          await disconnectUsers?.();
+
+          sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(fileInfo));
+
+          const url = new URL(`${window.location.origin}/rooms/shared/filter`);
+          url.searchParams.set("folder", fileInfo!.folderId.toString());
+          window.location.replace(url.toString());
+        })
+        .otherwise(() => {
+          console.error("Unknown start filling mode");
+        });
     },
-    [config?.startFillingMode, openShareFormDialog, onStartFillingVDRPanel],
+    [config?.startFillingMode, openShareFormDialog, onOpenRoleMappingPanel],
   );
 
   const onRequestRefreshFile = React.useCallback(async () => {
@@ -849,7 +996,11 @@ const useEditorEvents = ({
       onSDKInfo(e);
 
       // Add to recently viewed files in any mode (read or edit)
-      if (successAuth && fileInfo?.id) {
+      if (
+        successAuth &&
+        fileInfo?.id &&
+        fileInfo?.rootFolderType !== FolderType.DefaultTemplates
+      ) {
         addFileToRecentlyViewed(fileInfo.id);
       }
     },

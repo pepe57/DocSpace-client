@@ -1,76 +1,77 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 "use client";
 
 import React from "react";
 import { decode } from "he";
 import Link from "next/link";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 
 import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg";
 import DownloadIconUrl from "PUBLIC_DIR/images/icons/16/download.react.svg?url";
 import LinkIconUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import MailIcon from "PUBLIC_DIR/images/icons/12/mail.svg";
 
-import { toastr } from "@docspace/shared/components/toast";
-import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
+import { useTheme } from "@docspace/ui-kit/context/ThemeContext";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { classNames, mobile, mobileMore } from "@docspace/shared/utils";
-import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
-import { IconButton } from "@docspace/shared/components/icon-button";
+import { mobile, mobileMore } from "@docspace/shared/utils";
+import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
 import { copyShareLink } from "@docspace/shared/utils/copy";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/ui-kit/components/scrollbar";
 
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
-} from "@docspace/shared/components/avatar";
+} from "@docspace/ui-kit/components/avatar";
 
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
-
-import {
-  CompletedFormLayout,
-  ButtonWrapper,
-  TextWrapper,
-  Box,
-  FormNumberWrapper,
-  ManagerWrapper,
-  MainContent,
-  ContainerCompletedForm,
-} from "./CompletedForm.styled";
 
 import type { CompletedFormProps } from "./CompletedForm.types";
 import { getFolderUrl } from "./CompletedForm.helper";
 import { CompletedFormEmpty } from "./CompletedForm.empty";
+
+import styles from "./completed-form.module.scss";
 
 const BIG_FORM_NUMBER = 9_999_999;
 
@@ -80,15 +81,15 @@ export const CompletedForm = ({
   isShareFile,
   isSDK,
 }: CompletedFormProps) => {
-  const theme = useTheme();
+  const { isBase, currentColorScheme } = useTheme();
   const { t } = useTranslation(["CompletedForm", "Common"]);
 
   useUpdateSearchParamId(session?.response.originalForm.id.toString());
 
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
-  const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !isBase);
+  const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !isBase);
 
-  const bgPattern = getBgPattern(theme.currentColorScheme?.id);
+  const bgPattern = getBgPattern(currentColorScheme?.id);
 
   if (!session) return <CompletedFormEmpty />;
 
@@ -134,16 +135,24 @@ export const CompletedForm = ({
     ...(isShareFile ? { is_file: "true" } : {}),
   });
 
+  const bgBlockStyle = {
+    "--bg-pattern": bgPattern,
+  } as React.CSSProperties;
+
   return (
-    <ContainerCompletedForm bgPattern={bgPattern}>
+    <section
+      className={styles.container}
+      style={bgBlockStyle}
+      data-testid="completed_form_container"
+    >
       <Scrollbar fixedSize>
-        <CompletedFormLayout>
+        <div className={styles.completedFormLayout}>
           <picture className="completed-form__logo">
             <source media={mobile} srcSet={smallLogoUrl} />
             <source media={mobileMore} srcSet={logoUrl} />
             <img src={logoUrl} alt="logo" />
           </picture>
-          <TextWrapper>
+          <section className={styles.textWrapper}>
             <Heading level={HeadingLevel.h1}>
               {t("CompletedForm:FormCompletedSuccessfully")}
             </Heading>
@@ -152,9 +161,14 @@ export const CompletedForm = ({
                 ? t("CompletedForm:DescriptionForAnonymous")
                 : t("CompletedForm:DescriptionForRegisteredUser")}
             </Text>
-          </TextWrapper>
-          <MainContent>
-            <Box className="completed-form__file">
+          </section>
+          <main className={styles.mainContent}>
+            <div
+              className={classNames(
+                styles.completedFormBox,
+                "completed-form__file",
+              )}
+            >
               <PDFIcon />
               <Heading
                 className="completed-form__filename"
@@ -173,10 +187,10 @@ export const CompletedForm = ({
                     : "copy_link_icon_button"
                 }
               />
-            </Box>
-            <FormNumberWrapper>
+            </div>
+            <div className={styles.formNumberWrapper}>
               <span className="label">{t("CompletedForm:FormNumber")}</span>
-              <Box>
+              <div className={styles.completedFormBox}>
                 <Text
                   className={classNames("completed-form__form-number", {
                     "form-number--big": formNumber > BIG_FORM_NUMBER,
@@ -184,32 +198,41 @@ export const CompletedForm = ({
                 >
                   {formNumber}
                 </Text>
-              </Box>
-            </FormNumberWrapper>
-            <ManagerWrapper>
-              <span className="label">{t("CompletedForm:FormOwner")}</span>
-              <Box>
-                <Avatar
-                  className="manager__avatar"
-                  size={AvatarSize.medium}
-                  role={AvatarRole.manager}
-                  source={manager.avatar}
-                />
-                <Heading level={HeadingLevel.h3} className="manager__user-name">
-                  {decode(manager.displayName)}
-                </Heading>
-                <Link
-                  className="manager__mail link"
-                  href={`mailto:${manager.email}`}
-                  data-testid="manager_email_link"
-                >
-                  <MailIcon />
-                  <span>{manager.email}</span>
-                </Link>
-              </Box>
-            </ManagerWrapper>
-          </MainContent>
-          <ButtonWrapper isShareFile={isShareFile ? !isRoomMember : false}>
+              </div>
+            </div>
+            {manager ? (
+              <div className={styles.managerWrapper}>
+                <span className="label">{t("CompletedForm:FormOwner")}</span>
+                <div className={styles.completedFormBox}>
+                  <Avatar
+                    className="manager__avatar"
+                    size={AvatarSize.medium}
+                    role={AvatarRole.manager}
+                    source={manager.avatar}
+                  />
+                  <Heading
+                    level={HeadingLevel.h3}
+                    className="manager__user-name"
+                  >
+                    {decode(manager.displayName)}
+                  </Heading>
+                  <Link
+                    className="manager__mail link"
+                    href={`mailto:${manager.email}`}
+                    data-testid="manager_email_link"
+                  >
+                    <MailIcon />
+                    <span>{manager.email}</span>
+                  </Link>
+                </div>
+              </div>
+            ) : null}
+          </main>
+          <footer
+            className={classNames(styles.buttonWrapper, {
+              [styles.shareFile]: isShareFile ? !isRoomMember : false,
+            })}
+          >
             <Button
               scale
               primary
@@ -235,7 +258,7 @@ export const CompletedForm = ({
                 testId="back_to_room_button"
               />
             ) : null}
-          </ButtonWrapper>
+          </footer>
           <Link
             className="link"
             href={`/?${fillAgainSearchParams.toString()}`}
@@ -244,8 +267,8 @@ export const CompletedForm = ({
           >
             {t("CompletedForm:FillItOutAgain")}
           </Link>
-        </CompletedFormLayout>
+        </div>
       </Scrollbar>
-    </ContainerCompletedForm>
+    </section>
   );
 };

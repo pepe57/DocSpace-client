@@ -1,36 +1,44 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
-
-import { injectDefaultTheme, isMobile, mobile } from "@docspace/shared/utils";
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Aside } from "@docspace/shared/components/aside";
+import classNames from "classnames";
+import { isMobile } from "@docspace/shared/utils";
+import { Backdrop } from "@docspace/ui-kit/components/backdrop";
+import { Aside } from "@docspace/ui-kit/components/aside";
 
 import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router";
@@ -44,41 +52,7 @@ import { isPublicPreview } from "@docspace/shared/utils/common";
 import HeaderUnAuth from "./sub-components/header-unauth";
 import HeaderNav from "./sub-components/header-nav";
 import Header from "./sub-components/header";
-
-const StyledContainer = styled.header.attrs(injectDefaultTheme)`
-  height: ${(props) => props.theme.header.height};
-  position: relative;
-  align-items: center;
-  background-color: ${(props) => props.theme.header.backgroundColor};
-
-  ${(props) =>
-    !props.isLoaded
-      ? css`
-          @media ${mobile} {
-            width: 100vw; // fixes space between header loader and screen edge
-          }
-        `
-      : css`
-          @media ${mobile} {
-            .navMenuHeader,
-            .profileMenuIcon,
-            .navMenuHeaderUnAuth {
-              position: absolute;
-              z-index: 160;
-              top: 0;
-              // top: ${({ isVisible }) => (isVisible ? "0" : "-48px")};
-
-              transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-              -moz-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-              -ms-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-              -webkit-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-              -o-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-            }
-
-            width: 100vw;
-          }
-        `}
-`;
+import styles from "./nav.module.scss";
 
 const NavMenu = (props) => {
   const {
@@ -101,16 +75,69 @@ const NavMenu = (props) => {
   } = props;
 
   const timeout = React.useRef(null);
+  const scrollTopRef = React.useRef(0);
 
   const location = useLocation();
 
-  const [isBackdropVisible, setIsBackdropVisible] = React.useState(
+  const [isBackdropVisible, setIsBackdropVisible] = useState(
     isBackdropVisibleProp,
   );
-  const [isNavOpened, setIsNavOpened] = React.useState(isNavHoverEnabledProp);
-  const [isAsideVisible, setIsAsideVisible] = React.useState(isNavOpenedProp);
-  const [isNavHoverEnabled, setIsNavHoverEnabled] =
-    React.useState(isAsideVisibleProp);
+  const [isNavOpened, setIsNavOpened] = useState(isNavOpenedProp);
+  const [isAsideVisible, setIsAsideVisible] = useState(isAsideVisibleProp);
+  const [isNavHoverEnabled, setIsNavHoverEnabled] = useState(
+    isNavHoverEnabledProp,
+  );
+  const [isFixed, setIsFixed] = useState(true);
+
+  const onScroll = useCallback((e) => {
+    const eventTarget = e.target;
+    const currentScrollTop = Math.max(0, eventTarget.scrollTop);
+    const scrollHeight = eventTarget.scrollHeight;
+    const clientHeight = eventTarget.clientHeight;
+
+    const scrollShift = scrollTopRef.current - currentScrollTop;
+    scrollTopRef.current = currentScrollTop;
+
+    const isNearBottom = scrollHeight - (currentScrollTop + clientHeight) < 100;
+
+    const isAtTop = currentScrollTop < 20;
+
+    if (isAtTop) {
+      setIsFixed(false);
+    } else if (scrollShift > 0 && !isNearBottom) {
+      setIsFixed(true);
+    } else if (scrollShift <= 0) {
+      setIsFixed(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const scroll = isMobile()
+      ? document.querySelector("#customScrollBar .scroll-wrapper > .scroller")
+      : document.querySelector("#sectionScroll .scroll-wrapper > .scroller");
+    scroll?.addEventListener("scroll", onScroll);
+
+    return () => {
+      scroll?.removeEventListener("scroll", onScroll);
+    };
+  }, [onScroll]);
+
+  useEffect(() => {
+    if (isFixed) {
+      document.documentElement.style.setProperty("--nav-offset", "48px");
+    } else {
+      document.documentElement.style.removeProperty("--nav-offset");
+    }
+
+    return () => {
+      document.documentElement.style.removeProperty("--nav-offset");
+    };
+  }, [isFixed]);
+
+  useEffect(() => {
+    setIsFixed(false);
+    scrollTopRef.current = 0;
+  }, [location.pathname]);
 
   const backdropClick = () => {
     setIsBackdropVisible(false);
@@ -166,7 +193,11 @@ const NavMenu = (props) => {
   const isPreparationPortal = location.pathname === "/preparation-portal";
 
   return (
-    <StyledContainer isLoaded={isLoaded}>
+    <header
+      className={classNames(styles.header, {
+        [styles.isFixed]: isFixed,
+      })}
+    >
       <Backdrop
         visible={isBackdropVisible}
         onClick={backdropClick}
@@ -203,7 +234,7 @@ const NavMenu = (props) => {
           {asideContent}
         </Aside>
       ) : null}
-    </StyledContainer>
+    </header>
   );
 };
 

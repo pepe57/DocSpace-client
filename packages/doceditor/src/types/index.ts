@@ -1,55 +1,64 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import {
   TFile,
-  TFileSecurity,
   TFilesSettings,
-  TFolder,
-  TFolderSecurity,
   TGetReferenceData,
   TGetReferenceDataRequest,
   TSharedUsers,
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
-import {
-  HeaderProps,
-  TBreadCrumb,
-} from "@docspace/shared/components/selector/Selector.types";
-import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
+import { HeaderProps, TBreadCrumb } from "@docspace/ui-kit/components/selector";
+import type {
+  TSelectedFileInfo,
+  FilesSettingsDto,
+  FolderDtoInteger,
+  SdkFolderType,
+  FileEntryDtoIntegerAllOfSecurity,
+} from "@docspace/ui-kit/selectors/Files/FilesSelector.types";
 import type {
   ConflictResolveType,
   FilesSelectorFilterTypes,
-  RoomsType,
+  FolderType,
   StartFillingMode,
 } from "@docspace/shared/enums";
-import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 import { TFrameConfig } from "@docspace/shared/types/Frame";
+import type { RoomsType } from "@docspace/ui-kit/enums";
 
 export type TGoBack = {
   requestClose: boolean;
@@ -69,8 +78,14 @@ export type SdkSearchParams = {
   locale?: string | null | undefined;
   theme?: string | undefined;
   editorGoBack?: boolean | "event";
+  withoutGoBackText?: boolean;
   is_file?: boolean;
   isSDK?: boolean;
+};
+
+export type TGenerationToolCallState = {
+  toolName: string;
+  parameters: Record<string, string>;
 };
 
 export type RootPageProps = {
@@ -84,6 +99,7 @@ export type RootPageProps = {
       share: string;
       editorType: string;
       error?: string;
+      withTool?: string;
     }> &
       SdkSearchParams
   >;
@@ -213,6 +229,7 @@ export interface IInitialConfig {
   startFillingMode?: StartFillingMode;
   fillingSessionId?: string;
   fillingStatus?: boolean;
+  quotaExceededScope?: number;
 }
 
 export type TError = {
@@ -237,6 +254,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+
+      generationToolCallState?: TGenerationToolCallState;
     }
   | {
       error: TError;
@@ -252,6 +271,8 @@ export type TResponse =
       shareKey?: string;
       deepLinkSettings?: number;
       baseSdkConfig?: TFrameConfig;
+
+      generationToolCallState?: TGenerationToolCallState;
     };
 
 export type EditorProps = {
@@ -269,6 +290,8 @@ export type EditorProps = {
   organizationName?: string;
   shareKey?: string;
 
+  generationToolCallState?: TGenerationToolCallState;
+
   onDownloadAs?: (obj: object) => void;
   openShareFormDialog?: () => void;
   onSDKRequestSharingSettings?: () => void;
@@ -277,8 +300,9 @@ export type EditorProps = {
   onSDKRequestSelectSpreadsheet?: (event: object) => void;
   onSDKRequestSelectDocument?: (event: object) => void;
   onSDKRequestReferenceSource?: (event: object) => void;
-  onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
+  onOpenRoleMappingPanel?: (roles: TFormRole[]) => void;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
+  disconnectUsers?: () => Promise<void>;
   onStartFilling?: VoidFunction;
 };
 
@@ -315,9 +339,7 @@ export interface SelectFolderDialogProps {
     selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
-      | TFileSecurity
-      | TFolderSecurity
-      | TRoomSecurity
+      | FileEntryDtoIntegerAllOfSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
     isDisabledFolder?: boolean,
@@ -332,11 +354,13 @@ export interface SelectFolderDialogProps {
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
-    selectedTreeNode: TFolder,
+    selectedTreeNode: FolderDtoInteger,
     selectedFileInfo: TSelectedFileInfo,
-  ) => Promise<void>;
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
+  ) => void | Promise<void>;
   fileInfo: TFile;
-  filesSettings: TFilesSettings;
+  filesSettings: FilesSettingsDto;
   fileSaveAsExtension?: string;
   selectedFolderId?: string | number;
 }
@@ -354,11 +378,12 @@ export interface SelectFileDialogProps {
     selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
-      | TFileSecurity
-      | TFolderSecurity
-      | TRoomSecurity
+      | FileEntryDtoIntegerAllOfSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
+    isDisabledFolder?: boolean,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
   ) => boolean;
   isVisible: boolean;
   onClose: () => void;
@@ -369,11 +394,13 @@ export interface SelectFileDialogProps {
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
-    selectedTreeNode: TFolder,
+    selectedTreeNode: FolderDtoInteger,
     selectedFileInfo: TSelectedFileInfo,
-  ) => Promise<void>;
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
+  ) => void | Promise<void>;
   fileInfo: TFile;
-  filesSettings: TFilesSettings;
+  filesSettings: FilesSettingsDto;
   selectedFolderId?: string | number;
 }
 
@@ -382,6 +409,8 @@ export interface UseSocketHelperProps {
   user?: TUser;
   shareKey?: string;
   standalone?: boolean;
+  folderId?: string | number;
+  folderType?: FolderType;
 }
 
 export interface UseEventsProps {
@@ -398,9 +427,11 @@ export interface UseEventsProps {
   sdkConfig?: TFrameConfig | null;
   organizationName: string;
   shareKey?: string;
+  generationToolCallState?: TGenerationToolCallState;
   setFillingStatusDialogVisible?: React.Dispatch<React.SetStateAction<boolean>>;
   openShareFormDialog?: VoidFunction;
-  onStartFillingVDRPanel?: (roles: TFormRole[]) => void;
+  onOpenRoleMappingPanel?: (roles: TFormRole[]) => void;
+  disconnectUsers?: () => Promise<void>;
 }
 
 export interface UseInitProps {
@@ -413,6 +444,7 @@ export interface UseInitProps {
   setDocTitle: (value: string) => void;
   documentReady: boolean;
   organizationName: string;
+  generationToolCallState?: TGenerationToolCallState;
 }
 
 export type THistoryData =
@@ -441,9 +473,20 @@ export type TDocEditor = {
   setHistoryData?: (obj: THistoryData) => void;
   setActionLink: (link: string) => void;
   setUsers?: ({ c, users }: { c: string; users: TSharedUsers[] }) => void;
-  startFilling?: VoidFunction;
+  startFilling?: (start?: boolean) => void;
   requestRoles?: VoidFunction;
   setFavorite?: (favorite: boolean) => void;
+  createConnector?: () => TEditorConnector;
+};
+
+export type TEditorConnector = {
+  attachEvent: (id: string, action: (...args: unknown[]) => void) => void;
+  sendEvent: (name: string, data?: string | object | unknown[]) => void;
+  executeMethod: (
+    name: string,
+    params: object[],
+    callback: (response: object | { error: string }) => void,
+  ) => void;
 };
 
 export type TCatchError =
@@ -475,11 +518,12 @@ export type StartFillingSelectorDialogProps = {
     selectedItemType: "rooms" | "files" | "agents" | undefined,
     isRoot: boolean,
     selectedItemSecurity:
-      | TFileSecurity
-      | TFolderSecurity
-      | TRoomSecurity
+      | FileEntryDtoIntegerAllOfSecurity
       | undefined,
     selectedFileInfo: TSelectedFileInfo,
+    isDisabledFolder?: boolean,
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
   ) => boolean;
 
   onSubmit: (
@@ -489,11 +533,13 @@ export type StartFillingSelectorDialogProps = {
     breadCrumbs: TBreadCrumb[],
     fileName: string,
     isChecked: boolean,
-    selectedTreeNode: TFolder,
+    selectedTreeNode: FolderDtoInteger,
     selectedFileInfo: TSelectedFileInfo,
-  ) => Promise<void>;
+    isInsideKnowledge?: boolean,
+    isInsideResultStorage?: boolean,
+  ) => void | Promise<void>;
 
-  filesSettings: TFilesSettings;
+  filesSettings: FilesSettingsDto;
   createDefineRoomType: RoomsType;
 };
 
@@ -510,4 +556,12 @@ export type ConflictStateType = {
 export type TFormRole = {
   name: string;
   color: string;
+};
+
+export type TEditorAIEvent = {
+  id: string;
+  type: string;
+  url: string;
+  streaming: boolean;
+  options: RequestInit & { headers: Record<string, string> };
 };

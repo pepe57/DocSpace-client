@@ -3,6 +3,16 @@
   "problemMatcher": [],
   "tasks": [
     {
+      "label": "separator",
+      "type": "shell",
+      "command": "echo",
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "close": true
+      }
+    },
+    {
       "label": "Build DocEditor Translations",
       "type": "shell",
       "command": "node ./scripts/buildTranslations.js",
@@ -16,8 +26,8 @@
       }
     },
     {
-      "label": "Backend | build CE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py",
+      "label": "Backend | run CE (Aspire)",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -31,8 +41,13 @@
       }
     },
     {
-      "label": "Backend | run CE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -n",
+      "label": "Backend | run CE - full (Aspire)",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development",
+      "options": {
+        "env": {
+          "SKIP_CLIENT": "true"
+        }
+      },
       "type": "shell",
       "group": {
         "kind": "build",
@@ -46,8 +61,90 @@
       }
     },
     {
-      "label": "Backend | build EE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -e enterprise",
+      "label": "Backend | run EE (Aspire)",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev",
+      "type": "shell",
+      "options": {
+        "env": {
+          "APP_EDITION": "enterprise"
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | run EE - full (Aspire)",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development",
+      "type": "shell",
+      "options": {
+        "env": {
+          "APP_EDITION": "enterprise",
+          "SKIP_CLIENT": "true"
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | run DE (Aspire)",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev",
+      "type": "shell",
+      "options": {
+        "env": {
+          "APP_EDITION": "developer"
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | run DE - full (Aspire)",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; SKIP_CLIENT=true dotnet run --launch-profile development",
+      "type": "shell",
+      "options": {
+        "env": {
+          "APP_EDITION": "developer",
+          "SKIP_CLIENT": "true"
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Backend | run SAAS (Aspire)",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile frontend-dev --APP_HOSTING_STANDALONE false",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -61,9 +158,15 @@
       }
     },
     {
-      "label": "Backend | run EE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -n -e enterprise",
+      "label": "Backend | run SAAS - full (Aspire)",
+      "command": "cd ${workspaceFolder}/../server/common/ASC.AppHost ; dotnet run --launch-profile development --APP_HOSTING_STANDALONE false",
       "type": "shell",
+      "options": {
+        "env": {
+          "APP_EDITION": "developer",
+          "SKIP_CLIENT": "true"
+        }
+      },
       "group": {
         "kind": "build",
         "isDefault": true
@@ -76,263 +179,11 @@
       }
     },
     {
-      "label": "Backend | rebuild EE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -f -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
+      "label": "Backend | clear Aspire (Docker)",
+      "command": "docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker stop && docker ps -a --format '{{.Names}}' | grep -E 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' | xargs -r docker rm && docker volume prune -f && docker network prune -f",
+      "windows": {
+        "command": "$c = docker ps -a --format '{{.Names}}' | Where-Object { $_ -match 'mysql|redis|cache-|rabbitmq|messaging-|opensearch|mailpit|dbgate|redisinsight|onlyoffice-|openresty' }; if ($c) { $c | ForEach-Object { docker stop $_ }; $c | ForEach-Object { docker rm $_ } }; docker volume prune -f; docker network prune -f"
       },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build EE + dnsmasq",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build EE + identity",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -i -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build EE + dnsmasq + identity",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d -i -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build DE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -e developer",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | run DE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -n -e developer",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | rebuild DE",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -f -e developer",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build DE + dnsmasq",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d -e developer",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build DE + identity",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -i -e developer",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build DE + dnsmasq + identity",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -d -i -e developer",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build SAAS + dnsmasq",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | run SAAS + dnsmasq",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -n -s -d -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | build SAAS + dnsmasq + identity",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d -i -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | rebuild SAAS + dnsmasq",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/build.backend.docker.py -s -d -f -e enterprise",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | clear",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/clear.backend.docker.py",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | stop",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/start/stop.backend.docker.py",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | restart",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/start/restart.backend.docker.py",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
-      }
-    },
-    {
-      "label": "Backend | start",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/start/start.backend.docker.py",
       "type": "shell",
       "group": {
         "kind": "build",
@@ -364,6 +215,66 @@
       "label": "Frontend | update pnpm-lock.yaml",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run wipe ; pnpm install",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | update ui-kit lock",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run update-ui-kit-lock",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | update translation-app lock",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run update-translation-app-lock",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | update all lock files",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run wipe ; pnpm install ; pnpm run update-ui-kit-lock ; pnpm run update-translation-app-lock",
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | update deps",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm update --recursive",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -436,6 +347,21 @@
       }
     },
     {
+      "label": "Frontend | start:sdk",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run start:sdk",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | start-prod",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run start-prod",
@@ -466,9 +392,54 @@
       }
     },
     {
+      "label": "Frontend | start-prod:sdk",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run start-prod:sdk",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Frontend | deploy",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm run deploy",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | deploy run",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/../publish/web ; trap 'kill 0' EXIT ; (cd login && node server.js) & (cd editor && node server.js) & (cd management && node server.js) & (cd sdk && node server.js) & npx serve client -s -l 5001",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Frontend | storybook (ui-kit)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm run storybook",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -541,6 +512,21 @@
       }
     },
     {
+      "label": "Test | Jest:translations:clear-wrong",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; CLEAR_WRONG_VALUES=true FIX_MOVED_KEYS=true npm run test:locales ; npm run open-report",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Jest:images",
       "type": "shell",
       "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:images ; npm run open-report",
@@ -601,9 +587,294 @@
       }
     },
     {
+      "label": "Test | Jest:dependencies:audit",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm audit --audit-level=moderate",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Jest:licenses:audit",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; pnpm run licenses-audit",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Jest:unit",
       "type": "shell",
       "command": "cd ${workspaceFolder} ; pnpm test",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Jest:unit:ui-kit",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/libs/ui-kit ; pnpm test",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Build",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; docker compose -f docker/e2e/compose.yaml build e2e-tests",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Run",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; docker compose -f docker/e2e/compose.yaml run --rm -e RUN_CLIENT=true -e RUN_LOGIN=true -e RUN_DOCEDITOR=true -e RUN_SDK=true -e RUN_MANAGEMENT=true -e WORKERS=5 e2e-tests",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Show Report (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Show Report (login)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm exec playwright show-report --port 9326 ${workspaceFolder}/playwright-report/login",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Show Report (doceditor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm exec playwright show-report --port 9327 ${workspaceFolder}/playwright-report/doceditor",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Show Report (sdk)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm exec playwright show-report --port 9328 ${workspaceFolder}/playwright-report/sdk",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Show Report (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm exec playwright show-report --port 9329 ${workspaceFolder}/playwright-report/management",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | E2E All - Clear",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; docker compose -f docker/e2e/compose.yaml down --volumes --remove-orphans --rmi all",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e run ui (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:ui",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker build (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker start (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker update-screenshots (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/client",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev update-screenshots (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:dev:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker clear (client)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/client ; pnpm test:e2e:docker:clear",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e run ui (login)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:ui",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -646,9 +917,69 @@
       }
     },
     {
+      "label": "Test | Test e2e docker update-screenshots (login)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev (login)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9325 ${workspaceFolder}/playwright-report/login",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev update-screenshots (login)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:dev:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Test e2e docker clear (login)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/login ; pnpm test:e2e:docker:clear",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e run ui (SDK)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:ui",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -691,9 +1022,264 @@
       }
     },
     {
+      "label": "Test | Test e2e docker update-screenshots (SDK)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev (SDK)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/sdk",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev update-screenshots (SDK)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:dev:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
       "label": "Test | Test e2e docker clear (SDK)",
       "type": "shell",
       "command": "cd ${workspaceFolder}/packages/sdk ; pnpm test:e2e:docker:clear",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e run ui (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:ui",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker build (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker start (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/management",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker update-screenshots (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/management",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev update-screenshots (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:dev:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker clear (management)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/management ; pnpm test:e2e:docker:clear",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e run ui (editor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:ui",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker build (editor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker start (editor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:start ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/doceditor",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker update-screenshots (editor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev (editor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:dev ; pnpm exec playwright show-report --port 9324 ${workspaceFolder}/playwright-report/doceditor",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker dev update-screenshots (editor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:dev:update-screenshots",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e docker clear (editor)",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/packages/doceditor ; pnpm test:e2e:docker:clear",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -748,6 +1334,140 @@
         "panel": "new",
         "focus": true,
         "close": false
+      }
+    },
+    {
+      "label": "Utils | Update copyright year",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; node ./scripts/update-copyright-year.js",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Translation App | start",
+      "type": "shell",
+      "command": "bash '${workspaceFolder}/common/translation-app/run.translation-app.sh'",
+      "windows": {
+        "command": "cmd /c '${workspaceFolder}\\common\\translation-app\\run.translation-app.bat'"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Translation App | start (skip meta)",
+      "type": "shell",
+      "command": "bash '${workspaceFolder}/common/translation-app/run.translation-app.sh' --skip-meta",
+      "windows": {
+        "command": "cmd /c '${workspaceFolder}\\common\\translation-app\\run.translation-app.bat' --skip-meta"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Screenshot Comparison | start",
+      "type": "shell",
+      "command": "bash '${workspaceFolder}/common/screenshot-comparison-app/run.screenshot-comparison.sh'",
+      "windows": {
+        "command": "cmd /c '${workspaceFolder}\\common\\screenshot-comparison-app\\run.screenshot-comparison.bat'"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Translation App | translation stats",
+      "type": "shell",
+      "command": "node '${workspaceFolder}/common/scripts/translation-stats.js'",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | translation stats (Markdown)",
+      "type": "shell",
+      "command": "node '${workspaceFolder}/common/scripts/translation-stats.js' --md='${workspaceFolder}/translation-stats.md'",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | verify translations (no LLM)",
+      "type": "shell",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && node src/scripts/verify-translations-spell-check.js --no-llm",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | verify translations (LLM)",
+      "type": "shell",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && node src/scripts/verify-translations-spell-check.js",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | verify translations (LLM + recheck)",
+      "type": "shell",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && node src/scripts/verify-translations-spell-check.js --recheck",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | clear meta issues",
+      "type": "shell",
+      "command": "cd '${workspaceFolder}/common/translation-app/backend' && npm run clear-meta-issues",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "focus": true
+      }
+    },
+    {
+      "label": "Translation App | update metadata",
+      "type": "shell",
+      "command": "node '${workspaceFolder}/common/scripts/clean-empty-locales.js' && cd '${workspaceFolder}/common/translation-app/backend' && npm install --silent && npm run generate-metadata && npm run save-meta-keys-usage && npm run generate-auto-comments-metadata",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true
       }
     }
   ]

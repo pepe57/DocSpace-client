@@ -1,53 +1,93 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React from "react";
+import { useNavigate } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
+import axios from "axios";
+import classNames from "classnames";
 
-import { Text } from "@docspace/shared/components/text";
-import type { TAiProvider, TModel } from "@docspace/shared/api/ai/types";
-import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
-import { getModels, getProviders } from "@docspace/shared/api/ai";
-import { toastr } from "@docspace/shared/components/toast";
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { Text } from "@docspace/ui-kit/components/text";
+import type {
+  TAIConfig,
+  TAiProvider,
+  TModel,
+} from "@docspace/shared/api/ai/types";
+import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
+import {
+  getDefaultProvider,
+  getModels,
+  getProviders,
+} from "@docspace/shared/api/ai";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { RectangleSkeleton } from "@docspace/ui-kit/components/rectangle";
 import type { TAgentParams } from "@docspace/shared/utils/aiAgents";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { RecomendedModel } from "@docspace/ui-kit/ai-agent/recomended-model";
 
 import { StyledParam } from "../../../CreateEditDialogParams/StyledParam";
 import { modelCache } from "./modelCache";
+import { ProviderType } from "@docspace/shared/api/ai/enums";
 
 type ModelSettingsProps = {
   agentParams: TAgentParams;
+  systemAiEnabled?: TAIConfig["systemAiEnabled"];
+  recommendedModelForForms?: TAIConfig["recommendedModelForForms"];
+  isAdmin?: boolean;
+  openedFromChat?: boolean;
   setAgentParams: (value: Partial<TAgentParams>) => void;
 };
 
-const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
+const ModelSettings = ({
+  agentParams,
+  systemAiEnabled,
+  recommendedModelForForms,
+  isAdmin,
+  openedFromChat,
+  setAgentParams,
+}: ModelSettingsProps) => {
   const { t } = useTranslation(["AIRoom", "Common"]);
+  const navigate = useNavigate();
+
+  const onOpenSettings = React.useCallback(() => {
+    navigate("/portal-settings/ai-settings/providers");
+  }, [navigate]);
 
   const [providers, setProviders] = React.useState<TAiProvider[]>([]);
   const [models, setModels] = React.useState<TModel[]>([]);
+  const [error, setError] = React.useState<string | null>(null);
 
   const [selectedProvider, setSelectedProvider] = React.useState<TAiProvider>({
     id: agentParams.providerId || -2,
@@ -56,19 +96,34 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     modelId: agentParams.modelId ?? "",
   } as TModel);
 
+  const initProviderIdRef = React.useRef<number | null>(
+    agentParams.providerId || null,
+  );
+  const initModelIdRef = React.useRef<string | null>(
+    agentParams.modelId || null,
+  );
+
   const [isProvidersLoading, setIsProvidersLoading] = React.useState(false);
   const [isProvidersFetched, setIsProvidersFetched] = React.useState(false);
+  const [isModelsLoading, setIsModelsLoading] = React.useState(false);
+  const [isModelsFetched, setIsModelsFetched] = React.useState(false);
+  const [hasProviderBeenSwitched, setHasProviderBeenSwitched] =
+    React.useState(false);
 
   const prevSelectedModel = React.useRef<TModel | null>(null);
 
   React.useEffect(() => {
+    const defaultProvider = modelCache.getDefaultProvider();
     const cachedProviders = modelCache.getProviders();
     if (cachedProviders) {
       setProviders(cachedProviders);
       setIsProvidersFetched(true);
 
       if (selectedProvider.id === -2) {
-        setSelectedProvider(cachedProviders[0]);
+        const preferredProvider = cachedProviders.find(
+          (pr) => pr.id === defaultProvider?.providerId,
+        );
+        setSelectedProvider(preferredProvider || cachedProviders[0]);
       } else {
         const provider = cachedProviders.find(
           (pr) => pr.id === selectedProvider.id,
@@ -85,15 +140,30 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       try {
         setIsProvidersLoading(true);
 
-        const p = await getProviders();
-        const enabledProviders = p.filter((pr) => !pr.needReset);
+        const [p, defaultProvider] = await Promise.all([
+          getProviders(),
+          getDefaultProvider(),
+        ]);
+
+        const enabledProviders = p
+          .filter((pr) => !pr.needReset)
+          .filter(
+            (pr) =>
+              pr.type !== ProviderType.PortalAi ||
+              (pr.type === ProviderType.PortalAi && systemAiEnabled),
+          );
         setProviders(enabledProviders);
         modelCache.setProviders(p);
+        modelCache.setDefaultProvider(defaultProvider);
+        modelCache.setAiServiceEnable(systemAiEnabled ?? false);
 
         setIsProvidersFetched(true);
 
         if (selectedProvider.id === -2) {
-          setSelectedProvider(enabledProviders[0]);
+          const preferredProvider = enabledProviders.find(
+            (pr) => pr.id === defaultProvider?.providerId,
+          );
+          setSelectedProvider(preferredProvider || enabledProviders[0]);
         } else {
           const provider = enabledProviders.find(
             (pr) => pr.id === selectedProvider.id,
@@ -110,10 +180,15 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
         toastr.error(e as string);
       } finally {
         setIsProvidersLoading(false);
+        setIsProvidersFetched(true);
       }
     };
 
-    if (modelCache.getProviders()) return;
+    if (
+      modelCache.getProviders() &&
+      systemAiEnabled === modelCache.isAiServiceEnable()
+    )
+      return;
 
     if (providers.length || isProvidersLoading || isProvidersFetched) return;
 
@@ -123,9 +198,12 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     providers.length,
     isProvidersLoading,
     isProvidersFetched,
+    systemAiEnabled,
   ]);
 
   React.useEffect(() => {
+    const defaultModel = modelCache.getDefaultProvider()?.defaultModel;
+
     const fetchModels = async () => {
       try {
         const m = await getModels(selectedProvider?.id);
@@ -136,17 +214,22 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
           const model = m.find((mo) => mo.modelId === selectedModel.modelId);
 
           if (!model) {
-            setSelectedModel(m[0]);
-
+            const preferredModel = m.find((mo) => mo.modelId === defaultModel);
+            setSelectedModel(preferredModel || m[0] || null);
             return;
           }
 
           setSelectedModel(model);
         } else {
-          setSelectedModel(m[0]);
+          const preferredModel = m.find((mo) => mo.modelId === defaultModel);
+          setSelectedModel(preferredModel || m[0] || null);
         }
       } catch (e) {
         toastr.error(e as string);
+
+        if (axios.isAxiosError(e)) {
+          setError(e.response?.data?.error?.message);
+        }
       }
     };
 
@@ -154,6 +237,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       return;
 
     const cachedModels = modelCache.getModels(selectedProvider.id);
+
     if (cachedModels) {
       setModels(cachedModels);
 
@@ -164,16 +248,34 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
         if (model) {
           setSelectedModel(model);
         } else {
-          setSelectedModel(cachedModels[0]);
+          setSelectedModel(cachedModels[0] ?? null);
         }
       } else {
-        setSelectedModel(cachedModels[0]);
+        const preferredModelId =
+          selectedProvider?.id === initProviderIdRef.current
+            ? initModelIdRef.current
+            : defaultModel;
+
+        const preferredModel =
+          cachedModels.find((mo) => mo.modelId === preferredModelId) ??
+          cachedModels[0] ??
+          null;
+
+        setSelectedModel(preferredModel);
       }
+
+      setIsModelsLoading(false);
+      setIsModelsFetched(true);
       return;
     }
 
     setSelectedModel(null);
-    fetchModels();
+    setIsModelsLoading(true);
+    setIsModelsFetched(false);
+    fetchModels().finally(() => {
+      setIsModelsLoading(false);
+      setIsModelsFetched(true);
+    });
   }, [selectedProvider?.id]);
 
   const providerOptions = React.useMemo(() => {
@@ -205,6 +307,10 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
 
       setSelectedProvider(provider);
       setSelectedModel(null);
+      setError(null);
+      setIsModelsLoading(true);
+      setIsModelsFetched(false);
+      setHasProviderBeenSwitched(true);
     },
     [providers, selectedProvider.id],
   );
@@ -213,7 +319,7 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     return models.map((model) => ({
       key: model.modelId,
       value: model.modelId,
-      label: model.name ?? model.modelId,
+      label: model.alias ?? model.modelId,
     }));
   }, [models]);
 
@@ -222,13 +328,13 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
       ? {
           key: selectedModel.modelId,
           value: selectedModel.modelId,
-          label: selectedModel.name ?? selectedModel.modelId,
+          label: selectedModel.alias ?? selectedModel.modelId,
         }
       : {
           key: "empty-selected-option",
-          label: "",
+          label: isModelsLoading ? "" : t("Common:NoModelsFound"),
         };
-  }, [selectedModel]);
+  }, [selectedModel, isModelsLoading, t]);
 
   const onSelectModel = React.useCallback(
     (option: TOption) => {
@@ -241,14 +347,67 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     [models],
   );
 
+  const onSelectRecomendedModel = React.useCallback(async () => {
+    // Current provider is OpenRouter — pick the recommended model.
+    if (selectedProvider?.type === ProviderType.OpenRouter) {
+      const recomended = models.find(
+        (model) => model.modelId === recommendedModelForForms,
+      );
+
+      if (recomended) setSelectedModel(recomended);
+
+      return;
+    }
+
+    // Otherwise switch to the first available OpenRouter provider and select
+    // its recommended model (loading the model list if needed). Caching the
+    // models before switching lets the models effect keep our selection
+    // instead of falling back to the provider's default.
+    const openRouterProvider = providers.find(
+      (provider) => provider.type === ProviderType.OpenRouter,
+    );
+
+    if (!openRouterProvider || openRouterProvider.id === selectedProvider?.id)
+      return;
+
+    let providerModels = modelCache.getModels(openRouterProvider.id);
+
+    if (!providerModels) {
+      try {
+        providerModels = await getModels(openRouterProvider.id);
+        modelCache.setModels(openRouterProvider.id, providerModels);
+      } catch {
+        providerModels = [];
+      }
+    }
+
+    const recomended =
+      providerModels.find(
+        (model) => model.modelId === recommendedModelForForms,
+      ) ?? null;
+
+    setSelectedProvider(openRouterProvider);
+    setSelectedModel(recomended);
+    setError(null);
+    setHasProviderBeenSwitched(true);
+  }, [selectedProvider, providers, models, recommendedModelForForms]);
+
   React.useEffect(() => {
-    if (!selectedModel) return;
+    if (!selectedModel && !error) return;
+
+    if (!selectedModel && error) {
+      setAgentParams({
+        modelId: undefined,
+      });
+      prevSelectedModel.current = selectedModel;
+      return;
+    }
 
     const hasChanges =
       prevSelectedModel.current?.modelId !== selectedModel?.modelId ||
       prevSelectedModel.current?.providerId !== selectedModel?.providerId;
 
-    if (!hasChanges || typeof selectedModel.providerId !== "number") return;
+    if (!hasChanges || typeof selectedModel?.providerId !== "number") return;
 
     setAgentParams({
       modelId: selectedModel?.modelId,
@@ -256,14 +415,35 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
     });
 
     prevSelectedModel.current = selectedModel;
-  }, [selectedModel?.modelId, selectedModel?.providerId, setAgentParams]);
+  }, [selectedModel, setAgentParams, error]);
+
+  const isModelLoading =
+    isModelsLoading ||
+    (!isModelsFetched &&
+      !selectedModel?.modelId &&
+      !error &&
+      !hasProviderBeenSwitched);
+
+  const availableProviders = providers.map((provider) => provider.type);
+  const modelIds = models.map((model) => model.modelId);
+
+  // Show the recommendation banner only when the dialog was opened from the
+  // chat recommendation banner, and not until providers and models are loaded
+  // (otherwise it briefly flashes the wrong, not-available state).
+  const isRecomendationReady =
+    openedFromChat &&
+    isProvidersFetched &&
+    !isProvidersLoading &&
+    !isModelLoading;
 
   return (
     <StyledParam increaseGap>
       <div className=" set_room_params-info">
         <div>
           <Text fontSize="13px" lineHeight="20px" fontWeight={600} noSelect>
-            {t("Model")}
+            {t("AIProviderAndModel", {
+              aiProvider: t("Common:AIProvider"),
+            })}
           </Text>
           <Text
             fontSize="12px"
@@ -272,7 +452,9 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             className="set_room_params-info-description"
             noSelect
           >
-            {t("ModelDescription")}
+            {t("ModelDescription", {
+              aiProvider: t("Common:AIProvider"),
+            })}
           </Text>
           <Text
             fontSize="12px"
@@ -291,39 +473,66 @@ const ModelSettings = ({ agentParams, setAgentParams }: ModelSettingsProps) => {
             />
           </Text>
         </div>
+
+        {isRecomendationReady ? (
+          <RecomendedModel
+            isAdmin={!!isAdmin}
+            isChat={false}
+            selectedModel={selectedModel?.modelId ?? ""}
+            providerType={selectedProvider?.type}
+            availableProviders={availableProviders}
+            modelList={modelIds}
+            recomendedModel={recommendedModelForForms ?? ""}
+            onOpenSettings={onOpenSettings}
+            onSelectModel={onSelectRecomendedModel}
+          />
+        ) : null}
+
         {isProvidersLoading ? (
           <RectangleSkeleton width="100%" height="32px" />
         ) : (
-          <ComboBox
-            options={providerOptions}
-            selectedOption={providerSelectedOption}
-            onSelect={onSelectProvider}
-            scaled
-            scaledOptions
-            noBorder={false}
-            className="ai-combobox"
-            displaySelectedOption
-          />
+          <FieldContainer
+            isVertical
+            hasError={!!error}
+            errorMessage={error || ""}
+            errorMessageWidth="100%"
+            removeMargin
+          >
+            <ComboBox
+              options={providerOptions}
+              selectedOption={providerSelectedOption}
+              onSelect={onSelectProvider}
+              scaled
+              scaledOptions
+              dropDownMaxHeight={providerOptions.length > 7 ? 300 : undefined}
+              noBorder={false}
+              className={classNames("ai-combobox provider-combobox", {
+                "has-error": !!error,
+              })}
+              displaySelectedOption
+              dataTestId="create_agent_provider_combobox"
+            />
+          </FieldContainer>
         )}
-        {!selectedModel ? (
-          <RectangleSkeleton width="100%" height="32px" />
-        ) : (
-          <ComboBox
-            options={modelOptions}
-            selectedOption={modelSelectedOptions}
-            onSelect={onSelectModel}
-            scaled
-            scaledOptions
-            dropDownMaxHeight={modelOptions.length > 7 ? 300 : undefined}
-            isDefaultMode
-            className="ai-combobox"
-            displaySelectedOption
-            dropDownClassName="not-selectable"
-          />
-        )}
+        <ComboBox
+          options={modelOptions}
+          selectedOption={modelSelectedOptions}
+          onSelect={onSelectModel}
+          scaled
+          scaledOptions
+          dropDownMaxHeight={modelOptions.length > 7 ? 300 : undefined}
+          isDefaultMode
+          className="ai-combobox"
+          displaySelectedOption
+          dropDownClassName="not-selectable"
+          isDisabled={!!error || isModelLoading || !models.length}
+          isLoading={isModelLoading}
+          dataTestId="create_agent_model_combobox"
+        />
       </div>
     </StyledParam>
   );
 };
 
 export default ModelSettings;
+

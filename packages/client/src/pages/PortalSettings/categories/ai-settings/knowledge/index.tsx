@@ -1,41 +1,48 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * Copyright (C) Ascensio System SIA, 2009-2026
  *
- * This program is a free software product.
- * You can redistribute it and/or modify it under the terms
- * of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
- * Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
- * to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
- * any third-party rights.
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
  *
- * This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
- * the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
  *
- * You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
  *
- * The  interactive user interfaces in modified source and object code versions of the Program must
- * display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
  *
- * Pursuant to Section 7(b) of the License you must retain the original Product logo when
- * distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
- * trademark law for use of our trademarks.
+ * No trademark rights are granted under this License.
  *
- * All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
- * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
- * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
-import { KnowledgeType } from "@docspace/shared/api/ai/enums";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { ComboBox, type TOption } from "@docspace/shared/components/combobox";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { PasswordInput } from "@docspace/shared/components/password-input";
-import { Text } from "@docspace/shared/components/text";
-import { Tooltip } from "@docspace/shared/components/tooltip";
-import { toastr } from "@docspace/shared/components/toast";
+import { KnowledgeType, ProviderType } from "@docspace/shared/api/ai/enums";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { ComboBox, type TOption } from "@docspace/ui-kit/components/combobox";
+import { FieldContainer } from "@docspace/ui-kit/components/field-container";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { PasswordInput } from "@docspace/ui-kit/components/password-input";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Tooltip } from "@docspace/ui-kit/components/tooltip";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { inject, observer } from "mobx-react";
@@ -46,15 +53,17 @@ import generalStyles from "../AISettings.module.scss";
 
 import styles from "./Knowledge.module.scss";
 import { ResetKnowledgeDialog } from "./dialogs/reset";
+import { KnowledgeLoader } from "./KnowledgeLoader";
 
 type TKnowledgeProps = {
   knowledgeInitied?: AISettingsStore["knowledgeInitied"];
   knowledgeConfig?: AISettingsStore["knowledgeConfig"];
   updateKnowledge?: AISettingsStore["updateKnowledge"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
+  aiProviders?: AISettingsStore["aiProviders"];
   getAIConfig?: SettingsStore["getAIConfig"];
   aiConfig?: SettingsStore["aiConfig"];
-  aiSettingsUrl?: string;
+  knowledgeSettingsUrl?: SettingsStore["knowledgeSettingsUrl"];
 };
 
 const FAKE_KEY_VALUE = "0000000000000000";
@@ -64,9 +73,10 @@ const KnowledgeComponent = ({
   knowledgeConfig,
   updateKnowledge,
   hasAIProviders,
+  aiProviders,
   getAIConfig,
   aiConfig,
-  aiSettingsUrl,
+  knowledgeSettingsUrl,
 }: TKnowledgeProps) => {
   const { t } = useTranslation(["Common", "AISettings", "AIRoom", "Settings"]);
 
@@ -82,6 +92,7 @@ const KnowledgeComponent = ({
     const initial: Record<KnowledgeType, string> = {
       [KnowledgeType.OpenAi]: "",
       [KnowledgeType.OpenRouter]: "",
+      [KnowledgeType.PortalAi]: "",
       [KnowledgeType.None]: "",
     };
 
@@ -103,6 +114,9 @@ const KnowledgeComponent = ({
       if (knowledgeConfig?.type === KnowledgeType.OpenRouter)
         return KnowledgeType.OpenRouter;
 
+      if (knowledgeConfig?.type === KnowledgeType.PortalAi)
+        return KnowledgeType.PortalAi;
+
       return KnowledgeType.None;
     },
   );
@@ -123,6 +137,7 @@ const KnowledgeComponent = ({
     setValuesByProvider({
       [KnowledgeType.OpenAi]: "",
       [KnowledgeType.OpenRouter]: "",
+      [KnowledgeType.PortalAi]: "",
       [KnowledgeType.None]: "",
     });
     setSelectedOption(KnowledgeType.None);
@@ -154,8 +169,34 @@ const KnowledgeComponent = ({
     setSaveRequestRunning(false);
   };
 
+  const hasSystemProvider = aiProviders?.some(
+    (p) => p.type === ProviderType.PortalAi,
+  );
+  const isSystemProviderDisabled =
+    hasSystemProvider && !aiConfig?.systemAiEnabled;
+
   const items = React.useMemo(() => {
-    return [
+    const options: TOption[] = [];
+
+    if (hasSystemProvider) {
+      options.push({
+        key: KnowledgeType.PortalAi,
+        label: isSystemProviderDisabled
+          ? `ONLYOFFICE AI (${t("Common:ActivationRequired")})`
+          : "ONLYOFFICE AI",
+        disabled: isSystemProviderDisabled,
+        withExternalLink: isSystemProviderDisabled,
+        externalLinkPath: isSystemProviderDisabled
+          ? "/portal-settings/payments/services"
+          : undefined,
+        onExternalLinkClick: isSystemProviderDisabled
+          ? () =>
+              window.DocSpace?.navigate("/portal-settings/payments/services")
+          : undefined,
+      });
+    }
+
+    options.push(
       {
         key: KnowledgeType.OpenAi,
         label: "OpenAI",
@@ -164,8 +205,10 @@ const KnowledgeComponent = ({
         key: KnowledgeType.OpenRouter,
         label: "OpenRouter",
       },
-    ];
-  }, []);
+    );
+
+    return options;
+  }, [hasSystemProvider, isSystemProviderDisabled, t]);
 
   const selectedItem = React.useMemo(() => {
     return items.find((item) => item.key === selectedOption);
@@ -193,50 +236,19 @@ const KnowledgeComponent = ({
       if (knowledgeConfig?.type === KnowledgeType.OpenRouter)
         return KnowledgeType.OpenRouter;
 
+      if (knowledgeConfig?.type === KnowledgeType.PortalAi)
+        return KnowledgeType.PortalAi;
+
       return KnowledgeType.None;
     });
   }, [knowledgeConfig]);
 
-  if (!knowledgeInitied)
-    return (
-      <div className={generalStyles.search}>
-        <RectangleSkeleton
-          className={generalStyles.description}
-          width="700px"
-          height="36px"
-        />
-        <RectangleSkeleton
-          className={generalStyles.learnMoreLink}
-          width="100px"
-          height="19px"
-        />
-        <div className={styles.knowledgeForm}>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="119px" height="20px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-          <div className={generalStyles.fieldContainer}>
-            <RectangleSkeleton width="48px" height="32px" />
-            <RectangleSkeleton width="340px" height="32px" />
-          </div>
-        </div>
-        <div className={styles.buttonContainer}>
-          <RectangleSkeleton
-            className={styles.addProviderButton}
-            width="128px"
-            height="32px"
-          />
-          <RectangleSkeleton
-            className={styles.learnMoreLink}
-            width="322px"
-            height="32px"
-          />
-        </div>
-      </div>
-    );
+  if (!knowledgeInitied) return <KnowledgeLoader />;
 
-  const isSaveDisabled =
-    !currentValue || selectedOption === KnowledgeType.None || isKeyHidden;
+  const isPortalAiSelected = selectedOption === KnowledgeType.PortalAi;
+  const isSaveDisabled = isPortalAiSelected
+    ? knowledgeConfig?.type === KnowledgeType.PortalAi
+    : !currentValue || selectedOption === KnowledgeType.None || isKeyHidden;
 
   const tooltipId = "tooltip-web-search";
 
@@ -249,6 +261,7 @@ const KnowledgeComponent = ({
           !hasAIProviders
             ? t("AISettings:ToUseAddProvider", {
                 value: t("AIRoom:Knowledge"),
+                aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }
@@ -256,22 +269,23 @@ const KnowledgeComponent = ({
         <Text className={generalStyles.description}>
           {t("AISettings:KnowledgeSettingsDescription", {
             modelName: aiConfig?.embeddingModel || "text-embedding-3-small",
+            aiAgents: t("Common:AIAgents"),
           })}
         </Text>
-        {aiSettingsUrl ? (
+        {knowledgeSettingsUrl ? (
           <Link
             className={generalStyles.learnMoreLink}
             target={LinkTarget.blank}
             type={LinkType.page}
             fontWeight={600}
             isHovered
-            href={aiSettingsUrl}
+            href={knowledgeSettingsUrl}
             color="accent"
           >
             {t("Common:LearnMore")}
           </Link>
         ) : null}
-        <div className={styles.knowledgeForm}>
+        <div className={styles.knowledgeForm} data-testid="knowledge-form">
           <FieldContainer
             labelVisible
             isVertical
@@ -280,6 +294,8 @@ const KnowledgeComponent = ({
           >
             <ComboBox
               options={items}
+              showDisabledItems
+              scaledOptions={hasSystemProvider}
               selectedOption={
                 selectedItem ?? ({ label: t("Common:SelectAction") } as TOption)
               }
@@ -290,42 +306,51 @@ const KnowledgeComponent = ({
               }
               displaySelectedOption
               isDisabled={!hasAIProviders || isKeyHidden}
+              dataTestId="knowledge-provider-combobox"
+              dropDownTestId="knowledge-provider-dropdown"
             />
           </FieldContainer>
-          <FieldContainer
-            labelVisible
-            isVertical
-            labelText={t("AISettings:APIKey")}
-            removeMargin
-          >
-            {isKeyHidden ? (
-              <div className={styles.aiBanner}>
-                <Text fontSize="12px" fontWeight={400} lineHeight="16px">
-                  {t("AISettings:WebSearchKeyHiddenDescription")}
-                </Text>
-              </div>
-            ) : (
-              <>
-                <PasswordInput
-                  className={styles.passwordInput}
-                  placeholder={t("AISettings:EnterKey")}
-                  inputValue={currentValue}
-                  onChange={onChange}
-                  scale
-                  isSimulateType
-                  isFullWidth
-                  isDisableTooltip
-                  isDisabled={
-                    isKeyHidden || selectedOption === KnowledgeType.None
-                  }
-                  autoComplete="off"
-                />
-                <Text className={styles.hiddenKeyDescription}>
-                  {t("AISettings:KnowledgeKeyDescription")}
-                </Text>
-              </>
-            )}
-          </FieldContainer>
+          {selectedOption !== KnowledgeType.PortalAi ? (
+            <FieldContainer
+              labelVisible
+              isVertical
+              labelText={t("AISettings:APIKey")}
+              removeMargin
+            >
+              {isKeyHidden ? (
+                <div
+                  className={styles.aiBanner}
+                  data-testid="knowledge-key-hidden-banner"
+                >
+                  <Text fontSize="12px" fontWeight={400} lineHeight="16px">
+                    {t("AISettings:WebSearchKeyHiddenDescription")}
+                  </Text>
+                </div>
+              ) : (
+                <>
+                  <PasswordInput
+                    className={styles.passwordInput}
+                    inputName="knowledge_key"
+                    placeholder={t("AISettings:EnterKey")}
+                    inputValue={currentValue}
+                    onChange={onChange}
+                    scale
+                    isSimulateType
+                    isFullWidth
+                    isDisableTooltip
+                    isDisabled={
+                      isKeyHidden || selectedOption === KnowledgeType.None
+                    }
+                    autoComplete="off"
+                    testId="knowledge-key-input"
+                  />
+                  <Text className={styles.hiddenKeyDescription}>
+                    {t("AISettings:KnowledgeKeyDescription")}
+                  </Text>
+                </>
+              )}
+            </FieldContainer>
+          ) : null}
         </div>
         <div className={styles.buttonContainer}>
           <Button
@@ -336,6 +361,7 @@ const KnowledgeComponent = ({
             onClick={onSave}
             isLoading={saveRequestRunning}
             isDisabled={isSaveDisabled}
+            testId="knowledge-save-button"
           />
           <Button
             size={ButtonSize.small}
@@ -348,6 +374,7 @@ const KnowledgeComponent = ({
               saveRequestRunning ||
               knowledgeConfig.needReset
             }
+            testId="knowledge-reset-button"
           />
         </div>
       </div>
@@ -368,9 +395,12 @@ export const Knowledge = inject(
       knowledgeConfig: aiSettingsStore.knowledgeConfig,
       updateKnowledge: aiSettingsStore.updateKnowledge,
       hasAIProviders: aiSettingsStore.hasAIProviders,
+      aiProviders: aiSettingsStore.aiProviders,
       getAIConfig: settingsStore.getAIConfig,
       aiConfig: settingsStore.aiConfig,
-      aiSettingsUrl: settingsStore.aiSettingsUrl,
+      knowledgeSettingsUrl: settingsStore.knowledgeSettingsUrl,
     };
   },
 )(observer(KnowledgeComponent));
+
+export { KnowledgeLoader };

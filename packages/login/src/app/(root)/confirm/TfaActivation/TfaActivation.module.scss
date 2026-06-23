@@ -1,0 +1,171 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/mixins";
+
+.tfaActivationForm {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1fr 1fr;
+  gap: 80px;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 24px;
+
+  @include mixins.tablet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  @include mixins.mobile {
+    margin: 0 auto;
+    flex-direction: column;
+    gap: 0px;
+
+    padding-inline-end: 8px;
+  }
+
+  :global(.app-code-wrapper) {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    @include mixins.tablet-and-below {
+      flex-direction: column;
+    }
+  }
+
+  :global(.logo-wrapper) {
+    max-width: 386px;
+    height: 44px;
+    width: auto;
+
+    @include mixins.tablet {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @include mixins.mobile {
+      display: none;
+    }
+  }
+
+  :global(.set-app-description) {
+    box-sizing: border-box;
+    margin: 0 0 32px 0;
+    width: 100%;
+    max-width: 480px;
+
+    :global(.logo-wrapper) {
+      margin: 0 auto;
+      max-width: 386px;
+      height: 44px;
+    }
+  }
+
+  :global(.set-app-title) {
+    margin-bottom: 4px;
+  }
+
+  :global(.set-app-subtitle) {
+    margin-bottom: 20px;
+  }
+
+  :global(.set-app-text) {
+    margin-top: 8px;
+  }
+
+  :global(.qrcode-wrapper) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 80px;
+    border-radius: 6px;
+    margin-bottom: 32px;
+
+    @include mixins.mobile {
+      display: none;
+    }
+  }
+
+  :global(.app-code-input),
+  :global(.app-code-continue-btn) {
+    box-sizing: border-box;
+  }
+
+  :global(.description) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    :global(.description-item) {
+      display: flex;
+      gap: 12px;
+    }
+
+    :global(.icon-container) {
+      position: relative;
+      height: 32px;
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+    }
+
+    :global(.icon-container::before) {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--accent-main);
+      opacity: 0.1;
+      border-radius: 6px;
+      z-index: -1;
+    }
+  }
+
+  :global(strong) {
+    user-select: text;
+  }
+}

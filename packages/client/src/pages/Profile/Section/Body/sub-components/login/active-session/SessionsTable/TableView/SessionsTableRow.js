@@ -1,69 +1,48 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 
-import { TableRow, TableCell } from "@docspace/shared/components/table";
-import { Text } from "@docspace/shared/components/text";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
+import { TableRow, TableCell } from "@docspace/ui-kit/components/table";
+import { Text } from "@docspace/ui-kit/components/text";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { getCorrectDate } from "@docspace/ui-kit/utils/date/getCorrectDate";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
-import { globalColors } from "@docspace/shared/themes";
-import { injectDefaultTheme } from "@docspace/shared/utils";
-
-const StyledTableRow = styled(TableRow).attrs(injectDefaultTheme)`
-  .session-platform {
-    font-weight: 600;
-    margin-inline-end: 5px;
-  }
-
-  .session-info {
-    font-weight: 600;
-    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
-  }
-
-  .divider {
-    display: inline-block;
-    height: 12px;
-    width: 2px;
-    background-color: ${(props) =>
-      props.theme.profile.activeSessions.dividerColor};
-    margin: -2px 5px;
-  }
-
-  .tick-icon {
-    margin-inline-start: 8px;
-  }
-
-  .remove-cell {
-    justify-content: flex-end;
-  }
-`;
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
+import styles from "../../active-sessions.module.scss";
 
 const SessionsTableRow = (props) => {
   const {
@@ -90,23 +69,23 @@ const SessionsTableRow = (props) => {
   };
 
   return (
-    <StyledTableRow
+    <TableRow
       key={item.id}
       hideColumns={hideColumns}
       dataTestId={`session_row_${item.id}`}
     >
       <TableCell>
-        <Text className="session-platform" dataTestId="session_platform">
+        <Text className={styles.sessionPlatform} dataTestId="session_platform">
           {platform}
         </Text>
         <Text
-          className="session-info"
+          className={styles.sessionInfo}
           dataTestId="session_browser"
         >{`(${browser})`}</Text>
         {showTickIcon ? (
           <IconButton
             size={12}
-            className="tick-icon"
+            className={styles.tickIcon}
             color={globalColors.tickColor}
             iconName={TickSvgUrl}
           />
@@ -114,19 +93,23 @@ const SessionsTableRow = (props) => {
       </TableCell>
 
       <TableCell>
-        <Text className="session-info" truncate dataTestId="session_date">
+        <Text className={styles.sessionInfo} truncate dataTestId="session_date">
           {getCorrectDate(locale, date)}
         </Text>
       </TableCell>
 
       <TableCell>
-        <Text className="session-info" truncate dataTestId="session_location">
+        <Text
+          className={styles.sessionInfo}
+          truncate
+          dataTestId="session_location"
+        >
           {country || city ? (
             <>
               {country}
               {country && city ? ", " : null}
               {city}
-              <span className="divider" />
+              {ip ? <span className={styles.rowDivider} /> : null}
             </>
           ) : null}
           {ip}
@@ -134,7 +117,7 @@ const SessionsTableRow = (props) => {
       </TableCell>
 
       {showRemoveIcon ? (
-        <TableCell className="remove-cell">
+        <TableCell className={styles.removeCell}>
           <IconButton
             size={20}
             iconName={RemoveSessionSvgUrl}
@@ -144,7 +127,7 @@ const SessionsTableRow = (props) => {
           />
         </TableCell>
       ) : null}
-    </StyledTableRow>
+    </TableRow>
   );
 };
 
@@ -162,3 +145,4 @@ export default inject(({ setup, settingsStore, userStore }) => {
     setPlatformModalData,
   };
 })(observer(SessionsTableRow));
+

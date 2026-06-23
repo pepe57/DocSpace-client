@@ -1,36 +1,48 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
+import { useEventLog } from "../sub-components/useEventLog";
 import { useNavigate } from "react-router";
 
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import SDK from "@onlyoffice/docspace-sdk-js";
+
+import { EventLogBlock } from "../sub-components/EventLogBlock";
 
 import LeftMenuUrl from "PUBLIC_DIR/images/sdk-presets_left-menu.react.svg?url";
 import TitleUrl from "PUBLIC_DIR/images/sdk-presets_title.react.svg?url";
@@ -46,13 +58,13 @@ import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { Label } from "@docspace/shared/components/label";
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { SelectedItem } from "@docspace/shared/components/selected-item";
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { Label } from "@docspace/ui-kit/components/label";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { RadioButtonGroup } from "@docspace/ui-kit/components/radio-button-group";
+import { SelectedItem } from "@docspace/ui-kit/components/selected-item";
+import { HelpButton } from "@docspace/ui-kit/components/help-button";
 import { loadScript, getSdkScriptUrl } from "@docspace/shared/utils/common";
 
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
@@ -92,6 +104,21 @@ import {
   SelectedItemsContainer,
   CheckboxGroup,
 } from "./StyledPresets";
+import { getBrandName } from "@docspace/shared/constants/brands";
+
+const MANAGER_EVENT_TYPES = [
+  "onAppReady",
+  "onAppError",
+  "onAuthSuccess",
+  "onSignOut",
+  "onNoAccess",
+  "onNotFound",
+  "onContentReady",
+  "onEditorCloseCallback",
+  "onEditorOpen",
+  "onDownload",
+  "onFileManagerClick",
+];
 
 const Manager = (props) => {
   const { t, fetchExternalLinks, theme, currentColorScheme } = props;
@@ -127,7 +154,7 @@ const Manager = (props) => {
     { key: "Activity", label: t("Files:LastActivity") },
   ]);
 
-  const [version, onSetVersion] = useState(sdkVersion[210]);
+  const [version, onSetVersion] = useState(sdkVersion[220]);
 
   const [source, onSetSource] = useState(sdkSource.Package);
 
@@ -168,13 +195,31 @@ const Manager = (props) => {
       search: "",
       withSubfolders: false,
     },
+    events: {
+      onAppReady: () => {},
+      onAppError: () => {},
+      onAuthSuccess: () => {},
+      onSignOut: () => {},
+      onNoAccess: () => {},
+      onNotFound: () => {},
+      onContentReady: () => {},
+      onEditorCloseCallback: () => {},
+      onEditorOpen: () => {},
+      onDownload: () => {},
+      onFileManagerClick: () => {},
+    },
   });
+
+  const [eventLog, onClearEventLog] = useEventLog(config.frameId);
 
   const fromPackage = source === sdkSource.Package;
 
   const sdkScriptUrl = getSdkScriptUrl(version);
 
-  const sdk = fromPackage ? new SDK() : window.DocSpace.SDK;
+  const sdk = useMemo(
+    () => (fromPackage ? new SDK() : window.DocSpace.SDK),
+    [fromPackage],
+  );
 
   const destroyFrame = () => {
     sdk?.frames[config.frameId]?.destroyFrame();
@@ -208,7 +253,7 @@ const Manager = (props) => {
     return () => {
       destroyFrame();
     };
-  });
+  }, [config]);
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
@@ -382,21 +427,29 @@ const Manager = (props) => {
   const redirectToSelectedRoom = () => navigateRoom(config.id);
 
   const preview = (
-    <Frame
-      width={config.width.includes("px") ? config.width : undefined}
-      height={config.height.includes("px") ? config.height : undefined}
-      targetId={config.frameId}
-    >
-      <div id={config.frameId} />
-    </Frame>
+    <>
+      <Frame
+        width={config.width.includes("px") ? config.width : undefined}
+        height={config.height.includes("px") ? config.height : undefined}
+        targetId={config.frameId}
+      >
+        <div id={config.frameId} />
+      </Frame>
+      <EventLogBlock
+        t={t}
+        events={eventLog}
+        onClear={onClearEventLog}
+        eventTypes={MANAGER_EVENT_TYPES}
+      />
+    </>
   );
 
   return (
     <PresetWrapper
       description={t("CustomDescription", {
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
       })}
-      header={t("CreateSamplePortal", { productName: t("Common:ProductName") })}
+      header={t("CreateSamplePortal", { productName: getBrandName("ProductName") })}
     >
       <Container>
         <PreviewBlock
@@ -568,7 +621,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("Header")}
                       description={t("HeaderDescription", {
-                        productName: t("Common:ProductName"),
+                        productName: getBrandName("ProductName"),
                       })}
                       img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     />
@@ -602,10 +655,7 @@ const Manager = (props) => {
             {sharedLinks ? (
               <ControlsGroup>
                 <LabelGroup>
-                  <Label
-                    className="label"
-                    text={t("SharingPanel:ExternalLink")}
-                  />
+                  <Label className="label" text={t("Common:ExternalLink")} />
                   <HelpButton
                     offsetRight={0}
                     size={12}
@@ -750,6 +800,5 @@ export const Component = inject(({ settingsStore, publicRoomStore }) => {
     "Common",
     "Files",
     "Translations",
-    "SharingPanel",
   ])(observer(Manager)),
 );

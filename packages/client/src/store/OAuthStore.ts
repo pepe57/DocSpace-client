@@ -18,8 +18,7 @@ import {
   IClientProps,
   TScope,
 } from "@docspace/shared/utils/oauth/types";
-import { toastr } from "@docspace/shared/components/toast";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -96,6 +95,8 @@ class OAuthStore {
 
   setJwtTokenRunning: boolean = false;
 
+  private setJwtTokenPromise: Promise<void> | null = null;
+
   errorOAuth: Error | null = null;
 
   constructor(userStore: UserStore, settingsStore: SettingsStore) {
@@ -110,28 +111,27 @@ class OAuthStore {
   };
 
   setJwtToken = async () => {
-    let cookieToken = getOAuthJWTSignature(this.userStore!.user!.id);
+    const userId = this.userStore!.user!.id;
 
+    const cookieToken = getOAuthJWTSignature(userId);
     if (cookieToken) return;
 
-    if (this.setJwtTokenRunning) {
-      await new Promise((resolve) => {
-        setInterval(() => {
-          cookieToken = getOAuthJWTSignature(this.userStore!.user!.id);
-          if (cookieToken) resolve(cookieToken);
-        }, 100);
-      });
-
-      this.setJwtTokenRunning = false;
-
+    if (this.setJwtTokenPromise !== null) {
+      await this.setJwtTokenPromise;
       return;
     }
 
     this.setJwtTokenRunning = true;
+    this.setJwtTokenPromise = (async () => {
+      try {
+        await setOAuthJWTSignature(userId);
+      } finally {
+        this.setJwtTokenRunning = false;
+        this.setJwtTokenPromise = null;
+      }
+    })();
 
-    await setOAuthJWTSignature(this.userStore!.user!.id);
-
-    this.setJwtTokenRunning = false;
+    await this.setJwtTokenPromise;
   };
 
   setRevokeDialogVisible = (value: boolean) => {
@@ -283,7 +283,7 @@ class OAuthStore {
         });
       };
 
-      fetchUsers();
+      await fetchUsers();
 
       runInAction(() => {
         this.clients = [...clientList.data];
@@ -364,7 +364,7 @@ class OAuthStore {
       });
     };
 
-    fetchUsers();
+    await fetchUsers();
 
     runInAction(() => {
       this.currentPage = clientList.page;
@@ -720,7 +720,7 @@ class OAuthStore {
     const openOption = {
       key: "open",
       icon: ExternalLinkReactSvgUrl,
-      label: t("Files:Open"),
+      label: t("Common:Open"),
       onClick: () => window.open(item.websiteUrl, "_blank"),
       disabled: isInfo,
       dataTestId: "oauth_files_open_option",

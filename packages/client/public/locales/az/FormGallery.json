@@ -3,11 +3,12 @@
   "EmptyFormGalleryScreenDescription": "Sorğunuza uyğun nəticə tapılmadı",
   "ErrorViewDescription": "Zəhmət olmasa, bir az sonra yenə cəhd edin",
   "ErrorViewDescriptionNetworkError": "Görünür ki, internet bağlantısı yoxdur",
-  "ErrorViewHeader": "Forma qalereyası müvəqqəti olaraq əlçatan deyil",
-  "SelectForm": "Formanı seçin",
-  "SubmitToGalleryDialogGuideInfo": "Mükəmməl formalar yaratmağı və təsdiq şansınızı artırmağı bizim <1>bələdçimizdən</1> öyrənin.",
-  "SubmitToGalleryDialogMainInfo": "Bu otağın sahibi sizsiniz. Otağı tərk etməzdən əvvəl sahib rolunu başqa istifadəçiyə ötürməlisiniz.",
+  "ErrorViewHeader": "Qalereya müvəqqəti olaraq əlçatmazdır",
+  "GalleryTitle": "{{organizationName}} Şablon Qalereyası",
+  "SelectTemplate": "Şablon Seçin",
+  "SubmitToGalleryDialogMainInfo": "Şablonunuzu digərlərinin işlərində istifadə etməsi üçün ictimai qalereyaya təqdim edin. Şablon nəzarət prosesindən keçdikdən sonra, töhfənizə görə sizə bildiriş veriləcək və mükafatlandırılacaqsınız.",
   "SuggestChanges": "Dəyişikliklər təklif edin",
   "TemplateInfo": "Şablon məlumatı",
+  "UploadGallery": "Qalereyə yükləyin",
   "ViewAllTemplates": "Bütün şablonlara baxın"
 }

@@ -1,7 +1,8 @@
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget } from "@docspace/shared/components/link";
-import { StyledUploadDescription } from "../Plugins.styled";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget } from "@docspace/ui-kit/components/link";
+import styles from "../Plugins.module.scss";
 import { UploadDecsriptionProps } from "../Plugins.types";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const UploadDescription = ({
   pluginsSdkUrl,
@@ -9,14 +10,14 @@ const UploadDescription = ({
   t,
 }: UploadDecsriptionProps) => {
   return (
-    <StyledUploadDescription>
-      <Text className="upload-description-text">
-        {t("UploadDescription", { productName: t("Common:ProductName") })}
+    <div className={styles.uploadDescription}>
+      <Text className={styles.uploadDescriptionText}>
+        {t("UploadDescription", { productName: getBrandName("ProductName") })}
       </Text>
       {pluginsSdkUrl ? (
         <Link
           className="link-learn-more"
-          color={currentColorScheme.main?.accent}
+          color={currentColorScheme?.main?.accent ?? undefined}
           isHovered
           target={LinkTarget.blank}
           href={pluginsSdkUrl}
@@ -25,7 +26,7 @@ const UploadDescription = ({
           {t("Common:LearnMore")}
         </Link>
       ) : null}
-    </StyledUploadDescription>
+    </div>
   );
 };
 

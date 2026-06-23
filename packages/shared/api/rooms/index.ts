@@ -1,34 +1,42 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 // @ts-nocheck
 
 import { AxiosRequestConfig } from "axios";
-
-import moment from "moment";
+import type { DateTime } from "luxon";
 import { Nullable } from "types";
 import {
   FolderType,
@@ -52,6 +60,7 @@ import {
   TRoom,
   TGetRoomMembers,
   TFeed,
+  ExternalSyncDB,
 } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
@@ -197,7 +206,7 @@ export function createRoomInThirdpary(id, data) {
 export function editRoom(id, data) {
   const options = { method: "put", url: `/files/rooms/${id}`, data };
 
-  return request(options).then((res) => {
+  return request<TRoom>(options).then((res) => {
     return res;
   });
 }
@@ -273,8 +282,30 @@ export function createTag(name) {
     return res;
   });
 }
+export async function removeTagRequest(names: string[]) {
+  const data = { names };
+  const options = {
+    method: "delete",
+    url: "/files/tags",
+    data,
+  };
 
-export function addTagsToRoom(id, tagArray) {
+  return request(options).then((res) => {
+    return res;
+  });
+}
+export function updateTagName(oldName: string, newName: string) {
+  const data = { oldName, newName };
+  const options = {
+    method: "PUT",
+    url: "/files/tags",
+    data,
+  };
+
+  return request(options)!;
+}
+
+export function addTagsToRoom(id: string | number, tagArray: string[]) {
   const data = { names: tagArray };
   const options = {
     method: "put",
@@ -283,11 +314,11 @@ export function addTagsToRoom(id, tagArray) {
   };
 
   return request(options).then((res) => {
-    return res;
+    return res as TRoom;
   });
 }
 
-export function removeTagsFromRoom(id, tagArray) {
+export function removeTagsFromRoom(id: string | number, tagArray: string[]) {
   const data = { names: tagArray };
   const options = {
     method: "delete",
@@ -306,9 +337,7 @@ export function getTags() {
     url: "/files/tags",
   };
 
-  return request(options).then((res) => {
-    return res;
-  });
+  return request<string[]>(options);
 }
 
 export function uploadRoomLogo(data) {
@@ -346,7 +375,14 @@ export function removeLogoFromRoom(id) {
   });
 }
 
-export const setInvitationLinks = async (roomId, title, access, linkId) => {
+export const setInvitationLinks = async (
+  roomId,
+  title,
+  access,
+  linkId,
+  expirationDate,
+  maxUseCount,
+) => {
   const options = {
     method: "put",
     url: `/files/rooms/${roomId}/links`,
@@ -354,6 +390,8 @@ export const setInvitationLinks = async (roomId, title, access, linkId) => {
       linkId,
       title,
       access,
+      expirationDate,
+      maxUseCount,
     },
   };
   const skipRedirect = true;
@@ -423,7 +461,7 @@ export function editExternalLink(
   linkId: number | string,
   title: string,
   access: ShareAccessRights,
-  expirationDate: moment.Moment | string | null,
+  expirationDate: DateTime | string | string | null,
   linkType: number,
   password: string | undefined,
   disabled: boolean,
@@ -457,7 +495,7 @@ export function createExternalLink(
   link: Partial<{
     title: string;
     access: ShareAccessRights;
-    expirationDate: moment.Moment | string | null;
+    expirationDate: DateTime | string | string | null;
     linkType: number;
     password: string | undefined;
     denyDownload: boolean;
@@ -664,4 +702,74 @@ export function hideConfirmRoomLifetime(val: boolean) {
   };
 
   return request(options);
+}
+
+export function createGroupRooms(newGroup) {
+  const options = {
+    method: "post",
+    url: "/files/group",
+    data: newGroup,
+  };
+
+  return request(options);
+}
+
+export function getRoomGroups() {
+  const options = {
+    method: "get",
+    url: "/files/group?includeMembers=false",
+  };
+
+  return request(options);
+}
+
+export function getGroupById(groupId) {
+  const options = {
+    method: "get",
+    url: `/files/group/${groupId}?includeMembers=true`,
+  };
+
+  return request(options);
+}
+
+export function updateGroupIcon(groupId, icon) {
+  const options = {
+    method: "post",
+    url: `/files/group/${groupId}/icon`,
+    data: { icon },
+  };
+
+  return request(options);
+}
+
+export function updateRoomGroup(groupId, data) {
+  const options = {
+    method: "put",
+    url: `/files/group/${groupId}`,
+    data,
+  };
+
+  return request(options);
+}
+
+export function deleteRoomGroup(groupId) {
+  const options = {
+    method: "delete",
+    url: `/files/group/${groupId}`,
+  };
+
+  return request(options);
+}
+
+export async function externalDbSync(itemId: string | number) {
+  return request<ExternalSyncDB>({
+    method: "GET",
+    url: `/files/rooms/${itemId}/externalDbSync`,
+  });
+}
+export async function startDbSync(itemId: string | number) {
+  return request<ExternalSyncDB>({
+    method: "POST",
+    url: `/files/rooms/${itemId}/externalDbSync`,
+  });
 }

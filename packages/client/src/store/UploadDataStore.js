@@ -1,49 +1,61 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { makeAutoObservable, runInAction } from "mobx";
-import { Trans } from "react-i18next";
+import { getI18n, Trans } from "react-i18next";
 import { TIMEOUT } from "SRC_DIR/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
-import { ConflictResolveType } from "@docspace/shared/enums";
-import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+import { AnalyticsEvents, ConflictResolveType } from "@docspace/shared/enums";
+import SocketHelper, { SocketCommands } from "@docspace/ui-kit/utils/socket";
 import {
   getFileInfo,
   getFolderInfo,
   uploadFile,
   convertFile,
   startUploadSession,
+  uploadChunkSequential,
+  uploadChunkParallel,
+  finalizeUploadSession,
   getFileConversationProgress,
   copyToFolder,
   moveToFolder,
   fileCopyAs,
   checkIsFileExist,
 } from "@docspace/shared/api/files";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
 import { getUnexpectedErrorText } from "SRC_DIR/helpers/filesUtils";
@@ -53,7 +65,7 @@ import {
 } from "SRC_DIR/helpers/utils";
 import { hasOwnProperty } from "@docspace/shared/utils/object";
 import { OPERATIONS_NAME } from "@docspace/shared/constants";
-import { Link } from "@docspace/shared/components/link";
+import { Link } from "@docspace/ui-kit/components/link";
 
 const removeDuplicate = (items) => {
   const obj = {};
@@ -258,7 +270,7 @@ class UploadDataStore {
     return this.files.filter((f) => f.uniqueId === id);
   };
 
-  cancelUpload = (t) => {
+  cancelUpload = () => {
     this.finishUploadFilesCalled = false;
 
     const newUploadData = {
@@ -296,7 +308,17 @@ class UploadDataStore {
     this.setUploadData(newUploadData);
     this.uploadedFilesHistory = newHistory;
 
-    toastr.info(t("Common:CancelUpload"));
+    this.primaryProgressDataStore.setPrimaryProgressBarData({
+      operation: OPERATIONS_NAME.upload,
+      completed: true,
+      canceled: true,
+      alert: true,
+      label: i18n.t("Common:CanceledOperation", {
+        operationName: i18n.t("Files:Uploading"),
+      }),
+    });
+
+    toastr.info(i18n.t("Common:CancelUpload"));
   };
 
   cancelConversion = () => {
@@ -1264,29 +1286,16 @@ class UploadDataStore {
     const {
       t,
       res, // file response data
-      fileSize, // file size
       index, // chunk index
       indexOfFile, // file index in the list
       path, // file path
       chunksLength, // length of file chunks
       resolve, // resolve cb
-      reject, // reject cb
-      isAsyncUpload = false, // async upload checker
-      isFinalize = false, // is finalize chunk
       //  allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
       createNewIfExist,
     } = chunkUploadObj;
 
-    if (!res.data.data && res.data.message) {
-      return reject({
-        message: res.data.message,
-        chunkIndex: index,
-        chunkSize: fileSize,
-        isFinalize,
-      });
-    }
-
-    const { uploaded, id: fileId, file: fileInfo } = res.data.data;
+    const { uploaded, id: fileId, file: fileInfo } = res;
 
     // let uploadedSize;
 
@@ -1342,6 +1351,13 @@ class UploadDataStore {
         }
       });
 
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: AnalyticsEvents.FileUploaded,
+        id: fileInfo.id,
+        parentId: fileInfo.folderId,
+      });
+
       if (fileInfo.version > 2) {
         this.filesStore.setHighlightFile({
           highlightFileId: fileInfo.id,
@@ -1387,14 +1403,12 @@ class UploadDataStore {
     if (currentFile.action === "uploaded") {
       this.refreshFiles(currentFile);
     }
-    if (!isAsyncUpload || res.status === 201) {
-      return resolve();
-    }
+
+    return resolve();
   };
 
   asyncUpload = async (t, chunkData, resolve, reject, createNewIfExist) => {
-    const { operationId, file, fileSize, indexOfFile, path, length } =
-      chunkData;
+    const { operationId, file, indexOfFile, path, length } = chunkData;
 
     if (
       this.uploaded ||
@@ -1427,10 +1441,6 @@ class UploadDataStore {
           ].isFinished = true;
         }
 
-        if (!res.data.data && res.data.message) {
-          delete this.asyncUploadObj[operationId];
-          return reject(res.data.message);
-        }
         this.asyncUpload(t, chunkData, resolve, reject, createNewIfExist);
 
         const activeLength = this.asyncUploadObj[operationId]
@@ -1439,31 +1449,14 @@ class UploadDataStore {
             ).length - 1
           : 0;
 
-        let allIsUploaded;
-        if (this.asyncUploadObj[operationId]) {
-          const finished = this.asyncUploadObj[operationId].chunksArray.filter(
-            (x) => x.isFinished,
-          );
-
-          allIsUploaded =
-            this.asyncUploadObj[operationId].chunksArray.length -
-            finished.length -
-            1; // 1 last
-        }
-
         this.checkChunkUpload({
           t,
           res,
-          fileSize,
           index: activeLength,
           indexOfFile,
           path,
           chunksLength: length,
           resolve,
-          reject,
-          isAsyncUpload: true,
-          isFinalize: false,
-          allChunkUploaded: allIsUploaded === 0,
           createNewIfExist,
         });
 
@@ -1491,15 +1484,11 @@ class UploadDataStore {
             this.checkChunkUpload({
               t,
               res: finalizeRes,
-              fileSize,
               index: finalizeIndex,
               indexOfFile,
               path,
               chunksLength: length,
               resolve,
-              reject,
-              isAsyncUpload: true,
-              isFinalize: true,
               createNewIfExist,
             });
           }
@@ -1511,7 +1500,8 @@ class UploadDataStore {
   };
 
   uploadFileChunks = async (
-    location,
+    sessionId,
+    folderId,
     requestsDataArray,
     fileSize,
     indexOfFile,
@@ -1534,8 +1524,10 @@ class UploadDataStore {
           isFinished: false,
           isFinalize: false,
           onUpload: () =>
-            uploadFile(
-              `${location}&chunkNumber=${index + 1}&upload=true`,
+            uploadChunkParallel(
+              folderId,
+              sessionId,
+              index + 1,
               requestsDataArray[index],
             ),
         });
@@ -1544,7 +1536,7 @@ class UploadDataStore {
         isActive: false,
         isFinished: false,
         isFinalize: true,
-        onUpload: () => uploadFile(`${location}&finalize=true`),
+        onUpload: () => finalizeUploadSession(folderId, sessionId),
       });
 
       if (!this.asyncUploadObj[operationId]) {
@@ -1577,20 +1569,21 @@ class UploadDataStore {
           return Promise.resolve();
         }
 
-        const res = await uploadFile(location, requestsDataArray[index]);
+        const res = await uploadChunkSequential(
+          folderId,
+          sessionId,
+          requestsDataArray[index],
+        );
         const resolve = (r) => Promise.resolve(r);
-        const reject = (err) => Promise.reject(err);
 
         this.checkChunkUpload({
           t,
           res,
-          fileSize,
           index,
           indexOfFile,
           path,
           chunksLength: length,
           resolve,
-          reject,
           createNewIfExist,
         });
 
@@ -1683,6 +1676,7 @@ class UploadDataStore {
       percent: this.percent,
       operation: OPERATIONS_NAME.upload,
       alert: false,
+      canceled: false,
       showPanel: this.setUploadPanelVisible,
     };
 
@@ -1734,8 +1728,10 @@ class UploadDataStore {
     const fileName = file.name;
     const fileSize = file.size;
 
+    const actualFolderId = isAIRoom ? knowledgeId : toFolderId;
+
     return startUploadSession(
-      isAIRoom ? knowledgeId : toFolderId,
+      actualFolderId,
       fileName,
       fileSize,
       "", // relativePath,
@@ -1744,9 +1740,9 @@ class UploadDataStore {
       createNewIfExist,
     )
       .then((res) => {
-        const location = res.data.location;
-        const path = res.data.path;
-        const operationId = res.data.id;
+        const sessionId = res.id;
+        const path = res.path;
+        const operationId = res.id;
         const requestsDataArray = [];
 
         let chunk = 0;
@@ -1760,13 +1756,14 @@ class UploadDataStore {
         }
 
         return {
-          location,
+          sessionId,
+          folderId: actualFolderId,
           requestsDataArray,
           path,
           operationId,
         };
       })
-      .then(({ location, requestsDataArray, path, operationId }) => {
+      .then(({ sessionId, folderId, requestsDataArray, path, operationId }) => {
         const fileIndex = this.uploadedFilesHistory.findIndex(
           (f) => f.uniqueId === this.files[indexOfFile].uniqueId,
         );
@@ -1774,7 +1771,8 @@ class UploadDataStore {
           this.uploadedFilesHistory[fileIndex].percent = chunks < 2 ? 50 : 0;
 
         return this.uploadFileChunks(
-          location,
+          sessionId,
+          folderId,
           requestsDataArray,
           fileSize,
           indexOfFile,
@@ -2278,6 +2276,10 @@ class UploadDataStore {
 
     if (!isCopy || destFolderId === this.selectedFolderStore.id) {
       this.clearActiveOperations(fileIds, folderIds);
+
+      if (!isCopy) {
+        this.filesStore.removeFiles(fileIds, folderIds, null, destFolderId);
+      }
 
       isMovingSelectedFolder &&
         this.navigateToNewFolderLocation(this.selectedFolderStore.id);

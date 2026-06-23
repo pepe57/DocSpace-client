@@ -1,32 +1,41 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * Copyright (C) Ascensio System SIA, 2009-2026
  *
- * This program is a free software product.
- * You can redistribute it and/or modify it under the terms
- * of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
- * Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
- * to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
- * any third-party rights.
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
  *
- * This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
- * the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
  *
- * You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
  *
- * The  interactive user interfaces in modified source and object code versions of the Program must
- * display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
  *
- * Pursuant to Section 7(b) of the License you must retain the original Product logo when
- * distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
- * trademark law for use of our trademarks.
+ * No trademark rights are granted under this License.
  *
- * All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
- * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
- * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
 
 import { makeAutoObservable, runInAction } from "mobx";
+import { AnalyticsEvents } from "@docspace/shared/enums";
+import axios from "axios";
 
 import {
   type WebSearchConfig,
@@ -37,6 +46,8 @@ import {
   type TServer,
   type TUpdateAiProvider,
   type TUpdateServer,
+  TDefaultProvider,
+  TModel,
 } from "@docspace/shared/api/ai/types";
 import {
   addNewServer,
@@ -53,15 +64,26 @@ import {
   updateKnowledgeConfig,
   getKnowledgeConfig,
   getProviderAvailabilityStatus,
+  getDefaultProvider,
+  getModels,
+  updateDefaultProvider,
 } from "@docspace/shared/api/ai";
 import {
+  ProviderType,
   ServerType,
   WebSearchType,
   KnowledgeType,
 } from "@docspace/shared/api/ai/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { TTranslation } from "@docspace/shared/types";
+
+type TSettingsStore = {
+  aiConfig?: { systemAiEnabled?: boolean };
+};
 
 class AISettingsStore {
+  settingsStore: TSettingsStore;
+
   isInit = false;
 
   aiProviders: TAiProvider[] = [];
@@ -84,7 +106,18 @@ class AISettingsStore {
 
   checkProvidersAbortController: AbortController | null = null;
 
-  constructor() {
+  defaultProvider: TDefaultProvider | null = null;
+
+  defaultProviderModels: TModel[] | null = null;
+
+  isDefaultProviderModelsLoading = false;
+
+  defaultProviderModelsError: string | null = null;
+
+  defaultProviderInitied = false;
+
+  constructor(settingsStore: TSettingsStore) {
+    this.settingsStore = settingsStore;
     makeAutoObservable(this);
   }
 
@@ -108,6 +141,26 @@ class AISettingsStore {
     this.webSearchInitied = value;
   };
 
+  setDefaultProvider = (provider: TDefaultProvider | null) => {
+    this.defaultProvider = provider;
+  };
+
+  setDefaultProviderModels = (models: TModel[] | null) => {
+    this.defaultProviderModels = models;
+  };
+
+  setIsDefaultProviderModelsLoading = (value: boolean) => {
+    this.isDefaultProviderModelsLoading = value;
+  };
+
+  setDefaultProviderModelsError = (error: string | null) => {
+    this.defaultProviderModelsError = error;
+  };
+
+  setDefaultProviderInitied = (value: boolean) => {
+    this.defaultProviderInitied = value;
+  };
+
   setAIProviders = (providers: TAiProvider[]) => {
     this.aiProviders = providers;
   };
@@ -128,6 +181,17 @@ class AISettingsStore {
     const newProvider = await createProvider(provider);
 
     this.aiProviders.push(newProvider);
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: AnalyticsEvents.AiProviderAdded,
+      id: newProvider.id,
+      type: newProvider.type,
+    });
+
+    if (this.aiProviders.length === 1) {
+      await this.initDefaultProvider();
+    }
   };
 
   updateAIProvider = async (id: TAiProvider["id"], data: TUpdateAiProvider) => {
@@ -145,14 +209,46 @@ class AISettingsStore {
         this.unavailableProvidersIdsSet.delete(id);
       }
     }
+
+    if (
+      this.defaultProvider?.providerId === newProvider.id &&
+      this.defaultProvider?.providerTitle !== newProvider.title
+    ) {
+      this.defaultProvider.providerTitle = newProvider.title;
+    }
   };
 
   deleteAIProvider = async (id: TAiProvider["id"]) => {
+    const isDefaultProvider = this.aiProviders?.find(
+      (p) => p.id === id,
+    )?.isDefault;
+    const isLastProvider = this.aiProviders.length === 1;
+
     await deleteProviders({ ids: [id] });
 
-    this.aiProviders = this.aiProviders.filter(
-      (provider) => provider.id !== id,
-    );
+    runInAction(() => {
+      this.aiProviders = this.aiProviders.filter(
+        (provider) => provider.id !== id,
+      );
+
+      if (isLastProvider) {
+        this.clearDefaultProviderData();
+      }
+    });
+
+    if (isDefaultProvider && !isLastProvider) {
+      await this.initDefaultProvider();
+
+      runInAction(() => {
+        const defaultProviderInList = this.aiProviders.find(
+          (p) => p.id === this.defaultProvider?.providerId,
+        );
+
+        if (defaultProviderInList && !defaultProviderInList.isDefault) {
+          defaultProviderInList.isDefault = true;
+        }
+      });
+    }
   };
 
   fetchAIProviders = async () => {
@@ -320,6 +416,85 @@ class AISettingsStore {
     return !this.unavailableProvidersIdsSet.has(id);
   };
 
+  fetchDefaultProviderModels = async (providerId: TAiProvider["id"]) => {
+    let models = null;
+
+    try {
+      this.setIsDefaultProviderModelsLoading(true);
+      this.setDefaultProviderModelsError(null);
+
+      models = await getModels(providerId);
+      this.setDefaultProviderModels(models);
+    } catch (e) {
+      let error = e;
+
+      if (axios.isAxiosError(e)) {
+        error = e.response?.data?.error?.message;
+      }
+
+      toastr.error(error as string);
+      console.error(e);
+      this.setDefaultProviderModelsError(error as string);
+      this.setDefaultProviderModels(null);
+    } finally {
+      this.setIsDefaultProviderModelsLoading(false);
+    }
+
+    return models;
+  };
+
+  initDefaultProvider = async () => {
+    this.setDefaultProviderInitied(false);
+
+    try {
+      const defaultProvider = await getDefaultProvider();
+
+      if (defaultProvider) {
+        this.setDefaultProvider(defaultProvider);
+        await this.fetchDefaultProviderModels(defaultProvider.providerId);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      this.setDefaultProviderInitied(true);
+    }
+  };
+
+  changeDefaultProvider = async (
+    providerData: {
+      providerId: number;
+      defaultModel: string;
+    },
+    t: TTranslation,
+  ) => {
+    try {
+      const newDefaultProvider = await updateDefaultProvider(providerData);
+
+      this.aiProviders.forEach((p) => {
+        if (p.isDefault) {
+          p.isDefault = false;
+        }
+
+        if (p.id === newDefaultProvider.providerId) {
+          p.isDefault = true;
+        }
+      });
+
+      this.setDefaultProvider(newDefaultProvider);
+      toastr.success(t("AISettings:DefaultProviderSetSuccess"));
+    } catch (e) {
+      toastr.error(e as string);
+      console.error(e);
+    }
+  };
+
+  clearDefaultProviderData = () => {
+    this.setDefaultProvider(null);
+    this.setDefaultProviderModels(null);
+    this.setDefaultProviderInitied(false);
+    this.setDefaultProviderModelsError(null);
+  };
+
   get systemMCPServers() {
     return this.mcpServers.filter(
       (mcp) => mcp.serverType !== ServerType.Custom,
@@ -333,7 +508,14 @@ class AISettingsStore {
   }
 
   get hasAIProviders() {
-    return this.aiProviders.length > 0;
+    if (this.aiProviders.length === 0) return false;
+
+    const isOnlyDisabledPortalAi =
+      this.aiProviders.length === 1 &&
+      this.aiProviders[0].type === ProviderType.PortalAi &&
+      !this.settingsStore.aiConfig?.systemAiEnabled;
+
+    return !isOnlyDisabledPortalAi;
   }
 }
 

@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { useMemo, useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router";
@@ -38,7 +47,6 @@ import {
 import { StopFillingDialog } from "@docspace/shared/dialogs/stop-filling";
 import { Guidance } from "@docspace/shared/components/guidance";
 import { getFormFillingTipsStorageName } from "@docspace/shared/utils";
-import AIAgentsSelector from "@docspace/shared/selectors/AIAgent";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
@@ -77,8 +85,11 @@ import {
   DeleteVersionDialog,
   CancelOperationDialog,
   ReducedRightsDialog,
-  SocialAuthWelcomeDialog,
+  EditRoomGroupsDialog,
+  AddRoomToGroupDialog,
+  PauseSubmissionsDialog,
 } from "../dialogs";
+import { AIAgentsDialog } from "../dialogs/AIAgentsDialog";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
 import RestoreRoomDialog from "../dialogs/RestoreRoomDialog";
@@ -95,10 +106,16 @@ import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 import CloseEditIndexDialog from "../dialogs/CloseEditIndexDialog";
 import FillingStatusPanel from "../panels/FillingStatusPanel";
+import ExternalSyncDbPanel from "../panels/ExternalSyncDbPanel";
 import TemplateAccessSettingsPanel from "../panels/TemplateAccessSettingsPanel";
 import RemoveUserConfirmationDialog from "../dialogs/RemoveUserConfirmationDialog";
 import AssignRoles from "../dialogs/AssignRoles";
 import ShareSelector from "../ShareSelector";
+
+import TemplateGallery from "../TemplateGallery";
+import InfoPanelTemplateGallery from "../TemplateGallery/InfoPanel";
+import PluginSelector from "../PluginSelector";
+import AskAIConnectDialog from "../dialogs/AskAIConnectDialog";
 
 const Panels = (props) => {
   const {
@@ -143,6 +160,7 @@ const Panels = (props) => {
     moveToPublicRoomVisible,
     settingsPluginDialogVisible,
     pluginDialogVisible,
+    pluginSelectorVisible,
     leaveRoomDialogVisible,
     changeRoomOwnerIsVisible,
     deletePluginDialogVisible,
@@ -176,10 +194,21 @@ const Panels = (props) => {
     reducedRightsVisible,
     removeUserConfirmation,
     assignRolesDialogVisible,
-    socialAuthWelcomeDialogVisible,
     extsFilesVectorized,
     aiAgentSelectorDialogProps,
     setAiAgentSelectorDialogProps,
+    templateGalleryVisible,
+    isVisibleInfoPanelTemplateGallery,
+    editRoomGroupsDialogVisible,
+    getCovers,
+    currentColorScheme,
+    covers,
+    setArrRoomGroups,
+    setEditRoomGroupsDialogVisible,
+    arrRoomGroups,
+    addRoomToGroupDialogVisible,
+    pauseSubmissionsDialogVisible,
+    askAIConnectDialogVisible,
   } = props;
 
   const navigate = useNavigate();
@@ -277,6 +306,7 @@ const Panels = (props) => {
     pluginDialogVisible && (
       <PluginDialog isVisible={pluginDialogVisible} key="plugin-dialog" />
     ),
+    pluginSelectorVisible && <PluginSelector key="plugin-selector" />,
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
     conversionVisible && <ConversionPanel key="conversion-panel" />,
     (moveToPanelVisible ||
@@ -301,13 +331,10 @@ const Panels = (props) => {
     lifetimeDialogVisible && <LifetimeDialog key="lifetime-dialog" />,
     emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
     downloadDialogVisible && <DownloadDialog key="download-dialog" />,
-
     conflictResolveDialogVisible && (
       <ConflictResolveDialog key="conflict-resolve-dialog" />
     ),
     convertDialogVisible && <ConvertDialog key="convert-dialog" />,
-
-    // createRoomDialogVisible && <CreateRoomDialog key="create-room-dialog" />,
     (createRoomConfirmDialogVisible || confirmDialogIsLoading) && (
       <CreateRoomConfirmDialog key="create-room-confirm-dialog" />
     ),
@@ -323,7 +350,6 @@ const Panels = (props) => {
         withAIAgentsTreeFolder
       />
     ),
-
     selectFileFormRoomDialogVisible && (
       <FilesSelector
         isFormRoom
@@ -339,7 +365,6 @@ const Panels = (props) => {
         withAIAgentsTreeFolder
       />
     ),
-
     selectFileAiKnowledgeDialogVisible && (
       <FilesSelector
         isFormRoom
@@ -356,9 +381,8 @@ const Panels = (props) => {
         withAIAgentsTreeFolder
       />
     ),
-
     aiAgentSelectorDialogProps.visible && (
-      <AIAgentsSelector
+      <AIAgentsDialog
         key="ai-agents-selector"
         onClose={() => setAiAgentSelectorDialogProps(false, null)}
         withPadding
@@ -378,7 +402,6 @@ const Panels = (props) => {
         }}
       />
     ),
-
     hotkeyPanelVisible && <HotkeysPanel key="hotkey-panel" />,
     invitePanelVisible && <InvitePanel key="invite-panel" />,
     convertPasswordDialogVisible && (
@@ -400,13 +423,11 @@ const Panels = (props) => {
     ),
     changeQuotaDialogVisible && <ChangeQuotaDialog key="change-quota-dialog" />,
     editLinkPanelIsVisible && <EditLinkPanel key="edit-link-panel" />,
-
     deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
     embeddingPanelData.visible && <EmbeddingPanel key="embedding-panel" />,
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
-
     leaveRoomDialogVisible && <LeaveRoomDialog key="leave-room-dialog" />,
     changeRoomOwnerIsVisible && (
       <ChangeRoomOwnerPanel key="change-room-owner" />
@@ -439,10 +460,10 @@ const Panels = (props) => {
       <CloseEditIndexDialog key="close-edit-index-dialog-dialog" />
     ),
     <FillingStatusPanel key="filling-status-panel" />,
+    <ExternalSyncDbPanel key="external-sync-db-panel" />,
     deleteVersionDialogVisible && (
       <DeleteVersionDialog key="delete-version-dialog" />
     ),
-
     stopFillingDialogData.visible && (
       <StopFillingDialog
         key="stop-filling-dialog"
@@ -457,7 +478,6 @@ const Panels = (props) => {
     welcomeFormFillingTipsVisible ? (
       <FormFillingTipsDialog key="form-filling_tips_dialog" />
     ) : null,
-
     formFillingTipsVisible ? (
       <Guidance
         key="form-filling-tips-guidance"
@@ -467,22 +487,41 @@ const Panels = (props) => {
         config={config}
       />
     ) : null,
-
     isShareFormData.visible && (
       <ShareFormPanel key="share-form-dialog" {...isShareFormData} />
     ),
     reducedRightsVisible ? (
       <ReducedRightsDialog key="reduced-rights-dialog" />
     ) : null,
-
     removeUserConfirmation && (
       <RemoveUserConfirmationDialog key="remove-user-confirmation-dialog" />
     ),
     assignRolesDialogVisible && <AssignRoles key="assign-roles-dialog" />,
-    socialAuthWelcomeDialogVisible && (
-      <SocialAuthWelcomeDialog key="joining-space-dialog" />
-    ),
     <ShareSelector key="share-selector" />,
+    templateGalleryVisible && <TemplateGallery key="template-gallery" />,
+    isVisibleInfoPanelTemplateGallery && (
+      <InfoPanelTemplateGallery key="template-gallery-info-panel" />
+    ),
+    editRoomGroupsDialogVisible && (
+      <EditRoomGroupsDialog
+        key="edit-room-groups-dialog"
+        currentColorScheme={currentColorScheme}
+        getCovers={getCovers}
+        covers={covers}
+        setArrRoomGroups={setArrRoomGroups}
+        setEditRoomGroupsDialogVisible={setEditRoomGroupsDialogVisible}
+        arrRoomGroups={arrRoomGroups}
+      />
+    ),
+    addRoomToGroupDialogVisible && (
+      <AddRoomToGroupDialog key="add-room-to-group-dialog" />
+    ),
+    pauseSubmissionsDialogVisible && (
+      <PauseSubmissionsDialog key="pause-submissions-dialog" />
+    ),
+    askAIConnectDialogVisible && (
+      <AskAIConnectDialog key="ask-ai-connect-dialog" />
+    ),
   ];
 };
 
@@ -501,6 +540,7 @@ export default inject(
     userStore,
     guidanceStore,
     filesSettingsStore,
+    oformsStore,
   }) => {
     const {
       copyPanelVisible,
@@ -516,7 +556,7 @@ export default inject(
       createRoomDialogVisible,
       createRoomConfirmDialogVisible,
       convertPasswordDialogVisible,
-      connectItem, // TODO:
+      connectItem,
       restoreAllPanelVisible,
       archiveDialogVisible,
       restoreRoomDialogVisible,
@@ -567,13 +607,19 @@ export default inject(
       reducedRightsData,
       removeUserConfirmation,
       assignRolesDialogData,
-      socialAuthWelcomeDialogVisible,
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
+      editRoomGroupsDialogVisible,
+      getCovers,
+      covers,
+      setEditRoomGroupsDialogVisible,
+      addRoomToGroupDialogVisible,
+      pauseSubmissionsDialogVisible,
+      askAIConnectDialogVisible,
     } = dialogsStore;
 
-    const { viewAs } = filesStore;
+    const { viewAs, setArrRoomGroups, arrRoomGroups } = filesStore;
 
     const { extsFilesVectorized } = filesSettingsStore;
 
@@ -585,7 +631,9 @@ export default inject(
       isVisible: versionHistoryPanelVisible,
       deleteVersionDialogVisible,
     } = versionHistoryStore;
-    const { hotkeyPanelVisible } = settingsStore;
+
+    const { hotkeyPanelVisible, currentColorScheme } = settingsStore;
+
     const { confirmDialogIsLoading } = createEditRoomStore;
     const { isRoomsTariffAlmostLimit, isUserTariffAlmostLimit } =
       currentQuotaStore;
@@ -594,9 +642,13 @@ export default inject(
       settingsPluginDialogVisible,
       deletePluginDialogVisible,
       pluginDialogVisible,
+      pluginSelectorVisible,
     } = pluginStore;
 
     const { getRefElement, config } = guidanceStore;
+
+    const { templateGalleryVisible, isVisibleInfoPanelTemplateGallery } =
+      oformsStore;
 
     const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
     const resetQuotaItem = () => {
@@ -620,7 +672,7 @@ export default inject(
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
-      connectDialogVisible: connectDialogVisible || !!connectItem, // TODO:
+      connectDialogVisible: connectDialogVisible || !!connectItem,
       versionHistoryPanelVisible,
       deleteDialogVisible,
       lifetimeDialogVisible,
@@ -657,6 +709,7 @@ export default inject(
       moveToPublicRoomVisible,
       settingsPluginDialogVisible,
       pluginDialogVisible,
+      pluginSelectorVisible,
       leaveRoomDialogVisible,
       changeRoomOwnerIsVisible,
       deletePluginDialogVisible,
@@ -690,11 +743,22 @@ export default inject(
       reducedRightsVisible: reducedRightsData.visible,
       removeUserConfirmation: removeUserConfirmation.visible,
       assignRolesDialogVisible: assignRolesDialogData.visible,
-      socialAuthWelcomeDialogVisible,
       extsFilesVectorized,
 
       aiAgentSelectorDialogProps,
       setAiAgentSelectorDialogProps,
+      templateGalleryVisible,
+      isVisibleInfoPanelTemplateGallery,
+      editRoomGroupsDialogVisible,
+      currentColorScheme,
+      getCovers,
+      covers,
+      setArrRoomGroups,
+      setEditRoomGroupsDialogVisible,
+      arrRoomGroups,
+      addRoomToGroupDialogVisible,
+      pauseSubmissionsDialogVisible,
+      askAIConnectDialogVisible,
     };
   },
 )(observer(Panels));

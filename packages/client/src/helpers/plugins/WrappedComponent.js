@@ -1,45 +1,55 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import { Text } from "@docspace/shared/components/text";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Textarea } from "@docspace/shared/components/textarea";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Label } from "@docspace/shared/components/label";
-import { Button } from "@docspace/shared/components/button";
-import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { ComboBox } from "@docspace/shared/components/combobox";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
+import { TextInput } from "@docspace/ui-kit/components/text-input";
+import { Label } from "@docspace/ui-kit/components/label";
+import { Button } from "@docspace/ui-kit/components/button";
+import { ToggleButton } from "@docspace/ui-kit/components/toggle-button";
+import { ComboBox } from "@docspace/ui-kit/components/combobox";
+import { IconButton } from "@docspace/ui-kit/components/icon-button";
+import { Link } from "@docspace/ui-kit/components/link";
 
 import { PluginComponents } from "./enums";
-
 import { borderToStyle, messageActions } from "./utils";
 
 const PLUGIN_IFRAME_TITLE = "Plugin iframe";
@@ -48,6 +58,7 @@ const PropsContext = React.createContext({});
 
 export const PluginComponent = inject(({ pluginStore }) => {
   const {
+    getPluginIconUrl,
     updatePluginStatus,
     setCurrentSettingsDialogPlugin,
     setSettingsPluginDialogVisible,
@@ -60,9 +71,14 @@ export const PluginComponent = inject(({ pluginStore }) => {
     updateEventListenerItems,
     updateFileItems,
     updatePlugin,
+    setPluginSelectorVisible,
+    setPluginSelectorProps,
+    setPluginMediaViewerVisible,
+    setPluginMediaViewerProps,
   } = pluginStore;
 
   return {
+    getPluginIconUrl,
     updatePluginStatus,
     setCurrentSettingsDialogPlugin,
     setSettingsPluginDialogVisible,
@@ -75,6 +91,10 @@ export const PluginComponent = inject(({ pluginStore }) => {
     updateEventListenerItems,
     updateFileItems,
     updatePlugin,
+    setPluginSelectorVisible,
+    setPluginSelectorProps,
+    setPluginMediaViewerVisible,
+    setPluginMediaViewerProps,
   };
 })(
   observer(
@@ -82,6 +102,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
       component,
 
       pluginName,
+      getPluginIconUrl,
 
       setSettingsPluginDialogVisible,
       setCurrentSettingsDialogPlugin,
@@ -96,6 +117,10 @@ export const PluginComponent = inject(({ pluginStore }) => {
       updateEventListenerItems,
       updateFileItems,
       updatePlugin,
+      setPluginSelectorVisible,
+      setPluginSelectorProps,
+      setPluginMediaViewerVisible,
+      setPluginMediaViewerProps,
     }) => {
       const [elementProps, setElementProps] = React.useState(component.props);
 
@@ -154,6 +179,7 @@ export const PluginComponent = inject(({ pluginStore }) => {
           };
         }
 
+
         switch (componentName) {
           case PluginComponents.box: {
             const childrenComponents = elementProps?.children?.map(
@@ -166,7 +192,15 @@ export const PluginComponent = inject(({ pluginStore }) => {
               ),
             );
 
-            return <div style={elementStyles}>{childrenComponents}</div>;
+            return (
+              <div
+                id={elementProps?.id}
+                className={elementProps?.className}
+                style={elementStyles}
+              >
+                {childrenComponents}
+              </div>
+            );
           }
 
           case PluginComponents.text: {
@@ -197,6 +231,10 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
+                setPluginMediaViewerVisible,
+                setPluginMediaViewerProps,
               });
             };
 
@@ -223,6 +261,10 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
+                setPluginMediaViewerVisible,
+                setPluginMediaViewerProps,
               });
             };
 
@@ -249,6 +291,10 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
+                setPluginMediaViewerVisible,
+                setPluginMediaViewerProps,
               });
             };
 
@@ -275,6 +321,10 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
+                setPluginMediaViewerVisible,
+                setPluginMediaViewerProps,
               });
             };
 
@@ -321,6 +371,8 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateEventListenerItems,
                 updateFileItems,
                 updatePlugin,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
               });
 
               setIsRequestRunning && setIsRequestRunning(false);
@@ -374,6 +426,10 @@ export const PluginComponent = inject(({ pluginStore }) => {
                 updateProfileMenuItems,
                 updateEventListenerItems,
                 updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
+                setPluginMediaViewerVisible,
+                setPluginMediaViewerProps,
               });
             };
 
@@ -401,6 +457,101 @@ export const PluginComponent = inject(({ pluginStore }) => {
           case PluginComponents.skeleton: {
             return <RectangleSkeleton {...elementProps} />;
           }
+
+          case PluginComponents.iconButton: {
+            const onClickAction = async () => {
+              if (!elementProps.onClick) return;
+
+              const message = await elementProps.onClick();
+
+              messageActions({
+                message,
+                setElementProps,
+                pluginName,
+                setSettingsPluginDialogVisible,
+                setCurrentSettingsDialogPlugin,
+                updatePluginStatus,
+                updatePropsContext,
+                setPluginDialogVisible,
+                setPluginDialogProps,
+                updateContextMenuItems,
+                updateInfoPanelItems,
+                updateMainButtonItems,
+                updateProfileMenuItems,
+                updateEventListenerItems,
+                updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
+                setPluginMediaViewerVisible,
+                setPluginMediaViewerProps,
+              });
+            };
+
+            const { onClick, iconName, iconClickName, iconHoverName, ...rest } =
+              elementProps;
+
+            const icon = iconName
+              ? getPluginIconUrl(pluginName, iconName)
+              : undefined;
+
+            const iconHover = iconHoverName
+              ? getPluginIconUrl(pluginName, iconHoverName)
+              : undefined;
+
+            const iconClick = iconClickName
+              ? getPluginIconUrl(pluginName, iconClickName)
+              : undefined;
+
+            return (
+                <IconButton
+                  {...rest}
+                  iconName={icon}
+                  iconHoverName={iconHover}
+                  iconClickName={iconClick}
+                  onClick={onClickAction}
+                />
+            );
+          }
+
+          case PluginComponents.link: {
+            const onClickAction = async () => {
+              if (!elementProps.onClick) return;
+
+              const message = await elementProps.onClick();
+
+              messageActions({
+                message,
+                setElementProps,
+                pluginName,
+                setSettingsPluginDialogVisible,
+                setCurrentSettingsDialogPlugin,
+                updatePluginStatus,
+                updatePropsContext,
+                setPluginDialogVisible,
+                setPluginDialogProps,
+                updateContextMenuItems,
+                updateInfoPanelItems,
+                updateMainButtonItems,
+                updateProfileMenuItems,
+                updateEventListenerItems,
+                updateFileItems,
+                setPluginSelectorVisible,
+                setPluginSelectorProps,
+                setPluginMediaViewerVisible,
+                setPluginMediaViewerProps,
+              });
+            };
+
+            return (
+                <Link 
+                  {...elementProps} 
+                  onClick={onClickAction}
+                >
+                  {elementProps.text}
+                </Link>
+            );
+          }
+
           default:
             break;
         }

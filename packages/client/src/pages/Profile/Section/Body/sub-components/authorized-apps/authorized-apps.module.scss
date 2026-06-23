@@ -1,0 +1,235 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+@use "@docspace/ui-kit/styles/mixins";
+
+.container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.tableWrapper {
+  margin-top: 0px;
+
+  :global(.header-container-text) {
+    font-size: 12px;
+  }
+
+  :global(.table-container_header) {
+    position: absolute;
+  }
+}
+
+.rowWrapper {
+  display: contents;
+}
+
+.tableRow {
+  :global(.table-container_cell) {
+    text-overflow: ellipsis;
+
+    padding-inline-end: 8px;
+  }
+
+  .mr8 {
+    margin-inline-end: 8px;
+  }
+
+  .textOverflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .descriptionText {
+    color: var(--profile-oauth-description-color);
+  }
+
+  .toggleButton {
+    display: contents;
+
+    input {
+      position: relative;
+
+      margin-inline-start: -8px;
+    }
+  }
+
+  :global(.table-container_row-loader) {
+    margin-left: 8px;
+    margin-right: 16px;
+  }
+
+  &:hover {
+    :global(.table-container_cell) {
+      cursor: pointer;
+      background: var(--profile-oauth-row-background) !important;
+
+      margin-top: -1px;
+
+      border-top: var(--profile-oauth-row-border);
+    }
+
+    :global(.table-container_file-name-cell) {
+      :global(.rtl) {
+        margin-right: -24px;
+        padding-right: 24px;
+      }
+      margin-left: -24px;
+      padding-left: 24px;
+    }
+
+    :global(.table-container_row-context-menu-wrapper) {
+      :global(.rtl) {
+        margin-left: -20px;
+        padding-left: 18px;
+      }
+
+      margin-right: -20px;
+      padding-right: 18px;
+    }
+  }
+}
+
+.rowContainer {
+  margin-top: 0px;
+
+  :global(.row-list-item) {
+    padding-left: 21px;
+  }
+
+  :global(.row-loader) {
+    width: calc(100% - 46px) !important;
+    padding-left: 21px;
+  }
+
+  img {
+    width: 32px;
+    max-width: 32px;
+
+    height: 32px;
+    max-height: 32px;
+  }
+
+  :global(.oauth2-row-selected) {
+    background: var(--profile-oauth-checked-background);
+
+    cursor: pointer;
+    border-bottom: none;
+
+    margin-left: -24px;
+    margin-right: -24px;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    @include mixins.tablet {
+      margin-left: -16px;
+      margin-right: -16px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+
+  :global(.oauth2-row) {
+    margin-top: -3px;
+    padding-top: 3px;
+
+    &:hover {
+      background: var(--profile-oauth-checked-background);
+
+      cursor: pointer;
+      border-bottom: none;
+
+      margin-left: -24px;
+      margin-right: -24px;
+      padding-left: 24px;
+      padding-right: 24px;
+
+      @include mixins.tablet {
+        margin-left: -16px;
+        margin-right: -16px;
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+    }
+  }
+}
+
+.rowContent {
+  display: flex;
+  padding-bottom: 10px;
+
+  :global(.rowMainContainer) {
+    height: 100%;
+    width: 100%;
+  }
+
+  :global(.mainIcons) {
+    min-width: 76px;
+  }
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
+.flexWrapper {
+  display: flex;
+}
+
+.nameContainer {
+  :global(.table-container_row-checkbox) {
+    margin-inline-start: -8px;
+    width: 16px;
+    padding: 16px 8px 16px 16px;
+
+    :global(.rtl) {
+      padding: 16px 16px 16px 8px;
+    }
+  }
+}
+
+.styledImage {
+  width: 32px;
+  height: 32px;
+
+  border-radius: 3px;
+}

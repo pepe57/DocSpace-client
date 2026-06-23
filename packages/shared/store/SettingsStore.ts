@@ -1,31 +1,56 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
+
+import SocketHelper, {
+  SocketCommands,
+  SocketCommandsRoomParts,
+  SocketEvents,
+} from "@docspace/ui-kit/utils/socket";
+import { toastr, type TData } from "@docspace/ui-kit/components/toast";
+import {
+  Base,
+  Dark,
+  type TColorScheme,
+} from "@docspace/ui-kit/providers/theme";
+import { ThemeKeys } from "@docspace/ui-kit/enums";
+import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
+import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+
 import api from "../api";
 import type { TAIConfig } from "../api/ai/types";
 import type { TApiKey } from "../api/api-keys/types";
@@ -50,40 +75,34 @@ import type {
   TTimeZone,
   TVersionBuild,
 } from "../api/settings/types";
-import { toastr } from "../components/toast";
-import type { TData } from "../components/toast/Toast.type";
-import { COOKIE_EXPIRATION_YEAR, LANGUAGE, MEDIA_VIEW_URL } from "../constants";
+
+import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import {
   DeepLinkType,
   type RecaptchaType,
   TenantStatus,
-  ThemeKeys,
-  type UrlActionType,
+  FolderType,
+  UrlActionType,
 } from "../enums";
 import { version } from "../package.json";
 import type { ILogo } from "../pages/Branding/WhiteLabel/WhiteLabel.types";
-import { Base, Dark, type TColorScheme } from "../themes";
+
 import type { Nullable } from "../types";
 import type { TFrameConfig } from "../types/Frame";
-import {
-  size as deviceSize,
-  getDeviceTypeByWidth,
-  getSystemTheme,
-  isTablet,
-} from "../utils";
+
+import { size as deviceSize, getDeviceTypeByWidth, isTablet } from "../utils";
 import { isRequestAborted } from "../utils/axios/isRequestAborted";
-import { combineUrl } from "../utils/combineUrl";
 import {
   frameCallEvent,
   getShowText,
+  insertDataLayer,
   insertTagManager,
   isManagement,
   isPublicRoom,
   openUrl,
 } from "../utils/common";
-import { getCookie, setCookie } from "../utils/cookie";
+import { applyCustomStyles } from "../utils/customStyles";
 import FirebaseHelper from "../utils/firebase";
-import SocketHelper from "../utils/socket";
 
 const themes = {
   Dark,
@@ -140,7 +159,7 @@ class SettingsStore {
 
   utcHoursOffset = 0;
 
-  defaultPage = "/";
+  defaultFolderType = FolderType.Rooms;
 
   homepage = "";
 
@@ -334,6 +353,8 @@ class SettingsStore {
 
   displayBanners: boolean = false;
 
+  aiServicesEnabled: boolean = true;
+
   apiKeys: TApiKey[] = [];
 
   permissions: string[] = [];
@@ -344,9 +365,21 @@ class SettingsStore {
 
   aiConfig: Nullable<TAIConfig> = null;
 
+  externalDbEnabled: boolean = false;
+
   constructor() {
     makeAutoObservable(this);
+
+    this.wsExternalDbSettings();
   }
+
+  wsExternalDbSettings = () => {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: SocketCommandsRoomParts.ExternalDbSettings,
+    });
+
+    SocketHelper?.on(SocketEvents.ExternalDbSettings, this.setSettings);
+  };
 
   clearAbortControllerArr = () => {
     this.abortControllerArr.forEach((controller) => {
@@ -393,6 +426,12 @@ class SettingsStore {
 
   get helpCenterEntries() {
     return this.externalResources?.helpcenter?.entries;
+  }
+
+  get aiServicesManagementUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.aiservicesmanagement
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.aiservicesmanagement}`
+      : this.helpCenterDomain;
   }
 
   get apiDomain() {
@@ -565,6 +604,30 @@ class SettingsStore {
   get aiSettingsUrl() {
     return this.helpCenterDomain && this.helpCenterEntries?.aisettings
       ? `${this.helpCenterDomain}${this.helpCenterEntries.aisettings}`
+      : null;
+  }
+
+  get aiProviderSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.aiprovidersettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.aiprovidersettings}`
+      : null;
+  }
+
+  get mcpServersSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.mcpserverssettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.mcpserverssettings}`
+      : null;
+  }
+
+  get webSearchSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.websearchsettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.websearchsettings}`
+      : null;
+  }
+
+  get knowledgeSettingsUrl() {
+    return this.helpCenterDomain && this.helpCenterEntries?.knowledgesettings
+      ? `${this.helpCenterDomain}${this.helpCenterEntries.knowledgesettings}`
       : null;
   }
 
@@ -870,6 +933,10 @@ class SettingsStore {
       : this.helpCenterDomain;
   }
 
+  get templateGalleryAvailable() {
+    return !!(this.formGallery && this.formGallery.domain !== "");
+  }
+
   setIsDesktopClientInit = (isDesktopClientInit: boolean) => {
     this.isDesktopClientInit = isDesktopClientInit;
   };
@@ -896,8 +963,8 @@ class SettingsStore {
     this.snackbarExist = snackbar;
   };
 
-  setDefaultPage = (defaultPage: string) => {
-    this.defaultPage = defaultPage;
+  setDefaultFolderType = (folderType: FolderType) => {
+    this.defaultFolderType = folderType;
   };
 
   setPortalDomain = (domain: string) => {
@@ -912,37 +979,25 @@ class SettingsStore {
     this.greetingSettings = greetingSettings;
   };
 
-  getSettings = async () => {
-    const settings: Nullable<TSettings> = await api.settings.getSettings(true);
+  setCulture = (culture: string) => (this.culture = culture);
 
-    if (window.AscDesktopEditor !== undefined) {
-      const dp = combineUrl(window.ClientConfig?.proxy?.url, MEDIA_VIEW_URL);
-      this.setDefaultPage(dp);
-    }
-
-    if (!settings) return;
-
+  setSettings = (settings: Partial<TSettings>) => {
     Object.keys(settings).forEach((forEachKey) => {
       const key = forEachKey as keyof TSettings;
 
       if (key in this && settings) {
-        if (key === "socketUrl") {
+        if (key === "socketUrl" && settings[key]) {
           this.setSocketUrl(settings[key]);
           return;
         }
 
-        this.setValue(
-          key as keyof SettingsStore,
-          key === "defaultPage"
-            ? combineUrl(window.ClientConfig?.proxy?.url, settings[key])
-            : settings[key],
-        );
+        this.setValue(key as keyof SettingsStore, settings[key]);
 
         if (key === "culture") {
           if (settings?.wizardToken) return;
           const language = getCookie(LANGUAGE);
           if (!language || language === "undefined") {
-            setCookie(LANGUAGE, settings[key], {
+            setCookie(LANGUAGE, settings[key]!, {
               "max-age": COOKIE_EXPIRATION_YEAR,
             });
           }
@@ -951,8 +1006,20 @@ class SettingsStore {
         this.setValue("hashSettings", settings[key]);
       }
     });
+  };
+
+  getSettings = async () => {
+    const settings: Nullable<TSettings> = await api.settings.getSettings(true);
+
+    if (!settings) return;
+
+    this.setSettings(settings);
 
     this.setGreetingSettings(settings.greetingSettings);
+
+    if (settings.aiEnabled !== undefined) {
+      this.aiServicesEnabled = settings.aiEnabled;
+    }
 
     return settings;
   };
@@ -1008,6 +1075,10 @@ class SettingsStore {
     }
 
     if (origSettings?.tagManagerId) {
+      if (origSettings?.ownerId) {
+        insertDataLayer(origSettings.ownerId);
+      }
+
       insertTagManager(origSettings.tagManagerId);
     }
   };
@@ -1397,7 +1468,7 @@ class SettingsStore {
   };
 
   setTheme = (key: ThemeKeys) => {
-    let theme: null | ThemeKeys.BaseStr | ThemeKeys.DarkStr = null;
+    let theme: ThemeKeys.BaseStr | ThemeKeys.DarkStr = ThemeKeys.BaseStr;
     switch (key) {
       case ThemeKeys.Base:
       case ThemeKeys.BaseStr:
@@ -1410,11 +1481,6 @@ class SettingsStore {
       case ThemeKeys.System:
       case ThemeKeys.SystemStr:
       default:
-        theme =
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? ThemeKeys.DarkStr
-            : ThemeKeys.BaseStr;
         theme = getSystemTheme();
     }
 
@@ -1563,6 +1629,8 @@ class SettingsStore {
     runInAction(() => {
       this.frameConfig = frameConfig;
     });
+
+    applyCustomStyles(frameConfig?.stylesUrl);
 
     if (frameConfig) {
       frameCallEvent({
@@ -1742,6 +1810,19 @@ class SettingsStore {
 
   setDisplayBanners = (displayBanners: boolean) => {
     this.displayBanners = displayBanners;
+  };
+
+  setAiServicesEnabled = (aiServicesEnabled: boolean) => {
+    this.aiServicesEnabled = aiServicesEnabled;
+  };
+
+  updateDefaultFolderType = async (folderType: FolderType) => {
+    try {
+      const res = await api.settings.setDefaultFolderType(folderType);
+      this.setDefaultFolderType(res);
+    } catch (e) {
+      toastr.error(e as TData);
+    }
   };
 }
 

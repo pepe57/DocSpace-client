@@ -1,27 +1,25 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation, Trans } from "react-i18next";
-import styled from "styled-components";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { Text } from "@docspace/ui-kit/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-
-const StyledText = styled(Text)`
-  margin-top: 16px;
-`;
+import { DeviceType } from "@docspace/shared/enums";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 type ReducedRightsDialogProps = {
   visible: boolean;
   adminName: string;
+  currentDeviceType: DeviceType;
   setReducedRightsData: (visible: boolean, admin?: string) => void;
 };
 
 const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
   visible,
   adminName,
-
+  currentDeviceType,
   setReducedRightsData,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
@@ -39,7 +37,12 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
   };
 
   return (
-    <ModalDialog visible={visible} onClose={onCloseDialog} autoMaxHeight>
+    <ModalDialog
+      visible={visible}
+      onClose={onCloseDialog}
+      autoMaxHeight
+      isLarge
+    >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Trans
@@ -48,12 +51,12 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
           i18nKey="YourUserTypeHasChanged"
           values={{
             userType: t("Common:Guest"),
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
             adminName,
           }}
           components={{ 1: <span style={{ fontWeight: 600 }} /> }}
         />
-        <StyledText>
+        <Text style={{ marginTop: "16px" }}>
           <Trans
             t={t}
             ns="Files"
@@ -61,12 +64,12 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
             values={{ sectionName: t("Common:MyDocuments") }}
             components={{ 1: <span style={{ fontWeight: 600 }} /> }}
           />
-        </StyledText>
-        <StyledText>
+        </Text>
+        <Text style={{ marginTop: "16px" }}>
           {t("Common:ForQuestionsContactPortalAdmin", {
-            productName: t("Common:ProductName"),
+            productName: getBrandName("ProductName"),
           })}
-        </StyledText>
+        </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -75,28 +78,29 @@ const ReducedRightsDialog: React.FC<ReducedRightsDialogProps> = ({
           size={ButtonSize.normal}
           primary
           onClick={onCloseDialog}
-          scale
+          scale={currentDeviceType === DeviceType.mobile}
         />
         <Button
           key="RedirectButton"
-          label={t("Files:GoToSection", {
-            sectionName: t("Common:MyDocuments"),
-          })}
+          label={t("Common:MyDocuments")}
           size={ButtonSize.normal}
           onClick={onRedirect}
-          scale
+          scale={currentDeviceType === DeviceType.mobile}
         />
       </ModalDialog.Footer>
     </ModalDialog>
   );
 };
 
-export default inject(({ dialogsStore }: TStore) => {
+export default inject(({ dialogsStore, settingsStore }: TStore) => {
   const { reducedRightsData, setReducedRightsData } = dialogsStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     visible: reducedRightsData.visible,
     adminName: reducedRightsData.adminName,
+    currentDeviceType,
     setReducedRightsData,
   };
 })(observer(ReducedRightsDialog));
+

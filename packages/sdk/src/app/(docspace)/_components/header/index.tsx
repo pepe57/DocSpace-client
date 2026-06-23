@@ -1,32 +1,41 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 "use client";
 
-import { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import classnames from "classnames";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
@@ -34,22 +43,20 @@ import { useSearchParams } from "next/navigation";
 
 import Navigation, {
   TNavigationItem,
-} from "@docspace/shared/components/navigation";
-import { TableGroupMenu } from "@docspace/shared/components/table";
-import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { getLogoUrl } from "@docspace/shared/utils/common";
+} from "@docspace/ui-kit/components/navigation";
+import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
-import { useTheme } from "@docspace/shared/hooks/useTheme";
-
+import { FolderType } from "@docspace/shared/enums";
 import useDeviceType from "@/hooks/useDeviceType";
 import { useNavigationStore } from "../../_store/NavigationStore";
 import { useFilesSelectionStore } from "../../_store/FilesSelectionStore";
 import { useFilesListStore } from "../../_store/FilesListStore";
-import { useSettingsStore } from "../../_store/SettingsStore";
 
 import useFolderActions from "../../_hooks/useFolderActions";
 import useContextMenuModel from "../../_hooks/useContextMenuModel";
 import useHeaderMenu from "../../_hooks/useHeaderMenu";
+import { DeleteContext } from "../../_contexts/DeleteContext";
+import { FileOperationsContext } from "../../_contexts/FileOperationsContext";
 
 import type { HeaderProps } from "./Header.types";
 
@@ -60,6 +67,10 @@ const Header = ({
   pathParts,
   isEmptyList,
   showTitle = true,
+  onBurgerClick,
+  isInfoPanelVisible = false,
+  onToggleInfoPanel,
+  headerOffset = 0,
 }: HeaderProps) => {
   const searchParams = useSearchParams();
 
@@ -68,16 +79,28 @@ const Header = ({
     return value === "true" ? true : value === "false" ? false : value;
   };
 
-  showTitle = getValue("showTitle") as boolean;
+  const showTitleParam = getValue("showTitle");
+  if (showTitleParam !== null) showTitle = showTitleParam as boolean;
 
   const navigationStore = useNavigationStore();
   const filesSelectionStore = useFilesSelectionStore();
   const filesListStore = useFilesListStore();
-  const { displayAbout } = useSettingsStore();
   const { currentDeviceType } = useDeviceType();
-  const { getHeaderContextMenuModel } = useContextMenuModel({});
+  const deleteCtx = React.useContext(DeleteContext);
+  const fileOpsCtx = React.useContext(FileOperationsContext);
+  const isTrashSection = filesListStore.rootFolderType === FolderType.TRASH;
+  const { getHeaderContextMenuModel } = useContextMenuModel({
+    onDeleteClick: deleteCtx?.deleteItem,
+    onDeleteSelectedClick: deleteCtx?.deleteItems,
+    onCopyClick: !isTrashSection ? fileOpsCtx?.copyItem : undefined,
+    onMoveClick: !isTrashSection ? fileOpsCtx?.moveItem : undefined,
+    onDuplicateClick: !isTrashSection ? fileOpsCtx?.duplicateItem : undefined,
+    onRestoreClick: isTrashSection ? fileOpsCtx?.restoreItem : undefined,
+    onCopySelectedClick: !isTrashSection ? fileOpsCtx?.copyItems : undefined,
+    onMoveSelectedClick: !isTrashSection ? fileOpsCtx?.moveItems : undefined,
+    onRestoreSelectedClick: isTrashSection ? fileOpsCtx?.restoreItems : undefined,
+  });
   const { getHeaderMenu, onCheckboxChange } = useHeaderMenu();
-  const { isBase: isBaseTheme } = useTheme();
 
   const tableGroupMenuVisible = filesSelectionStore.selection.length > 0;
   const isChecked =
@@ -87,19 +110,15 @@ const Header = ({
 
   const { openFolder } = useFolderActions({ t });
 
-  const { title, rootFolderId, id } = current;
+  const title = current?.title;
+  const rootFolderId = current?.rootFolderId;
+  const id = current?.id;
 
-  const isRoomsFolder = pathParts[0].id === rootFolderId;
-
-  const logo = displayAbout
-    ? getLogoUrl(WhiteLabelLogoType.LightSmall, !isBaseTheme)
-    : "";
-
-  const burgerLogo = displayAbout
-    ? getLogoUrl(WhiteLabelLogoType.LeftMenu, !isBaseTheme)
-    : "";
+  const isRoomsFolder = pathParts?.[0]?.id === rootFolderId;
 
   const navigationItems: TNavigationItem[] = useMemo(() => {
+    if (!pathParts) return [];
+
     const items = pathParts
       .map((p) => ({
         id: p.id,
@@ -115,8 +134,8 @@ const Header = ({
 
   useEffect(() => {
     navigationStore.setNavigationItems(navigationItems);
-    navigationStore.setCurrentFolderId(id);
-    navigationStore.setCurrentTitle(title);
+    if (id !== undefined) navigationStore.setCurrentFolderId(id);
+    if (title !== undefined) navigationStore.setCurrentTitle(title);
     navigationStore.setCurrentIsRootRoom(isRoomsFolder);
   }, [title, navigationItems, navigationStore, id, isRoomsFolder]);
 
@@ -124,6 +143,7 @@ const Header = ({
     navigationStore.navigationItems ?? navigationItems;
 
   const onBackToParentFolder = useCallback(() => {
+    if (!currentNavigationItems.length) return;
     openFolder(currentNavigationItems[0].id, currentNavigationItems[0].title);
   }, [currentNavigationItems, openFolder]);
 
@@ -135,29 +155,49 @@ const Header = ({
     };
   }, [onBackToParentFolder]);
 
+  const { outerOffsetStyle, innerOffsetStyle } = useMemo(() => {
+    if (!headerOffset) {
+      return {
+        outerOffsetStyle: undefined as React.CSSProperties | undefined,
+        innerOffsetStyle: undefined as React.CSSProperties | undefined,
+      };
+    }
+    return {
+      outerOffsetStyle: { alignSelf: "stretch" } as React.CSSProperties,
+      innerOffsetStyle: {
+        position: "relative",
+        marginInlineStart: `${headerOffset}px`,
+        height: "100%",
+      } as React.CSSProperties,
+    };
+  }, [headerOffset]);
+
+  if (!current || !pathParts) return null;
+
   return (
     <div
       className={classnames(styles.headerContainer, {
-        [styles.infoPanelVisible]: false,
+        [styles.infoPanelVisible]: isInfoPanelVisible,
         [styles.isExternalFolder]: false,
         [styles.isLifetimeEnabled]: false,
       })}
+      style={outerOffsetStyle}
     >
       {tableGroupMenuVisible ? (
         <TableGroupMenu
           withComboBox
-          withoutInfoPanelToggler
+          withoutInfoPanelToggler={!onToggleInfoPanel}
           isChecked={isChecked}
           isIndeterminate={!isChecked}
           headerMenu={getHeaderContextMenuModel()}
           onClick={() => {}}
           onChange={onCheckboxChange}
-          toggleInfoPanel={() => {}}
-          isInfoPanelVisible={false}
+          toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
+          isInfoPanelVisible={isInfoPanelVisible}
           checkboxOptions={getHeaderMenu()}
         />
       ) : (
-        <div className="header-container">
+        <div className="header-container" style={innerOffsetStyle}>
           <Navigation
             showText
             isRootFolder={currentNavigationItems.length === 0}
@@ -167,7 +207,6 @@ const Header = ({
               currentNavigationItems.length === 0 ? "" : pathParts[0].title
             }
             isDesktop={false}
-            isFrame
             navigationItems={currentNavigationItems}
             getContextOptionsPlus={() => []}
             getContextOptionsFolder={() => []}
@@ -183,8 +222,6 @@ const Header = ({
             isEmptyFilesList={isEmptyList}
             onBackToParentFolder={onBackToParentFolder}
             showRootFolderTitle={false}
-            withLogo={logo}
-            burgerLogo={burgerLogo}
             withMenu={!isRoomsFolder}
             currentDeviceType={currentDeviceType}
             titleIcon=""
@@ -192,11 +229,12 @@ const Header = ({
             showNavigationButton={false}
             isCurrentFolderInfo={false}
             showTitle={showTitle}
-            isPublicRoom
             isRoom={!!current.roomType}
-            isInfoPanelVisible={false}
-            toggleInfoPanel={() => {}}
-            onLogoClick={() => {}}
+            isInfoPanelVisible={isInfoPanelVisible}
+            toggleInfoPanel={onToggleInfoPanel ?? (() => {})}
+            withLogo=""
+            burgerLogo=""
+            onLogoClick={onBurgerClick ?? (() => {})}
             hideInfoPanel={() => {}}
             clearTrash={() => {}}
             showFolderInfo={() => {}}

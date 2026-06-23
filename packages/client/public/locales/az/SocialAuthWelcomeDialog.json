@@ -1,8 +1,6 @@
 {
-  "ChangeData": "Məlumatları və şifrəni dəyiş",
-  "ClickButtonBelow": "E-poçtunuzla daxil olmaq istəyirsinizsə, öz şifrənizi qurun. <br /> Hazır olduğunuzda, aşağıdakı düyməni klikləyin.",
-  "ContinueToProduct": "{{productName}} ilə davam edin",
-  "GeneratedPassword": "Yaranmış şifrə",
   "ProductNameDetail": "{{productName}} adı",
-  "ReviewAccountDetails": "Xüsusi hesab məlumatlarınızı nəzərdən keçmək üçün bir dəqiqə vaxt ayırın:"
+  "SetEmailPassword": "Şifrə təyin et",
+  "WelcomeSubtitle": "Sahəniz uğurla yaradıldı. Profil məlumatlarınızı nəzərdən keçirin və işə başlayın.",
+  "YourProfileDetails": "Profil məlumatlarınız"
 }

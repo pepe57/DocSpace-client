@@ -5,9 +5,9 @@ import { usePathname, useSearchParams } from "next/navigation";
 import {
   TItem,
   TOnFilter,
-} from "@docspace/shared/components/filter/Filter.types";
+} from "@docspace/ui-kit/components/filter/Filter.types";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { getFilterType } from "@docspace/shared/components/filter/Filter.utils";
+import { getFilterType } from "@docspace/ui-kit/components/filter/Filter.utils";
 import {
   FilterGroups,
   FilterType,
@@ -310,9 +310,12 @@ export default function useFilesFilter({
   }, [t]);
 
   const onChangeViewAs = React.useCallback(() => {
-    const newViewAs = filesViewAs === "tile" ? "row" : "tile";
-
-    setFilesViewAs(newViewAs);
+    if (filesViewAs === "tile") {
+      const isDesktopWidth = window.innerWidth > 1024;
+      setFilesViewAs(isDesktopWidth ? "table" : "row");
+    } else {
+      setFilesViewAs("tile");
+    }
   }, [setFilesViewAs, filesViewAs]);
 
   const removeSelectedItem = React.useCallback(

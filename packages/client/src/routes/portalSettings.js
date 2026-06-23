@@ -1,36 +1,69 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
-import { Navigate } from "react-router";
+import React from "react";
+import { Navigate, useLocation } from "react-router";
+import { inject, observer } from "mobx-react";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
 import componentLoader from "@docspace/shared/utils/component-loader";
+import { getFromSessionStorage } from "@docspace/shared/utils/getFromSessionStorage";
 import { generalRoutes } from "./general";
 
 import { ViewComponent } from "../pages/PortalSettings/View";
+
+const DevToolsRedirect = () => {
+  const location = useLocation();
+  const newPath = location.pathname.replace(
+    /^\/portal-settings\/developer-tools/,
+    "/developer-tools",
+  );
+  return <Navigate to={newPath} replace />;
+};
+
+const ProtectedAISettingsRoute = inject(({ settingsStore }) => ({
+  aiServicesEnabled: settingsStore.aiServicesEnabled,
+}))(
+  observer(({ aiServicesEnabled, children }) => {
+    return aiServicesEnabled ? (
+      children
+    ) : (
+      <Navigate to="/portal-settings" replace />
+    );
+  }),
+);
 
 const PortalSettingsRoutes = {
   path: "portal-settings/",
@@ -55,6 +88,10 @@ const PortalSettingsRoutes = {
     },
     {
       path: "customization/appearance",
+      element: <ViewComponent />,
+    },
+    {
+      path: "customization/default-templates",
       element: <ViewComponent />,
     },
     {
@@ -188,6 +225,19 @@ const PortalSettingsRoutes = {
       },
     },
     {
+      path: "customization/general/ai-services-management",
+      async lazy() {
+        const { AiServicesManagement } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/common/Customization/ai-services-management"
+            ),
+        );
+
+        return { Component: AiServicesManagement };
+      },
+    },
+    {
       path: "security",
       element: <Navigate to="security/access-portal" replace />,
     },
@@ -240,6 +290,19 @@ const PortalSettingsRoutes = {
         );
 
         return { Component: TrustedMailSection };
+      },
+    },
+    {
+      path: "security/access-portal/access-control",
+      async lazy() {
+        const { AccessControlSection } = await componentLoader(
+          () =>
+            import(
+              "SRC_DIR/pages/PortalSettings/categories/security/access-portal/accessControl"
+            ),
+        );
+
+        return { Component: AccessControlSection };
       },
     },
     {
@@ -322,23 +385,43 @@ const PortalSettingsRoutes = {
     },
     {
       path: "ai-settings",
-      element: <Navigate to="ai-settings/providers" replace />,
+      element: (
+        <ProtectedAISettingsRoute>
+          <Navigate to="ai-settings/providers" replace />
+        </ProtectedAISettingsRoute>
+      ),
     },
     {
       path: "ai-settings/providers",
-      element: <ViewComponent />,
+      element: (
+        <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
     },
     {
       path: "ai-settings/servers",
-      element: <ViewComponent />,
+      element: (
+        <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
     },
     {
       path: "ai-settings/search",
-      element: <ViewComponent />,
+      element: (
+        <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
     },
     {
       path: "ai-settings/knowledge",
-      element: <ViewComponent />,
+      element: (
+        <ProtectedAISettingsRoute>
+          <ViewComponent />
+        </ProtectedAISettingsRoute>
+      ),
     },
     {
       path: "integration",
@@ -433,7 +516,23 @@ const PortalSettingsRoutes = {
       element: <ViewComponent />,
     },
     {
-      path: "services",
+      path: "payments/services",
+      element: <ViewComponent />,
+    },
+    {
+      path: "payments/payment-method",
+      element: <ViewComponent />,
+    },
+    {
+      path: "payments/services/ai-services",
+      element: <ViewComponent />,
+    },
+    {
+      path: "payments/services/backup",
+      element: <ViewComponent />,
+    },
+    {
+      path: "payments/services/disk-storage",
       element: <ViewComponent />,
     },
     {
@@ -521,141 +620,11 @@ const PortalSettingsRoutes = {
     },
     {
       path: "developer-tools",
-      element: <ViewComponent />,
+      element: <Navigate to="/developer-tools/overview" replace />,
     },
     {
-      path: "developer-tools/api",
-      element: <ViewComponent />,
-    },
-    {
-      path: "developer-tools/api-keys",
-      element: <ViewComponent />,
-    },
-    {
-      path: "developer-tools/javascript-sdk",
-      element: <ViewComponent />,
-    },
-    {
-      path: "developer-tools/javascript-sdk/docspace",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/DocSpace"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/javascript-sdk/public-room",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/SimpleRoom"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/javascript-sdk/custom",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Manager"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/javascript-sdk/room-selector",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/RoomSelector"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/javascript-sdk/file-selector",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/FileSelector"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/javascript-sdk/editor",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Editor"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/javascript-sdk/viewer",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/plugin-sdk",
-      element: <ViewComponent />,
-    },
-    {
-      path: "developer-tools/webhooks",
-      element: <ViewComponent />,
-    },
-    {
-      path: "developer-tools/webhooks/:id",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookHistory"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/webhooks/:id/:eventId",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/Webhooks/WebhookEventDetails"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/oauth",
-      element: <ViewComponent />,
-    },
-    {
-      path: "developer-tools/oauth/create",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage"
-            ),
-        ),
-    },
-    {
-      path: "developer-tools/oauth/:id",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage"
-            ),
-        ),
+      path: "developer-tools/*",
+      element: <DevToolsRedirect />,
     },
     ...generalRoutes,
   ],

@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 import React, {
   useRef,
   useState,
@@ -33,7 +42,7 @@ import React, {
 
 import { DeviceType } from "../../../../enums";
 import { includesMethod } from "../../../../utils/typeGuards";
-import type { ContextMenuRefType } from "../../../context-menu";
+import type { ContextMenuRefType } from "@docspace/ui-kit/components/context-menu";
 
 import { isGif, isHeic, isTiff, isWebp } from "../../MediaViewer.utils";
 import styles from "./Viewer.module.scss";
@@ -47,6 +56,7 @@ import { ViewerPlayer } from "../ViewerPlayer";
 import { PDFViewer } from "../PDFViewer";
 
 import type ViewerProps from "./Viewer.props";
+import { PluginViewer } from "../PluginViewer/PluginViewer";
 
 export const Viewer = (props: ViewerProps) => {
   const {
@@ -75,6 +85,7 @@ export const Viewer = (props: ViewerProps) => {
     onDownloadClick,
     onSetSelectionFile,
     generateContextMenu,
+    pluginViewerContent,
   } = props;
 
   const timerIDRef = useRef<NodeJS.Timeout>(undefined);
@@ -234,11 +245,13 @@ export const Viewer = (props: ViewerProps) => {
 
   const playlistFile = playlist[playlistPos];
 
-  const isDecodedImage =
-    isTiff(playlistFile.fileExst) || isHeic(playlistFile.fileExst);
+  const isDecodedImage = playlistFile
+    ? isTiff(playlistFile.fileExst) || isHeic(playlistFile.fileExst)
+    : false;
 
-  const isAnimatedImage =
-    isGif(playlistFile.fileExst) || isWebp(playlistFile.fileExst);
+  const isAnimatedImage = playlistFile
+    ? isGif(playlistFile.fileExst) || isWebp(playlistFile.fileExst)
+    : false;
 
   const mediaType = isPdf
     ? "PDF"
@@ -260,7 +273,10 @@ export const Viewer = (props: ViewerProps) => {
       aria-label={`${mediaType} viewer - ${title}`}
       aria-modal="true"
     >
-      {!isFullscreen && !isMobile && panelVisible && !isPdf ? (
+      {!isFullscreen &&
+      !isMobile &&
+      panelVisible &&
+      (!isPdf || pluginViewerContent) ? (
         <DesktopDetails
           title={title}
           onMaskClick={handleMaskClick}
@@ -279,7 +295,17 @@ export const Viewer = (props: ViewerProps) => {
         </>
       ) : null}
 
-      {isImage ? (
+      {pluginViewerContent ? (
+        <PluginViewer
+          pluginViewerContent={pluginViewerContent}
+          handleMaskClick={handleMaskClick}
+          onNext={onNextClick}
+          onPrev={onPrevClick}
+          isFirstItem={!isNotFirstElement}
+          isLastItem={!isNotLastElement}
+          devices={devices}
+        />
+      ) : isImage && playlistFile ? (
         <ImageViewer
           key={targetFile?.id}
           isDecodedImage={isDecodedImage}
@@ -306,7 +332,7 @@ export const Viewer = (props: ViewerProps) => {
           backgroundBlack={backgroundBlack}
           setBackgroundBlack={setBackgroundBlack}
         />
-      ) : isVideo || isAudio ? (
+      ) : (isVideo || isAudio) && playlistFile ? (
         <ViewerPlayer
           isError={isError}
           src={fileUrl}
@@ -324,7 +350,7 @@ export const Viewer = (props: ViewerProps) => {
           isFistImage={!isNotFirstElement}
           isOpenContextMenu={isOpenContextMenu}
           thumbnailSrc={playlistFile.thumbnailUrl}
-          canDownload={!!targetFile?.security.Download}
+          canDownload={!!targetFile?.security?.Download}
           onPrev={onPrevClick}
           onNext={onNextClick}
           setIsError={setIsError}
@@ -362,3 +388,4 @@ export const Viewer = (props: ViewerProps) => {
     </div>
   );
 };
+

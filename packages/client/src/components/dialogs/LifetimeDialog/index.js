@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { Text } from "@docspace/shared/components/text";
-import { StyledBodyContent, StyledFooterContent } from "./StyledLifetimeDialog";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { Button } from "@docspace/ui-kit/components/button";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { Text } from "@docspace/ui-kit/components/text";
+import styles from "./LifetimeDialog.module.scss";
 
 const LifetimeDialogComponent = (props) => {
   const {
@@ -62,22 +62,23 @@ const LifetimeDialogComponent = (props) => {
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledBodyContent className="modal-dialog-content-body">
+        <div className={styles.lifetimeBodyContainer}>
           <Text fontWeight={600} fontSize="13px">
             {t("Files:LifetimeDialogDescriptionHeader")}
           </Text>
           <Text fontSize="13px">{t("Files:LifetimeDialogDescription")}</Text>
-        </StyledBodyContent>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
-        <StyledFooterContent>
+        <div className={styles.lifetimeFooterContainer}>
           <Checkbox
-            className="modal-dialog_lifetime-checkbox"
+            className={styles.lifetimeCheckbox}
             label={t("ConvertDialog:HideMessage")}
             isChecked={isChecked}
             onChange={onChange}
+            dataTestId="lifetime_dialog_hide_message_checkbox"
           />
-          <div className="modal-dialog_lifetime-buttons">
+          <div className={styles.lifetimeButtons}>
             <Button
               id="delete-file-modal_submit"
               key="OKButton"
@@ -86,6 +87,7 @@ const LifetimeDialogComponent = (props) => {
               primary
               scale
               onClick={onAcceptClick}
+              testId="lifetime_dialog_ok_button"
             />
             <Button
               id="delete-file-modal_cancel"
@@ -94,9 +96,10 @@ const LifetimeDialogComponent = (props) => {
               size="normal"
               scale
               onClick={onClose}
+              testId="lifetime_dialog_cancel_button"
             />
           </div>
-        </StyledFooterContent>
+        </div>
       </ModalDialog.Footer>
     </ModalDialog>
   );

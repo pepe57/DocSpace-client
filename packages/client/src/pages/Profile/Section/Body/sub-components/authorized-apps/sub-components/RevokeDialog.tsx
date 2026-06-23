@@ -4,11 +4,12 @@ import { useTranslation, Trans } from "react-i18next";
 import {
   ModalDialog,
   ModalDialogType,
-} from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+} from "@docspace/ui-kit/components/modal-dialog";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 
 import { RevokeDialogProps } from "../AuthorizedApps.types";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const RevokeDialog = ({
   visible,
@@ -33,7 +34,7 @@ const RevokeDialog = ({
       i18nKey="RevokeConsentDescriptionGroup"
       ns="OAuth"
       values={{
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         organizationName: logoText,
       }}
     />
@@ -44,7 +45,7 @@ const RevokeDialog = ({
       ns="OAuth"
       values={{
         name,
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         organizationName: logoText,
       }}
     />
@@ -55,7 +56,7 @@ const RevokeDialog = ({
       i18nKey="RevokeConsentLoginGroup"
       ns="OAuth"
       values={{
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         organizationName: logoText,
       }}
     />
@@ -66,7 +67,7 @@ const RevokeDialog = ({
       ns="OAuth"
       values={{
         name,
-        productName: t("Common:ProductName"),
+        productName: getBrandName("ProductName"),
         organizationName: logoText,
       }}
     />

@@ -1,38 +1,47 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { useState } from "react";
 import isEqual from "lodash/isEqual";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 
-import { Text } from "../../../components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { SaveCancelButtons } from "../../../components/save-cancel-buttons";
 import { WhiteLabelLogoType } from "../../../enums";
-import { globalColors } from "../../../themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
 
 import { Logo } from "./Logo";
 import { IWhiteLabel, IWhiteLabelData } from "./WhiteLabel.types";
@@ -44,13 +53,13 @@ import {
 } from "./WhiteLabel.helper";
 import { WhiteLabelHeader } from "./WhiteLabelHeader";
 import styles from "./WhiteLabel.module.scss";
+import { getConstName } from "@docspace/shared/constants/consts";
 
 export const WhiteLabel = (props: IWhiteLabel) => {
   const {
     logoUrls,
     isSettingPaid,
     showAbout,
-    showNotAvailable,
     standalone,
     onSave,
     onRestoreDefault,
@@ -196,9 +205,14 @@ export const WhiteLabel = (props: IWhiteLabel) => {
   const isEqualLogo = isEqual(logoUrls, defaultWhiteLabelLogoUrls);
 
   return (
-    <div className={styles.whiteLabelWrapper}>
+    <div
+      className={classNames(styles.whiteLabelWrapper, {
+        ["isEnableBranding"]: !isSettingPaid,
+        ["settings_unavailable"]: !isSettingPaid,
+      })}
+      data-testid="whitelabel-settings-wrapper"
+    >
       <WhiteLabelHeader
-        showNotAvailable={showNotAvailable}
         isSettingPaid={isSettingPaid}
         standalone={standalone}
         onUseTextAsLogo={onUseTextAsLogo}
@@ -210,11 +224,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
 
       <div className={styles.logosContainer}>
         <div className={styles.logoWrapper}>
-          <Text
-            fontSize="15px"
-            fontWeight="600"
-            className="settings_unavailable"
-          >
+          <Text fontSize="15px" fontWeight="600">
             {t("LogoLightSmall")} ({logoUrls[0].size.width}x
             {logoUrls[0].size.height})
           </Text>
@@ -247,11 +257,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         </div>
 
         <div className={styles.logoWrapper}>
-          <Text
-            fontSize="15px"
-            fontWeight="600"
-            className="settings_unavailable"
-          >
+          <Text fontSize="15px" fontWeight="600">
             {t("LogoCompact")} ({logoUrls[5].size.width}x
             {logoUrls[5].size.height})
           </Text>
@@ -292,11 +298,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         </div>
 
         <div className={styles.logoWrapper}>
-          <Text
-            fontSize="15px"
-            fontWeight="600"
-            className="settings_unavailable"
-          >
+          <Text fontSize="15px" fontWeight="600">
             {t("LogoLogin")} ({logoUrls[1].size.width}x{logoUrls[1].size.height}
             )
           </Text>
@@ -338,11 +340,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
 
         {showAbout ? (
           <div className={styles.logoWrapper}>
-            <Text
-              fontSize="15px"
-              fontWeight="600"
-              className="settings_unavailable"
-            >
+            <Text fontSize="15px" fontWeight="600">
               {t("LogoAbout")} ({logoUrls[6].size.width}x
               {logoUrls[6].size.height})
             </Text>
@@ -383,11 +381,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           </div>
         ) : null}
         <div className={styles.logoWrapper}>
-          <Text
-            fontSize="15px"
-            fontWeight="600"
-            className="settings_unavailable"
-          >
+          <Text fontSize="15px" fontWeight="600">
             {t("LogoFavicon")} ({logoUrls[2].size.width}x
             {logoUrls[2].size.height})
           </Text>
@@ -405,11 +399,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
         </div>
 
         <div className={styles.logoWrapper}>
-          <Text
-            fontSize="15px"
-            fontWeight="600"
-            className="settings_unavailable"
-          >
+          <Text fontSize="15px" fontWeight="600">
             {/* t("LogoForEditors", { editorName: t("Common:Documents") })} */}
             {t("LogoDocsEditor")} ({logoUrls[4].size.width}x
             {logoUrls[4].size.height})
@@ -418,6 +408,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
           <div className={styles.logosWrapper}>
             <Logo
               name={logoUrls[4].name}
+              title={t("LightTheme")}
               src={logoUrls[4].path.light}
               imageClass={classNames(
                 styles.borderImg,
@@ -433,6 +424,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             />
             <Logo
               name={logoUrls[3].name}
+              title={t("DarkTheme")}
               src={logoUrls[3].path.light}
               imageClass={classNames(
                 styles.borderImg,
@@ -538,7 +530,7 @@ export const WhiteLabel = (props: IWhiteLabel) => {
             fontWeight="600"
             className="settings_unavailable"
           >
-            {t("LogoForEditors", { editorName: t("Common:PDF") })} (
+            {t("LogoForEditors", { editorName: getConstName("PDF") })} (
             {logoUrls[12].size.width}x{logoUrls[12].size.height})
           </Text>
           <div className={styles.logosWrapper}>

@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { makeAutoObservable, runInAction } from "mobx";
 import axios from "axios";
@@ -31,29 +40,48 @@ import cloneDeep from "lodash/cloneDeep";
 import api from "@docspace/shared/api";
 import type { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import type { UserStore } from "@docspace/shared/store/UserStore";
+import type { CurrentTariffStatusStore } from "@docspace/shared/store/CurrentTariffStatusStore";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
-import { toastr } from "@docspace/shared/components/toast";
+import { TData, toastr } from "@docspace/ui-kit/components/toast";
 import type {
   TFile,
   TFileSecurity,
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import type { TAPIPlugin } from "@docspace/shared/api/plugins/types";
-import type { ModalDialogProps } from "@docspace/shared/components/modal-dialog/ModalDialog.types";
+import type { ModalDialogProps } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.types";
 import type { TTranslation } from "@docspace/shared/types";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import SocketHelper, {
+  SocketEvents,
+  TChangeWebPluginData,
+} from "@docspace/ui-kit/utils/socket";
 
 import defaultConfig from "PUBLIC_DIR/scripts/config.json";
 
 import type {
+  IFloatingOperationsButtonClient,
   IContextMenuItem,
+  IContextMenuItemClient,
   IContextMenuItemValidation,
   IEventListenerItem,
+  IEventListenerItemClient,
   IFileItem,
+  IFileItemClient,
   IInfoPanelItem,
+  IInfoPanelItemClient,
   IMainButtonItem,
+  IMainButtonItemClient,
+  IMessage,
   IProfileMenuItem,
+  IProfileMenuItemClient,
+  IArticleButtonItem,
+  IArticleButtonItemClient,
   IframeWindow,
   TPlugin,
+  IPostMessageCallbackMessage,
+  IMediaViewerClient,
 } from "SRC_DIR/helpers/plugins/types";
 
 import { getPluginUrl, messageActions } from "../helpers/plugins/utils";
@@ -66,6 +94,8 @@ import {
 } from "../helpers/plugins/enums";
 
 import type SelectedFolderStore from "./SelectedFolderStore";
+import type { TSelectorProps } from "SRC_DIR/components/PluginSelector/types";
+import { SocketCommands } from "@docspace/ui-kit/utils/socket";
 
 const { api: apiConf, proxy: proxyConf } = defaultConfig;
 const { origin: apiOrigin, prefix: apiPrefix } = apiConf;
@@ -76,6 +106,14 @@ const origin =
 const proxy = window.ClientConfig?.proxy?.url || proxyURL;
 const prefix = window.ClientConfig?.api?.prefix || apiPrefix;
 
+type TDispatchMessage = {
+  message: IMessage | void;
+  pluginName: string;
+  setElementProps?: React.Dispatch<unknown>;
+  updateCreateDialogProps?: React.Dispatch<unknown>;
+  updatePropsContext?: (props: unknown) => void;
+};
+
 class PluginStore {
   private settingsStore: SettingsStore = {} as SettingsStore;
 
@@ -83,19 +121,23 @@ class PluginStore {
 
   private userStore: UserStore = {} as UserStore;
 
+  private currentTariffStatusStore: CurrentTariffStatusStore | null = null;
+
   plugins: TPlugin[] = [];
 
-  contextMenuItems: Map<string, IContextMenuItem> = new Map();
+  contextMenuItems: Map<string, IContextMenuItemClient> = new Map();
 
-  infoPanelItems: Map<string, IInfoPanelItem> = new Map();
+  infoPanelItems: Map<string, IInfoPanelItemClient> = new Map();
 
-  mainButtonItems: Map<string, IMainButtonItem> = new Map();
+  mainButtonItems: Map<string, IMainButtonItemClient> = new Map();
 
-  profileMenuItems: Map<string, IProfileMenuItem> = new Map();
+  profileMenuItems: Map<string, IProfileMenuItemClient> = new Map();
 
-  eventListenerItems: Map<string, IEventListenerItem> = new Map();
+  eventListenerItems: Map<string, IEventListenerItemClient> = new Map();
 
-  fileItems: Map<string, IFileItem> = new Map();
+  fileItems: Map<string, IFileItemClient> = new Map();
+
+  articleButtonItems: Map<string, IArticleButtonItemClient> = new Map();
 
   pluginFrame: HTMLIFrameElement | null = null;
 
@@ -107,7 +149,16 @@ class PluginStore {
 
   pluginDialogVisible = false;
 
+  pluginSelectorVisible = false;
+
+  pluginFloatingOperationsButtons: Map<
+    string,
+    IFloatingOperationsButtonClient
+  > = new Map();
+
   pluginDialogProps: null | ModalDialogProps = null;
+
+  pluginSelectorProps: null | TSelectorProps = null;
 
   deletePluginDialogVisible = false;
 
@@ -117,17 +168,91 @@ class PluginStore {
 
   needPageReload = false;
 
+  pluginMediaViewerVisible = false;
+
+  pluginMediaViewerProps: null | IMediaViewerClient = null;
+
   constructor(
     settingsStore: SettingsStore,
     selectedFolderStore: SelectedFolderStore,
     userStore: UserStore,
+    currentTariffStatusStore: CurrentTariffStatusStore,
   ) {
     this.settingsStore = settingsStore;
     this.selectedFolderStore = selectedFolderStore;
     this.userStore = userStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
 
     makeAutoObservable(this);
+
+    // Subscribe to plugin state changes via WebSocket
+    this.wsChangeWebPlugin();
   }
+
+  wsChangeWebPlugin = () => {
+    SocketHelper?.emit(SocketCommands.Subscribe, {
+      roomParts: "change-web-plugin",
+    });
+
+    SocketHelper?.on(
+      SocketEvents.ChangeWebPlugin,
+      this.handlePluginStateChange,
+    );
+  };
+
+  handlePluginStateChange = (data: TChangeWebPluginData) => {
+    const { webPluginName, enabled } = data;
+
+    runInAction(() => {
+      const plugin = this.plugins.find((p) => p.name === webPluginName);
+
+      if (!plugin) return;
+
+      plugin.enabled = enabled;
+
+      if (enabled) {
+        this.activatePlugin(webPluginName);
+      } else {
+        this.deactivatePlugin(webPluginName);
+      }
+    });
+  };
+
+  dispatchMessage = ({
+    message,
+    pluginName,
+    setElementProps,
+    updateCreateDialogProps,
+    updatePropsContext,
+  }: TDispatchMessage) => {
+    messageActions({
+      message,
+      pluginName,
+      setElementProps,
+      setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
+      setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
+      updatePluginStatus: this.updatePluginStatus,
+      updatePropsContext: updatePropsContext,
+      setPluginDialogVisible: this.setPluginDialogVisible,
+      setPluginDialogProps: this.setPluginDialogProps,
+      updateContextMenuItems: this.updateContextMenuItems,
+      updateInfoPanelItems: this.updateInfoPanelItems,
+      updateMainButtonItems: this.updateMainButtonItems,
+      updateProfileMenuItems: this.updateProfileMenuItems,
+      updateEventListenerItems: this.updateEventListenerItems,
+      updateFileItems: this.updateFileItems,
+      updateArticleButtonItems: this.updateArticleButtonItems,
+      updateCreateDialogProps: updateCreateDialogProps,
+      updatePlugin: this.updatePlugin,
+      setPluginSelectorVisible: this.setPluginSelectorVisible,
+      setPluginSelectorProps: this.setPluginSelectorProps,
+      addPluginFloatingOperations: this.addPluginFloatingOperations,
+      removePluginFloatingOperations: this.removePluginFloatingOperations,
+      updatePluginFloatingOperations: this.updatePluginFloatingOperations,
+      setPluginMediaViewerVisible: this.setPluginMediaViewerVisible,
+      setPluginMediaViewerProps: this.setPluginMediaViewerProps,
+    });
+  };
 
   setNeedPageReload = (value: boolean) => {
     this.needPageReload = value;
@@ -149,6 +274,16 @@ class PluginStore {
     this.pluginDialogVisible = value;
   };
 
+  setPluginSelectorVisible = (value: boolean) => {
+    this.pluginSelectorVisible = value;
+  };
+
+  setPluginSelectorProps = (
+    value: null | (TSelectorProps & { pluginName: string }),
+  ) => {
+    this.pluginSelectorProps = value;
+  };
+
   setPluginDialogProps = (value: null | ModalDialogProps) => {
     this.pluginDialogProps = value;
   };
@@ -160,6 +295,36 @@ class PluginStore {
   setDeletePluginDialogProps = (value: null | { pluginName: string }) => {
     this.deletePluginDialogProps = value;
   };
+
+  addPluginFloatingOperations = (value: IFloatingOperationsButtonClient) => {
+    if (this.pluginFloatingOperationsButtons.has(value.id)) return;
+    this.pluginFloatingOperationsButtons.set(value.id, value);
+  };
+
+  updatePluginFloatingOperations = (value: IFloatingOperationsButtonClient) => {
+    if (!this.pluginFloatingOperationsButtons.has(value.id)) return;
+    this.pluginFloatingOperationsButtons.set(value.id, value);
+  };
+
+  removePluginFloatingOperations = (id: string) => {
+    this.pluginFloatingOperationsButtons.delete(id);
+  };
+
+  setPluginMediaViewerVisible = (value: boolean) => {
+    this.pluginMediaViewerVisible = value;
+  };
+
+  setPluginMediaViewerProps = (value: null | IMediaViewerClient) => {
+    this.pluginMediaViewerProps = value;
+  };
+
+  get isNotPaidPeriod() {
+    return this.currentTariffStatusStore?.isNotPaidPeriod;
+  }
+
+  get pluginFloatingOperationsArray(): IFloatingOperationsButtonClient[] {
+    return Array.from(this.pluginFloatingOperationsButtons.values());
+  }
 
   updatePluginStatus = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
@@ -202,6 +367,12 @@ class PluginStore {
         if (this.plugins[pluginIdx].scopes.includes(PluginScopes.File)) {
           this.updateFileItems(name);
         }
+
+        if (
+          this.plugins[pluginIdx].scopes.includes(PluginScopes.ArticleButton)
+        ) {
+          this.updateArticleButtonItems(name);
+        }
       }
     }
   };
@@ -219,6 +390,8 @@ class PluginStore {
   };
 
   initPlugins = async () => {
+    if (this.isNotPaidPeriod) return;
+
     const frame = document.createElement("iframe");
     frame.id = "plugin-iframe";
     frame.width = "0px";
@@ -236,6 +409,8 @@ class PluginStore {
   };
 
   updatePlugins = async (fromList?: boolean) => {
+    if (this.isNotPaidPeriod) return;
+
     const abortController = new AbortController();
     this.settingsStore.addAbortControllers(abortController);
 
@@ -280,7 +455,13 @@ class PluginStore {
     return true;
   };
 
-  addPlugin = async (data: FormData, t: TTranslation) => {
+  checkPluginCacheWarning = (plugin: TAPIPlugin) => {
+    return this.plugins.some(
+      (p) => p.name === plugin.name && p.version === plugin.version,
+    );
+  };
+
+  addPlugin = async (data: FormData) => {
     try {
       const plugin = await api.plugins.addPlugin(data);
 
@@ -288,27 +469,22 @@ class PluginStore {
         plugin.minDocSpaceVersion,
       );
 
-      if (!isPluginCompatible) {
-        toastr.error(
-          t("PluginIsNotCompatible", {
-            productName: t("Common:ProductName"),
-          }),
-        );
-      } else {
-        toastr.success(t("PluginLoadedSuccessfully"));
-      }
+      const isPluginInCache = this.checkPluginCacheWarning(plugin);
 
       this.setNeedPageReload(true);
 
       this.initPlugin(plugin);
-    } catch (e) {
-      const err = e as { response: { data: { error: { message: string } } } };
 
-      toastr.error(err.response.data.error.message as string);
+      return {
+        isPluginCompatible,
+        isPluginInCache,
+      };
+    } catch (e) {
+      toastr.error(e as TData);
     }
   };
 
-  uninstallPlugin = async (name: string) => {
+  uninstallPlugin = async (name: string, t: TTranslation) => {
     const pluginIdx = this.plugins.findIndex((p) => p.name === name);
 
     try {
@@ -323,9 +499,26 @@ class PluginStore {
           if (this.plugins.length === 0) this.setIsEmptyList(true);
         });
       }
+      toastr.success(t("PluginDeletedSuccessfully"));
     } catch (e) {
+      toastr.error(e as TData);
       console.log(e);
     }
+  };
+
+  initLocalePlugin = (plugin: TPlugin) => {
+    const culture = this.settingsStore.culture;
+    const currentLanguage = (getCookie(LANGUAGE) || culture) as string;
+    plugin.setLanguage?.(currentLanguage);
+
+    const language = plugin.getLanguage?.();
+
+    plugin.nameLocale =
+      (language && plugin.nameLocaleMap?.[language]) || plugin.name;
+
+    plugin.descriptionLocale =
+      (language && plugin.descriptionLocaleMap?.[language]) ||
+      plugin.description;
   };
 
   initPlugin = (
@@ -342,6 +535,8 @@ class PluginStore {
 
           const newPlugin = cloneDeep({
             ...plugin,
+            nameLocaleMap: plugin.nameLocale,
+            descriptionLocaleMap: plugin.descriptionLocale,
             ...iWindow?.Plugins?.[plugin.pluginName],
           });
 
@@ -352,11 +547,11 @@ class PluginStore {
 
           newPlugin.iconUrl = getPluginUrl(newPlugin.url, "");
 
-          const isPluginCompatible = this.checkPluginCompatibility(
+          newPlugin.compatible = this.checkPluginCompatibility(
             plugin.minDocSpaceVersion,
           );
 
-          newPlugin.compatible = isPluginCompatible;
+          this.initLocalePlugin(newPlugin);
 
           this.installPlugin(newPlugin);
 
@@ -393,6 +588,35 @@ class PluginStore {
     });
   };
 
+  installPluginCss = async (plugin: TPlugin) => {
+    if (!plugin.cssUrl) return;
+
+    const linkId = `plugin-styles-${plugin.pluginName}`;
+    const existingLink = document.getElementById(linkId) as HTMLLinkElement;
+
+    if (existingLink) {
+      // update existing link
+      existingLink.href = plugin.cssUrl;
+      return;
+    }
+
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = plugin.cssUrl;
+    link.id = linkId;
+    document.head.appendChild(link);
+  };
+
+  uninstallPluginCss = (plugin: TPlugin) => {
+    const linkId = `plugin-styles-${plugin.pluginName}`;
+    const link = document.getElementById(linkId) as HTMLLinkElement;
+
+    if (link) {
+      link.remove();
+    }
+  };
+
   installPlugin = async (plugin: TPlugin, addToList = true) => {
     if (addToList) {
       const idx = this.plugins.findIndex((p) => p.name === plugin.name);
@@ -424,6 +648,8 @@ class PluginStore {
 
     if (plugin.status === PluginStatus.hide) return;
 
+    this.installPluginCss(plugin);
+
     if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
       this.updateContextMenuItems(name);
     }
@@ -446,6 +672,14 @@ class PluginStore {
 
     if (plugin.scopes.includes(PluginScopes.File)) {
       this.updateFileItems(name);
+    }
+
+    if (plugin.scopes.includes(PluginScopes.PostMessage)) {
+      this.initPostMessagePlugin(plugin);
+    }
+
+    if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
+      this.updateArticleButtonItems(name);
     }
   };
 
@@ -486,6 +720,7 @@ class PluginStore {
 
       return plugin;
     } catch (e) {
+      toastr.error(e as TData);
       console.log(e);
     }
   };
@@ -510,6 +745,8 @@ class PluginStore {
     plugin.enabled = false;
     plugin.settings = "";
 
+    this.uninstallPluginCss(plugin);
+
     if (plugin.scopes.includes(PluginScopes.ContextMenu)) {
       this.deactivateContextMenuItems(plugin);
     }
@@ -532,6 +769,10 @@ class PluginStore {
 
     if (plugin.scopes.includes(PluginScopes.File)) {
       this.deactivateFileItems(plugin);
+    }
+
+    if (plugin.scopes.includes(PluginScopes.ArticleButton)) {
+      this.deactivateArticleButtonItems(plugin);
     }
   };
 
@@ -566,7 +807,8 @@ class PluginStore {
     ctx: IContextMenuItemValidation,
   ) => {
     const keys: string[] = [];
-    const { type, fileExst, userRole, device, security, itemSecurity } = ctx;
+    const { type, fileExst, userRole, device, security, itemSecurity, itemId } =
+      ctx;
 
     if (type && item.fileType && !item.fileType.includes(type)) return;
 
@@ -593,6 +835,13 @@ class PluginStore {
     )
       return;
 
+    if (
+      itemId !== undefined &&
+      item.itemId &&
+      !item.itemId.includes(itemId)
+    )
+      return;
+
     if (item.items && item.items.length > 0) {
       item.items.forEach((subItem) => {
         const validContextMenuItemKeys = this.getValidContextMenuItemKeys(
@@ -612,9 +861,10 @@ class PluginStore {
 
   getContextMenuKeysByType = (
     type: PluginFileType,
-    fileExst: string,
-    security: TRoomSecurity | TFolderSecurity,
-    itemSecurity: TFileSecurity | TRoomSecurity | TFolderSecurity,
+    fileExst?: string,
+    security?: TRoomSecurity | TFolderSecurity,
+    itemSecurity?: TFileSecurity | TRoomSecurity | TFolderSecurity,
+    itemId?: number | string,
   ) => {
     if (this.contextMenuItems.size === 0) return;
 
@@ -625,7 +875,7 @@ class PluginStore {
     const keys: string[] = [];
 
     switch (type) {
-      case PluginFileType.Files:
+      case PluginFileType.file:
         items.forEach((item) => {
           const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
@@ -634,13 +884,14 @@ class PluginStore {
             device,
             security,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);
         });
 
         break;
-      case PluginFileType.Folders:
+      case PluginFileType.folder:
         items.forEach((item) => {
           const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
@@ -648,12 +899,13 @@ class PluginStore {
             device,
             security,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);
         });
         break;
-      case PluginFileType.Rooms:
+      case PluginFileType.room:
         items.forEach((item) => {
           const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
@@ -661,12 +913,13 @@ class PluginStore {
             device,
             security,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);
         });
         break;
-      case PluginFileType.Image:
+      case PluginFileType.image:
         items.forEach((item) => {
           const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
@@ -675,12 +928,13 @@ class PluginStore {
             fileExst,
             security,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);
         });
         break;
-      case PluginFileType.Video:
+      case PluginFileType.video:
         items.forEach((item) => {
           const validKeys = this.getValidContextMenuItemKeys(item, {
             type,
@@ -689,6 +943,7 @@ class PluginStore {
             security,
             fileExst,
             itemSecurity,
+            itemId,
           });
 
           if (validKeys) keys.push(...validKeys);
@@ -702,13 +957,21 @@ class PluginStore {
     return keys;
   };
 
+  getPluginIconUrl = (pluginName: string, icon: string) => {
+    const plugin = this.plugins.find((p) => p.name === pluginName);
+
+    if (!plugin) return;
+
+    return `${plugin.iconUrl}/assets/${icon}?hash=${plugin.version}`;
+  };
+
   updateContextMenuItems = (name: string) => {
     const plugin = this.plugins.find((p) => p.name === name);
 
     if (!plugin || !plugin.enabled) return;
 
-    const items: Map<string, IContextMenuItem> =
-      plugin.getContextMenuItems && plugin.getContextMenuItems();
+    const items: Map<string, IContextMenuItem> | undefined =
+      plugin.getContextMenuItems?.();
 
     if (!items) return;
 
@@ -716,39 +979,43 @@ class PluginStore {
     let currentDepth = 1;
 
     // Helper function to recursively process context menu items
-    const processContextMenuItem = (value: IContextMenuItem) => {
-      const onClick = async (fileId: number) => {
-        if (!value.onClick || value.items) return;
+    const processContextMenuItem = (
+      value: IContextMenuItem,
+    ): IContextMenuItemClient => {
+      const onClick: IContextMenuItemClient["onClick"] = async (fileId) => {
+        // Support both new onItemClick and deprecated onClick for backward compatibility
+        const onClickCallback = value.onItemClick || value.onClick;
 
-        const message = await value.onClick(fileId);
+        if (!onClickCallback || value.items) return;
 
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
+        let message: IMessage | void;
+
+        if (value.onItemClick) {
+          message = await value.onItemClick(fileId);
+        } else {
+          message = await value.onClick?.(fileId as number);
+        }
+
+        this.dispatchMessage({ message, pluginName: plugin.name });
+      };
+
+      const onGroupClick: IContextMenuItemClient["onGroupClick"] = async (
+        items,
+      ) => {
+        if (!value.onGroupClick || !value.isGroupAction || value.items) return;
+
+        const message = await value.onGroupClick(items);
+
+        this.dispatchMessage({ message, pluginName: plugin.name });
       };
 
       const { items, ...rest } = value;
 
       // Create processed result object
-      const processedItem: IContextMenuItem = {
+      const processedItem: IContextMenuItemClient = {
         ...rest,
         onClick,
+        onGroupClick,
         pluginName: plugin.name,
         icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
       };
@@ -791,7 +1058,7 @@ class PluginStore {
     if (!plugin || !plugin.enabled) return;
 
     const items: Map<string, IInfoPanelItem> | undefined =
-      plugin.getInfoPanelItems && plugin.getInfoPanelItems();
+      plugin.getInfoPanelItems?.();
 
     if (!items) return;
 
@@ -809,40 +1076,20 @@ class PluginStore {
 
       if (!correctUserType || !correctDevice) return;
 
-      const submenu = { ...value.subMenu };
+      const onClick = async (id: number) => {
+        if (!value.subMenu?.onClick) return;
 
-      if (value.subMenu.onClick) {
-        const onClick = async (id: number) => {
-          const message = await value?.subMenu?.onClick?.(id);
+        const message = await value.subMenu.onClick(id);
 
-          messageActions({
-            message,
-            setElementProps: null,
-            pluginName: plugin.name,
-            setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-            setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-            updatePluginStatus: this.updatePluginStatus,
-            updatePropsContext: null,
-            setPluginDialogVisible: this.setPluginDialogVisible,
-            setPluginDialogProps: this.setPluginDialogProps,
-            updateContextMenuItems: this.updateContextMenuItems,
-            updateInfoPanelItems: this.updateInfoPanelItems,
-            updateMainButtonItems: this.updateMainButtonItems,
-            updateProfileMenuItems: this.updateProfileMenuItems,
-            updateEventListenerItems: this.updateEventListenerItems,
-            updateFileItems: this.updateFileItems,
-            updateCreateDialogProps: null,
-            updatePlugin: null,
-          });
-        };
+        this.dispatchMessage({ message, pluginName: plugin.name });
 
-        submenu.onClick = onClick;
-      }
+        return message;
+      };
 
       this.infoPanelItems.set(key, {
         ...value,
-        subMenu: submenu,
-
+        isHeaderVisible: value.isHeaderVisible ?? true,
+        subMenu: { ...value.subMenu, onClick },
         pluginName: plugin.name,
       });
     });
@@ -852,7 +1099,7 @@ class PluginStore {
     if (!plugin) return;
 
     const items: Map<string, IInfoPanelItem> | undefined =
-      plugin.getInfoPanelItems && plugin.getInfoPanelItems();
+      plugin.getInfoPanelItems?.();
 
     if (!items) return;
 
@@ -873,7 +1120,6 @@ class PluginStore {
 
     const userRole = this.getUserRole();
     const device = this.getCurrentDevice();
-    const storeId = this.selectedFolderStore.id;
 
     Array.from(items).forEach(([key, value]) => {
       const correctUserType = value.usersType
@@ -886,80 +1132,58 @@ class PluginStore {
 
       if (!correctUserType || !correctDevice) return;
 
-      const newItems: IMainButtonItem[] = [];
+      const newItems: IMainButtonItemClient[] = [];
+
+      const createMainButtonClickHandler = (
+        item: IMainButtonItem,
+        pluginName: string,
+      ) => {
+        return async () => {
+          const storeId = this.selectedFolderStore.id;
+          // Support both new onItemClick and deprecated onClick for backward compatibility
+          const onClickCallback = item.onItemClick || item.onClick;
+
+          if (!onClickCallback) return;
+
+          if (!storeId) return;
+
+          let message: IMessage | void;
+
+          if (item.onItemClick) {
+            message = await item.onItemClick(storeId);
+          } else {
+            message = await item.onClick?.(storeId as number);
+          }
+
+          this.dispatchMessage({ message, pluginName });
+        };
+      };
+
+      const storeId = this.selectedFolderStore.id;
 
       if (value.items && storeId) {
         value.items.forEach((i) => {
-          const onClick = async () => {
-            const message = await i?.onClick?.(storeId);
+          const onClick = createMainButtonClickHandler(i, plugin.name);
 
-            messageActions({
-              message,
-              setElementProps: null,
-              pluginName: plugin.name,
-              setSettingsPluginDialogVisible:
-                this.setSettingsPluginDialogVisible,
-              setCurrentSettingsDialogPlugin:
-                this.setCurrentSettingsDialogPlugin,
-              updatePluginStatus: this.updatePluginStatus,
-              updatePropsContext: null,
-              setPluginDialogVisible: this.setPluginDialogVisible,
-              setPluginDialogProps: this.setPluginDialogProps,
-              updateContextMenuItems: this.updateContextMenuItems,
-              updateInfoPanelItems: this.updateInfoPanelItems,
-              updateMainButtonItems: this.updateMainButtonItems,
-              updateProfileMenuItems: this.updateProfileMenuItems,
-              updateEventListenerItems: this.updateEventListenerItems,
-              updateFileItems: this.updateFileItems,
-              updateCreateDialogProps: null,
-              updatePlugin: null,
-            });
-          };
+          const { items: _, ...rest } = i;
 
           newItems.push({
-            ...i,
+            ...rest,
             onClick,
             icon: `${plugin.iconUrl}/assets/${i.icon}?hash=${plugin.version}`,
+            pluginName: plugin.name,
           });
         });
       }
 
-      const onClick = async () => {
-        if (!value.onClick) return;
-        const currStoreId = this.selectedFolderStore.id;
-        if (!currStoreId) return;
-
-        const message = await value.onClick(currStoreId);
-
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
-      };
+      const onClick = createMainButtonClickHandler(value, plugin.name);
 
       this.mainButtonItems.set(key, {
         ...value,
         onClick,
-
         pluginName: plugin.name,
-
         icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
-        items: newItems.length > 0 ? newItems : null,
+        items: newItems.length > 0 ? newItems : undefined,
       });
     });
   };
@@ -968,7 +1192,7 @@ class PluginStore {
     if (!plugin) return;
 
     const items: Map<string, IMainButtonItem> | undefined =
-      plugin.getMainButtonItems && plugin.getMainButtonItems();
+      plugin.getMainButtonItems?.();
 
     if (!items) return;
 
@@ -983,7 +1207,7 @@ class PluginStore {
     if (!plugin || !plugin.enabled) return;
 
     const items: Map<string, IProfileMenuItem> | undefined =
-      plugin.getProfileMenuItems && plugin.getProfileMenuItems();
+      plugin.getProfileMenuItems?.();
 
     if (!items) return;
 
@@ -1006,33 +1230,13 @@ class PluginStore {
 
         const message = await value.onClick();
 
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
+        this.dispatchMessage({ message, pluginName: plugin.name });
       };
 
       this.profileMenuItems.set(key, {
         ...value,
         onClick,
-
         pluginName: plugin.name,
-
         icon: `${plugin.iconUrl}/assets/${value.icon}?hash=${plugin.version}`,
       });
     });
@@ -1042,7 +1246,7 @@ class PluginStore {
     if (!plugin) return;
 
     const items: Map<string, IProfileMenuItem> | undefined =
-      plugin.getProfileMenuItems && plugin.getProfileMenuItems();
+      plugin.getProfileMenuItems?.();
 
     if (!items) return;
 
@@ -1057,7 +1261,7 @@ class PluginStore {
     if (!plugin || !plugin.enabled) return;
 
     const items: Map<string, IEventListenerItem> | undefined =
-      plugin.getEventListenerItems && plugin.getEventListenerItems();
+      plugin.getEventListenerItems?.();
 
     if (!items) return;
 
@@ -1079,31 +1283,12 @@ class PluginStore {
 
         const message = await value.eventHandler();
 
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
+        this.dispatchMessage({ message, pluginName: plugin.name });
       };
 
       this.eventListenerItems.set(key, {
         ...value,
         eventHandler,
-
         pluginName: plugin.name,
       });
     });
@@ -1113,7 +1298,7 @@ class PluginStore {
     if (!plugin) return;
 
     const items: Map<string, IEventListenerItem> | undefined =
-      plugin.getEventListenerItems && plugin.getEventListenerItems();
+      plugin.getEventListenerItems?.();
 
     if (!items) return;
 
@@ -1127,8 +1312,7 @@ class PluginStore {
 
     if (!plugin || !plugin.enabled) return;
 
-    const items: Map<string, IFileItem> | undefined =
-      plugin.getFileItems && plugin.getFileItems();
+    const items: Map<string, IFileItem> | undefined = plugin.getFileItems?.();
 
     if (!items) return;
 
@@ -1174,25 +1358,7 @@ class PluginStore {
 
         const message = await value.onClick(item);
 
-        messageActions({
-          message,
-          setElementProps: null,
-          pluginName: plugin.name,
-          setSettingsPluginDialogVisible: this.setSettingsPluginDialogVisible,
-          setCurrentSettingsDialogPlugin: this.setCurrentSettingsDialogPlugin,
-          updatePluginStatus: this.updatePluginStatus,
-          updatePropsContext: null,
-          setPluginDialogVisible: this.setPluginDialogVisible,
-          setPluginDialogProps: this.setPluginDialogProps,
-          updateContextMenuItems: this.updateContextMenuItems,
-          updateInfoPanelItems: this.updateInfoPanelItems,
-          updateMainButtonItems: this.updateMainButtonItems,
-          updateProfileMenuItems: this.updateProfileMenuItems,
-          updateEventListenerItems: this.updateEventListenerItems,
-          updateFileItems: this.updateFileItems,
-          updateCreateDialogProps: null,
-          updatePlugin: null,
-        });
+        this.dispatchMessage({ message, pluginName: plugin.name });
       };
 
       this.fileItems.set(key, {
@@ -1200,7 +1366,6 @@ class PluginStore {
         onClick,
         fileIcon,
         fileIconTile,
-
         pluginName: plugin.name,
       });
     });
@@ -1209,13 +1374,64 @@ class PluginStore {
   deactivateFileItems = (plugin: TPlugin) => {
     if (!plugin) return;
 
-    const items: Map<string, IFileItem> | undefined =
-      plugin.getFileItems && plugin.getFileItems();
+    const items: Map<string, IFileItem> | undefined = plugin.getFileItems?.();
 
     if (!items) return;
 
     Array.from(items).forEach(([key]) => {
       this.fileItems.delete(key);
+    });
+  };
+
+  initPostMessagePlugin = (plugin: TPlugin) => {
+    const callback = (message: IPostMessageCallbackMessage) => {
+      this.dispatchMessage({ message, pluginName: plugin.name });
+    };
+
+    plugin.setPostMessageCallback?.(callback);
+  };
+
+  updateArticleButtonItems = async (name: string) => {
+    const plugin = this.plugins.find((p) => p.name === name);
+
+    if (!plugin || !plugin.enabled) return;
+
+    const items: Map<string, IArticleButtonItem> | undefined =
+      plugin.getArticleButtonItems && plugin.getArticleButtonItems();
+
+    if (!items) return;
+
+    const userRole = this.getUserRole();
+    const device = this.getCurrentDevice();
+
+    for (const [key, value] of Array.from(items)) {
+      const correctUserType = value.usersTypes
+        ? value.usersTypes.includes(userRole)
+        : true;
+
+      const correctDevice = value.devices
+        ? value.devices.includes(device)
+        : true;
+
+      if (!correctUserType || !correctDevice) continue;
+
+      this.articleButtonItems.set(key, {
+        ...value,
+        pluginName: plugin.name,
+      });
+    }
+  };
+
+  deactivateArticleButtonItems = (plugin: TPlugin) => {
+    if (!plugin) return;
+
+    const items: Map<string, IArticleButtonItem> | undefined =
+      plugin.getArticleButtonItems && plugin.getArticleButtonItems();
+
+    if (!items) return;
+
+    Array.from(items).forEach(([key]) => {
+      this.articleButtonItems.delete(key);
     });
   };
 
@@ -1232,7 +1448,7 @@ class PluginStore {
   }
 
   get contextMenuItemsList() {
-    const items: { key: string; value: IContextMenuItem }[] = Array.from(
+    const items: { key: string; value: IContextMenuItemClient }[] = Array.from(
       this.contextMenuItems,
       ([key, value]) => {
         return { key, value: { ...value } };
@@ -1313,6 +1529,23 @@ class PluginStore {
 
   get fileItemsList() {
     const items = Array.from(this.fileItems, ([key, value]) => {
+      return {
+        key,
+        value: {
+          ...value,
+        },
+      };
+    });
+
+    if (items.length > 0) {
+      return items;
+    }
+
+    return null;
+  }
+
+  get articleButtonItemsList() {
+    const items = Array.from(this.articleButtonItems, ([key, value]) => {
       return {
         key,
         value: {

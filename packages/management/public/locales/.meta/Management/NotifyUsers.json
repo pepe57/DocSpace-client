@@ -3,17 +3,18 @@
   "content": "Notify users that the space will be unavailable",
   "content_en_sha1_hash": "60226058f43f64563c0928ea2b09ef90e055819d",
   "created_at": "2025-05-19T21:30:57.461Z",
-  "updated_at": "2025-08-21T11:22:39.970Z",
+  "updated_at": "2026-05-15T14:00:06.971Z",
   "comment": {
-    "text": "This translation key is used to notify users that a space will be unavailable. It appears as a button label in an interface, prompting users to take action or be informed of the unavailability. Translators should provide a message that conveys this information in a clear and concise manner.",
+    "text": "This is a checkbox label. It allows the user to choose whether to notify other users about upcoming space unavailability.",
     "is_auto": true,
-    "updated_at": "2025-05-20T09:47:55.282Z"
+    "updated_at": "2026-04-11T21:31:39.980Z",
+    "model": "google/gemini-2.5-flash"
   },
   "usage": [
     {
       "file_path": "/packages/management/src/app/settings/encrypt-data/page.client.tsx",
-      "line_number": 122,
-      "context": "/>\n </Text>\n ) : null}\n <Checkbox\n className=\"checkbox\"\n label={t(\"NotifyUsers\")}\n onChange={() => setIsNotifyChecked(!isNotifyChecked)}\n isChecked={isNotifyChecked}\n isDisabled={isDisabled}\n />\n <Button",
+      "line_number": 138,
+      "context": "/>\n </Text>\n ) : null}\n <Checkbox\n className={styles.checkbox}\n label={t(\"NotifyUsers\")}\n onChange={() => setIsNotifyChecked(!isNotifyChecked)}\n isChecked={isNotifyChecked}\n isDisabled={isDisabled}\n />\n <Button",
       "module": "/packages/management"
     }
   ],
@@ -33,13 +34,7 @@
     "az": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'İstifadəçilərə sahənin əlçatmaz olduğunu bildirin' literally translates to 'Inform users that the space is inaccessible.' While understandable, 'unavailable' (from the English content) implies a temporary unavailability, whereas 'inaccessible' implies a more permanent or restricted access. A better translation would convey the temporary nature of the unavailability.",
-          "suggestion": "Consider alternatives like 'İstifadəçilərə sahənin işləyəcək olmadığını bildirin' (Inform users that the space will not be working) or 'İstifadəçilərə sahənin vaxtsız olmadığını bildirin' (Inform users that the space is not available at this time)."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "bg": {
@@ -51,30 +46,13 @@
     "cs": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'space' is translated as 'úložiště'. While 'úložiště' can sometimes mean 'space', it typically refers to storage or a repository. 'Úložiště' doesn't fully capture the general meaning of 'space' in this context, which could refer to a virtual space, a physical location, or a shared resource.  A more versatile translation might consider 'prostor' or a more descriptive phrase depending on the intended meaning.",
-          "suggestion": "Consider 'prostor' or a more contextually accurate translation of 'space' depending on the intended meaning. For example, if referring to a virtual workspace, 'virtuální prostor' might be appropriate."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "de": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Benachrichtigen Sie die Benutzer, dass das Space nicht verfügbar sein wird' is a bit literal and doesn't flow naturally in German. 'Space' is an English term and should be replaced with a German equivalent or rephrased.",
-          "suggestion": "Benachrichtigen Sie die Benutzer, dass der Bereich nicht verfügbar sein wird."
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The word 'Space' is an English loanword.  A more appropriate German word like 'Bereich', 'Raum' or 'Plattform' would be better depending on the context.",
-          "suggestion": "Consider replacing 'Space' with 'Bereich', 'Raum', or 'Plattform' depending on the context."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "el-GR": {
@@ -86,18 +64,7 @@
     "es": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "spelling",
-          "description": "The word 'espacio' is misspelled. It should be 'espacio'.",
-          "suggestion": "espacio"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While 'inaccesible' is a valid word, 'indisponible' would be a more natural and accurate translation of 'unavailable' in this context. 'Inaccesible' implies a permanent inability to access, whereas 'indisponible' suggests a temporary unavailability.",
-          "suggestion": "indisponible"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "fi": {
@@ -133,18 +100,7 @@
     "ko-KR": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation '공간을 사용할 수 없게 됨을 사용자에게 알림' is a bit verbose and not the most natural way to express 'Notify users that the space will be unavailable' in Korean. It literally translates to 'Notify users that the space will become unavailable'.",
-          "suggestion": "공간 사용 불가 안내"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "While grammatically correct, '공간 사용 불가 안내' is more concise and common for this type of notification. A slightly more detailed option could be '공간 사용 중단 안내' (Notification of space interruption/shutdown)",
-          "suggestion": "공간 사용 중단 안내"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "lo-LA": {
@@ -156,13 +112,7 @@
     "lv": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "While 'krātuve' translates to 'storage,' 'space' in the English context likely refers to a digital space or a workspace within an application. 'krātuve' implies a physical storage area.",
-          "suggestion": "Consider alternatives like 'telpa' (room/space), 'platforma' (platform), or a more specific term depending on the context of the space being unavailable. For example, 'Paziņot lietotājiem, ka platforma nebūs pieejama' or 'Paziņot lietotājiem, ka darba telpa nebūs pieejama'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "nl": {
@@ -192,36 +142,19 @@
     "ro": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "grammar",
-          "description": "The Romanian translation uses the conditional mood inappropriately. The English sentence describes an action that will happen, requiring a future tense or indicative mood in Romanian.",
-          "suggestion": "Anunțați utilizatorii că spațiul nu va fi disponibil."
-        },
-        {
-          "type": "grammar",
-          "description": "The use of 'dacă' (if) is unnecessary and grammatically incorrect in this context.",
-          "suggestion": "Remove 'dacă'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "ru": {
       "ai_translated": false,
       "ai_model": null,
       "ai_spell_check_issues": [],
-      "approved_at": null
+      "approved_at": "2026-05-15T15:04:54.651494Z"
     },
     "si": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'භාවිතයට නොමැති බව පරිශීලකයන්ට දැන්වන්න.' is a bit literal and not the most natural way to express 'Notify users that the space will be unavailable' in Sinhala. 'භාවිතයට නොමැති' (bhāvitayata nōmaṭi) translates to 'not available for use,' which is accurate but slightly awkward. A more natural phrasing would consider the context of a 'space' being unavailable.",
-          "suggestion": "භාවිතයට නොමැති බවත්, එමනිසා දැන්වීම් කරන්න."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "sk": {
@@ -251,30 +184,13 @@
     "tr": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Alanların kullanılamayacağını kullanıcılara bildirin' is a literal translation but not ideal. While technically correct, it sounds slightly unnatural in Turkish. A more natural phrasing would emphasize the notification itself.",
-          "suggestion": "Kullanıcılara alanı kullanılamayacağını bildirin"
-        },
-        {
-          "type": "incorrect_translation",
-          "description": "The term 'Alanların' can be interpreted as multiple spaces, while the English implies a single space.  Depending on the context, it could be misleading.",
-          "suggestion": "If referring to a single space, consider 'Alanın' or contextually appropriate wording."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "uk-UA": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation 'Сповістити користувачів, що простори будуть недоступні' implies multiple spaces. The English says 'space' (singular).",
-          "suggestion": "Сповістити користувачів, що простір буде недоступний"
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     },
     "vi": {
@@ -286,13 +202,7 @@
     "zh-CN": {
       "ai_translated": false,
       "ai_model": null,
-      "ai_spell_check_issues": [
-        {
-          "type": "incorrect_translation",
-          "description": "The translation \"通知用户空间将不可用\" is a literal translation but lacks nuance. While technically correct, it doesn't sound natural in Chinese. A more natural phrasing would convey the reason for unavailability.",
-          "suggestion": "通知用户空间将无法使用 (Tōngzhī yònghù kōngjiān jiāng wúfǎ shǐyòng) - This translates to 'Notify users that the space will be unusable'."
-        }
-      ],
+      "ai_spell_check_issues": [],
       "approved_at": null
     }
   }

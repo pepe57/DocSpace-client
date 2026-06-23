@@ -1,33 +1,44 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 // @ts-nocheck
 
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import moment from "moment";
+import type { DateTime } from "luxon";
+
+import type { TFile } from "@docspace/ui-kit/types";
 
 import {
   ConflictResolveType,
@@ -47,11 +58,10 @@ import { request } from "../client";
 import { SHARED_MEMBERS_COUNT } from "../../constants";
 
 import FilesFilter from "./filter";
-import {
+import type {
   TDocServiceLocation,
   TEditDiff,
   TEditHistory,
-  TFile,
   TFileLink,
   TFilesSettings,
   TFilesUsedSpace,
@@ -75,7 +85,10 @@ import {
   TFormRoleMappingRequest,
   TFileFillingFormStatus,
   TShareToUser,
+  TDefaultTemplate,
+  UpdateXlsxResponse,
 } from "./types";
+
 import type { TFileConvertId } from "../../dialogs/download-dialog/DownloadDialog.types";
 
 export async function openEdit(
@@ -698,7 +711,7 @@ export async function startUploadSession(
   folderId: string | number,
   fileName: string,
   fileSize: number,
-  relativePath: boolean,
+  relativePath: string,
   encrypted: boolean,
   createOn: unknown,
   CreateNewIfExist: boolean,
@@ -711,13 +724,48 @@ export async function startUploadSession(
     createOn,
     CreateNewIfExist,
   };
-  const res = (await request({
+
+  return request({
     method: "post",
-    url: `/files/${folderId}/upload/create_session`,
+    url: `/files/${folderId}/session`,
     data,
     skipForbidden: true,
-  })) as TUploadOperation;
+  }) as TUploadOperation;
+}
 
+export async function uploadChunkParallel(
+  folderId: string | number,
+  sessionId: string,
+  chunkNumber: number,
+  data: FormData,
+) {
+  return request({
+    method: "post",
+    url: `/files/${folderId}/session/${sessionId}/upload?chunkNumber=${chunkNumber}`,
+    data,
+  });
+}
+
+export async function uploadChunkSequential(
+  folderId: string | number,
+  sessionId: string,
+  data: FormData,
+) {
+  return request({
+    method: "post",
+    url: `/files/${folderId}/session/${sessionId}`,
+    data,
+  });
+}
+
+export async function finalizeUploadSession(
+  folderId: string | number,
+  sessionId: string,
+) {
+  const res = await request({
+    method: "put",
+    url: `/files/${folderId}/session/${sessionId}/finalize`,
+  });
   return res;
 }
 
@@ -1196,6 +1244,27 @@ export async function getSettingsFiles(headers = null) {
   return res;
 }
 
+export type TAccessControlSettings = Pick<
+  TFilesSettings,
+  | "externalShare"
+  | "defaultShareLinkInternal"
+  | "externalShareApplyToDocuments"
+  | "externalShareApplyToRooms"
+  | "blockExistingLinksOnRestrict"
+>;
+
+export async function setAccessControlSettings(
+  settings: TAccessControlSettings,
+) {
+  const res = (await request({
+    method: "put",
+    url: "/files/settings/externalsharingsettings",
+    data: settings,
+  })) as TAccessControlSettings;
+
+  return res;
+}
+
 export async function markAsFavorite(fileIds: number[], folderIds: number[]) {
   const data = { fileIds, folderIds };
   const options: AxiosRequestConfig = {
@@ -1559,7 +1628,7 @@ export async function getPrimaryLinkIfNotExistCreate(
   fileId: number | string,
   access: ShareAccessRights,
   internal: boolean,
-  expirationDate: moment.Moment | null,
+  expirationDate: DateTime | string | null,
 ) {
   const res = (await request(
     {
@@ -1576,7 +1645,7 @@ export async function getOrCreatePrimaryFolderLink(
   folderId: number | string,
   access?: ShareAccessRights,
   internal?: boolean,
-  expirationDate?: moment.Moment | null,
+  expirationDate?: DateTime | string | null,
 ) {
   const res = (await request(
     {
@@ -1605,7 +1674,7 @@ export async function editExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate: moment.Moment | string | null,
+  expirationDate: DateTime | string | string | null,
   title: string,
   password?: string,
   denyDownload?: boolean,
@@ -1633,7 +1702,7 @@ export async function editExternalFolderLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate: moment.Moment | string | null,
+  expirationDate: DateTime | string | string | null,
   title: string,
   password?: string,
   denyDownload?: boolean,
@@ -1661,7 +1730,7 @@ export async function addExternalLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate?: moment.Moment | null,
+  expirationDate?: DateTime | string | null,
 ) {
   const res = (await request({
     method: "put",
@@ -1676,7 +1745,7 @@ export async function addExternalFolderLink(
   access: ShareAccessRights,
   primary: boolean,
   internal: boolean,
-  expirationDate?: moment.Moment | null,
+  expirationDate?: DateTime | string | null,
 ) {
   const res = (await request({
     method: "put",
@@ -1893,4 +1962,89 @@ export async function shareFileToUsers(
   })) as RoomMember[];
 
   return res;
+}
+
+export async function getDefaultTemplates() {
+  const res = await request({
+    method: "get",
+    url: "/files/settings/defaulttemplate",
+  });
+
+  return res.items as TDefaultTemplate[];
+}
+
+export async function setDefaultTemplates(
+  selectedFile: number | null,
+  fileExtension: string,
+) {
+  const res = await request({
+    method: "put",
+    url: "/files/settings/defaulttemplate",
+    data: {
+      selectedFile,
+      fileExtension,
+    },
+  });
+
+  return res.items as TDefaultTemplate[];
+}
+
+export async function resetDefaultTemplates(fileExtension: string) {
+  const res = await request({
+    method: "delete",
+    url: "/files/settings/defaulttemplate",
+    data: {
+      fileExtension,
+    },
+  });
+
+  return res.items as TDefaultTemplate[];
+}
+
+export async function uploadTemplateFromDevice(
+  file: File,
+  fileExtension: string,
+) {
+  const formData = new FormData();
+  formData.append("File", file);
+  const res = await request({
+    method: "post",
+    url: `/files/settings/defaulttemplate?FileExtension=${encodeURIComponent(fileExtension)}`,
+    data: formData,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res.items as TDefaultTemplate[];
+}
+
+export async function setOrganizeGrouping(set: boolean) {
+  const res = await request({
+    method: "put",
+    url: "/files/settings/organizegrouping",
+    data: { set },
+  });
+
+  return res as boolean;
+}
+
+export async function updateXlsxFile(fileId: string | number) {
+  return request<UpdateXlsxResponse>({
+    method: "POST",
+    url: `/files/file/${fileId}/xlsx`,
+  });
+}
+
+export async function updateXlsxFolder(folderId: string | number) {
+  return request<UpdateXlsxResponse>({
+    method: "POST",
+    url: `/files/folder/${folderId}/xlsx`,
+  });
+}
+
+export async function getProgressXlsx(itemId: string | number) {
+  return request<UpdateXlsxResponse["task"]>({
+    method: "GET",
+    url: `/files/file/${itemId}/xlsx`,
+  });
 }

@@ -1,39 +1,47 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { Slider } from "@docspace/shared/components/slider";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link } from "@docspace/ui-kit/components/link";
+import { Slider } from "@docspace/ui-kit/components/slider";
+import { Checkbox } from "@docspace/ui-kit/components/checkbox";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { isMobileDevice, size } from "@docspace/shared/utils";
 import isEqual from "lodash/isEqual";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
@@ -45,35 +53,7 @@ import PasswordLoader from "../sub-components/loaders/password-loader";
 import { LearnMoreWrapper } from "../StyledSecurity";
 import useSecurity from "../useSecurity";
 import { createDefaultHookSettingsProps } from "../../../utils/createDefaultHookSettingsProps";
-
-const MainContainer = styled.div`
-  width: 100%;
-
-  .password-slider {
-    width: 160px;
-    height: 8px;
-    margin-block: 24px;
-    margin-inline: 0 16px;
-  }
-
-  .checkboxes {
-    box-sizing: border-box;
-    display: inline-block;
-    margin-top: 18px;
-    margin-bottom: 24px;
-
-    .second-checkbox {
-      margin: 8px 0;
-    }
-  }
-
-  .slider-box {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-`;
+import styles from "./passwordStrength.module.scss";
 
 const PasswordStrength = (props) => {
   const {
@@ -271,7 +251,7 @@ const PasswordStrength = (props) => {
   }
 
   return (
-    <MainContainer>
+    <div className={styles.container}>
       <LearnMoreWrapper withoutExternalLink={!passwordStrengthSettingsUrl}>
         <Text fontSize="13px" fontWeight="400">
           {t("SettingPasswordDescription")}
@@ -295,9 +275,9 @@ const PasswordStrength = (props) => {
       <Text fontSize="14px" fontWeight="600" className="length-subtitle">
         {t("PasswordMinLenght")}
       </Text>
-      <div className="slider-box">
+      <div className={styles.sliderBox}>
         <Slider
-          className="password-slider"
+          className={styles.passwordSlider}
           dataTestId="password_strength_slider"
           min="8"
           max="30"
@@ -312,7 +292,7 @@ const PasswordStrength = (props) => {
           })}
         </Text>
       </div>
-      <div className="checkboxes">
+      <div className={styles.checkboxes}>
         <Checkbox
           className="use-upper-case"
           onChange={onClickCheckbox}
@@ -322,7 +302,7 @@ const PasswordStrength = (props) => {
           dataTestId="password_strength_upper_case"
         />
         <Checkbox
-          className="use-digits second-checkbox"
+          className={`use-digits ${styles.secondCheckbox}`}
           onChange={onClickCheckbox}
           label={t("UseDigits")}
           isChecked={useDigits}
@@ -330,7 +310,7 @@ const PasswordStrength = (props) => {
           dataTestId="password_strength_digits"
         />
         <Checkbox
-          className="use-special-char second-checkbox"
+          className={`use-special-char ${styles.secondCheckbox}`}
           onChange={onClickCheckbox}
           label={t("UseSpecialChar")}
           isChecked={useSpecialSymbols}
@@ -354,7 +334,7 @@ const PasswordStrength = (props) => {
         saveButtonDataTestId="password_strength_save"
         cancelButtonDataTestId="password_strength_cancel"
       />
-    </MainContainer>
+    </div>
   );
 };
 

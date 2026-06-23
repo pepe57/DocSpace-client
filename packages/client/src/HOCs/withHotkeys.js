@@ -1,35 +1,44 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import { useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router";
 import { Events, FolderType, RoomsType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { copySelectedText } from "@docspace/shared/utils/copy";
 
@@ -97,6 +106,9 @@ const withHotkeys = (Component) => {
       isParentFolderFormRoom,
       isIndexEditingMode,
       enableSelection,
+      openContextMenu,
+      askAIAction,
+      currentFolderId,
     } = props;
 
     const navigate = useNavigate();
@@ -115,8 +127,11 @@ const withHotkeys = (Component) => {
     };
 
     const onKeyDown = (e) => {
+      const contextMenuIsOpen =
+        document.getElementsByClassName("p-contextmenu").length;
+
       const someDialogIsOpen = checkDialogsOpen();
-      setIsEnabled(!someDialogIsOpen);
+      setIsEnabled(!someDialogIsOpen || !contextMenuIsOpen);
 
       if (isIndexEditingMode) return;
 
@@ -141,7 +156,9 @@ const withHotkeys = (Component) => {
       )
         return;
 
-      const event = new Event(Events.CREATE);
+      const event = new CustomEvent(Events.CREATE, {
+        detail: { parentId: currentFolderId, context: "hotkey", extension },
+      });
 
       const payload = {
         extension,
@@ -161,7 +178,9 @@ const withHotkeys = (Component) => {
 
         if (!item.contextOptions.includes("rename")) return;
 
-        const event = new Event(Events.RENAME);
+        const event = new CustomEvent(Events.RENAME, {
+          detail: { parentId: currentFolderId, context: "hotkey" },
+        });
         event.item = item;
 
         window.dispatchEvent(event);
@@ -175,8 +194,31 @@ const withHotkeys = (Component) => {
           return;
         }
 
-        const event = new Event(Events.ROOM_CREATE);
+        const event = new CustomEvent(Events.ROOM_CREATE, {
+          detail: { parentId: currentFolderId, context: "hotkey" },
+        });
         window.dispatchEvent(event);
+      }
+    };
+
+    const onCreateAIAgent = () => {
+      if (!isVisitor && isAIAgentsFolder && security?.Create) {
+        const event = new CustomEvent(Events.AGENT_CREATE, {
+          detail: { parentId: currentFolderId, context: "hotkey" },
+        });
+        window.dispatchEvent(event);
+      }
+    };
+
+    const onAskAI = () => {
+      const selection = getSelection();
+
+      if (selection.length === 1) {
+        const item = selection[0];
+
+        if (!item.contextOptions.includes("ask-ai")) return;
+
+        askAIAction(item);
       }
     };
 
@@ -204,8 +246,11 @@ const withHotkeys = (Component) => {
     useHotkeys(
       "*",
       (e) => {
+        const contextMenuIsOpen =
+          document.getElementsByClassName("p-contextmenu").length;
         const someDialogIsOpen = checkDialogsOpen();
-        if (someDialogIsOpen) return;
+
+        if (someDialogIsOpen || contextMenuIsOpen) return e;
 
         if (
           (e.key === "Alt" && (e.ctrlKey || e.metaKey)) ||
@@ -236,6 +281,9 @@ const withHotkeys = (Component) => {
           case "ArrowLeft":
           case "h": {
             return selectLeft();
+          }
+          case "Enter": {
+            return openItem();
           }
 
           default:
@@ -271,7 +319,7 @@ const withHotkeys = (Component) => {
 
     // Select all files and folders
     useHotkeys(
-      "shift+a, ctrl+a, command+a",
+      "ctrl+a, command+a",
       (e) => {
         e.preventDefault();
         selectAll();
@@ -295,7 +343,7 @@ const withHotkeys = (Component) => {
     useHotkeys("ctrl+RIGHT, command+RIGHT", moveCaretRight, hotkeysFilter);
 
     // Open item
-    useHotkeys("Enter", () => openItem(t), hotkeysFilter);
+    // useHotkeys("Enter", () => openItem(t), hotkeysFilter);
 
     // Back to parent folder
     useHotkeys(
@@ -361,6 +409,17 @@ const withHotkeys = (Component) => {
       ...{ keyup: true },
     });
 
+    useHotkeys("Shift+c", openContextMenu, {
+      ...hotkeysFilter,
+      ...{ keyup: true },
+    });
+
+    // Create AI agent
+    useHotkeys("Shift+a", () => onCreateAIAgent(), {
+      ...hotkeysFilter,
+      ...{ keyup: true },
+    });
+
     // Delete selection
     useHotkeys(
       "delete, shift+3, command+delete, command+Backspace",
@@ -385,7 +444,7 @@ const withHotkeys = (Component) => {
           if (isFavoritesFolder) {
             const selection = getSelection();
             setFavoriteAction("remove", selection)
-              .then(() => toastr.success(t("RemovedFromFavorites")))
+              .then(() => toastr.success(t("Common:RemovedFromFavorites")))
               .catch((err) => toastr.error(err));
 
             return;
@@ -438,6 +497,9 @@ const withHotkeys = (Component) => {
     );
 
     useHotkeys("f2", onRename, hotkeysFilter);
+
+    // Ask AI
+    useHotkeys("Ctrl+i, command+i", onAskAI, hotkeysFilter);
 
     // Upload file
     useHotkeys(
@@ -523,6 +585,7 @@ const withHotkeys = (Component) => {
         uploadFile,
         copyToClipboard,
         uploadClipboardFiles,
+        openContextMenu,
         enableSelection,
       } = hotkeyStore;
 
@@ -539,6 +602,7 @@ const withHotkeys = (Component) => {
         deleteRooms,
         archiveRooms,
         isGroupMenuBlocked,
+        askAIAction,
       } = filesActionsStore;
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
@@ -561,6 +625,7 @@ const withHotkeys = (Component) => {
       const isFormRoom = selectedFolderStore.roomType === RoomsType.FormRoom;
       const isParentFolderFormRoom =
         selectedFolderStore.parentRoomType === FolderType.FormRoom;
+      const currentFolderId = selectedFolderStore.id;
 
       return {
         setSelected,
@@ -592,6 +657,7 @@ const withHotkeys = (Component) => {
         deselectAll,
         activateHotkeys,
         onClickBack,
+        openContextMenu,
 
         uploadFile,
         enabledHotkeys,
@@ -626,6 +692,8 @@ const withHotkeys = (Component) => {
         isFormRoom,
         isParentFolderFormRoom,
         enableSelection,
+        askAIAction,
+        currentFolderId,
       };
     },
   )(observer(WithHotkeys));

@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -30,13 +39,13 @@ import { useTheme } from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalDialog.enums";
+import { ModalDialog } from "@docspace/ui-kit/components/modal-dialog";
+import { ModalDialogType } from "@docspace/ui-kit/components/modal-dialog/ModalDialog.enums";
 import { SocialButton } from "@docspace/shared/components/social-button";
-import { Text } from "@docspace/shared/components/text";
-import { Textarea } from "@docspace/shared/components/textarea";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { globalColors } from "@docspace/shared/themes";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Textarea } from "@docspace/ui-kit/components/textarea";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import { generatePKCEPair } from "@docspace/shared/utils/oauth";
 import { AuthenticationMethod } from "@docspace/shared/enums";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -46,10 +55,11 @@ import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import {
-  StyledContainer,
-  StyledPreviewContainer,
-  StyledBlocksContainer,
+	StyledContainer,
+	StyledPreviewContainer,
+	StyledBlocksContainer,
 } from "../OAuth.styled";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 const htmlBlock = `<body>
     <button id="docspace-button" class="docspace-button">
@@ -115,64 +125,64 @@ const styleBlock = `<style>
 </style>`;
 
 const linkParams =
-  "width=800,height=800,status='no',toolbar='no',menubar='no',resizable='yes',scrollbars='no'";
+	"width=800,height=800,status='no',toolbar='no',menubar='no',resizable='yes',scrollbars='no'";
 
 interface PreviewDialogProps {
-  visible: boolean;
+	visible: boolean;
 
-  setPreviewDialogVisible?: (value: boolean) => void;
-  client?: IClientProps;
+	setPreviewDialogVisible?: (value: boolean) => void;
+	client?: IClientProps;
 }
 
 const PreviewDialog = ({
-  visible,
-  setPreviewDialogVisible,
-  client,
+	visible,
+	setPreviewDialogVisible,
+	client,
 }: PreviewDialogProps) => {
-  const { t } = useTranslation(["OAuth", "Common", "Webhooks"]);
-  const theme = useTheme();
+	const { t } = useTranslation(["OAuth", "Common", "Webhooks"]);
+	const theme = useTheme();
 
-  const [codeVerifier, setCodeVerifier] = React.useState("");
-  const [codeChallenge, setCodeChallenge] = React.useState("");
+	const [codeVerifier, setCodeVerifier] = React.useState("");
+	const [codeChallenge, setCodeChallenge] = React.useState("");
 
-  const onClose = () => setPreviewDialogVisible?.(false);
+	const onClose = () => setPreviewDialogVisible?.(false);
 
-  const icon = theme.isBase ? OnlyofficeLight : OnlyofficeDark;
+	const icon = theme.isBase ? OnlyofficeLight : OnlyofficeDark;
 
-  const scopesString = client?.scopes.join(" ");
+	const scopesString = client?.scopes.join(" ");
 
-  const isClientSecretPost = !client?.authenticationMethods.includes(
-    AuthenticationMethod.none,
-  );
+	const isClientSecretPost = !client?.authenticationMethods.includes(
+		AuthenticationMethod.none,
+	);
 
-  const encodingScopes = encodeURI(scopesString || "");
+	const encodingScopes = encodeURI(scopesString || "");
 
-  React.useEffect(() => {
-    const getData = () => {
-      const { verifier, challenge } = generatePKCEPair();
+	React.useEffect(() => {
+		const getData = () => {
+			const { verifier, challenge } = generatePKCEPair();
 
-      setCodeVerifier(verifier);
-      setCodeChallenge(challenge);
-    };
+			setCodeVerifier(verifier);
+			setCodeChallenge(challenge);
+		};
 
-    getData();
-  }, []);
+		getData();
+	}, []);
 
-  const getLink = () => {
-    return `${
-      window?.ClientConfig?.oauth2.origin || window.location.origin
-    }/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${
-      client?.redirectUris[0]
-    }&scope=${encodingScopes}${
-      isClientSecretPost
-        ? ""
-        : `&code_challenge_method=S256&code_challenge=${codeChallenge}`
-    }`;
-  };
+	const getLink = () => {
+		return `${
+			window?.ClientConfig?.oauth2.origin || window.location.origin
+		}/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${
+			client?.redirectUris[0]
+		}&scope=${encodingScopes}${
+			isClientSecretPost
+				? ""
+				: `&code_challenge_method=S256&code_challenge=${codeChallenge}`
+		}`;
+	};
 
-  const link = getLink();
+	const link = getLink();
 
-  const scriptBlock = `<script>
+	const scriptBlock = `<script>
     const button = document.getElementById('docspace-button')
 
     function openOAuthPage() {
@@ -186,126 +196,126 @@ const PreviewDialog = ({
     button.addEventListener('click', openOAuthPage)
 </script>`;
 
-  return (
-    <ModalDialog
-      visible={visible}
-      displayType={ModalDialogType.aside}
-      onClose={onClose}
-      withBodyScroll
-    >
-      <ModalDialog.Header>{t("OAuth:AuthButton")}</ModalDialog.Header>
-      <ModalDialog.Body>
-        <StyledContainer>
-          <StyledPreviewContainer>
-            <SocialButton
-              className="social-button"
-              label={
-                <Trans
-                  t={t}
-                  ns="OAuth"
-                  i18nKey="SignIn"
-                  values={{ productName: t("Common:ProductName") }}
-                />
-              }
-              IconComponent={icon}
-              onClick={() => {
-                window.open(link, "login", linkParams);
-              }}
-              dataTestId="social_OAuth_button"
-            />
-          </StyledPreviewContainer>
-          <StyledBlocksContainer>
-            <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
-                HTML
-              </Text>
-              <Textarea
-                heightTextArea={64}
-                enableCopy
-                isReadOnly
-                value={htmlBlock}
-                dataTestId="html_block_textarea"
-              />
-            </div>
-            <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
-                CSS
-              </Text>
-              <Textarea
-                heightTextArea={64}
-                enableCopy
-                isReadOnly
-                value={styleBlock}
-                dataTestId="style_block_textarea"
-              />
-            </div>
-            <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
-                JavaScript
-              </Text>
-              <Textarea
-                heightTextArea={64}
-                enableCopy
-                isReadOnly
-                value={scriptBlock}
-                dataTestId="script_block_textarea"
-              />
-            </div>
-            <div className="block-container">
-              <Text fontWeight={600} lineHeight="20px" fontSize="13px">
-                {t("OAuth:AuthorizeLink")}
-              </Text>
-              <Textarea
-                heightTextArea={64}
-                enableCopy
-                isReadOnly
-                value={link}
-                dataTestId="authorize_link_textarea"
-              />
-            </div>
+	return (
+		<ModalDialog
+			visible={visible}
+			displayType={ModalDialogType.aside}
+			onClose={onClose}
+			withBodyScroll
+		>
+			<ModalDialog.Header>{t("OAuth:AuthButton")}</ModalDialog.Header>
+			<ModalDialog.Body>
+				<StyledContainer>
+					<StyledPreviewContainer>
+						<SocialButton
+							className="social-button"
+							label={
+								<Trans
+									t={t}
+									ns="OAuth"
+									i18nKey="SignIn"
+									values={{ productName: getBrandName("ProductName") }}
+								/>
+							}
+							IconComponent={icon}
+							onClick={() => {
+								window.open(link, "login", linkParams);
+							}}
+							dataTestId="social_OAuth_button"
+						/>
+					</StyledPreviewContainer>
+					<StyledBlocksContainer>
+						<div className="block-container">
+							<Text fontWeight={600} lineHeight="20px" fontSize="13px">
+								HTML
+							</Text>
+							<Textarea
+								heightTextArea={64}
+								enableCopy
+								isReadOnly
+								value={htmlBlock}
+								dataTestId="html_block_textarea"
+							/>
+						</div>
+						<div className="block-container">
+							<Text fontWeight={600} lineHeight="20px" fontSize="13px">
+								CSS
+							</Text>
+							<Textarea
+								heightTextArea={64}
+								enableCopy
+								isReadOnly
+								value={styleBlock}
+								dataTestId="style_block_textarea"
+							/>
+						</div>
+						<div className="block-container">
+							<Text fontWeight={600} lineHeight="20px" fontSize="13px">
+								JavaScript
+							</Text>
+							<Textarea
+								heightTextArea={64}
+								enableCopy
+								isReadOnly
+								value={scriptBlock}
+								dataTestId="script_block_textarea"
+							/>
+						</div>
+						<div className="block-container">
+							<Text fontWeight={600} lineHeight="20px" fontSize="13px">
+								{t("OAuth:AuthorizeLink")}
+							</Text>
+							<Textarea
+								heightTextArea={64}
+								enableCopy
+								isReadOnly
+								value={link}
+								dataTestId="authorize_link_textarea"
+							/>
+						</div>
 
-            {!isClientSecretPost ? (
-              <div className="block-container">
-                <Text fontWeight={600} lineHeight="20px" fontSize="13px">
-                  {t("OAuth:CodeVerifier")}
-                </Text>
-                <Textarea
-                  heightTextArea={64}
-                  enableCopy
-                  isReadOnly
-                  value={codeVerifier}
-                  dataTestId="code_verifier_textarea"
-                />
-              </div>
-            ) : null}
-          </StyledBlocksContainer>
-        </StyledContainer>
-      </ModalDialog.Body>
-      <ModalDialog.Footer>
-        <Button
-          size={ButtonSize.normal}
-          scale
-          label={t("Common:OKButton")}
-          onClick={onClose}
-          testId="preview_dialog_ok_button"
-        />
-      </ModalDialog.Footer>
-    </ModalDialog>
-  );
+						{!isClientSecretPost ? (
+							<div className="block-container">
+								<Text fontWeight={600} lineHeight="20px" fontSize="13px">
+									{t("OAuth:CodeVerifier")}
+								</Text>
+								<Textarea
+									heightTextArea={64}
+									enableCopy
+									isReadOnly
+									value={codeVerifier}
+									dataTestId="code_verifier_textarea"
+								/>
+							</div>
+						) : null}
+					</StyledBlocksContainer>
+				</StyledContainer>
+			</ModalDialog.Body>
+			<ModalDialog.Footer>
+				<Button
+					size={ButtonSize.normal}
+					scale
+					label={t("Common:OKButton")}
+					onClick={onClose}
+					testId="preview_dialog_ok_button"
+				/>
+			</ModalDialog.Footer>
+		</ModalDialog>
+	);
 };
 
 export default inject(
-  ({
-    oauthStore,
-  }: {
-    settingsStore: SettingsStore;
-    oauthStore: OAuthStore;
-  }) => {
-    const { setPreviewDialogVisible, bufferSelection } = oauthStore;
+	({
+		oauthStore,
+	}: {
+		settingsStore: SettingsStore;
+		oauthStore: OAuthStore;
+	}) => {
+		const { setPreviewDialogVisible, bufferSelection } = oauthStore;
 
-    return {
-      setPreviewDialogVisible,
-      client: bufferSelection,
-    };
-  },
+		return {
+			setPreviewDialogVisible,
+			client: bufferSelection,
+		};
+	},
 )(observer(PreviewDialog));

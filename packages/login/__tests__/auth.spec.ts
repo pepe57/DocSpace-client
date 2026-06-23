@@ -1,35 +1,47 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
-import { BASE_URL, endpoints } from "@docspace/shared/__mocks__/e2e";
-import { expect, test } from "./fixtures/base";
+import {
+  confirmHandler,
+  loginHandler,
+} from "@docspace/shared/__mocks__/handlers";
+import { expectScreenshot } from "@docspace/shared/__mocks__/e2e";
+import { test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/Auth";
-const PORT = 5111;
 
 const QUERY_PARAMS = [
   {
@@ -46,78 +58,120 @@ const QUERY_PARAMS = [
   },
 ];
 
-const QUERY_PARAMS_WITH_REFERENCE_URL = QUERY_PARAMS.concat({
-  name: "referenceUrl",
-  value: `${BASE_URL}:${PORT}/rooms`,
-});
-
-const QUERY_PARAMS_WITH_FILE_HANDLER = QUERY_PARAMS.concat([
-  {
+const getQueryParamsWithReferenceUrl = (baseUrl: string) => {
+  return QUERY_PARAMS.concat({
     name: "referenceUrl",
-    value: `${BASE_URL}:${PORT}/filehandler.ashx?action=download`,
-  },
-  {
-    name: "fileid",
-    value: "23",
-  },
-]);
+    value: `${baseUrl}/rooms`,
+  });
+};
+
+const getQueryParamsWithFileHandler = (baseUrl: string) => {
+  return QUERY_PARAMS.concat([
+    {
+      name: "referenceUrl",
+      value: `${baseUrl}/filehandler.ashx?action=download`,
+    },
+    {
+      name: "fileid",
+      value: "23",
+    },
+  ]);
+};
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const URL_WITH_REFERENCE_URL = getUrlWithQueryParams(
-  URL,
-  QUERY_PARAMS_WITH_REFERENCE_URL,
-);
-const URL_WITH_FILE_HANDLER = getUrlWithQueryParams(
-  URL,
-  QUERY_PARAMS_WITH_FILE_HANDLER,
-);
 
-test("auth success", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.login]);
-  await page.goto(URL_WITH_PARAMS);
+const getUrlWithReferenceUrl = (baseUrl: string) => {
+  return getUrlWithQueryParams(URL, getQueryParamsWithReferenceUrl(baseUrl));
+};
+const getUrlWithFileHandler = (baseUrl: string) => {
+  return getUrlWithQueryParams(URL, getQueryParamsWithFileHandler(baseUrl));
+};
+
+test("auth success", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
 
   await page.getByTestId("loader").waitFor({ state: "detached" });
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL(`${baseUrl}/`, { waitUntil: "load" });
 
-  await expect(page).toHaveScreenshot(["desktop", "auth", "auth-success.png"]);
+  await expectScreenshot(page,["desktop", "auth", "auth-success.png"]);
 });
 
-test("auth with reference url success", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.login]);
-  await page.goto(URL_WITH_REFERENCE_URL);
+test("auth with reference url success", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
+  await page.goto(`${baseUrl}${getUrlWithReferenceUrl(baseUrl)}`);
 
   await page.getByTestId("loader").waitFor({ state: "detached" });
 
-  await page.waitForURL(`${BASE_URL}:${PORT}/rooms`, {
+  await page.waitForURL(`${baseUrl}/rooms`, {
     waitUntil: "load",
   });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "auth",
     "auth-with-reference-url-success.png",
   ]);
 });
 
-test("auth with file handler success", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.login]);
-  await page.goto(URL_WITH_FILE_HANDLER, { waitUntil: "domcontentloaded" });
+test("auth with file handler success", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
+  await page.goto(`${baseUrl}${getUrlWithFileHandler(baseUrl)}`, {
+    waitUntil: "domcontentloaded",
+  });
 
   await page
     .getByText("File downloading in progress")
     .waitFor({ state: "detached" });
 
-  await page.waitForURL(
-    `${BASE_URL}:${PORT}/filehandler.ashx?action=download`,
-    {
-      waitUntil: "load",
-    },
-  );
+  await page.waitForURL(`${baseUrl}/filehandler.ashx?action=download`, {
+    waitUntil: "load",
+  });
 
-  await expect(page).toHaveScreenshot([
+  await expectScreenshot(page,[
     "desktop",
     "auth",
     "auth-with-file-handler-success-redirect.png",
+  ]);
+});
+
+test("auth with tfa success", async ({
+  page,
+  baseUrl,
+  serverRequestInterceptor,
+  clientRequestInterceptor,
+  port,
+}) => {
+  serverRequestInterceptor.use(confirmHandler(port, undefined, true));
+  clientRequestInterceptor.use(loginHandler(port, null, true));
+  await page.goto(`${baseUrl}${URL_WITH_PARAMS}`);
+
+  await page.getByTestId("loader").waitFor({ state: "detached" });
+
+  await page.waitForURL(
+    `${baseUrl}/login/confirm/TfaAuth?type=TfaAuth&uid=d513b1f4`,
+    { waitUntil: "load" },
+  );
+
+  await expectScreenshot(page,[
+    "desktop",
+    "auth",
+    "auth-with-tfa-success.png",
   ]);
 });

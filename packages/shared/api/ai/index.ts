@@ -1,38 +1,46 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
-import { toastr } from "../../components/toast";
-import { getCookie } from "../../utils";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { getCookie } from "@docspace/ui-kit/utils/cookie";
+import { checkFilterInstance } from "../../utils/common";
 
-import { request } from "../client";
+import { request, getAuthToken } from "../client";
 import type { TFile } from "../files/types";
 import type { KnowledgeType, ToolsPermission, WebSearchType } from "./enums";
 import RoomsFilter from "../rooms/filter";
-import { checkFilterInstance } from "../../utils/common";
-import { getAiModelName } from "../../utils/ai";
 
 import type {
   TCreateAiProvider,
@@ -55,6 +63,11 @@ import type {
   TCreateAgentData,
   TEditAgentData,
   TGetAgents,
+  TDefaultProvider,
+  TUpdateDefaultProviderData,
+  TModelSettingsDto,
+  TPreviewModelsRequest,
+  TAIUserConfig,
 } from "./types";
 
 const baseUrl = "/ai";
@@ -110,6 +123,31 @@ export const getAvailableProviderUrls = async () => {
   return res;
 };
 
+export const previewProviderModels = async (
+  data: TPreviewModelsRequest,
+  abortController?: AbortController | null,
+) => {
+  const res = (await request({
+    method: "post",
+    url: `${baseUrl}/providers/models/preview`,
+    data,
+    signal: abortController?.signal,
+  })) as TModelSettingsDto[];
+
+  return res;
+};
+
+export const getProviderModelSettings = async (
+  providerId: TAiProvider["id"],
+) => {
+  const res = (await request({
+    method: "get",
+    url: `${baseUrl}/providers/${providerId}/models`,
+  })) as TModelSettingsDto[];
+
+  return res;
+};
+
 export const getModels = async (
   providerId?: TAiProvider["id"],
   abortController?: AbortController | null,
@@ -129,7 +167,6 @@ export const getModels = async (
 
   return res.map((m) => ({
     ...m,
-    name: getAiModelName(m.modelId),
   })) as TModelList;
 };
 
@@ -148,19 +185,38 @@ export const getProviderAvailabilityStatus = async (
     }));
 };
 
+const getAuthHeaders = (): Record<string, string> => {
+  if (typeof window === "undefined") return {};
+
+  const cookie = getCookie("asc_auth_key");
+  if (cookie) return { Authorization: cookie };
+
+  const token = getAuthToken();
+  if (token) return { Authorization: token };
+
+  const publicRoomKey = new URLSearchParams(window.location.search).get(
+    "share",
+  );
+
+  if (publicRoomKey)
+    return {
+      "Request-Token": publicRoomKey,
+    };
+
+  return {};
+};
+
 export const startNewChat = async (
   roomId: number | string,
   message: string,
   files: string[],
   abortController?: AbortController,
 ) => {
-  const authHeader = getCookie("asc_auth_key")!;
-
   const response = await fetch(`/api/2.0${baseUrl}/rooms/${roomId}/chats`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: authHeader,
+      ...getAuthHeaders(),
     },
     signal: abortController?.signal,
     body: JSON.stringify({ message, files }),
@@ -175,13 +231,11 @@ export const sendMessageToChat = async (
   files: string[],
   abortController?: AbortController,
 ) => {
-  const authHeader = getCookie("asc_auth_key")!;
-
   const response = await fetch(`/api/2.0${baseUrl}/chats/${chatId}/messages`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: authHeader,
+      ...getAuthHeaders(),
     },
     signal: abortController?.signal,
     body: JSON.stringify({ message, files }),
@@ -625,7 +679,7 @@ export const getAIAgents = async (
 };
 
 export const deleteAIAgent = async (id: TAgent["id"]) => {
-  await request({ method: "DELETE", url: `${baseUrl}/agents/${id}` });
+  await request({ method: "DELETE", url: `${baseUrl}/agents/${id}`, data: {} });
 };
 
 export const resetAIAgentQuota = async (roomIds: TAgent["id"]) => {
@@ -666,3 +720,53 @@ export const getMCPServerById = async (id: string) => {
 
   return res as TServer;
 };
+
+export const getDefaultProvider = async () => {
+  const options = {
+    method: "get",
+    url: `${baseUrl}/providers/default`,
+  };
+
+  const res = await request(options);
+
+  return res as TDefaultProvider;
+};
+
+export const updateDefaultProvider = async ({
+  providerId,
+  defaultModel,
+}: TUpdateDefaultProviderData) => {
+  const options = {
+    method: "put",
+    url: `${baseUrl}/providers/default`,
+    data: { providerId, defaultModel },
+  };
+
+  const res = await request(options);
+
+  return res as TDefaultProvider;
+};
+
+export const getAIUserConfig = async () => {
+  const options = {
+    method: "get",
+    url: `${baseUrl}/config/user`,
+  };
+
+  const res = await request(options);
+
+  return res as TAIUserConfig;
+};
+
+export const updateAIUserConfig = async (data: TAIUserConfig) => {
+  const options = {
+    method: "put",
+    url: `${baseUrl}/config/user`,
+    data,
+  };
+
+  const res = await request(options);
+
+  return res as TAIUserConfig;
+};
+

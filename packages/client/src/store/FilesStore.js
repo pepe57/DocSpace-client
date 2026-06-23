@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import axios from "axios";
 import { match } from "ts-pattern";
@@ -31,6 +40,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 import api from "@docspace/shared/api";
 import {
+  AnalyticsEvents,
   FileType,
   FilterType,
   FolderType,
@@ -45,7 +55,7 @@ import {
 import SocketHelper, {
   SocketCommands,
   SocketEvents,
-} from "@docspace/shared/utils/socket";
+} from "@docspace/ui-kit/utils/socket";
 
 import {
   isLockedSharedRoom,
@@ -64,9 +74,10 @@ import {
   getDaysRemaining,
   frameCallEvent,
   getCategoryType,
+  getFileExtension,
 } from "@docspace/shared/utils/common";
 
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import config from "PACKAGE_FILE";
 import {
   LOADER_TIMEOUT,
@@ -112,6 +123,8 @@ import {
   FILTER_TRASH,
 } from "@docspace/shared/utils/filterConstants";
 import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
+
+import { showCreatedPDFFormDialog } from "SRC_DIR/components/dialogs/CreatedPDFFormDialog";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -270,6 +283,10 @@ class FilesStore {
 
   aiRoomStore = null;
 
+  dialogsStore = null;
+
+  arrRoomGroups = [];
+
   constructor(
     authStore,
     selectedFolderStore,
@@ -411,19 +428,26 @@ class FilesStore {
     });
 
     // WAIT FOR RESPONSES OF EDITING FILE
-    SocketHelper?.on(SocketEvents.StartEditFile, (id) => {
+    SocketHelper?.on(SocketEvents.StartEditFile, (data) => {
+      const fileId = typeof data === "object" ? data.fileId : data;
+      const editingBy = typeof data === "object" ? data.editingBy : undefined;
+
       const { socketSubscribers } = SocketHelper;
-      const pathParts = `FILE-${id}`;
+      const pathParts = `FILE-${fileId}`;
 
       if (!socketSubscribers.has(pathParts)) return;
 
-      const foundIndex = this.files.findIndex((x) => x.id === id);
+      const foundIndex = this.files.findIndex((x) => x.id === fileId);
       if (foundIndex == -1) return;
 
-      console.log(`[WS] s:start-edit-file`, id, this.files[foundIndex].title);
+      console.log(
+        `[WS] s:start-edit-file`,
+        fileId,
+        this.files[foundIndex].title,
+      );
 
       this.updateSelectionStatus(
-        id,
+        fileId,
         this.files[foundIndex].fileStatus | FileStatus.IsEditing,
         true,
       );
@@ -432,6 +456,8 @@ class FilesStore {
         foundIndex,
         this.files[foundIndex].fileStatus | FileStatus.IsEditing,
       );
+
+      this.updateFileLiveEditingBy(foundIndex, editingBy);
     });
 
     SocketHelper?.on(SocketEvents.ModifyRoom, (option) => {
@@ -449,20 +475,23 @@ class FilesStore {
       this.wsChangeFolderAccessRights(option);
     });
 
-    SocketHelper?.on(SocketEvents.StopEditFile, (id) => {
+    SocketHelper?.on(SocketEvents.StopEditFile, (data) => {
+      const fileId = typeof data === "object" ? data.fileId : data;
+
       const { socketSubscribers } = SocketHelper;
-      const pathParts = `FILE-${id}`;
+      const pathParts = `FILE-${fileId}`;
 
       if (!socketSubscribers.has(pathParts)) return;
 
-      const foundIndex = this.files.findIndex((x) => x.id === id);
+      const foundIndex = this.files.findIndex((x) => x.id === fileId);
+
       if (foundIndex == -1) return;
       const foundFile = this.files[foundIndex];
 
-      console.log(`[WS] s:stop-edit-file`, id, foundFile.title);
+      console.log(`[WS] s:stop-edit-file`, fileId, foundFile.title);
 
       this.updateSelectionStatus(
-        id,
+        fileId,
         foundFile.fileStatus & ~FileStatus.IsEditing,
         false,
       );
@@ -472,7 +501,9 @@ class FilesStore {
         foundFile.fileStatus & ~FileStatus.IsEditing,
       );
 
-      this.getFileInfo(id, foundFile.requestToken);
+      this.updateFileLiveEditingBy(foundIndex, undefined);
+
+      this.getFileInfo(fileId, foundFile.requestToken);
       this.createThumbnail(foundFile);
     });
 
@@ -571,6 +602,15 @@ class FilesStore {
       }
 
       if (foundIndex > -1) return;
+
+      window.dataLayer = window.dataLayer || [];
+
+      window.dataLayer.push({
+        event: AnalyticsEvents.FileCreated,
+        id: file.id,
+        parentId: file.folderId,
+        file_type: getFileExtension(file.title).replace(".", ""),
+      });
 
       this.selectedFolderStore.setFilesCount(
         this.selectedFolderStore.filesCount + 1,
@@ -844,19 +884,7 @@ class FilesStore {
 
     if (this.selectedFolderStore.id !== file.folderId) return;
 
-    const localKey = `${PDF_FORM_DIALOG_KEY}-${this.userStore.user.id}`;
-
-    const show = !JSON.parse(localStorage.getItem(localKey) ?? "false");
-
-    const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
-      detail: {
-        file,
-        show,
-        localKey,
-      },
-    });
-
-    window?.dispatchEvent(event);
+    showCreatedPDFFormDialog(file, this.userStore.user.id);
   };
 
   wsChangeFolderAccessRights = (option) => {
@@ -1349,6 +1377,12 @@ class FilesStore {
     this.files[index].fileStatus = status;
   };
 
+  updateFileLiveEditingBy = (index, activeEditors) => {
+    if (index < 0) return;
+
+    this.files[index].activeEditors = activeEditors;
+  };
+
   updateFileVectorizationStatus = (fileId, status) => {
     const foundIndex = this.files.findIndex((file) => file.id === fileId);
     if (foundIndex < 0) return;
@@ -1553,9 +1587,13 @@ class FilesStore {
 
       if (fileType === "file") {
         if (this.activeFiles.findIndex((f) => f.id == id) === -1) {
-          newSelections.push(
-            this.filesList.find((f) => f.id == id && !f.isFolder),
+          const selectableFile = this.filesList.find(
+            (f) => f.id == id && !f.isFolder,
           );
+
+          if (selectableFile) {
+            newSelections.push(selectableFile);
+          }
         }
       } else if (this.activeFolders.findIndex((f) => f.id == id) === -1) {
         const selectableFolder = this.filesList.find(
@@ -1822,7 +1860,11 @@ class FilesStore {
           filterData.searchArea = SearchArea.Active;
           const newUrl = getCategoryUrl(CategoryType.Chat, folderId);
 
-          history.pushState(null, "", `${newUrl}?${filterData.toUrlParams()}`);
+          history.replaceState(
+            null,
+            "",
+            `${newUrl}?${filterData.toUrlParams()}`,
+          );
         }
 
         if (newTotal > 0) {
@@ -2319,6 +2361,7 @@ class FilesStore {
 
               const isFiltered =
                 subjectId ||
+                filter.subjectOwnerId ||
                 filterValue ||
                 type ||
                 filter.provider ||
@@ -2489,6 +2532,7 @@ class FilesStore {
 
               const isFiltered =
                 subjectId ||
+                filter.subjectOwnerId ||
                 filterValue ||
                 type ||
                 filter.provider ||
@@ -2734,7 +2778,12 @@ class FilesStore {
 
       const extsCustomFilter =
         this.filesSettingsStore?.extsWebCustomFilterEditing || EMPTY_ARRAY;
+      const extsWebEdited =
+        this.filesSettingsStore?.extsWebEdited || EMPTY_ARRAY;
       const isExtsCustomFilter = extsCustomFilter.includes(item.fileExst);
+      const isExtsWebEdited = extsWebEdited.includes(item.fileExst);
+      const canShowCustomFilter =
+        canSetUpCustomFilter && isExtsCustomFilter && isExtsWebEdited;
 
       const isSharedWithMeFolderSection =
         this.treeFoldersStore.sharedWithMeFolderId === item.rootFolderId &&
@@ -2752,6 +2801,7 @@ class FilesStore {
         "pdf-view",
         "make-form",
         "edit-pdf",
+        "update-xlsx-data",
         "separator0",
         "ask-ai",
         "separator6",
@@ -2823,6 +2873,10 @@ class FilesStore {
         ]);
       }
 
+      if (!item.security?.UpdateXlsx) {
+        fileOptions = removeOptions(fileOptions, ["update-xlsx-data"]);
+      }
+
       if (this.publicRoomStore.isPublicRoom) {
         fileOptions = removeOptions(fileOptions, [
           "separator0",
@@ -2837,7 +2891,14 @@ class FilesStore {
           "copy-general-link",
           "mark-as-favorite",
           "remove-from-favorites",
+          "copy-to",
+          "ask-ai",
+          "separator6",
         ]);
+
+        if (!canMove && !canDuplicate) {
+          fileOptions = removeOptions(fileOptions, ["move"]);
+        }
       }
 
       if (!item.security?.FillingStatus) {
@@ -2858,7 +2919,7 @@ class FilesStore {
         ]);
       }
 
-      if (!canSetUpCustomFilter || !isExtsCustomFilter) {
+      if (!canShowCustomFilter) {
         fileOptions = removeOptions(fileOptions, ["custom-filter"]);
       }
 
@@ -3029,10 +3090,11 @@ class FilesStore {
             !item.viewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
-              PluginFileType.Files,
+              PluginFileType.file,
               item.fileExst,
               security,
               item.security,
+              item.id,
             );
 
             pluginFilesKeys &&
@@ -3044,10 +3106,11 @@ class FilesStore {
             item.viewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
-              PluginFileType.Image,
+              PluginFileType.image,
               item.fileExst,
               security,
               item.security,
+              item.id,
             );
 
             pluginFilesKeys &&
@@ -3059,10 +3122,11 @@ class FilesStore {
             !item.viewAccessibility.ImageView
           ) {
             const pluginFilesKeys = this.pluginStore.getContextMenuKeysByType(
-              PluginFileType.Video,
+              PluginFileType.video,
               item.fileExst,
               security,
               item.security,
+              item.id,
             );
 
             pluginFilesKeys &&
@@ -3155,6 +3219,7 @@ class FilesStore {
         "separator0",
         "edit-agent",
         "invite-users-to-room",
+        "link-for-room-members",
         "room-info",
         "pin-room",
         "unpin-room",
@@ -3163,7 +3228,7 @@ class FilesStore {
         "separator1",
         "duplicate-room",
         "download",
-        "change-room-owner",
+        "change-agent-owner",
         "leave-room",
         "delete",
       ];
@@ -3181,7 +3246,7 @@ class FilesStore {
       }
 
       if (!canChangeOwner) {
-        agentOptions = removeOptions(agentOptions, ["change-room-owner"]);
+        agentOptions = removeOptions(agentOptions, ["change-agent-owner"]);
       }
 
       if (!canRemoveAgent) {
@@ -3233,7 +3298,7 @@ class FilesStore {
       const canEditRoom = item.security?.EditRoom;
 
       const canViewRoomInfo = item.security?.Read || isLockedSharedRoom(item);
-      const canMuteRoom = item.security?.Mute;
+      const canMuteRoom = item.security?.Mute && item.inRoom;
 
       const canChangeOwner = item.security?.ChangeOwner;
 
@@ -3253,6 +3318,9 @@ class FilesStore {
         "external-link",
         "embedding-settings",
         "room-info",
+        "create-group",
+        "add-to-group",
+        "remove-from-group",
         "pin-room",
         "unpin-room",
         "mute-room",
@@ -3326,10 +3394,6 @@ class FilesStore {
         roomOptions = removeOptions(roomOptions, ["download"]);
       }
 
-      if (!canDownload && !canDuplicate) {
-        roomOptions = removeOptions(roomOptions, ["separator1"]);
-      }
-
       if (!item.providerKey) {
         roomOptions = removeOptions(roomOptions, ["reconnect-storage"]);
       }
@@ -3358,6 +3422,29 @@ class FilesStore {
         roomOptions = removeOptions(roomOptions, ["room-info"]);
       }
 
+      const { organizeRoomsGrouping } = this.filesSettingsStore;
+      const { roomGroups } = this.dialogsStore;
+      const currentGroupId = this.roomsFilter?.groupId;
+      if (
+        !organizeRoomsGrouping ||
+        isArchiveFolder ||
+        item.rootFolderType === FolderType.Archive ||
+        this.treeFoldersStore.isAIAgentsFolder
+      ) {
+        roomOptions = removeOptions(roomOptions, [
+          "create-group",
+          "add-to-group",
+          "remove-from-group",
+        ]);
+      } else if (!roomGroups || roomGroups.length === 0) {
+        roomOptions = removeOptions(roomOptions, [
+          "add-to-group",
+          "remove-from-group",
+        ]);
+      } else if (!currentGroupId) {
+        roomOptions = removeOptions(roomOptions, ["remove-from-group"]);
+      }
+
       if (isArchiveFolder || item.rootFolderType === FolderType.Archive) {
         roomOptions = removeOptions(roomOptions, ["archive-room"]);
       } else {
@@ -3365,10 +3452,11 @@ class FilesStore {
 
         if (enablePlugins) {
           const pluginRoomsKeys = this.pluginStore.getContextMenuKeysByType(
-            PluginFileType.Rooms,
+            PluginFileType.room,
             null,
             security,
             item.security,
+            item.id,
           );
 
           pluginRoomsKeys &&
@@ -3389,6 +3477,7 @@ class FilesStore {
       "select",
       "open",
       // "separator0",
+      "update-xlsx-data",
       "sharing-settings",
       "copy-shared-link",
       "manage-links",
@@ -3422,6 +3511,10 @@ class FilesStore {
       folderOptions = ["select", "separator0", "remove-shared-folder-or-file"];
     }
 
+    if (!item.security?.UpdateXlsx) {
+      folderOptions = removeOptions(folderOptions, ["update-xlsx-data"]);
+    }
+
     if (!isSharedWithMeFolderSection) {
       folderOptions = removeOptions(folderOptions, [
         "remove-shared-folder-or-file",
@@ -3443,7 +3536,12 @@ class FilesStore {
         "create-room",
         "mark-as-favorite",
         "remove-from-favorites",
+        "copy-to",
       ]);
+
+      if (!canMove && !canDuplicate) {
+        folderOptions = removeOptions(folderOptions, ["move"]);
+      }
     }
 
     if (!canDownload) {
@@ -3503,10 +3601,11 @@ class FilesStore {
 
       if (enablePlugins) {
         const pluginFoldersKeys = this.pluginStore.getContextMenuKeysByType(
-          PluginFileType.Folders,
+          PluginFileType.folder,
           null,
           security,
           item.security,
+          item.id,
         );
 
         pluginFoldersKeys &&
@@ -5092,6 +5191,7 @@ class FilesStore {
 
     const {
       subjectId,
+      subjectOwnerId,
       filterValue,
       type,
       withSubfolders: withRoomsSubfolders,
@@ -5120,6 +5220,7 @@ class FilesStore {
           withRoomsSubfolders ||
           searchInContentRooms ||
           subjectId ||
+          subjectOwnerId ||
           tags ||
           withoutTags ||
           quotaFilter

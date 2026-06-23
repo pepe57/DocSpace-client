@@ -2,21 +2,21 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Consumer } from "@docspace/shared/utils/context";
-import { Text } from "@docspace/shared/components/text";
+import { Consumer } from "@docspace/ui-kit/utils/context";
+import { Text } from "@docspace/ui-kit/components/text";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import useViewEffect from "@docspace/ui-kit/hooks/useViewEffect";
 import OAuthStore from "SRC_DIR/store/OAuthStore";
 import InfoDialog from "SRC_DIR/pages/PortalSettings/categories/developer-tools/OAuth/sub-components/InfoDialog";
 
-import { StyledContainer } from "./AuthorizedApps.styled";
 import { AuthorizedAppsProps } from "./AuthorizedApps.types";
 
 import TableView from "./sub-components/TableView";
 import RowView from "./sub-components/RowView";
 import RevokeDialog from "./sub-components/RevokeDialog";
 import EmptyScreen from "./sub-components/EmptyScreen";
+import styles from "./authorized-apps.module.scss";
 
 const AuthorizedApps = ({
   consents,
@@ -42,7 +42,7 @@ const AuthorizedApps = ({
   });
 
   return (
-    <StyledContainer>
+    <div className={styles.container} data-testid="profile-authorized-apps">
       {consents && consents?.length > 0 ? (
         <>
           <Text fontSize="12px" fontWeight="400" lineHeight="16px">
@@ -82,7 +82,7 @@ const AuthorizedApps = ({
           logoText={logoText!}
         />
       ) : null}
-    </StyledContainer>
+    </div>
   );
 };
 

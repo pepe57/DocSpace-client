@@ -1,0 +1,1561 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+
+import type { Location } from "react-router";
+import find from "lodash/find";
+import { findWindows } from "windows-iana";
+import { getCultureLabel } from "../constants/cultures";
+import {
+  parseToDateTime,
+  startOf,
+  dateDiffAbs,
+} from "@docspace/ui-kit/utils/date";
+import { isMobile } from "react-device-detect";
+import resizeImage from "resize-image";
+import { pbkdf2 } from "@noble/hashes/pbkdf2.js";
+import { sha256 } from "@noble/hashes/sha2.js";
+
+import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
+import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
+import LeftMenuSvgUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
+import DocseditorSvgUrl from "PUBLIC_DIR/images/logo/docseditor.svg?url";
+import LightSmallSvgUrl from "PUBLIC_DIR/images/logo/lightsmall.svg?url";
+import DocsEditoRembedSvgUrl from "PUBLIC_DIR/images/logo/docseditorembed.svg?url";
+import DarkLightSmallSvgUrl from "PUBLIC_DIR/images/logo/dark_lightsmall.svg?url";
+import FaviconIco from "PUBLIC_DIR/images/logo/favicon.ico";
+import SpreadsheetEditorSvgUrl from "PUBLIC_DIR/images/logo/spreadsheeteditor.svg?url";
+import SpreadsheetEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/spreadsheeteditorembed.svg?url";
+import PresentationEditorSvgUrl from "PUBLIC_DIR/images/logo/presentationeditor.svg?url";
+import PresentationEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/presentationeditorembed.svg?url";
+import PDFEditorSvgUrl from "PUBLIC_DIR/images/logo/pdfeditor.svg?url";
+import PDFEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/pdfeditorembed.svg?url";
+import DiagramEditorSvgUrl from "PUBLIC_DIR/images/logo/diagrameditor.svg?url";
+import DiagramEditorEmbedSvgUrl from "PUBLIC_DIR/images/logo/diagrameditorembed.svg?url";
+
+import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
+import BackgroundPatternOrangeReactSvgUrl from "PUBLIC_DIR/images/background.pattern.orange.react.svg?url";
+import BackgroundPatternGreenReactSvgUrl from "PUBLIC_DIR/images/background.pattern.green.react.svg?url";
+import BackgroundPatternRedReactSvgUrl from "PUBLIC_DIR/images/background.pattern.red.react.svg?url";
+import BackgroundPatternPurpleReactSvgUrl from "PUBLIC_DIR/images/background.pattern.purple.react.svg?url";
+import BackgroundPatternLightBlueReactSvgUrl from "PUBLIC_DIR/images/background.pattern.lightBlue.react.svg?url";
+import BackgroundPatternBlackReactSvgUrl from "PUBLIC_DIR/images/background.pattern.black.react.svg?url";
+
+import { AvatarRole } from "@docspace/ui-kit/components/avatar";
+import { ThemeKeys } from "@docspace/ui-kit/enums";
+
+import { parseAddress } from "./email";
+
+import {
+  FolderType,
+  RoomsType,
+  ErrorKeys,
+  WhiteLabelLogoType,
+  EmployeeType,
+  EmployeeTypeString,
+  UrlActionType,
+} from "../enums";
+import {
+  CategoryType,
+  COOKIE_EXPIRATION_YEAR,
+  LANGUAGE,
+  PUBLIC_MEDIA_VIEW_URL,
+  TIMEZONE,
+} from "../constants";
+
+import { TI18n, TTranslation, ValueOf } from "../types";
+import { TUser } from "../api/people/types";
+import { TFolder, TFile, TGetFolder } from "../api/files/types";
+import { TRoom } from "../api/rooms/types";
+import {
+  TDomainValidator,
+  TPasswordHash,
+  TTimeZone,
+} from "../api/settings/types";
+import { TopLoaderService } from "@docspace/ui-kit/components/top-loading-indicator";
+
+import { Encoder } from "@docspace/ui-kit/utils/encoder";
+import { combineUrl } from "./combineUrl";
+import { getCookie, setCookie } from "@docspace/ui-kit/utils/cookie";
+import { checkIsSSR } from "@docspace/ui-kit/utils/device";
+
+import { hasOwnProperty } from "./object";
+import { TFrameConfig } from "../types/Frame";
+import { isFile, isFolder } from "./typeGuards";
+import { getUserTypeDescriptionClient } from "./getUserTypeDescription";
+import { getSystemTheme } from "@docspace/ui-kit/utils/get-system-theme";
+import { isLanguageRtl } from "@docspace/ui-kit/providers/theme";
+
+export const desktopConstants = Object.freeze({
+  domain: !checkIsSSR() && window.location.origin,
+  provider: "onlyoffice",
+  cryptoEngineId: "{FFF0E1EB-13DB-4678-B67D-FF0A41DBBCEF}",
+});
+
+let timer: null | ReturnType<typeof setTimeout> = null;
+export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
+  return currentLng
+    ? i18n.language !== currentLng
+      ? i18n.changeLanguage(currentLng)
+      : Promise.resolve((...args: string[]) => i18n.t(...args))
+    : i18n.changeLanguage("en");
+}
+
+export function createPasswordHash(
+  password: string,
+  hashSettings?: TPasswordHash,
+) {
+  if (
+    !password ||
+    !hashSettings ||
+    typeof password !== "string" ||
+    typeof hashSettings !== "object" ||
+    !hasOwnProperty(hashSettings, "salt") ||
+    !hasOwnProperty(hashSettings, "size") ||
+    !hasOwnProperty(hashSettings, "iterations") ||
+    typeof hashSettings.size !== "number" ||
+    typeof hashSettings.iterations !== "number" ||
+    typeof hashSettings.salt !== "string"
+  )
+    throw new Error("Invalid params.");
+
+  const { size, iterations, salt } = hashSettings;
+
+  const enc = new TextEncoder();
+  const derivedBytes = pbkdf2(sha256, enc.encode(password), enc.encode(salt), {
+    c: iterations,
+    dkLen: size / 8,
+  });
+
+  return Array.from(derivedBytes)
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+export const isPublicRoom = () => {
+  return (
+    typeof window !== "undefined" &&
+    (window.location.pathname === "/rooms/share" ||
+      window.location.pathname.includes(PUBLIC_MEDIA_VIEW_URL))
+  );
+};
+
+export const isPublicPreview = () => {
+  return window.location.pathname.includes("/share/preview/");
+};
+
+export const parseDomain = (
+  domain: string,
+  setError: (error: string[] | null) => void,
+  t: (key: string) => string,
+) => {
+  const parsedDomain = parseAddress(`test@${domain}`);
+
+  if (parsedDomain?.parseErrors && parsedDomain?.parseErrors.length > 0) {
+    const translatedErrors = parsedDomain.parseErrors.map((error) => {
+      switch (error.errorKey) {
+        case ErrorKeys.LocalDomain:
+          return t("Common:LocalDomain");
+        case ErrorKeys.IncorrectDomain:
+        case ErrorKeys.IncorrectEmail:
+          return t("Common:IncorrectDomain");
+        case ErrorKeys.DomainIpAddress:
+          return t("Common:DomainIpAddress");
+        case ErrorKeys.PunycodeDomain:
+          return t("Common:PunycodeDomain");
+        case ErrorKeys.PunycodeLocalPart:
+          return t("Common:PunycodeLocalPart");
+        case ErrorKeys.IncorrectLocalPart:
+          return t("Common:IncorrectLocalPart");
+        case ErrorKeys.SpacesInLocalPart:
+          return t("Common:SpacesInLocalPart");
+        case ErrorKeys.MaxLengthExceeded:
+          return t("Common:MaxLengthExceeded");
+        default:
+          return t("Common:IncorrectDomain");
+      }
+    });
+
+    setError(translatedErrors);
+  }
+
+  return parsedDomain.isValid();
+};
+
+export const validatePortalName = (
+  value: string,
+  nameValidator: TDomainValidator,
+  setError: (error: string | null) => void,
+  t: TTranslation,
+) => {
+  const validName = new RegExp(nameValidator.regex);
+  switch (true) {
+    case value === "":
+      return setError(t("Common:PortalNameEmpty"));
+    case value.length < nameValidator.minLength ||
+      value.length > nameValidator.maxLength:
+      return setError(
+        t("Common:PortalNameLength", {
+          minLength: nameValidator.minLength.toString(),
+          maxLength: nameValidator.maxLength.toString(),
+        }),
+      );
+    case !validName.test(value):
+      return setError(t("Common:PortalNameIncorrect"));
+
+    default:
+      setError(null);
+  }
+  return validName.test(value);
+};
+
+export const getShowText = () => {
+  const showArticle = localStorage.getItem("showArticle");
+
+  if (showArticle) {
+    return JSON.parse(showArticle) === "true";
+  }
+
+  return false;
+};
+
+export const isManagement = () => {
+  return window.location.pathname.includes("management");
+};
+
+export function updateTempContent(isAuth = false) {
+  if (isAuth) {
+    const el = document.getElementById("burger-loader-svg");
+    if (el) {
+      el.style.display = "block";
+    }
+
+    const el1 = document.getElementById("logo-loader-svg");
+    if (el1) {
+      el1.style.display = "block";
+    }
+
+    const el2 = document.getElementById("avatar-loader-svg");
+    if (el2) {
+      el2.style.display = "block";
+    }
+  } else {
+    const tempElm = document.getElementById("temp-content");
+    if (tempElm) {
+      tempElm.outerHTML = "";
+    }
+  }
+}
+
+export function hideLoader() {
+  if (isMobile) return;
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
+  TopLoaderService.end();
+}
+
+export function showLoader() {
+  if (isMobile) return;
+
+  hideLoader();
+  TopLoaderService.cancel();
+  // timer = setTimeout(() => {
+  TopLoaderService.start();
+  // }, 500);
+}
+
+export function showProgress() {
+  if (isMobile) return;
+  TopLoaderService.cancel();
+  TopLoaderService.start();
+}
+
+export function isMe(user: TUser, userName: string) {
+  return (
+    user && user.id && (userName === "@self" || user.userName === userName)
+  );
+}
+
+export function isAdmin(currentUser: TUser) {
+  return (
+    currentUser.isAdmin ||
+    currentUser.isOwner ||
+    (currentUser.listAdminModules && currentUser.listAdminModules?.length > 0)
+  );
+}
+
+export const getUserAvatarRoleByType = (type: EmployeeType) => {
+  switch (type) {
+    case EmployeeType.Owner:
+      return AvatarRole.owner;
+    case EmployeeType.Admin:
+      return AvatarRole.admin;
+    case EmployeeType.RoomAdmin:
+      return AvatarRole.manager;
+
+    default:
+      return AvatarRole.user;
+  }
+};
+
+export const getUserType = (user: TUser) => {
+  if (user.isOwner) return EmployeeType.Owner;
+  if (isAdmin(user)) return EmployeeType.Admin;
+  if (user.isRoomAdmin) return EmployeeType.RoomAdmin;
+  if (user.isCollaborator) return EmployeeType.User;
+  if (user.isVisitor) return EmployeeType.Guest;
+  return EmployeeType.Guest;
+};
+
+export const getStringUserType = (user: TUser) => {
+  if (user.isOwner) return EmployeeTypeString.Owner;
+  if (isAdmin(user)) return EmployeeTypeString.Admin;
+  if (user.isRoomAdmin) return EmployeeTypeString.RoomAdmin;
+  if (user.isCollaborator) return EmployeeTypeString.User;
+  if (user.isVisitor) return EmployeeTypeString.Guest;
+  return EmployeeTypeString.Guest;
+};
+
+export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
+  switch (type) {
+    case EmployeeType.Owner:
+      return t("Common:Owner");
+    case EmployeeType.Admin:
+      return t("Common:PortalAdmin", {
+        productName: getBrandName("ProductName"),
+      });
+    case EmployeeType.RoomAdmin:
+      return t("Common:RoomAdmin");
+    case EmployeeType.User:
+      return t("Common:User");
+    case EmployeeType.Guest:
+    default:
+      return t("Common:Guest");
+  }
+};
+
+export function clickBackdrop() {
+  const elms = document.getElementsByClassName(
+    "backdrop-active",
+  ) as HTMLCollectionOf<HTMLDivElement>;
+
+  if (elms && elms.length > 0) {
+    elms[0].click();
+  }
+}
+
+export function objectToGetParams(obj: object, prefix = ""): string {
+  const params: string[] = [];
+
+  for (const [key, value] of Object.entries(obj)) {
+    if (value == null) continue;
+
+    const paramKey = prefix ? `${prefix}[${key}]` : key;
+
+    if (Array.isArray(value)) {
+      for (const item of value) {
+        params.push(
+          `${encodeURIComponent(paramKey)}[]=${encodeURIComponent(String(item))}`,
+        );
+      }
+    } else if (typeof value === "object") {
+      const nested = objectToGetParams(value, paramKey);
+      if (nested) params.push(nested);
+    } else {
+      params.push(
+        `${encodeURIComponent(paramKey)}=${encodeURIComponent(String(value))}`,
+      );
+    }
+  }
+
+  if (!params.length) return "";
+  return prefix ? params.join("&") : `?${params.join("&")}`;
+}
+
+export function toCommunityHostname(hostname: string) {
+  let communityHostname;
+  try {
+    communityHostname =
+      hostname.indexOf("m.") > -1
+        ? hostname.substring(2, hostname.length)
+        : hostname;
+  } catch (e) {
+    console.error(e);
+    communityHostname = hostname;
+  }
+
+  return communityHostname;
+}
+
+export function getProviderLabel(provider: string, t: (key: string) => string) {
+  switch (provider) {
+    case "apple":
+      return getBrandName("ProviderApple");
+    case "google":
+      return getBrandName("ProviderGoogle");
+    case "facebook":
+      return getBrandName("ProviderFacebook");
+    case "twitter":
+      return getBrandName("ProviderTwitter");
+    case "linkedin":
+      return getBrandName("ProviderLinkedIn");
+    case "microsoft":
+      return getBrandName("ProviderMicrosoft");
+    case "sso":
+      return getConstName("SSO");
+    case "zoom":
+      return getBrandName("ProviderZoom");
+    case "weixin":
+      return getBrandName("ProviderWechat");
+    case "sso-full":
+      return t("Common:ProviderSsoSetting");
+    case "nextcloud":
+      return getBrandName("Nextcloud");
+    default:
+      return "";
+  }
+}
+
+export function getProviderTranslation(
+  provider: string,
+  t: (key: string) => string,
+  linked = false,
+  signUp = false,
+) {
+  const providerLabel = getProviderLabel(provider, t);
+
+  if (linked) {
+    return `${t("Common:Disconnect")} ${providerLabel}`;
+  }
+
+  switch (provider) {
+    case "apple":
+      return signUp ? t("Common:SignUpWithApple") : t("Common:SignInWithApple");
+    case "google":
+      return signUp
+        ? t("Common:SignUpWithGoogle")
+        : t("Common:SignInWithGoogle");
+    case "facebook":
+      return signUp
+        ? t("Common:SignUpWithFacebook")
+        : t("Common:SignInWithFacebook");
+    case "twitter":
+      return signUp
+        ? t("Common:SignUpWithTwitter")
+        : t("Common:SignInWithTwitter");
+    case "linkedin":
+      return signUp
+        ? t("Common:SignUpWithLinkedIn")
+        : t("Common:SignInWithLinkedIn");
+    case "microsoft":
+      return signUp
+        ? t("Common:SignUpWithMicrosoft")
+        : t("Common:SignInWithMicrosoft");
+    case "sso":
+      return signUp ? t("Common:SignUpWithSso") : t("Common:SignInWithSso");
+    case "zoom":
+      return signUp ? t("Common:SignUpWithZoom") : t("Common:SignInWithZoom");
+    case "weixin":
+      return signUp
+        ? t("Common:SignUpWithWechat")
+        : t("Common:SignInWithWechat");
+    case "nextcloud":
+      return signUp
+        ? t("Common:SignUpWithNextcloud")
+        : t("Common:SignInWithNextcloud");
+    default:
+      return "";
+  }
+}
+
+export const getLifetimePeriodTranslation = (
+  period: number,
+  t: TTranslation,
+) => {
+  switch (period) {
+    case 0:
+      return t("Common:Days").toLowerCase();
+    case 1:
+      return t("Common:Months").toLowerCase();
+    case 2:
+      return t("Common:Years").toLowerCase();
+
+    default:
+      return t("Common:Days").toLowerCase();
+  }
+};
+
+// temporary function needed to replace rtl language in Editor to ltr
+export const getLtrLanguageForEditor = (
+  userLng: string | undefined,
+  portalLng: string,
+  isEditor: boolean = false,
+): string => {
+  let isEditorPath;
+  if (typeof window !== "undefined") {
+    isEditorPath = window?.location.pathname.indexOf("doceditor") !== -1;
+  }
+  const isUserLngRtl = isLanguageRtl(userLng || "en");
+  // const isPortalLngRtl = isLanguageRtl(portalLng);
+
+  if (userLng === undefined && portalLng) return portalLng;
+
+  if ((!isEditor && !isEditorPath) || (userLng && !isUserLngRtl))
+    return userLng || "en";
+
+  return "en";
+};
+
+export function loadScript(
+  url: string,
+  id: string,
+  onLoad: (e: Event) => void,
+  onError: OnErrorEventHandler,
+) {
+  try {
+    const script = document.createElement("script");
+    script.setAttribute("type", "text/javascript");
+    script.setAttribute("id", id);
+
+    if (onLoad) script.onload = onLoad;
+    if (onError) script.onerror = onError;
+
+    script.src = url;
+    script.async = true;
+
+    document.body.appendChild(script);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function isRetina() {
+  if (window.devicePixelRatio > 1) return true;
+
+  const mediaQuery =
+    "(-webkit-min-device-pixel-ratio: 1.5),\
+      (min--moz-device-pixel-ratio: 1.5),\
+      (-o-min-device-pixel-ratio: 3/2),\
+      (min-resolution: 1.5dppx),\
+      (min-device-pixel-ratio: 1.5)";
+
+  if (window.matchMedia?.(mediaQuery).matches) return true;
+  return false;
+}
+
+export function convertLanguage(key: string) {
+  switch (key) {
+    case "en":
+      return "en-GB";
+    case "ru-RU":
+      return "ru";
+    case "de-DE":
+      return "de";
+    case "it-IT":
+      return "it";
+    case "fr-FR":
+      return "fr";
+    default:
+      return key;
+  }
+}
+
+export function convertToLanguage(key: string) {
+  if (!key) return;
+
+  const splittedKey = key.split("-");
+
+  if (splittedKey.length > 1) return splittedKey[0];
+
+  return key;
+}
+
+export function sleep(ms: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+export function isElementInViewport(el: HTMLElement) {
+  if (!el) return;
+
+  const rect = el.getBoundingClientRect();
+
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+
+export function assign(
+  objParam: Record<string, unknown>,
+  keyPath: string[],
+  value: unknown,
+) {
+  let obj: Record<string, unknown> = objParam;
+  const lastKeyIndex = keyPath.length - 1;
+  for (let i = 0; i < lastKeyIndex; ++i) {
+    const key = keyPath[i];
+    if (!(key in obj)) {
+      obj[key] = {};
+    }
+    obj = obj[key] as Record<string, unknown>;
+  }
+  obj[keyPath[lastKeyIndex]] = value;
+}
+
+export function getLoginLink(token: string, code: string) {
+  return combineUrl(
+    window.ClientConfig?.proxy?.url,
+    `/login.ashx?p=${token}&code=${code}`,
+  );
+}
+
+const FRAME_NAME = "frameDocSpace";
+
+export const getFrameId = () => {
+  return window.self.name.replace(`${FRAME_NAME}__#`, "");
+};
+
+export const frameCallbackData = (
+  methodReturnData: unknown,
+  callId?: number,
+) => {
+  window.parent.postMessage(
+    JSON.stringify({
+      type: "onMethodReturn",
+      frameId: getFrameId(),
+      methodReturnData,
+      ...(callId !== undefined && { callId }),
+    }),
+    "*",
+  );
+};
+
+export const frameCallEvent = (eventReturnData: unknown) => {
+  window.parent.postMessage(
+    JSON.stringify({
+      type: "onEventReturn",
+      frameId: getFrameId(),
+      eventReturnData,
+    }),
+    "*",
+  );
+};
+
+export const frameCallCommand = (
+  commandName: string,
+  commandData?: unknown,
+) => {
+  window.parent.postMessage(
+    JSON.stringify({
+      type: "onCallCommand",
+      frameId: getFrameId(),
+      commandName,
+      commandData,
+    }),
+    "*",
+  );
+};
+
+export {
+  getPowerFromBytes,
+  getSizeFromBytes,
+  getConvertedSize,
+  calculateTotalPrice,
+  truncateNumberToFraction,
+  formatCurrencyValue,
+} from "@docspace/ui-kit/billing/utils/common";
+
+export const frameHandlePing = (eventData: {
+  type?: string;
+  frameId?: string;
+}): boolean => {
+  if (eventData?.type === "ping") {
+    window.parent.postMessage(
+      JSON.stringify({
+        type: "pong",
+        frameId: getFrameId(),
+      }),
+      "*",
+    );
+    return true;
+  }
+  return false;
+};
+
+import { getConvertedSize } from "@docspace/ui-kit/billing/utils/common";
+import { getBrandName } from "@docspace/shared/constants/brands";
+import { getConstName } from "@docspace/shared/constants/consts";
+
+export const getConvertedQuota = (
+  t: (key: string) => string,
+  bytes: number,
+  withoutSizeName: boolean = false,
+) => {
+  if (bytes === -1) return t("Common:Unlimited");
+  return getConvertedSize(t, bytes, withoutSizeName);
+};
+
+export const getSpaceQuotaAsText = (
+  t: (key: string) => string,
+  usedSpace: number,
+  quotaLimit: number,
+  isDefaultQuotaSet: boolean,
+) => {
+  const usedValue = getConvertedQuota(t, usedSpace);
+
+  if (!isDefaultQuotaSet) return usedValue;
+
+  if (!quotaLimit) return usedValue;
+
+  const quotaValue = getConvertedQuota(t, quotaLimit);
+
+  return `${usedValue} / ${quotaValue}`;
+};
+
+export const conversionToBytes = (size: number, power: number) => {
+  const value = Math.ceil(size * 1024 ** power);
+
+  return value.toString();
+};
+
+export const getBgPattern = (colorSchemeId: number | undefined) => {
+  switch (colorSchemeId) {
+    case 1:
+      return `url('${BackgroundPatternReactSvgUrl}')`;
+    case 2:
+      return `url('${BackgroundPatternOrangeReactSvgUrl}')`;
+    case 3:
+      return `url('${BackgroundPatternGreenReactSvgUrl}')`;
+    case 4:
+      return `url('${BackgroundPatternRedReactSvgUrl}')`;
+    case 5:
+      return `url('${BackgroundPatternPurpleReactSvgUrl}')`;
+    case 6:
+      return `url('${BackgroundPatternLightBlueReactSvgUrl}')`;
+    case 7:
+      return `url('${BackgroundPatternBlackReactSvgUrl}')`;
+    default:
+      return `url('${BackgroundPatternReactSvgUrl}')`;
+  }
+};
+
+export const getDaysLeft = (date: Date) => {
+  const targetDate = startOf(parseToDateTime(date)!, "day")!;
+  const currentDate = startOf(parseToDateTime(new Date())!, "day")!;
+  return dateDiffAbs(targetDate, currentDate, "days");
+};
+
+export const getDaysRemaining = (autoDelete: Date) => {
+  const daysRemaining = getDaysLeft(autoDelete);
+
+  if (daysRemaining <= 0) return "<1";
+  return `${daysRemaining}`;
+};
+
+export const getFileExtension = (fileTitleParam: string) => {
+  let fileTitle = fileTitleParam;
+  if (!fileTitle) {
+    return "";
+  }
+  fileTitle = fileTitle.trim();
+  const posExt = fileTitle.lastIndexOf(".");
+  return posExt >= 0 ? fileTitle.substring(posExt).trim().toLowerCase() : "";
+};
+
+export const sortInDisplayOrder = (folders: TGetFolder[]) => {
+  const sorted = [];
+
+  const aiAgentsFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.AIAgents,
+  );
+  if (aiAgentsFolder) sorted.push(aiAgentsFolder);
+
+  const myFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.USER,
+  );
+  if (myFolder) sorted.push(myFolder);
+
+  const shareRoom = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Rooms,
+  );
+  if (shareRoom) sorted.push(shareRoom);
+
+  const sharedWithMeFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.SHARE,
+  );
+  if (sharedWithMeFolder) sorted.push(sharedWithMeFolder);
+
+  const favoritesFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Favorites,
+  );
+  if (favoritesFolder) sorted.push(favoritesFolder);
+
+  const recentFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Recent,
+  );
+  if (recentFolder) sorted.push(recentFolder);
+
+  const archiveRoom = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Archive,
+  );
+  if (archiveRoom) sorted.push(archiveRoom);
+
+  const privateFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Privacy,
+  );
+  if (privateFolder) sorted.push(privateFolder);
+
+  const commonFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.COMMON,
+  );
+  if (commonFolder) sorted.push(commonFolder);
+
+  const projectsFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.Projects,
+  );
+  if (projectsFolder) sorted.push(projectsFolder);
+
+  const trashFolder = find(
+    folders,
+    (folder) => folder.current.rootFolderType === FolderType.TRASH,
+  );
+  if (trashFolder) sorted.push(trashFolder);
+
+  return sorted;
+};
+
+export const getFolderClassNameByType = (folderType: FolderType) => {
+  switch (folderType) {
+    case FolderType.AIAgents:
+      return "tree-node-ai-agents";
+    case FolderType.USER:
+      return "tree-node-my";
+    case FolderType.SHARE:
+      return "tree-node-share";
+    case FolderType.COMMON:
+      return "tree-node-common";
+    case FolderType.Projects:
+      return "tree-node-projects";
+    case FolderType.Favorites:
+      return "tree-node-favorites";
+    case FolderType.Recent:
+      return "tree-node-recent";
+    case FolderType.Privacy:
+      return "tree-node-privacy";
+    case FolderType.TRASH:
+      return "tree-node-trash";
+    default:
+      return "";
+  }
+};
+
+export const decodeDisplayName = <T extends TFile | TFolder | TRoom>(
+  items: T[],
+) => {
+  return items.map((item) => {
+    if (!item) return item;
+
+    if ("updatedBy" in item) {
+      const updatedBy = item.updatedBy;
+      if (
+        updatedBy &&
+        "displayName" in updatedBy &&
+        updatedBy.displayName &&
+        typeof updatedBy.displayName === "string"
+      )
+        updatedBy.displayName = Encoder.htmlDecode(updatedBy.displayName);
+    }
+
+    if ("createdBy" in item) {
+      const createdBy = item.createdBy;
+      if (
+        createdBy &&
+        "displayName" in createdBy &&
+        createdBy.displayName &&
+        typeof createdBy.displayName === "string"
+      )
+        createdBy.displayName = Encoder.htmlDecode(createdBy.displayName);
+    }
+
+    return item;
+  });
+};
+
+export const checkFilterInstance = (
+  filterObject: object,
+  certainClass: { prototype: object },
+) => {
+  const isInstance =
+    filterObject.constructor.name === certainClass.prototype.constructor.name;
+
+  if (!isInstance)
+    throw new Error(
+      `Filter ${filterObject.constructor.name} isn't an instance of   ${certainClass.prototype.constructor.name}`,
+    );
+
+  return isInstance;
+};
+
+export const toUrlParams = (
+  obj: { [key: string]: unknown },
+  skipNull: boolean,
+) => {
+  let str = "";
+
+  Object.keys(obj).forEach((key) => {
+    if (skipNull && !obj[key]) return;
+
+    if (str !== "") {
+      str += "&";
+    }
+
+    const item = obj[key];
+
+    // added for double employeetype or room type
+    if (Array.isArray(item) && (key === "employeetypes" || key === "type")) {
+      for (let i = 0; i < item.length; i += 1) {
+        str += `${key}=${encodeURIComponent(item[i])}`;
+        if (i !== item.length - 1) {
+          str += "&";
+        }
+      }
+    } else if (typeof item === "object") {
+      str += `${key}=${encodeURIComponent(JSON.stringify(item))}`;
+    } else if (
+      typeof item === "string" ||
+      typeof item === "number" ||
+      typeof item === "boolean"
+    ) {
+      str += `${key}=${encodeURIComponent(item)}`;
+    }
+  });
+
+  return str;
+};
+
+const groupParamsByKey = (params: URLSearchParams) =>
+  Array.from(params.entries()).reduce(
+    (accumulator: { [key: string]: string | string[] }, [key, value]) => {
+      if (accumulator[key]) {
+        accumulator[key] = Array.isArray(accumulator[key])
+          ? [...accumulator[key], value]
+          : [accumulator[key], value];
+      } else {
+        accumulator[key] = value;
+      }
+      return accumulator;
+    },
+    {},
+  );
+
+export const parseURL = (searchUrl: string) => {
+  const params = new URLSearchParams(searchUrl);
+  const entries: { [key: string]: string | string[] } =
+    groupParamsByKey(params);
+  return entries;
+};
+
+export function getObjectByLocation(location: Location) {
+  if (!location.search || !location.search.length) return null;
+
+  try {
+    const searchUrl = location.search.substring(1);
+    const params = parseURL(searchUrl);
+    return params;
+  } catch (e) {
+    console.error(e);
+    return {};
+  }
+}
+
+export function tryParse(str: string) {
+  try {
+    if (!str) return undefined;
+
+    return JSON.parse(str);
+  } catch (e) {
+    console.error(e);
+    return undefined;
+  }
+}
+
+export function tryParseArray(str: string) {
+  try {
+    const res = tryParse(str);
+
+    if (!Array.isArray(res)) return undefined;
+
+    return res;
+  } catch (e) {
+    console.error(e);
+    return undefined;
+  }
+}
+
+export const RoomsTypeValues = Object.values(RoomsType).filter(
+  (item): item is number =>
+    typeof item === "number" && item !== RoomsType.AIRoom,
+);
+
+export const RoomsTypes = RoomsTypeValues.reduce<Record<number, number>>(
+  (acc, current) => {
+    if (typeof current === "string") return { ...acc };
+    return { ...acc, [current]: current };
+  },
+  {},
+);
+
+export const getEditorTheme = (theme?: ThemeKeys) => {
+  const systemTheme =
+    getSystemTheme() === ThemeKeys.DarkStr ? "theme-night" : "theme-white";
+
+  switch (theme) {
+    case ThemeKeys.BaseStr:
+    case ThemeKeys.Base:
+      return "theme-white";
+    case ThemeKeys.DarkStr:
+    case ThemeKeys.Dark:
+      return "theme-night";
+    case ThemeKeys.SystemStr:
+    case ThemeKeys.System:
+      return "theme-system";
+    default:
+      return systemTheme;
+  }
+};
+
+const languages: string[] = ["ar-SA"];
+export const isBetaLanguage = (language: string): boolean => {
+  return languages.includes(language);
+};
+
+export const getLogoFromPath = (path: string) => {
+  if (!path || path.indexOf("images/logo/") === -1) return path;
+
+  const name = path.split("/").pop();
+
+  switch (name) {
+    case "aboutpage.svg":
+    case "loginpage.svg":
+      return LoginPageSvgUrl;
+    case "dark_loginpage.svg":
+      return DarkLoginPageSvgUrl;
+    case "leftmenu.svg":
+    case "dark_leftmenu.svg":
+      return LeftMenuSvgUrl;
+    case "dark_aboutpage.svg":
+    case "dark_lightsmall.svg":
+      return DarkLightSmallSvgUrl;
+    case "docseditor.svg":
+      return DocseditorSvgUrl;
+    case "lightsmall.svg":
+      return LightSmallSvgUrl;
+    case "docseditorembed.svg":
+      return DocsEditoRembedSvgUrl;
+    case "favicon.ico":
+      return FaviconIco;
+    case "spreadsheeteditor.svg":
+      return SpreadsheetEditorSvgUrl;
+    case "spreadsheeteditorembed.svg":
+      return SpreadsheetEditorEmbedSvgUrl;
+    case "presentationeditor.svg":
+      return PresentationEditorSvgUrl;
+    case "presentationeditorembed.svg":
+      return PresentationEditorEmbedSvgUrl;
+    case "pdfeditor.svg":
+      return PDFEditorSvgUrl;
+    case "pdfeditorembed.svg":
+      return PDFEditorEmbedSvgUrl;
+    case "diagrameditor.svg":
+      return DiagramEditorSvgUrl;
+    case "diagrameditorembed.svg":
+      return DiagramEditorEmbedSvgUrl;
+    default:
+      break;
+  }
+
+  return path;
+};
+
+export type FolderTypeValueOf = (typeof FolderType)[keyof typeof FolderType];
+
+export const getIconPathByFolderType = (
+  folderType?: FolderTypeValueOf,
+): string => {
+  const defaultPath = "folder.svg";
+
+  const folderIconPath: Partial<Record<FolderTypeValueOf, string>> = {
+    [FolderType.Done]: "folderComplete.svg",
+    [FolderType.InProgress]: "folderInProgress.svg",
+    [FolderType.DEFAULT]: defaultPath,
+  };
+
+  return folderIconPath[folderType ?? FolderType.DEFAULT] ?? defaultPath;
+};
+
+export const insertTagManager = (id: string) => {
+  const script = document.createElement("script");
+  script.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','${id}');`;
+
+  const noScript = document.createElement("noscript");
+  noScript.innerHTML = `<iframe src="https://www.googletagmanager.com/ns.html?id=${id}"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe>`;
+
+  document.head.insertBefore(script, document.head.childNodes[0]);
+  document.body.insertBefore(noScript, document.body.childNodes[0]);
+};
+
+export const insertDataLayer = (id: string) => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ user_id: id });
+};
+
+export const mapTimezonesToArray = (
+  timezones: TTimeZone[],
+): {
+  key: string | number;
+  label: string;
+}[] => {
+  return timezones.map((timezone) => {
+    return { key: timezone.id, label: timezone.displayName };
+  });
+};
+
+export const getUserTimezone = (): string => {
+  return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+};
+
+export const getSelectZone = (
+  zones: {
+    key: string | number;
+    label: string;
+  }[],
+  userTimezone: string,
+) => {
+  const defaultTimezone = "UTC";
+  const isWindowsZones = zones[0].key === "Dateline Standard Time"; // TODO: get from server
+
+  if (isWindowsZones) {
+    const windowsZoneKey = findWindows(userTimezone);
+    const result = zones.filter((zone) => zone.key === windowsZoneKey[0]);
+    return result.length
+      ? result
+      : zones.filter((zone) => zone.key === defaultTimezone);
+  }
+  const userTimezoneResult = zones.filter((zone) => zone.key === userTimezone);
+  return userTimezoneResult.length
+    ? userTimezoneResult
+    : zones.filter((zone) => zone.key === defaultTimezone);
+};
+
+export function getLogoUrl(
+  logoType: WhiteLabelLogoType,
+  dark: boolean = false,
+  def: boolean = false,
+  culture?: string,
+  update: boolean = false,
+) {
+  let logoTimestamp = "";
+
+  if (update) {
+    const timestamp = window.sessionStorage?.getItem("logoUpdateTimestamp");
+    if (timestamp) logoTimestamp = `&t=${timestamp}`;
+  }
+
+  const url = `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}${culture ? `&culture=${culture}` : ""}${logoTimestamp}`;
+
+  return url;
+}
+
+export function updateLogoTimestamp() {
+  window.sessionStorage?.setItem("logoUpdateTimestamp", Date.now().toString());
+}
+
+export const getUserTypeName = (
+  isOwner: boolean,
+  isPortalAdmin: boolean,
+  isRoomAdmin: boolean,
+  isCollaborator: boolean,
+  t: TTranslation,
+) => {
+  if (isOwner) return t("Common:Owner");
+
+  if (isPortalAdmin)
+    return t("Common:PortalAdmin", {
+      productName: getBrandName("ProductName"),
+    });
+
+  if (isRoomAdmin) return t("Common:RoomAdmin");
+
+  if (isCollaborator) return t("Common:User");
+
+  return t("Common:Guest");
+};
+
+export const getUserTypeDescription = (
+  isPortalAdmin: boolean,
+  isRoomAdmin: boolean,
+  isCollaborator: boolean,
+  t: TTranslation,
+) => {
+  return getUserTypeDescriptionClient(
+    isPortalAdmin,
+    isRoomAdmin,
+    isCollaborator,
+    t,
+  );
+};
+
+export function setLanguageForUnauthorized(
+  culture: string,
+  isReload: boolean = true,
+) {
+  setCookie(LANGUAGE, culture, {
+    "max-age": COOKIE_EXPIRATION_YEAR,
+  });
+
+  if (!window) return;
+
+  const url = new URL(window.location.href);
+  const prevCulture = url.searchParams.get("culture");
+
+  if (prevCulture) {
+    const newUrl = window.location.href.replace(`&culture=${prevCulture}`, ``);
+
+    window.history.pushState({}, "", newUrl);
+  }
+
+  if (isReload) window.location.reload();
+}
+
+export function setTimezoneForUnauthorized(timezone: string) {
+  setCookie(TIMEZONE, timezone, {
+    "max-age": COOKIE_EXPIRATION_YEAR,
+  });
+}
+
+export const imageProcessing = async (file: File, maxSize?: number) => {
+  const ONE_MEGABYTE = 1024 * 1024;
+  const COMPRESSION_RATIO = 2;
+  const NO_COMPRESSION_RATIO = 1;
+
+  const maxImageSize = maxSize ?? ONE_MEGABYTE;
+  const imageBitMap = await createImageBitmap(file);
+
+  const { width } = imageBitMap;
+  const { height } = imageBitMap;
+
+  const canvas = resizeImage.resize2Canvas(imageBitMap, width, height);
+
+  async function resizeRecursiveAsync(
+    img: { width: number; height: number },
+    compressionRatio = COMPRESSION_RATIO,
+    depth = 0,
+  ): Promise<unknown> {
+    const data = resizeImage.resize(
+      canvas,
+      img.width / compressionRatio,
+      img.height / compressionRatio,
+      resizeImage.JPEG,
+    );
+
+    const newFile = await fetch(data)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const f = new File([blob], "File name", {
+          type: "image/jpg",
+        });
+        return f;
+      });
+
+    // const stepMessage = `Step ${depth + 1}`;
+    // const sizeMessage = `size = ${file.size} bytes`;
+    // const compressionRatioMessage = `compressionRatio = ${compressionRatio}`;
+
+    // console.log(`${stepMessage} ${sizeMessage} ${compressionRatioMessage}`);
+
+    if (newFile.size < maxImageSize) {
+      return newFile;
+    }
+
+    if (depth > 5) {
+      // console.log("start");
+      throw new Error("recursion depth exceeded");
+    }
+
+    return new Promise((resolve) => {
+      return resolve(newFile);
+    }).then(() => resizeRecursiveAsync(img, compressionRatio + 1, depth + 1));
+  }
+
+  return resizeRecursiveAsync(
+    { width, height },
+    file.size > maxImageSize ? COMPRESSION_RATIO : NO_COMPRESSION_RATIO,
+  );
+};
+
+export const getBackupProgressInfo = (
+  opt: {
+    progress: number;
+    isCompleted?: boolean;
+    link?: string;
+    error?: string;
+    warning?: string;
+  },
+  t: TTranslation,
+  setBackupProgress: (progress: number) => void,
+  setLink: (link: string) => void,
+  setShowCancelOperation?: (show: boolean) => void,
+  showCancelOperation?: boolean,
+) => {
+  const { isCompleted, link, error, progress, warning } = opt;
+
+  if (progress !== 100) {
+    setBackupProgress(progress);
+    if (!isCompleted && !showCancelOperation) setShowCancelOperation?.(true);
+  }
+
+  if (progress === 100 && !isCompleted) {
+    setShowCancelOperation?.(false);
+  }
+
+  if (isCompleted) {
+    setBackupProgress(100);
+    if (showCancelOperation) setShowCancelOperation?.(false);
+
+    if (link && link.slice(0, 1) === "/") {
+      setLink(link);
+    }
+
+    if (warning) {
+      return { warning };
+    }
+
+    if (error) {
+      return { error };
+    }
+
+    return { success: t("Common:BackupCreatedSuccess") };
+  }
+};
+
+type OpenUrlParams = {
+  url: string;
+  action: UrlActionType;
+  replace?: boolean;
+  isFrame?: boolean;
+  frameConfig?: TFrameConfig | null;
+};
+
+export const openUrl = ({
+  url,
+  action,
+  replace,
+  isFrame,
+  frameConfig,
+}: OpenUrlParams) => {
+  if (action === UrlActionType.Download) {
+    return isFrame &&
+      frameConfig?.downloadToEvent &&
+      frameConfig?.events?.onDownload
+      ? frameCallEvent({ event: "onDownload", data: url })
+      : replace
+        ? (window.location.href = url)
+        : window.open(url, "_self");
+  }
+};
+
+export const getSdkScriptUrl = (version: string) => {
+  return typeof window !== "undefined"
+    ? `${window.location.origin}/static/scripts/sdk/${version}/api.js`
+    : "";
+};
+
+export const insertEditorPreloadFrame = (docServiceUrl: string) => {
+  if (
+    !docServiceUrl ||
+    typeof window === "undefined" ||
+    document.getElementById("editor-preload-frame")
+  ) {
+    return;
+  }
+
+  const iframe = document.createElement("iframe");
+
+  iframe.id = "editor-preload-frame";
+  iframe.style.cssText =
+    "position:absolute;width:0;height:0;border:0;opacity:0;pointer-events:none;visibility:hidden";
+  iframe.setAttribute("aria-hidden", "true");
+  iframe.setAttribute("tabindex", "-1");
+
+  const cleanup = () => iframe.remove();
+  const setupCleanup = () => setTimeout(cleanup, 3000);
+
+  iframe.addEventListener("load", setupCleanup, { once: true });
+  iframe.addEventListener("error", cleanup, { once: true });
+
+  const appendIframe = () => {
+    document.body.appendChild(iframe);
+    iframe.src = docServiceUrl;
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", appendIframe, { once: true });
+  } else {
+    appendIframe();
+  }
+};
+
+export function buildDataTestId(
+  dataTestId: string | undefined,
+  suffix: string,
+): string | undefined {
+  if (!dataTestId) return undefined;
+  return `${dataTestId}_${suffix}`;
+}
+
+export const getErrorInfo = (
+  err: unknown,
+  t: TTranslation,
+  customText: string | React.ReactNode,
+) => {
+  let message;
+
+  const knownError = err as {
+    response?: { status: number; data: { error: { message: string } } };
+    message?: string;
+  };
+
+  if (customText) {
+    message = customText;
+  } else if (typeof err === "string") {
+    message = err;
+  } else {
+    message =
+      ("response" in knownError && knownError.response?.data?.error?.message) ||
+      ("message" in knownError && knownError.message) ||
+      "";
+  }
+
+  if (knownError?.response?.status === 502)
+    message = t("Common:UnexpectedError");
+
+  return message ?? t("Common:UnexpectedError");
+};
+
+export const getCategoryType = (location: { pathname: string }) => {
+  let categoryType: ValueOf<typeof CategoryType> = CategoryType.Shared;
+  const { pathname } = location;
+
+  if (pathname.startsWith("/rooms")) {
+    if (pathname.indexOf("personal") > -1) {
+      categoryType = CategoryType.Personal;
+    } else if (pathname.indexOf("shared") > -1) {
+      const regexp = /(rooms)\/shared\/(\d+)/;
+
+      categoryType = !regexp.test(location.pathname)
+        ? CategoryType.Shared
+        : CategoryType.SharedRoom;
+    } else if (pathname.indexOf("share") > -1) {
+      categoryType = CategoryType.PublicRoom;
+    } else if (pathname.indexOf("archive") > -1) {
+      categoryType = CategoryType.Archive;
+    }
+  } else if (pathname.startsWith("/files/favorite")) {
+    categoryType = CategoryType.Favorite;
+  } else if (pathname.startsWith("/favorite")) {
+    categoryType = CategoryType.Favorite;
+  } else if (pathname.startsWith("/recent")) {
+    categoryType = CategoryType.Recent;
+  } else if (pathname.startsWith("/files/trash")) {
+    categoryType = CategoryType.Trash;
+  } else if (pathname.startsWith("/settings")) {
+    categoryType = CategoryType.Settings;
+  } else if (pathname.startsWith("/accounts")) {
+    categoryType = CategoryType.Accounts;
+  } else if (pathname.startsWith("/shared-with-me")) {
+    categoryType = CategoryType.SharedWithMe;
+  } else if (pathname.startsWith("/ai-agents")) {
+    const agentRegexp = /(ai-agents)\/(\d+)/;
+    const chatRegexp = /(ai-agents)\/(\d+)\/chat/;
+
+    if (chatRegexp.test(location.pathname)) {
+      categoryType = CategoryType.Chat;
+    } else if (agentRegexp.test(location.pathname)) {
+      categoryType = CategoryType.AIAgent;
+    } else {
+      categoryType = CategoryType.AIAgents;
+    }
+  }
+
+  return categoryType;
+};
+export function splitFileAndFolderIds<T extends TFolder | TFile>(items: T[]) {
+  const initial = {
+    fileIds: [] as Array<string | number>,
+    folderIds: [] as Array<string | number>,
+  };
+
+  return (items ?? []).reduce((acc, item) => {
+    const id = (item as TFolder | TFile)?.id;
+    if (id === undefined || id === null) return acc;
+
+    if (isFolder(item)) acc.folderIds.push(id);
+    else if (isFile(item)) acc.fileIds.push(id);
+
+    return acc;
+  }, initial);
+}
+

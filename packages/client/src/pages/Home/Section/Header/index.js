@@ -1,34 +1,45 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
+import PublicRoomRestrictedIconUrl from "PUBLIC_DIR/images/public-room.restricted.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg?url";
+import WarningQuotaExceededUrl from "PUBLIC_DIR/images/warning.quota-exceeded.react.svg?url";
 
 import React from "react";
 import classnames from "classnames";
@@ -38,16 +49,16 @@ import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
-import Navigation from "@docspace/shared/components/navigation";
+import Navigation from "@docspace/ui-kit/components/navigation";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import {
-  Context,
   getLogoUrl,
   getCheckboxItemId,
   getCheckboxItemLabel,
 } from "@docspace/shared/utils";
-import { TableGroupMenu } from "@docspace/shared/components/table";
+import { Context } from "@docspace/ui-kit/utils/context";
+import { TableGroupMenu } from "@docspace/ui-kit/components/table";
 import {
   RoomsType,
   DeviceType,
@@ -70,12 +81,14 @@ import TariffBar from "SRC_DIR/components/TariffBar";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { GuidanceRefKey } from "@docspace/shared/components/guidance/sub-components/Guid.types";
 import getFilesFromEvent from "@docspace/shared/utils/get-files-from-event";
-import { toastr } from "@docspace/shared/components/toast";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { toastr } from "@docspace/ui-kit/components/toast";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import styles from "@docspace/shared/styles/SectionHeader.module.scss";
 import useProfileHeader from "SRC_DIR/pages/Profile/Section/Header/useProfileHeader";
 
 import { useContactsHeader } from "./useContacts";
+import { getWarningText } from "../getWarningText";
+import { AnalyzeResponsesButton } from "./sub-components/AnalyzeResponses";
 
 const SectionHeaderContent = (props) => {
   const {
@@ -182,6 +195,9 @@ const SectionHeaderContent = (props) => {
 
     isAIRoom,
     isAIAgent,
+    isRoomStorageQuotaExceeded,
+    roomUsedSpace,
+    roomQuotaLimit,
     isKnowledgeTab,
     currentClientView,
     profile,
@@ -200,6 +216,11 @@ const SectionHeaderContent = (props) => {
     isSharedWithMeFolderRoot,
     isAIAgentsFolder,
     filesSelection,
+    isCollaborator,
+    isVisitor,
+    isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
+    hasExternalLinks,
   } = props;
 
   const location = useLocation();
@@ -366,6 +387,7 @@ const SectionHeaderContent = (props) => {
               label={label}
               data-key={key}
               onClick={onSelect}
+              truncateText
             />
           );
         })}
@@ -467,7 +489,7 @@ const SectionHeaderContent = (props) => {
   const getContextOptionsPlus = React.useCallback(() => {
     if (isContactsPage) return getContactsModel(t);
     return getFolderModel(t);
-  }, [isContactsPage, getContactsModel, getFolderModel, t]);
+  }, [isContactsPage, getContactsModel, getFolderModel, t, contactsTab]);
 
   const onNavigationButtonClick = React.useCallback(() => {
     onCreateAndCopySharedLink(selectedFolder, t);
@@ -529,7 +551,11 @@ const SectionHeaderContent = (props) => {
         isInPublicRoom ||
         (isShared && (isArchive ? selectedFolder?.isRoom : isRoom))
       ) {
-        return PublicRoomIconUrl;
+        return isExternalShareRestricted &&
+          blockExistingLinksOnRestrict &&
+          hasExternalLinks
+          ? PublicRoomRestrictedIconUrl
+          : PublicRoomIconUrl;
       } else if (!isRootRooms && !isArchive && !isSharedWithMeFolderRoot)
         return PublicRoomIconUrl;
     }
@@ -548,13 +574,36 @@ const SectionHeaderContent = (props) => {
     isRoom,
     isSharedWithMeFolderRoot,
     isLifetimeEnabled,
+    isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
+    hasExternalLinks,
+  ]);
+
+  const titleTooltip = React.useMemo(() => {
+    if (
+      isRoom &&
+      selectedFolder?.shared &&
+      isExternalShareRestricted &&
+      blockExistingLinksOnRestrict &&
+      hasExternalLinks
+    )
+      return t("Common:ExternalAccessDisabledByAdmin");
+
+    return undefined;
+  }, [
+    isRoom,
+    selectedFolder,
+    isExternalShareRestricted,
+    blockExistingLinksOnRestrict,
+    hasExternalLinks,
+    t,
   ]);
 
   const titleIconTooltip = React.useMemo(() => {
     if (sharedType) return t("Files:RecentlyOpenedTooltip");
 
     if (lifetime)
-      return `${t("Files:RoomFilesLifetime", {
+      return `${t("Common:RoomFilesLifetime", {
         days: lifetime.value,
         period: getLifetimePeriodTranslation(lifetime.period, t),
       })}. ${
@@ -850,13 +899,14 @@ const SectionHeaderContent = (props) => {
 
   const badgeLabel = showTemplateBadge ? t("Files:Template") : "";
 
-  const warningText = isRecycleBinFolder
-    ? t("TrashAutoDeleteWarning", {
-        sectionName: t("Common:TrashSection"),
-      })
-    : isPersonalReadOnly
-      ? t("PersonalFolderErasureWarning")
-      : "";
+  const warningText = getWarningText({
+    t,
+    isRecycleBinFolder,
+    isPersonalReadOnly,
+    isRoomStorageQuotaExceeded,
+    roomUsedSpace,
+    roomQuotaLimit,
+  });
 
   const isContextButtonVisible = React.useMemo(() => {
     if (isProfile) return true;
@@ -883,7 +933,7 @@ const SectionHeaderContent = (props) => {
   const onPlusClick = React.useCallback(() => {
     if (isAIAgentsFolder) return onCreateAgent();
     if (!isContactsPage) return onCreateRoom();
-    if (isContactsGroupsPage) return createGroup();
+    if (isContactsGroupsPage) return createGroup(selectedFolder?.id, "sidebar");
   }, [
     isAIAgentsFolder,
     isContactsPage,
@@ -921,6 +971,8 @@ const SectionHeaderContent = (props) => {
           [styles.isExternalFolder]:
             location.state?.isExternal || selectedFolder?.external,
           [styles.isLifetimeEnabled]: isLifetimeEnabled,
+          [styles.isColoredTitleIcon]:
+            titleIcon === PublicRoomRestrictedIconUrl,
         })}
       >
         {tableGroupMenuVisible ? (
@@ -937,7 +989,11 @@ const SectionHeaderContent = (props) => {
               showText={showText}
               isRootFolder={isRoot ? !isContactsInsideGroupPage : null}
               canCreate={
-                (currentCanCreate || (isContactsPage && contactsCanCreate)) &&
+                (currentCanCreate ||
+                  (isContactsPage &&
+                    contactsCanCreate &&
+                    !isCollaborator &&
+                    !isVisitor)) &&
                 !isSettingsPage &&
                 !isProfile
                   ? !isPublicRoom
@@ -970,10 +1026,13 @@ const SectionHeaderContent = (props) => {
               isInfoPanelVisible={isProfile ? false : isInfoPanelVisible}
               titles={{
                 warningText,
+                warningIcon: isRoomStorageQuotaExceeded
+                  ? WarningQuotaExceededUrl
+                  : undefined,
                 actions: isRoomsFolder
                   ? t("Common:NewRoom")
                   : t("Common:Actions"),
-                contextMenu: t("Translations:TitleShowFolderActions"),
+                contextMenu: t("Common:TitleShowFolderActions"),
                 infoPanel: t("Common:InfoPanel"),
               }}
               withMenu={withMenu}
@@ -996,6 +1055,7 @@ const SectionHeaderContent = (props) => {
               isPublicRoom={isPublicRoom}
               titleIcon={titleIcon}
               titleIconTooltip={titleIconTooltip}
+              titleTooltip={titleTooltip}
               showRootFolderTitle={
                 insideTheRoom || insideTheAgent || isContactsInsideGroupPage
               }
@@ -1018,6 +1078,11 @@ const SectionHeaderContent = (props) => {
               isPlusButtonVisible={isPlusButtonVisible}
               showBackButton={isProfile}
               contextMenuHeader={isProfile ? undefined : contextMenuHeader}
+              analyzeResponsesButton={
+                <AnalyzeResponsesButton
+                  className={styles.analyzeResponsesButton}
+                />
+              }
             />
             {showSignInButton ? (
               <Button
@@ -1085,6 +1150,7 @@ export default inject(
 
     const isRoomAdmin = userStore.user?.isRoomAdmin;
     const isCollaborator = userStore.user?.isCollaborator;
+    const isVisitor = userStore.user?.isVisitor;
 
     const {
       setSelected,
@@ -1161,6 +1227,9 @@ export default inject(
       shared,
       isAIRoom,
       isAIAgent,
+      isRoomStorageQuotaExceeded,
+      roomUsedSpace,
+      roomQuotaLimit,
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
@@ -1178,8 +1247,6 @@ export default inject(
 
     const {
       onClickEditRoom,
-      onClickInviteUsers,
-      onClickArchive,
       onCopyLink,
       onCreateAndCopySharedLink,
       getFolderModel,
@@ -1231,11 +1298,11 @@ export default inject(
 
     const { isIndexEditingMode, setIsIndexEditingMode, getIndexingArray } =
       indexingStore;
-    const { isPublicRoom } = publicRoomStore;
+    const { isPublicRoom, hasExternalLinks } = publicRoomStore;
 
     let folderPath = navigationPath;
 
-    if (isFrame && !!pathParts) {
+    if (isFrame && pathParts) {
       folderPath = navigationPath.filter((item) => !item.isRootRoom);
     }
 
@@ -1249,14 +1316,6 @@ export default inject(
     const isRootRooms = rootFolderType === FolderType.Rooms;
 
     const isShared = shared || navigationPath.find((r) => r.shared);
-
-    const showNavigationButton = !!((!security?.CopyLink && !isArchive) ||
-    isPublicRoom ||
-    isSharedWithMeFolderRoot ||
-    isArchive ||
-    !isRootRooms
-      ? false
-      : security?.Read && isShared);
 
     const rootFolderId = navigationPath.length
       ? navigationPath[navigationPath.length - 1]?.id
@@ -1277,6 +1336,25 @@ export default inject(
     const { showProfileLoader } = clientLoadingStore;
 
     const { enabledHotkeys } = filesStore;
+    const {
+      getIcon,
+      isExternalShareRestricted: isShareRestricted,
+      externalShareApplyToRooms,
+      externalShareApplyToDocuments,
+      blockExistingLinksOnRestrict,
+    } = filesStore.filesSettingsStore;
+
+    const isExternalShareRestricted =
+      isShareRestricted &&
+      (isRoom ? externalShareApplyToRooms : externalShareApplyToDocuments);
+
+    const showNavigationButton = !!((!security?.CopySharedLink && !isArchive) ||
+    isPublicRoom ||
+    isSharedWithMeFolderRoot ||
+    isArchive ||
+    !isRootRooms
+      ? false
+      : security?.Read && isShared);
 
     return {
       currentClientView,
@@ -1320,8 +1398,6 @@ export default inject(
       selectedFolder,
 
       onClickEditRoom,
-      onClickInviteUsers,
-      onClickArchive,
       onCopyLink,
 
       isGroupMenuBlocked,
@@ -1345,12 +1421,13 @@ export default inject(
       setUsersSelected,
       isRoomAdmin,
       isCollaborator,
+      isVisitor,
       isEmptyPage,
       categoryType,
       theme,
       isFrame,
       showTitle: frameConfig?.showTitle,
-      hideInfoPanel: isFrame,
+      hideInfoPanel: isFrame && !frameConfig?.infoPanelVisible,
       showMenu: frameConfig?.showMenu,
       currentDeviceType,
       insideGroupTempTitle,
@@ -1388,6 +1465,9 @@ export default inject(
 
       isAIRoom,
       isAIAgent,
+      isRoomStorageQuotaExceeded,
+      roomUsedSpace,
+      roomQuotaLimit,
       isKnowledgeTab,
       contactsTab,
 
@@ -1401,7 +1481,10 @@ export default inject(
       setChangePasswordVisible,
       setChangeAvatarVisible,
       setChangeNameVisible,
-      getIcon: filesStore.filesSettingsStore.getIcon,
+      getIcon,
+      isExternalShareRestricted,
+      blockExistingLinksOnRestrict,
+      hasExternalLinks,
 
       isRootRooms,
       isArchive,
@@ -1416,12 +1499,12 @@ export default inject(
     "Common",
     "Translations",
     "InfoPanel",
-    "SharingPanel",
-    "Article",
     "People",
     "PeopleTranslations",
     "ChangeUserTypeDialog",
     "Notifications",
     "Profile",
+    "GroupingRooms",
   ])(observer(SectionHeaderContent)),
 );
+

@@ -1,0 +1,232 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+import React, { useEffect, useMemo } from "react";
+
+import { isLockedSharedRoom as isLockedSharedRoomUtil } from "@docspace/shared/utils";
+import { FolderType } from "@docspace/shared/enums";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import { useEventCallback } from "@docspace/shared/hooks/useEventCallback";
+import { isRoom as isRoomUtil } from "@docspace/shared/utils/typeGuards";
+
+import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
+import { InfoPanelView } from "SRC_DIR/helpers/info-panel";
+import { getAvailableInfoPanelTabs } from "SRC_DIR/helpers/info-panel/tabs";
+
+import { BodyProps } from "./Body.types";
+
+import ItemTitle from "./sub-components/ItemTitle";
+import SeveralItems from "./sub-components/SeveralItems";
+import NoItem from "./sub-components/NoItem";
+
+import Users from "./views/Users";
+import Groups from "./views/Groups";
+
+import FilesView from "./views/FilesView";
+
+import commonStyles from "./helpers/Common.module.scss";
+
+const InfoPanelBodyGeneral = ({
+  selection,
+  contactsTab,
+
+  roomsView,
+  fileView,
+  getIsFiles,
+  getIsRooms,
+  getIsAIAgent,
+  getIsTrash,
+
+  infoPanelItemsList,
+  enablePlugins,
+  isRecentFolder,
+
+  maxImageUploadSize,
+
+  editRoomDialogProps,
+  createRoomDialogProps,
+  templateEventVisible,
+
+  avatarEditorDialogVisible,
+  image,
+
+  setAvatarEditorDialogVisible,
+  onSaveRoomLogo,
+  onChangeFile,
+  setImage,
+  checkIsExpiredLinkAsync,
+  editAgentDialogProps,
+}: BodyProps) => {
+  const isFiles = getIsFiles();
+  const isRooms = getIsRooms();
+  const isAgents = getIsAIAgent();
+  const isTrash = getIsTrash();
+  const isGroups = contactsTab === "groups";
+  const isGuests = contactsTab === "guests";
+  const isUsers = contactsTab === "inside_group" || contactsTab === "people";
+  const isTemplatesRoom =
+    !Array.isArray(selection) &&
+    selection?.rootFolderType === FolderType.RoomTemplates;
+
+  const isRoom = isRoomUtil(selection);
+  const isFolder = selection && "isFolder" in selection && !!selection.isFolder;
+
+  const isRoot = isFolder && selection?.id === selection?.rootFolderId;
+  const id = !Array.isArray(selection) ? selection?.id : null;
+
+  const isLockedSharedRoom = isRoom && isLockedSharedRoomUtil(selection);
+
+  const isSeveralItems = Array.isArray(selection) && selection.length > 1;
+  const isNoItem =
+    !selection ||
+    (!Array.isArray(selection) &&
+      selection.isLinkExpired &&
+      selection.external) ||
+    isLockedSharedRoom ||
+    isRoot;
+
+  const { tabs: availableTabs, useRoomsView } = useMemo(
+    () =>
+      getAvailableInfoPanelTabs({
+        selection,
+        isTrash,
+        isRecentFolder,
+        enablePlugins,
+        infoPanelItemsList,
+      }),
+    [selection, isTrash, isRecentFolder, enablePlugins, infoPanelItemsList],
+  );
+
+  const currentView = useMemo(() => {
+    const raw = useRoomsView ? roomsView : fileView;
+    return availableTabs.includes(raw) ? raw : availableTabs[0] ?? InfoPanelView.infoDetails;
+  }, [availableTabs, useRoomsView, roomsView, fileView]);
+
+  const deferredCurrentView = React.useDeferredValue(currentView);
+
+  const isExpiredLink = useEventCallback(() =>
+    checkIsExpiredLinkAsync(selection),
+  );
+
+  useEffect(() => {
+    if (!id) return;
+
+    isExpiredLink();
+  }, [id, isExpiredLink]);
+
+  const getView = () => {
+    if (isUsers || isGuests) return <Users isGuests={isGuests} />;
+
+    if (isGroups) return <Groups />;
+
+    if (isSeveralItems || Array.isArray(selection))
+      return <SeveralItems selectedItems={selection} />;
+
+    if (isNoItem || !selection) {
+      const lockedSharedRoomProps = isLockedSharedRoom
+        ? { isLockedSharedRoom }
+        : {};
+      return (
+        <NoItem
+          isRooms={isRooms}
+          isFiles={isFiles}
+          isTemplatesRoom={isTemplatesRoom}
+          isAgents={isAgents}
+          infoPanelSelection={selection}
+          {...lockedSharedRoomProps}
+        />
+      );
+    }
+
+    return (
+      <React.Suspense
+        fallback={
+          <InfoPanelViewLoader
+            view={
+              currentView === InfoPanelView.infoMembers
+                ? "members"
+                : currentView === InfoPanelView.infoHistory
+                  ? "history"
+                  : "details"
+            }
+          />
+        }
+      >
+        <FilesView
+          currentView={deferredCurrentView}
+          selection={selection}
+          isArchive={selection.rootFolderType === FolderType.Archive}
+        />
+      </React.Suspense>
+    );
+  };
+
+  return (
+    <div className={commonStyles.infoPanelBody}>
+      {!isNoItem &&
+      !Array.isArray(selection) &&
+      (isUsers || isGuests || isGroups) ? (
+        <ItemTitle
+          infoPanelSelection={selection}
+          isContacts={isUsers || isGuests || isGroups}
+          isNoItem={isNoItem ?? false}
+        />
+      ) : null}
+      {getView()}
+
+      {avatarEditorDialogVisible &&
+      !editRoomDialogProps.visible &&
+      !editAgentDialogProps.visible &&
+      !createRoomDialogProps.visible &&
+      !Array.isArray(selection) ? (
+        <AvatarEditorDialog
+          image={image}
+          onChangeImage={setImage}
+          onClose={() => setAvatarEditorDialogVisible(false)}
+          onSave={(img: unknown) =>
+            !templateEventVisible
+              ? onSaveRoomLogo(selection?.id, img, selection, true)
+              : setAvatarEditorDialogVisible(false)
+          }
+          onChangeFile={onChangeFile}
+          classNameWrapperImageCropper="icon-editor"
+          visible={image.uploadedFile}
+          maxImageSize={maxImageUploadSize}
+        />
+      ) : null}
+    </div>
+  );
+};
+
+export default InfoPanelBodyGeneral;

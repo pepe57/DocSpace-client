@@ -1,42 +1,50 @@
 /*
- * (c) Copyright Ascensio System SIA 2009-2025
+ * Copyright (C) Ascensio System SIA, 2009-2026
  *
- * This program is a free software product.
- * You can redistribute it and/or modify it under the terms
- * of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
- * Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
- * to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
- * any third-party rights.
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
  *
- * This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
- * the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
  *
- * You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
  *
- * The  interactive user interfaces in modified source and object code versions of the Program must
- * display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
  *
- * Pursuant to Section 7(b) of the License you must retain the original Product logo when
- * distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
- * trademark law for use of our trademarks.
+ * No trademark rights are granted under this License.
  *
- * All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
- * content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
- * International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
  */
 
 import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
-import { Text } from "@docspace/shared/components/text";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Heading, HeadingLevel } from "@docspace/ui-kit/components/heading";
+import { Text } from "@docspace/ui-kit/components/text";
+import { Link, LinkTarget, LinkType } from "@docspace/ui-kit/components/link";
+import { Button, ButtonSize } from "@docspace/ui-kit/components/button";
 import type { TServer } from "@docspace/shared/api/ai/types";
-import { toastr, TData } from "@docspace/shared/components/toast";
+import { toastr, TData } from "@docspace/ui-kit/components/toast";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import type AISettingsStore from "SRC_DIR/store/portal-settings/AISettingsStore";
 
@@ -47,6 +55,7 @@ import { DeleteMCPDialog } from "./dialogs/delete";
 import { DisableMCPDialog } from "./dialogs/disable";
 import { EditMCPDialog } from "./dialogs/edit";
 import { MCPTile } from "./mcp-tile";
+import { ServersLoader } from "./ServersLoader";
 
 type MCPListProps = {
   showHeading: boolean;
@@ -56,6 +65,7 @@ type MCPListProps = {
   onSettingsClick: (item: TServer) => void;
   onDeleteClick: (id: TServer["id"]) => void;
   isMCPActionsDisabled?: boolean;
+  dataTestId?: string;
 };
 
 const MCPList = ({
@@ -66,11 +76,12 @@ const MCPList = ({
   onSettingsClick,
   onDeleteClick,
   isMCPActionsDisabled,
+  dataTestId = "mcp-list",
 }: MCPListProps) => {
   if (!mcpServers?.length) return;
 
   return (
-    <div className={styles.mcpListContainer}>
+    <div className={styles.mcpListContainer} data-testid={dataTestId}>
       {showHeading ? (
         <Heading
           className={styles.mcpHeading}
@@ -114,7 +125,7 @@ type MCPServersProps = {
   updateMCPStatus?: AISettingsStore["updateMCPStatus"];
   hasAIProviders?: AISettingsStore["hasAIProviders"];
   mcpServersInitied?: AISettingsStore["mcpServersInitied"];
-  aiSettingsUrl?: string;
+  mcpServersSettingsUrl?: SettingsStore["mcpServersSettingsUrl"];
 };
 
 const MCPServersComponent = ({
@@ -124,7 +135,7 @@ const MCPServersComponent = ({
   updateMCPStatus,
   hasAIProviders,
   mcpServersInitied,
-  aiSettingsUrl,
+  mcpServersSettingsUrl,
 }: MCPServersProps) => {
   const { t } = useTranslation(["Common", "AISettings"]);
   const [addDialogVisible, setAddDialogVisible] = useState(false);
@@ -217,40 +228,24 @@ const MCPServersComponent = ({
     });
   };
 
-  if (!mcpServersInitied)
-    return (
-      <div className={styles.mcpServers}>
-        <RectangleSkeleton
-          className={styles.description}
-          width="700px"
-          height="54px"
-        />
-        <RectangleSkeleton
-          className={styles.learnMoreLink}
-          width="100px"
-          height="19px"
-        />
-        <RectangleSkeleton
-          className={styles.addProviderButton}
-          width="158px"
-          height="32px"
-        />
-      </div>
-    );
+  if (!mcpServersInitied) return <ServersLoader />;
 
   return (
     <div className={styles.mcpServers}>
       <Text className={styles.description}>
-        {t("AISettings:MCPSettingsDescription")}
+        {t("AISettings:MCPSettingsDescription", {
+          mcpServers: t("Common:MCPSettingTitle"),
+          aiChats: t("Common:AIChats"),
+        })}
       </Text>
-      {aiSettingsUrl ? (
+      {mcpServersSettingsUrl ? (
         <Link
           className={styles.learnMoreLink}
           target={LinkTarget.blank}
           type={LinkType.page}
           fontWeight={600}
           isHovered
-          href={aiSettingsUrl}
+          href={mcpServersSettingsUrl}
           color="accent"
         >
           {t("Common:LearnMore")}
@@ -259,7 +254,9 @@ const MCPServersComponent = ({
       <Button
         primary
         size={ButtonSize.small}
-        label={t("AISettings:AddMCPServer")}
+        label={t("AISettings:AddMCPServer", {
+          mcpServer: t("Common:MCPServer"),
+        })}
         scale={false}
         className={styles.addProviderButton}
         onClick={showAddDialog}
@@ -267,10 +264,12 @@ const MCPServersComponent = ({
         tooltipText={
           isMCPActionsDisabled
             ? t("AISettings:ToUseAddProvider", {
-                value: t("AISettings:MCPServer"),
+                value: t("Common:MCPServer"),
+                aiProvider: t("Common:AIProvider"),
               })
             : undefined
         }
+        testId="add-mcp-button"
       />
 
       <MCPList
@@ -281,6 +280,7 @@ const MCPServersComponent = ({
         onSettingsClick={onUpdateMCP}
         onDeleteClick={onDeleteMCP}
         isMCPActionsDisabled={isMCPActionsDisabled}
+        dataTestId="custom-mcp-list"
       />
 
       <MCPList
@@ -291,6 +291,7 @@ const MCPServersComponent = ({
         onSettingsClick={onUpdateMCP}
         onDeleteClick={onDeleteMCP}
         isMCPActionsDisabled={isMCPActionsDisabled}
+        dataTestId="system-mcp-list"
       />
 
       {addDialogVisible ? <AddMCPDialog onClose={hideAddDialog} /> : null}
@@ -335,7 +336,9 @@ export const MCPServers = inject(
       updateMCPStatus,
       hasAIProviders,
       mcpServersInitied,
-      aiSettingsUrl: settingsStore.aiSettingsUrl,
+      mcpServersSettingsUrl: settingsStore.mcpServersSettingsUrl,
     };
   },
 )(observer(MCPServersComponent));
+
+export { ServersLoader };

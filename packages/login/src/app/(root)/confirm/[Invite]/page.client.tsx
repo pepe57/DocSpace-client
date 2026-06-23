@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 "use client";
 
@@ -38,6 +47,7 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
+import classNames from "classnames";
 
 import {
   TCapabilities,
@@ -46,7 +56,7 @@ import {
   TThirdPartyProvider,
   TInvitationSettings,
 } from "@docspace/shared/api/settings/types";
-import { toastr } from "@docspace/shared/components/toast";
+import { toastr } from "@docspace/ui-kit/components/toast";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
@@ -55,36 +65,37 @@ import {
 import {
   createPasswordHash,
   getLoginLink,
-  getOAuthToken,
   toUrlParams,
 } from "@docspace/shared/utils/common";
-import { setCookie } from "@docspace/shared/utils/cookie";
-import { ButtonKeys } from "@docspace/shared/enums";
-import { TValidate } from "@docspace/shared/components/email-input";
+import { getOAuthToken } from "@docspace/ui-kit/utils/get-oauth-token";
+import { setCookie } from "@docspace/ui-kit/utils/cookie";
+import { ButtonKeys, EmployeeStatus } from "@docspace/shared/enums";
+import { TValidate } from "@docspace/ui-kit/components/email-input";
 import { TCreateUserData, TError } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
-import { Text } from "@docspace/shared/components/text";
+import { Text } from "@docspace/ui-kit/components/text";
 import { login, thirdPartyLogin } from "@docspace/shared/api/user";
 import {
   createUser,
-  getUserByEmail,
+  checkUserExists,
   signupOAuth,
 } from "@docspace/shared/api/people";
 
 import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import { RegisterContainer } from "@/components/RegisterContainer.styled";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/ui-kit/providers/theme/themes";
 import EmailInputForm from "./_sub-components/EmailInputForm";
 import RegistrationForm from "./_sub-components/RegistrationForm";
+
+import styles from "@/components/RegisterContainer.module.scss";
+import { getBrandName } from "@docspace/shared/constants/brands";
 
 export type CreateUserFormProps = {
   userNameRegex: string;
   passwordHash: TPasswordHash;
   licenseUrl: string;
   legalTerms: string;
-  defaultPage?: string;
   passwordSettings?: TPasswordSettings;
   capabilities?: TCapabilities;
   thirdPartyProviders?: TThirdPartyProvider[];
@@ -92,13 +103,13 @@ export type CreateUserFormProps = {
   isStandalone: boolean;
   logoText: string;
   invitationSettings?: TInvitationSettings;
+  hostName: string;
 };
 
 const CreateUserForm = (props: CreateUserFormProps) => {
   const {
     userNameRegex,
     passwordHash,
-    defaultPage = "/",
     passwordSettings,
     capabilities,
     thirdPartyProviders,
@@ -108,6 +119,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     isStandalone,
     logoText,
     invitationSettings,
+    hostName,
   } = props;
 
   const { linkData, roomData, confirmLinkResult } =
@@ -116,7 +128,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const router = useRouter();
 
-  const organizationName = logoText || t("Common:OrganizationName");
+  const organizationName = logoText || getBrandName("OrganizationName");
 
   const currentCultureName = i18n.language;
 
@@ -149,6 +161,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const [registrationForm, setRegistrationForm] = useState(!!emailFromLink);
 
+  const [isContinueBlocked, setIsContinueBlocked] = useState(false);
+
   const focusInput = () => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -161,7 +175,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     async (profile: string) => {
       const signupAccount: { [key: string]: string | undefined } = {
         EmployeeType: linkData.emplType,
-        Email: confirmLinkResult.email,
         Key: linkData.key,
         SerializedProfile: profile,
         culture: currentCultureName,
@@ -200,7 +213,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
         const finalUrl = roomData.roomId
           ? `/${path}?folder=${roomData.roomId}`
-          : defaultPage;
+          : "/";
 
         if (response.confirmUrl) {
           sessionStorage.setItem("referenceUrl", finalUrl);
@@ -227,7 +240,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     },
     [
       currentCultureName,
-      defaultPage,
       confirmLinkResult.email,
       linkData.emplType,
       linkData.key,
@@ -258,7 +270,26 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     const headerKey = linkData?.confirmHeader ?? null;
 
     try {
-      await getUserByEmail(email, headerKey, currentCultureName);
+      const userExists = await checkUserExists(email, headerKey);
+
+      if (!userExists.exists) {
+        setRegistrationForm(true);
+        setIsLoading(false);
+        return;
+      }
+
+      // Backend returns EmployeeStatus (UserExistsResponseDto.Status), not
+      // EmployeeActivationStatus. EmployeeStatus.Pending (4) marks an invited
+      // user who has not completed registration — see the codebase convention
+      // (UsersStore, contacts utils, InfoPanel Users view, etc).
+      if (userExists.status === EmployeeStatus.Pending) {
+        setEmailValid(false);
+        setIsEmailErrorShow(true);
+        setEmailErrorText(t("Confirm:UserAlreadyInvited"));
+        setIsContinueBlocked(true);
+        setIsLoading(false);
+        return;
+      }
 
       setCookie(LANGUAGE, currentCultureName, {
         "max-age": COOKIE_EXPIRATION_YEAR,
@@ -270,7 +301,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
       const finalUrl = roomData.roomId
         ? `/${path}?folder=${roomData.roomId}`
-        : defaultPage;
+        : "/";
 
       if (roomId) {
         sessionStorage.setItem("referenceUrl", finalUrl);
@@ -282,7 +313,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           email,
           roomName,
           displayName,
-          spaceAddress: window.location.host,
+          spaceAddress: hostName,
         },
         true,
       );
@@ -295,9 +326,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       router.push(url);
     } catch (error) {
       const knownError = error as TError;
-      const status =
-        typeof knownError === "object" ? knownError?.response?.status : "";
-      const isNotExistUser = status === 404;
 
       const forbiddenInviteUsersPortal = roomData.roomId
         ? !invitationSettings?.allowInvitingGuests
@@ -310,9 +338,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           typeof knownError === "object"
             ? knownError?.response?.data?.error?.message
             : "";
-        setEmailErrorText(errorInvite);
-      } else if (isNotExistUser) {
-        setRegistrationForm(true);
+        // biome-ignore lint/plugin/no-dynamic-i18n-key: errorInvite is a runtime-provided i18n key from backend
+        setEmailErrorText(errorInvite ? t(`Common:${errorInvite}`) : "");
       }
     }
 
@@ -338,7 +365,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
     const finalUrl = roomData.roomId
       ? `/${path}?folder=${roomData.roomId}`
-      : defaultPage;
+      : "/";
 
     const isConfirm = typeof res === "string" && res.includes("confirm");
     if (isConfirm) {
@@ -426,7 +453,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       console.error("confirm error", errorMessage);
       toastr.error(errorMessage);
       setIsEmailErrorShow(true);
-      setEmailErrorText(errorMessage);
+      // biome-ignore lint/plugin/no-dynamic-i18n-key: errorMessage is a runtime-provided i18n key from backend
+      setEmailErrorText(errorMessage ? t(`Common:${errorMessage}`) : "");
       setEmailValid(false);
       setIsLoading(false);
     }
@@ -435,6 +463,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
     setIsEmailErrorShow(false);
+    setIsContinueBlocked(false);
   };
 
   const onChangeFname = (e: ChangeEvent<HTMLInputElement>) => {
@@ -551,7 +580,9 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const onValidateEmail = (result: TValidate): undefined => {
     setEmailValid(result.isValid);
-    setEmailErrorText(result.errors?.[0] ?? "");
+    const errorKey = result.errors?.[0];
+    // biome-ignore lint/plugin/no-dynamic-i18n-key: errorKey is a runtime-provided i18n key from email validator
+    setEmailErrorText(errorKey ? t(`Common:${errorKey}`) : "");
   };
 
   const onClickBack = () => {
@@ -567,8 +598,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     : {};
 
   return (
-    <RegisterContainer registrationForm={registrationForm}>
-      <div className="auth-form-fields">
+    <div className={styles.registerContainer}>
+      <div
+        className={classNames(styles.authFormFields, {
+          [styles.registrationForm]: registrationForm,
+        })}
+      >
         <EmailInputForm
           ref={inputRef}
           isLoading={isLoading}
@@ -577,6 +612,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           emailValid={emailValid}
           emailFromLink={emailFromLink}
           emailErrorText={emailErrorText}
+          isContinueDisabled={isContinueBlocked}
           onContinue={onContinue}
           onChange={onChangeEmail}
           onValidate={onValidateEmail}
@@ -617,8 +653,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
       {!emailFromLink && (oauthDataExists() || ssoExists()) ? (
         <>
-          <div className="line">
-            <Text color={globalColors.gray} className="or-label">
+          <div className={styles.line}>
+            <Text color={globalColors.gray} className={styles.orLabel}>
               {t("Common:orContinueWith")}
             </Text>
           </div>
@@ -631,8 +667,9 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           />
         </>
       ) : null}
-    </RegisterContainer>
+    </div>
   );
 };
 
 export default CreateUserForm;
+

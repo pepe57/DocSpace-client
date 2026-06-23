@@ -1,28 +1,37 @@
-// (c) Copyright Ascensio System SIA 2009-2025
-//
-// This program is a free software product.
-// You can redistribute it and/or modify it under the terms
-// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
-// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
-// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
-// any third-party rights.
-//
-// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
-// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
-// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
-//
-// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
-//
-// The  interactive user interfaces in modified source and object code versions of the Program must
-// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
-//
-// Pursuant to Section 7(b) of the License you must retain the original Product logo when
-// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
-// trademark law for use of our trademarks.
-//
-// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
-// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
-// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
 
 // @ts-nocheck
 
@@ -31,7 +40,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { Nullable } from "../../types";
 import { ILogo } from "../../pages/Branding/WhiteLabel/WhiteLabel.types";
 import { request } from "../client";
-import { RecaptchaType } from "../../enums";
+import { FolderType, RecaptchaType } from "../../enums";
 import {
   TCustomSchema,
   TGetCSPSettings,
@@ -711,6 +720,19 @@ export async function getAuthProviders() {
   return res;
 }
 
+export async function testExternalDbConnection(data: Record<string, unknown>) {
+  const res = await request<{
+    success: boolean;
+    error?: string;
+  }>({
+    method: "post",
+    url: `/settings/authservice/externaldb/test`,
+    data,
+  })!;
+
+  return res;
+}
+
 export function updateConsumerProps(newProps) {
   const options = {
     method: "post",
@@ -785,9 +807,14 @@ export function getTfaSecretKeyAndQR(confirmKey = null) {
   return request(options);
 }
 
-export function validateTfaCode(code, confirmKey: Nullable<string> = null) {
+export function validateTfaCode(
+  code,
+  confirmKey: Nullable<string> = null,
+  session: boolean,
+) {
   const data = {
     code,
+    session,
   };
 
   const options = {
@@ -1042,7 +1069,15 @@ export function createWebhook(name, uri, secretKey, ssl, triggers, targetId) {
   return request({
     method: "post",
     url: `/settings/webhook`,
-    data: { name, uri, secretKey, enabled: true, ssl, triggers, targetId },
+    data: {
+      name,
+      uri,
+      secretKey,
+      enabled: true,
+      ssl,
+      triggers: Number(triggers),
+      targetId,
+    },
   });
 }
 
@@ -1066,7 +1101,16 @@ export function updateWebhook(
   return request({
     method: "put",
     url: `/settings/webhook`,
-    data: { id, name, uri, secretKey, enabled: true, ssl, triggers, targetId },
+    data: {
+      id,
+      name,
+      uri,
+      secretKey,
+      enabled: true,
+      ssl,
+      triggers: Number(triggers),
+      targetId,
+    },
   });
 }
 
@@ -1130,6 +1174,13 @@ export function retryWebhooks(webhooksIds) {
     method: "put",
     url: `/settings/webhook/retry`,
     data: { Ids: webhooksIds },
+  });
+}
+
+export function getWebhookTriggers() {
+  return request({
+    method: "get",
+    url: `/settings/webhook/triggers`,
   });
 }
 
@@ -1481,4 +1532,33 @@ export async function getNotificationsSettings() {
   });
 
   return res.channels as TNotificationChannel[];
+}
+
+export async function setDefaultFolderType(folderType: FolderType) {
+  const res = await request({
+    method: "PUT",
+    url: "/settings/defaultFolder",
+    data: { DefaultFolderType: folderType },
+  });
+
+  return res.defaultFolderType as FolderType;
+}
+
+export async function getAiAccessSettings() {
+	const res = await request({
+		method: "get",
+		url: "/settings/ai-access",
+	});
+
+	return res as { enabled: boolean };
+}
+
+export async function setAiAccessSettings(enabled: boolean) {
+	const res = await request({
+		method: "post",
+		url: "/settings/ai-access",
+		data: { enabled },
+	});
+
+	return res as { enabled: boolean };
 }

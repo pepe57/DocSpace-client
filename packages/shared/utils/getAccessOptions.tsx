@@ -1,0 +1,368 @@
+/*
+ * Copyright (C) Ascensio System SIA, 2009-2026
+ *
+ * This program is a free software product. You can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License (AGPL)
+ * version 3 as published by the Free Software Foundation, together with the
+ * additional terms provided in the LICENSE file.
+ *
+ * This program is distributed WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. For
+ * details, see the GNU AGPL at: https://www.gnu.org/licenses/agpl-3.0.html
+ *
+ * You can contact Ascensio System SIA by email at info@onlyoffice.com
+ * or by postal mail at 20A-6 Ernesta Birznieka-Upisha Street, Riga,
+ * LV-1050, Latvia, European Union.
+ *
+ * The interactive user interfaces in modified versions of the Program
+ * are required to display Appropriate Legal Notices in accordance with
+ * Section 5 of the GNU AGPL version 3.
+ *
+ * No trademark rights are granted under this License.
+ *
+ * All non-code elements of the Product, including illustrations,
+ * icon sets, and technical writing content, are licensed under the
+ * Creative Commons Attribution-ShareAlike 4.0 International License:
+ * https://creativecommons.org/licenses/by-sa/4.0/legalcode
+ *
+ * This license applies only to such non-code elements and does not
+ * modify or replace the licensing terms applicable to the Program's
+ * source code, which remains licensed under the GNU Affero General
+ * Public License v3.
+ *
+ * SPDX-License-Identifier: AGPL-3.0-only
+ */
+import { Trans } from "react-i18next";
+import { globalColors } from "@docspace/ui-kit/providers/theme";
+import type { TTranslation } from "../types";
+import { getUserTypeTranslation } from "./common";
+import { EmployeeType, RoomsType, ShareAccessRights } from "../enums";
+import { TFunction } from "i18next";
+import { getBrandName } from "@docspace/shared/constants/brands";
+
+export type AccessOptionType = {
+	key: string | EmployeeType;
+	label: string;
+	description: string;
+	access: ShareAccessRights | EmployeeType;
+	type: EmployeeType;
+
+	color?: string;
+	quota?: string;
+	tooltip?: string;
+};
+
+type SeparatorOptionType = {
+	key: string;
+	isSeparator: boolean;
+};
+
+const None = -1 as RoomsType;
+
+const getRoomAdminDescription = (roomType: RoomsType, t: TTranslation) => {
+	switch (roomType) {
+		case RoomsType.FormRoom:
+			return t("Common:RoleRoomAdminFormRoomDescription");
+		case RoomsType.AIRoom:
+			return t("Common:RoleAIAgentManagerDescription", {
+				aiAgent: t("Common:AIAgent"),
+			});
+		case None:
+			return (
+				<Trans
+					t={t as TFunction}
+					ns="Common"
+					i18nKey="RoleRoomAdminDescription"
+					components={{
+						1: <strong></strong>,
+					}}
+					values={{
+						sectionName: t("Common:Documents"),
+						agentSection: t("Common:AIAgents"),
+					}}
+				/>
+			) as unknown as string;
+		default:
+			return t("Common:RoleRoomManagerDescription");
+	}
+};
+
+const getUserDescription = (roomType: RoomsType, t: TTranslation) => {
+	switch (roomType) {
+		case RoomsType.FormRoom:
+			return t("Common:RolePowerUserFormRoomDescription");
+		case RoomsType.AIRoom:
+			return t("Common:RoleAIAgentContentCreatorDescription");
+		case None:
+			return (
+				<Trans
+					t={t as TFunction}
+					ns="Common"
+					i18nKey="RoleNewUserDescription"
+					components={{
+						1: <strong></strong>,
+					}}
+					values={{
+						agentSection: t("Common:AIAgents"),
+						aiAgent: t("Common:AIAgent"),
+					}}
+				/>
+			) as unknown as string;
+		default:
+			return t("Common:RoleContentCreatorDescription");
+	}
+};
+
+const getFormFillerDescription = (roomType: RoomsType, t: TTranslation) => {
+	switch (roomType) {
+		case RoomsType.FormRoom:
+			return t("Common:RoleFormFillerFormRoomDescription");
+		default:
+			return t("Common:RoleFormFillerDescription");
+	}
+};
+
+export const getAccessOptions = (
+	t: TTranslation,
+	roomType: RoomsType = RoomsType.CustomRoom,
+	withRemove = false,
+	withSeparator = false,
+	isOwner = false,
+	isAdmin = false,
+	standalone = false,
+) => {
+	let options: Array<AccessOptionType | SeparatorOptionType> = [];
+
+	const isNone = roomType === None;
+	const accesses = {
+		portalAdmin: {
+			key: EmployeeType.Admin,
+			label: getUserTypeTranslation(EmployeeType.Admin, t),
+			description: (
+				<Trans
+					t={t as TFunction}
+					ns="Common"
+					i18nKey="RolePortalAdminDescription"
+					components={{
+						1: <strong></strong>,
+					}}
+					values={{
+						productName: getBrandName("ProductName"),
+						sectionName: t("Common:Documents"),
+						agentSection: t("Common:AIAgents"),
+					}}
+				/>
+			) as unknown as string,
+			...(!standalone && isNone && { quota: t("Common:Paid") }),
+			color: globalColors.favoritesStatus,
+			access: isNone ? EmployeeType.Admin : ShareAccessRights.FullAccess,
+			type: EmployeeType.Admin,
+		},
+		roomAdmin: {
+			key: "roomAdmin",
+			label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
+			description: getRoomAdminDescription(roomType, t),
+			...(!standalone && { quota: t("Common:Paid") }),
+			color: globalColors.favoritesStatus,
+			access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,
+			type: EmployeeType.RoomAdmin,
+		},
+		roomManager: {
+			key: "roomManager",
+			label: t("Common:RoomManager"),
+			description: getRoomAdminDescription(roomType, t),
+			tooltip: t("UserMaxAvailableRoleWarning", {
+				productName: getBrandName("ProductName"),
+			}),
+			...(!standalone && isNone && { quota: t("Common:Paid") }),
+			color: globalColors.favoritesStatus,
+			access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,
+			type: EmployeeType.RoomAdmin,
+		},
+		agentManager: {
+			key: "agentManager",
+			label: t("Common:AgentManager"),
+			description: getRoomAdminDescription(roomType, t),
+			tooltip: t("UserAgentMaxAvailableRoleWarning", {
+				productName: getBrandName("ProductName"),
+			}),
+			...(!standalone && isNone && { quota: t("Common:Paid") }),
+			color: globalColors.favoritesStatus,
+			access: isNone ? EmployeeType.RoomAdmin : ShareAccessRights.RoomManager,
+			type: EmployeeType.RoomAdmin,
+		},
+		user: {
+			key: "newUser",
+			label: getUserTypeTranslation(EmployeeType.User, t),
+			description: getUserDescription(roomType, t),
+			access: isNone ? EmployeeType.User : ShareAccessRights.Collaborator,
+			type: EmployeeType.User,
+		},
+		contentCreator: {
+			key: "contentCreator",
+			label: t("Common:ContentCreator"),
+			description: getUserDescription(roomType, t),
+			tooltip:
+				roomType === RoomsType.AIRoom
+					? t("GuestAgentMaxAvailableRoleWarning", {
+							productName: getBrandName("ProductName"),
+						})
+					: undefined,
+			access: isNone ? EmployeeType.User : ShareAccessRights.Collaborator,
+			type: EmployeeType.User,
+		},
+		editor: {
+			key: "editor",
+			label: t("Common:Editor"),
+			description: t("Common:RoleEditorDescription"),
+			access: ShareAccessRights.Editing,
+			type: EmployeeType.User,
+		},
+		formFiller: {
+			key: "formFiller",
+			label: t("Common:RoleFormFiller"),
+			description: getFormFillerDescription(roomType, t),
+			access: ShareAccessRights.FormFilling,
+			type: EmployeeType.User,
+		},
+		reviewer: {
+			key: "reviewer",
+			label: t("Common:RoleReviewer"),
+			description: t("Common:RoleReviewerDescription"),
+			access: ShareAccessRights.Review,
+			type: EmployeeType.User,
+		},
+		commentator: {
+			key: "commentator",
+			label: t("Common:RoleCommentator"),
+			description: t("Common:RoleCommentatorDescription"),
+			access: ShareAccessRights.Comment,
+			type: EmployeeType.User,
+		},
+		viewer: {
+			key: "viewer",
+			label: t("Common:RoleViewer"),
+			description:
+				roomType === RoomsType.AIRoom
+					? t("Common:RoleAIAgentViewerDescription")
+					: t("Common:RoleViewerDescription"),
+			access: ShareAccessRights.ReadOnly,
+			type: EmployeeType.User,
+		},
+	};
+
+	switch (roomType) {
+		// case RoomsType.FillingFormsRoom:
+		//   options = [
+		//     accesses.roomManager,
+		//     { key: "s1", isSeparator: withSeparator },
+		//     accesses.contentCreator,
+		//     accesses.formFiller,
+		//     accesses.viewer,
+		//   ];
+		//   break;
+		case RoomsType.EditingRoom:
+			options = [
+				accesses.roomManager,
+				{ key: "s1", isSeparator: withSeparator },
+				accesses.contentCreator,
+				accesses.editor,
+				accesses.viewer,
+			];
+			break;
+		// case RoomsType.ReviewRoom:
+		//   options = [
+		//     accesses.roomManager,
+		//     { key: "s1", isSeparator: withSeparator },
+		//     accesses.contentCreator,
+		//     accesses.reviewer,
+		//     accesses.commentator,
+		//     accesses.viewer,
+		//   ];
+		//   break;
+		// case RoomsType.ReadOnlyRoom:
+		//   options = [
+		//     accesses.roomManager,
+		//     { key: "s1", isSeparator: withSeparator },
+		//     accesses.contentCreator,
+		//     accesses.viewer,
+		//   ];
+		//   break;
+		case RoomsType.CustomRoom:
+			options = [
+				accesses.roomManager,
+				{ key: "s1", isSeparator: withSeparator },
+				accesses.contentCreator,
+				accesses.editor,
+				accesses.reviewer,
+				accesses.commentator,
+				accesses.viewer,
+			];
+			break;
+		case RoomsType.PublicRoom:
+			options = [accesses.roomManager, accesses.contentCreator];
+			break;
+
+		case RoomsType.FormRoom:
+			options = [
+				accesses.roomManager,
+				{ key: "s1", isSeparator: withSeparator },
+				accesses.contentCreator,
+				accesses.formFiller,
+			];
+			break;
+
+		case RoomsType.VirtualDataRoom:
+			options = [
+				accesses.roomManager,
+				{ key: "s1", isSeparator: withSeparator },
+				accesses.contentCreator,
+				accesses.editor,
+				accesses.viewer,
+				accesses.formFiller,
+			];
+			break;
+
+		case RoomsType.AIRoom:
+			options = [
+				accesses.agentManager,
+				accesses.contentCreator,
+				{ key: "s1", isSeparator: withSeparator },
+				accesses.viewer,
+			];
+			break;
+
+		case None:
+			if (isOwner) options.push(accesses.portalAdmin);
+
+			if (isAdmin || isOwner) {
+				options.push(
+					...[
+						accesses.roomAdmin,
+						{
+							key: "s1",
+							isSeparator: withSeparator,
+						},
+					],
+				);
+			}
+
+			options = [...options, accesses.user];
+			break;
+		default:
+			break;
+	}
+
+	const removeOption = [
+		{
+			key: "s2",
+			isSeparator: true,
+		},
+		{
+			key: "remove",
+			label: t("Common:Remove"),
+		},
+	];
+
+	return withRemove ? [...options, ...removeOption] : options;
+};
